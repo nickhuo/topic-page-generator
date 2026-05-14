@@ -57,15 +57,16 @@ async def fetch_tavily(
     if not api_key:
         return []
     body = {
-        "api_key": api_key,
         "query": query,
         "max_results": max_results,
+        "topic": "news",
         "days": time_range_days,
         "search_depth": "basic",
         "include_answer": False,
         "include_raw_content": False,
     }
-    async with httpx.AsyncClient(timeout=15.0) as client:
+    headers = {"Authorization": f"Bearer {api_key}"}
+    async with httpx.AsyncClient(timeout=15.0, headers=headers) as client:
         resp = await _post(client, body)
     if resp.status_code != 200:
         return []

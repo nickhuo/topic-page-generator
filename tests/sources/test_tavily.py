@@ -13,7 +13,7 @@ FIXTURES = Path(__file__).parent / "fixtures"
 async def test_fetch_tavily_happy_path(monkeypatch):
     monkeypatch.setenv("TAVILY_API_KEY", "test-key")
     payload = json.loads((FIXTURES / "tavily_results.json").read_text())
-    respx.post("https://api.tavily.com/search").mock(
+    route = respx.post("https://api.tavily.com/search").mock(
         return_value=httpx.Response(200, json=payload)
     )
 
@@ -28,6 +28,10 @@ async def test_fetch_tavily_happy_path(monkeypatch):
     openai_src = next(s for s in sources if str(s.url).startswith("https://openai.com"))
     assert reuters.publisher.tier == "T1"
     assert openai_src.publisher.tier == "T0"
+    sent_request = route.calls.last.request
+    assert sent_request.headers.get("authorization") == "Bearer test-key"
+    sent_body = json.loads(sent_request.content)
+    assert "api_key" not in sent_body
 
 
 @respx.mock

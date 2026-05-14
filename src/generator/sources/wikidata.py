@@ -54,7 +54,7 @@ def _sparql_for(qid: str) -> str:
 
 async def fetch_wikidata(entity: str) -> tuple[Source | None, dict[str, str]]:
     """Resolve entity → Q-id → property dict + Source pointing at the Q-page."""
-    headers = {"User-Agent": _USER_AGENT, "Accept": "application/json"}
+    headers = {"User-Agent": _USER_AGENT, "Accept": "application/sparql-results+json"}
     async with httpx.AsyncClient(headers=headers, timeout=10.0) as client:
         search = await _get(
             client,
@@ -84,9 +84,8 @@ async def fetch_wikidata(entity: str) -> tuple[Source | None, dict[str, str]]:
             bindings = sparql.json().get("results", {}).get("bindings", [])
             if bindings:
                 row = bindings[0]
-                # Accept either `<label>` (test-fixture style) or `<label>Label` (real Wikidata).
                 for label in _PROP_MAP.values():
-                    cell = row.get(label) or row.get(f"{label}Label")
+                    cell = row.get(f"{label}Label")
                     if cell and "value" in cell:
                         props[label] = cell["value"]
 
