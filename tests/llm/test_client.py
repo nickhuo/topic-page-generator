@@ -5,7 +5,11 @@ import httpx
 import pytest
 import respx
 
-from generator.llm.client import call_structured, LLMConfigError
+from generator.llm.client import (
+    _strip_provider_unsupported_keywords,
+    call_structured,
+    LLMConfigError,
+)
 from generator.llm.trace_buffer import drain, reset
 from generator.schema import TriageOutput
 
@@ -112,3 +116,31 @@ def test_missing_api_key_raises(monkeypatch):
         asyncio.run(call_structured(
             model="m", messages=[{"role": "user", "content": "x"}], response_model=TriageOutput
         ))
+
+
+
+def test_strip_provider_unsupported_strips_number_and_array_bounds():
+    """Bedrock rejects minimum/maximum on numbers and minItems/maxItems on arrays."""
+    schema = {
+        "type": "object",
+        "properties": {
+            "score": {"type": "number", "minimum": 0, "maximum": 1},
+            "tiles": {"type": "array", "minItems": 1, "maxItems": 4,
+                      "items": {"type": "string"}},
+            "nested": {
+                "type": "object",
+                "properties": {
+                    "rate": {"type": "number", "exclusiveMinimum": 0,
+                             "exclusiveMaximum": 1},
+                },
+            },
+        },
+    }
+    cleaned = _strip_provider_unsupported_keywords(schema)
+    flat = repr(cleaned)
+    for kw in ("minimum", "maximum", "minItems", "maxItems",
+               "exclusiveMinimum", "exclusiveMaximum"):
+        assert kw not in flat, f"{kw} should have been stripped"
+    # Structural fields preserved.
+    assert cleaned["properties"]["score"]["type"] == "number"
+    assert cleaned["properties"]["tiles"]["items"]["type"] == "string"

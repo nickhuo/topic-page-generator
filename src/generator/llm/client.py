@@ -72,12 +72,16 @@ def _estimate_cost(model: str, input_tokens: int, output_tokens: int) -> float:
 def _strip_provider_unsupported_keywords(schema: Any) -> Any:
     """Remove JSON Schema keywords that some OpenRouter providers reject.
 
-    Amazon Bedrock's Converse API rejects `minimum` and `maximum` on number
-    types even when `strict: false`. Pydantic emits these from `Field(ge=, le=)`
-    bounds. We strip them here and rely on the `_clamp_confidences` walker
-    plus the validation-retry loop to enforce bounds.
+    Amazon Bedrock's Converse API rejects `minimum`/`maximum` on number types
+    and `minItems`/`maxItems` on array types, even when `strict: false`.
+    Pydantic emits these from `Field(ge=, le=)` and `Field(min_length=, max_length=)`
+    bounds. We strip them here and rely on the `_clamp_confidences` walker plus
+    the validation-retry loop to enforce bounds.
     """
-    UNSUPPORTED = {"minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum"}
+    UNSUPPORTED = {
+        "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum",
+        "minItems", "maxItems",
+    }
     if isinstance(schema, dict):
         return {
             k: _strip_provider_unsupported_keywords(v)
