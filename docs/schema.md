@@ -156,10 +156,7 @@ type BaseModuleFields = {
 type ConfidenceFlag =
   | "single_source"          // <2 unique publishers
   | "low_tier_only"          // no T0/T1/T2 sources
-  | "contested_fact"         // conflicting sources
-  | "fresh_breaking"         // very recent, may be inaccurate
-  | "language_translated"    // translated from non-English
-  | "ai_flagged_source";     // a source matched the AI-content blacklist
+  | "contested_fact";        // conflicting sources
 
 type ModuleConfidence = {
   overall: number;                   // 0.0 – 1.0

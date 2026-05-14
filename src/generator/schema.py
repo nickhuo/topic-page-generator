@@ -43,9 +43,6 @@ ConfidenceFlag = Literal[
     "single_source",
     "low_tier_only",
     "contested_fact",
-    "fresh_breaking",
-    "language_translated",
-    "ai_flagged_source",
 ]
 
 # Aesthetic enums (§6)
