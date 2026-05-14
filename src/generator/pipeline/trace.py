@@ -1,4 +1,5 @@
 """Lightweight trace recorder used across pipeline stages."""
+
 from __future__ import annotations
 
 import time
@@ -8,7 +9,7 @@ from datetime import datetime, timezone
 from typing import Iterator
 
 from generator.llm.trace_buffer import drain as _drain_llm_calls
-from generator.schema import StageTrace, Trace, TraceApproval
+from generator.schema import EditorAction, StageTrace, Trace, TraceApproval
 
 
 class TraceRecorder:
@@ -18,6 +19,7 @@ class TraceRecorder:
         self.input_sentence = input_sentence
         self.started_at = datetime.now(timezone.utc)
         self.stages: list[StageTrace] = []
+        self._editor_actions: list[EditorAction] = []
 
     @contextmanager
     def stage(self, name: str, model: str | None = None) -> Iterator[None]:
@@ -49,6 +51,9 @@ class TraceRecorder:
             )
         )
 
+    def record_editor_action(self, action: EditorAction) -> None:
+        self._editor_actions.append(action)
+
     def finalize(self, auto_mode: bool = True) -> Trace:
         ended_at = datetime.now(timezone.utc)
         return Trace(
@@ -60,7 +65,7 @@ class TraceRecorder:
             total_duration_ms=int((ended_at - self.started_at).total_seconds() * 1000),
             total_cost_usd=0.0,
             pipeline_trace=self.stages,
-            editor_actions=[],
+            editor_actions=list(self._editor_actions),
             final_outcome="auto_approved" if auto_mode else "approved_published",
             approval=TraceApproval(
                 actor="cli_user@local",
