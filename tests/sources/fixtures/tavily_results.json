@@ -1,0 +1,19 @@
+{
+  "query": "GPT-5.5 Instant ChatGPT",
+  "results": [
+    {
+      "title": "OpenAI rolls out GPT-5.5 Instant",
+      "url": "https://www.reuters.com/technology/openai-gpt55",
+      "content": "Reuters report excerpt...",
+      "published_date": "2026-05-02",
+      "score": 0.92
+    },
+    {
+      "title": "Introducing GPT-5.5 Instant",
+      "url": "https://openai.com/blog/gpt-5-5-instant",
+      "content": "OpenAI announcement excerpt...",
+      "published_date": "2026-05-01",
+      "score": 0.95
+    }
+  ]
+}

@@ -1,21 +1,34 @@
 """Typer CLI entry point — `generate "<one sentence>"`."""
 from __future__ import annotations
 
+import asyncio
 import json
 import uuid
 from pathlib import Path
 
+import httpx
 import typer
 from pydantic import ValidationError
 from rich.console import Console
 
-from generator.pipeline import consistency, disambiguate, extract, fetch, plan, render, triage
+from generator.pipeline import consistency, disambiguate, extract, plan, render, triage
+from generator.pipeline.fetch import EmptyEvidencePoolError, run_fetch_stage
 from generator.pipeline.render import slugify
 from generator.pipeline.trace import TraceRecorder
+from generator.schema import EventSubject, TriageOutput
 
 console = Console()
 
 _OUTPUT_DIR = Path(__file__).resolve().parents[2] / "output"
+
+
+def _subject_from_triage(t: TriageOutput) -> EventSubject:
+    return EventSubject(
+        primary_entity=t.primary_entity or "Unknown",
+        event_type_hint=t.event_type_hint or "generic",
+        temporal_posture=t.temporal_posture or "recent",
+        time_anchor=t.time_anchor,
+    )
 
 
 def generate(
@@ -52,7 +65,18 @@ def generate(
             )
 
         with recorder.stage("fetch"):
-            sources = fetch.run()
+            try:
+                sources = asyncio.run(
+                    run_fetch_stage(plan_out, _subject_from_triage(triage_out))
+                )
+            except EmptyEvidencePoolError as exc:
+                console.print(f"[bold red]Fetch failed:[/bold red] {exc}")
+                raise typer.Exit(code=3) from exc
+            except httpx.HTTPError as exc:
+                console.print(
+                    f"[bold red]Network error during fetch:[/bold red] {exc}"
+                )
+                raise typer.Exit(code=3) from exc
             console.print(f"[green]✓[/green] Fetch  sources={len(sources)}")
 
         with recorder.stage("extract", model="stub"):

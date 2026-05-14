@@ -1,0 +1,10 @@
+{
+  "results": {
+    "bindings": [
+      {
+        "instance_of": {"value": "language model"},
+        "point_in_time": {"value": "2026-05-01T00:00:00Z"}
+      }
+    ]
+  }
+}
