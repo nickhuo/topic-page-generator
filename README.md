@@ -1,5 +1,7 @@
 # Topic Page Generator
 
+## What this is
+
 Newsbreak topic-page-generator: a CLI that takes one sentence describing a news event and emits a publish-ready topic page (HTML + structured data + audit trace), with an editor-in-the-loop for safety. It runs an 8-stage pipeline backed by real LLM calls, live source fetching, and Pydantic-enforced schemas at every step. Every editor decision is recorded in the trace so the full editorial chain of custody is preserved.
 
 ## Setup
