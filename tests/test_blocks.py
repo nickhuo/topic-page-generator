@@ -13,6 +13,7 @@ from generator.blocks.schema import (
     MapBlockData,
     NewsfeedBlockData,
     ParagraphBlockData,
+    ReactionsBlock,
     TimelineBlockData,
 )
 from tests.fixtures import make_full_event_page
@@ -34,6 +35,7 @@ def test_default_block_kind_map_is_total():
             "newsfeed",
             "factsheet",
             "map",
+            "reactions",
         }
 
 
@@ -92,12 +94,12 @@ def test_media_coverage_renders_newsfeed():
     assert block.cards
 
 
-def test_reactions_renders_newsfeed_quotes_variant():
+def test_reactions_renders_reactions_block():
     page = make_full_event_page()
     block = module_to_block(_by_kind(page.modules, "reactions"), page.sources)
-    assert isinstance(block, NewsfeedBlockData)
-    assert block.variant == "quotes"
+    assert isinstance(block, ReactionsBlock)
     assert block.cards
+    assert len(block.cards) <= 4
 
 
 def test_official_statements_default_renders_newsfeed_quotes():

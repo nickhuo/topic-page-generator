@@ -168,8 +168,11 @@ def test_reaction_item_stakeholder_tier_optional():
     from generator.schema import ReactionItem
 
     r = ReactionItem(
-        author="A", author_role="role", quote="q",
-        sentiment="positive", source_id="s1",
+        author="A",
+        author_role="role",
+        quote="q",
+        sentiment="positive",
+        source_id="s1",
     )
     assert r.stakeholder_tier is None
     assert r.author_image_url is None
@@ -179,8 +182,11 @@ def test_reaction_item_accepts_stakeholder_tier():
     from generator.schema import ReactionItem
 
     r = ReactionItem(
-        author="A", author_role="role", quote="q",
-        sentiment="positive", source_id="s1",
+        author="A",
+        author_role="role",
+        quote="q",
+        sentiment="positive",
+        source_id="s1",
         stakeholder_tier="stakeholder",
         author_image_url="https://x.test/a.jpg",
     )

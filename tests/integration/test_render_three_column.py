@@ -35,3 +35,67 @@ def test_section_renders_category_chip_when_set():
     page = page.model_copy(update={"need_plans": new_plans})
     html = render_html(page)
     assert 'class="need-section__chip need-section__chip--fact"' in html
+
+
+def _page_with_reactions():
+    from generator.schema import (
+        NeedCurationPlan,
+        ReactionItem,
+        ReactionsData,
+        ReactionsModule,
+    )
+    from tests.fixtures import canned_event_page, conf
+
+    page = canned_event_page()
+    reactions = ReactionsModule(
+        module_id="m_react",
+        serves_needs=["world_reaction"],
+        citations=[],
+        confidence=conf(),
+        slot="primary",
+        artifact="ReactionStream",
+        inclusion_reason="high",
+        data=ReactionsData(
+            items=[
+                ReactionItem(
+                    author=f"A{i}",
+                    author_role=f"role{i}",
+                    quote=f"quote {i}",
+                    sentiment="positive",
+                    source_id="s1",
+                    stakeholder_tier="stakeholder" if i < 2 else "third_party",
+                )
+                for i in range(5)
+            ]
+        ),
+    )
+    new_plan = NeedCurationPlan(
+        need_id="world_reaction",
+        activated=True,
+        rank=2,
+        section_title="Reactions",
+        rationale="How people responded.",
+        assigned_modules=["reactions"],
+        render_overrides={"reactions": "reactions"},
+        category="opinion",
+    )
+    return page.model_copy(
+        update={
+            "modules": list(page.modules) + [reactions],
+            "need_plans": list(page.need_plans) + [new_plan],
+        }
+    )
+
+
+def test_reactions_render_as_quote_cards_limited_to_four():
+    html = render_html(_page_with_reactions())
+    assert 'class="quote-card"' in html
+    assert html.count('class="quote-card"') == 4
+
+
+def test_reactions_stakeholders_rendered_before_third_party():
+    html = render_html(_page_with_reactions())
+    # A0 is a stakeholder; A3 is a third_party that survives the 4-card cap.
+    pos_a0 = html.find("A0")
+    pos_a3 = html.find("A3")
+    assert 0 <= pos_a0 < pos_a3

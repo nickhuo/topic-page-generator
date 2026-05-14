@@ -34,6 +34,12 @@ Rules:
 - Cite every fact via a source_id that appears in the evidence pool above.
 - Do not invent facts not supported by the evidence.
 - Output strictly conforms to the JSON schema you've been given.
+- For each reaction, set stakeholder_tier to one of:
+  * "stakeholder" — person directly affected, employed by, or with formal authority over the event subject (e.g. the CEO of the company, the team captain, a head of state speaking on their own policy).
+  * "adjacent" — industry expert, regulator, or competitor whose opinion materially shapes the story.
+  * "third_party" — pundits, fans, generic commentators.
+- Prefer stakeholders. Aim for at least 2 stakeholder items if the evidence supports it.
+- Set author_image_url ONLY if an unambiguous photo URL is present in the evidence (og:image of a profile page, Wikidata image). Otherwise omit.
 """
 
     def queries(self, ctx: PlanContext) -> list[str]:

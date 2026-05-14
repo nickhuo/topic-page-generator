@@ -16,6 +16,7 @@ from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 from generator.schema import (
     Citation,
     ISO8601,
+    Sentiment,
     SourceId,
     SourceTier,
 )
@@ -100,6 +101,16 @@ class FactsheetRow(_Frozen):
     source_id: SourceId | None = None
 
 
+class QuoteCard(_Frozen):
+    author: str
+    author_role: str
+    quote: str
+    sentiment: Sentiment
+    stakeholder_tier: Literal["stakeholder", "adjacent", "third_party"] | None = None
+    author_image_url: HttpUrl | None = None
+    source_id: SourceId
+
+
 # ---------------------------------------------------------------------------
 # Block variants
 # ---------------------------------------------------------------------------
@@ -142,12 +153,18 @@ class MapBlockData(_Frozen):
     locations: list[Location] = Field(min_length=1)
 
 
+class ReactionsBlock(_Frozen):
+    kind: Literal["reactions"] = "reactions"
+    cards: list[QuoteCard] = Field(max_length=4)
+
+
 RenderBlock = Annotated[
     ParagraphBlockData
     | TimelineBlockData
     | ChartBlockData
     | NewsfeedBlockData
     | FactsheetBlockData
-    | MapBlockData,
+    | MapBlockData
+    | ReactionsBlock,
     Field(discriminator="kind"),
 ]

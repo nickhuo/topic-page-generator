@@ -547,7 +547,9 @@ class DisambiguationOutput(_Frozen):
 # ---------------------------------------------------------------------------
 # Phase-1 needs-driven plan types — the only plan contract.
 # ---------------------------------------------------------------------------
-BlockKind = Literal["paragraph", "timeline", "chart", "newsfeed", "factsheet", "map"]
+BlockKind = Literal[
+    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions"
+]
 
 FetchAngle = Literal["news", "commentary", "official", "explainer"]
 
