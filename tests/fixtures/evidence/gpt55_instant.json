@@ -1,0 +1,192 @@
+[
+  {
+    "id": "src-openai-blog-gpt55",
+    "url": "https://openai.com/blog/gpt-5-5-instant",
+    "publisher": {
+      "name": "OpenAI",
+      "tier": "T0",
+      "logo_url": null
+    },
+    "title": "Introducing GPT-5.5 Instant: the new default ChatGPT model",
+    "author": "OpenAI Team",
+    "published_at": "2026-05-12T09:00:00+00:00",
+    "fetched_at": "2026-05-12T10:00:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 50,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-openai-product-page",
+    "url": "https://openai.com/chatgpt/gpt-5-5-instant",
+    "publisher": {
+      "name": "OpenAI",
+      "tier": "T0",
+      "logo_url": null
+    },
+    "title": "GPT-5.5 Instant — ChatGPT product page",
+    "author": null,
+    "published_at": "2026-05-12T09:30:00+00:00",
+    "fetched_at": "2026-05-12T10:05:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 30,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-nytimes-gpt55",
+    "url": "https://www.nytimes.com/2026/05/12/technology/openai-gpt-55-instant-default.html",
+    "publisher": {
+      "name": "The New York Times",
+      "tier": "T1",
+      "logo_url": null
+    },
+    "title": "OpenAI Rolls Out Faster GPT-5.5 Instant as Default for ChatGPT Users",
+    "author": "Cade Metz",
+    "published_at": "2026-05-12T12:00:00+00:00",
+    "fetched_at": "2026-05-12T13:00:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 25,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-verge-gpt55",
+    "url": "https://www.theverge.com/2026/5/12/openai-gpt-55-instant-chatgpt-default",
+    "publisher": {
+      "name": "The Verge",
+      "tier": "T1",
+      "logo_url": null
+    },
+    "title": "GPT-5.5 Instant is now the default model in ChatGPT — here's what changes",
+    "author": "Alex Heath",
+    "published_at": "2026-05-12T11:30:00+00:00",
+    "fetched_at": "2026-05-12T12:30:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 30,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-reuters-gpt55",
+    "url": "https://www.reuters.com/technology/openai-upgrades-chatgpt-gpt-55-instant-2026-05-12/",
+    "publisher": {
+      "name": "Reuters",
+      "tier": "T1",
+      "logo_url": null
+    },
+    "title": "OpenAI upgrades ChatGPT default to GPT-5.5 Instant, cutting hallucinations by 52.5%",
+    "author": "Anna Tong",
+    "published_at": "2026-05-12T10:45:00+00:00",
+    "fetched_at": "2026-05-12T11:45:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 30,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-techcrunch-gpt55",
+    "url": "https://techcrunch.com/2026/05/12/openai-gpt-5-5-instant-default-chatgpt/",
+    "publisher": {
+      "name": "TechCrunch",
+      "tier": "T1",
+      "logo_url": null
+    },
+    "title": "OpenAI's GPT-5.5 Instant brings 2x throughput and lower cost to ChatGPT free tier",
+    "author": "Kyle Wiggers",
+    "published_at": "2026-05-12T11:00:00+00:00",
+    "fetched_at": "2026-05-12T12:00:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 30,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-wsj-gpt55",
+    "url": "https://www.wsj.com/tech/ai/openai-gpt-55-instant-model-launch-2026-05-12",
+    "publisher": {
+      "name": "The Wall Street Journal",
+      "tier": "T1",
+      "logo_url": null
+    },
+    "title": "OpenAI Makes GPT-5.5 Instant the New Default, Pressuring Google and Anthropic",
+    "author": "Deepa Seetharaman",
+    "published_at": "2026-05-12T13:00:00+00:00",
+    "fetched_at": "2026-05-12T14:00:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 25,
+      "can_paraphrase": false
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-wikidata-openai",
+    "url": "https://www.wikidata.org/wiki/Q42989300",
+    "publisher": {
+      "name": "Wikidata",
+      "tier": "T2",
+      "logo_url": null
+    },
+    "title": "OpenAI (Q42989300) — Wikidata entity",
+    "author": null,
+    "published_at": "2026-05-13T00:00:00+00:00",
+    "fetched_at": "2026-05-13T06:00:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 100,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-wikidata-gpt55",
+    "url": "https://www.wikidata.org/wiki/Q130500001",
+    "publisher": {
+      "name": "Wikidata",
+      "tier": "T2",
+      "logo_url": null
+    },
+    "title": "GPT-5.5 Instant (Q130500001) — Wikidata entity",
+    "author": null,
+    "published_at": "2026-05-13T01:00:00+00:00",
+    "fetched_at": "2026-05-13T06:30:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 100,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  },
+  {
+    "id": "src-blog-aiinsider",
+    "url": "https://aiinsider.substack.com/p/gpt-55-instant-teardown",
+    "publisher": {
+      "name": "AI Insider Newsletter",
+      "tier": "T3",
+      "logo_url": null
+    },
+    "title": "GPT-5.5 Instant teardown: what changed under the hood vs GPT-5.3 Instant",
+    "author": "Linus Chen",
+    "published_at": "2026-05-13T08:00:00+00:00",
+    "fetched_at": "2026-05-13T09:00:00+00:00",
+    "language": "en",
+    "rights": {
+      "max_excerpt_words": 50,
+      "can_paraphrase": true
+    },
+    "archive_url": null
+  }
+]
