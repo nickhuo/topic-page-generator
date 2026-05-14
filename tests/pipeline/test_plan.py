@@ -47,8 +47,21 @@ def test_plan_stage_is_deterministic_lookup():
 
 def test_plan_stage_falls_through_for_unknown_type():
     triage = _TRIAGE.model_copy(update={"event_type_hint": "weird_thing"})
-    out = run_plan_stage(triage, _DISAMB)
+    # Disamb must also reflect the unknown type — otherwise it (correctly)
+    # wins over triage and we'd never test the lookup fallback.
+    weird_chosen = _DISAMB.chosen.model_copy(update={"event_type_hint": "weird_thing"})
+    weird_disamb = _DISAMB.model_copy(update={"chosen": weird_chosen})
+    out = run_plan_stage(triage, weird_disamb)
     assert out.archetype_hint == "generic_event"
+
+
+def test_plan_stage_prefers_disamb_when_present():
+    """If disambiguation refined the event type, the archetype lookup follows disamb."""
+    triage = _TRIAGE.model_copy(update={"event_type_hint": "product_launch"})
+    refined_chosen = _DISAMB.chosen.model_copy(update={"event_type_hint": "scheduled_sports_event"})
+    refined_disamb = _DISAMB.model_copy(update={"chosen": refined_chosen})
+    out = run_plan_stage(triage, refined_disamb)
+    assert out.archetype_hint == "scheduled_sports_event"
 
 
 @respx.mock

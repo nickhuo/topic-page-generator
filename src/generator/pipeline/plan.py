@@ -21,11 +21,17 @@ AESTHETIC_CONFIDENCE_THRESHOLD = 0.75
 def run_plan_stage(triage: TriageOutput, disamb: DisambiguationOutput) -> PlanOutput:
     """Deterministic Stage 3a: event type → archetype lookup.
 
-    Uses triage's event_type_hint as the primary signal. Disambiguation may
-    refine the entity/time anchor but the archetype classification comes from
-    triage.
+    Prefer the disambiguated event_type_hint if disambiguation actually chose one.
+    When triage is confident, disamb short-circuits and copies triage.event_type_hint.
+    When triage is low-confidence and disamb LLM-resolves, disamb's hint is more authoritative.
     """
-    return _lookup_archetype(triage.event_type_hint)
+    # Prefer the disambiguated event_type_hint if disambiguation actually chose one.
+    chosen_hint = (
+        disamb.chosen.event_type_hint
+        if disamb.chosen is not None
+        else triage.event_type_hint
+    )
+    return _lookup_archetype(chosen_hint)
 
 
 async def run_aesthetic_stage(
