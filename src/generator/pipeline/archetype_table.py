@@ -106,7 +106,12 @@ ARCHETYPES: dict[str, PlanOutput] = {
 
 
 def lookup(event_type_hint: str | None) -> PlanOutput:
-    """Return the plan skeleton for `event_type_hint`, falling through to generic."""
-    if not event_type_hint:
-        return ARCHETYPES["generic_event"]
-    return ARCHETYPES.get(event_type_hint, ARCHETYPES["generic_event"])
+    """Return a deep copy of the plan skeleton for `event_type_hint`, falling through to generic.
+
+    Deep-copying isolates each caller from the shared ARCHETYPES table — Pydantic v2
+    models don't deep-freeze mutable contents, so a caller appending to
+    `plan.composition` would otherwise pollute the singleton.
+    """
+    key = event_type_hint or "generic_event"
+    archetype = ARCHETYPES.get(key, ARCHETYPES["generic_event"])
+    return archetype.model_copy(deep=True)

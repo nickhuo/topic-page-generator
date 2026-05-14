@@ -54,6 +54,10 @@ async def run_aesthetic_stage(
             out.preset_confidence,
             AESTHETIC_CONFIDENCE_THRESHOLD,
         )
+        # TODO(pr-5): decide whether aesthetic_overrides emitted with a product_focus
+        # intent should be cleared when the preset falls back to "reference". The
+        # current behavior preserves them — the renderer is expected to treat
+        # overrides as suggestions that defer to the preset when they conflict.
         # Replace preset_id with the safe default; keep the LLM's reasoning.
         out = out.model_copy(update={"preset_id": "reference"})
     return out
