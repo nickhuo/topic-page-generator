@@ -297,6 +297,8 @@ class ReactionItem(_Frozen):
     quote: str = Field(max_length=280)
     sentiment: Sentiment
     source_id: SourceId
+    stakeholder_tier: Literal["stakeholder", "adjacent", "third_party"] | None = None
+    author_image_url: HttpUrl | None = None
 
 
 class ReactionAggregate(_Frozen):
