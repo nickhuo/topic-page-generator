@@ -20,17 +20,6 @@ log = logging.getLogger(__name__)
 AESTHETIC_CONFIDENCE_THRESHOLD = 0.75
 
 _OPINION_MODULES = {"reactions", "media_coverage", "official_statements"}
-_FACT_MODULES = {
-    "infobox",
-    "schedule",
-    "kpi_numbers",
-    "comparison",
-    "where_to_watch",
-    "background",
-    "changelog",
-    "countdown",
-    "hero",
-}
 
 
 def infer_default_category(assigned_modules: list[str]) -> str | None:
