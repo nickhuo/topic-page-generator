@@ -7,6 +7,7 @@ from contextlib import contextmanager
 from datetime import datetime, timezone
 from typing import Iterator
 
+from generator.llm.trace_buffer import drain as _drain_llm_calls
 from generator.schema import StageTrace, Trace, TraceApproval
 
 
@@ -33,6 +34,7 @@ class TraceRecorder:
                     model=model,
                     outcome="error",
                     error=str(exc),
+                    llm_calls=_drain_llm_calls(),
                 )
             )
             raise
@@ -43,6 +45,7 @@ class TraceRecorder:
                 duration_ms=int((time.perf_counter() - start) * 1000),
                 model=model,
                 outcome="success",
+                llm_calls=_drain_llm_calls(),
             )
         )
 
