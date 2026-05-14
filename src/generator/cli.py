@@ -15,6 +15,7 @@ from rich.console import Console
 
 from generator.llm.client import LLMConfigError, LLMOutputError
 from generator.llm.trace_buffer import reset as _reset_llm_calls
+from generator.modules.base import PlanContext
 from generator.pipeline import consistency, disambiguate, extract, plan, render, triage
 from generator.pipeline.fetch import EmptyEvidencePoolError, run_fetch_stage
 from generator.pipeline.render import slugify
@@ -90,12 +91,17 @@ def generate(
             aesthetic_out = await plan.run_aesthetic_stage(triage_out, plan_out, evidence_preview)
             console.print(f"[green]✓[/green] Aesthetic  preset={aesthetic_out.preset_id}")
 
-        with recorder.stage("extract", model="stub"):
-            modules = extract.run(sources)
+        subject = _subject_from_triage(triage_out)
+
+        with recorder.stage("extract"):
+            modules = await extract.run(plan_out, aesthetic_out, subject, sources)
             console.print(f"[green]✓[/green] Extract  modules={len(modules)}")
 
-        with recorder.stage("consistency", model="stub"):
-            consistency_out = consistency.run(modules)
+        with recorder.stage("consistency"):
+            ctx = PlanContext(subject=subject, plan=plan_out, aesthetic=aesthetic_out)
+            consistency_out, modules, needs_coverage, uncovered = await consistency.run(
+                modules, ctx, sources
+            )
             console.print(f"[green]✓[/green] Consistency  passes={consistency_out.passes}")
 
         with recorder.stage("render"):
@@ -107,6 +113,8 @@ def generate(
                 sources=sources,
                 modules=modules,
                 trace_id=recorder.trace_id,
+                needs_coverage=needs_coverage,
+                uncovered_needs=uncovered,
             )
             html = render.render_html(page)
             console.print(f"[green]✓[/green] Render  modules_in_page={len(page.modules)}")

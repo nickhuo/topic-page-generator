@@ -2,10 +2,8 @@
 from __future__ import annotations
 
 import re
-from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import get_args
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -31,17 +29,6 @@ def slugify(text: str) -> str:
     return "-".join(parts) or "event"
 
 
-def _compute_needs_coverage(modules: list[TypedModule]) -> dict[NeedId, list[str]]:
-    coverage: dict[NeedId, list[str]] = defaultdict(list)
-    for m in modules:
-        for need in m.serves_needs:
-            coverage[need].append(m.module_id)
-    # ensure every NeedId key is present
-    for need in get_args(NeedId):
-        coverage.setdefault(need, [])
-    return dict(coverage)
-
-
 def build_page(
     input_sentence: str,
     page_id: str,
@@ -50,10 +37,11 @@ def build_page(
     sources: list[Source],
     modules: list[TypedModule],
     trace_id: str,
+    *,
+    needs_coverage: dict[NeedId, list[str]],
+    uncovered_needs: list[NeedId],
 ) -> EventPage:
     now = datetime.now(timezone.utc).isoformat()
-    coverage = _compute_needs_coverage(modules)
-    uncovered: list[NeedId] = [n for n, ids in coverage.items() if not ids]  # type: ignore[misc]
     return EventPage(
         page_id=page_id,
         input_sentence=input_sentence,
@@ -67,8 +55,8 @@ def build_page(
         modules=modules,
         layout=EventLayout(preset_id=aesthetic.preset_id, overrides=None),
         sources=sources,
-        needs_coverage=coverage,
-        uncovered_needs=uncovered,
+        needs_coverage=needs_coverage,
+        uncovered_needs=uncovered_needs,
         meta=EventMeta(
             last_updated=now,
             editor_approved=True,
