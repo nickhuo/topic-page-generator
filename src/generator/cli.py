@@ -9,6 +9,7 @@ from typing import Any
 
 import httpx
 import typer
+from dotenv import load_dotenv
 from pydantic import ValidationError
 from rich.console import Console
 
@@ -39,6 +40,11 @@ def generate(
     auto: bool = typer.Option(True, "--auto/--interactive", help="Bypass HITL prompts."),
 ) -> None:
     """Run the 8-stage pipeline on a one-sentence input."""
+    # Load .env files so OPENROUTER_API_KEY / TAVILY_API_KEY / MODEL_* overrides
+    # don't have to be exported in every shell. .env.local wins over .env.
+    load_dotenv(".env")
+    load_dotenv(".env.local", override=True)
+
     console.rule("[bold]topic-page-generator[/bold]")
     console.print(f"[dim]input:[/dim] {sentence}")
     console.print(f"[dim]mode:[/dim] {'auto' if auto else 'interactive'}")
