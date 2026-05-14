@@ -1,12 +1,16 @@
-"""Stage 7 — Render. Composes the EventPage and renders placeholder HTML."""
+"""Stage 7 — Render. Composes EventPage → ResolvedLayout → HTML."""
 from __future__ import annotations
 
+import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from markupsafe import Markup
 
+from generator.layout.grid import ARTIFACT_PARTIAL, QUOTE_DENSITY, ResolvedLayout, compose
+from generator.layout.tokens import palette_css_vars
 from generator.schema import (
     AestheticPlanOutput,
     EventLayout,
@@ -19,7 +23,8 @@ from generator.schema import (
     TypedModule,
 )
 
-_TEMPLATES_DIR = Path(__file__).resolve().parents[3] / "templates"
+_PROJECT_ROOT = Path(__file__).resolve().parents[3]
+_TEMPLATES_DIR = _PROJECT_ROOT / "templates"
 
 
 def slugify(text: str) -> str:
@@ -66,10 +71,51 @@ def build_page(
     )
 
 
+def _build_jsonld(page: EventPage) -> str:
+    schema_type = "Event" if page.subject.time_anchor else "NewsArticle"
+    data: dict = {
+        "@context": "https://schema.org",
+        "@type": schema_type,
+        "name": page.subject.primary_entity,
+        "description": page.input_sentence,
+    }
+    if page.subject.time_anchor:
+        data["startDate"] = page.subject.time_anchor
+    else:
+        data["datePublished"] = page.meta.last_updated
+    return json.dumps(data, separators=(",", ":"))
+
+
+def _make_cite(source_index: dict[str, int]):
+    def cite(source_id: str) -> Markup:
+        n = source_index.get(source_id)
+        if n is None:
+            return Markup("")
+        return Markup(
+            f'<sup class="cite-num"><a href="#src-{n}">[{n}]</a></sup>'
+        )
+    return cite
+
+
 def render_html(page: EventPage) -> str:
+    layout: ResolvedLayout = compose(page)
+
     env = Environment(
         loader=FileSystemLoader(str(_TEMPLATES_DIR)),
         autoescape=select_autoescape(["html"]),
     )
-    template = env.get_template("placeholder.html")
-    return template.render(page=page)
+
+    stylesheet = (_TEMPLATES_DIR / "styles.css").read_text(encoding="utf-8")
+    palette_block = palette_css_vars(layout.config.design_tokens.palette)
+
+    template = env.get_template("layout.html")
+    return template.render(
+        page=page,
+        layout=layout,
+        artifact_partial=ARTIFACT_PARTIAL,
+        quote_density=QUOTE_DENSITY,
+        cite=_make_cite(layout.source_index),
+        palette_css_block=palette_block,
+        stylesheet=stylesheet,
+        jsonld=_build_jsonld(page),
+    )
