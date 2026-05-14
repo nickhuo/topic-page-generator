@@ -154,9 +154,18 @@ activemq-data/
 .envrc
 .venv
 
-# Generator output
-output/
+# Generator output (ignored by default; committed demo artifacts whitelisted below)
+output/*
 !output/.gitkeep
+!output/gpt55-instant.html
+!output/gpt55-instant.data.json
+!output/gpt55-instant.trace.json
+!output/eurovision-2026.html
+!output/eurovision-2026.data.json
+!output/eurovision-2026.trace.json
+!output/worldcup-2026.html
+!output/worldcup-2026.data.json
+!output/worldcup-2026.trace.json
 env/
 venv/
 ENV/
