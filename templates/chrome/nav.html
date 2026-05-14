@@ -1,0 +1,11 @@
+<nav class="needs-nav" aria-label="Page sections">
+  <div class="container">
+    <ul class="needs-nav__list">
+      {% for section in sections %}
+        <li class="needs-nav__item">
+          <a href="#need-{{ section.need_id }}">{{ section.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

@@ -1,4 +1,4 @@
-"""Tests for Stage 5 — Module extraction (parallel, per-kind)."""
+"""Tests for Stage 5 — Module extraction (parallel, per-kind, need-aware)."""
 
 from __future__ import annotations
 
@@ -20,20 +20,28 @@ from generator.schema import (
     AestheticOverrides,
     AestheticPlanOutput,
     EventSubject,
+    FetchQuery,
     InfoboxData,
     InfoboxRow,
-    PlanComposition,
-    PlanOutput,
+    NeedCurationPlan,
+    NeedPlanOutput,
     Publisher,
     Source,
     SourceRights,
-    SourceStrategy,
+    TierQuota,
 )
 
 
-# ---------------------------------------------------------------------------
-# Shared helpers / fixtures
-# ---------------------------------------------------------------------------
+_ALL_NEEDS = (
+    "what_happened",
+    "when_where",
+    "who_involved",
+    "current_state",
+    "why_matters",
+    "world_reaction",
+    "what_can_do",
+    "what_next",
+)
 
 
 def _make_source(
@@ -56,34 +64,34 @@ def _make_source(
     )
 
 
-def _make_plan(
+def _make_need_plan(
     module_kinds: list[str] | None = None,
-    preferred_tiers: list[str] | None = None,
     time_range_days: int = 14,
-) -> PlanOutput:
+) -> NeedPlanOutput:
+    """Build a NeedPlanOutput where need #1 (what_happened) is activated and
+    carries all the requested module_kinds. Other 7 needs are deactivated
+    placeholders so the rank-permutation invariant holds."""
     if module_kinds is None:
         module_kinds = ["hero", "infobox"]
-    if preferred_tiers is None:
-        preferred_tiers = ["T0", "T1"]
-    composition = [
-        PlanComposition(
-            module_kind=kind,
-            artifact="HeroBanner" if kind == "hero" else "Infobox",
-            slot="hero" if kind == "hero" else "aside",
-            priority="required",
+    plans = []
+    for idx, nid in enumerate(_ALL_NEEDS):
+        plans.append(
+            NeedCurationPlan(
+                need_id=nid,
+                activated=(idx == 0),
+                rank=idx + 1,
+                section_title=f"Section {nid}",
+                rationale="test",
+                fetch_queries=(
+                    [FetchQuery(query="q", time_range_days=time_range_days)]
+                    if idx == 0
+                    else []
+                ),
+                assigned_modules=module_kinds if idx == 0 else [],
+                publisher_quota=TierQuota(),
+            )
         )
-        for kind in module_kinds
-    ]
-    return PlanOutput(
-        archetype_hint="product_launch",
-        layout_preset_id="product_focus",
-        composition=composition,
-        source_strategy=SourceStrategy(
-            preferred_tiers=preferred_tiers,
-            time_range_days=time_range_days,
-            min_publishers=1,
-        ),
-    )
+    return NeedPlanOutput(need_plans=plans, layout_preset_id="product_focus")
 
 
 def _make_aesthetic() -> AestheticPlanOutput:
@@ -106,17 +114,13 @@ def _make_subject() -> EventSubject:
 def _openrouter_envelope(
     content_json: str, model: str = "anthropic/claude-haiku-4-5"
 ) -> dict:
-    """Wrap a JSON string in an OpenRouter chat-completion response envelope."""
     return {
         "id": "gen-test-extract",
         "model": model,
         "choices": [
             {
                 "index": 0,
-                "message": {
-                    "role": "assistant",
-                    "content": content_json,
-                },
+                "message": {"role": "assistant", "content": content_json},
                 "finish_reason": "stop",
             }
         ],
@@ -160,47 +164,35 @@ def _valid_infobox_json(source_id: str = "src_1") -> str:
 
 
 # ---------------------------------------------------------------------------
-# Test 1: _filter_evidence respects preferred_tiers and recency
+# Test 1: _filter_evidence applies a coarse recency window only.
 # ---------------------------------------------------------------------------
-
-
-def test_filter_evidence_respects_preferred_tiers_and_recency():
+def test_filter_evidence_drops_sources_older_than_2x_window():
     now = datetime.now(timezone.utc)
-    recent_t0 = _make_source("src_good_t0", tier="T0", published_at=now.isoformat())
-    recent_t2 = _make_source("src_good_t2", tier="T2", published_at=now.isoformat())
-    old_t0 = _make_source(
-        "src_old_t0",
-        tier="T0",
+    recent = _make_source("src_recent", published_at=now.isoformat())
+    old = _make_source(
+        "src_old",
         published_at=(now - timedelta(days=60)).isoformat(),
     )
-    recent_t3 = _make_source("src_t3", tier="T3", published_at=now.isoformat())
-
-    plan = _make_plan(preferred_tiers=["T0", "T1"], time_range_days=14)
-    # cutoff = now - 28 days; preferred_tiers = T0/T1
-
-    result = _filter_evidence([recent_t0, recent_t2, old_t0, recent_t3], plan)
+    plan = _make_need_plan(time_range_days=14)  # cutoff = 2 * 14 = 28 days
+    result = _filter_evidence([recent, old], plan)
     ids = {s.id for s in result}
-
-    assert "src_good_t0" in ids  # T0, recent — passes
-    assert "src_good_t2" not in ids  # T2, not in preferred_tiers
-    assert "src_old_t0" not in ids  # T0 but too old (60d > 28d cutoff)
-    assert "src_t3" not in ids  # T3, not in preferred_tiers
+    assert "src_recent" in ids
+    assert "src_old" not in ids
 
 
 def test_filter_evidence_falls_back_to_full_pool_when_nothing_matches():
-    """If no sources pass the filter, return the full pool rather than an empty list."""
+    """If no sources pass the recency filter, return the full pool."""
     now = datetime.now(timezone.utc)
-    src = _make_source("src_only", tier="T3", published_at=now.isoformat())
-    plan = _make_plan(preferred_tiers=["T0"], time_range_days=7)
-    result = _filter_evidence([src], plan)
-    assert result == [src]
+    old = _make_source(
+        "src_only", published_at=(now - timedelta(days=400)).isoformat()
+    )
+    plan = _make_need_plan(time_range_days=7)
+    assert _filter_evidence([old], plan) == [old]
 
 
 # ---------------------------------------------------------------------------
 # Test 2: _collect_cited_ids walks pydantic tree
 # ---------------------------------------------------------------------------
-
-
 def test_collect_cited_ids_walks_pydantic_tree():
     data = InfoboxData(
         rows=[
@@ -208,27 +200,21 @@ def test_collect_cited_ids_walks_pydantic_tree():
             InfoboxRow(label="Date", value="May 2026", source_id="src_y"),
         ]
     )
-    ids = _collect_cited_ids(data)
-    assert ids == {"src_x", "src_y"}
+    assert _collect_cited_ids(data) == {"src_x", "src_y"}
 
 
 def test_collect_cited_ids_handles_empty():
-    data = InfoboxData(rows=[])
-    ids = _collect_cited_ids(data)
-    assert ids == set()
+    assert _collect_cited_ids(InfoboxData(rows=[])) == set()
 
 
 # ---------------------------------------------------------------------------
 # Test 3: extract_one_module skips when cited_ids not in evidence pool
 # ---------------------------------------------------------------------------
-
-
 @respx.mock
 async def test_extract_one_module_skips_when_cited_ids_unknown(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
 
-    # LLM returns infobox data citing src_unknown which is NOT in the evidence pool
     content = _valid_infobox_json(source_id="src_unknown")
     respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         return_value=httpx.Response(200, json=_openrouter_envelope(content))
@@ -239,9 +225,11 @@ async def test_extract_one_module_skips_when_cited_ids_unknown(monkeypatch):
     infobox_cls = next(cls for cls in all_modules() if cls.kind == "infobox")
     module = infobox_cls()
 
-    evidence = [_make_source("src_1")]  # only src_1 in pool
-    plan = _make_plan(["infobox"])
-    ctx = PlanContext(subject=_make_subject(), plan=plan, aesthetic=_make_aesthetic())
+    evidence = [_make_source("src_1")]
+    plan = _make_need_plan(["infobox"])
+    ctx = PlanContext(
+        subject=_make_subject(), need_plan=plan, aesthetic=_make_aesthetic()
+    )
 
     result = await extract_one_module(module, ctx, evidence)
     assert result is None
@@ -250,15 +238,12 @@ async def test_extract_one_module_skips_when_cited_ids_unknown(monkeypatch):
 # ---------------------------------------------------------------------------
 # Test 4: extract_one_module skips when should_render returns False
 # ---------------------------------------------------------------------------
-
-
 @respx.mock
 async def test_extract_one_module_skips_when_should_render_false(monkeypatch):
-    """InfoboxModule.should_render requires >= 3 rows; return empty rows → skip."""
+    """InfoboxModule.should_render requires >= 3 rows; return 2 → skip."""
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
 
-    # Return an infobox with only 2 rows — should_render will return False
     sparse_infobox = json.dumps(
         {
             "rows": [
@@ -277,8 +262,10 @@ async def test_extract_one_module_skips_when_should_render_false(monkeypatch):
     module = infobox_cls()
 
     evidence = [_make_source("src_1")]
-    plan = _make_plan(["infobox"])
-    ctx = PlanContext(subject=_make_subject(), plan=plan, aesthetic=_make_aesthetic())
+    plan = _make_need_plan(["infobox"])
+    ctx = PlanContext(
+        subject=_make_subject(), need_plan=plan, aesthetic=_make_aesthetic()
+    )
 
     result = await extract_one_module(module, ctx, evidence)
     assert result is None
@@ -287,20 +274,15 @@ async def test_extract_one_module_skips_when_should_render_false(monkeypatch):
 # ---------------------------------------------------------------------------
 # Test 5: run returns only successful modules
 # ---------------------------------------------------------------------------
-
-
 @respx.mock
 async def test_run_returns_only_successful_modules(monkeypatch):
-    """hero+infobox succeed; schedule gets malformed JSON → only 2 modules returned."""
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
 
     evidence = [_make_source("src_1"), _make_source("src_2", publisher_name="Wired")]
-    plan = _make_plan(["hero", "infobox", "schedule"])
+    plan = _make_need_plan(["hero", "infobox", "schedule"])
 
     def side_effect(request):
-        # Detect which module is being extracted from the request body.
-        # Each extraction_prompt_template starts with: "... for the "<Kind>" module ..."
         body = json.loads(request.content)
         user_message = next(
             m["content"] for m in body["messages"] if m["role"] == "user"
@@ -314,7 +296,6 @@ async def test_run_returns_only_successful_modules(monkeypatch):
                 200, json=_openrouter_envelope(_valid_infobox_json("src_1"))
             )
         else:
-            # schedule → malformed JSON (triggers validation retry then LLMOutputError)
             return httpx.Response(200, json=_openrouter_envelope("NOT VALID JSON {{{"))
 
     respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
@@ -322,12 +303,11 @@ async def test_run_returns_only_successful_modules(monkeypatch):
     )
 
     result = await run(
-        plan=plan,
+        need_plan=plan,
         aesthetic=_make_aesthetic(),
         subject=_make_subject(),
         evidence_pool=evidence,
     )
-    # hero and infobox succeed; schedule fails validation and is dropped
     assert len(result) == 2
     kinds = {m.kind for m in result}
     assert "hero" in kinds
@@ -336,18 +316,16 @@ async def test_run_returns_only_successful_modules(monkeypatch):
 
 
 # ---------------------------------------------------------------------------
-# Test 6: run only dispatches kinds in composition
+# Test 6: run only dispatches kinds in assigned_modules
 # ---------------------------------------------------------------------------
-
-
 @respx.mock
-async def test_run_only_dispatches_kinds_in_composition(monkeypatch):
-    """Composition with only 'hero' → exactly 1 LLM call."""
+async def test_run_only_dispatches_kinds_in_plan(monkeypatch):
+    """Plan with only 'hero' assigned → exactly 1 LLM call."""
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
 
     evidence = [_make_source("src_1")]
-    plan = _make_plan(["hero"])
+    plan = _make_need_plan(["hero"])
 
     route = respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         return_value=httpx.Response(
@@ -356,7 +334,7 @@ async def test_run_only_dispatches_kinds_in_composition(monkeypatch):
     )
 
     await run(
-        plan=plan,
+        need_plan=plan,
         aesthetic=_make_aesthetic(),
         subject=_make_subject(),
         evidence_pool=evidence,

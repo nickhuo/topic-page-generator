@@ -12,6 +12,7 @@ dependencies = [
     "openai>=1.30",
     "python-dotenv>=1.0",
     "tenacity>=8.2",
+    "selectolax>=0.4.8",
 ]
 
 [project.scripts]

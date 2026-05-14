@@ -1,0 +1,17 @@
+<section class="hero" aria-label="Page lede">
+  <div class="container">
+    {% if hero_module.data.badge_label %}
+      <p class="hero__badge">{{ hero_module.data.badge_label }}</p>
+    {% endif %}
+    <h1 class="hero__title">{{ hero_module.data.title }}</h1>
+    {% if hero_module.data.subtitle %}
+      <p class="hero__subtitle">{{ hero_module.data.subtitle }}</p>
+    {% endif %}
+    <p class="hero__summary">{{ hero_module.data.summary }}</p>
+    {% if hero_module.data.image_url %}
+      <figure class="hero__media">
+        <img src="{{ hero_module.data.image_url }}" alt="{{ hero_module.data.image_alt }}" loading="eager">
+      </figure>
+    {% endif %}
+  </div>
+</section>

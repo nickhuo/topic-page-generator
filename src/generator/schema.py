@@ -108,6 +108,12 @@ class Source(_Frozen):
     language: str
     rights: SourceRights
     archive_url: HttpUrl | None = None
+    # Phase-1 needs-driven additions. Default-empty / None so existing code paths
+    # keep working until plan.py + fetch.py are switched over.
+    serves_needs: list[NeedId] = Field(default_factory=list)
+    thumbnail_url: HttpUrl | None = None
+    summary: str | None = None
+    enriched_at: ISO8601 | None = None
 
 
 class Citation(_Frozen):
@@ -474,6 +480,10 @@ class EventPage(_Frozen):
     sources: list[Source]
     needs_coverage: dict[NeedId, list[ModuleId]]
     uncovered_needs: list[NeedId]
+    # The needs curation plan that produced this page (Phase 1 cutover).
+    # Optional during migration so older fixtures still round-trip; once all
+    # outputs are produced by the new plan stage, mark required.
+    need_plans: list["NeedCurationPlan"] = Field(default_factory=list)
     meta: EventMeta
 
 
@@ -517,25 +527,60 @@ class DisambiguationOutput(_Frozen):
     unresolved_candidates: list[DisambiguationCandidate] = Field(default_factory=list)
 
 
-class PlanComposition(_Frozen):
-    module_kind: str
-    artifact: str
-    slot: Slot
-    priority: Priority
-    artifact_alternatives: list[str] = Field(default_factory=list)
+# ---------------------------------------------------------------------------
+# Phase-1 needs-driven plan types — the only plan contract.
+# ---------------------------------------------------------------------------
+BlockKind = Literal[
+    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map"
+]
+
+FetchAngle = Literal["news", "commentary", "official", "explainer"]
 
 
-class SourceStrategy(_Frozen):
-    preferred_tiers: list[SourceTier]
-    time_range_days: int
-    min_publishers: int
+class FetchQuery(_Frozen):
+    """A single Tavily-bound search the plan stage emits for a particular need."""
+
+    query: str
+    time_range_days: int | None = None
+    angle: FetchAngle | None = None
+    notes: str | None = None
 
 
-class PlanOutput(_Frozen):
-    archetype_hint: str
-    layout_preset_id: AestheticPresetId
-    composition: list[PlanComposition]
-    source_strategy: SourceStrategy
+class TierQuota(_Frozen):
+    """Minimum number of sources required per publisher tier on a need."""
+
+    t0: int = 0
+    t1: int = 0
+    t2: int = 0
+
+
+class NeedCurationPlan(_Frozen):
+    """Plan-stage instructions for one reader need.
+
+    All 8 needs always appear in PlanOutput.need_plans; `activated=False` means
+    the LLM (or editor) decided this need has no substance for this event and
+    it should not be surfaced on the page.
+    """
+
+    need_id: NeedId
+    activated: bool
+    rank: int = Field(ge=1, le=8)
+    section_title: str
+    rationale: str
+    fetch_queries: list[FetchQuery] = Field(default_factory=list)
+    assigned_modules: list[str] = Field(default_factory=list)
+    render_overrides: dict[str, BlockKind] = Field(default_factory=dict)
+    publisher_quota: TierQuota = Field(default_factory=TierQuota)
+
+
+class NeedPlanOutput(_Frozen):
+    """Output of the new needs-driven plan stage (Phase 1 cutover target).
+
+    Distinct from legacy PlanOutput so both can coexist during migration.
+    """
+
+    need_plans: list[NeedCurationPlan]
+    layout_preset_id: AestheticPresetId  # carries over the deterministic preset hint
 
 
 class AestheticOverrides(_Frozen):

@@ -9,11 +9,22 @@ from generator.pipeline.trace import TraceRecorder
 from generator.schema import (
     DisambiguationCandidate,
     DisambiguationOutput,
-    PlanComposition,
-    PlanOutput,
-    SourceStrategy,
+    NeedCurationPlan,
+    NeedPlanOutput,
+    TierQuota,
     TriageAlternative,
     TriageOutput,
+)
+
+_ALL_NEEDS = (
+    "what_happened",
+    "when_where",
+    "who_involved",
+    "current_state",
+    "why_matters",
+    "world_reaction",
+    "what_can_do",
+    "what_next",
 )
 
 # ---------------------------------------------------------------------------
@@ -208,24 +219,21 @@ def test_disambiguation_review_interactive_pick(monkeypatch) -> None:
 # ---------------------------------------------------------------------------
 
 
-def _plan() -> PlanOutput:
-    return PlanOutput(
-        archetype_hint="live_event",
-        layout_preset_id="live_dominance",
-        composition=[
-            PlanComposition(
-                module_kind="hero",
-                artifact="hero.html",
-                slot="hero",
-                priority="required",
-            )
-        ],
-        source_strategy=SourceStrategy(
-            preferred_tiers=["T0", "T1"],
-            time_range_days=7,
-            min_publishers=3,
-        ),
-    )
+def _plan() -> NeedPlanOutput:
+    plans = [
+        NeedCurationPlan(
+            need_id=nid,
+            activated=(idx < 3),
+            rank=idx + 1,
+            section_title=f"Section {nid}",
+            rationale="test",
+            fetch_queries=[],
+            assigned_modules=["hero"] if idx == 0 else [],
+            publisher_quota=TierQuota(),
+        )
+        for idx, nid in enumerate(_ALL_NEEDS)
+    ]
+    return NeedPlanOutput(need_plans=plans, layout_preset_id="live_dominance")
 
 
 def test_plan_review_auto_mode() -> None:
@@ -238,22 +246,21 @@ def test_plan_review_auto_mode() -> None:
     assert any(a.reason == "auto_mode" for a in trace.editor_actions)
 
 
-def test_plan_review_interactive_override(monkeypatch) -> None:
+def test_plan_review_interactive_toggles_need(monkeypatch) -> None:
     recorder = _recorder()
     prompter = _prompter(auto_mode=False, recorder=recorder)
     plan = _plan()
-
+    # what_happened is activated by default; toggle should deactivate it.
     monkeypatch.setattr(
         rich.prompt.Prompt,
         "ask",
-        staticmethod(lambda *a, **k: "product_focus"),
+        staticmethod(lambda *a, **k: "what_happened"),
     )
-
     result = prompter.plan_review(plan)
-    assert result.archetype_hint == "product_focus"
-
+    wh = next(p for p in result.need_plans if p.need_id == "what_happened")
+    assert wh.activated is False
     trace = recorder.finalize(auto_mode=False)
-    assert any(a.action == "override_archetype" for a in trace.editor_actions)
+    assert any(a.action == "edit_module_field" for a in trace.editor_actions)
 
 
 def test_plan_review_interactive_keep(monkeypatch) -> None:
@@ -268,7 +275,9 @@ def test_plan_review_interactive_keep(monkeypatch) -> None:
     )
 
     result = prompter.plan_review(plan)
-    assert result.archetype_hint == "live_event"
+    # No edit made → plan unchanged in content and no editor action logged.
+    wh = next(p for p in result.need_plans if p.need_id == "what_happened")
+    assert wh.activated is True
     trace = recorder.finalize(auto_mode=False)
     assert trace.editor_actions == []
 

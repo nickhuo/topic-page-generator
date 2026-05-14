@@ -8,79 +8,26 @@
   <style>{{ stylesheet | safe }}</style>
   <script type="application/ld+json">{{ jsonld | safe }}</script>
 </head>
-<body class="density-{{ layout.config.design_tokens.density }}">
+<body>
   <a class="skip-link" href="#main" aria-label="Skip to main content">Skip to content</a>
 
-  {% if layout.config.signals.sticky_top_strip == "live" %}
-    <div class="sticky-strip sticky-strip--live" role="status">LIVE NOW</div>
-  {% endif %}
-
-  <header class="hero hero--{{ 'full-bleed' if layout.config.hero.placement == 'full_bleed' else 'in-main' }}">
-    <div class="container">
-      {% if layout.config.signals.live_pill %}
-        <span class="live-pill" aria-label="Live event">LIVE</span>
-      {% endif %}
-
-      {% for m in layout.slots["hero"] %}
-        {% if m.kind == "hero" %}
-          {% include "artifacts/hero.html" %}
-        {% elif m.kind == "countdown" and layout.config.signals.countdown_in_hero %}
-          {% include "artifacts/countdown.html" %}
-        {% endif %}
-      {% endfor %}
-
-      <p class="last-updated">Last updated {{ page.meta.last_updated }}</p>
-    </div>
+  <header class="page-chrome">
+    {% if hero_module %}
+      {% include "chrome/hero.html" %}
+    {% endif %}
+    {% if countdown_module %}
+      {% include "chrome/countdown.html" %}
+    {% endif %}
   </header>
 
-  <main id="main" class="container">
-    <div class="layout-cols"
-         style="--col-main: {{ layout.config.columns.ratios[0] }}fr; --col-aside: {{ layout.config.columns.ratios[1] }}fr;">
-      <section class="main">
-        {% for m in layout.slots["primary"] %}
-          {% if m.kind == "kpi_numbers" %}
-            <section class="kpi-row" aria-label="Key numbers">
-              {% for tile in m.data.tiles %}
-                {% include "artifacts/kpi_tile.html" %}
-              {% endfor %}
-            </section>
-          {% else %}
-            {% set partial = artifact_partial[m.kind] %}
-            {% if partial %}
-              {% include "artifacts/" ~ partial %}
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-      </section>
+  {% if sections %}
+    {% include "chrome/nav.html" %}
+  {% endif %}
 
-      <aside class="aside" aria-label="Auxiliary information">
-        {% for m in layout.slots["aside"] %}
-          {% if m.kind == "kpi_numbers" %}
-            <section class="kpi-row">
-              {% for tile in m.data.tiles %}
-                {% include "artifacts/kpi_tile.html" %}
-              {% endfor %}
-            </section>
-          {% else %}
-            {% set partial = artifact_partial[m.kind] %}
-            {% if partial %}
-              {% include "artifacts/" ~ partial %}
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-      </aside>
-    </div>
-
-    {% if layout.slots["tail"] %}
-      <section class="tail" aria-label="Further reading">
-        {% for m in layout.slots["tail"] %}
-          {% set partial = artifact_partial[m.kind] %}
-          {% if partial %}
-            {% include "artifacts/" ~ partial %}
-          {% endif %}
-        {% endfor %}
-      </section>
-    {% endif %}
+  <main id="main" class="page-main">
+    {% for section in sections %}
+      {% include "needs/section.html" %}
+    {% endfor %}
   </main>
 
   <footer class="page-footer">
@@ -88,12 +35,13 @@
       <h2>Sources</h2>
       <ol class="sources">
         {% for src in page.sources %}
-          <li id="src-{{ layout.source_index[src.id] }}">
+          <li id="src-{{ source_index[src.id] }}">
             <a href="{{ src.url }}" rel="noopener noreferrer">{{ src.title }}</a>
-            — {{ src.publisher.name }} <span class="cite-pub">({{ src.publisher.tier }})</span>
+            <span class="src-meta">— {{ src.publisher.name }} <span class="src-tier">({{ src.publisher.tier }})</span></span>
           </li>
         {% endfor %}
       </ol>
+      <p class="meta-line">Last updated {{ page.meta.last_updated }}</p>
     </div>
   </footer>
 </body>

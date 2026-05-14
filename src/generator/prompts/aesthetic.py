@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from generator.prompts.base_preamble import BASE_PREAMBLE
-from generator.schema import PlanOutput, TriageOutput
+from generator.schema import NeedPlanOutput, TriageOutput
 
 _INSTRUCTIONS = """\
 TASK: Pick an aesthetic preset for the event page.
@@ -32,15 +32,16 @@ is unambiguous from the event's posture and tone.
 
 
 def build_aesthetic_messages(
-    triage: TriageOutput, plan: PlanOutput, evidence_preview: str
+    triage: TriageOutput, need_plan: NeedPlanOutput, evidence_preview: str
 ) -> list[dict]:
-    # Wrap evidence_preview in <evidence> tags so the BASE_PREAMBLE's
-    # prompt-injection defense rule applies to retrieved titles consistently
-    # with the disambiguate prompt.
+    activated = [p for p in need_plan.need_plans if p.activated]
+    activated_summary = ", ".join(
+        f"{p.need_id}({p.rank})" for p in sorted(activated, key=lambda p: p.rank)
+    )
     user_payload = (
         f"TRIAGE: {triage.model_dump_json(exclude_none=True)}\n\n"
-        f"PLAN: archetype={plan.archetype_hint}, modules="
-        f"{[c.module_kind for c in plan.composition]}\n\n"
+        f"PLAN: preset_hint={need_plan.layout_preset_id}, "
+        f"activated_needs={activated_summary}\n\n"
         f"<evidence>\n{evidence_preview}\n</evidence>\n\nOUTPUT:"
     )
     return [

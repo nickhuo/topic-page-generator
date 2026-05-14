@@ -1,5 +1,0 @@
-<div class="kpi-tile" data-cite="{{ tile.source_id }}">
-  <div class="kpi-tile__value">{{ tile.value }}{% if tile.unit %} <small>{{ tile.unit }}</small>{% endif %}</div>
-  <div class="kpi-tile__label">{{ tile.label }} {{ cite(tile.source_id) | safe }}</div>
-  {% if tile.comparison %}<div class="kpi-tile__comparison">{{ tile.comparison }}</div>{% endif %}
-</div>

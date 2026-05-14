@@ -127,6 +127,7 @@ class EditorPrompter:
     # 3. plan_review
     # ------------------------------------------------------------------
     def plan_review(self, plan):
+        """Editor touchpoint for the needs-driven plan."""
         if self.auto:
             self._log(
                 action="accept_module",
@@ -135,32 +136,45 @@ class EditorPrompter:
             )
             return plan
 
-        table = Table(title="Plan Review")
-        table.add_column("Field", style="bold")
-        table.add_column("Value")
-        table.add_row("archetype_hint", plan.archetype_hint or "")
-        table.add_row("modules", str(len(plan.composition)))
-        for comp in plan.composition:
-            kind = getattr(comp, "module_kind", None) or getattr(
-                comp, "kind", str(comp)
+        table = Table(title="Plan Review — Needs Curation")
+        table.add_column("Rank", style="bold")
+        table.add_column("Need")
+        table.add_column("On")
+        table.add_column("Section Title")
+        table.add_column("Modules")
+        table.add_column("Queries")
+        for p in sorted(plan.need_plans, key=lambda x: x.rank):
+            table.add_row(
+                str(p.rank),
+                p.need_id,
+                "✓" if p.activated else "✗",
+                p.section_title[:50],
+                ",".join(p.assigned_modules)[:40],
+                str(len(p.fetch_queries)),
             )
-            slot = getattr(comp, "slot", "")
-            table.add_row("  module", f"{kind} ({slot})")
         self.console.print(table)
-
-        new_arch = Prompt.ask(
-            "Override archetype? [enter to keep / type new]", default=""
+        toggle = Prompt.ask(
+            "Toggle a need by id (e.g. 'world_reaction'), or enter to accept",
+            default="",
         )
-        if new_arch:
-            old = plan.archetype_hint
-            plan.archetype_hint = new_arch
-            self._log(
-                action="override_archetype",
-                target={"module_kind": "plan"},
-                before=old,
-                after=new_arch,
-                reason="manual_override",
-            )
+        if toggle:
+            for p in plan.need_plans:
+                if p.need_id == toggle:
+                    new_plans = [
+                        pp.model_copy(update={"activated": not pp.activated})
+                        if pp.need_id == toggle
+                        else pp
+                        for pp in plan.need_plans
+                    ]
+                    plan = plan.model_copy(update={"need_plans": new_plans})
+                    self._log(
+                        action="edit_module_field",
+                        target={"module_kind": "plan", "field_path": f"need_plans[{toggle}].activated"},
+                        before=p.activated,
+                        after=not p.activated,
+                        reason="editor toggled need",
+                    )
+                    break
         return plan
 
     # ------------------------------------------------------------------

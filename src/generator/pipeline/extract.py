@@ -1,4 +1,4 @@
-"""Stage 5 — Module extraction (parallel, per-kind)."""
+"""Stage 5 — Module extraction (parallel, per-kind, need-aware)."""
 
 from __future__ import annotations
 
@@ -17,7 +17,10 @@ from generator.schema import (
     AestheticPlanOutput,
     Citation,
     EventSubject,
-    PlanOutput,
+    NeedCurationPlan,
+    NeedPlanOutput,
+    Priority,
+    Slot,
     Source,
     SourceTier,
     TypedModule,
@@ -26,16 +29,63 @@ from generator.schema import (
 log = logging.getLogger(__name__)
 _TIER_RANK: dict[SourceTier, int] = {"T0": 0, "T1": 1, "T2": 2, "T3": 3}
 
+# Default slot assignments when assembling modules. Slot was a layout-grid
+# concept that the editorial single-column flow no longer routes on, but the
+# field still lives on EventPage.modules for downstream tooling/legacy traces.
+_DEFAULT_SLOT_BY_KIND: dict[str, Slot] = {
+    "hero": "hero",
+    "countdown": "hero",
+    "infobox": "aside",
+    "media_coverage": "tail",
+}
 
-def _filter_evidence(pool: list[Source], plan: PlanOutput) -> list[Source]:
-    strat = plan.source_strategy
-    cutoff = datetime.now(timezone.utc) - timedelta(days=strat.time_range_days * 2)
-    filtered = [
-        s
-        for s in pool
-        if s.publisher.tier in strat.preferred_tiers
-        and _parse_iso(s.published_at) >= cutoff
-    ]
+
+def _rank_to_priority(rank: int) -> Priority:
+    if rank <= 1:
+        return "required"
+    if rank <= 3:
+        return "high"
+    if rank <= 5:
+        return "medium"
+    return "low"
+
+
+def _plan_for_kind(
+    need_plan: NeedPlanOutput, kind: str
+) -> NeedCurationPlan | None:
+    """Find the activated need plan whose assigned_modules contains this kind."""
+    for plan in sorted(need_plan.need_plans, key=lambda p: p.rank):
+        if not plan.activated:
+            continue
+        if kind in plan.assigned_modules:
+            return plan
+    return None
+
+
+def _max_time_range_days(need_plan: NeedPlanOutput) -> int:
+    """Broadest time window asked for across all activated need queries."""
+    days = 14
+    for plan in need_plan.need_plans:
+        if not plan.activated:
+            continue
+        for fq in plan.fetch_queries:
+            if fq.time_range_days is not None:
+                days = max(days, fq.time_range_days)
+    return days
+
+
+def _filter_evidence(
+    pool: list[Source], need_plan: NeedPlanOutput
+) -> list[Source]:
+    """Time-window filter on the source pool.
+
+    Tier filtering used to live here too via PlanOutput.source_strategy; the
+    needs-driven fetch already enforces per-need publisher diversity, so this
+    only applies a coarse recency window (2× the broadest plan window).
+    """
+    days = _max_time_range_days(need_plan)
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days * 2)
+    filtered = [s for s in pool if _parse_iso(s.published_at) >= cutoff]
     return filtered or pool
 
 
@@ -112,7 +162,6 @@ async def extract_one_module(
 
 
 def _collect_cited_ids(data: BaseModel) -> set[str]:
-    """Walk a module-data pydantic tree and collect every `source_id` field value."""
     found: set[str] = set()
 
     def visit(node: Any) -> None:
@@ -145,22 +194,28 @@ def _assemble_typed_module(
     artifact: str,
     ctx: PlanContext,
 ):
-    comp = next((c for c in ctx.plan.composition if c.module_kind == module.kind), None)
-    module_id = f"mod_{module.kind}"
-    slot = comp.slot if comp else "primary"
-    inclusion_reason = comp.priority if comp else "medium"
-    alternatives = comp.artifact_alternatives if comp else []
+    """Wrap an extracted data payload in its TypedModule envelope.
+
+    Slot / priority used to come from PlanOutput.composition; in the needs-
+    driven world they're derived from which activated need-plan claims this
+    module kind. Falls back to module-kind defaults if no plan claims it.
+    """
+    plan = _plan_for_kind(ctx.need_plan, module.kind)
+    slot: Slot = _DEFAULT_SLOT_BY_KIND.get(module.kind, "primary")
+    inclusion_reason: Priority = (
+        _rank_to_priority(plan.rank) if plan is not None else "medium"
+    )
     citations = _citations_for(data, sources_used)
 
     cls = _typed_module_class_for(module.kind)
     return cls(
-        module_id=module_id,
+        module_id=f"mod_{module.kind}",
         serves_needs=module.serves_needs,
         citations=citations,
         confidence=confidence,
         slot=slot,
         artifact=artifact,
-        artifact_alternatives=alternatives,
+        artifact_alternatives=[],
         inclusion_reason=inclusion_reason,
         data=data,
     )
@@ -210,17 +265,21 @@ def _typed_module_class_for(kind: str):
 
 
 async def run(
-    plan: PlanOutput,
+    need_plan: NeedPlanOutput,
     aesthetic: AestheticPlanOutput,
     subject: EventSubject,
     evidence_pool: list[Source],
 ) -> list[TypedModule]:
-    ctx = PlanContext(subject=subject, plan=plan, aesthetic=aesthetic)
-    evidence = _filter_evidence(evidence_pool, plan)
+    ctx = PlanContext(subject=subject, need_plan=need_plan, aesthetic=aesthetic)
+    evidence = _filter_evidence(evidence_pool, need_plan)
 
-    kinds_to_run = [c.module_kind for c in plan.composition] or [
-        m.kind for m in all_modules()
-    ]
+    # Union of every assigned_module across activated needs.
+    assigned: set[str] = set()
+    for plan in need_plan.need_plans:
+        if not plan.activated:
+            continue
+        assigned.update(plan.assigned_modules)
+    kinds_to_run = list(assigned) or [m.kind for m in all_modules()]
     modules = [cls() for cls in all_modules() if cls.kind in kinds_to_run]
 
     results = await asyncio.gather(

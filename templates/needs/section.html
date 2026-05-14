@@ -1,0 +1,19 @@
+<section id="need-{{ section.need_id }}" class="need-section" data-need="{{ section.need_id }}">
+  <div class="container">
+    <h2 class="need-section__title">{{ section.title }}</h2>
+    {% if section.rationale %}
+      <p class="need-section__rationale">{{ section.rationale }}</p>
+    {% endif %}
+    <div class="need-section__blocks">
+      {% for block in section.blocks %}
+        {% if block.kind == "paragraph" %}{% include "blocks/paragraph.html" %}
+        {% elif block.kind == "timeline" %}{% include "blocks/timeline.html" %}
+        {% elif block.kind == "chart" %}{% include "blocks/chart.html" %}
+        {% elif block.kind == "newsfeed" %}{% include "blocks/newsfeed.html" %}
+        {% elif block.kind == "factsheet" %}{% include "blocks/factsheet.html" %}
+        {% elif block.kind == "map" %}{% include "blocks/map.html" %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

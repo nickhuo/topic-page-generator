@@ -13,7 +13,7 @@ from generator.schema import (
     EventSubject,
     ModuleConfidence,
     NeedId,
-    PlanOutput,
+    NeedPlanOutput,
     Source,
     SourceTier,
 )
@@ -22,7 +22,7 @@ from generator.schema import (
 class PlanContext(BaseModel):
     model_config = ConfigDict(frozen=True, arbitrary_types_allowed=True)
     subject: EventSubject
-    plan: PlanOutput
+    need_plan: NeedPlanOutput
     aesthetic: AestheticPlanOutput
 
 
@@ -47,9 +47,12 @@ class Module(ABC):
     def queries(self, ctx: "PlanContext") -> list[str]: ...
 
     def default_artifact(self, ctx: "PlanContext", data: BaseModel) -> str:
-        for entry in ctx.plan.composition:
-            if entry.module_kind == self.kind:
-                return entry.artifact
+        """Pick the canonical artifact name for this module kind.
+
+        Kept for the `EventPage.modules[*].artifact` field; not used for
+        template routing anymore (blocks layer replaced that). Modules can
+        still override if they want context-sensitive variants.
+        """
         return self.allowed_artifacts[0]
 
     @abstractmethod

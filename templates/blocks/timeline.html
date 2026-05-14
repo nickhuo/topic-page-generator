@@ -1,0 +1,15 @@
+<ol class="block block--timeline">
+  {% for entry in block.entries %}
+    <li class="timeline__entry timeline__entry--{{ entry.importance }}">
+      {% if entry.time %}<time class="timeline__time">{{ entry.time }}</time>{% endif %}
+      <div class="timeline__body">
+        <h3 class="timeline__title">{{ entry.title }}</h3>
+        {% if entry.location %}<p class="timeline__loc">{{ entry.location }}</p>{% endif %}
+        {% if entry.description %}<p class="timeline__desc">{{ entry.description }}</p>{% endif %}
+        {% if entry.source_id and source_index[entry.source_id] %}
+          <sup class="cite-num" data-cite="{{ entry.source_id }}"><a href="#src-{{ source_index[entry.source_id] }}">[{{ source_index[entry.source_id] }}]</a></sup>
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+</ol>

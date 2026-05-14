@@ -1,0 +1,51 @@
+<div class="block block--chart block--chart-{{ block.chart_type }}">
+  {% if block.title %}<h3 class="chart__title">{{ block.title }}</h3>{% endif %}
+
+  {% if block.chart_type == "stat" %}
+    <div class="stat-row">
+      {% for s in block.stats %}
+        <div class="stat">
+          <div class="stat__value">{{ s.value }}{% if s.unit %} <span class="stat__unit">{{ s.unit }}</span>{% endif %}</div>
+          <div class="stat__label">{{ s.label }}</div>
+          {% if s.comparison %}<div class="stat__cmp">{{ s.comparison }}</div>{% endif %}
+          {% if s.source_id and source_index[s.source_id] %}
+            <sup class="cite-num" data-cite="{{ s.source_id }}"><a href="#src-{{ source_index[s.source_id] }}">[{{ source_index[s.source_id] }}]</a></sup>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+  {% elif block.chart_type == "compare_table" %}
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          {% for sub in block.table.subjects %}<th>{{ sub }}</th>{% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in block.table.rows %}
+          <tr>
+            <th scope="row">{{ row.axis }}</th>
+            {% for cell in row.cells %}<td>{{ cell }}</td>{% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  {% elif block.chart_type == "bar" %}
+    {% set _max = (block.series | map(attribute='values') | map('max') | max) or 1 %}
+    <div class="bar-chart">
+      {% for series in block.series %}
+        <div class="bar-chart__series">
+          <span class="bar-chart__label">{{ series.label }}</span>
+          <div class="bar-chart__bars">
+            {% for v in series.values %}
+              <span class="bar-chart__bar" style="--bar: {{ (v / _max * 100) | round(1) }}%;" title="{{ v }}{% if series.unit %} {{ series.unit }}{% endif %}"></span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

@@ -1,4 +1,12 @@
-"""Stage 7 — Render. Composes EventPage → ResolvedLayout → HTML."""
+"""Stage 7 — Render. EventPage → editorial single-column HTML.
+
+The page is structured as:
+  chrome (hero + countdown)  →  needs nav  →  N need sections  →  footer
+
+Each need section emits a typed-block sequence: paragraph / timeline / chart
+/ newsfeed / factsheet / map. Modules adapt themselves to one of these
+shapes via `blocks.module_to_block()`.
+"""
 
 from __future__ import annotations
 
@@ -8,14 +16,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from markupsafe import Markup
 
-from generator.layout.grid import (
-    ARTIFACT_PARTIAL,
-    QUOTE_DENSITY,
-    ResolvedLayout,
-    compose,
-)
+from generator.blocks import module_to_block
 from generator.layout.tokens import palette_css_vars
 from generator.schema import (
     AestheticPlanOutput,
@@ -23,6 +25,7 @@ from generator.schema import (
     EventMeta,
     EventPage,
     EventSubject,
+    NeedCurationPlan,
     NeedId,
     Source,
     TriageOutput,
@@ -31,6 +34,8 @@ from generator.schema import (
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 _TEMPLATES_DIR = _PROJECT_ROOT / "templates"
+
+_CHROME_KINDS = {"hero", "countdown"}
 
 
 def slugify(text: str) -> str:
@@ -51,6 +56,7 @@ def build_page(
     *,
     needs_coverage: dict[NeedId, list[str]],
     uncovered_needs: list[NeedId],
+    need_plans: list[NeedCurationPlan] | None = None,
 ) -> EventPage:
     now = datetime.now(timezone.utc).isoformat()
     return EventPage(
@@ -68,6 +74,7 @@ def build_page(
         sources=sources,
         needs_coverage=needs_coverage,
         uncovered_needs=uncovered_needs,
+        need_plans=need_plans or [],
         meta=EventMeta(
             last_updated=now,
             editor_approved=True,
@@ -92,34 +99,100 @@ def _build_jsonld(page: EventPage) -> str:
     return json.dumps(data, separators=(",", ":"))
 
 
-def _make_cite(source_index: dict[str, int]):
-    def cite(source_id: str) -> Markup:
-        n = source_index.get(source_id)
-        if n is None:
-            return Markup("")
-        return Markup(f'<sup class="cite-num"><a href="#src-{n}">[{n}]</a></sup>')
+def _select_palette_id(page: EventPage) -> str:
+    """Resolve the palette id to inject as CSS vars.
 
-    return cite
+    Aesthetic overrides win when present; otherwise infer from preset.
+    """
+    # Aesthetic overrides aren't stored on the page directly; preset is.
+    preset = page.layout.preset_id
+    return {
+        "live_dominance": "urgent_red",
+        "product_focus": "minimal_tech",
+        "imminent_event": "bold_sport",
+        "reference": "neutral_news",
+    }.get(preset, "neutral_news")
+
+
+def _build_sections(page: EventPage) -> list[dict]:
+    """Assemble the ordered list of need sections for the template."""
+    modules_by_kind = {m.kind: m for m in page.modules}
+    rendered: set[str] = set(_CHROME_KINDS) & set(modules_by_kind.keys())
+    sections: list[dict] = []
+
+    activated = sorted(
+        (p for p in page.need_plans if p.activated), key=lambda p: p.rank
+    )
+    for plan in activated:
+        section_blocks = []
+        for kind in plan.assigned_modules:
+            if kind in rendered:
+                continue
+            mod = modules_by_kind.get(kind)
+            if mod is None:
+                continue
+            override = plan.render_overrides.get(kind)
+            section_blocks.append(
+                module_to_block(mod, page.sources, override=override)
+            )
+            rendered.add(kind)
+        if section_blocks:
+            sections.append(
+                {
+                    "need_id": plan.need_id,
+                    "title": plan.section_title,
+                    "rationale": plan.rationale,
+                    "blocks": section_blocks,
+                }
+            )
+
+    # Orphans: modules that weren't assigned to any activated need.
+    orphan_modules = [
+        m
+        for m in page.modules
+        if m.kind not in rendered and m.kind not in _CHROME_KINDS
+    ]
+    if orphan_modules:
+        sections.append(
+            {
+                "need_id": "more",
+                "title": "More on this topic",
+                "rationale": "",
+                "blocks": [
+                    module_to_block(m, page.sources) for m in orphan_modules
+                ],
+            }
+        )
+
+    return sections
 
 
 def render_html(page: EventPage) -> str:
-    layout: ResolvedLayout = compose(page)
-
     env = Environment(
         loader=FileSystemLoader(str(_TEMPLATES_DIR)),
         autoescape=select_autoescape(["html"]),
     )
 
+    palette_block = palette_css_vars(_select_palette_id(page))
     stylesheet = (_TEMPLATES_DIR / "styles.css").read_text(encoding="utf-8")
-    palette_block = palette_css_vars(layout.config.design_tokens.palette)
+
+    hero_module = next(
+        (m for m in page.modules if m.kind == "hero"), None
+    )
+    countdown_module = next(
+        (m for m in page.modules if m.kind == "countdown"), None
+    )
+
+    source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
+    sections = _build_sections(page)
 
     template = env.get_template("layout.html")
     return template.render(
         page=page,
-        layout=layout,
-        artifact_partial=ARTIFACT_PARTIAL,
-        quote_density=QUOTE_DENSITY,
-        cite=_make_cite(layout.source_index),
+        hero_module=hero_module,
+        countdown_module=countdown_module,
+        sections=sections,
+        source_index=source_index,
         palette_css_block=palette_block,
         stylesheet=stylesheet,
         jsonld=_build_jsonld(page),

@@ -1,24 +1,36 @@
-"""Stage 4 — Fetch orchestrator. Fires two clients in parallel, dedupes,
-filters AI-content blacklist, sorts by (tier asc, published_at desc)."""
+"""Stage 4 — Fetch. Needs-driven multi-query fan-out with publisher diversity.
+
+Each activated need in the plan brings 1-2 Tavily queries; we fan all of them
+out in parallel (semaphore-bounded), tag returned Sources with the need they
+serve, merge across queries with URL dedup that preserves serves_needs, and
+optionally enrich each source's thumbnail + summary via OpenGraph scraping.
+"""
 
 from __future__ import annotations
 
 import asyncio
+import logging
+import os
 from datetime import datetime
 
-from generator.schema import EventSubject, PlanOutput, Source
+from generator.schema import (
+    EventSubject,
+    NeedId,
+    NeedPlanOutput,
+    Source,
+)
 from generator.sources._common import host_of
+from generator.sources.og_scrape import enrich_sources
 from generator.sources.tavily import fetch_tavily
 from generator.sources.wikidata import fetch_wikidata
+
+log = logging.getLogger(__name__)
 
 
 class EmptyEvidencePoolError(RuntimeError):
     """Raised when all source clients return zero results."""
 
 
-# TODO(pr-future): replace placeholders with a curated AI-content domain list.
-# Reuters investigation (2024) listed 40+ AI-aggregator domains; mirror a
-# small placeholder subset until the real list is integrated.
 AI_CONTENT_BLACKLIST: frozenset[str] = frozenset(
     {
         "aigeneratednews.example",
@@ -35,23 +47,12 @@ AI_CONTENT_BLACKLIST: frozenset[str] = frozenset(
 )
 
 _TIER_ORDER = {"T0": 0, "T1": 1, "T2": 2, "T3": 3}
+_FETCH_CONCURRENCY = 6
 
 
 def _is_blacklisted(url: str) -> bool:
     h = host_of(url)
     return any(bad in h for bad in AI_CONTENT_BLACKLIST)
-
-
-def _dedupe_by_url(sources: list[Source]) -> list[Source]:
-    seen: set[str] = set()
-    out: list[Source] = []
-    for s in sources:
-        key = str(s.url)
-        if key in seen:
-            continue
-        seen.add(key)
-        out.append(s)
-    return out
 
 
 def _iso_to_epoch(iso: str) -> float:
@@ -61,46 +62,103 @@ def _iso_to_epoch(iso: str) -> float:
         return 0.0
 
 
-async def run_fetch_stage(plan: PlanOutput, subject: EventSubject) -> list[Source]:
-    """Fan out to Wikidata + Tavily, then merge → dedupe → blacklist → sort.
+def _dedupe_preserving_needs(sources: list[Source]) -> list[Source]:
+    """Dedupe by URL, but merge `serves_needs` across duplicates so a single
+    source surfaced by two different need queries records both."""
+    seen: dict[str, Source] = {}
+    for s in sources:
+        key = str(s.url)
+        existing = seen.get(key)
+        if existing is None:
+            seen[key] = s
+            continue
+        merged_needs = list(
+            dict.fromkeys([*existing.serves_needs, *s.serves_needs])
+        )
+        seen[key] = existing.model_copy(update={"serves_needs": merged_needs})
+    return list(seen.values())
 
-    Wikipedia was removed: its summary endpoint adds latency without offering
-    anything Wikidata + Tavily don't already cover for the event types we ship
-    (product launches, scheduled events, live cultural events). Any wikipedia.org
-    URLs that come through Tavily still get T2 via `publisher_tier.PUBLISHER_TIERS`.
-    """
+
+async def _fetch_one_query(
+    sem: asyncio.Semaphore,
+    need_id: NeedId,
+    query: str,
+    time_range_days: int,
+    primary_entity: str,
+) -> list[Source]:
+    async with sem:
+        results = await fetch_tavily(
+            query,
+            time_range_days=time_range_days,
+            max_results=8,
+            primary_entity=primary_entity,
+        )
+    return [s.model_copy(update={"serves_needs": [need_id]}) for s in results]
+
+
+async def run_fetch_stage(
+    need_plan: NeedPlanOutput, subject: EventSubject
+) -> list[Source]:
+    """Fan out one Tavily call per (need, fetch_query), gather Wikidata once,
+    dedupe URLs while preserving need attribution, blacklist AI-content
+    domains, enrich thumbnails+summaries via OG scrape, then sort by
+    (tier asc, published_at desc)."""
     entity = subject.primary_entity
-    days = plan.source_strategy.time_range_days
-    query = entity
-    if subject.event_type_hint:
-        query = f"{entity} {subject.event_type_hint.replace('_', ' ')}"
+    sem = asyncio.Semaphore(_FETCH_CONCURRENCY)
 
-    # TODO(pr-3+): when an event subject is a product (e.g. "GPT-5.5 Instant"),
-    # the parent org ("OpenAI") may not appear in primary_entity, which means
-    # tier_for() will miss T0 attribution for openai.com. Pass richer context
-    # here — input_sentence and any disambiguation-derived org names — once
-    # those flow through. For now the triage stub returns "X (Org)" so the
-    # substring rule resolves correctly.
+    # Collect (need_id, query, days) triples from activated plans.
+    fetch_specs: list[tuple[NeedId, str, int]] = []
+    for plan in need_plan.need_plans:
+        if not plan.activated:
+            continue
+        for fq in plan.fetch_queries:
+            days = fq.time_range_days or 14
+            fetch_specs.append((plan.need_id, fq.query, days))
+
+    # Fallback: if no fetch queries at all (unusual), at least search the entity.
+    if not fetch_specs:
+        log.warning(
+            "Plan emitted zero fetch_queries; falling back to single entity query."
+        )
+        fetch_specs = [("what_happened", entity, 14)]
+
+    max_calls = int(os.getenv("MAX_TAVILY_CALLS", "20"))
+    if len(fetch_specs) > max_calls:
+        log.warning(
+            "Plan asked for %d Tavily calls; clamping to MAX_TAVILY_CALLS=%d.",
+            len(fetch_specs),
+            max_calls,
+        )
+        fetch_specs = fetch_specs[:max_calls]
+
     wikidata_task = fetch_wikidata(entity)
-    tavily_task = fetch_tavily(
-        query, time_range_days=days, max_results=10, primary_entity=entity
-    )
-
-    wd_res, tav_res = await asyncio.gather(wikidata_task, tavily_task)
+    tavily_tasks = [
+        _fetch_one_query(sem, need_id, query, days, entity)
+        for (need_id, query, days) in fetch_specs
+    ]
+    wd_res, *tav_results = await asyncio.gather(wikidata_task, *tavily_tasks)
 
     merged: list[Source] = []
     wd_source, _wd_props = wd_res
     if wd_source is not None:
-        merged.append(wd_source)
-    merged.extend(tav_res)
+        # Wikidata serves "who_involved" / "what_happened" by default.
+        merged.append(
+            wd_source.model_copy(
+                update={"serves_needs": ["who_involved", "what_happened"]}
+            )
+        )
+    for batch in tav_results:
+        merged.extend(batch)
 
     merged = [s for s in merged if not _is_blacklisted(str(s.url))]
-    merged = _dedupe_by_url(merged)
+    merged = _dedupe_preserving_needs(merged)
 
     if not merged:
         raise EmptyEvidencePoolError(
             f"No sources found for entity={entity!r}. Tried Wikidata and Tavily."
         )
+
+    merged = await enrich_sources(merged)
 
     merged.sort(
         key=lambda s: (

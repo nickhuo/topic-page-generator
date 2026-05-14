@@ -1,0 +1,11 @@
+<div class="block block--paragraph">
+  {% for p in block.paragraphs_md %}
+    <p>{{ p }}{% for c in block.citations %}<sup class="cite-num" data-cite="{{ c.source_id }}"><a href="#src-{{ source_index[c.source_id] }}">[{{ source_index[c.source_id] }}]</a></sup>{% endfor %}</p>
+  {% endfor %}
+  {% for pq in block.pull_quotes %}
+    <blockquote class="pull-quote">
+      <p>“{{ pq.quote }}”</p>
+      {% if pq.attribution %}<cite>— {{ pq.attribution }}</cite>{% endif %}
+    </blockquote>
+  {% endfor %}
+</div>

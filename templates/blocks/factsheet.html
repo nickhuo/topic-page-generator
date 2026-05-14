@@ -1,0 +1,19 @@
+<dl class="block block--factsheet">
+  {% for row in block.rows %}
+    <div class="fact-row">
+      <dt class="fact-row__label">{{ row.label }}</dt>
+      <dd class="fact-row__value">
+        {% if row.value is iterable and row.value is not string %}
+          <ul class="fact-row__list">
+            {% for v in row.value %}<li>{{ v }}</li>{% endfor %}
+          </ul>
+        {% else %}
+          {{ row.value }}
+        {% endif %}
+        {% if row.source_id and source_index[row.source_id] %}
+          <sup class="cite-num" data-cite="{{ row.source_id }}"><a href="#src-{{ source_index[row.source_id] }}">[{{ source_index[row.source_id] }}]</a></sup>
+        {% endif %}
+      </dd>
+    </div>
+  {% endfor %}
+</dl>

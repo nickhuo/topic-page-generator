@@ -25,12 +25,23 @@ from generator.schema import (
     InfoboxModule,
     InfoboxRow,
     ModuleConfidence,
-    PlanComposition,
-    PlanOutput,
+    NeedCurationPlan,
+    NeedPlanOutput,
     Publisher,
     Source,
     SourceRights,
-    SourceStrategy,
+    TierQuota,
+)
+
+_ALL_NEEDS = (
+    "what_happened",
+    "when_where",
+    "who_involved",
+    "current_state",
+    "why_matters",
+    "world_reaction",
+    "what_can_do",
+    "what_next",
 )
 
 
@@ -65,28 +76,24 @@ def _make_confidence() -> ModuleConfidence:
     )
 
 
-def _make_plan(module_kinds: list[str] | None = None) -> PlanOutput:
+def _make_plan(module_kinds: list[str] | None = None) -> NeedPlanOutput:
     if module_kinds is None:
         module_kinds = ["hero", "infobox"]
-    composition = [
-        PlanComposition(
-            module_kind=kind,
-            artifact="HeroBanner" if kind == "hero" else "Infobox",
-            slot="hero" if kind == "hero" else "aside",
-            priority="required",
+    plans = []
+    for idx, nid in enumerate(_ALL_NEEDS):
+        plans.append(
+            NeedCurationPlan(
+                need_id=nid,
+                activated=(idx == 0),
+                rank=idx + 1,
+                section_title=f"Section {nid}",
+                rationale="test",
+                fetch_queries=[],
+                assigned_modules=module_kinds if idx == 0 else [],
+                publisher_quota=TierQuota(),
+            )
         )
-        for kind in module_kinds
-    ]
-    return PlanOutput(
-        archetype_hint="product_launch",
-        layout_preset_id="product_focus",
-        composition=composition,
-        source_strategy=SourceStrategy(
-            preferred_tiers=["T0", "T1"],
-            time_range_days=14,
-            min_publishers=1,
-        ),
-    )
+    return NeedPlanOutput(need_plans=plans, layout_preset_id="product_focus")
 
 
 def _make_aesthetic() -> AestheticPlanOutput:
@@ -109,7 +116,7 @@ def _make_subject() -> EventSubject:
 def _make_ctx() -> PlanContext:
     return PlanContext(
         subject=_make_subject(),
-        plan=_make_plan(["hero", "countdown"]),
+        need_plan=_make_plan(["hero", "countdown"]),
         aesthetic=_make_aesthetic(),
     )
 
@@ -373,10 +380,10 @@ async def test_regenerate_triggers_module_rerun_and_caps_at_two(monkeypatch):
     # Need evidence pool with src_1 so extract_one_module can succeed citation check
     evidence = [_make_source("src_1")]
 
-    # Use a ctx that includes hero in the plan composition so extract_one_module works
+    # Use a ctx that includes hero in the need plan so extract_one_module works
     ctx = PlanContext(
         subject=_make_subject(),
-        plan=_make_plan(["hero"]),
+        need_plan=_make_plan(["hero"]),
         aesthetic=_make_aesthetic(),
     )
 

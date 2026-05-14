@@ -11,12 +11,23 @@ from generator.schema import (
     AestheticOverrides,
     AestheticPlanOutput,
     EventSubject,
-    PlanComposition,
-    PlanOutput,
+    NeedCurationPlan,
+    NeedPlanOutput,
     Publisher,
     Source,
     SourceRights,
-    SourceStrategy,
+    TierQuota,
+)
+
+_ALL_NEEDS = (
+    "what_happened",
+    "when_where",
+    "who_involved",
+    "current_state",
+    "why_matters",
+    "world_reaction",
+    "what_can_do",
+    "what_next",
 )
 
 
@@ -36,23 +47,21 @@ def _make_ctx() -> PlanContext:
         temporal_posture="recent",
         time_anchor=None,
     )
-    plan = PlanOutput(
-        archetype_hint="product_launch",
-        layout_preset_id="product_focus",
-        composition=[
-            PlanComposition(
-                module_kind="hero",
-                artifact="HeroBanner",
-                slot="hero",
-                priority="required",
-                artifact_alternatives=["HeroSplit"],
-            )
-        ],
-        source_strategy=SourceStrategy(
-            preferred_tiers=["T0", "T1"],
-            time_range_days=14,
-            min_publishers=2,
-        ),
+    need_plans = [
+        NeedCurationPlan(
+            need_id=nid,
+            activated=(idx == 0),
+            rank=idx + 1,
+            section_title=f"Section {nid}",
+            rationale="ok",
+            fetch_queries=[],
+            assigned_modules=["hero"] if idx == 0 else [],
+            publisher_quota=TierQuota(),
+        )
+        for idx, nid in enumerate(_ALL_NEEDS)
+    ]
+    need_plan = NeedPlanOutput(
+        need_plans=need_plans, layout_preset_id="product_focus"
     )
     aesthetic = AestheticPlanOutput(
         preset_id="product_focus",
@@ -61,7 +70,7 @@ def _make_ctx() -> PlanContext:
         aesthetic_overrides=AestheticOverrides(),
         reasoning="ok",
     )
-    return PlanContext(subject=subject, plan=plan, aesthetic=aesthetic)
+    return PlanContext(subject=subject, need_plan=need_plan, aesthetic=aesthetic)
 
 
 def test_plan_context_is_frozen():
@@ -93,32 +102,7 @@ def test_subclass_auto_registers_into_registry():
         MODULE_REGISTRY.pop("_stub", None)
 
 
-def test_default_artifact_reads_plan_composition():
-    class _StubData(BaseModel):
-        x: int = 1
-
-    class _Hero(Module):
-        kind = "hero"
-        serves_needs = ["what_happened"]
-        allowed_artifacts = ["HeroBanner", "HeroSplit"]
-        data_schema = _StubData
-        extraction_prompt_template = "irrelevant"
-
-        def queries(self, ctx):
-            return []
-
-        def should_render(self, data):
-            return True
-
-    try:
-        ctx = _make_ctx()
-        artifact = _Hero().default_artifact(ctx, _StubData())
-        assert artifact == "HeroBanner"  # from plan composition
-    finally:
-        MODULE_REGISTRY.pop("hero", None)
-
-
-def test_default_artifact_falls_back_to_first_allowed_when_no_match():
+def test_default_artifact_returns_first_allowed():
     class _StubData(BaseModel):
         x: int = 1
 

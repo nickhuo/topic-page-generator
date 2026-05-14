@@ -15,10 +15,21 @@ from generator.schema import (
     AestheticOverrides,
     AestheticPlanOutput,
     EventSubject,
-    PlanComposition,
-    PlanOutput,
+    NeedCurationPlan,
+    NeedPlanOutput,
     Source,
-    SourceStrategy,
+    TierQuota,
+)
+
+_ALL_NEEDS = (
+    "what_happened",
+    "when_where",
+    "who_involved",
+    "current_state",
+    "why_matters",
+    "world_reaction",
+    "what_can_do",
+    "what_next",
 )
 
 
@@ -233,39 +244,21 @@ def _ctx_for_product_launch():
         temporal_posture="recent",
         time_anchor="2026-05-12T00:00:00+00:00",
     )
-    composition = [
-        PlanComposition(
-            module_kind=k,
-            artifact={
-                "hero": "HeroBanner",
-                "infobox": "Infobox",
-                "schedule": "ScheduleList",
-                "countdown": "Countdown",
-                "kpi_numbers": "KPITiles",
-                "comparison": "ComparisonTable",
-                "changelog": "Changelog",
-                "reactions": "ReactionsList",
-                "media_coverage": "CoverageList",
-                "official_statements": "StatementsList",
-                "where_to_watch": "ChannelList",
-                "background": "Prose",
-            }[k],
-            slot="primary",
-            priority="medium",
-            artifact_alternatives=[],
+    plans = []
+    for idx, nid in enumerate(_ALL_NEEDS):
+        plans.append(
+            NeedCurationPlan(
+                need_id=nid,
+                activated=(idx == 0),
+                rank=idx + 1,
+                section_title=f"Section {nid}",
+                rationale="test",
+                fetch_queries=[],
+                assigned_modules=ALL_KINDS if idx == 0 else [],
+                publisher_quota=TierQuota(),
+            )
         )
-        for k in ALL_KINDS
-    ]
-    plan = PlanOutput(
-        archetype_hint="product_launch",
-        layout_preset_id="product_focus",
-        composition=composition,
-        source_strategy=SourceStrategy(
-            preferred_tiers=["T0", "T1", "T2"],
-            time_range_days=14,
-            min_publishers=2,
-        ),
-    )
+    need_plan = NeedPlanOutput(need_plans=plans, layout_preset_id="product_focus")
     aesthetic = AestheticPlanOutput(
         preset_id="product_focus",
         preset_confidence=0.9,
@@ -273,7 +266,7 @@ def _ctx_for_product_launch():
         aesthetic_overrides=AestheticOverrides(),
         reasoning="product launch fits product_focus",
     )
-    return subject, plan, aesthetic
+    return subject, need_plan, aesthetic
 
 
 @respx.mock
@@ -299,8 +292,8 @@ async def test_e2e_at_least_seven_modules_succeed(monkeypatch, evidence_gpt55):
         side_effect=route_handler
     )
 
-    subject, plan, aesthetic = _ctx_for_product_launch()
-    modules = await extract.run(plan, aesthetic, subject, evidence_gpt55)
+    subject, need_plan, aesthetic = _ctx_for_product_launch()
+    modules = await extract.run(need_plan, aesthetic, subject, evidence_gpt55)
 
     assert len(modules) >= 7, (
         f"only got {len(modules)} modules: {[m.kind for m in modules]}"

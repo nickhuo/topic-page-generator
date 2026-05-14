@@ -103,16 +103,20 @@ def generate(
             disamb_out = prompter.disambiguation_review(disamb_out)
 
         with recorder.stage("plan"):
-            plan_out = plan.run_plan_stage(triage_out, disamb_out)
-            console.print(f"[green]✓[/green] Plan  archetype={plan_out.archetype_hint}")
+            need_plan_out = await plan.run_plan_stage(triage_out, disamb_out)
+            activated = [p for p in need_plan_out.need_plans if p.activated]
+            console.print(
+                f"[green]✓[/green] Plan  activated_needs={len(activated)}/8 "
+                f"preset={need_plan_out.layout_preset_id}"
+            )
 
         if review_plan:
-            plan_out = prompter.plan_review(plan_out)
+            need_plan_out = prompter.plan_review(need_plan_out)
 
         try:
             with recorder.stage("fetch"):
                 sources = await run_fetch_stage(
-                    plan_out, _subject_from_triage(triage_out)
+                    need_plan_out, _subject_from_triage(triage_out)
                 )
         except EmptyEvidencePoolError as exc:
             console.print(f"[bold red]Fetch failed:[/bold red] {exc}")
@@ -129,7 +133,7 @@ def generate(
 
         with recorder.stage("aesthetic_plan"):
             aesthetic_out = await plan.run_aesthetic_stage(
-                triage_out, plan_out, evidence_preview
+                triage_out, need_plan_out, evidence_preview
             )
             console.print(
                 f"[green]✓[/green] Aesthetic  preset={aesthetic_out.preset_id}"
@@ -138,11 +142,13 @@ def generate(
         subject = _subject_from_triage(triage_out)
 
         with recorder.stage("extract"):
-            modules = await extract.run(plan_out, aesthetic_out, subject, sources)
+            modules = await extract.run(need_plan_out, aesthetic_out, subject, sources)
             console.print(f"[green]✓[/green] Extract  modules={len(modules)}")
 
         with recorder.stage("consistency"):
-            ctx = PlanContext(subject=subject, plan=plan_out, aesthetic=aesthetic_out)
+            ctx = PlanContext(
+                subject=subject, need_plan=need_plan_out, aesthetic=aesthetic_out
+            )
             consistency_out, modules, needs_coverage, uncovered = await consistency.run(
                 modules, ctx, sources
             )
@@ -163,7 +169,7 @@ def generate(
             if verdict == "regen":
                 from generator.pipeline.extract import _filter_evidence
 
-                evidence = _filter_evidence(sources, plan_out)
+                evidence = _filter_evidence(sources, need_plan_out)
                 m2_regenned = await extract_one_module(
                     m2,
                     ctx,
@@ -191,6 +197,7 @@ def generate(
                 trace_id=recorder.trace_id,
                 needs_coverage=needs_coverage,
                 uncovered_needs=uncovered,
+                need_plans=need_plan_out.need_plans,
             )
             html = render.render_html(page)
             console.print(
@@ -223,7 +230,7 @@ def generate(
                 if target_idx is not None:
                     from generator.pipeline.extract import _filter_evidence
 
-                    evidence = _filter_evidence(sources, plan_out)
+                    evidence = _filter_evidence(sources, need_plan_out)
                     regenned = await extract_one_module(
                         modules[target_idx],
                         ctx,
@@ -243,6 +250,7 @@ def generate(
                         trace_id=recorder.trace_id,
                         needs_coverage=needs_coverage,
                         uncovered_needs=uncovered,
+                        need_plans=need_plan_out.need_plans,
                     )
                     output_paths["html"].write_text(
                         render.render_html(page), encoding="utf-8"
@@ -305,9 +313,9 @@ def regen_module(
         EditorAction,
         EditorActionTarget,
         EventPage,
-        PlanComposition,
-        PlanOutput,
-        SourceStrategy,
+        NeedCurationPlan,
+        NeedPlanOutput,
+        TierQuota,
         Trace,
     )
     from generator.pipeline.extract import _filter_evidence
@@ -330,30 +338,43 @@ def regen_module(
     module_instance = ModuleCls()
 
     # ------------------------------------------------------------------ rebuild PlanContext
-    # EventPage doesn't store PlanOutput/AestheticPlanOutput directly; reconstruct
-    # minimal stubs from the data that IS available on the page.
-    composition = [
-        PlanComposition(
-            module_kind=m.kind,
-            artifact=m.artifact,
-            slot=m.slot,
-            priority=m.inclusion_reason,
-            artifact_alternatives=m.artifact_alternatives,
+    # Prefer reusing the saved need_plans verbatim; if they're empty (older
+    # outputs from before Phase 1 landed) synthesize a minimal stub that lists
+    # every module kind under the `what_happened` need so extract still runs.
+    if page.need_plans:
+        need_plan_stub = NeedPlanOutput(
+            need_plans=list(page.need_plans),
+            layout_preset_id=page.layout.preset_id,
         )
-        for m in page.modules
-    ]
-    # Reconstruct a source strategy from the actual sources present.
-    tiers_present = list({s.publisher.tier for s in page.sources})
-    plan_stub = PlanOutput(
-        archetype_hint="regen",
-        layout_preset_id=page.layout.preset_id,
-        composition=composition,
-        source_strategy=SourceStrategy(
-            preferred_tiers=tiers_present or ["T0", "T1", "T2", "T3"],
-            time_range_days=365,
-            min_publishers=1,
-        ),
-    )
+    else:
+        all_kinds = [m.kind for m in page.modules]
+        all_need_ids = (
+            "what_happened",
+            "when_where",
+            "who_involved",
+            "current_state",
+            "why_matters",
+            "world_reaction",
+            "what_can_do",
+            "what_next",
+        )
+        need_plan_stub = NeedPlanOutput(
+            need_plans=[
+                NeedCurationPlan(
+                    need_id=nid,
+                    activated=(idx == 0),
+                    rank=idx + 1,
+                    section_title="(regen stub)",
+                    rationale="reconstructed for regen-module CLI",
+                    fetch_queries=[],
+                    assigned_modules=all_kinds if idx == 0 else [],
+                    render_overrides={},
+                    publisher_quota=TierQuota(),
+                )
+                for idx, nid in enumerate(all_need_ids)
+            ],
+            layout_preset_id=page.layout.preset_id,
+        )
     aesthetic_stub = AestheticPlanOutput(
         preset_id=page.layout.preset_id,
         preset_confidence=1.0,
@@ -361,10 +382,12 @@ def regen_module(
         aesthetic_overrides=AestheticOverrides(),
         reasoning="reconstructed for regen-module CLI",
     )
-    ctx = PlanContext(subject=page.subject, plan=plan_stub, aesthetic=aesthetic_stub)
+    ctx = PlanContext(
+        subject=page.subject, need_plan=need_plan_stub, aesthetic=aesthetic_stub
+    )
 
     # ------------------------------------------------------------------ extract
-    evidence = _filter_evidence(page.sources, plan_stub)
+    evidence = _filter_evidence(page.sources, need_plan_stub)
 
     new_typed = asyncio.run(
         extract_one_module(
@@ -398,6 +421,7 @@ def regen_module(
         sources=page.sources,
         needs_coverage=page.needs_coverage,
         uncovered_needs=page.uncovered_needs,
+        need_plans=page.need_plans,
         meta=EventMeta(
             last_updated=now_iso,
             editor_approved=page.meta.editor_approved,

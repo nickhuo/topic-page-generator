@@ -1,16 +1,16 @@
-"""Stage 3 — Plan (deterministic) + Aesthetic Plan (LLM)."""
+"""Stage 3 — Plan (LLM, needs-driven) + Aesthetic Plan (LLM)."""
 
 from __future__ import annotations
 
 import logging
 
 from generator.llm.client import call_structured, get_default_model
-from generator.pipeline.archetype_table import lookup as _lookup_archetype
 from generator.prompts.aesthetic import build_aesthetic_messages
+from generator.prompts.plan import build_need_plan_messages
 from generator.schema import (
     AestheticPlanOutput,
     DisambiguationOutput,
-    PlanOutput,
+    NeedPlanOutput,
     TriageOutput,
 )
 
@@ -19,25 +19,28 @@ log = logging.getLogger(__name__)
 AESTHETIC_CONFIDENCE_THRESHOLD = 0.75
 
 
-def run_plan_stage(triage: TriageOutput, disamb: DisambiguationOutput) -> PlanOutput:
-    """Deterministic Stage 3a: event type → archetype lookup.
+async def run_plan_stage(
+    triage: TriageOutput,
+    disamb: DisambiguationOutput,
+    *,
+    model: str | None = None,
+) -> NeedPlanOutput:
+    """LLM Stage 3a: curate the page as a sequence of need sections.
 
-    Prefer the disambiguated event_type_hint if disambiguation actually chose one.
-    When triage is confident, disamb short-circuits and copies triage.event_type_hint.
-    When triage is low-confidence and disamb LLM-resolves, disamb's hint is more authoritative.
+    For each of the 8 reader needs the LLM decides: activation, rank,
+    event-specific H2 (`section_title`), rationale, 1–2 Tavily fetch_queries,
+    which module kinds belong under it, and a publisher_quota.
     """
-    # Prefer the disambiguated event_type_hint if disambiguation actually chose one.
-    chosen_hint = (
-        disamb.chosen.event_type_hint
-        if disamb.chosen is not None
-        else triage.event_type_hint
+    return await call_structured(
+        model=model or get_default_model("plan"),
+        messages=build_need_plan_messages(triage, disamb),
+        response_model=NeedPlanOutput,
     )
-    return _lookup_archetype(chosen_hint)
 
 
 async def run_aesthetic_stage(
     triage: TriageOutput,
-    plan: PlanOutput,
+    need_plan: NeedPlanOutput,
     evidence_preview: str,
     *,
     model: str | None = None,
@@ -45,7 +48,7 @@ async def run_aesthetic_stage(
     """LLM Stage 3b: pick aesthetic preset + closed-enum overrides."""
     out = await call_structured(
         model=model or get_default_model("aesthetic"),
-        messages=build_aesthetic_messages(triage, plan, evidence_preview),
+        messages=build_aesthetic_messages(triage, need_plan, evidence_preview),
         response_model=AestheticPlanOutput,
     )
 
@@ -55,10 +58,5 @@ async def run_aesthetic_stage(
             out.preset_confidence,
             AESTHETIC_CONFIDENCE_THRESHOLD,
         )
-        # TODO(pr-5): decide whether aesthetic_overrides emitted with a product_focus
-        # intent should be cleared when the preset falls back to "reference". The
-        # current behavior preserves them — the renderer is expected to treat
-        # overrides as suggestions that defer to the preset when they conflict.
-        # Replace preset_id with the safe default; keep the LLM's reasoning.
         out = out.model_copy(update={"preset_id": "reference"})
     return out

@@ -33,6 +33,7 @@ _TRANSIENT = (httpx.TimeoutException, httpx.NetworkError)
 _STAGE_FALLBACK_MODELS = {
     "triage": "anthropic/claude-haiku-4-5",
     "disambiguate": "anthropic/claude-sonnet-4-6",
+    "plan": "anthropic/claude-sonnet-4-6",
     "aesthetic": "anthropic/claude-haiku-4-5",
     "extract": "anthropic/claude-haiku-4-5",
     "consistency": "anthropic/claude-haiku-4-5",
