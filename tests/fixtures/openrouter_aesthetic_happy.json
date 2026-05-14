@@ -1,0 +1,15 @@
+{
+  "id": "gen-test-3",
+  "model": "anthropic/claude-haiku-4-5",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"preset_id\": \"product_focus\", \"preset_confidence\": 0.88, \"alternatives_considered\": [\"reference\"], \"aesthetic_overrides\": {\"palette\": \"minimal_tech\", \"density\": \"standard\", \"typography_weight\": \"standard\", \"hero_mood\": \"minimalist_product\", \"copy_register\": \"analytical_measured\"}, \"reasoning\": \"Tech product release matches product_focus.\"}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 412, "completion_tokens": 102, "total_tokens": 514}
+}
