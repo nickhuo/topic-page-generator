@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, HttpUrl
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
 
 
 # ---------------------------------------------------------------------------
@@ -156,6 +156,18 @@ class _BaseModule(_Frozen):
 # ---------------------------------------------------------------------------
 # §3 Module data payloads and the 12 module variants
 # ---------------------------------------------------------------------------
+class OverviewBullet(_Frozen):
+    text: str = Field(min_length=1)
+    source_id: SourceId
+
+    @field_validator("text")
+    @classmethod
+    def _cap_words(cls, v: str) -> str:
+        if len(v.split()) > 18:
+            raise ValueError("overview bullet text must be <= 18 words")
+        return v
+
+
 class HeroData(_Frozen):
     title: str = Field(max_length=80)
     subtitle: str | None = Field(default=None, max_length=120)
@@ -163,6 +175,9 @@ class HeroData(_Frozen):
     image_url: HttpUrl | None = None
     image_alt: str  # TODO: enforce non-empty only when image_url is set
     badge_label: str | None = None
+    overview_bullets: list[OverviewBullet] | None = Field(
+        default=None, min_length=3, max_length=4
+    )
 
 
 class HeroModule(_BaseModule):
@@ -530,9 +545,7 @@ class DisambiguationOutput(_Frozen):
 # ---------------------------------------------------------------------------
 # Phase-1 needs-driven plan types — the only plan contract.
 # ---------------------------------------------------------------------------
-BlockKind = Literal[
-    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map"
-]
+BlockKind = Literal["paragraph", "timeline", "chart", "newsfeed", "factsheet", "map"]
 
 FetchAngle = Literal["news", "commentary", "official", "explainer"]
 
@@ -571,6 +584,8 @@ class NeedCurationPlan(_Frozen):
     assigned_modules: list[str] = Field(default_factory=list)
     render_overrides: dict[str, BlockKind] = Field(default_factory=dict)
     publisher_quota: TierQuota = Field(default_factory=TierQuota)
+    category: Literal["fact", "opinion"] | None = None
+    opinion_subtag: str | None = None
 
 
 class NeedPlanOutput(_Frozen):
