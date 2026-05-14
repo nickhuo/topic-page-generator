@@ -171,3 +171,163 @@ def event_page(
             pipeline_trace_id="tr1",
         ),
     )
+
+
+# --- Task 8 additions ---------------------------------------------------------
+
+from generator.schema import (
+    ChangelogData,
+    ChangelogEntry,
+    ChangelogModule,
+    Citation,
+    ComparisonAxis,
+    ComparisonCell,
+    ComparisonData,
+    ComparisonModule,
+    ComparisonSubject,
+    CountdownData,
+    CountdownModule,
+    KPINumbersData,
+    KPINumbersModule,
+    KPITile,
+    OfficialStatementItem,
+    OfficialStatementsData,
+    OfficialStatementsModule,
+    ReactionItem,
+    ReactionsData,
+    ReactionsModule,
+    ScheduleData,
+    ScheduleItem,
+    ScheduleModule,
+    WhereToWatchChannel,
+    WhereToWatchData,
+    WhereToWatchModule,
+)
+
+
+def make_full_event_page(preset_id: str = "reference"):
+    """Synthesise an EventPage with all 12 module kinds and valid data."""
+    sources_ = [
+        source("s1", "https://example.com/a", "T0"),
+        source("s2", "https://example.com/b", "T1"),
+        source("s3", "https://example.com/c", "T2"),
+    ]
+
+    hero = hero_module()
+    hero = hero.model_copy(update={"data": HeroData(title="Big Event", summary="Summary.", image_alt="")})
+
+    info = infobox_module(slot="aside", rows=4)
+
+    sched = ScheduleModule(
+        module_id="m_sched", serves_needs=["when_where"], citations=[], confidence=conf(),
+        slot="primary", artifact="Timeline", inclusion_reason="high",
+        data=ScheduleData(
+            items=[
+                ScheduleItem(time_iso="2026-06-11T18:00:00Z", label="Opening match", source_id="s1"),
+                ScheduleItem(time_iso="2026-06-12T18:00:00Z", label="Second match", source_id="s2"),
+            ],
+            timezone="UTC",
+        ),
+    )
+
+    countdown = CountdownModule(
+        module_id="m_cd", serves_needs=["what_next"], citations=[], confidence=conf(),
+        slot="hero", artifact="CountdownBlock", inclusion_reason="required",
+        data=CountdownData(target_at="2026-06-11T18:00:00Z", label="Until kickoff", source_id="s1"),
+    )
+
+    kpi = KPINumbersModule(
+        module_id="m_kpi", serves_needs=["current_state"], citations=[], confidence=conf(),
+        slot="primary", artifact="KPITiles", inclusion_reason="medium",
+        data=KPINumbersData(
+            tiles=[
+                KPITile(value="52.5%", label="Fewer hallucinations", source_id="s1"),
+                KPITile(value="37", label="New features", source_id="s2"),
+            ],
+        ),
+    )
+
+    cmp_ = ComparisonModule(
+        module_id="m_cmp", serves_needs=["why_matters"], citations=[], confidence=conf(),
+        slot="primary", artifact="ComparisonTable", inclusion_reason="medium",
+        data=ComparisonData(
+            subjects=[ComparisonSubject(name="A"), ComparisonSubject(name="B")],
+            axes=[
+                ComparisonAxis(
+                    label="Speed",
+                    cells=[
+                        ComparisonCell(value="fast", source_id="s1"),
+                        ComparisonCell(value="slow", source_id="s2"),
+                    ],
+                ),
+            ],
+        ),
+    )
+
+    changelog = ChangelogModule(
+        module_id="m_cl", serves_needs=["what_happened"], citations=[], confidence=conf(),
+        slot="primary", artifact="ChangelogList", inclusion_reason="high",
+        data=ChangelogData(
+            version_label="v2",
+            entries=[
+                ChangelogEntry(label="New thing", description="It does X.", importance="feature", source_id="s1"),
+                ChangelogEntry(label="Big change", description="Breaks Y.", importance="breaking", source_id="s2"),
+            ],
+        ),
+    )
+
+    reactions = ReactionsModule(
+        module_id="m_rx", serves_needs=["world_reaction"], citations=[], confidence=conf(),
+        slot="primary", artifact="ReactionStream", inclusion_reason="high",
+        data=ReactionsData(
+            items=[
+                ReactionItem(author=f"Person {i}", author_role="Analyst",
+                             quote=f"Quote {i}.", sentiment="positive", source_id="s1")
+                for i in range(5)
+            ],
+        ),
+    )
+
+    coverage = media_coverage_module(slot="tail")
+
+    official = OfficialStatementsModule(
+        module_id="m_os", serves_needs=["who_involved"], citations=[], confidence=conf(),
+        slot="primary", artifact="QuoteStack", inclusion_reason="medium",
+        data=OfficialStatementsData(
+            items=[
+                OfficialStatementItem(
+                    author="CEO", role="CEO", organization="OpenAI",
+                    quote="We shipped it.", made_at="2026-05-01T00:00:00Z",
+                    source_url="https://example.com/a", source_id="s1",
+                ),
+            ],
+        ),
+    )
+
+    watch = WhereToWatchModule(
+        module_id="m_w2w", serves_needs=["what_can_do"], citations=[], confidence=conf(),
+        slot="primary", artifact="ChannelGrid", inclusion_reason="high",
+        data=WhereToWatchData(
+            channels=[
+                WhereToWatchChannel(type="streaming", name="Streamr", source_id="s1"),
+            ],
+        ),
+    )
+
+    bg = BackgroundModule(
+        module_id="m_bg", serves_needs=["why_matters"], citations=[], confidence=conf(),
+        slot="primary", artifact="Prose", inclusion_reason="low",
+        data=BackgroundData(
+            paragraphs=[BackgroundParagraph(
+                text="Some background prose here.",
+                citations=[Citation(source_id="s1", claim_text="background claim")],
+            )],
+        ),
+    )
+
+    page = event_page(
+        modules=[hero, info, sched, countdown, kpi, cmp_, changelog, reactions, coverage, official, watch, bg],
+        preset_id=preset_id,
+        sources_=sources_,
+    )
+    return page
