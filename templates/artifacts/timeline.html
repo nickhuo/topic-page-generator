@@ -1,0 +1,20 @@
+<section class="module-timeline" aria-label="Schedule">
+  <h2>Schedule</h2>
+  {% if m.data.items %}
+    <ol class="timeline">
+      {% for item in m.data.items %}
+        <li class="timeline__item" data-cite="{{ item.source_id }}">
+          <span class="timeline__time">{{ item.time_iso }}</span>
+          <span class="timeline__body">
+            <strong>{{ item.label }}</strong>
+            {% if item.location %} — {{ item.location }}{% endif %}
+            {{ cite(item.source_id) | safe }}
+          </span>
+        </li>
+      {% endfor %}
+    </ol>
+    <p class="timeline__tz">Times in {{ m.data.timezone }}.</p>
+  {% else %}
+    <p class="empty">No events scheduled yet.</p>
+  {% endif %}
+</section>

@@ -1,0 +1,13 @@
+{% if m.data.title %}
+  {% if m.data.badge_label %}
+    <span class="hero__badge">{{ m.data.badge_label }}</span>
+  {% endif %}
+  <h1 class="hero__title">{{ m.data.title }}</h1>
+  {% if m.data.subtitle %}<p class="hero__subtitle">{{ m.data.subtitle }}</p>{% endif %}
+  <p class="hero__summary">{{ m.data.summary }}</p>
+  {% if m.data.image_url %}
+    <img src="{{ m.data.image_url }}" alt="{{ m.data.image_alt }}" loading="eager">
+  {% endif %}
+{% else %}
+  <p class="empty">Headline pending.</p>
+{% endif %}

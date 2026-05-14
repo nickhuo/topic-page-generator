@@ -1,0 +1,26 @@
+<section class="module-coverage" aria-label="In the news">
+  <h2>In the news</h2>
+  {% if m.data.items %}
+    {% if m.data.grouping_strategy == "by_perspective" %}
+      {% set groups = m.data.items | groupby("perspective") %}
+    {% elif m.data.grouping_strategy == "by_subtopic" %}
+      {% set groups = m.data.items | groupby("sub_topic") %}
+    {% else %}
+      {% set groups = [(None, m.data.items)] %}
+    {% endif %}
+    {% for label, group in groups %}
+      <div class="coverage__group">
+        {% if label %}<h3 class="coverage__group-title">{{ label }}</h3>{% endif %}
+        {% for item in group %}
+          <article class="coverage__item" data-cite="{{ item.source_id }}">
+            <h4><a href="{{ item.url }}" rel="noopener noreferrer">{{ item.headline }}</a></h4>
+            <p class="coverage__pub">{{ item.publisher }} ({{ item.publisher_tier }}) · {{ item.published_at }}</p>
+            <p>{{ item.snippet }} {{ cite(item.source_id) | safe }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No coverage indexed yet.</p>
+  {% endif %}
+</section>

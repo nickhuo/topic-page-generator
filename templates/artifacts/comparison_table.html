@@ -1,0 +1,27 @@
+<section class="module-comparison" aria-label="Comparison">
+  <h2>Comparison</h2>
+  {% if m.data.axes %}
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th></th>
+          {% for s in m.data.subjects %}
+            <th>{{ s.name }}{% if s.label %} <small>({{ s.label }})</small>{% endif %}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for axis in m.data.axes %}
+          <tr>
+            <th scope="row">{{ axis.label }}</th>
+            {% for cell in axis.cells %}
+              <td data-cite="{{ cell.source_id }}">{{ cell.value }} {{ cite(cell.source_id) | safe }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">No comparison axes available.</p>
+  {% endif %}
+</section>

@@ -1,0 +1,20 @@
+<section class="module-watch" aria-label="Where to watch">
+  <h2>Where to watch</h2>
+  {% if m.data.channels %}
+    <div class="watch-grid">
+      {% for ch in m.data.channels %}
+        <div class="watch-tile" data-cite="{{ ch.source_id }}">
+          <div class="watch-tile__type">{{ ch.type }}</div>
+          <div class="watch-tile__name">
+            {% if ch.url %}<a href="{{ ch.url }}" rel="noopener noreferrer">{{ ch.name }}</a>{% else %}{{ ch.name }}{% endif %}
+          </div>
+          {% if ch.region %}<div class="watch-tile__region">{{ ch.region }}</div>{% endif %}
+          {% if ch.cost %}<div class="watch-tile__cost">{{ ch.cost }}</div>{% endif %}
+          {{ cite(ch.source_id) | safe }}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No broadcast info available yet.</p>
+  {% endif %}
+</section>
