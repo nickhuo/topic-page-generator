@@ -28,6 +28,7 @@ Task:
 - Write a subtitle of ≤120 characters (optional, add only if it adds meaningful context).
 - Write a one-sentence summary of ≤140 characters that conveys the essential fact.
 - Set badge_label to match the temporal posture (e.g., "LIVE", "UPCOMING", "JUST IN", "RECAP").
+- Write 3–4 overview_bullets, each ≤18 words. Each bullet must cite a source_id from the evidence pool. Bullets should be the four things a reader most needs to know about this event at a glance — not a restatement of the title.
 - Every claim must be supported by the evidence pool above.
 
 Rules:

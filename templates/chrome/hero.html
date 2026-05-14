@@ -3,11 +3,27 @@
     {% if hero_module.data.badge_label %}
       <p class="hero__badge">{{ hero_module.data.badge_label }}</p>
     {% endif %}
-    <h1 class="hero__title">{{ hero_module.data.title }}</h1>
+    <h1 class="hero__title">
+      {{ hero_module.data.title }}
+      <time class="hero__updated" datetime="{{ page.meta.last_updated }}" title="{{ page.meta.last_updated }}">
+        Updated {{ page.meta.last_updated[:10] }}
+      </time>
+    </h1>
     {% if hero_module.data.subtitle %}
       <p class="hero__subtitle">{{ hero_module.data.subtitle }}</p>
     {% endif %}
-    <p class="hero__summary">{{ hero_module.data.summary }}</p>
+    {% if hero_module.data.overview_bullets %}
+      <ul class="hero__overview">
+        {% for b in hero_module.data.overview_bullets %}
+          <li>
+            {{ b.text }}
+            <sup class="cite"><a href="#src-{{ source_index[b.source_id] }}">{{ source_index[b.source_id] }}</a></sup>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="hero__summary">{{ hero_module.data.summary }}</p>
+    {% endif %}
     {% if hero_module.data.image_url %}
       <figure class="hero__media">
         <img src="{{ hero_module.data.image_url }}" alt="{{ hero_module.data.image_alt }}" loading="eager">

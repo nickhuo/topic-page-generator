@@ -140,6 +140,8 @@ def _build_sections(page: EventPage) -> list[dict]:
                     "need_id": plan.need_id,
                     "title": plan.section_title,
                     "rationale": plan.rationale,
+                    "category": plan.category,
+                    "opinion_subtag": plan.opinion_subtag,
                     "blocks": section_blocks,
                 }
             )
@@ -156,6 +158,8 @@ def _build_sections(page: EventPage) -> list[dict]:
                 "need_id": "more",
                 "title": "More on this topic",
                 "rationale": "",
+                "category": None,
+                "opinion_subtag": None,
                 "blocks": [module_to_block(m, page.sources) for m in orphan_modules],
             }
         )

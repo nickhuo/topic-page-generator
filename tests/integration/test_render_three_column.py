@@ -21,3 +21,17 @@ def test_toc_js_is_injected():
     page = canned_event_page()
     html = render_html(page)
     assert "IntersectionObserver" in html  # the TOC script body
+
+
+def test_hero_renders_last_updated_chip():
+    page = canned_event_page()
+    html = render_html(page)
+    assert 'class="hero__updated"' in html
+
+
+def test_section_renders_category_chip_when_set():
+    page = canned_event_page()
+    new_plans = [p.model_copy(update={"category": "fact"}) for p in page.need_plans]
+    page = page.model_copy(update={"need_plans": new_plans})
+    html = render_html(page)
+    assert 'class="need-section__chip need-section__chip--fact"' in html

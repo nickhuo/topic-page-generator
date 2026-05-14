@@ -517,3 +517,17 @@ small, .src-meta, .src-tier, .news-card__meta { font-size: 0.85rem; color: var(-
 .page-reference { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; gap: 20px; }
 .ref-card { border: 1px solid var(--c-rule, #e5e7eb); border-radius: 10px; padding: 16px; background: #fff; }
 .ref-card__title { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 12px; color: var(--c-muted, #6b7280); }
+
+/* ---------- hero updated chip + overview bullets ---------- */
+.hero__updated { display: inline-block; margin-left: 12px; font-size: 14px; font-weight: 400; color: var(--c-muted, #6b7280); vertical-align: middle; }
+.hero__overview { margin: 16px 0 0; padding-left: 20px; line-height: 1.55; }
+.hero__overview li { margin-bottom: 8px; }
+
+/* ---------- section fact/opinion chip ---------- */
+.need-section__chip {
+  display: inline-block; padding: 2px 8px; border-radius: 999px;
+  font-size: 11px; letter-spacing: .08em; font-weight: 600;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.need-section__chip--fact { background: #f3f4f6; color: #4b5563; }
+.need-section__chip--opinion { background: color-mix(in srgb, var(--c-accent, #2563eb) 18%, white); color: var(--c-accent, #2563eb); }
