@@ -54,8 +54,12 @@ class TraceRecorder:
     def record_editor_action(self, action: EditorAction) -> None:
         self._editor_actions.append(action)
 
-    def finalize(self, auto_mode: bool = True) -> Trace:
+    def finalize(
+        self, *, auto_mode: bool = True, final_outcome: str | None = None
+    ) -> Trace:
         ended_at = datetime.now(timezone.utc)
+        if final_outcome is None:
+            final_outcome = "auto_approved" if auto_mode else "approved_published"
         return Trace(
             trace_id=self.trace_id,
             page_id=self.page_id,
@@ -66,7 +70,7 @@ class TraceRecorder:
             total_cost_usd=0.0,
             pipeline_trace=self.stages,
             editor_actions=list(self._editor_actions),
-            final_outcome="auto_approved" if auto_mode else "approved_published",
+            final_outcome=final_outcome,
             approval=TraceApproval(
                 actor="cli_user@local",
                 approved_at=ended_at.isoformat(),
