@@ -84,6 +84,18 @@ def canned_event_page() -> EventPage:
             badge_label="LIVE",
         ),
     )
+    info = InfoboxModule(
+        module_id="m_info",
+        serves_needs=["when_where"],
+        citations=[],
+        confidence=conf(),
+        slot="aside",
+        artifact="Infobox",
+        inclusion_reason="required",
+        data=InfoboxData(
+            rows=[InfoboxRow(label="When", value="Today", source_id="s1")]
+        ),
+    )
     from generator.schema import NeedCurationPlan
 
     plan = NeedCurationPlan(
@@ -92,7 +104,7 @@ def canned_event_page() -> EventPage:
         rank=1,
         section_title="What happened",
         rationale="Establish the core facts.",
-        assigned_modules=["hero"],
+        assigned_modules=["hero", "infobox"],
     )
     return EventPage(
         page_id="p_test",
@@ -103,7 +115,7 @@ def canned_event_page() -> EventPage:
             event_type_hint="generic",
             temporal_posture="recent",
         ),
-        modules=[hero],
+        modules=[hero, info],
         layout=EventLayout(preset_id="reference", overrides=None),
         sources=[_src(1)],
         needs_coverage={"what_happened": ["m_hero"]},
