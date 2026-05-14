@@ -1,4 +1,5 @@
 """Tests for the countdown module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.countdown import CountdownModule
 from generator.schema import CountdownData
@@ -19,7 +20,9 @@ def test_countdown_metadata():
 
 
 def test_countdown_should_render():
-    data = CountdownData(target_at="2025-06-01T20:00:00Z", label="Game 1 tip-off", source_id="s1")
+    data = CountdownData(
+        target_at="2025-06-01T20:00:00Z", label="Game 1 tip-off", source_id="s1"
+    )
     assert CountdownModule().should_render(data)
 
 

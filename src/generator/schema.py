@@ -3,6 +3,7 @@
 Source of truth: docs/schema.md. If anything diverges, schema.md wins and
 this file is wrong.
 """
+
 from __future__ import annotations
 
 from typing import Annotated, Any, Literal
@@ -236,7 +237,9 @@ class ComparisonCell(_Frozen):
 
 class ComparisonAxis(_Frozen):
     label: str
-    cells: list[ComparisonCell]  # length must equal subjects length (enforced at extract)
+    cells: list[
+        ComparisonCell
+    ]  # length must equal subjects length (enforced at extract)
 
 
 class ComparisonData(_Frozen):

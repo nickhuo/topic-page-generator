@@ -1,4 +1,5 @@
 """End-to-end Stage 5 test: at least 7 of 12 modules succeed."""
+
 from __future__ import annotations
 
 import json
@@ -25,9 +26,18 @@ _FIXTURES = Path(__file__).parent.parent / "fixtures"
 _EVIDENCE_PATH = _FIXTURES / "evidence" / "gpt55_instant.json"
 
 ALL_KINDS = [
-    "hero", "infobox", "schedule", "countdown", "kpi_numbers", "comparison",
-    "changelog", "reactions", "media_coverage", "official_statements",
-    "where_to_watch", "background",
+    "hero",
+    "infobox",
+    "schedule",
+    "countdown",
+    "kpi_numbers",
+    "comparison",
+    "changelog",
+    "reactions",
+    "media_coverage",
+    "official_statements",
+    "where_to_watch",
+    "background",
 ]
 
 # Map kind → data_schema.__name__ (the unique string in the request body's response_format block)
@@ -66,19 +76,27 @@ def _module_data_payload(kind: str, source_ids: list[str]) -> dict[str, Any]:
             "badge_label": "Product Launch",
         }
     if kind == "infobox":
-        return {"rows": [
-            {"label": "Vendor", "value": "OpenAI", "source_id": sid},
-            {"label": "Released", "value": "May 2026", "source_id": sid},
-            {"label": "Replaces", "value": "GPT-5.3 Instant", "source_id": sid2},
-            {"label": "Surface", "value": "ChatGPT default", "source_id": sid},
-            {"label": "Pricing", "value": "Same tier", "source_id": sid2},
-        ]}
+        return {
+            "rows": [
+                {"label": "Vendor", "value": "OpenAI", "source_id": sid},
+                {"label": "Released", "value": "May 2026", "source_id": sid},
+                {"label": "Replaces", "value": "GPT-5.3 Instant", "source_id": sid2},
+                {"label": "Surface", "value": "ChatGPT default", "source_id": sid},
+                {"label": "Pricing", "value": "Same tier", "source_id": sid2},
+            ]
+        }
     if kind == "kpi_numbers":
-        return {"tiles": [
-            {"value": "52.5%", "label": "Fewer hallucinations",
-             "comparison": "vs GPT-5.3 Instant", "source_id": sid},
-            {"value": "2x", "label": "Throughput", "source_id": sid2},
-        ]}
+        return {
+            "tiles": [
+                {
+                    "value": "52.5%",
+                    "label": "Fewer hallucinations",
+                    "comparison": "vs GPT-5.3 Instant",
+                    "source_id": sid,
+                },
+                {"value": "2x", "label": "Throughput", "source_id": sid2},
+            ]
+        }
     if kind == "comparison":
         return {
             "subjects": [
@@ -86,12 +104,20 @@ def _module_data_payload(kind: str, source_ids: list[str]) -> dict[str, Any]:
                 {"name": "GPT-5.3 Instant", "label": "previous"},
             ],
             "axes": [
-                {"label": "Latency",
-                 "cells": [{"value": "fast", "source_id": sid},
-                           {"value": "slower", "source_id": sid2}]},
-                {"label": "Cost",
-                 "cells": [{"value": "lower", "source_id": sid},
-                           {"value": "baseline", "source_id": sid2}]},
+                {
+                    "label": "Latency",
+                    "cells": [
+                        {"value": "fast", "source_id": sid},
+                        {"value": "slower", "source_id": sid2},
+                    ],
+                },
+                {
+                    "label": "Cost",
+                    "cells": [
+                        {"value": "lower", "source_id": sid},
+                        {"value": "baseline", "source_id": sid2},
+                    ],
+                },
             ],
         }
     if kind == "changelog":
@@ -99,51 +125,83 @@ def _module_data_payload(kind: str, source_ids: list[str]) -> dict[str, Any]:
             "version_label": "GPT-5.5 Instant",
             "previous_version_label": "GPT-5.3 Instant",
             "entries": [
-                {"label": "Memory control",
-                 "description": "Per-conversation memory sources control panel",
-                 "importance": "feature", "source_id": sid},
-                {"label": "Faster Instant tier",
-                 "description": "Lower latency on default-tier responses",
-                 "importance": "feature", "source_id": sid2},
+                {
+                    "label": "Memory control",
+                    "description": "Per-conversation memory sources control panel",
+                    "importance": "feature",
+                    "source_id": sid,
+                },
+                {
+                    "label": "Faster Instant tier",
+                    "description": "Lower latency on default-tier responses",
+                    "importance": "feature",
+                    "source_id": sid2,
+                },
             ],
         }
     if kind == "reactions":
-        return {"items": [
-            {"author": f"Reviewer {i}", "author_role": "Tech journalist",
-             "quote": f"Notable reaction {i} about GPT-5.5 Instant launch from OpenAI.",
-             "sentiment": "positive" if i % 2 == 0 else "neutral",
-             "source_id": sid if i % 2 == 0 else sid2}
-            for i in range(5)
-        ]}
+        return {
+            "items": [
+                {
+                    "author": f"Reviewer {i}",
+                    "author_role": "Tech journalist",
+                    "quote": f"Notable reaction {i} about GPT-5.5 Instant launch from OpenAI.",
+                    "sentiment": "positive" if i % 2 == 0 else "neutral",
+                    "source_id": sid if i % 2 == 0 else sid2,
+                }
+                for i in range(5)
+            ]
+        }
     if kind == "media_coverage":
-        return {"items": [
-            {"headline": f"Headline {i}: GPT-5.5 Instant launches",
-             "publisher": f"Outlet {i}", "publisher_tier": "T1",
-             "published_at": "2026-05-12T10:00:00+00:00",
-             "url": f"https://example.com/story{i}",
-             "snippet": "Coverage snippet about the GPT-5.5 Instant rollout by OpenAI.",
-             "source_id": sid if i % 2 == 0 else sid2}
-            for i in range(5)
-        ], "grouping_strategy": "flat"}
+        return {
+            "items": [
+                {
+                    "headline": f"Headline {i}: GPT-5.5 Instant launches",
+                    "publisher": f"Outlet {i}",
+                    "publisher_tier": "T1",
+                    "published_at": "2026-05-12T10:00:00+00:00",
+                    "url": f"https://example.com/story{i}",
+                    "snippet": "Coverage snippet about the GPT-5.5 Instant rollout by OpenAI.",
+                    "source_id": sid if i % 2 == 0 else sid2,
+                }
+                for i in range(5)
+            ],
+            "grouping_strategy": "flat",
+        }
     if kind == "official_statements":
-        return {"items": [
-            {"author": "Sam Altman", "role": "CEO", "organization": "OpenAI",
-             "quote": "GPT-5.5 Instant raises the bar for the default ChatGPT experience.",
-             "made_at": "2026-05-12T15:00:00+00:00",
-             "source_url": "https://openai.com/blog/gpt55-instant",
-             "source_id": sid},
-        ]}
+        return {
+            "items": [
+                {
+                    "author": "Sam Altman",
+                    "role": "CEO",
+                    "organization": "OpenAI",
+                    "quote": "GPT-5.5 Instant raises the bar for the default ChatGPT experience.",
+                    "made_at": "2026-05-12T15:00:00+00:00",
+                    "source_url": "https://openai.com/blog/gpt55-instant",
+                    "source_id": sid,
+                },
+            ]
+        }
     if kind == "background":
-        return {"paragraphs": [
-            {"text": "GPT-5.5 Instant succeeds GPT-5.3 Instant as the default ChatGPT model.",
-             "citations": [{"source_id": sid, "claim_text": "Rollout in May 2026."}]},
-        ]}
+        return {
+            "paragraphs": [
+                {
+                    "text": "GPT-5.5 Instant succeeds GPT-5.3 Instant as the default ChatGPT model.",
+                    "citations": [
+                        {"source_id": sid, "claim_text": "Rollout in May 2026."}
+                    ],
+                },
+            ]
+        }
     if kind == "schedule":
         # Empty items → should_render returns False → legitimately skipped
         return {"items": [], "timezone": "America/Los_Angeles"}
     if kind == "countdown":
-        return {"target_at": "2026-06-01T00:00:00+00:00", "label": "next milestone",
-                "source_id": sid}
+        return {
+            "target_at": "2026-06-01T00:00:00+00:00",
+            "label": "next milestone",
+            "source_id": sid,
+        }
     if kind == "where_to_watch":
         # Empty channels → should_render returns False → legitimately skipped
         return {"channels": []}
@@ -155,13 +213,15 @@ def _mock_response(kind: str, source_ids: list[str]) -> dict[str, Any]:
     return {
         "id": f"gen-{kind}",
         "model": "anthropic/claude-haiku-4-5",
-        "choices": [{
-            "index": 0,
-            "message": {
-                "role": "assistant",
-                "content": json.dumps(_module_data_payload(kind, source_ids)),
-            },
-        }],
+        "choices": [
+            {
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": json.dumps(_module_data_payload(kind, source_ids)),
+                },
+            }
+        ],
         "usage": {"prompt_tokens": 100, "completion_tokens": 80},
     }
 
@@ -252,6 +312,8 @@ async def test_e2e_at_least_seven_modules_succeed(monkeypatch, evidence_gpt55):
             assert c.source_id in pool_id_set, (
                 f"module {m.kind} cited unknown source_id {c.source_id}"
             )
-        assert set(m.confidence.flags) <= {"single_source", "low_tier_only", "contested_fact"}, (
-            f"module {m.kind} has unexpected confidence flags: {m.confidence.flags}"
-        )
+        assert set(m.confidence.flags) <= {
+            "single_source",
+            "low_tier_only",
+            "contested_fact",
+        }, f"module {m.kind} has unexpected confidence flags: {m.confidence.flags}"

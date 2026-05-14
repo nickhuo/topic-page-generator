@@ -2,7 +2,12 @@ from generator.pipeline.archetype_table import lookup, ARCHETYPES
 
 
 def test_all_four_known_archetypes_present():
-    for k in ("product_launch", "live_cultural_event", "scheduled_sports_event", "generic_event"):
+    for k in (
+        "product_launch",
+        "live_cultural_event",
+        "scheduled_sports_event",
+        "generic_event",
+    ):
         assert k in ARCHETYPES
         assert ARCHETYPES[k].composition  # non-empty
 

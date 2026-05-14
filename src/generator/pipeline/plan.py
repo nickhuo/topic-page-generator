@@ -1,4 +1,5 @@
 """Stage 3 — Plan (deterministic) + Aesthetic Plan (LLM)."""
+
 from __future__ import annotations
 
 import logging

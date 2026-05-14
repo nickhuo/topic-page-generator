@@ -1,4 +1,5 @@
 """Stage 2 — Disambiguation. Conditionally fires Tavily + LLM."""
+
 from __future__ import annotations
 
 import logging
@@ -32,12 +33,16 @@ def _short_circuit(triage: TriageOutput) -> DisambiguationOutput:
     )
 
 
-async def run(triage: TriageOutput, *, model: str | None = None) -> DisambiguationOutput:
+async def run(
+    triage: TriageOutput, *, model: str | None = None
+) -> DisambiguationOutput:
     if triage.confidence >= CONFIDENCE_THRESHOLD:
         return _short_circuit(triage)
 
     # Build a search query from triage alternatives.
-    candidates = [a.entity for a in triage.alternatives] or [triage.primary_entity or ""]
+    candidates = [a.entity for a in triage.alternatives] or [
+        triage.primary_entity or ""
+    ]
     query = " OR ".join(f'"{c}"' for c in candidates if c)
     evidence = await fetch_tavily(
         query, time_range_days=30, max_results=8, primary_entity=triage.primary_entity

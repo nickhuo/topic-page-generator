@@ -1,4 +1,5 @@
 """Schedule module — ordered list of timed events."""
+
 from __future__ import annotations
 
 from typing import ClassVar

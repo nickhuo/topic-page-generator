@@ -1,4 +1,5 @@
 """Tests for Stage 6 — consistency check + needs_coverage."""
+
 from __future__ import annotations
 
 import json
@@ -14,7 +15,6 @@ from generator.pipeline.consistency import _compute_needs_coverage, run
 from generator.schema import (
     AestheticOverrides,
     AestheticPlanOutput,
-    Citation,
     ConfidenceSignals,
     CountdownData,
     CountdownModule,
@@ -37,6 +37,7 @@ from generator.schema import (
 # ---------------------------------------------------------------------------
 # Shared helpers / fixtures
 # ---------------------------------------------------------------------------
+
 
 def _make_source(sid: str = "src_1") -> Source:
     return Source(
@@ -196,6 +197,7 @@ def _openrouter_envelope(content_json: str) -> dict:
 # Test 1: passes when no issues
 # ---------------------------------------------------------------------------
 
+
 @respx.mock
 @pytest.mark.asyncio
 async def test_consistency_passes_when_no_issues(monkeypatch):
@@ -229,8 +231,9 @@ async def test_consistency_passes_when_no_issues(monkeypatch):
 # Test 2: _compute_needs_coverage pure unit test
 # ---------------------------------------------------------------------------
 
+
 def test_compute_needs_coverage_unions_correctly():
-    hero = _make_hero_module()      # serves: what_happened
+    hero = _make_hero_module()  # serves: what_happened
     infobox = _make_infobox_module()  # serves: what_happened, who_involved
 
     coverage, uncovered = _compute_needs_coverage([hero, infobox])
@@ -238,7 +241,14 @@ def test_compute_needs_coverage_unions_correctly():
     assert set(coverage["what_happened"]) == {"mod_hero", "mod_infobox"}
     assert coverage["who_involved"] == ["mod_infobox"]
     # needs not served by any module
-    for need in ("when_where", "current_state", "why_matters", "world_reaction", "what_can_do", "what_next"):
+    for need in (
+        "when_where",
+        "current_state",
+        "why_matters",
+        "world_reaction",
+        "what_can_do",
+        "what_next",
+    ):
         assert need in uncovered
     assert "what_happened" not in uncovered
     assert "who_involved" not in uncovered
@@ -247,6 +257,7 @@ def test_compute_needs_coverage_unions_correctly():
 # ---------------------------------------------------------------------------
 # Test 3: remove action drops module
 # ---------------------------------------------------------------------------
+
 
 @respx.mock
 @pytest.mark.asyncio
@@ -257,18 +268,20 @@ async def test_remove_action_drops_module(monkeypatch):
     countdown = _make_countdown_module()
     hero = _make_hero_module()
 
-    first_response = json.dumps({
-        "passes": False,
-        "issues": [
-            {
-                "severity": "warning",
-                "module_kind": "countdown",
-                "field_path": "target_at",
-                "description": "event already happened",
-                "recommended_action": "remove",
-            }
-        ],
-    })
+    first_response = json.dumps(
+        {
+            "passes": False,
+            "issues": [
+                {
+                    "severity": "warning",
+                    "module_kind": "countdown",
+                    "field_path": "target_at",
+                    "description": "event already happened",
+                    "recommended_action": "remove",
+                }
+            ],
+        }
+    )
     second_response = json.dumps({"passes": True, "issues": []})
 
     call_count = 0
@@ -280,7 +293,9 @@ async def test_remove_action_drops_module(monkeypatch):
             return httpx.Response(200, json=_openrouter_envelope(first_response))
         return httpx.Response(200, json=_openrouter_envelope(second_response))
 
-    respx.post("https://openrouter.ai/api/v1/chat/completions").mock(side_effect=side_effect)
+    respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
+        side_effect=side_effect
+    )
 
     result, modules_out, needs_coverage, uncovered = await run(
         [countdown, hero], _make_ctx(), []
@@ -296,6 +311,7 @@ async def test_remove_action_drops_module(monkeypatch):
 # Test 4: regenerate triggers module rerun, caps at MAX_PAGE_REGENS (2)
 # ---------------------------------------------------------------------------
 
+
 @respx.mock
 @pytest.mark.asyncio
 async def test_regenerate_triggers_module_rerun_and_caps_at_two(monkeypatch):
@@ -304,27 +320,31 @@ async def test_regenerate_triggers_module_rerun_and_caps_at_two(monkeypatch):
 
     hero = _make_hero_module()
 
-    regen_issue_response = json.dumps({
-        "passes": False,
-        "issues": [
-            {
-                "severity": "error",
-                "module_kind": "hero",
-                "field_path": "title",
-                "description": "title contradicts infobox date",
-                "recommended_action": "regenerate",
-            }
-        ],
-    })
+    regen_issue_response = json.dumps(
+        {
+            "passes": False,
+            "issues": [
+                {
+                    "severity": "error",
+                    "module_kind": "hero",
+                    "field_path": "title",
+                    "description": "title contradicts infobox date",
+                    "recommended_action": "regenerate",
+                }
+            ],
+        }
+    )
 
-    valid_hero_data = json.dumps({
-        "title": "GPT-5.5 Instant is Now ChatGPT Default",
-        "subtitle": "OpenAI makes the switch in May 2026",
-        "summary": "OpenAI set GPT-5.5 Instant as the default model.",
-        "image_url": None,
-        "image_alt": "OpenAI logo",
-        "badge_label": "PRODUCT LAUNCH",
-    })
+    valid_hero_data = json.dumps(
+        {
+            "title": "GPT-5.5 Instant is Now ChatGPT Default",
+            "subtitle": "OpenAI makes the switch in May 2026",
+            "summary": "OpenAI set GPT-5.5 Instant as the default model.",
+            "image_url": None,
+            "image_alt": "OpenAI logo",
+            "badge_label": "PRODUCT LAUNCH",
+        }
+    )
 
     extract_call_count = 0
     consistency_call_count = 0
@@ -346,7 +366,9 @@ async def test_regenerate_triggers_module_rerun_and_caps_at_two(monkeypatch):
             extract_call_count += 1
             return httpx.Response(200, json=_openrouter_envelope(valid_hero_data))
 
-    respx.post("https://openrouter.ai/api/v1/chat/completions").mock(side_effect=side_effect)
+    respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
+        side_effect=side_effect
+    )
 
     # Need evidence pool with src_1 so extract_one_module can succeed citation check
     evidence = [_make_source("src_1")]
@@ -371,6 +393,7 @@ async def test_regenerate_triggers_module_rerun_and_caps_at_two(monkeypatch):
 # ---------------------------------------------------------------------------
 # Test 5: LLM failure falls back to passes=True (safety net)
 # ---------------------------------------------------------------------------
+
 
 @respx.mock
 @pytest.mark.asyncio

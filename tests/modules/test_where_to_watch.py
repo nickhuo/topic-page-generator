@@ -1,4 +1,5 @@
 """Tests for the where_to_watch module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.where_to_watch import WhereToWatchModule
 from generator.schema import WhereToWatchData, WhereToWatchChannel

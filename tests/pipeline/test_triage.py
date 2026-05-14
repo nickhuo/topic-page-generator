@@ -18,7 +18,9 @@ async def test_triage_happy_path(monkeypatch):
     respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         return_value=httpx.Response(200, json=payload)
     )
-    out = await run("OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT in May 2026")
+    out = await run(
+        "OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT in May 2026"
+    )
     assert out.primary_entity == "GPT-5.5 Instant (OpenAI)"
     assert out.event_type_hint == "product_launch"
     assert out.confidence == 0.92

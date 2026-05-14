@@ -1,4 +1,5 @@
 """Shared helpers for the source clients."""
+
 from __future__ import annotations
 
 import hashlib

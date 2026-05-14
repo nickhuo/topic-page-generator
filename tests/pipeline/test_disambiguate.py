@@ -35,19 +35,24 @@ async def test_disambiguate_short_circuits_when_confident():
 async def test_disambiguate_fires_llm_when_low_confidence(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
+
     # Stub: return a non-empty Source so the LLM call fires.
     async def fake_tavily(*a, **kw):
         from generator.schema import Publisher, Source, SourceRights
-        return [Source(
-            id="src_abc123",
-            url="https://example.com/apollo",
-            publisher=Publisher(name="Example", tier="T1"),
-            title="Apollo line launch",
-            published_at="2026-05-13T00:00:00Z",
-            fetched_at="2026-05-13T12:00:00Z",
-            language="en",
-            rights=SourceRights(max_excerpt_words=30, can_paraphrase=False),
-        )]
+
+        return [
+            Source(
+                id="src_abc123",
+                url="https://example.com/apollo",
+                publisher=Publisher(name="Example", tier="T1"),
+                title="Apollo line launch",
+                published_at="2026-05-13T00:00:00Z",
+                fetched_at="2026-05-13T12:00:00Z",
+                language="en",
+                rights=SourceRights(max_excerpt_words=30, can_paraphrase=False),
+            )
+        ]
+
     monkeypatch.setattr("generator.pipeline.disambiguate.fetch_tavily", fake_tavily)
 
     payload = json.loads((FIX / "openrouter_disambiguate_happy.json").read_text())
@@ -61,8 +66,16 @@ async def test_disambiguate_fires_llm_when_low_confidence(monkeypatch):
         temporal_posture="recent",
         confidence=0.40,
         alternatives=[
-            TriageAlternative(entity="Apollo (SpaceX merch line)", event_type_hint="product_launch", rationale="r"),
-            TriageAlternative(entity="Apollo program (NASA)", event_type_hint="generic_event", rationale="r"),
+            TriageAlternative(
+                entity="Apollo (SpaceX merch line)",
+                event_type_hint="product_launch",
+                rationale="r",
+            ),
+            TriageAlternative(
+                entity="Apollo program (NASA)",
+                event_type_hint="generic_event",
+                rationale="r",
+            ),
         ],
         reasoning="x",
     )
@@ -80,6 +93,7 @@ async def test_disambiguate_short_circuits_when_no_evidence(monkeypatch):
 
     async def empty_tavily(*a, **kw):
         return []
+
     monkeypatch.setattr("generator.pipeline.disambiguate.fetch_tavily", empty_tavily)
 
     triage = TriageOutput(

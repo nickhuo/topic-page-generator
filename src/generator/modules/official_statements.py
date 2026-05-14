@@ -1,4 +1,5 @@
 """Official Statements module — direct quotes from named officials."""
+
 from __future__ import annotations
 
 from typing import ClassVar

@@ -1,4 +1,5 @@
 """Infobox module — structured key-fact rows for a topic."""
+
 from __future__ import annotations
 
 from typing import ClassVar

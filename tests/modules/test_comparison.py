@@ -1,7 +1,13 @@
 """Tests for the comparison module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.comparison import ComparisonModule
-from generator.schema import ComparisonData, ComparisonSubject, ComparisonAxis, ComparisonCell
+from generator.schema import (
+    ComparisonData,
+    ComparisonSubject,
+    ComparisonAxis,
+    ComparisonCell,
+)
 
 
 def test_comparison_registered():
@@ -24,7 +30,10 @@ def _make_data(n_subjects: int = 2, n_axes: int = 1) -> ComparisonData:
     axes = [
         ComparisonAxis(
             label=f"Axis{j}",
-            cells=[ComparisonCell(value=f"v{i}{j}", source_id="s1") for i in range(n_subjects)],
+            cells=[
+                ComparisonCell(value=f"v{i}{j}", source_id="s1")
+                for i in range(n_subjects)
+            ],
         )
         for j in range(n_axes)
     ]
@@ -38,11 +47,13 @@ def test_comparison_should_render():
 
 def test_comparison_should_not_render_one_subject():
     # Can't create with 1 subject due to min_length=2, so test mismatched cells
-    data = _make_data(n_subjects=2, n_axes=1)
     # Manually corrupt cells count to simulate mismatch
     from generator.schema import ComparisonSubject, ComparisonAxis, ComparisonCell
+
     subjects = [ComparisonSubject(name="A"), ComparisonSubject(name="B")]
-    axes = [ComparisonAxis(label="X", cells=[ComparisonCell(value="v", source_id="s1")])]  # 1 cell, 2 subjects
+    axes = [
+        ComparisonAxis(label="X", cells=[ComparisonCell(value="v", source_id="s1")])
+    ]  # 1 cell, 2 subjects
     bad_data = ComparisonData(subjects=subjects, axes=axes)
     assert not ComparisonModule().should_render(bad_data)
 

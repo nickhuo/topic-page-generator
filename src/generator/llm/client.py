@@ -5,6 +5,7 @@ tests. OpenAI's chat-completions request shape is well-documented and
 OpenRouter is wire-compatible. Using httpx also avoids the openai SDK's
 internal http client lifecycle.
 """
+
 from __future__ import annotations
 
 import json
@@ -30,11 +31,11 @@ _ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 _TRANSIENT = (httpx.TimeoutException, httpx.NetworkError)
 
 _STAGE_FALLBACK_MODELS = {
-    "triage":       "anthropic/claude-haiku-4-5",
+    "triage": "anthropic/claude-haiku-4-5",
     "disambiguate": "anthropic/claude-sonnet-4-6",
-    "aesthetic":    "anthropic/claude-haiku-4-5",
-    "extract":      "anthropic/claude-haiku-4-5",
-    "consistency":  "anthropic/claude-haiku-4-5",
+    "aesthetic": "anthropic/claude-haiku-4-5",
+    "extract": "anthropic/claude-haiku-4-5",
+    "consistency": "anthropic/claude-haiku-4-5",
 }
 
 
@@ -43,11 +44,12 @@ def get_default_model(stage: str) -> str:
     env_key = f"MODEL_{stage.upper()}"
     return os.getenv(env_key) or _STAGE_FALLBACK_MODELS[stage]
 
+
 # Per-million-token pricing snapshot (USD). Used only for the trace; not load-bearing.
 # Keys are model identifiers as passed to OpenRouter.
 _PRICING_USD_PER_1M = {
-    "anthropic/claude-haiku-4-5":  {"input": 1.00,  "output": 5.00},
-    "anthropic/claude-sonnet-4-6": {"input": 3.00,  "output": 15.00},
+    "anthropic/claude-haiku-4-5": {"input": 1.00, "output": 5.00},
+    "anthropic/claude-sonnet-4-6": {"input": 3.00, "output": 15.00},
 }
 
 
@@ -79,8 +81,12 @@ def _strip_provider_unsupported_keywords(schema: Any) -> Any:
     the validation-retry loop to enforce bounds.
     """
     UNSUPPORTED = {
-        "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum",
-        "minItems", "maxItems",
+        "minimum",
+        "maximum",
+        "exclusiveMinimum",
+        "exclusiveMaximum",
+        "minItems",
+        "maxItems",
     }
     if isinstance(schema, dict):
         return {
@@ -201,10 +207,12 @@ async def call_structured(
                 parsed = json.loads(content)
             except json.JSONDecodeError as exc:
                 last_error = exc
-                body["messages"].append({
-                    "role": "user",
-                    "content": f"Your previous reply was not valid JSON ({exc}). Reply with the corrected JSON object only.",
-                })
+                body["messages"].append(
+                    {
+                        "role": "user",
+                        "content": f"Your previous reply was not valid JSON ({exc}). Reply with the corrected JSON object only.",
+                    }
+                )
                 continue
 
             _clamp_confidences(parsed)
@@ -213,12 +221,16 @@ async def call_structured(
                 return response_model.model_validate(parsed)
             except ValidationError as exc:
                 last_error = exc
-                body["messages"].append({
-                    "role": "user",
-                    "content": (
-                        f"Your previous JSON failed schema validation: {exc.json()}. "
-                        "Reply with corrected JSON conforming to the same schema. Do not include any prose."
-                    ),
-                })
+                body["messages"].append(
+                    {
+                        "role": "user",
+                        "content": (
+                            f"Your previous JSON failed schema validation: {exc.json()}. "
+                            "Reply with corrected JSON conforming to the same schema. Do not include any prose."
+                        ),
+                    }
+                )
 
-    raise LLMOutputError(f"LLM output failed validation after {attempts} attempts: {last_error}")
+    raise LLMOutputError(
+        f"LLM output failed validation after {attempts} attempts: {last_error}"
+    )

@@ -1,4 +1,5 @@
 """Wikidata SPARQL client. Two HTTP calls: search → SPARQL properties."""
+
 from __future__ import annotations
 
 from datetime import datetime, timezone

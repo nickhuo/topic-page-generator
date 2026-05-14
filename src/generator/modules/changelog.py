@@ -1,4 +1,5 @@
 """Changelog module — versioned list of changes or updates."""
+
 from __future__ import annotations
 
 from typing import ClassVar

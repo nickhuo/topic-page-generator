@@ -3,6 +3,7 @@
 We POST to https://api.tavily.com/search with a JSON body. Response shape:
   {"results": [{"title", "url", "content", "published_date", "score"}, ...]}
 """
+
 from __future__ import annotations
 
 import os
@@ -85,7 +86,9 @@ async def fetch_tavily(
             Source(
                 id=build_source_id(url),
                 url=url,
-                publisher=Publisher(name=_publisher_name_from_host(host, tier), tier=tier),
+                publisher=Publisher(
+                    name=_publisher_name_from_host(host, tier), tier=tier
+                ),
                 title=hit.get("title", url),
                 author=None,
                 published_at=published or fetched_at,

@@ -3,8 +3,12 @@ from generator.layout.tokens import PALETTES, palette_css_vars, REQUIRED_VARS
 
 def test_all_six_palettes_present():
     assert set(PALETTES.keys()) == {
-        "festive_warm", "minimal_tech", "urgent_red",
-        "muted_solemn", "bold_sport", "neutral_news",
+        "festive_warm",
+        "minimal_tech",
+        "urgent_red",
+        "muted_solemn",
+        "bold_sport",
+        "neutral_news",
     }
 
 

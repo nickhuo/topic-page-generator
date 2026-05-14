@@ -1,4 +1,5 @@
 """Consistency-check stage: detect cross-module conflicts."""
+
 from __future__ import annotations
 import json
 
@@ -25,8 +26,7 @@ If everything is internally consistent, return passes=true with issues=[].
 
 def build_consistency_messages(modules: list[TypedModule]) -> list[dict]:
     payload = [
-        {"kind": m.kind, "data": m.data.model_dump(mode="json")}
-        for m in modules
+        {"kind": m.kind, "data": m.data.model_dump(mode="json")} for m in modules
     ]
     return [
         {"role": "system", "content": BASE_PREAMBLE + "\n\n" + _INSTRUCTIONS},

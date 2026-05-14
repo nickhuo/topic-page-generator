@@ -1,4 +1,5 @@
 """Stage 7 — Render. Composes EventPage → ResolvedLayout → HTML."""
+
 from __future__ import annotations
 
 import json
@@ -9,7 +10,12 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup
 
-from generator.layout.grid import ARTIFACT_PARTIAL, QUOTE_DENSITY, ResolvedLayout, compose
+from generator.layout.grid import (
+    ARTIFACT_PARTIAL,
+    QUOTE_DENSITY,
+    ResolvedLayout,
+    compose,
+)
 from generator.layout.tokens import palette_css_vars
 from generator.schema import (
     AestheticPlanOutput,
@@ -91,9 +97,8 @@ def _make_cite(source_index: dict[str, int]):
         n = source_index.get(source_id)
         if n is None:
             return Markup("")
-        return Markup(
-            f'<sup class="cite-num"><a href="#src-{n}">[{n}]</a></sup>'
-        )
+        return Markup(f'<sup class="cite-num"><a href="#src-{n}">[{n}]</a></sup>')
+
     return cite
 
 

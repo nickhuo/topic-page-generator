@@ -1,4 +1,5 @@
 """Tests for the kpi_numbers module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.kpi_numbers import KPINumbersModule
 from generator.schema import KPINumbersData, KPITile

@@ -1,4 +1,5 @@
 """Stage 6 — cross-module consistency + needs coverage."""
+
 from __future__ import annotations
 
 import logging
@@ -20,8 +21,14 @@ log = logging.getLogger(__name__)
 MAX_PAGE_REGENS = 2
 
 _ALL_NEEDS: tuple[NeedId, ...] = (
-    "what_happened", "when_where", "who_involved", "current_state",
-    "why_matters", "world_reaction", "what_can_do", "what_next",
+    "what_happened",
+    "when_where",
+    "who_involved",
+    "current_state",
+    "why_matters",
+    "world_reaction",
+    "what_can_do",
+    "what_next",
 )
 
 

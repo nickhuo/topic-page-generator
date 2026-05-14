@@ -1,5 +1,6 @@
 """Stage 4 — Fetch orchestrator. Fires two clients in parallel, dedupes,
 filters AI-content blacklist, sorts by (tier asc, published_at desc)."""
+
 from __future__ import annotations
 
 import asyncio
@@ -18,18 +19,20 @@ class EmptyEvidencePoolError(RuntimeError):
 # TODO(pr-future): replace placeholders with a curated AI-content domain list.
 # Reuters investigation (2024) listed 40+ AI-aggregator domains; mirror a
 # small placeholder subset until the real list is integrated.
-AI_CONTENT_BLACKLIST: frozenset[str] = frozenset({
-    "aigeneratednews.example",
-    "ai-content.example",
-    "auto-news.example",
-    "newsbot.example",
-    "copydesk.ai",
-    "syntheticnews.example",
-    "robonews.example",
-    "aifeed.example",
-    "neuralwire.example",
-    "writebot.example",
-})
+AI_CONTENT_BLACKLIST: frozenset[str] = frozenset(
+    {
+        "aigeneratednews.example",
+        "ai-content.example",
+        "auto-news.example",
+        "newsbot.example",
+        "copydesk.ai",
+        "syntheticnews.example",
+        "robonews.example",
+        "aifeed.example",
+        "neuralwire.example",
+        "writebot.example",
+    }
+)
 
 _TIER_ORDER = {"T0": 0, "T1": 1, "T2": 2, "T3": 3}
 
@@ -100,6 +103,9 @@ async def run_fetch_stage(plan: PlanOutput, subject: EventSubject) -> list[Sourc
         )
 
     merged.sort(
-        key=lambda s: (_TIER_ORDER.get(s.publisher.tier, 9), -_iso_to_epoch(s.published_at))
+        key=lambda s: (
+            _TIER_ORDER.get(s.publisher.tier, 9),
+            -_iso_to_epoch(s.published_at),
+        )
     )
     return merged

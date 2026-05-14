@@ -1,4 +1,5 @@
 """Tests for the media_coverage module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.media_coverage import MediaCoverageModule
 from generator.schema import MediaCoverageData, MediaCoverageItem
@@ -32,12 +33,16 @@ def _make_item(n: int = 0) -> MediaCoverageItem:
 
 
 def test_media_coverage_should_render():
-    data = MediaCoverageData(items=[_make_item(i) for i in range(3)], grouping_strategy="flat")
+    data = MediaCoverageData(
+        items=[_make_item(i) for i in range(3)], grouping_strategy="flat"
+    )
     assert MediaCoverageModule().should_render(data)
 
 
 def test_media_coverage_should_not_render_too_few():
-    data = MediaCoverageData(items=[_make_item(i) for i in range(2)], grouping_strategy="flat")
+    data = MediaCoverageData(
+        items=[_make_item(i) for i in range(2)], grouping_strategy="flat"
+    )
     assert not MediaCoverageModule().should_render(data)
 
 

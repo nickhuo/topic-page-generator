@@ -1,4 +1,5 @@
 """Stage 1 — Triage. Single LLM call → TriageOutput."""
+
 from __future__ import annotations
 
 from generator.llm.client import call_structured, get_default_model

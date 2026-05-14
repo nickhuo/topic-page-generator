@@ -1,4 +1,5 @@
 """Aesthetic-plan stage prompt builder."""
+
 from __future__ import annotations
 
 from generator.prompts.base_preamble import BASE_PREAMBLE

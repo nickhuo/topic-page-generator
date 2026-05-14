@@ -1,5 +1,3 @@
-import pytest
-
 from generator.layout.grid import (
     ARTIFACT_PARTIAL,
     ResolvedLayout,
@@ -11,7 +9,6 @@ from tests.fixtures import (
     hero_module,
     infobox_module,
     media_coverage_module,
-    source,
 )
 
 
@@ -67,9 +64,17 @@ def test_aux_overflow_moves_to_primary_tail():
 
 def test_artifact_partial_map_covers_eleven_kinds():
     expected = {
-        "hero", "infobox", "schedule", "countdown", "comparison",
-        "changelog", "reactions", "official_statements", "media_coverage",
-        "where_to_watch", "background",
+        "hero",
+        "infobox",
+        "schedule",
+        "countdown",
+        "comparison",
+        "changelog",
+        "reactions",
+        "official_statements",
+        "media_coverage",
+        "where_to_watch",
+        "background",
     }
     # kpi_numbers handled inline in layout.html, not via partial map
     assert expected <= set(ARTIFACT_PARTIAL.keys())

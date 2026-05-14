@@ -1,4 +1,5 @@
 """Countdown module — single anchoring future timestamp."""
+
 from __future__ import annotations
 
 from typing import ClassVar

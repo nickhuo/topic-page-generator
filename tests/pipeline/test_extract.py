@@ -1,9 +1,9 @@
 """Tests for Stage 5 — Module extraction (parallel, per-kind)."""
+
 from __future__ import annotations
 
 import json
 from datetime import datetime, timedelta, timezone
-from unittest.mock import AsyncMock, patch
 
 import httpx
 import respx
@@ -34,6 +34,7 @@ from generator.schema import (
 # ---------------------------------------------------------------------------
 # Shared helpers / fixtures
 # ---------------------------------------------------------------------------
+
 
 def _make_source(
     sid: str,
@@ -102,7 +103,9 @@ def _make_subject() -> EventSubject:
     )
 
 
-def _openrouter_envelope(content_json: str, model: str = "anthropic/claude-haiku-4-5") -> dict:
+def _openrouter_envelope(
+    content_json: str, model: str = "anthropic/claude-haiku-4-5"
+) -> dict:
     """Wrap a JSON string in an OpenRouter chat-completion response envelope."""
     return {
         "id": "gen-test-extract",
@@ -122,31 +125,44 @@ def _openrouter_envelope(content_json: str, model: str = "anthropic/claude-haiku
 
 
 def _valid_hero_json(source_id: str = "src_1") -> str:
-    return json.dumps({
-        "title": "GPT-5.5 Instant is Now ChatGPT Default",
-        "subtitle": "OpenAI makes the switch in May 2026",
-        "summary": "OpenAI set GPT-5.5 Instant as the default ChatGPT model.",
-        "image_url": None,
-        "image_alt": "OpenAI logo",
-        "badge_label": "PRODUCT LAUNCH",
-    })
+    return json.dumps(
+        {
+            "title": "GPT-5.5 Instant is Now ChatGPT Default",
+            "subtitle": "OpenAI makes the switch in May 2026",
+            "summary": "OpenAI set GPT-5.5 Instant as the default ChatGPT model.",
+            "image_url": None,
+            "image_alt": "OpenAI logo",
+            "badge_label": "PRODUCT LAUNCH",
+        }
+    )
 
 
 def _valid_infobox_json(source_id: str = "src_1") -> str:
-    return json.dumps({
-        "rows": [
-            {"label": "Vendor", "value": "OpenAI", "source_id": source_id},
-            {"label": "Release", "value": "May 2026", "source_id": source_id},
-            {"label": "Replaces", "value": "GPT-5.3 Instant", "source_id": source_id},
-            {"label": "Surface", "value": "ChatGPT default", "source_id": source_id},
-            {"label": "Pricing", "value": "Same tiers", "source_id": source_id},
-        ]
-    })
+    return json.dumps(
+        {
+            "rows": [
+                {"label": "Vendor", "value": "OpenAI", "source_id": source_id},
+                {"label": "Release", "value": "May 2026", "source_id": source_id},
+                {
+                    "label": "Replaces",
+                    "value": "GPT-5.3 Instant",
+                    "source_id": source_id,
+                },
+                {
+                    "label": "Surface",
+                    "value": "ChatGPT default",
+                    "source_id": source_id,
+                },
+                {"label": "Pricing", "value": "Same tiers", "source_id": source_id},
+            ]
+        }
+    )
 
 
 # ---------------------------------------------------------------------------
 # Test 1: _filter_evidence respects preferred_tiers and recency
 # ---------------------------------------------------------------------------
+
 
 def test_filter_evidence_respects_preferred_tiers_and_recency():
     now = datetime.now(timezone.utc)
@@ -165,10 +181,10 @@ def test_filter_evidence_respects_preferred_tiers_and_recency():
     result = _filter_evidence([recent_t0, recent_t2, old_t0, recent_t3], plan)
     ids = {s.id for s in result}
 
-    assert "src_good_t0" in ids        # T0, recent — passes
-    assert "src_good_t2" not in ids    # T2, not in preferred_tiers
-    assert "src_old_t0" not in ids     # T0 but too old (60d > 28d cutoff)
-    assert "src_t3" not in ids         # T3, not in preferred_tiers
+    assert "src_good_t0" in ids  # T0, recent — passes
+    assert "src_good_t2" not in ids  # T2, not in preferred_tiers
+    assert "src_old_t0" not in ids  # T0 but too old (60d > 28d cutoff)
+    assert "src_t3" not in ids  # T3, not in preferred_tiers
 
 
 def test_filter_evidence_falls_back_to_full_pool_when_nothing_matches():
@@ -183,6 +199,7 @@ def test_filter_evidence_falls_back_to_full_pool_when_nothing_matches():
 # ---------------------------------------------------------------------------
 # Test 2: _collect_cited_ids walks pydantic tree
 # ---------------------------------------------------------------------------
+
 
 def test_collect_cited_ids_walks_pydantic_tree():
     data = InfoboxData(
@@ -205,6 +222,7 @@ def test_collect_cited_ids_handles_empty():
 # Test 3: extract_one_module skips when cited_ids not in evidence pool
 # ---------------------------------------------------------------------------
 
+
 @respx.mock
 async def test_extract_one_module_skips_when_cited_ids_unknown(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
@@ -217,6 +235,7 @@ async def test_extract_one_module_skips_when_cited_ids_unknown(monkeypatch):
     )
 
     from generator.modules import all_modules
+
     infobox_cls = next(cls for cls in all_modules() if cls.kind == "infobox")
     module = infobox_cls()
 
@@ -232,6 +251,7 @@ async def test_extract_one_module_skips_when_cited_ids_unknown(monkeypatch):
 # Test 4: extract_one_module skips when should_render returns False
 # ---------------------------------------------------------------------------
 
+
 @respx.mock
 async def test_extract_one_module_skips_when_should_render_false(monkeypatch):
     """InfoboxModule.should_render requires >= 3 rows; return empty rows → skip."""
@@ -239,17 +259,20 @@ async def test_extract_one_module_skips_when_should_render_false(monkeypatch):
     reset()
 
     # Return an infobox with only 2 rows — should_render will return False
-    sparse_infobox = json.dumps({
-        "rows": [
-            {"label": "Vendor", "value": "OpenAI", "source_id": "src_1"},
-            {"label": "Date", "value": "May 2026", "source_id": "src_1"},
-        ]
-    })
+    sparse_infobox = json.dumps(
+        {
+            "rows": [
+                {"label": "Vendor", "value": "OpenAI", "source_id": "src_1"},
+                {"label": "Date", "value": "May 2026", "source_id": "src_1"},
+            ]
+        }
+    )
     respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         return_value=httpx.Response(200, json=_openrouter_envelope(sparse_infobox))
     )
 
     from generator.modules import all_modules
+
     infobox_cls = next(cls for cls in all_modules() if cls.kind == "infobox")
     module = infobox_cls()
 
@@ -264,6 +287,7 @@ async def test_extract_one_module_skips_when_should_render_false(monkeypatch):
 # ---------------------------------------------------------------------------
 # Test 5: run returns only successful modules
 # ---------------------------------------------------------------------------
+
 
 @respx.mock
 async def test_run_returns_only_successful_modules(monkeypatch):
@@ -282,14 +306,20 @@ async def test_run_returns_only_successful_modules(monkeypatch):
             m["content"] for m in body["messages"] if m["role"] == "user"
         )
         if '"Hero" module' in user_message:
-            return httpx.Response(200, json=_openrouter_envelope(_valid_hero_json("src_1")))
+            return httpx.Response(
+                200, json=_openrouter_envelope(_valid_hero_json("src_1"))
+            )
         elif '"Infobox" module' in user_message:
-            return httpx.Response(200, json=_openrouter_envelope(_valid_infobox_json("src_1")))
+            return httpx.Response(
+                200, json=_openrouter_envelope(_valid_infobox_json("src_1"))
+            )
         else:
             # schedule → malformed JSON (triggers validation retry then LLMOutputError)
             return httpx.Response(200, json=_openrouter_envelope("NOT VALID JSON {{{"))
 
-    respx.post("https://openrouter.ai/api/v1/chat/completions").mock(side_effect=side_effect)
+    respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
+        side_effect=side_effect
+    )
 
     result = await run(
         plan=plan,
@@ -309,6 +339,7 @@ async def test_run_returns_only_successful_modules(monkeypatch):
 # Test 6: run only dispatches kinds in composition
 # ---------------------------------------------------------------------------
 
+
 @respx.mock
 async def test_run_only_dispatches_kinds_in_composition(monkeypatch):
     """Composition with only 'hero' → exactly 1 LLM call."""
@@ -319,7 +350,9 @@ async def test_run_only_dispatches_kinds_in_composition(monkeypatch):
     plan = _make_plan(["hero"])
 
     route = respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
-        return_value=httpx.Response(200, json=_openrouter_envelope(_valid_hero_json("src_1")))
+        return_value=httpx.Response(
+            200, json=_openrouter_envelope(_valid_hero_json("src_1"))
+        )
     )
 
     await run(

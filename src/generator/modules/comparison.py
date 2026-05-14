@@ -1,4 +1,5 @@
 """Comparison module — side-by-side table of 2–3 subjects across N axes."""
+
 from __future__ import annotations
 
 from typing import ClassVar

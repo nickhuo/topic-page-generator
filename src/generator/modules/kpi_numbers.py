@@ -1,4 +1,5 @@
 """KPI Numbers module — 1–4 quantitative tiles."""
+
 from __future__ import annotations
 
 from typing import ClassVar

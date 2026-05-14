@@ -1,4 +1,5 @@
 """Layout composition: merge preset + overrides, route modules to slots."""
+
 from __future__ import annotations
 
 from pydantic import BaseModel, ConfigDict
@@ -80,7 +81,7 @@ def compose(event_page: EventPage) -> ResolvedLayout:
         slots[slot].append(module)
 
     if len(slots["aside"]) > config.aux.max_items:
-        overflow = slots["aside"][config.aux.max_items:]
+        overflow = slots["aside"][config.aux.max_items :]
         slots["aside"] = slots["aside"][: config.aux.max_items]
         slots["primary"].extend(overflow)
 

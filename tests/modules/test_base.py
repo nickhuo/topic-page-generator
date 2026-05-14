@@ -1,4 +1,5 @@
 """Tests for Module ABC + PlanContext + MODULE_REGISTRY."""
+
 from __future__ import annotations
 
 import pytest
@@ -156,6 +157,7 @@ def _src(name: str, tier: str) -> Source:
 
 def test_compute_default_confidence_flags_single_source():
     class D(BaseModel): ...
+
     conf = compute_default_confidence([_src("openai", "T0")], D())
     assert "single_source" in conf.flags
     assert "low_tier_only" not in conf.flags
@@ -163,15 +165,15 @@ def test_compute_default_confidence_flags_single_source():
 
 def test_compute_default_confidence_flags_low_tier_only():
     class D(BaseModel): ...
-    conf = compute_default_confidence(
-        [_src("blog1", "T3"), _src("blog2", "T3")], D()
-    )
+
+    conf = compute_default_confidence([_src("blog1", "T3"), _src("blog2", "T3")], D())
     assert "low_tier_only" in conf.flags
     assert "single_source" not in conf.flags
 
 
 def test_compute_default_confidence_flags_contested():
     class D(BaseModel): ...
+
     conf = compute_default_confidence(
         [_src("nyt", "T1"), _src("verge", "T1")],
         D(),

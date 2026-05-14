@@ -1,4 +1,5 @@
 """Media Coverage module — distinct headlines from across the press."""
+
 from __future__ import annotations
 
 from typing import ClassVar

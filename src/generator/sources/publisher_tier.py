@@ -1,4 +1,5 @@
 """Static publisher-tier map and resolver. No I/O, no side effects."""
+
 from __future__ import annotations
 
 from generator.schema import SourceTier

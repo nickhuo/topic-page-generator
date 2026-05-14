@@ -1,4 +1,5 @@
 """Tests for the official_statements module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.official_statements import OfficialStatementsModule
 from generator.schema import OfficialStatementsData, OfficialStatementItem

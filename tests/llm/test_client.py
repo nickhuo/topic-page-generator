@@ -88,7 +88,16 @@ async def test_call_structured_retries_on_validation_error(monkeypatch):
     bad = json.loads((FIX / "openrouter_triage_happy.json").read_text())
     inner = json.loads(bad["choices"][0]["message"]["content"])
     inner["confidence"] = "very-high"  # wrong type
-    bad_payload = {**bad, "choices": [{"index": 0, "message": {"role": "assistant", "content": json.dumps(inner)}, "finish_reason": "stop"}]}
+    bad_payload = {
+        **bad,
+        "choices": [
+            {
+                "index": 0,
+                "message": {"role": "assistant", "content": json.dumps(inner)},
+                "finish_reason": "stop",
+            }
+        ],
+    }
     good = json.loads((FIX / "openrouter_triage_happy.json").read_text())
     route = respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         side_effect=[
@@ -113,10 +122,14 @@ def test_missing_api_key_raises(monkeypatch):
     with pytest.raises(LLMConfigError):
         # constructor / first call should fail clearly
         import asyncio
-        asyncio.run(call_structured(
-            model="m", messages=[{"role": "user", "content": "x"}], response_model=TriageOutput
-        ))
 
+        asyncio.run(
+            call_structured(
+                model="m",
+                messages=[{"role": "user", "content": "x"}],
+                response_model=TriageOutput,
+            )
+        )
 
 
 def test_strip_provider_unsupported_strips_number_and_array_bounds():
@@ -125,21 +138,34 @@ def test_strip_provider_unsupported_strips_number_and_array_bounds():
         "type": "object",
         "properties": {
             "score": {"type": "number", "minimum": 0, "maximum": 1},
-            "tiles": {"type": "array", "minItems": 1, "maxItems": 4,
-                      "items": {"type": "string"}},
+            "tiles": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 4,
+                "items": {"type": "string"},
+            },
             "nested": {
                 "type": "object",
                 "properties": {
-                    "rate": {"type": "number", "exclusiveMinimum": 0,
-                             "exclusiveMaximum": 1},
+                    "rate": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "exclusiveMaximum": 1,
+                    },
                 },
             },
         },
     }
     cleaned = _strip_provider_unsupported_keywords(schema)
     flat = repr(cleaned)
-    for kw in ("minimum", "maximum", "minItems", "maxItems",
-               "exclusiveMinimum", "exclusiveMaximum"):
+    for kw in (
+        "minimum",
+        "maximum",
+        "minItems",
+        "maxItems",
+        "exclusiveMinimum",
+        "exclusiveMaximum",
+    ):
         assert kw not in flat, f"{kw} should have been stripped"
     # Structural fields preserved.
     assert cleaned["properties"]["score"]["type"] == "number"

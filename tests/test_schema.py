@@ -1,4 +1,5 @@
 """Schema-roundtrip smoke tests."""
+
 from __future__ import annotations
 
 from generator.schema import EventPage
@@ -20,9 +21,7 @@ def _minimal_page_dict() -> dict:
                 "kind": "hero",
                 "module_id": "mod_hero",
                 "serves_needs": ["what_happened"],
-                "citations": [
-                    {"source_id": "src_001", "claim_text": "A claim."}
-                ],
+                "citations": [{"source_id": "src_001", "claim_text": "A claim."}],
                 "confidence": {
                     "overall": 0.9,
                     "field_level": {},
@@ -98,16 +97,21 @@ def test_event_page_roundtrip() -> None:
 
 def test_stage_trace_accepts_llm_calls():
     from generator.schema import StageTrace, LLMCall
+
     st = StageTrace(
         stage="triage",
         started_at="2026-05-13T12:00:00Z",
         duration_ms=120,
         outcome="success",
-        llm_calls=[LLMCall(
-            model="anthropic/claude-haiku-4-5",
-            input_tokens=512, output_tokens=128,
-            cost_usd=0.0011, duration_ms=110,
-        )],
+        llm_calls=[
+            LLMCall(
+                model="anthropic/claude-haiku-4-5",
+                input_tokens=512,
+                output_tokens=128,
+                cost_usd=0.0011,
+                duration_ms=110,
+            )
+        ],
     )
     assert st.llm_calls[0].model == "anthropic/claude-haiku-4-5"
 

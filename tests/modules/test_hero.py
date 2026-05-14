@@ -1,4 +1,5 @@
 """Tests for the hero module: schema binding, render gate, registry."""
+
 import importlib
 
 from generator.modules import MODULE_REGISTRY
@@ -8,6 +9,7 @@ from generator.schema import HeroData
 def _get_hero_module():
     """Return the live HeroModule class, re-registering if test_base clobbered it."""
     import generator.modules.hero as _hero_mod
+
     importlib.reload(_hero_mod)
     return _hero_mod.HeroModule
 
@@ -21,6 +23,7 @@ def test_hero_registered():
 
 def test_hero_metadata():
     import generator.modules.hero as _hero_mod
+
     HeroModule = _hero_mod.HeroModule
     assert HeroModule.kind == "hero"
     assert HeroModule.serves_needs == ["what_happened"]
@@ -33,6 +36,7 @@ def test_hero_metadata():
 
 def test_hero_should_render():
     import generator.modules.hero as _hero_mod
+
     HeroModule = _hero_mod.HeroModule
     valid = HeroData(title="t", summary="s", image_alt="alt")
     assert HeroModule().should_render(valid)
@@ -42,5 +46,6 @@ def test_hero_should_render():
 
 def test_hero_should_render_none():
     import generator.modules.hero as _hero_mod
+
     HeroModule = _hero_mod.HeroModule
     assert not HeroModule().should_render(None)

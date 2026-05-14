@@ -1,4 +1,5 @@
 """Where To Watch module — broadcast and streaming channels."""
+
 from __future__ import annotations
 
 from typing import ClassVar

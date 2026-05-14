@@ -1,4 +1,5 @@
 """Background module — synthesized context paragraphs."""
+
 from __future__ import annotations
 
 from typing import ClassVar
@@ -42,6 +43,4 @@ Rules:
     def should_render(self, data: BackgroundData | None) -> bool:  # type: ignore[override]
         if data is None:
             return False
-        return len(data.paragraphs) >= 1 and all(
-            p.citations for p in data.paragraphs
-        )
+        return len(data.paragraphs) >= 1 and all(p.citations for p in data.paragraphs)

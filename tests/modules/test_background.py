@@ -1,4 +1,5 @@
 """Tests for the background module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.background import BackgroundModule
 from generator.schema import BackgroundData, BackgroundParagraph, Citation

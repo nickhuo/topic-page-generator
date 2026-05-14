@@ -1,4 +1,5 @@
 """Disambiguate stage prompt builder."""
+
 from __future__ import annotations
 
 from generator.prompts.base_preamble import BASE_PREAMBLE
@@ -49,19 +50,23 @@ OUTPUT:
 """
 
 
-def build_disambiguate_messages(triage: TriageOutput, evidence: list[Source]) -> list[dict]:
+def build_disambiguate_messages(
+    triage: TriageOutput, evidence: list[Source]
+) -> list[dict]:
     triage_json = triage.model_dump_json(indent=2, exclude_none=True)
     blocks: list[str] = []
     for s in evidence[:8]:  # cap to keep prompt small
         blocks.append(
             f'<evidence id="{s.id}">\n'
-            f'Title: {s.title}\n'
-            f'Publisher: {s.publisher.name} ({s.publisher.tier})\n'
-            f'URL: {s.url}\n'
-            f'Published: {s.published_at}\n'
-            f'</evidence>'
+            f"Title: {s.title}\n"
+            f"Publisher: {s.publisher.name} ({s.publisher.tier})\n"
+            f"URL: {s.url}\n"
+            f"Published: {s.published_at}\n"
+            f"</evidence>"
         )
-    user_payload = "TRIAGE:\n" + triage_json + "\n\n" + "\n\n".join(blocks) + "\n\nOUTPUT:"
+    user_payload = (
+        "TRIAGE:\n" + triage_json + "\n\n" + "\n\n".join(blocks) + "\n\nOUTPUT:"
+    )
     return [
         {"role": "system", "content": BASE_PREAMBLE + "\n\n" + _INSTRUCTIONS},
         {"role": "system", "content": _FEW_SHOT_AMBIGUOUS},

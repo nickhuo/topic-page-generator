@@ -35,9 +35,15 @@ def test_every_data_cite_has_numbered_footer_link():
         assert re.search(r'href="#src-\d+"', html), f"no cite link for {sid}"
 
 
-@pytest.mark.parametrize("preset_id", [
-    "live_dominance", "product_focus", "imminent_event", "reference",
-])
+@pytest.mark.parametrize(
+    "preset_id",
+    [
+        "live_dominance",
+        "product_focus",
+        "imminent_event",
+        "reference",
+    ],
+)
 def test_renders_all_four_presets(preset_id):
     page = make_full_event_page(preset_id=preset_id)
     html = render_html(page)
@@ -50,7 +56,7 @@ def test_renders_all_four_presets(preset_id):
 def test_jsonld_block_present():
     page = make_full_event_page()
     html = render_html(page)
-    assert 'application/ld+json' in html
+    assert "application/ld+json" in html
     assert '"@type"' in html
 
 
@@ -58,7 +64,7 @@ def test_skip_link_and_viewport():
     page = make_full_event_page()
     html = render_html(page)
     assert 'class="skip-link"' in html
-    assert 'viewport' in html
+    assert "viewport" in html
 
 
 def test_palette_css_vars_in_head():

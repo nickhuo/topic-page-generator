@@ -1,4 +1,5 @@
 """Stage 5 — Module extraction (parallel, per-kind)."""
+
 from __future__ import annotations
 
 import asyncio
@@ -30,7 +31,8 @@ def _filter_evidence(pool: list[Source], plan: PlanOutput) -> list[Source]:
     strat = plan.source_strategy
     cutoff = datetime.now(timezone.utc) - timedelta(days=strat.time_range_days * 2)
     filtered = [
-        s for s in pool
+        s
+        for s in pool
         if s.publisher.tier in strat.preferred_tiers
         and _parse_iso(s.published_at) >= cutoff
     ]
@@ -82,7 +84,9 @@ async def extract_one_module(
     try:
         data = await call_structured(
             model=get_default_model("extract"),
-            messages=_build_messages(module, ctx, evidence, regen_feedback=regen_feedback),
+            messages=_build_messages(
+                module, ctx, evidence, regen_feedback=regen_feedback
+            ),
             response_model=module.data_schema,
         )
     except (LLMOutputError, ValidationError) as exc:
@@ -95,7 +99,9 @@ async def extract_one_module(
     cited_ids = _collect_cited_ids(data)
     pool_ids = {s.id for s in evidence}
     if cited_ids and not cited_ids.issubset(pool_ids):
-        log.warning("module %s cited unknown source_ids: %s", module.kind, cited_ids - pool_ids)
+        log.warning(
+            "module %s cited unknown source_ids: %s", module.kind, cited_ids - pool_ids
+        )
         return None
 
     sources_used = [s for s in evidence if s.id in cited_ids]
@@ -163,24 +169,43 @@ def _assemble_typed_module(
 def _citations_for(data: BaseModel, sources_used: list[Source]) -> list[Citation]:
     ids = _collect_cited_ids(data)
     return [
-        Citation(source_id=s.id, claim_text=f"Supporting evidence from {s.publisher.name}.")
-        for s in sources_used if s.id in ids
+        Citation(
+            source_id=s.id, claim_text=f"Supporting evidence from {s.publisher.name}."
+        )
+        for s in sources_used
+        if s.id in ids
     ]
 
 
 def _typed_module_class_for(kind: str):
     from generator.schema import (
-        HeroModule, InfoboxModule, ScheduleModule, CountdownModule,
-        KPINumbersModule, ComparisonModule, ChangelogModule, ReactionsModule,
-        MediaCoverageModule, OfficialStatementsModule, WhereToWatchModule, BackgroundModule,
+        HeroModule,
+        InfoboxModule,
+        ScheduleModule,
+        CountdownModule,
+        KPINumbersModule,
+        ComparisonModule,
+        ChangelogModule,
+        ReactionsModule,
+        MediaCoverageModule,
+        OfficialStatementsModule,
+        WhereToWatchModule,
+        BackgroundModule,
     )
+
     return {
-        "hero": HeroModule, "infobox": InfoboxModule, "schedule": ScheduleModule,
-        "countdown": CountdownModule, "kpi_numbers": KPINumbersModule,
-        "comparison": ComparisonModule, "changelog": ChangelogModule,
-        "reactions": ReactionsModule, "media_coverage": MediaCoverageModule,
+        "hero": HeroModule,
+        "infobox": InfoboxModule,
+        "schedule": ScheduleModule,
+        "countdown": CountdownModule,
+        "kpi_numbers": KPINumbersModule,
+        "comparison": ComparisonModule,
+        "changelog": ChangelogModule,
+        "reactions": ReactionsModule,
+        "media_coverage": MediaCoverageModule,
         "official_statements": OfficialStatementsModule,
-        "where_to_watch": WhereToWatchModule, "background": BackgroundModule,
+        "where_to_watch": WhereToWatchModule,
+        "background": BackgroundModule,
     }[kind]
 
 
@@ -193,7 +218,9 @@ async def run(
     ctx = PlanContext(subject=subject, plan=plan, aesthetic=aesthetic)
     evidence = _filter_evidence(evidence_pool, plan)
 
-    kinds_to_run = [c.module_kind for c in plan.composition] or [m.kind for m in all_modules()]
+    kinds_to_run = [c.module_kind for c in plan.composition] or [
+        m.kind for m in all_modules()
+    ]
     modules = [cls() for cls in all_modules() if cls.kind in kinds_to_run]
 
     results = await asyncio.gather(

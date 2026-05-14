@@ -1,4 +1,5 @@
 """Hero module — primary identity card for the event/entity."""
+
 from __future__ import annotations
 
 from typing import ClassVar

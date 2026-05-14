@@ -1,4 +1,5 @@
 """Tests for the changelog module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.changelog import ChangelogModule
 from generator.schema import ChangelogData, ChangelogEntry
@@ -20,7 +21,9 @@ def test_changelog_metadata():
 
 
 def _make_entry() -> ChangelogEntry:
-    return ChangelogEntry(label="New feature", description="Added X", importance="feature", source_id="s1")
+    return ChangelogEntry(
+        label="New feature", description="Added X", importance="feature", source_id="s1"
+    )
 
 
 def test_changelog_should_render():

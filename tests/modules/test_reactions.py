@@ -1,4 +1,5 @@
 """Tests for the reactions module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.reactions import ReactionsModule
 from generator.schema import ReactionsData, ReactionItem

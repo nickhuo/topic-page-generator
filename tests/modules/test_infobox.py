@@ -1,4 +1,5 @@
 """Tests for the infobox module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.infobox import InfoboxModule
 from generator.schema import InfoboxData, InfoboxRow
@@ -19,7 +20,9 @@ def test_infobox_metadata():
     assert "{evidence_block}" in InfoboxModule.extraction_prompt_template
 
 
-def _make_row(label: str = "Key", value: str = "Val", source_id: str = "s1") -> InfoboxRow:
+def _make_row(
+    label: str = "Key", value: str = "Val", source_id: str = "s1"
+) -> InfoboxRow:
     return InfoboxRow(label=label, value=value, source_id=source_id)
 
 

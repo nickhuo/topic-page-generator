@@ -6,7 +6,10 @@ from generator.schema import LayoutConfig
 
 def test_all_four_presets_present():
     assert set(PRESETS.keys()) == {
-        "live_dominance", "product_focus", "imminent_event", "reference",
+        "live_dominance",
+        "product_focus",
+        "imminent_event",
+        "reference",
     }
 
 
@@ -29,15 +32,20 @@ def test_product_focus_uses_minimal_tech_palette():
 
 
 def test_reference_is_fallback_for_unknown_archetypes():
-    assert get_preset("totally_unknown_preset_id").design_tokens.palette == "neutral_news"
+    assert (
+        get_preset("totally_unknown_preset_id").design_tokens.palette == "neutral_news"
+    )
 
 
-@pytest.mark.parametrize("pid,ratios", [
-    ("live_dominance", [0.75, 0.25]),
-    ("product_focus", [0.60, 0.40]),
-    ("imminent_event", [0.65, 0.35]),
-    ("reference", [0.65, 0.35]),
-])
+@pytest.mark.parametrize(
+    "pid,ratios",
+    [
+        ("live_dominance", [0.75, 0.25]),
+        ("product_focus", [0.60, 0.40]),
+        ("imminent_event", [0.65, 0.35]),
+        ("reference", [0.65, 0.35]),
+    ],
+)
 def test_column_ratios(pid, ratios):
     assert PRESETS[pid].columns.ratios == ratios
 

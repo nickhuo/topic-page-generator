@@ -3,21 +3,24 @@
 Each palette is a dict from CSS custom-property name to value. `palette_css_vars`
 renders a `:root { ... }` block for inlining into <head>.
 """
+
 from __future__ import annotations
 
 from generator.schema import PaletteId
 
-REQUIRED_VARS: frozenset[str] = frozenset({
-    "--color-bg",
-    "--color-surface",
-    "--color-ink",
-    "--color-ink-muted",
-    "--color-accent",
-    "--color-accent-ink",
-    "--color-divider",
-    "--font-weight-body",
-    "--font-weight-heading",
-})
+REQUIRED_VARS: frozenset[str] = frozenset(
+    {
+        "--color-bg",
+        "--color-surface",
+        "--color-ink",
+        "--color-ink-muted",
+        "--color-accent",
+        "--color-accent-ink",
+        "--color-divider",
+        "--font-weight-body",
+        "--font-weight-heading",
+    }
+)
 
 
 PALETTES: dict[PaletteId, dict[str, str]] = {

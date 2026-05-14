@@ -1,4 +1,5 @@
 """Per-call LLM trace buffer. Uses contextvars so async stages don't bleed."""
+
 from __future__ import annotations
 
 from contextvars import ContextVar

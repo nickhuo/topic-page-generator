@@ -1,4 +1,5 @@
 """Tests for the schedule module: schema binding, render gate, registry."""
+
 from generator.modules import MODULE_REGISTRY
 from generator.modules.schedule import ScheduleModule
 from generator.schema import ScheduleData, ScheduleItem
@@ -20,7 +21,9 @@ def test_schedule_metadata():
 
 
 def _make_item() -> ScheduleItem:
-    return ScheduleItem(time_iso="2025-01-01T10:00:00Z", label="Opening", source_id="s1")
+    return ScheduleItem(
+        time_iso="2025-01-01T10:00:00Z", label="Opening", source_id="s1"
+    )
 
 
 def test_schedule_should_render():
