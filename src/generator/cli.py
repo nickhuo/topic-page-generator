@@ -128,6 +128,11 @@ def generate(
     except LLMOutputError as exc:
         console.print(f"[bold red]LLM returned invalid output:[/bold red] {exc}")
         raise typer.Exit(code=4) from exc
+    except httpx.HTTPError as exc:
+        # Tenacity exhausted retries for a transient LLM-side failure (sustained
+        # 429/5xx or network outage). Convert to a clean exit instead of a stack trace.
+        console.print(f"[bold red]Network error calling LLM:[/bold red] {exc}")
+        raise typer.Exit(code=3) from exc
     except ValidationError as exc:
         console.print("[bold red]Schema validation failed:[/bold red]")
         console.print(json.dumps(exc.errors(), indent=2, default=str))

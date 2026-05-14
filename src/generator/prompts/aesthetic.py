@@ -33,11 +33,14 @@ is unambiguous from the event's posture and tone.
 def build_aesthetic_messages(
     triage: TriageOutput, plan: PlanOutput, evidence_preview: str
 ) -> list[dict]:
+    # Wrap evidence_preview in <evidence> tags so the BASE_PREAMBLE's
+    # prompt-injection defense rule applies to retrieved titles consistently
+    # with the disambiguate prompt.
     user_payload = (
         f"TRIAGE: {triage.model_dump_json(exclude_none=True)}\n\n"
         f"PLAN: archetype={plan.archetype_hint}, modules="
         f"{[c.module_kind for c in plan.composition]}\n\n"
-        f"EVIDENCE PREVIEW:\n{evidence_preview}\n\nOUTPUT:"
+        f"<evidence>\n{evidence_preview}\n</evidence>\n\nOUTPUT:"
     )
     return [
         {"role": "system", "content": BASE_PREAMBLE + "\n\n" + _INSTRUCTIONS},

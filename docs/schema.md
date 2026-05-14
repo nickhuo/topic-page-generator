@@ -528,6 +528,18 @@ type ConsistencyCheckOutput = {
 
 ## 5. Trace and Editor
 
+### `LLMCall` — one entry per individual LLM round-trip
+
+```typescript
+type LLMCall = {
+  model: string;                     // OpenRouter model identifier
+  input_tokens: number;
+  output_tokens: number;
+  cost_usd: number;                  // estimated from a per-model price table
+  duration_ms: number;
+};
+```
+
 ### `StageTrace` — one entry per pipeline stage
 
 ```typescript
@@ -542,6 +554,8 @@ type StageTrace = {
   retry_count: number;
   error?: string;
   output_ref?: string;               // hash or reference, not the full payload
+  llm_calls: LLMCall[];              // one entry per LLM round-trip in this stage
+                                     // (empty for deterministic stages)
 };
 ```
 
