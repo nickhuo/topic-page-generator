@@ -1,4 +1,14 @@
-"""Typer CLI entry point — `generate "<one sentence>"`."""
+"""Typer CLI entry point.
+
+Commands
+--------
+``generate run "<sentence>"``  — full 8-stage pipeline (was the only command).
+``generate regen-module <kind> <data.json>``  — re-run Stage 5 for one module.
+
+.. note::
+   The old bare invocation ``generate "<sentence>"`` no longer works; use
+   ``generate run "<sentence>"`` instead.  The README will be updated in Task 7.
+"""
 
 from __future__ import annotations
 
@@ -14,7 +24,7 @@ from dotenv import load_dotenv
 from pydantic import ValidationError
 from rich.console import Console
 
-from generator.editor.prompt_cli import EditorPrompter
+from generator.editor.prompt_cli import EditorPrompter, _now
 from generator.llm.client import LLMConfigError, LLMOutputError
 from generator.llm.trace_buffer import reset as _reset_llm_calls
 from generator.modules.base import PlanContext
@@ -26,6 +36,8 @@ from generator.pipeline.trace import TraceRecorder
 from generator.schema import EventSubject, TriageOutput
 
 console = Console()
+
+app = typer.Typer(no_args_is_help=True)
 
 _OUTPUT_DIR = Path(__file__).resolve().parents[2] / "output"
 
@@ -39,6 +51,7 @@ def _subject_from_triage(t: TriageOutput) -> EventSubject:
     )
 
 
+@app.command("run")
 def generate(
     sentence: str = typer.Argument(..., help="One-sentence event description."),
     auto: bool = typer.Option(
@@ -271,10 +284,172 @@ def generate(
     console.print(f"trace: {output_paths['trace']}")
 
 
-def app() -> None:
+@app.command("regen-module")
+def regen_module(
+    kind: str = typer.Argument(
+        ..., help="Module kind to regenerate (e.g. 'reactions')."
+    ),
+    data_json_path: Path = typer.Argument(
+        ...,
+        exists=True,
+        readable=True,
+        dir_okay=False,
+        help="Path to an existing <slug>.data.json file.",
+    ),
+) -> None:
+    """Re-run Stage 5 for one module against the cached evidence pool."""
+    from generator.modules import MODULE_REGISTRY, all_modules  # noqa: F401 — populates registry
+    from generator.schema import (
+        AestheticOverrides,
+        AestheticPlanOutput,
+        EditorAction,
+        EditorActionTarget,
+        EventPage,
+        PlanComposition,
+        PlanOutput,
+        SourceStrategy,
+        Trace,
+    )
+    from generator.pipeline.extract import _filter_evidence
+    from generator.pipeline.render import render_html
+
+    # ------------------------------------------------------------------ load
+    page = EventPage.model_validate_json(data_json_path.read_text())
+
+    target_typed = next((m for m in page.modules if m.kind == kind), None)
+    if target_typed is None:
+        typer.echo(f"No module with kind '{kind}' in {data_json_path}", err=True)
+        raise typer.Exit(1)
+
+    # Instantiate the bare Module class (needed by extract_one_module).
+    all_modules()  # populate registry
+    ModuleCls = MODULE_REGISTRY.get(kind)
+    if ModuleCls is None:
+        typer.echo(f"Unknown module kind '{kind}'.", err=True)
+        raise typer.Exit(1)
+    module_instance = ModuleCls()
+
+    # ------------------------------------------------------------------ rebuild PlanContext
+    # EventPage doesn't store PlanOutput/AestheticPlanOutput directly; reconstruct
+    # minimal stubs from the data that IS available on the page.
+    composition = [
+        PlanComposition(
+            module_kind=m.kind,
+            artifact=m.artifact,
+            slot=m.slot,
+            priority=m.inclusion_reason,
+            artifact_alternatives=m.artifact_alternatives,
+        )
+        for m in page.modules
+    ]
+    # Reconstruct a source strategy from the actual sources present.
+    tiers_present = list({s.publisher.tier for s in page.sources})
+    plan_stub = PlanOutput(
+        archetype_hint="regen",
+        layout_preset_id=page.layout.preset_id,
+        composition=composition,
+        source_strategy=SourceStrategy(
+            preferred_tiers=tiers_present or ["T0", "T1", "T2", "T3"],
+            time_range_days=365,
+            min_publishers=1,
+        ),
+    )
+    aesthetic_stub = AestheticPlanOutput(
+        preset_id=page.layout.preset_id,
+        preset_confidence=1.0,
+        alternatives_considered=[],
+        aesthetic_overrides=AestheticOverrides(),
+        reasoning="reconstructed for regen-module CLI",
+    )
+    ctx = PlanContext(subject=page.subject, plan=plan_stub, aesthetic=aesthetic_stub)
+
+    # ------------------------------------------------------------------ extract
+    evidence = _filter_evidence(page.sources, plan_stub)
+
+    new_typed = asyncio.run(
+        extract_one_module(
+            module_instance,
+            ctx,
+            evidence,
+            regen_feedback="manual regen via CLI subcommand",
+        )
+    )
+    if new_typed is None:
+        typer.echo(
+            f"Extraction returned None for module '{kind}' — keeping original.",
+            err=True,
+        )
+        raise typer.Exit(2)
+
+    # ------------------------------------------------------------------ update page
+    updated_modules = [new_typed if m.kind == kind else m for m in page.modules]
+    # Build a fresh EventPage preserving all existing metadata.
+    from generator.schema import EventMeta
+    from datetime import datetime, timezone
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    updated_page = EventPage(
+        page_id=page.page_id,
+        input_sentence=page.input_sentence,
+        generated_at=page.generated_at,
+        subject=page.subject,
+        modules=updated_modules,
+        layout=page.layout,
+        sources=page.sources,
+        needs_coverage=page.needs_coverage,
+        uncovered_needs=page.uncovered_needs,
+        meta=EventMeta(
+            last_updated=now_iso,
+            editor_approved=page.meta.editor_approved,
+            editor_id=page.meta.editor_id,
+            pipeline_trace_id=page.meta.pipeline_trace_id,
+        ),
+    )
+    data_json_path.write_text(
+        updated_page.model_dump_json(indent=2, exclude_none=False), encoding="utf-8"
+    )
+
+    # ------------------------------------------------------------------ re-render HTML
+    html_path = data_json_path.parent / (
+        data_json_path.name.removesuffix(".data.json") + ".html"
+    )
+    html_path.write_text(render_html(updated_page), encoding="utf-8")
+
+    # ------------------------------------------------------------------ append trace action
+    trace_path = data_json_path.parent / (
+        data_json_path.name.removesuffix(".data.json") + ".trace.json"
+    )
+    if trace_path.exists():
+        trace_obj = Trace.model_validate_json(trace_path.read_text())
+        action = EditorAction(
+            action_at=_now(),
+            actor="editor:cli",
+            action="regenerate_module",
+            target=EditorActionTarget(module_kind=kind),
+            reason="cli regen-module subcommand",
+        )
+        # Trace is frozen; rebuild with the appended action.
+        updated_trace = Trace(
+            **{
+                **trace_obj.model_dump(),
+                "editor_actions": [
+                    *[a.model_dump() for a in trace_obj.editor_actions],
+                    action.model_dump(),
+                ],
+            }
+        )
+        trace_path.write_text(
+            updated_trace.model_dump_json(indent=2, exclude_none=False),
+            encoding="utf-8",
+        )
+
+    typer.echo(f"Regenerated module '{kind}' in {data_json_path}.")
+
+
+def main() -> None:
     """Entry point for the `generate` console script."""
-    typer.run(generate)
+    app()
 
 
 if __name__ == "__main__":
-    app()
+    main()

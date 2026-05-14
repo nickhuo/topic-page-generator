@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
-generate = "generator.cli:app"
+generate = "generator.cli:main"
 
 [tool.uv]
 dev-dependencies = [
