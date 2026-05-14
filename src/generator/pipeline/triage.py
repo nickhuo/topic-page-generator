@@ -1,20 +1,14 @@
-"""Stage 1 — Triage. Stub returns high-confidence classification."""
+"""Stage 1 — Triage. Single LLM call → TriageOutput."""
 from __future__ import annotations
 
+from generator.llm.client import call_structured, get_default_model
+from generator.prompts.triage import build_triage_messages
 from generator.schema import TriageOutput
 
 
-def run(input_sentence: str) -> TriageOutput:
-    return TriageOutput(
-        is_event=True,
-        # Include the responsible org so tier_for's T0 substring match resolves
-        # openai.com → T0 for this event. PR 3 (real LLM triage) will naturally
-        # surface the maker in primary_entity; until then, the stub does it explicitly.
-        primary_entity="GPT-5.5 Instant (OpenAI)",
-        event_type_hint="product_launch",
-        temporal_posture="recent",
-        time_anchor="2026-05-01T00:00:00Z",
-        confidence=0.92,
-        alternatives=[],
-        reasoning="stub: high-confidence product_launch from input sentence",
+async def run(input_sentence: str, *, model: str | None = None) -> TriageOutput:
+    return await call_structured(
+        model=model or get_default_model("triage"),
+        messages=build_triage_messages(input_sentence),
+        response_model=TriageOutput,
     )
