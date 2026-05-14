@@ -67,6 +67,26 @@ def _estimate_cost(model: str, input_tokens: int, output_tokens: int) -> float:
     )
 
 
+def _strip_provider_unsupported_keywords(schema: Any) -> Any:
+    """Remove JSON Schema keywords that some OpenRouter providers reject.
+
+    Amazon Bedrock's Converse API rejects `minimum` and `maximum` on number
+    types even when `strict: false`. Pydantic emits these from `Field(ge=, le=)`
+    bounds. We strip them here and rely on the `_clamp_confidences` walker
+    plus the validation-retry loop to enforce bounds.
+    """
+    UNSUPPORTED = {"minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum"}
+    if isinstance(schema, dict):
+        return {
+            k: _strip_provider_unsupported_keywords(v)
+            for k, v in schema.items()
+            if k not in UNSUPPORTED
+        }
+    if isinstance(schema, list):
+        return [_strip_provider_unsupported_keywords(item) for item in schema]
+    return schema
+
+
 def _clamp_confidences(obj: Any) -> Any:
     """Walk parsed JSON and clamp confidence-like floats to [0, 1].
 
@@ -125,11 +145,20 @@ async def call_structured(
             "type": "json_schema",
             "json_schema": {
                 "name": response_model.__name__,
-                "schema": response_model.model_json_schema(),
-                "strict": True,
+                "schema": _strip_provider_unsupported_keywords(
+                    response_model.model_json_schema()
+                ),
+                # `strict: True` is OFF: Pydantic's anyOf-for-Optional shape
+                # is rejected by some OpenRouter-routed providers (Bedrock).
+                # The validation-retry loop below provides correctness.
+                "strict": False,
             },
         },
         "temperature": 0.0,
+        # Cap output tokens — routing-brain outputs are small (~500-800 tokens)
+        # and uncapped requests trigger OpenRouter's per-request credit-budget
+        # rejection for keys with low limits.
+        "max_tokens": 4096,
     }
 
     attempts = 0

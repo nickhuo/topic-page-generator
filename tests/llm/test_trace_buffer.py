@@ -6,7 +6,8 @@ def _mk():
 
 def test_push_drain_returns_calls():
     reset()
-    push(_mk()); push(_mk())
+    push(_mk())
+    push(_mk())
     out = drain()
     assert len(out) == 2
     assert drain() == []  # drained
