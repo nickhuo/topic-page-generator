@@ -13,13 +13,12 @@ def reset() -> None:
 
 
 def push(call: LLMCall) -> None:
-    # ContextVar values are shared by reference within a context;
-    # mutate-then-set keeps the same list visible to readers inside the same task.
+    # Only mutate non-empty lists; otherwise set a fresh one to avoid shared default.
     current = _buf.get()
-    if current is _buf.get(None) and isinstance(current, list):
-        current.append(call)
-    else:
+    if not current:
         _buf.set([call])
+    else:
+        current.append(call)
 
 
 def drain() -> list[LLMCall]:

@@ -1,13 +1,13 @@
 from generator.llm.client import (
-    DEFAULT_MODELS,
     LLMConfigError,
     LLMOutputError,
     call_structured,
+    get_default_model,
 )
 from generator.llm.trace_buffer import drain, push, reset
 
 __all__ = [
-    "DEFAULT_MODELS",
+    "get_default_model",
     "LLMConfigError",
     "LLMOutputError",
     "call_structured",

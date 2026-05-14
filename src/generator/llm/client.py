@@ -29,12 +29,17 @@ _T = TypeVar("_T", bound=BaseModel)
 _ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 _TRANSIENT = (httpx.TimeoutException, httpx.NetworkError)
 
-# Per-stage model defaults — overridable via env vars.
-DEFAULT_MODELS = {
-    "triage":        os.getenv("MODEL_TRIAGE",       "anthropic/claude-haiku-4-5"),
-    "disambiguate":  os.getenv("MODEL_DISAMBIGUATE", "anthropic/claude-sonnet-4-6"),
-    "aesthetic":     os.getenv("MODEL_AESTHETIC",    "anthropic/claude-haiku-4-5"),
+_STAGE_FALLBACK_MODELS = {
+    "triage":       "anthropic/claude-haiku-4-5",
+    "disambiguate": "anthropic/claude-sonnet-4-6",
+    "aesthetic":    "anthropic/claude-haiku-4-5",
 }
+
+
+def get_default_model(stage: str) -> str:
+    """Resolve the per-stage model at call time so .env loaded later is respected."""
+    env_key = f"MODEL_{stage.upper()}"
+    return os.getenv(env_key) or _STAGE_FALLBACK_MODELS[stage]
 
 # Per-million-token pricing snapshot (USD). Used only for the trace; not load-bearing.
 # Keys are model identifiers as passed to OpenRouter.
@@ -115,7 +120,7 @@ async def call_structured(
     }
     body = {
         "model": model,
-        "messages": messages,
+        "messages": list(messages),
         "response_format": {
             "type": "json_schema",
             "json_schema": {
@@ -162,7 +167,7 @@ async def call_structured(
             except json.JSONDecodeError as exc:
                 last_error = exc
                 body["messages"].append({
-                    "role": "system",
+                    "role": "user",
                     "content": f"Your previous reply was not valid JSON ({exc}). Reply with the corrected JSON object only.",
                 })
                 continue
@@ -174,7 +179,7 @@ async def call_structured(
             except ValidationError as exc:
                 last_error = exc
                 body["messages"].append({
-                    "role": "system",
+                    "role": "user",
                     "content": (
                         f"Your previous JSON failed schema validation: {exc.json()}. "
                         "Reply with corrected JSON conforming to the same schema. Do not include any prose."

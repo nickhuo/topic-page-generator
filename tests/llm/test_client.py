@@ -51,6 +51,9 @@ async def test_call_structured_retries_on_5xx(monkeypatch):
     )
     assert out.confidence == 0.92
     assert route.call_count == 2
+    # The 503 round-trip should NOT push a trace entry (it never reached usage parsing);
+    # only the successful retry records its cost.
+    assert len(drain()) == 1
 
 
 @respx.mock
@@ -96,6 +99,9 @@ async def test_call_structured_retries_on_validation_error(monkeypatch):
     )
     assert out.confidence == 0.92
     assert route.call_count == 2
+    # Both round-trips reached usage parsing, so both should record costs
+    # (validation failure happens after the trace push).
+    assert len(drain()) == 2
 
 
 def test_missing_api_key_raises(monkeypatch):
