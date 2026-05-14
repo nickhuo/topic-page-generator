@@ -55,16 +55,12 @@ async def test_run_fetch_dedup_blacklist_sort(monkeypatch):
         "https://aigeneratednews.example/x", "T3", "2026-05-06T00:00:00Z"
     )
 
-    async def fake_wiki(*a, **kw):
-        return t2
-
     async def fake_wd(*a, **kw):
-        return (None, {})
+        return (t2, {})
 
     async def fake_tav(*a, **kw):
         return [t0, t1_new, t1_old, dup, blacklisted]
 
-    monkeypatch.setattr("generator.pipeline.fetch.fetch_wikipedia", fake_wiki)
     monkeypatch.setattr("generator.pipeline.fetch.fetch_wikidata", fake_wd)
     monkeypatch.setattr("generator.pipeline.fetch.fetch_tavily", fake_tav)
     monkeypatch.setattr(
@@ -83,16 +79,12 @@ async def test_run_fetch_dedup_blacklist_sort(monkeypatch):
 
 
 async def test_run_fetch_empty_raises(monkeypatch):
-    async def empty_w(*a, **kw):
-        return None
-
     async def empty_wd(*a, **kw):
         return (None, {})
 
     async def empty_t(*a, **kw):
         return []
 
-    monkeypatch.setattr("generator.pipeline.fetch.fetch_wikipedia", empty_w)
     monkeypatch.setattr("generator.pipeline.fetch.fetch_wikidata", empty_wd)
     monkeypatch.setattr("generator.pipeline.fetch.fetch_tavily", empty_t)
     with pytest.raises(EmptyEvidencePoolError):

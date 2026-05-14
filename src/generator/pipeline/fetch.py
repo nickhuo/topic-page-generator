@@ -1,4 +1,4 @@
-"""Stage 4 — Fetch orchestrator. Fires three clients in parallel, dedupes,
+"""Stage 4 — Fetch orchestrator. Fires two clients in parallel, dedupes,
 filters AI-content blacklist, sorts by (tier asc, published_at desc)."""
 from __future__ import annotations
 
@@ -9,11 +9,10 @@ from generator.schema import EventSubject, PlanOutput, Source
 from generator.sources._common import host_of
 from generator.sources.tavily import fetch_tavily
 from generator.sources.wikidata import fetch_wikidata
-from generator.sources.wikipedia import fetch_wikipedia
 
 
 class EmptyEvidencePoolError(RuntimeError):
-    """Raised when all three source clients return zero results."""
+    """Raised when all source clients return zero results."""
 
 
 # TODO(pr-future): replace placeholders with a curated AI-content domain list.
@@ -60,26 +59,33 @@ def _iso_to_epoch(iso: str) -> float:
 
 
 async def run_fetch_stage(plan: PlanOutput, subject: EventSubject) -> list[Source]:
-    """Fan out to all three clients, then merge → dedupe → blacklist → sort."""
+    """Fan out to Wikidata + Tavily, then merge → dedupe → blacklist → sort.
+
+    Wikipedia was removed: its summary endpoint adds latency without offering
+    anything Wikidata + Tavily don't already cover for the event types we ship
+    (product launches, scheduled events, live cultural events). Any wikipedia.org
+    URLs that come through Tavily still get T2 via `publisher_tier.PUBLISHER_TIERS`.
+    """
     entity = subject.primary_entity
     days = plan.source_strategy.time_range_days
     query = entity
     if subject.event_type_hint:
         query = f"{entity} {subject.event_type_hint.replace('_', ' ')}"
 
-    wiki_task = fetch_wikipedia(entity)
+    # TODO(pr-3+): when an event subject is a product (e.g. "GPT-5.5 Instant"),
+    # the parent org ("OpenAI") may not appear in primary_entity, which means
+    # tier_for() will miss T0 attribution for openai.com. Pass richer context
+    # here — input_sentence and any disambiguation-derived org names — once
+    # those flow through. For now the triage stub returns "X (Org)" so the
+    # substring rule resolves correctly.
     wikidata_task = fetch_wikidata(entity)
     tavily_task = fetch_tavily(
         query, time_range_days=days, max_results=10, primary_entity=entity
     )
 
-    wiki_res, wd_res, tav_res = await asyncio.gather(
-        wiki_task, wikidata_task, tavily_task
-    )
+    wd_res, tav_res = await asyncio.gather(wikidata_task, tavily_task)
 
     merged: list[Source] = []
-    if wiki_res is not None:
-        merged.append(wiki_res)
     wd_source, _wd_props = wd_res
     if wd_source is not None:
         merged.append(wd_source)
@@ -90,7 +96,7 @@ async def run_fetch_stage(plan: PlanOutput, subject: EventSubject) -> list[Sourc
 
     if not merged:
         raise EmptyEvidencePoolError(
-            f"No sources found for entity={entity!r}. Tried Wikipedia, Wikidata, Tavily."
+            f"No sources found for entity={entity!r}. Tried Wikidata and Tavily."
         )
 
     merged.sort(
