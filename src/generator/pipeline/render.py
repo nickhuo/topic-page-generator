@@ -132,9 +132,7 @@ def _build_sections(page: EventPage) -> list[dict]:
             if mod is None:
                 continue
             override = plan.render_overrides.get(kind)
-            section_blocks.append(
-                module_to_block(mod, page.sources, override=override)
-            )
+            section_blocks.append(module_to_block(mod, page.sources, override=override))
             rendered.add(kind)
         if section_blocks:
             sections.append(
@@ -158,9 +156,7 @@ def _build_sections(page: EventPage) -> list[dict]:
                 "need_id": "more",
                 "title": "More on this topic",
                 "rationale": "",
-                "blocks": [
-                    module_to_block(m, page.sources) for m in orphan_modules
-                ],
+                "blocks": [module_to_block(m, page.sources) for m in orphan_modules],
             }
         )
 
@@ -175,13 +171,10 @@ def render_html(page: EventPage) -> str:
 
     palette_block = palette_css_vars(_select_palette_id(page))
     stylesheet = (_TEMPLATES_DIR / "styles.css").read_text(encoding="utf-8")
+    toc_js = (_TEMPLATES_DIR / "toc.js").read_text(encoding="utf-8")
 
-    hero_module = next(
-        (m for m in page.modules if m.kind == "hero"), None
-    )
-    countdown_module = next(
-        (m for m in page.modules if m.kind == "countdown"), None
-    )
+    hero_module = next((m for m in page.modules if m.kind == "hero"), None)
+    countdown_module = next((m for m in page.modules if m.kind == "countdown"), None)
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
     sections = _build_sections(page)
@@ -195,5 +188,6 @@ def render_html(page: EventPage) -> str:
         source_index=source_index,
         palette_css_block=palette_block,
         stylesheet=stylesheet,
+        toc_js=toc_js,
         jsonld=_build_jsonld(page),
     )

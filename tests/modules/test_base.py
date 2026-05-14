@@ -60,9 +60,7 @@ def _make_ctx() -> PlanContext:
         )
         for idx, nid in enumerate(_ALL_NEEDS)
     ]
-    need_plan = NeedPlanOutput(
-        need_plans=need_plans, layout_preset_id="product_focus"
-    )
+    need_plan = NeedPlanOutput(need_plans=need_plans, layout_preset_id="product_focus")
     aesthetic = AestheticPlanOutput(
         preset_id="product_focus",
         preset_confidence=0.9,

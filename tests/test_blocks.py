@@ -102,9 +102,7 @@ def test_reactions_renders_newsfeed_quotes_variant():
 
 def test_official_statements_default_renders_newsfeed_quotes():
     page = make_full_event_page()
-    block = module_to_block(
-        _by_kind(page.modules, "official_statements"), page.sources
-    )
+    block = module_to_block(_by_kind(page.modules, "official_statements"), page.sources)
     assert isinstance(block, NewsfeedBlockData)
     assert block.variant == "quotes"
 

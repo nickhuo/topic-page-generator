@@ -183,9 +183,7 @@ def test_filter_evidence_drops_sources_older_than_2x_window():
 def test_filter_evidence_falls_back_to_full_pool_when_nothing_matches():
     """If no sources pass the recency filter, return the full pool."""
     now = datetime.now(timezone.utc)
-    old = _make_source(
-        "src_only", published_at=(now - timedelta(days=400)).isoformat()
-    )
+    old = _make_source("src_only", published_at=(now - timedelta(days=400)).isoformat())
     plan = _make_need_plan(time_range_days=7)
     assert _filter_evidence([old], plan) == [old]
 

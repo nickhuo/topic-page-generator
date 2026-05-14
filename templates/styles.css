@@ -467,3 +467,53 @@ small, .src-meta, .src-tier, .news-card__meta { font-size: 0.85rem; color: var(-
   .fact-row__label { border-bottom: none; padding-bottom: 0; }
   .needs-nav__list { flex-wrap: nowrap; overflow-x: auto; }
 }
+
+/* ---------- 3-column grid ---------- */
+.page-grid {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 320px;
+  gap: 40px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+@media (max-width: 1199px) {
+  .page-grid { grid-template-columns: minmax(0, 1fr) 300px; }
+  .page-toc { display: none; }
+}
+@media (max-width: 767px) {
+  .page-grid { grid-template-columns: 1fr; gap: 24px; padding: 16px; }
+  .page-reference { order: 2; }
+}
+
+/* ---------- TOC ---------- */
+.page-toc { position: sticky; top: 24px; align-self: start; }
+.page-toc__list { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--c-rule, #e5e7eb); }
+.page-toc__item { position: relative; }
+.page-toc__link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 12px; color: var(--c-muted, #6b7280);
+  text-decoration: none; font-size: 13px; line-height: 1.4;
+}
+.page-toc__dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--c-rule, #d1d5db); margin-left: -16px;
+}
+.page-toc__item.is-active .page-toc__link { color: var(--c-fg, #111); font-weight: 600; }
+.page-toc__item.is-active .page-toc__dot { background: var(--c-accent, #2563eb); }
+.page-toc__item.is-visited .page-toc__dot { background: var(--c-fg, #111); opacity: 0.4; }
+.page-toc__popover {
+  position: absolute; left: 100%; top: 0; margin-left: 12px;
+  width: 280px; padding: 10px 12px; background: #111; color: #fff;
+  border-radius: 6px; font-size: 12px; line-height: 1.4;
+  opacity: 0; pointer-events: none; transition: opacity .12s ease;
+  z-index: 10;
+}
+.page-toc__item:hover .page-toc__popover,
+.page-toc__item:focus-within .page-toc__popover { opacity: 1; }
+
+/* ---------- reference rail ---------- */
+.page-reference { position: sticky; top: 24px; align-self: start; display: flex; flex-direction: column; gap: 20px; }
+.ref-card { border: 1px solid var(--c-rule, #e5e7eb); border-radius: 10px; padding: 16px; background: #fff; }
+.ref-card__title { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 12px; color: var(--c-muted, #6b7280); }
