@@ -12,7 +12,7 @@ import typer
 from pydantic import ValidationError
 from rich.console import Console
 
-from generator.llm.client import LLMConfigError
+from generator.llm.client import LLMConfigError, LLMOutputError
 from generator.llm.trace_buffer import reset as _reset_llm_calls
 from generator.pipeline import consistency, disambiguate, extract, plan, render, triage
 from generator.pipeline.fetch import EmptyEvidencePoolError, run_fetch_stage
@@ -64,16 +64,16 @@ def generate(
             plan_out = plan.run_plan_stage(triage_out, disamb_out)
             console.print(f"[green]✓[/green] Plan  archetype={plan_out.archetype_hint}")
 
-        with recorder.stage("fetch"):
-            try:
+        try:
+            with recorder.stage("fetch"):
                 sources = await run_fetch_stage(plan_out, _subject_from_triage(triage_out))
-            except EmptyEvidencePoolError as exc:
-                console.print(f"[bold red]Fetch failed:[/bold red] {exc}")
-                raise typer.Exit(code=3) from exc
-            except httpx.HTTPError as exc:
-                console.print(f"[bold red]Network error during fetch:[/bold red] {exc}")
-                raise typer.Exit(code=3) from exc
-            console.print(f"[green]✓[/green] Fetch  sources={len(sources)}")
+        except EmptyEvidencePoolError as exc:
+            console.print(f"[bold red]Fetch failed:[/bold red] {exc}")
+            raise typer.Exit(code=3) from exc
+        except httpx.HTTPError as exc:
+            console.print(f"[bold red]Network error during fetch:[/bold red] {exc}")
+            raise typer.Exit(code=3) from exc
+        console.print(f"[green]✓[/green] Fetch  sources={len(sources)}")
 
         # Build a small evidence preview to pass into the aesthetic prompt.
         evidence_preview = "\n".join(
@@ -125,6 +125,9 @@ def generate(
     except LLMConfigError as exc:
         console.print(f"[bold red]LLM configuration error:[/bold red] {exc}")
         raise typer.Exit(code=1) from exc
+    except LLMOutputError as exc:
+        console.print(f"[bold red]LLM returned invalid output:[/bold red] {exc}")
+        raise typer.Exit(code=4) from exc
     except ValidationError as exc:
         console.print("[bold red]Schema validation failed:[/bold red]")
         console.print(json.dumps(exc.errors(), indent=2, default=str))
