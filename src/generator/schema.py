@@ -575,6 +575,14 @@ class StageTokens(_Frozen):
     output: int
 
 
+class LLMCall(_Frozen):
+    model: str
+    input_tokens: int
+    output_tokens: int
+    cost_usd: float
+    duration_ms: int
+
+
 class StageTrace(_Frozen):
     stage: str
     started_at: ISO8601
@@ -586,6 +594,7 @@ class StageTrace(_Frozen):
     retry_count: int = 0
     error: str | None = None
     output_ref: str | None = None
+    llm_calls: list[LLMCall] = Field(default_factory=list)
 
 
 class EditorActionTarget(_Frozen):

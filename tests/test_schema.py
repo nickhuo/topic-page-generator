@@ -96,6 +96,22 @@ def test_event_page_roundtrip() -> None:
     assert page.layout.preset_id == "product_focus"
 
 
+def test_stage_trace_accepts_llm_calls():
+    from generator.schema import StageTrace, LLMCall
+    st = StageTrace(
+        stage="triage",
+        started_at="2026-05-13T12:00:00Z",
+        duration_ms=120,
+        outcome="success",
+        llm_calls=[LLMCall(
+            model="anthropic/claude-haiku-4-5",
+            input_tokens=512, output_tokens=128,
+            cost_usd=0.0011, duration_ms=110,
+        )],
+    )
+    assert st.llm_calls[0].model == "anthropic/claude-haiku-4-5"
+
+
 def test_discriminated_union_rejects_unknown_kind() -> None:
     import pytest
     from pydantic import ValidationError
