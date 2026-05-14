@@ -72,5 +72,38 @@ async def test_disambiguate_fires_llm_when_low_confidence(monkeypatch):
     assert len(drain()) == 1
 
 
+@respx.mock
+async def test_disambiguate_short_circuits_when_no_evidence(monkeypatch):
+    """Low confidence but Tavily returns nothing → fall back to top triage candidate, no LLM call."""
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
+    reset()
+
+    async def empty_tavily(*a, **kw):
+        return []
+    monkeypatch.setattr("generator.pipeline.disambiguate.fetch_tavily", empty_tavily)
+
+    triage = TriageOutput(
+        is_event=True,
+        primary_entity="Apollo program",
+        event_type_hint="generic_event",
+        temporal_posture="recent",
+        confidence=0.40,
+        alternatives=[
+            TriageAlternative(
+                entity="Apollo (SpaceX merch line)",
+                event_type_hint="product_launch",
+                rationale="r",
+            ),
+        ],
+        reasoning="x",
+    )
+    out = await run(triage)
+    assert out.resolved is True
+    # Falls back to triage.primary_entity, not the alternatives.
+    assert out.chosen.entity == "Apollo program"
+    assert out.chosen.supporting_sources == []
+    assert len(drain()) == 0  # no LLM call
+
+
 def test_threshold_default():
     assert CONFIDENCE_THRESHOLD == 0.85
