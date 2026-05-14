@@ -34,6 +34,7 @@ _STAGE_FALLBACK_MODELS = {
     "disambiguate": "anthropic/claude-sonnet-4-6",
     "aesthetic":    "anthropic/claude-haiku-4-5",
     "extract":      "anthropic/claude-haiku-4-5",
+    "consistency":  "anthropic/claude-haiku-4-5",
 }
 
 
