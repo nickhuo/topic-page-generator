@@ -146,21 +146,64 @@ def generate(
                     seed_sources=seed_sources,
                 )
 
-            # Emit a compact summary for the smoke-test path.
-            summary = {
-                "sections": [
-                    {
-                        "section_id": s.section_id,
-                        "kind": s.kind,
-                        "rank": s.rank,
-                        "block_kind": s.block_kind,
-                        "evidence_count": len(pools.get(s.section_id, [])),
-                    }
-                    for s in combined.sections
-                ],
-                "total_sources": sum(len(p) for p in pools.values()),
-            }
-            typer.echo(json.dumps(summary, indent=2))
+            # Stage 4 (editor): block-driven extraction.
+            from generator.pipeline.block_extract import run_block_extract_stage
+            with recorder.stage("block_extract"):
+                rendered_sections = await run_block_extract_stage(
+                    sections=combined.sections,
+                    evidence_by_section=pools,
+                    canonical_title=ground_out.canonical_title,
+                )
+            console.print(
+                f"[green]✓[/green] Block extract  sections={len(rendered_sections)}"
+            )
+
+            # Stage 6 (editor): render.
+            from datetime import datetime, timezone as _tz
+
+            from generator.pipeline.render import (
+                build_editorial_page,
+                render_html,
+            )
+            from generator.schema import EventLayout, EventMeta
+
+            subject_e = subject_from_facts(
+                ground_out.facts, ground_out.canonical_title
+            )
+            all_sources = list(
+                {s.id: s for pool in pools.values() for s in pool}.values()
+            )
+
+            _now_iso = datetime.now(_tz.utc).isoformat()
+            with recorder.stage("render"):
+                editorial_page = build_editorial_page(
+                    input_sentence=sentence,
+                    page_id=page_id,
+                    subject=subject_e,
+                    layout=EventLayout(preset_id="product_focus", overrides=None),
+                    sources=all_sources + seed_sources,
+                    editorial_sections=rendered_sections,
+                    trace_id=recorder.trace_id,
+                    meta=EventMeta(
+                        last_updated=_now_iso,
+                        editor_approved=True,
+                        editor_id="cli_user@local",
+                        pipeline_trace_id=recorder.trace_id,
+                    ),
+                    wikipedia_card=_wp_card,
+                )
+                html = render_html(editorial_page)
+
+            # Stage 7 (editor): deliver.
+            slug = slugify(ground_out.canonical_title)
+            _OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            (_OUTPUT_DIR / f"{slug}.html").write_text(html, encoding="utf-8")
+            (_OUTPUT_DIR / f"{slug}.data.json").write_text(
+                editorial_page.model_dump_json(indent=2), encoding="utf-8"
+            )
+            console.print(
+                f"[green]✓[/green] Wrote {slug}.html and {slug}.data.json"
+            )
             raise typer.Exit(code=0)
 
         # Stage 2a: Plan.
