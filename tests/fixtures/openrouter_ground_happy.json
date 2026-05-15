@@ -1,0 +1,15 @@
+{
+  "id": "gen-test-1",
+  "model": "anthropic/claude-sonnet-4-6",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"is_hot_event\": true, \"rejection_reason\": null, \"facts\": {\"entities\": [\"GPT-5.5 Instant (OpenAI)\"], \"what\": \"OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT.\", \"when\": \"2026-05-01T00:00:00Z\", \"where\": null, \"why\": null, \"supporting_sources\": [\"src_a1\"]}, \"canonical_title\": \"GPT-5.5 Instant rollout\", \"confidence\": 0.92, \"reasoning\": \"Fresh T0 source confirms named product release.\"}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 412, "completion_tokens": 87, "total_tokens": 499}
+}
