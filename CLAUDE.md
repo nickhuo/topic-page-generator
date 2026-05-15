@@ -22,7 +22,7 @@ uv run ruff check .                                  # lint
 uv run ruff format .                                 # format
 ```
 
-Required env vars (in `.env` or `.env.local` — `.env.local` overrides): `OPENROUTER_API_KEY`, `TAVILY_API_KEY`. Optional `MODEL_GROUND`, `MODEL_CURATION`, `MODEL_RESEARCH_QUERY`, `MODEL_RESEARCH_EVAL`, `MODEL_BLOCK_EXTRACT` per-stage model overrides — defaults live in `src/generator/llm/client.py`.
+Required env vars (in `.env` or `.env.local` — `.env.local` overrides): `OPENROUTER_API_KEY`, `TAVILY_API_KEY`. Optional `BRAVE_API_KEY` — if absent, gallery sections are silently skipped (no crash). Optional `MODEL_GROUND`, `MODEL_CURATION`, `MODEL_RESEARCH_QUERY`, `MODEL_RESEARCH_EVAL`, `MODEL_BLOCK_EXTRACT` per-stage model overrides — defaults live in `src/generator/llm/client.py`.
 
 CLI exit codes: `1` LLM config, `2` schema validation, `3` network/fetch, `4` LLM bad output, `5` not a hot event / user rejected.
 

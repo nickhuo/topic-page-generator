@@ -25,6 +25,9 @@ Block kinds you can choose for each curated section (closed enum):
 - factsheet: labeled key/value rows. Use for cast lists, lineups, KPI tables.
 - map: geocoded locations. Use only when geography is load-bearing.
 - reactions: 2–4 quote cards spanning multiple sentiments or stakeholder tiers.
+- gallery: image cards with one-sentence captions. Use when visuals (photos
+  of the event, the venue, key people) materially add information that prose
+  can't. Requires BRAVE_API_KEY to fetch images at extraction time.
 """
 
 _INSTRUCTIONS = """\
@@ -50,8 +53,8 @@ Rules:
    often needs only 1 source, a reactions block needs ≥2 distinct sentiments.
 
 Triage hints for picking sections:
-- Sports / live event: consider "where_to_watch" (newsfeed variant=channels)
-  or a "lineup" (factsheet).
+- Sports / live event: consider "where_to_watch" (newsfeed variant=channels),
+  a "lineup" (factsheet), or a "photos" gallery (if visuals add clear value).
 - Product launch / earnings: consider "kpi_dashboard" (chart, stat or bar).
 - Geopolitical / disaster: consider a map.
 - Polarizing / contested: consider a reactions section spanning sentiments.

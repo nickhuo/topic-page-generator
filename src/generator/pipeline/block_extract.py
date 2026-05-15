@@ -27,8 +27,23 @@ from generator.schema import (
     SectionPlan,
     Source,
 )
+from generator.sources.brave import BraveConfigError, BraveImageResult, fetch_brave_images
 
 logger = logging.getLogger(__name__)
+
+# Minimum number of Brave image results required to proceed with gallery extraction.
+# Gallery spec requires ≥2 images; we want headroom for the LLM to pick from.
+_GALLERY_MIN_IMAGES = 3
+
+
+def _brave_query_for_section(section: SectionPlan, canonical_title: str) -> str:
+    """Build a Brave image search query for a gallery section.
+
+    Uses the section_id for semantic hints (e.g. "stadium_photos") combined
+    with the canonical_title. Truncated to ~80 chars.
+    """
+    raw = f"{canonical_title} {section.intent}"
+    return raw[:80]
 
 
 def _collect_cited_ids(obj) -> set[str]:
@@ -57,11 +72,38 @@ async def extract_one_section(
 ) -> RenderedSection | None:
     spec_cls = get_spec(section.block_kind)
     spec = spec_cls()
+
+    # Gallery sections require Brave image search before LLM extraction.
+    image_manifest: list[BraveImageResult] | None = None
+    if section.block_kind == "gallery":
+        query = _brave_query_for_section(section, canonical_title)
+        try:
+            results = await fetch_brave_images(query, count=12)
+        except BraveConfigError as exc:
+            logger.warning(
+                "block_extract: dropping gallery section %s — Brave not configured: %s. "
+                "Set BRAVE_API_KEY to enable gallery sections.",
+                section.section_id,
+                exc,
+            )
+            return None
+        if len(results) < _GALLERY_MIN_IMAGES:
+            logger.info(
+                "block_extract: dropping gallery section %s — only %d Brave results "
+                "(need ≥%d for LLM headroom)",
+                section.section_id,
+                len(results),
+                _GALLERY_MIN_IMAGES,
+            )
+            return None
+        image_manifest = results
+
     messages = build_block_extract_messages(
         section=section,
         spec=spec_cls,
         sources=sources,
         canonical_title=canonical_title,
+        image_manifest=image_manifest,
     )
     resolved_model = model or get_default_model("block_extract")
     try:
