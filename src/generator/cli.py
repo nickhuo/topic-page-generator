@@ -126,7 +126,41 @@ def generate(
             combined = SectionPlanOutput(
                 sections=backbone + list(curation_out.sections)
             )
-            typer.echo(combined.model_dump_json(indent=2))
+
+            # Stage 3 (editor): per-section research loop.
+            from generator.pipeline.research import run_research_stage
+            from generator.sources.wikidata import fetch_wikidata
+            from generator.sources.wikipedia import fetch_wikipedia_card
+
+            wd_source, _wd_props = await fetch_wikidata(
+                ground_out.facts.entities[0] if ground_out.facts.entities else ""
+            )
+            _wp_card = await fetch_wikipedia_card(ground_out.canonical_title)
+            seed_sources = [wd_source] if wd_source else []
+
+            with recorder.stage("research"):
+                pools = await run_research_stage(
+                    sections=combined.sections,
+                    canonical_title=ground_out.canonical_title,
+                    facts=ground_out.facts,
+                    seed_sources=seed_sources,
+                )
+
+            # Emit a compact summary for the smoke-test path.
+            summary = {
+                "sections": [
+                    {
+                        "section_id": s.section_id,
+                        "kind": s.kind,
+                        "rank": s.rank,
+                        "block_kind": s.block_kind,
+                        "evidence_count": len(pools.get(s.section_id, [])),
+                    }
+                    for s in combined.sections
+                ],
+                "total_sources": sum(len(p) for p in pools.values()),
+            }
+            typer.echo(json.dumps(summary, indent=2))
             raise typer.Exit(code=0)
 
         # Stage 2a: Plan.
