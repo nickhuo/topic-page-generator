@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+import pytest
+
+pytest.skip("regen-module removed; see test_regen_section.py", allow_module_level=True)
+
 import json
 from pathlib import Path
 

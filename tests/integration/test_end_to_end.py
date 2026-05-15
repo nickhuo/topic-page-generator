@@ -7,6 +7,10 @@ than mocking the HTTP layer when each stage expects a different JSON schema.
 
 from __future__ import annotations
 
+import pytest
+
+pytest.skip("legacy path removed", allow_module_level=True)
+
 import json
 from pathlib import Path
 

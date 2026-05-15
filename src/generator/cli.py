@@ -2,8 +2,8 @@
 
 Commands
 --------
-``generate run "<sentence>"``  — full 7-stage pipeline (was the only command).
-``generate regen-module <kind> <data.json>``  — re-run module extraction.
+``generate run "<sentence>"``  — full editor pipeline.
+``generate regen-section <section_id> <data.json>``  — re-run block extraction for one section.
 
 .. note::
    The old bare invocation ``generate "<sentence>"`` no longer works; use
@@ -14,8 +14,8 @@ from __future__ import annotations
 
 import asyncio
 import json
-import os
 import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -25,13 +25,10 @@ from dotenv import load_dotenv
 from pydantic import ValidationError
 from rich.console import Console
 
-from generator.editor.prompt_cli import EditorPrompter, _now
+from generator.editor.prompt_cli import EditorPrompter
 from generator.llm.client import LLMConfigError, LLMOutputError
 from generator.llm.trace_buffer import reset as _reset_llm_calls
-from generator.modules.base import PlanContext
-from generator.pipeline import consistency, extract, ground, plan, render
-from generator.pipeline.extract import extract_one_module
-from generator.pipeline.fetch import EmptyEvidencePoolError, run_fetch_stage
+from generator.pipeline import ground
 from generator.pipeline.render import slugify, subject_from_facts
 from generator.pipeline.trace import TraceRecorder
 
@@ -51,10 +48,10 @@ def generate(
     review_plan: bool = typer.Option(
         False,
         "--review-plan",
-        help="Enable the optional plan-override HITL touchpoint.",
+        help="[DEPRECATED] No-op; plan review is not implemented in the editor architecture.",
     ),
 ) -> None:
-    """Run the 7-stage pipeline on a one-sentence input."""
+    """Run the editor pipeline on a one-sentence input."""
     # Load .env files so OPENROUTER_API_KEY / TAVILY_API_KEY / MODEL_* overrides
     # don't have to be exported in every shell. .env.local wins over .env.
     load_dotenv(".env")
@@ -103,283 +100,118 @@ def generate(
             console.print("[bold red]Ground returned no facts. Aborting.[/bold red]")
             raise typer.Exit(code=4)
 
-        subject = subject_from_facts(ground_out.facts, ground_out.canonical_title)
-        slug = slugify(ground_out.canonical_title)
+        # Editor architecture: planners → research → block_extract → render → deliver
+        from generator.pipeline.backbone_planner import build_backbone_sections
+        from generator.pipeline.curation_planner import run_curation_stage
+        from generator.schema import SectionPlanOutput
 
-        # Editor-architecture flag: new planner path (gated behind env var).
-        if os.getenv("USE_EDITOR_ARCHITECTURE") == "1":
-            from generator.pipeline.backbone_planner import build_backbone_sections
-            from generator.pipeline.curation_planner import run_curation_stage
-            from generator.schema import SectionPlanOutput
-
-            backbone = build_backbone_sections(
-                ground_out.facts,
+        backbone = build_backbone_sections(
+            ground_out.facts,
+            canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
+        )
+        with recorder.stage("curation"):
+            curation_out = await run_curation_stage(
+                facts=ground_out.facts,
                 canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
-            )
-            with recorder.stage("curation"):
-                curation_out = await run_curation_stage(
-                    facts=ground_out.facts,
-                    canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
-                    backbone=backbone,
-                )
-
-            combined = SectionPlanOutput(
-                sections=backbone + list(curation_out.sections)
+                backbone=backbone,
             )
 
-            # Stage 3 (editor): per-section research loop.
-            from generator.pipeline.research import run_research_stage
-            from generator.sources.wikidata import fetch_wikidata
-            from generator.sources.wikipedia import fetch_wikipedia_card
-
-            wd_source, _wd_props = await fetch_wikidata(
-                ground_out.facts.entities[0] if ground_out.facts.entities else ""
-            )
-            _wp_card = await fetch_wikipedia_card(ground_out.canonical_title)
-            seed_sources = [wd_source] if wd_source else []
-
-            with recorder.stage("research"):
-                pools = await run_research_stage(
-                    sections=combined.sections,
-                    canonical_title=ground_out.canonical_title,
-                    facts=ground_out.facts,
-                    seed_sources=seed_sources,
-                )
-
-            # Stage 4 (editor): block-driven extraction.
-            from generator.pipeline.block_extract import run_block_extract_stage
-            with recorder.stage("block_extract"):
-                rendered_sections = await run_block_extract_stage(
-                    sections=combined.sections,
-                    evidence_by_section=pools,
-                    canonical_title=ground_out.canonical_title,
-                )
-            console.print(
-                f"[green]✓[/green] Block extract  sections={len(rendered_sections)}"
-            )
-
-            # Stage 6 (editor): render.
-            from datetime import datetime, timezone as _tz
-
-            from generator.pipeline.render import (
-                build_editorial_page,
-                render_html,
-            )
-            from generator.schema import EventLayout, EventMeta
-
-            subject_e = subject_from_facts(
-                ground_out.facts, ground_out.canonical_title
-            )
-            all_sources = list(
-                {s.id: s for pool in pools.values() for s in pool}.values()
-            )
-
-            _now_iso = datetime.now(_tz.utc).isoformat()
-            with recorder.stage("render"):
-                editorial_page = build_editorial_page(
-                    input_sentence=sentence,
-                    page_id=page_id,
-                    subject=subject_e,
-                    layout=EventLayout(preset_id="product_focus", overrides=None),
-                    sources=all_sources + seed_sources,
-                    editorial_sections=rendered_sections,
-                    trace_id=recorder.trace_id,
-                    meta=EventMeta(
-                        last_updated=_now_iso,
-                        editor_approved=True,
-                        editor_id="cli_user@local",
-                        pipeline_trace_id=recorder.trace_id,
-                    ),
-                    wikipedia_card=_wp_card,
-                )
-                html = render_html(editorial_page)
-
-            # Stage 7 (editor): deliver.
-            slug = slugify(ground_out.canonical_title)
-            _OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-            (_OUTPUT_DIR / f"{slug}.html").write_text(html, encoding="utf-8")
-            (_OUTPUT_DIR / f"{slug}.data.json").write_text(
-                editorial_page.model_dump_json(indent=2), encoding="utf-8"
-            )
-            console.print(
-                f"[green]✓[/green] Wrote {slug}.html and {slug}.data.json"
-            )
-            raise typer.Exit(code=0)
-
-        # Stage 2a: Plan.
-        with recorder.stage("plan"):
-            need_plan_out = await plan.run_plan_stage(
-                ground_out.facts, ground_out.canonical_title
-            )
-            activated = [p for p in need_plan_out.need_plans if p.activated]
-            console.print(
-                f"[green]✓[/green] Plan  activated_needs={len(activated)}/8 "
-                f"preset={need_plan_out.layout_preset_id}"
-            )
-
-        if review_plan:
-            need_plan_out = prompter.plan_review(need_plan_out)
-
-        # Stage 3: Fetch.
-        try:
-            with recorder.stage("fetch"):
-                sources = await run_fetch_stage(need_plan_out, subject)
-        except EmptyEvidencePoolError as exc:
-            console.print(f"[bold red]Fetch failed:[/bold red] {exc}")
-            raise typer.Exit(code=3) from exc
-        except httpx.HTTPError as exc:
-            console.print(f"[bold red]Network error during fetch:[/bold red] {exc}")
-            raise typer.Exit(code=3) from exc
-
-        console.print(f"[green]✓[/green] Fetch  sources={len(sources)}")
-
-        # Build a small evidence preview to pass into the aesthetic prompt.
-        evidence_preview = "\n".join(
-            f"- {s.publisher.tier} {s.publisher.name}: {s.title}" for s in sources[:6]
+        combined = SectionPlanOutput(
+            sections=backbone + list(curation_out.sections)
         )
 
-        # Stage 2b: Aesthetic.
-        with recorder.stage("aesthetic_plan"):
-            aesthetic_out = await plan.run_aesthetic_stage(
-                ground_out.facts,
-                ground_out.canonical_title,
-                need_plan_out,
-                evidence_preview,
-            )
-            console.print(
-                f"[green]✓[/green] Aesthetic  preset={aesthetic_out.preset_id}"
+        # Stage 3: per-section research loop.
+        from generator.pipeline.research import run_research_stage
+        from generator.sources.wikidata import fetch_wikidata
+        from generator.sources.wikipedia import fetch_wikipedia_card
+
+        wd_source, _wd_props = await fetch_wikidata(
+            ground_out.facts.entities[0] if ground_out.facts.entities else ""
+        )
+        _wp_card = await fetch_wikipedia_card(ground_out.canonical_title)
+        seed_sources = [wd_source] if wd_source else []
+
+        with recorder.stage("research"):
+            pools = await run_research_stage(
+                sections=combined.sections,
+                canonical_title=ground_out.canonical_title,
+                facts=ground_out.facts,
+                seed_sources=seed_sources,
             )
 
-        # Stage 4: Extract.
-        with recorder.stage("extract"):
-            modules = await extract.run(need_plan_out, aesthetic_out, subject, sources)
-            console.print(f"[green]✓[/green] Extract  modules={len(modules)}")
-
-        # Stage 5: Consistency.
-        with recorder.stage("consistency"):
-            ctx = PlanContext(
-                subject=subject, need_plan=need_plan_out, aesthetic=aesthetic_out
+        # Stage 4: block-driven extraction.
+        from generator.pipeline.block_extract import run_block_extract_stage
+        with recorder.stage("block_extract"):
+            rendered_sections = await run_block_extract_stage(
+                sections=combined.sections,
+                evidence_by_section=pools,
+                canonical_title=ground_out.canonical_title,
             )
-            consistency_out, modules, needs_coverage, uncovered = await consistency.run(
-                modules, ctx, sources
-            )
-            console.print(
-                f"[green]✓[/green] Consistency  passes={consistency_out.passes}"
-            )
+        console.print(
+            f"[green]✓[/green] Block extract  sections={len(rendered_sections)}"
+        )
 
-        # Module review touchpoint.
-        reviewed: list = []
-        for m in modules:
-            needs_review = getattr(m.confidence, "overall", 1.0) < 0.80 or bool(
-                getattr(m.confidence, "flags", [])
-            )
-            if not needs_review:
-                reviewed.append(m)
-                continue
-            verdict, m2 = prompter.module_review(m)
-            if verdict == "regen":
-                from generator.pipeline.extract import _filter_evidence
+        # Stage 5: render.
+        from generator.pipeline.render import (
+            build_editorial_page,
+            render_html,
+        )
+        from generator.schema import EventLayout, EventMeta
 
-                evidence = _filter_evidence(sources, need_plan_out)
-                m2_regenned = await extract_one_module(
-                    m2,
-                    ctx,
-                    evidence,
-                    regen_feedback="editor requested regeneration via CLI prompt",
-                )
-                if m2_regenned is not None:
-                    reviewed.append(m2_regenned)
-                else:
-                    reviewed.append(m2)
-            elif verdict == "skip":
-                continue  # drop the module
-            else:  # "keep"
-                reviewed.append(m2)
-        modules = reviewed
+        subject_e = subject_from_facts(
+            ground_out.facts, ground_out.canonical_title
+        )
+        all_sources = list(
+            {s.id: s for pool in pools.values() for s in pool}.values()
+        )
 
-        # Stage 6: Render.
+        _now_iso = datetime.now(timezone.utc).isoformat()
         with recorder.stage("render"):
-            page = render.build_page(
+            editorial_page = build_editorial_page(
                 input_sentence=sentence,
                 page_id=page_id,
-                subject=subject,
-                aesthetic=aesthetic_out,
-                sources=sources,
-                modules=modules,
+                subject=subject_e,
+                layout=EventLayout(preset_id="product_focus", overrides=None),
+                sources=all_sources + seed_sources,
+                editorial_sections=rendered_sections,
                 trace_id=recorder.trace_id,
-                needs_coverage=needs_coverage,
-                uncovered_needs=uncovered,
-                need_plans=need_plan_out.need_plans,
+                meta=EventMeta(
+                    last_updated=_now_iso,
+                    editor_approved=True,
+                    editor_id="cli_user@local",
+                    pipeline_trace_id=recorder.trace_id,
+                ),
+                wikipedia_card=_wp_card,
             )
-            html = render.render_html(page)
+            html = render_html(editorial_page)
             console.print(
-                f"[green]✓[/green] Render  modules_in_page={len(page.modules)}"
+                f"[green]✓[/green] Render  sections={len(editorial_page.editorial_sections or [])}"
             )
 
-        # Stage 7: Deliver.
-        with recorder.stage("deliver"):
-            _OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-            output_paths["html"] = _OUTPUT_DIR / f"{slug}.html"
-            output_paths["data"] = _OUTPUT_DIR / f"{slug}.data.json"
-            output_paths["trace"] = _OUTPUT_DIR / f"{slug}.trace.json"
+        # Stage 6: Deliver.
+        slug = slugify(ground_out.canonical_title)
+        _OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        html_path = _OUTPUT_DIR / f"{slug}.html"
+        data_path = _OUTPUT_DIR / f"{slug}.data.json"
+        trace_path = _OUTPUT_DIR / f"{slug}.trace.json"
 
-            output_paths["html"].write_text(html, encoding="utf-8")
-            output_paths["data"].write_text(
-                page.model_dump_json(indent=2, exclude_none=False), encoding="utf-8"
-            )
+        html_path.write_text(html, encoding="utf-8")
+        data_path.write_text(editorial_page.model_dump_json(indent=2), encoding="utf-8")
 
-            # Final approval touchpoint
-            verdict = prompter.final_approval(output_paths["html"])
-            final_outcome: str
-            if verdict == "approve":
-                final_outcome = "auto_approved" if auto else "approved_published"
-            elif verdict == "reject":
-                final_outcome = "rejected"
-            elif isinstance(verdict, tuple) and verdict[0] == "regen":
-                regen_kind = verdict[1]
-                target_idx = next(
-                    (i for i, m in enumerate(modules) if m.kind == regen_kind), None
-                )
-                if target_idx is not None:
-                    from generator.pipeline.extract import _filter_evidence
+        output_paths["html"] = html_path
+        output_paths["data"] = data_path
+        output_paths["trace"] = trace_path
 
-                    evidence = _filter_evidence(sources, need_plan_out)
-                    regenned = await extract_one_module(
-                        modules[target_idx],
-                        ctx,
-                        evidence,
-                        regen_feedback=f"final-approval regen for {regen_kind}",
-                    )
-                    if regenned is not None:
-                        modules[target_idx] = regenned
-                    # Re-render
-                    page = render.build_page(
-                        input_sentence=sentence,
-                        page_id=page_id,
-                        subject=subject,
-                        aesthetic=aesthetic_out,
-                        sources=sources,
-                        modules=modules,
-                        trace_id=recorder.trace_id,
-                        needs_coverage=needs_coverage,
-                        uncovered_needs=uncovered,
-                        need_plans=need_plan_out.need_plans,
-                    )
-                    output_paths["html"].write_text(
-                        render.render_html(page), encoding="utf-8"
-                    )
-                    output_paths["data"].write_text(
-                        page.model_dump_json(indent=2, exclude_none=False),
-                        encoding="utf-8",
-                    )
-                final_outcome = "draft_saved"
-            else:
-                final_outcome = "draft_saved"
+        final_decision = prompter.final_approval(html_path)
+        final_outcome: str
+        if final_decision == "approve":
+            final_outcome = "auto_approved" if auto else "approved_published"
+        else:
+            final_outcome = "rejected"
 
-            trace = recorder.finalize(auto_mode=auto, final_outcome=final_outcome)
-            output_paths["trace"].write_text(
-                trace.model_dump_json(indent=2, exclude_none=False), encoding="utf-8"
-            )
+        trace = recorder.finalize(auto_mode=auto, final_outcome=final_outcome)
+        trace_path.write_text(trace.model_dump_json(indent=2), encoding="utf-8")
+        console.print(f"[green]✓[/green] Wrote {slug}.html / .data.json / .trace.json")
 
     try:
         asyncio.run(_run())
@@ -402,184 +234,112 @@ def generate(
         raise typer.Exit(code=2) from exc
 
     console.rule("[bold green]done[/bold green]")
-    console.print(f"html:  {output_paths['html']}")
-    console.print(f"data:  {output_paths['data']}")
-    console.print(f"trace: {output_paths['trace']}")
+    console.print(f"html:  {output_paths.get('html', '(not written)')}")
+    console.print(f"data:  {output_paths.get('data', '(not written)')}")
+    console.print(f"trace: {output_paths.get('trace', '(not written)')}")
 
 
-@app.command("regen-module")
-def regen_module(
-    kind: str = typer.Argument(
-        ..., help="Module kind to regenerate (e.g. 'reactions')."
-    ),
+@app.command("regen-section")
+def regen_section(
+    section_id: str = typer.Argument(..., help="Section id to regenerate (e.g. 'overview')."),
     data_json_path: Path = typer.Argument(
-        ...,
-        exists=True,
-        readable=True,
-        dir_okay=False,
+        ..., exists=True, readable=True, dir_okay=False,
         help="Path to an existing <slug>.data.json file.",
     ),
 ) -> None:
-    """Re-run module extraction for one module against the cached evidence pool."""
-    from generator.modules import MODULE_REGISTRY, all_modules  # noqa: F401 — populates registry
-    from generator.pipeline.extract import _filter_evidence
-    from generator.pipeline.render import render_html
-    from generator.schema import (
-        AestheticOverrides,
-        AestheticPlanOutput,
-        EditorAction,
-        EditorActionTarget,
-        EventPage,
-        NeedCurationPlan,
-        NeedPlanOutput,
-        TierQuota,
-        Trace,
+    """Re-run block extraction for one section against the saved evidence pool."""
+    load_dotenv(".env")
+    load_dotenv(".env.local", override=True)
+    _reset_llm_calls()
+
+    raw = json.loads(data_json_path.read_text(encoding="utf-8"))
+    try:
+        from generator.schema import EventPage
+        page = EventPage.model_validate(raw)
+    except ValidationError as exc:
+        console.print(f"[bold red]Invalid EventPage:[/bold red] {exc}")
+        raise typer.Exit(code=2) from exc
+
+    if page.editorial_sections is None:
+        console.print("[bold red]data.json has no editorial_sections.[/bold red]")
+        raise typer.Exit(code=2)
+
+    existing = next(
+        (s for s in page.editorial_sections if s.section_id == section_id), None
+    )
+    if existing is None:
+        console.print(f"[bold red]Unknown section_id: {section_id}[/bold red]")
+        raise typer.Exit(code=1)
+
+    # Reconstruct a SectionPlan stub from the saved RenderedSection.
+    from generator.blocks.specs import get_spec
+    from generator.schema import SectionPlan
+
+    spec_cls = get_spec(existing.block_kind)
+    _backbone_ids = {"overview", "key_takeaways", "timeline", "background", "key_facts", "media_coverage"}
+    stub_section = SectionPlan(
+        section_id=existing.section_id,
+        kind="curated" if existing.section_id not in _backbone_ids else "backbone",
+        title=existing.section_id.replace("_", " ").title(),
+        rank=1,
+        block_kind=existing.block_kind,
+        intent="regen",
+        acceptance=spec_cls.default_acceptance,
     )
 
-    # ------------------------------------------------------------------ load
-    page = EventPage.model_validate_json(data_json_path.read_text())
+    # Use the saved sources_used as the evidence pool.
+    evidence = existing.sources_used or page.sources
 
-    target_typed = next((m for m in page.modules if m.kind == kind), None)
-    if target_typed is None:
-        typer.echo(f"No module with kind '{kind}' in {data_json_path}", err=True)
-        raise typer.Exit(1)
+    from generator.pipeline.block_extract import extract_one_section
+    from generator.schema import RenderedSection
 
-    # Instantiate the bare Module class (needed by extract_one_module).
-    all_modules()  # populate registry
-    ModuleCls = MODULE_REGISTRY.get(kind)
-    if ModuleCls is None:
-        typer.echo(f"Unknown module kind '{kind}'.", err=True)
-        raise typer.Exit(1)
-    module_instance = ModuleCls()
-
-    # ------------------------------------------------------------------ rebuild PlanContext
-    if page.need_plans:
-        need_plan_stub = NeedPlanOutput(
-            need_plans=list(page.need_plans),
-            layout_preset_id=page.layout.preset_id,
+    async def _do() -> RenderedSection | None:
+        return await extract_one_section(
+            section=stub_section,
+            sources=evidence,
+            canonical_title=page.meta.canonical_title if hasattr(page.meta, "canonical_title") else "",
         )
-    else:
-        all_kinds = [m.kind for m in page.modules]
-        all_need_ids = (
-            "what_happened",
-            "when_where",
-            "who_involved",
-            "current_state",
-            "why_matters",
-            "world_reaction",
-            "what_can_do",
-            "what_next",
-        )
-        need_plan_stub = NeedPlanOutput(
-            need_plans=[
-                NeedCurationPlan(
-                    need_id=nid,
-                    activated=(idx == 0),
-                    rank=idx + 1,
-                    section_title="(regen stub)",
-                    rationale="reconstructed for regen-module CLI",
-                    fetch_queries=[],
-                    assigned_modules=all_kinds if idx == 0 else [],
-                    render_overrides={},
-                    publisher_quota=TierQuota(),
-                )
-                for idx, nid in enumerate(all_need_ids)
-            ],
-            layout_preset_id=page.layout.preset_id,
-        )
-    aesthetic_stub = AestheticPlanOutput(
-        preset_id=page.layout.preset_id,
-        preset_confidence=1.0,
-        alternatives_considered=[],
-        aesthetic_overrides=AestheticOverrides(),
-        reasoning="reconstructed for regen-module CLI",
-    )
-    ctx = PlanContext(
-        subject=page.subject, need_plan=need_plan_stub, aesthetic=aesthetic_stub
-    )
 
-    # ------------------------------------------------------------------ extract
-    evidence = _filter_evidence(page.sources, need_plan_stub)
+    new_section = asyncio.run(_do())
+    if new_section is None:
+        console.print("[bold red]Regen produced no usable section.[/bold red]")
+        raise typer.Exit(code=4)
 
-    new_typed = asyncio.run(
-        extract_one_module(
-            module_instance,
-            ctx,
-            evidence,
-            regen_feedback="manual regen via CLI subcommand",
-        )
-    )
-    if new_typed is None:
-        typer.echo(
-            f"Extraction returned None for module '{kind}' — keeping original.",
-            err=True,
-        )
-        raise typer.Exit(2)
+    # Replace in place.
+    updated_sections = [
+        new_section if s.section_id == section_id else s
+        for s in page.editorial_sections
+    ]
+    updated_page = page.model_copy(update={"editorial_sections": updated_sections})
 
-    # ------------------------------------------------------------------ update page
-    updated_modules = [new_typed if m.kind == kind else m for m in page.modules]
-    from datetime import datetime, timezone
-
-    from generator.schema import EventMeta
-
-    now_iso = datetime.now(timezone.utc).isoformat()
-    updated_page = EventPage(
-        page_id=page.page_id,
-        input_sentence=page.input_sentence,
-        generated_at=page.generated_at,
-        subject=page.subject,
-        modules=updated_modules,
-        layout=page.layout,
-        sources=page.sources,
-        needs_coverage=page.needs_coverage,
-        uncovered_needs=page.uncovered_needs,
-        need_plans=page.need_plans,
-        meta=EventMeta(
-            last_updated=now_iso,
-            editor_approved=page.meta.editor_approved,
-            editor_id=page.meta.editor_id,
-            pipeline_trace_id=page.meta.pipeline_trace_id,
-        ),
-    )
     data_json_path.write_text(
-        updated_page.model_dump_json(indent=2, exclude_none=False), encoding="utf-8"
+        updated_page.model_dump_json(indent=2), encoding="utf-8"
     )
 
-    # ------------------------------------------------------------------ re-render HTML
-    html_path = data_json_path.parent / (
-        data_json_path.name.removesuffix(".data.json") + ".html"
-    )
+    from generator.pipeline.render import render_html
+    slug = data_json_path.stem
+    if slug.endswith(".data"):
+        slug = slug[: -len(".data")]
+    html_path = data_json_path.parent / f"{slug}.html"
     html_path.write_text(render_html(updated_page), encoding="utf-8")
 
-    # ------------------------------------------------------------------ append trace action
-    trace_path = data_json_path.parent / (
-        data_json_path.name.removesuffix(".data.json") + ".trace.json"
-    )
+    # Append trace action.
+    trace_path = data_json_path.parent / f"{slug}.trace.json"
     if trace_path.exists():
-        trace_obj = Trace.model_validate_json(trace_path.read_text())
-        action = EditorAction(
-            action_at=_now(),
-            actor="editor:cli",
-            action="regenerate_module",
-            target=EditorActionTarget(module_kind=kind),
-            reason="cli regen-module subcommand",
-        )
-        # Trace is frozen; rebuild with the appended action.
-        updated_trace = Trace(
-            **{
-                **trace_obj.model_dump(),
-                "editor_actions": [
-                    *[a.model_dump() for a in trace_obj.editor_actions],
-                    action.model_dump(),
-                ],
-            }
-        )
-        trace_path.write_text(
-            updated_trace.model_dump_json(indent=2, exclude_none=False),
-            encoding="utf-8",
-        )
+        trace_raw = json.loads(trace_path.read_text(encoding="utf-8"))
+        action = {
+            "action_at": datetime.now(timezone.utc).isoformat(),
+            "actor": "cli_user@local",
+            "action": "regenerate_section",
+            "target": {"section_id": section_id, "field_path": None},
+            "before": None,
+            "after": None,
+            "reason": "regen-section CLI",
+        }
+        trace_raw.setdefault("editor_actions", []).append(action)
+        trace_path.write_text(json.dumps(trace_raw, indent=2), encoding="utf-8")
 
-    typer.echo(f"Regenerated module '{kind}' in {data_json_path}.")
+    console.print(f"[green]✓[/green] Regenerated section {section_id}")
 
 
 def main() -> None:
