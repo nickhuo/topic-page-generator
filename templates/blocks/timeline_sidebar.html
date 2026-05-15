@@ -14,12 +14,15 @@
         {% else %}
           <span class="ref-timeline__date">{{ phase_labels[phase] }}</span>
         {% endif %}
-        <div class="ref-timeline__label">{{ entry.title }}</div>
+        <div class="ref-timeline__label">
+          {% if entry.source_id and source_index[entry.source_id] %}
+            <a href="#src-{{ source_index[entry.source_id] }}">{{ entry.title }}</a>
+          {% else %}
+            {{ entry.title }}
+          {% endif %}
+        </div>
         {% if entry.location %}
           <div class="ref-timeline__loc">{{ entry.location }}</div>
-        {% endif %}
-        {% if entry.source_id and source_index[entry.source_id] %}
-          <sup class="cite-num" data-cite="{{ entry.source_id }}"><a href="#src-{{ source_index[entry.source_id] }}">[{{ source_index[entry.source_id] }}]</a></sup>
         {% endif %}
       </li>
     {% endfor %}

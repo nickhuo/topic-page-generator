@@ -34,7 +34,7 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   /* Layout */
   --content-max: 1200px;
   --content-pad: 56px;
-  --sidebar-w:   272px;
+  --sidebar-w:   320px;
 }
 
 body {
@@ -663,81 +663,69 @@ body {
 }
 
 /* Timeline in sidebar
-   Geometry:
-     rail at x = 4px (1px hairline)
-     markers centered on rail (center at x = 4.5px)
-     content begins at padding-left of OL
+   Geometry: rail centered at x = 8.5px, markers centered on rail.
 */
 .ref-timeline {
   list-style: none; position: relative;
-  padding-left: 22px;
+  padding-left: 24px;
   margin: 0;
 }
 .ref-timeline::before {
   content: ""; position: absolute;
-  left: 4px; top: 4px; bottom: 4px;
+  left: 8px; top: 6px; bottom: 6px;
   width: 1px; background: var(--rule);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
-          mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
 }
 .ref-timeline__item {
   position: relative;
-  padding: 2px 0 var(--sp-4) 0;
+  padding: 0 0 var(--sp-4) 0;
   margin: 0;
 }
-.ref-timeline__item:first-child { padding-top: 0; }
-.ref-timeline__item:last-child  { padding-bottom: 0; }
+.ref-timeline__item:last-child { padding-bottom: 0; }
 
-/* Default marker — centered on rail at x = 4.5px */
+/* Default marker — width 9, centered on rail */
 .ref-timeline__item::before {
   content: ""; position: absolute;
-  left: -17px; top: 7px;
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--faint);
+  left: -20px; top: 2px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--ink-2);
   transition: transform .25s ease, box-shadow .3s ease;
 }
 
-/* PAST — settled, low-volume */
+/* PAST — small filled dot */
 .ref-timeline__item--past::before {
-  width: 5px; height: 5px;
-  left: -16px; top: 9px;
-  background: var(--faint);
+  width: 7px; height: 7px; left: -19px; top: 4px;
+  background: var(--faint); border: none;
 }
 .ref-timeline__item--past .ref-timeline__date  { color: var(--faint); }
 .ref-timeline__item--past .ref-timeline__label { color: var(--ink-2); font-weight: 500; }
+.ref-timeline__item--past .ref-timeline__label a { color: var(--ink-2); }
 .ref-timeline__item--past .ref-timeline__loc   { color: var(--faint); }
 
-/* PRESENT — filled ink with soft halo */
+/* PRESENT / CURRENT — filled ink with soft halo */
 .ref-timeline__item--present::before,
 .ref-timeline__item--current::before {
-  width: 9px; height: 9px;
-  left: -18px; top: 6px;
-  background: var(--ink);
+  width: 11px; height: 11px; left: -21px; top: 1px;
+  background: var(--ink); border: none;
   box-shadow: 0 0 0 4px color-mix(in oklab, var(--ink) 14%, transparent);
 }
 .ref-timeline__item--present .ref-timeline__date,
-.ref-timeline__item--current .ref-timeline__date {
-  color: var(--ink); font-weight: 700;
-}
+.ref-timeline__item--current .ref-timeline__date { color: var(--ink); font-weight: 700; }
 .ref-timeline__item--present .ref-timeline__label,
-.ref-timeline__item--current .ref-timeline__label {
-  color: var(--ink); font-weight: 700;
-}
+.ref-timeline__item--current .ref-timeline__label { color: var(--ink); font-weight: 700; }
 
-/* FUTURE — clean open ring */
+/* FUTURE — clean open ring (not dashed) */
 .ref-timeline__item--future::before {
-  width: 8px; height: 8px;
-  left: -17px; top: 6px;
-  background: var(--bg);
-  border: 1.5px solid var(--ink-2);
+  background: var(--bg); border: 1.5px solid var(--ink-2);
 }
 .ref-timeline__item--future .ref-timeline__date  { color: var(--ink-2); }
-.ref-timeline__item--future .ref-timeline__label { color: var(--ink-2); font-weight: 600; }
+.ref-timeline__item--future .ref-timeline__label { color: var(--ink); font-weight: 600; }
 
 .ref-timeline__date {
   font-size: 10.5px; color: var(--faint);
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: .07em;
   display: block; margin-bottom: 3px;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
@@ -747,13 +735,19 @@ body {
   color: var(--ink); line-height: 1.4;
   text-wrap: pretty;
 }
+.ref-timeline__label a {
+  color: inherit; text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px; background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size .2s ease;
+}
+.ref-timeline__label a:hover,
+.ref-timeline__label a:focus-visible { background-size: 100% 1px; outline: none; }
 .ref-timeline__loc {
   font-size: 11.5px; color: var(--muted);
   margin-top: 3px; line-height: 1.4;
 }
-
-/* Cite link slot — keep small in sidebar */
-.ref-timeline__item .cite-num { font-size: 9.5px; margin-left: 2px; }
 
 /* Wikipedia / Background card */
 .ref-wiki__thumb {
