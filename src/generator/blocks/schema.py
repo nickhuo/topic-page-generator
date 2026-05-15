@@ -1,10 +1,12 @@
 """Render-block schemas — discriminated by `kind`.
 
-Six block kinds map 1:1 to templates under `templates/blocks/`:
-  paragraph / timeline / chart / newsfeed / factsheet / map
+Block kinds map 1:1 to templates under `templates/blocks/`:
+  paragraph / timeline (sidebar-only) / chart / newsfeed / reactions / gallery
 
 Module subclasses produce one of these via `to_block()`. Templates consume
-only blocks, never raw module data.
+only blocks, never raw module data. `timeline` blocks are emitted exclusively
+by the backbone planner with placement="sidebar"; curation must never propose
+a timeline section.
 """
 
 from __future__ import annotations
@@ -58,14 +60,6 @@ class TimelineEntry(_Frozen):
     source_id: SourceId | None = None
 
 
-class Location(_Frozen):
-    name: str
-    lat: float | None = None
-    lon: float | None = None
-    note: str | None = None
-    source_id: SourceId | None = None
-
-
 class ChartSeries(_Frozen):
     """One series in a bar / line chart."""
 
@@ -94,12 +88,6 @@ class ComparisonRow(_Frozen):
 class ComparisonTable(_Frozen):
     subjects: list[str]
     rows: list[ComparisonRow]
-
-
-class FactsheetRow(_Frozen):
-    label: str
-    value: str | list[str]
-    source_id: SourceId | None = None
 
 
 class QuoteCard(_Frozen):
@@ -151,16 +139,6 @@ class NewsfeedBlockData(_Frozen):
     grouping: Literal["by_perspective", "by_subtopic", "by_time", "flat"] = "flat"
 
 
-class FactsheetBlockData(_Frozen):
-    kind: Literal["factsheet"] = "factsheet"
-    rows: list[FactsheetRow] = Field(min_length=1)
-
-
-class MapBlockData(_Frozen):
-    kind: Literal["map"] = "map"
-    locations: list[Location] = Field(min_length=1)
-
-
 class ReactionsBlock(_Frozen):
     kind: Literal["reactions"] = "reactions"
     cards: list[QuoteCard] = Field(max_length=4)
@@ -184,8 +162,6 @@ RenderBlock = Annotated[
     | TimelineBlockData
     | ChartBlockData
     | NewsfeedBlockData
-    | FactsheetBlockData
-    | MapBlockData
     | ReactionsBlock
     | GalleryBlockData,
     Field(discriminator="kind"),

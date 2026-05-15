@@ -1,4 +1,8 @@
-"""Timeline block spec — ordered, time-tagged events."""
+"""Timeline block spec — sidebar-only, emitted by the backbone planner.
+
+Timelines are forbidden in the main column; the sole template is the compact
+sidebar variant. Curation must not propose additional timeline sections.
+"""
 
 from __future__ import annotations
 
@@ -12,7 +16,7 @@ from generator.schema import AcceptanceCriteria
 class TimelineBlockSpec(BlockSpec):
     kind: ClassVar = "timeline"
     data_schema: ClassVar = TimelineBlockData
-    template_path: ClassVar = "blocks/timeline.html"
+    template_path: ClassVar = "blocks/timeline_sidebar.html"
     default_acceptance: ClassVar = AcceptanceCriteria(
         description="At least 3 milestone entries spanning the event arc.",
         min_sources=2,

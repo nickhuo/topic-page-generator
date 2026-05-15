@@ -46,7 +46,7 @@ def test_section_plan_curated_requires_string_section_id():
         kind="curated",
         title="Key people",
         rank=5,
-        block_kind="factsheet",
+        block_kind="paragraph",
         intent="who is involved and how",
         acceptance=AcceptanceCriteria(description="≥3 people"),
     )

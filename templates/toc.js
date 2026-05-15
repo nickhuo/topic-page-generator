@@ -17,28 +17,6 @@
     sections.forEach(s => obs.observe(s));
   }
 
-  /* ── Timeline expander ── */
-  document.querySelectorAll('.timeline__expand').forEach((btn, i) => {
-    const wrap = btn.parentElement;
-    const panel = wrap && wrap.querySelector(':scope > .timeline__earlier');
-    if (!panel) return;
-
-    const id = panel.id || `tl-earlier-${i}`;
-    panel.id = id;
-    btn.setAttribute('aria-controls', id);
-
-    const label = btn.querySelector('.timeline__expand-label');
-    const collapsedLabel = btn.dataset.collapsedLabel || (label && label.textContent) || 'Show earlier';
-    const expandedLabel = btn.dataset.expandedLabel || 'Hide earlier';
-
-    btn.addEventListener('click', () => {
-      const isOpen = panel.dataset.open === 'true';
-      panel.dataset.open = isOpen ? 'false' : 'true';
-      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-      if (label) label.textContent = isOpen ? collapsedLabel : expandedLabel;
-    });
-  });
-
   /* ── Perspectives tabs ── */
   document.querySelectorAll('.pv-tabs').forEach(tabBar => {
     const block = tabBar.closest('.block--reactions');

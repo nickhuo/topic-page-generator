@@ -14,22 +14,22 @@
 | `chrome/reference_wikipedia.html` | Background card with excerpt + link |
 | `needs/section.html` | Rationale hidden, unified chip (no color variants) |
 | `blocks/paragraph.html` | Cleaner inline citation style |
-| `blocks/factsheet.html` | Bordered rows, new label style |
 | `blocks/newsfeed.html` | Serif headline, outlet name, cleaner card |
 | `blocks/reactions.html` | Perspectives tab layout (Optimistic / Critical / Analytical) |
+| `blocks/timeline_sidebar.html` | Sidebar-only timeline (main-column timeline removed) |
 
 ## Files unchanged (copied as-is)
 
 | File | Notes |
 |------|-------|
 | `blocks/chart.html` | No structural change; styles updated via styles.css |
-| `blocks/timeline.html` | No structural change; styles updated via styles.css |
-| `blocks/map.html` | No structural change; styles updated via styles.css |
 
-## Files to remove
+## Files removed
 
 - `templates/partials/sources_card.html` — sources card at page bottom removed per design decision
 - `templates/chrome/toc.html` replaced (left sidebar TOC no longer used)
+- `templates/blocks/{factsheet,map}.html` — block kinds removed entirely
+- `templates/blocks/timeline.html` — main-column timeline removed; timelines render in the sidebar only
 
 ## Design decisions
 

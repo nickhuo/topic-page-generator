@@ -44,16 +44,18 @@ def test_returns_system_and_user_messages():
     assert msgs[1]["role"] == "user"
 
 
-def test_system_message_lists_seven_block_kinds():
+def test_system_message_lists_curated_block_kinds():
     msgs = build_curation_messages(
         facts=_facts(), canonical_title="t", backbone=_backbone()
     )
     system = msgs[0]["content"]
     for kind in [
-        "paragraph", "timeline", "chart", "newsfeed",
-        "factsheet", "map", "reactions",
+        "paragraph", "chart", "newsfeed", "reactions", "gallery",
     ]:
         assert kind in system, f"block kind {kind} missing from prompt"
+    # timeline is mentioned in the FORBIDDEN section
+    assert "timeline" in system
+    assert "FORBIDDEN" in system
 
 
 def test_user_payload_includes_facts_and_already_chosen_sections():

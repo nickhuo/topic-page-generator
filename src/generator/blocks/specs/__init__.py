@@ -15,9 +15,7 @@ _REGISTRY: dict[BlockKind, type[BlockSpec]] = {}
 from generator.blocks.specs import paragraph as _paragraph  # noqa: E402, F401
 from generator.blocks.specs import timeline as _timeline  # noqa: E402, F401
 from generator.blocks.specs import chart as _chart  # noqa: E402, F401
-from generator.blocks.specs import factsheet as _factsheet  # noqa: E402, F401
 from generator.blocks.specs import newsfeed as _newsfeed  # noqa: E402, F401
-from generator.blocks.specs import map as _map  # noqa: E402, F401
 from generator.blocks.specs import reactions as _reactions  # noqa: E402, F401
 from generator.blocks.specs import gallery as _gallery  # noqa: E402, F401
 

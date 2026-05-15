@@ -6,7 +6,6 @@
     {% for block in section.blocks %}
       {% if block.kind == "timeline" %}{% include "blocks/timeline_sidebar.html" %}
       {% elif block.kind == "paragraph" %}{% include "blocks/paragraph_sidebar.html" %}
-      {% elif block.kind == "factsheet" %}{% include "blocks/factsheet.html" %}
       {% elif block.kind == "newsfeed" %}{% include "blocks/newsfeed.html" %}
       {% endif %}
     {% endfor %}

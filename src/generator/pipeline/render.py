@@ -4,9 +4,10 @@ The page is structured as:
   chrome (hero)  →  horizontal sticky nav  →  N need sections (main column)
                                           ↘  reference sidebar (right column)
 
-Each need section emits a typed-block sequence: paragraph / timeline / chart
-/ newsfeed / factsheet / map / reactions. Sections are RenderedSection objects
-produced by the block_extract stage.
+Each need section emits a typed-block sequence: paragraph / chart / newsfeed
+/ reactions / gallery in the main column; timeline blocks render exclusively
+in the right sidebar via blocks/timeline_sidebar.html. Sections are
+RenderedSection objects produced by the block_extract stage.
 """
 
 from __future__ import annotations

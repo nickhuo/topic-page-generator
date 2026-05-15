@@ -145,17 +145,6 @@ _BLOCK_TIMELINE_CONTENT = json.dumps(
     }
 )
 
-_BLOCK_FACTSHEET_CONTENT = json.dumps(
-    {
-        "kind": "factsheet",
-        "rows": [
-            {"label": "Model name", "value": "GPT-5.5 Instant", "source_id": "s1"},
-            {"label": "Release date", "value": "2026-05-01", "source_id": "s1"},
-            {"label": "Developer", "value": "OpenAI", "source_id": "s1"},
-        ],
-    }
-)
-
 _BLOCK_NEWSFEED_CONTENT = json.dumps(
     {
         "kind": "newsfeed",
@@ -183,7 +172,6 @@ _BLOCK_NEWSFEED_CONTENT = json.dumps(
 _BLOCK_SCHEMA_CONTENTS: dict[str, str] = {
     "ParagraphBlockData": _BLOCK_PARAGRAPH_CONTENT,
     "TimelineBlockData": _BLOCK_TIMELINE_CONTENT,
-    "FactsheetBlockData": _BLOCK_FACTSHEET_CONTENT,
     "NewsfeedBlockData": _BLOCK_NEWSFEED_CONTENT,
 }
 

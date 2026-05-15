@@ -48,7 +48,7 @@ Stages and where they live (all under `src/generator/pipeline/` unless noted):
 **Prompts** live in `src/generator/prompts/` (one file per LLM-issuing stage). `base_preamble.py` is shared across stages.
 
 **Block layer** (`src/generator/blocks/`):
-- `schema.py` — `RenderBlock` discriminated union (7 kinds: `paragraph` / `timeline` / `chart` / `newsfeed` / `factsheet` / `map` / `reactions`) plus primitives (`NewsCard`, `TimelineEntry`, `Location`, `PullQuote`, etc.).
+- `schema.py` — `RenderBlock` discriminated union (`paragraph` / `timeline` / `chart` / `newsfeed` / `reactions` / `gallery`) plus primitives (`NewsCard`, `TimelineEntry`, `PullQuote`, etc.). `timeline` is sidebar-only — emitted exclusively by the backbone planner with `placement="sidebar"`; curation must never propose one.
 - `specs/` — `BlockSpec` per kind. Each owns `data_schema`, `extraction_prompt_fragment`, `template_path`, `default_acceptance`, `is_minimum_viable()`. Registry via `get_spec(kind)`.
 
 **`regen-section` subcommand** reconstructs a single `SectionPlan` stub from a saved `EventPage.editorial_sections[i]` and re-runs `block_extract.extract_one_section()` against that section's saved `sources_used`.

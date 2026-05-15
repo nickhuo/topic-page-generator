@@ -26,9 +26,7 @@ Rules:
    ("when", "schedule", "announced", year/month).
 4. If the section's block_kind is "newsfeed", bias toward publication terms
    ("coverage", "reactions", "analysis").
-5. If the section's block_kind is "factsheet", bias toward reference terms
-   ("specs", "details", "lineup", "list").
-6. If previous_gaps and previous_query are supplied, your new query MUST
+5. If previous_gaps and previous_query are supplied, your new query MUST
    differ meaningfully from previous_query and target one of the gaps.
 """
 

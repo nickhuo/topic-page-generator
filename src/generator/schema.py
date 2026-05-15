@@ -302,8 +302,6 @@ BlockKind = Literal[
     "timeline",
     "chart",
     "newsfeed",
-    "factsheet",
-    "map",
     "reactions",
     "gallery",
 ]

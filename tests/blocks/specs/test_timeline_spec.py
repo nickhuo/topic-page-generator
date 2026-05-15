@@ -9,7 +9,7 @@ def _entry(title="t", phase="past") -> TimelineEntry:
 def test_timeline_spec_metadata():
     spec = TimelineBlockSpec()
     assert spec.kind == "timeline"
-    assert spec.template_path == "blocks/timeline.html"
+    assert spec.template_path == "blocks/timeline_sidebar.html"
 
 
 def test_default_temporal_phase_is_past():
