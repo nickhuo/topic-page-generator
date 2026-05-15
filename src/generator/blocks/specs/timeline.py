@@ -29,11 +29,21 @@ Schema:
     - location (optional)
     - description (optional, <=160 chars)
     - importance: "breaking" | "feature" | "minor" | "normal"
+    - temporal_phase: "past" | "present" | "future" — REQUIRED.
+        - "past": already happened, before the current development.
+        - "present": the just-broken / unfolding development this page is about.
+        - "future": scheduled, announced, or expected next steps.
     - source_id (cite where this entry's facts come from)
 - timezone: IANA timezone string if entries have absolute times.
 
 Aim for 3-7 entries. Each must be a milestone, not routine sub-event.
+When the evidence supports it, the entry set MUST cover all three temporal
+phases — at least one past entry, at least one present entry, and at least
+one future entry. Order entries chronologically (oldest past → latest future).
 """
 
     def is_minimum_viable(self, data: TimelineBlockData) -> bool:
-        return len(data.entries) >= 2
+        if len(data.entries) < 2:
+            return False
+        phases = {e.temporal_phase for e in data.entries}
+        return len(phases) >= 2

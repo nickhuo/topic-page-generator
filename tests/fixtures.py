@@ -65,6 +65,7 @@ def canned_event_page() -> EventPage:
         generated_at=now,
         subject=EventSubject(
             title="Sample Event",
+            subtitle="A sample event used in tests.",
             entities=["Sample Event"],
             when=now,
         ),
@@ -150,6 +151,7 @@ def make_full_event_page(preset_id: str = "reference"):
         generated_at="2026-05-01T00:00:00Z",
         subject=EventSubject(
             title="Big Event",
+            subtitle="A big event subtitle.",
             entities=["Big Event"],
         ),
         layout=layout,

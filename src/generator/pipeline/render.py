@@ -84,14 +84,34 @@ def _build_editorial_section_dicts(
                 "category": None,  # no fact/opinion chip in editorial path
                 "blocks": [rs.block_data],
                 "section_index": idx,
+                "placement": rs.placement,
             }
         )
     return out
 
 
+def _partition_by_placement(
+    section_dicts: list[dict],
+) -> tuple[list[dict], list[dict]]:
+    """Split rendered sections into (main_column, sidebar_column)."""
+    main: list[dict] = []
+    sidebar: list[dict] = []
+    for s in section_dicts:
+        (sidebar if s.get("placement") == "sidebar" else main).append(s)
+    # Re-index main sections so the chip nav and screen-label numbering stay
+    # contiguous after sidebar sections are pulled out.
+    for new_idx, s in enumerate(main, start=1):
+        s["section_index"] = new_idx
+    return main, sidebar
+
+
 def subject_from_facts(facts: EventFacts, canonical_title: str) -> EventSubject:
+    # Subtitle is grounded by the ground stage; fall back to `what` if the
+    # model didn't fill it (e.g. older fixtures) — never invent.
+    subtitle = (facts.subtitle or facts.what)[:240]
     return EventSubject(
         title=canonical_title,
+        subtitle=subtitle,
         entities=facts.entities,
         when=facts.when,
         where=facts.where,
@@ -141,14 +161,16 @@ def render_html(page: EventPage) -> str:
     toc_js = (_TEMPLATES_DIR / "toc.js").read_text(encoding="utf-8")
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
-    sections = _build_editorial_section_dicts(page.editorial_sections)
+    all_sections = _build_editorial_section_dicts(page.editorial_sections)
+    main_sections, sidebar_sections = _partition_by_placement(all_sections)
     hero = _build_hero_context(page)
 
     template = env.get_template("layout.html")
     return template.render(
         page=page,
         hero=hero,
-        sections=sections,
+        sections=main_sections,
+        sidebar_sections=sidebar_sections,
         source_index=source_index,
         palette_css_block=palette_block,
         stylesheet=stylesheet,
@@ -161,33 +183,20 @@ def render_html(page: EventPage) -> str:
 def _build_hero_context(page: EventPage) -> dict:
     """Hero data for the page chrome.
 
-    Always populated — even a minimum-viable hero has the canonical title +
-    a dateline. Prefers page.hero_image (dedicated Brave fetch); falls back to
-    the first gallery section's first image.
+    Subtitle comes from `subject.subtitle` (produced by the ground stage).
+    Hero image prefers `page.hero_image`; falls back to the first gallery
+    section's first image.
     """
-    subtitle = _hero_subtitle(page)
     image_url, image_alt = _hero_image(page)
     dateline = _hero_dateline(page.subject)
     return {
         "title": page.subject.title,
-        "subtitle": subtitle,
+        "subtitle": page.subject.subtitle,
         "image_url": image_url,
         "image_alt": image_alt,
         "dateline": dateline,
         "entities": page.subject.entities,
     }
-
-
-def _hero_subtitle(page: EventPage) -> str | None:
-    """Pull a one-liner from the overview section if present."""
-    for rs in page.editorial_sections:
-        if rs.section_id == "overview" and rs.block_kind == "paragraph":
-            paragraphs = getattr(rs.block_data, "paragraphs_md", None) or []
-            if paragraphs:
-                first = paragraphs[0].strip()
-                return first[:240] + ("…" if len(first) > 240 else "")
-            break
-    return None
 
 
 def _hero_image(page: EventPage) -> tuple[str | None, str | None]:

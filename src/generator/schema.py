@@ -219,6 +219,7 @@ class EventSubject(_Frozen):
     """
 
     title: str
+    subtitle: str = Field(min_length=1, max_length=240)
     entities: list[str] = Field(min_length=1)
     when: ISO8601 | None = None
     where: str | None = None
@@ -273,6 +274,7 @@ class EventFacts(_Frozen):
     when: ISO8601 | None = None
     where: str | None = None
     why: str | None = None
+    subtitle: str | None = Field(default=None, max_length=240)
     supporting_sources: list[SourceId] = Field(default_factory=list)
 
 
@@ -296,19 +298,26 @@ class GroundOutput(_Frozen):
 # Editor-architecture section types
 # ---------------------------------------------------------------------------
 BlockKind = Literal[
-    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions", "gallery"
+    "paragraph",
+    "timeline",
+    "chart",
+    "newsfeed",
+    "factsheet",
+    "map",
+    "reactions",
+    "gallery",
 ]
 
 BackboneSectionId = Literal[
     "overview",
-    "key_takeaways",
     "timeline",
     "background",
-    "key_facts",
     "media_coverage",
 ]
 
 SectionKind = Literal["backbone", "curated"]
+
+Placement = Literal["main", "sidebar"]
 
 
 class AcceptanceCriteria(_Frozen):
@@ -336,6 +345,7 @@ class SectionPlan(_Frozen):
     block_kind: BlockKind
     intent: str
     acceptance: AcceptanceCriteria
+    placement: Placement = "main"
 
 
 class SectionPlanOutput(_Frozen):
@@ -381,6 +391,7 @@ class RenderedSection(_Frozen):
     sources_used: list["Source"] = Field(default_factory=list)
     eval_passed: bool = True
     eval_notes: str | None = None
+    placement: Placement = "main"
 
     @model_validator(mode="after")
     def _block_kind_matches_data(self) -> "RenderedSection":

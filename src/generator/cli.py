@@ -110,7 +110,9 @@ def generate(
                     f"[green]✓[/green] Hero image  {hero_image.publisher or 'fetched'}"
                 )
             else:
-                console.print("[dim]· Hero image skipped (no Brave key or no results)[/dim]")
+                console.print(
+                    "[dim]· Hero image skipped (no Brave key or no results)[/dim]"
+                )
 
         # Editor architecture: planners → research → block_extract → render → deliver
         from generator.pipeline.backbone_planner import build_backbone_sections
@@ -124,13 +126,12 @@ def generate(
         with recorder.stage("curation"):
             curation_out = await run_curation_stage(
                 facts=ground_out.facts,
-                canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
+                canonical_title=ground_out.canonical_title
+                or ground_out.facts.what[:80],
                 backbone=backbone,
             )
 
-        combined = SectionPlanOutput(
-            sections=backbone + list(curation_out.sections)
-        )
+        combined = SectionPlanOutput(sections=backbone + list(curation_out.sections))
 
         # Stage 3: per-section research loop.
         from generator.pipeline.research import run_research_stage
@@ -153,6 +154,7 @@ def generate(
 
         # Stage 4: block-driven extraction.
         from generator.pipeline.block_extract import run_block_extract_stage
+
         with recorder.stage("block_extract"):
             rendered_sections = await run_block_extract_stage(
                 sections=combined.sections,
@@ -170,12 +172,8 @@ def generate(
         )
         from generator.schema import EventLayout, EventMeta
 
-        subject_e = subject_from_facts(
-            ground_out.facts, ground_out.canonical_title
-        )
-        all_sources = list(
-            {s.id: s for pool in pools.values() for s in pool}.values()
-        )
+        subject_e = subject_from_facts(ground_out.facts, ground_out.canonical_title)
+        all_sources = list({s.id: s for pool in pools.values() for s in pool}.values())
 
         _now_iso = datetime.now(timezone.utc).isoformat()
         with recorder.stage("render"):
@@ -254,9 +252,14 @@ def generate(
 
 @app.command("regen-section")
 def regen_section(
-    section_id: str = typer.Argument(..., help="Section id to regenerate (e.g. 'overview')."),
+    section_id: str = typer.Argument(
+        ..., help="Section id to regenerate (e.g. 'overview')."
+    ),
     data_json_path: Path = typer.Argument(
-        ..., exists=True, readable=True, dir_okay=False,
+        ...,
+        exists=True,
+        readable=True,
+        dir_okay=False,
         help="Path to an existing <slug>.data.json file.",
     ),
 ) -> None:
@@ -268,6 +271,7 @@ def regen_section(
     raw = json.loads(data_json_path.read_text(encoding="utf-8"))
     try:
         from generator.schema import EventPage
+
         page = EventPage.model_validate(raw)
     except ValidationError as exc:
         console.print(f"[bold red]Invalid EventPage:[/bold red] {exc}")
@@ -289,7 +293,7 @@ def regen_section(
     from generator.schema import SectionPlan
 
     spec_cls = get_spec(existing.block_kind)
-    _backbone_ids = {"overview", "key_takeaways", "timeline", "background", "key_facts", "media_coverage"}
+    _backbone_ids = {"overview", "timeline", "background", "media_coverage"}
     stub_section = SectionPlan(
         section_id=existing.section_id,
         kind="curated" if existing.section_id not in _backbone_ids else "backbone",
@@ -310,7 +314,9 @@ def regen_section(
         return await extract_one_section(
             section=stub_section,
             sources=evidence,
-            canonical_title=page.meta.canonical_title if hasattr(page.meta, "canonical_title") else "",
+            canonical_title=page.meta.canonical_title
+            if hasattr(page.meta, "canonical_title")
+            else "",
         )
 
     new_section = asyncio.run(_do())
@@ -325,11 +331,10 @@ def regen_section(
     ]
     updated_page = page.model_copy(update={"editorial_sections": updated_sections})
 
-    data_json_path.write_text(
-        updated_page.model_dump_json(indent=2), encoding="utf-8"
-    )
+    data_json_path.write_text(updated_page.model_dump_json(indent=2), encoding="utf-8")
 
     from generator.pipeline.render import render_html
+
     slug = data_json_path.stem
     if slug.endswith(".data"):
         slug = slug[: -len(".data")]

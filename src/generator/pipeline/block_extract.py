@@ -27,7 +27,11 @@ from generator.schema import (
     SectionPlan,
     Source,
 )
-from generator.sources.brave import BraveConfigError, BraveImageResult, fetch_brave_images
+from generator.sources.brave import (
+    BraveConfigError,
+    BraveImageResult,
+    fetch_brave_images,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -116,6 +120,9 @@ async def extract_one_section(
         logger.warning("block_extract failed for %s: %s", section.section_id, exc)
         return None
 
+    # Spec-defined normalization (filter/sort/cap items) before integrity checks.
+    data = spec.postprocess(data)
+
     # Citation integrity: every cited source_id must be in the pool.
     pool_ids = {s.id for s in sources}
     cited_ids = _collect_cited_ids(data)
@@ -153,6 +160,7 @@ async def extract_one_section(
         sources_used=sources_used,
         eval_passed=True,
         eval_notes=None,
+        placement=section.placement,
     )
 
 

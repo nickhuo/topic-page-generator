@@ -36,3 +36,10 @@ class BlockSpec(ABC):
     @abstractmethod
     def is_minimum_viable(self, data: BaseModel) -> bool:
         """Return False to drop a section whose extracted data is too thin."""
+
+    def postprocess(self, data: BaseModel) -> BaseModel:
+        """Optional normalization applied to LLM output before viability check.
+
+        Default is identity. Subclasses may filter / sort / cap items here.
+        """
+        return data

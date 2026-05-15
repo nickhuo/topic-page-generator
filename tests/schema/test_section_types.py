@@ -17,10 +17,8 @@ from generator.blocks.schema import ParagraphBlockData
 def test_backbone_section_id_is_closed_enum():
     valid = {
         "overview",
-        "key_takeaways",
         "timeline",
         "background",
-        "key_facts",
         "media_coverage",
     }
     for sid in valid:
@@ -110,3 +108,39 @@ def test_rendered_section_round_trip():
     )
     assert rs.block_data.paragraphs_md == ["Hello."]
     assert rs.eval_passed is True
+    assert rs.placement == "main"
+
+
+def test_section_plan_placement_defaults_to_main_and_accepts_sidebar():
+    sp_default = SectionPlan(
+        section_id="overview",
+        kind="backbone",
+        title="t",
+        rank=1,
+        block_kind="paragraph",
+        intent="i",
+        acceptance=AcceptanceCriteria(description="d"),
+    )
+    assert sp_default.placement == "main"
+
+    sp_side = SectionPlan(
+        section_id="timeline",
+        kind="backbone",
+        title="t",
+        rank=2,
+        block_kind="timeline",
+        intent="i",
+        acceptance=AcceptanceCriteria(description="d"),
+        placement="sidebar",
+    )
+    assert sp_side.placement == "sidebar"
+
+
+def test_rendered_section_rejects_unknown_placement():
+    with pytest.raises(ValidationError):
+        RenderedSection(
+            section_id="overview",
+            block_kind="paragraph",
+            block_data=ParagraphBlockData(paragraphs_md=["x"]),
+            placement="footer",  # type: ignore[arg-type]
+        )

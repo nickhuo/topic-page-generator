@@ -12,6 +12,7 @@ def _minimal_page_dict() -> dict:
         "generated_at": "2026-05-13T12:00:00Z",
         "subject": {
             "title": "Test Entity launch",
+            "subtitle": "Test Entity unveiled a new product.",
             "entities": ["Test Entity"],
             "when": "2026-05-01T00:00:00Z",
         },

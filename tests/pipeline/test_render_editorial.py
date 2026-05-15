@@ -35,6 +35,7 @@ def _src() -> Source:
 def _subject() -> EventSubject:
     return EventSubject(
         title="NVIDIA GTC 2026",
+        subtitle="NVIDIA unveils new GPU architecture at GTC.",
         entities=["NVIDIA"],
         when="2026-03-19T12:00:00Z",
         where="San Jose",

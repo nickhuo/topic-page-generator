@@ -1,6 +1,6 @@
 """Prompt builder for the curation planner.
 
-One LLM call. Input: triage facts + canonical title + the 6 backbone sections
+One LLM call. Input: triage facts + canonical title + the 4 backbone sections
 already chosen. Output: 0–4 SectionPlan objects with `kind="curated"`.
 
 The curation planner is a one-shot — there is no refinement loop. It picks
@@ -31,7 +31,7 @@ Block kinds you can choose for each curated section (closed enum):
 """
 
 _INSTRUCTIONS = """\
-You are the curation planner. The backbone planner has already chosen six
+You are the curation planner. The backbone planner has already chosen four
 always-on sections (listed under "ALREADY CHOSEN"). Your job: decide which
 0 to 4 additional sections would make THIS event meaningfully richer.
 
@@ -45,7 +45,7 @@ Rules:
    "people_relationships", "where_to_watch"). It must NOT collide with any
    BackboneSectionId.
 5. `kind` must be `"curated"`.
-6. `rank` starts at 7 (after the 6 backbone ranks) and increments. No gaps.
+6. `rank` starts at 5 (after the 4 backbone ranks) and increments. No gaps.
 7. `block_kind` must be one of the 7 closed-enum kinds above.
 8. `intent`: one sentence describing what the section answers and how.
 9. `acceptance.description`: one sentence describing what success looks like.
@@ -93,11 +93,7 @@ def build_curation_messages(
         {
             "role": "system",
             "content": (
-                BASE_PREAMBLE
-                + "\n\n"
-                + _BLOCK_KIND_CATALOG
-                + "\n"
-                + _INSTRUCTIONS
+                BASE_PREAMBLE + "\n\n" + _BLOCK_KIND_CATALOG + "\n" + _INSTRUCTIONS
             ),
         },
         {

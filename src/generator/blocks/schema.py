@@ -54,6 +54,7 @@ class TimelineEntry(_Frozen):
     location: str | None = None
     description: str | None = None
     importance: Literal["breaking", "feature", "minor", "normal"] = "normal"
+    temporal_phase: Literal["past", "present", "future"] = "past"
     source_id: SourceId | None = None
 
 
