@@ -116,6 +116,7 @@ class QuoteCard(_Frozen):
 # ---------------------------------------------------------------------------
 class ParagraphBlockData(_Frozen):
     kind: Literal["paragraph"] = "paragraph"
+    style: Literal["prose", "bullets"] = "prose"
     paragraphs_md: list[str] = Field(min_length=1)
     pull_quotes: list[PullQuote] = Field(default_factory=list)
     citations: list[Citation] = Field(default_factory=list)
