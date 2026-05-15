@@ -9,7 +9,7 @@
   <script type="application/ld+json">{{ jsonld | safe }}</script>
 </head>
 <body>
-  <a class="skip-link" href="#main" aria-label="Skip to main content">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="page-chrome">
     {% if hero_module %}
@@ -20,29 +20,27 @@
     {% endif %}
   </header>
 
-  {% if sections %}
-    {% include "chrome/nav.html" %}
-  {% endif %}
+  <div class="page-grid">
+    {% if sections %}
+      {% include "chrome/toc.html" %}
+    {% endif %}
 
-  <main id="main" class="page-main">
-    {% for section in sections %}
-      {% include "needs/section.html" %}
-    {% endfor %}
-  </main>
+    <main id="main" class="page-main">
+      {% for section in sections %}
+        {% include "needs/section.html" %}
+      {% endfor %}
+      {% include "partials/sources_card.html" ignore missing %}
+    </main>
+
+    {% include "chrome/reference.html" ignore missing %}
+  </div>
 
   <footer class="page-footer">
     <div class="container">
-      <h2>Sources</h2>
-      <ol class="sources">
-        {% for src in page.sources %}
-          <li id="src-{{ source_index[src.id] }}">
-            <a href="{{ src.url }}" rel="noopener noreferrer">{{ src.title }}</a>
-            <span class="src-meta">— {{ src.publisher.name }} <span class="src-tier">({{ src.publisher.tier }})</span></span>
-          </li>
-        {% endfor %}
-      </ol>
       <p class="meta-line">Last updated {{ page.meta.last_updated }}</p>
     </div>
   </footer>
+
+  <script>{{ toc_js | safe }}</script>
 </body>
 </html>

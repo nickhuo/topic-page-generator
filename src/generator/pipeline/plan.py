@@ -10,6 +10,7 @@ from generator.prompts.plan import build_need_plan_messages
 from generator.schema import (
     AestheticPlanOutput,
     DisambiguationOutput,
+    NeedCurationPlan,
     NeedPlanOutput,
     TriageOutput,
 )
@@ -17,6 +18,20 @@ from generator.schema import (
 log = logging.getLogger(__name__)
 
 AESTHETIC_CONFIDENCE_THRESHOLD = 0.75
+
+_OPINION_MODULES = {"reactions", "media_coverage", "official_statements"}
+
+
+def infer_default_category(assigned_modules: list[str]) -> str | None:
+    """Return 'fact', 'opinion', or None based on the modules assigned to a need.
+
+    Empty input → None. All-opinion → 'opinion'. Anything else → 'fact'.
+    """
+    if not assigned_modules:
+        return None
+    if all(m in _OPINION_MODULES for m in assigned_modules):
+        return "opinion"
+    return "fact"
 
 
 async def run_plan_stage(
@@ -31,11 +46,19 @@ async def run_plan_stage(
     event-specific H2 (`section_title`), rationale, 1–2 Tavily fetch_queries,
     which module kinds belong under it, and a publisher_quota.
     """
-    return await call_structured(
+    out = await call_structured(
         model=model or get_default_model("plan"),
         messages=build_need_plan_messages(triage, disamb),
         response_model=NeedPlanOutput,
     )
+    finalised: list[NeedCurationPlan] = []
+    for p in out.need_plans:
+        if p.category is None:
+            p = p.model_copy(
+                update={"category": infer_default_category(p.assigned_modules)}
+            )
+        finalised.append(p)
+    return out.model_copy(update={"need_plans": finalised})
 
 
 async def run_aesthetic_stage(

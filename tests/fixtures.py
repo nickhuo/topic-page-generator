@@ -52,6 +52,84 @@ from generator.schema import (
 )
 
 
+def _src(i: int) -> Source:
+    return Source(
+        id=f"s{i}",
+        url=f"https://example.com/a{i}",
+        publisher=Publisher(name=f"Pub{i}", tier="T0"),
+        title=f"Title {i}",
+        published_at="2026-05-14T00:00:00Z",
+        fetched_at="2026-05-14T00:00:00Z",
+        language="en",
+        rights=SourceRights(max_excerpt_words=999, can_paraphrase=True),
+    )
+
+
+def canned_event_page() -> EventPage:
+    """Minimal EventPage with one hero module and one activated need plan."""
+    now = "2026-05-14T00:00:00Z"
+    hero = HeroModule(
+        module_id="m_hero",
+        serves_needs=["what_happened"],
+        citations=[],
+        confidence=conf(),
+        slot="hero",
+        artifact="HeroBanner",
+        inclusion_reason="required",
+        data=HeroData(
+            title="Sample Event",
+            subtitle="A subtitle",
+            summary="One-sentence summary of the event.",
+            image_alt="",
+            badge_label="LIVE",
+        ),
+    )
+    info = InfoboxModule(
+        module_id="m_info",
+        serves_needs=["when_where"],
+        citations=[],
+        confidence=conf(),
+        slot="aside",
+        artifact="Infobox",
+        inclusion_reason="required",
+        data=InfoboxData(
+            rows=[InfoboxRow(label="When", value="Today", source_id="s1")]
+        ),
+    )
+    from generator.schema import NeedCurationPlan
+
+    plan = NeedCurationPlan(
+        need_id="what_happened",
+        activated=True,
+        rank=1,
+        section_title="What happened",
+        rationale="Establish the core facts.",
+        assigned_modules=["hero", "infobox"],
+    )
+    return EventPage(
+        page_id="p_test",
+        input_sentence="Sample event happened today.",
+        generated_at=now,
+        subject=EventSubject(
+            primary_entity="Sample Event",
+            event_type_hint="generic",
+            temporal_posture="recent",
+        ),
+        modules=[hero, info],
+        layout=EventLayout(preset_id="reference", overrides=None),
+        sources=[_src(1)],
+        needs_coverage={"what_happened": ["m_hero"]},
+        uncovered_needs=[],
+        need_plans=[plan],
+        meta=EventMeta(
+            last_updated=now,
+            editor_approved=True,
+            editor_id="test",
+            pipeline_trace_id="t1",
+        ),
+    )
+
+
 def conf() -> ModuleConfidence:
     return ModuleConfidence(
         overall=0.9,

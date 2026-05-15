@@ -1,0 +1,24 @@
+<ul class="quote-grid">
+  {% for c in block.cards %}
+    <li class="quote-card">
+      <div class="quote-card__author">
+        {% if c.author_image_url %}
+          <img class="quote-card__photo" src="{{ c.author_image_url }}" alt="{{ c.author }}">
+        {% else %}
+          <span class="quote-card__monogram" aria-hidden="true">{{ c.author[:1] }}</span>
+        {% endif %}
+        <div>
+          <p class="quote-card__name">{{ c.author }}</p>
+          <p class="quote-card__role">{{ c.author_role }}</p>
+        </div>
+        <span class="quote-card__sentiment quote-card__sentiment--{{ c.sentiment }}" aria-label="{{ c.sentiment }}"></span>
+      </div>
+      <blockquote class="quote-card__quote">{{ c.quote }}</blockquote>
+      {% if c.source_id and source_index[c.source_id] %}
+        <p class="quote-card__cite">
+          <a href="#src-{{ source_index[c.source_id] }}">[{{ source_index[c.source_id] }}]</a>
+        </p>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

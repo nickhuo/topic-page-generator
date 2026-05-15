@@ -72,9 +72,7 @@ def _dedupe_preserving_needs(sources: list[Source]) -> list[Source]:
         if existing is None:
             seen[key] = s
             continue
-        merged_needs = list(
-            dict.fromkeys([*existing.serves_needs, *s.serves_needs])
-        )
+        merged_needs = list(dict.fromkeys([*existing.serves_needs, *s.serves_needs]))
         seen[key] = existing.model_copy(update={"serves_needs": merged_needs})
     return list(seen.values())
 

@@ -23,6 +23,8 @@ from generator.blocks.schema import (
     NewsfeedBlockData,
     ParagraphBlockData,
     PullQuote,
+    QuoteCard,
+    ReactionsBlock,
     RenderBlock,
     TimelineBlockData,
     TimelineEntry,
@@ -44,7 +46,7 @@ _DEFAULT_BLOCK_KIND: dict[str, BlockKind] = {
     "kpi_numbers": "chart",
     "comparison": "chart",
     "changelog": "timeline",
-    "reactions": "newsfeed",
+    "reactions": "reactions",
     "media_coverage": "newsfeed",
     "official_statements": "newsfeed",
     "where_to_watch": "newsfeed",
@@ -83,6 +85,8 @@ def module_to_block(
         return _to_newsfeed(module, src_by_id)
     if kind == "map":
         return _to_map(module)
+    if kind == "reactions":
+        return _reactions_to_block(module, src_by_id)
     return _to_paragraph(module, citations)  # safe fallback
 
 
@@ -104,8 +108,7 @@ def _to_paragraph(module: TypedModule, citations: list[Citation]) -> ParagraphBl
         # Render each statement as a paragraph + a pull quote.
         for item in module.data.items:
             paragraphs.append(
-                f"**{item.author}**, {item.role}, {item.organization}: "
-                f"“{item.quote}”"
+                f"**{item.author}**, {item.role}, {item.organization}: “{item.quote}”"
             )
             pull_quotes.append(
                 PullQuote(
@@ -226,23 +229,6 @@ def _to_newsfeed(
                 )
             )
         grouping = module.data.grouping_strategy
-    elif module.kind == "reactions":
-        variant = "quotes"
-        grouping = "flat"
-        for it in module.data.items:
-            src = src_by_id.get(it.source_id)
-            cards.append(
-                NewsCard(
-                    url=src.url if src else "https://example.invalid/",  # type: ignore[arg-type]
-                    title=f"{it.author} — {it.author_role}",
-                    publisher=src.publisher.name if src else "Unknown",
-                    tier=src.publisher.tier if src else "T3",
-                    published_at=src.published_at if src else None,
-                    summary=it.quote,
-                    source_id=it.source_id,
-                    thumbnail_url=src.thumbnail_url if src else None,
-                )
-            )
     elif module.kind == "official_statements":
         variant = "quotes"
         grouping = "flat"
@@ -303,8 +289,31 @@ def _to_map(module: TypedModule) -> MapBlockData:
     return MapBlockData(locations=[Location(name=module.kind)])
 
 
-def _thumb_for_source_id(
-    source_id: str, src_by_id: dict[str, Source]
-):
+def _thumb_for_source_id(source_id: str, src_by_id: dict[str, Source]):
     s = src_by_id.get(source_id)
     return s.thumbnail_url if s else None
+
+
+_STAKEHOLDER_RANK = {"stakeholder": 0, "adjacent": 1, "third_party": 2, None: 3}
+
+
+def _reactions_to_block(
+    module: TypedModule, src_by_id: dict[str, Source]
+) -> ReactionsBlock:
+    items = sorted(
+        module.data.items,
+        key=lambda r: _STAKEHOLDER_RANK[r.stakeholder_tier],
+    )
+    cards = [
+        QuoteCard(
+            author=r.author,
+            author_role=r.author_role,
+            quote=r.quote,
+            sentiment=r.sentiment,
+            stakeholder_tier=r.stakeholder_tier,
+            author_image_url=r.author_image_url,
+            source_id=r.source_id,
+        )
+        for r in items[:4]
+    ]
+    return ReactionsBlock(cards=cards)

@@ -1,0 +1,15 @@
+<nav class="page-toc" aria-label="Sections">
+  <ol class="page-toc__list">
+    {% for section in sections %}
+      <li class="page-toc__item" data-target="need-{{ section.need_id }}">
+        <a href="#need-{{ section.need_id }}" class="page-toc__link">
+          <span class="page-toc__dot" aria-hidden="true"></span>
+          <span class="page-toc__label">{{ section.title }}</span>
+        </a>
+        {% if section.rationale %}
+          <div class="page-toc__popover" role="tooltip">{{ section.rationale }}</div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</nav>

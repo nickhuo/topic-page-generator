@@ -104,3 +104,27 @@ async def test_aesthetic_falls_back_to_reference_when_low_confidence(monkeypatch
 
 def test_threshold_default():
     assert AESTHETIC_CONFIDENCE_THRESHOLD == 0.75
+
+
+def test_infer_category_facts():
+    from generator.pipeline.plan import infer_default_category
+
+    assert infer_default_category(["infobox", "schedule"]) == "fact"
+
+
+def test_infer_category_opinions():
+    from generator.pipeline.plan import infer_default_category
+
+    assert infer_default_category(["reactions"]) == "opinion"
+
+
+def test_infer_category_mixed_falls_back_to_fact():
+    from generator.pipeline.plan import infer_default_category
+
+    assert infer_default_category(["reactions", "schedule"]) == "fact"
+
+
+def test_infer_category_empty_is_none():
+    from generator.pipeline.plan import infer_default_category
+
+    assert infer_default_category([]) is None

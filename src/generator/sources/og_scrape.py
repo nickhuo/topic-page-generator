@@ -44,7 +44,10 @@ def _parse_og_from_html(html: str) -> dict[str, str]:
             continue
         if prop in ("og:image", "twitter:image") and "image" not in out:
             out["image"] = content
-        elif prop in ("og:description", "twitter:description", "description") and "description" not in out:
+        elif (
+            prop in ("og:description", "twitter:description", "description")
+            and "description" not in out
+        ):
             out["description"] = content
         if "image" in out and "description" in out:
             break
@@ -57,9 +60,7 @@ async def _enrich_one(client: httpx.AsyncClient, source: Source) -> Source:
     if not needs_image and not needs_summary:
         return source
     try:
-        async with client.stream(
-            "GET", str(source.url), follow_redirects=True
-        ) as resp:
+        async with client.stream("GET", str(source.url), follow_redirects=True) as resp:
             if resp.status_code >= 400:
                 return source
             content_type = resp.headers.get("content-type", "")
@@ -104,9 +105,8 @@ async def enrich_sources(sources: list[Source]) -> list[Source]:
     sem = asyncio.Semaphore(_CONCURRENCY)
     headers = {"User-Agent": _USER_AGENT, "Accept": "text/html,*/*"}
 
-    async with httpx.AsyncClient(
-        timeout=_TIMEOUT_SECONDS, headers=headers
-    ) as client:
+    async with httpx.AsyncClient(timeout=_TIMEOUT_SECONDS, headers=headers) as client:
+
         async def _bounded(s: Source) -> Source:
             async with sem:
                 return await _enrich_one(client, s)

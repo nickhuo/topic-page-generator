@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, HttpUrl
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
 
 
 # ---------------------------------------------------------------------------
@@ -122,6 +122,16 @@ class Citation(_Frozen):
     claim_text: str
 
 
+class WikipediaCardData(_Frozen):
+    """Reference rail card data fetched from the Wikipedia REST summary API."""
+
+    title: str
+    summary_text: str = Field(max_length=600)
+    thumbnail_url: HttpUrl | None = None
+    article_url: HttpUrl
+    retrieved_at: ISO8601
+
+
 # ---------------------------------------------------------------------------
 # §3 Module base
 # ---------------------------------------------------------------------------
@@ -156,6 +166,18 @@ class _BaseModule(_Frozen):
 # ---------------------------------------------------------------------------
 # §3 Module data payloads and the 12 module variants
 # ---------------------------------------------------------------------------
+class OverviewBullet(_Frozen):
+    text: str = Field(min_length=1)
+    source_id: SourceId
+
+    @field_validator("text")
+    @classmethod
+    def _cap_words(cls, v: str) -> str:
+        if len(v.split()) > 18:
+            raise ValueError("overview bullet text must be <= 18 words")
+        return v
+
+
 class HeroData(_Frozen):
     title: str = Field(max_length=80)
     subtitle: str | None = Field(default=None, max_length=120)
@@ -163,6 +185,9 @@ class HeroData(_Frozen):
     image_url: HttpUrl | None = None
     image_alt: str  # TODO: enforce non-empty only when image_url is set
     badge_label: str | None = None
+    overview_bullets: list[OverviewBullet] | None = Field(
+        default=None, min_length=3, max_length=4
+    )
 
 
 class HeroModule(_BaseModule):
@@ -190,6 +215,7 @@ class ScheduleItem(_Frozen):
     label: str
     location: str | None = None
     duration_min: int | None = None
+    is_milestone: bool = False
     source_id: SourceId
 
 
@@ -282,6 +308,8 @@ class ReactionItem(_Frozen):
     quote: str = Field(max_length=280)
     sentiment: Sentiment
     source_id: SourceId
+    stakeholder_tier: Literal["stakeholder", "adjacent", "third_party"] | None = None
+    author_image_url: HttpUrl | None = None
 
 
 class ReactionAggregate(_Frozen):
@@ -484,6 +512,10 @@ class EventPage(_Frozen):
     # Optional during migration so older fixtures still round-trip; once all
     # outputs are produced by the new plan stage, mark required.
     need_plans: list["NeedCurationPlan"] = Field(default_factory=list)
+    # Optional Wikipedia reference card surfaced in the right rail. Filled by
+    # the disambiguate stage when a confident entity title is available; the
+    # render path no-ops cleanly when this is None.
+    wikipedia_card: WikipediaCardData | None = None
     meta: EventMeta
 
 
@@ -531,7 +563,7 @@ class DisambiguationOutput(_Frozen):
 # Phase-1 needs-driven plan types — the only plan contract.
 # ---------------------------------------------------------------------------
 BlockKind = Literal[
-    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map"
+    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions"
 ]
 
 FetchAngle = Literal["news", "commentary", "official", "explainer"]
@@ -571,6 +603,8 @@ class NeedCurationPlan(_Frozen):
     assigned_modules: list[str] = Field(default_factory=list)
     render_overrides: dict[str, BlockKind] = Field(default_factory=dict)
     publisher_quota: TierQuota = Field(default_factory=TierQuota)
+    category: Literal["fact", "opinion"] | None = None
+    opinion_subtag: str | None = None
 
 
 class NeedPlanOutput(_Frozen):

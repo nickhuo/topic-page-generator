@@ -124,3 +124,78 @@ def test_discriminated_union_rejects_unknown_kind() -> None:
     data["modules"][0]["kind"] = "not_a_real_kind"
     with pytest.raises(ValidationError):
         EventPage.model_validate(data)
+
+
+def test_hero_data_accepts_overview_bullets():
+    from generator.schema import HeroData, OverviewBullet
+
+    bullets = [OverviewBullet(text="Point one.", source_id="s1") for _ in range(3)]
+    hd = HeroData(title="t", summary="s", image_alt="", overview_bullets=bullets)
+    assert len(hd.overview_bullets) == 3
+
+
+def test_hero_data_overview_bullets_optional():
+    from generator.schema import HeroData
+
+    hd = HeroData(title="t", summary="s", image_alt="")
+    assert hd.overview_bullets is None
+
+
+def test_overview_bullet_text_capped_at_18_words():
+    import pytest
+    from pydantic import ValidationError
+    from generator.schema import OverviewBullet
+
+    with pytest.raises(ValidationError):
+        OverviewBullet(text=" ".join(["w"] * 19), source_id="s1")
+
+
+def test_need_plan_category_defaults_none():
+    from generator.schema import NeedCurationPlan
+
+    p = NeedCurationPlan(
+        need_id="what_happened",
+        activated=True,
+        rank=1,
+        section_title="t",
+        rationale="r",
+    )
+    assert p.category is None
+    assert p.opinion_subtag is None
+
+
+def test_reaction_item_stakeholder_tier_optional():
+    from generator.schema import ReactionItem
+
+    r = ReactionItem(
+        author="A",
+        author_role="role",
+        quote="q",
+        sentiment="positive",
+        source_id="s1",
+    )
+    assert r.stakeholder_tier is None
+    assert r.author_image_url is None
+
+
+def test_schedule_item_is_milestone_defaults_false():
+    from generator.schema import ScheduleItem
+
+    s = ScheduleItem(time_iso="2026-05-14T00:00:00Z", label="x", source_id="s1")
+    assert s.is_milestone is False
+
+
+def test_reaction_item_accepts_stakeholder_tier():
+    from generator.schema import ReactionItem
+
+    r = ReactionItem(
+        author="A",
+        author_role="role",
+        quote="q",
+        sentiment="positive",
+        source_id="s1",
+        stakeholder_tier="stakeholder",
+        author_image_url="https://x.test/a.jpg",
+    )
+    assert r.stakeholder_tier == "stakeholder"
+    assert str(r.author_image_url).startswith("https://")

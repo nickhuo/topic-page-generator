@@ -104,9 +104,7 @@ def build_need_plan_messages(
         if disamb.chosen
         else triage.event_type_hint or "generic"
     )
-    time_anchor = (
-        disamb.chosen.time_anchor if disamb.chosen else triage.time_anchor
-    )
+    time_anchor = disamb.chosen.time_anchor if disamb.chosen else triage.time_anchor
     payload = (
         f"EVENT: {chosen_entity}\n"
         f"EVENT_TYPE_HINT: {chosen_type}\n"

@@ -1,0 +1,21 @@
+<section class="sources-card" aria-labelledby="sources-heading">
+  <div class="sources-card__head">
+    <h2 id="sources-heading">Sources</h2>
+    <span class="sources-card__count">{{ page.sources | length }}</span>
+  </div>
+  <ul class="sources-card__list">
+    {% for src in page.sources %}
+      <li id="src-{{ source_index[src.id] }}" class="sources-card__row">
+        <span class="sources-card__num">{{ source_index[src.id] }}</span>
+        <div class="sources-card__body">
+          <a class="sources-card__title" href="{{ src.url }}" rel="noopener noreferrer">{{ src.title }}</a>
+          <p class="sources-card__meta">
+            {{ src.publisher.name }}
+            <span class="sources-card__tier sources-card__tier--{{ src.publisher.tier }}">{{ src.publisher.tier }}</span>
+            {% if src.published_at %}· {{ src.published_at[:10] }}{% endif %}
+          </p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</section>

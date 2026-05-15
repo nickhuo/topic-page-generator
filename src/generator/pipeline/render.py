@@ -36,6 +36,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 _TEMPLATES_DIR = _PROJECT_ROOT / "templates"
 
 _CHROME_KINDS = {"hero", "countdown"}
+_MAX_MILESTONES = 6
 
 
 def slugify(text: str) -> str:
@@ -114,10 +115,20 @@ def _select_palette_id(page: EventPage) -> str:
     }.get(preset, "neutral_news")
 
 
-def _build_sections(page: EventPage) -> list[dict]:
-    """Assemble the ordered list of need sections for the template."""
+def _build_sections(
+    page: EventPage, *, consumed_by_chrome: set[str] | None = None
+) -> list[dict]:
+    """Assemble the ordered list of need sections for the template.
+
+    ``consumed_by_chrome`` lists module kinds that have already been rendered
+    by page chrome (e.g. the schedule module when its milestones are shown in
+    the right reference rail) so they don't get re-emitted as orphan blocks.
+    """
     modules_by_kind = {m.kind: m for m in page.modules}
-    rendered: set[str] = set(_CHROME_KINDS) & set(modules_by_kind.keys())
+    extra_consumed = consumed_by_chrome or set()
+    rendered: set[str] = (set(_CHROME_KINDS) | extra_consumed) & set(
+        modules_by_kind.keys()
+    )
     sections: list[dict] = []
 
     activated = sorted(
@@ -132,9 +143,7 @@ def _build_sections(page: EventPage) -> list[dict]:
             if mod is None:
                 continue
             override = plan.render_overrides.get(kind)
-            section_blocks.append(
-                module_to_block(mod, page.sources, override=override)
-            )
+            section_blocks.append(module_to_block(mod, page.sources, override=override))
             rendered.add(kind)
         if section_blocks:
             sections.append(
@@ -142,6 +151,8 @@ def _build_sections(page: EventPage) -> list[dict]:
                     "need_id": plan.need_id,
                     "title": plan.section_title,
                     "rationale": plan.rationale,
+                    "category": plan.category,
+                    "opinion_subtag": plan.opinion_subtag,
                     "blocks": section_blocks,
                 }
             )
@@ -158,13 +169,60 @@ def _build_sections(page: EventPage) -> list[dict]:
                 "need_id": "more",
                 "title": "More on this topic",
                 "rationale": "",
-                "blocks": [
-                    module_to_block(m, page.sources) for m in orphan_modules
-                ],
+                "category": None,
+                "opinion_subtag": None,
+                "blocks": [module_to_block(m, page.sources) for m in orphan_modules],
             }
         )
 
     return sections
+
+
+def _build_milestones(page: EventPage) -> list[dict]:
+    """Build the right-rail milestone timeline entries from the schedule module.
+
+    Returns at most ``_MAX_MILESTONES`` items, sorted chronologically. Each
+    item is a dict with ``day``, ``time``, ``label``, ``location``, ``state``
+    where state is one of ``past``/``future``/``current``. The
+    chronologically-last future entry is promoted to ``current`` (the next-up
+    milestone). Items whose ``time_iso`` cannot be parsed are silently dropped.
+    Returns ``[]`` when no schedule module exists or no items are flagged
+    ``is_milestone``.
+    """
+    sched = next((m for m in page.modules if m.kind == "schedule"), None)
+    if sched is None:
+        return []
+    now = datetime.now(timezone.utc)
+
+    # Parse timestamps first; drop items that cannot be parsed.
+    parsed: list[tuple[datetime, object]] = []
+    for i in [item for item in sched.data.items if item.is_milestone]:
+        try:
+            ts = datetime.fromisoformat(i.time_iso.replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        parsed.append((ts, i))
+
+    # Sort by parsed datetime, then cap.
+    parsed.sort(key=lambda pair: pair[0])
+    parsed = parsed[:_MAX_MILESTONES]
+
+    out: list[dict] = []
+    for ts, i in parsed:
+        ts_utc = ts.astimezone(timezone.utc)
+        state = "past" if ts_utc < now else "future"
+        out.append(
+            {
+                "day": ts_utc.strftime("%b %d"),
+                "time": ts_utc.strftime("%H:%M UTC"),
+                "label": i.label,
+                "location": i.location,
+                "state": state,
+            }
+        )
+    if out and out[-1]["state"] == "future":
+        out[-1]["state"] = "current"
+    return out
 
 
 def render_html(page: EventPage) -> str:
@@ -175,16 +233,17 @@ def render_html(page: EventPage) -> str:
 
     palette_block = palette_css_vars(_select_palette_id(page))
     stylesheet = (_TEMPLATES_DIR / "styles.css").read_text(encoding="utf-8")
+    toc_js = (_TEMPLATES_DIR / "toc.js").read_text(encoding="utf-8")
 
-    hero_module = next(
-        (m for m in page.modules if m.kind == "hero"), None
-    )
-    countdown_module = next(
-        (m for m in page.modules if m.kind == "countdown"), None
-    )
+    hero_module = next((m for m in page.modules if m.kind == "hero"), None)
+    countdown_module = next((m for m in page.modules if m.kind == "countdown"), None)
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
-    sections = _build_sections(page)
+    milestones = _build_milestones(page)
+    # When the schedule module has driven the right-rail milestone timeline,
+    # don't also re-emit it as an inline orphan block in the main flow.
+    consumed_by_chrome = {"schedule"} if milestones else set()
+    sections = _build_sections(page, consumed_by_chrome=consumed_by_chrome)
 
     template = env.get_template("layout.html")
     return template.render(
@@ -195,5 +254,7 @@ def render_html(page: EventPage) -> str:
         source_index=source_index,
         palette_css_block=palette_block,
         stylesheet=stylesheet,
+        toc_js=toc_js,
         jsonld=_build_jsonld(page),
+        milestones=milestones,
     )

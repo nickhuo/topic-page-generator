@@ -1,5 +1,11 @@
 <section id="need-{{ section.need_id }}" class="need-section" data-need="{{ section.need_id }}">
   <div class="container">
+    {% if section.category %}
+      <span class="need-section__chip need-section__chip--{{ section.category }}">
+        {% if section.category == "opinion" %}OPINION{% else %}FACT{% endif %}
+        {% if section.opinion_subtag %} · {{ section.opinion_subtag }}{% endif %}
+      </span>
+    {% endif %}
     <h2 class="need-section__title">{{ section.title }}</h2>
     {% if section.rationale %}
       <p class="need-section__rationale">{{ section.rationale }}</p>
@@ -12,6 +18,7 @@
         {% elif block.kind == "newsfeed" %}{% include "blocks/newsfeed.html" %}
         {% elif block.kind == "factsheet" %}{% include "blocks/factsheet.html" %}
         {% elif block.kind == "map" %}{% include "blocks/map.html" %}
+        {% elif block.kind == "reactions" %}{% include "blocks/reactions.html" ignore missing %}
         {% endif %}
       {% endfor %}
     </div>
