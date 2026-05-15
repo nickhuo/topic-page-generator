@@ -65,15 +65,33 @@ async def fetch_tavily(
         "search_depth": "basic",
         "include_answer": False,
         "include_raw_content": False,
+        # Ask Tavily for representative images so the newsfeed block has
+        # thumbnails. Images come back as a top-level list with no per-result
+        # mapping; we match them back to articles by URL host below.
+        "include_images": True,
+        "include_image_descriptions": True,
     }
     headers = {"Authorization": f"Bearer {api_key}"}
     async with httpx.AsyncClient(timeout=15.0, headers=headers) as client:
         resp = await _post(client, body)
     if resp.status_code != 200:
         return []
+    body_json = resp.json()
     fetched_at = datetime.now(timezone.utc).isoformat()
+
+    # Build host → image_url map from the top-level images list. Tavily returns
+    # either bare strings or {url, description} objects depending on flags.
+    image_by_host: dict[str, str] = {}
+    for img in body_json.get("images", []) or []:
+        img_url = img.get("url") if isinstance(img, dict) else img
+        if not img_url:
+            continue
+        img_host = host_of(img_url)
+        # First image per host wins — Tavily orders by relevance.
+        image_by_host.setdefault(img_host, img_url)
+
     out: list[Source] = []
-    for hit in resp.json().get("results", []):
+    for hit in body_json.get("results", []):
         url = hit.get("url")
         if not url:
             continue
@@ -99,6 +117,8 @@ async def fetch_tavily(
                     can_paraphrase=tier in ("T0", "T2"),
                 ),
                 archive_url=None,
+                thumbnail_url=image_by_host.get(host),
+                summary=(hit.get("content") or None),
             )
         )
     return out

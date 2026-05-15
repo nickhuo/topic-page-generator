@@ -104,6 +104,69 @@ async def test_fetch_tavily_skips_result_without_url(monkeypatch):
 
 
 @respx.mock
+async def test_fetch_tavily_attaches_image_by_host(monkeypatch):
+    monkeypatch.setenv("TAVILY_API_KEY", "test-key")
+    payload = {
+        "results": [
+            {
+                "title": "Reuters story",
+                "url": "https://www.reuters.com/technology/x",
+                "content": "body",
+                "published_date": "2026-05-02",
+            },
+            {
+                "title": "OpenAI blog",
+                "url": "https://openai.com/blog/x",
+                "content": "body",
+                "published_date": "2026-05-01",
+            },
+        ],
+        "images": [
+            {
+                "url": "https://www.reuters.com/img/og.jpg",
+                "description": "reuters hero",
+            },
+            "https://openai.com/og/x.png",
+            "https://unrelated.example/x.jpg",
+        ],
+    }
+    route = respx.post("https://api.tavily.com/search").mock(
+        return_value=httpx.Response(200, json=payload)
+    )
+    sources = await fetch_tavily("q", time_range_days=14, max_results=5)
+    by_host = {str(s.url).split("/")[2]: s for s in sources}
+    assert str(by_host["www.reuters.com"].thumbnail_url).startswith(
+        "https://www.reuters.com/img/og.jpg"
+    )
+    assert str(by_host["openai.com"].thumbnail_url).startswith(
+        "https://openai.com/og/x.png"
+    )
+    sent_body = json.loads(route.calls.last.request.content)
+    assert sent_body["include_images"] is True
+
+
+@respx.mock
+async def test_fetch_tavily_leaves_thumbnail_none_when_no_image_match(monkeypatch):
+    monkeypatch.setenv("TAVILY_API_KEY", "test-key")
+    payload = {
+        "results": [
+            {
+                "title": "lonely",
+                "url": "https://example.com/x",
+                "content": "c",
+                "published_date": "2026-05-01",
+            }
+        ],
+        "images": [],
+    }
+    respx.post("https://api.tavily.com/search").mock(
+        return_value=httpx.Response(200, json=payload)
+    )
+    sources = await fetch_tavily("q", time_range_days=14, max_results=5)
+    assert sources[0].thumbnail_url is None
+
+
+@respx.mock
 async def test_fetch_tavily_preserves_iso_published_date(monkeypatch):
     monkeypatch.setenv("TAVILY_API_KEY", "test-key")
     payload = {

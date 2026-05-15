@@ -29,11 +29,15 @@ def _format_evidence_block(sources: list[Source]) -> str:
         return "(no evidence)"
     lines = []
     for s in sources:
+        thumb_line = (
+            f"  image_url: {s.thumbnail_url}\n" if s.thumbnail_url else ""
+        )
         line = (
-            f"<src id=\"{s.id}\" tier=\"{s.publisher.tier}\" "
-            f"publisher=\"{s.publisher.name}\" "
-            f"url=\"{s.url}\" published=\"{s.published_at}\">\n"
+            f'<src id="{s.id}" tier="{s.publisher.tier}" '
+            f'publisher="{s.publisher.name}" '
+            f'url="{s.url}" published="{s.published_at}">\n'
             f"  title: {s.title}\n"
+            f"{thumb_line}"
             f"  summary: {(s.summary or '')[:480]}\n"
             f"</src>"
         )

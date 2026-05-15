@@ -34,8 +34,10 @@ Schema:
   thumbnail_url?, summary?, source_id?.
 
 HARD RULES — the pipeline post-filters; obey them up front to avoid loss:
-- Every card MUST have a `thumbnail_url`. Sources without an image are
-  silently dropped after extraction, so do not emit them.
+- Every card MUST have a `thumbnail_url`. Copy it VERBATIM from the matching
+  evidence `<src>` block's `image_url:` line. Do NOT invent image URLs and do
+  NOT use the article URL. If a source has no `image_url:` line, skip that
+  source entirely — pick a different one.
 - Every card MUST have a `published_at` (ISO8601). Cards without a date are
   dropped.
 - Order cards by `published_at` DESCENDING (newest first).
