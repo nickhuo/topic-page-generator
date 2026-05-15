@@ -1,7 +1,6 @@
 """Stage 1 — Ground.
 
-Replaces the previous triage + disambiguate stages. A single LLM call sees
-the input sentence alongside fresh Tavily evidence and produces a
+A single LLM call sees the input sentence alongside fresh Tavily evidence and produces a
 GroundOutput that either (a) gates the pipeline because the input is not
 an unfolding hot event, or (b) carries grounded EventFacts forward.
 """

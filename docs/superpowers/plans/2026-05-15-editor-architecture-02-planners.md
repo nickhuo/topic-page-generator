@@ -622,7 +622,9 @@ async def test_curation_stage_records_llm_call(monkeypatch):
     )
     calls = drain()
     assert len(calls) == 1
-    assert calls[0].stage == "curation"
+    # Stage attribution happens at TraceRecorder layer, not on LLMCall itself.
+    # We only verify the call was made and the model is the curation default.
+    assert calls[0].model == "anthropic/claude-sonnet-4-6"
 
 
 async def test_curation_stage_returns_empty_when_llm_returns_empty(monkeypatch):
@@ -676,7 +678,6 @@ LLMOutputError which the CLI maps to exit code 4.
 from __future__ import annotations
 
 from generator.llm.client import call_structured, get_default_model
-from generator.llm.trace_buffer import set_stage_for_pending_calls
 from generator.prompts.curation import build_curation_messages
 from generator.schema import EventFacts, SectionPlan, SectionPlanOutput
 
@@ -698,7 +699,6 @@ async def run_curation_stage(
     messages = build_curation_messages(
         facts=facts, canonical_title=canonical_title, backbone=backbone
     )
-    set_stage_for_pending_calls("curation")
     return await call_structured(
         model=resolved_model,
         messages=messages,
@@ -709,9 +709,7 @@ async def run_curation_stage(
 __all__ = ["run_curation_stage"]
 ```
 
-**IMPORTANT:** If `set_stage_for_pending_calls` does not exist in `generator.llm.trace_buffer`, fall back to whatever idiom the existing planner uses. Read `src/generator/pipeline/plan.py` to confirm how the stage name attaches to an `LLMCall`. If the existing code attaches stage via context (e.g., via `TraceRecorder.stage(...)` only), drop the `set_stage_for_pending_calls` line — the CLI's `with recorder.stage("curation"):` wrapper will handle it.
-
-Also: if the test `test_curation_stage_records_llm_call` checks `calls[0].stage == "curation"` and the stage name actually comes from the trace recorder (not from inside the call), update that assertion to check what's available (e.g., `calls[0].model == "anthropic/claude-sonnet-4-6"`).
+**Note on stage attribution:** Stage names are attached at the `TraceRecorder.stage(...)` context manager layer, not on individual `LLMCall` objects (`LLMCall` has no `.stage` field — verified via grep on existing planner code). The CLI's `with recorder.stage("curation"):` wrapper in Task 4 will drain `_buf` into a `StageTrace` whose `stage="curation"`. The stage function itself just makes the call.
 
 - [ ] **Step 5: Run test to verify it passes**
 

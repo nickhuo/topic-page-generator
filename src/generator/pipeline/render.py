@@ -139,11 +139,12 @@ def render_html(page: EventPage) -> str:
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
     sections = _build_editorial_section_dicts(page.editorial_sections)
+    hero = _build_hero_context(page)
 
     template = env.get_template("layout.html")
     return template.render(
         page=page,
-        hero_module=None,
+        hero=hero,
         sections=sections,
         source_index=source_index,
         palette_css_block=palette_block,
@@ -152,3 +153,54 @@ def render_html(page: EventPage) -> str:
         jsonld=_build_jsonld(page),
         milestones=[],
     )
+
+
+def _build_hero_context(page: EventPage) -> dict:
+    """Hero data for the page chrome.
+
+    Always populated — even a minimum-viable hero has the canonical title +
+    a dateline. If an editorial section with block_kind="gallery" exists, the
+    first gallery item's image becomes the hero image.
+    """
+    subtitle = _hero_subtitle(page)
+    image_url, image_alt = _hero_image(page.editorial_sections)
+    dateline = _hero_dateline(page.subject)
+    return {
+        "title": page.subject.title,
+        "subtitle": subtitle,
+        "image_url": image_url,
+        "image_alt": image_alt,
+        "dateline": dateline,
+        "entities": page.subject.entities,
+    }
+
+
+def _hero_subtitle(page: EventPage) -> str | None:
+    """Pull a one-liner from the overview section if present."""
+    for rs in page.editorial_sections:
+        if rs.section_id == "overview" and rs.block_kind == "paragraph":
+            paragraphs = getattr(rs.block_data, "paragraphs_md", None) or []
+            if paragraphs:
+                first = paragraphs[0].strip()
+                return first[:240] + ("…" if len(first) > 240 else "")
+            break
+    return None
+
+
+def _hero_image(sections: list[RenderedSection]) -> tuple[str | None, str | None]:
+    """First image from the first gallery section, if any."""
+    for rs in sections:
+        if rs.block_kind == "gallery":
+            items = getattr(rs.block_data, "items", None) or []
+            if items:
+                first = items[0]
+                return str(first.image_url), first.alt_text or first.caption
+    return None, None
+
+
+def _hero_dateline(subject: EventSubject) -> str | None:
+    """A short `when · where` line for the hero meta row."""
+    when = (subject.when or "")[:10] if subject.when else None
+    where = subject.where
+    parts = [p for p in (when, where) if p]
+    return " · ".join(parts) if parts else None
