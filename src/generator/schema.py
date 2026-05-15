@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -112,6 +112,8 @@ class Source(_Frozen):
     # Phase-1 needs-driven additions. Default-empty / None so existing code paths
     # keep working until plan.py + fetch.py are switched over.
     serves_needs: list[NeedId] = Field(default_factory=list)
+    # Editor-architecture: which SectionPlan.section_id values this source backs.
+    serves_sections: list[str] = Field(default_factory=list)
     thumbnail_url: HttpUrl | None = None
     summary: str | None = None
     enriched_at: ISO8601 | None = None
@@ -604,6 +606,28 @@ class SectionPlanOutput(_Frozen):
     """Combined output of backbone + curation planners."""
 
     sections: list[SectionPlan]
+
+
+class ResearchEvalResult(_Frozen):
+    """LLM judge output: is the section's evidence pool satisfactory?
+
+    Used inside the per-section research loop. If `satisfied=False`, `gaps`
+    must be non-empty (the LLM has to articulate what's missing) and
+    `next_query_hint` is the LLM's best guess at what Tavily query would
+    fill the gap.
+    """
+
+    satisfied: bool
+    gaps: list[str] = Field(default_factory=list)
+    next_query_hint: str | None = None
+
+    @model_validator(mode="after")
+    def _gaps_required_when_unsatisfied(self) -> ResearchEvalResult:
+        if not self.satisfied and not self.gaps:
+            raise ValueError(
+                "ResearchEvalResult.satisfied=False requires at least one gap"
+            )
+        return self
 
 
 class RenderedSection(_Frozen):
