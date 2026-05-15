@@ -514,6 +514,10 @@ class EventPage(_Frozen):
     # by the ground stage when a confident canonical title is available; the
     # render path no-ops cleanly when this is None.
     wikipedia_card: WikipediaCardData | None = None
+    # Editorial-architecture render path: list of fully-extracted sections.
+    # When present, render walks this list instead of the legacy modules path.
+    # Plan 5 will remove the conditional + legacy fields.
+    editorial_sections: list["RenderedSection"] | None = None
     meta: EventMeta
 
 
@@ -640,11 +644,20 @@ class RenderedSection(_Frozen):
 
     section_id: str
     block_kind: BlockKind
-    block_data: Any  # discriminated RenderBlock; kept Any to avoid forward-ref cycle
+    block_data: Any  # validated as RenderBlock by _block_kind_matches_data below
     citations: list["Citation"] = Field(default_factory=list)
     sources_used: list["Source"] = Field(default_factory=list)
     eval_passed: bool = True
     eval_notes: str | None = None
+
+    @model_validator(mode="after")
+    def _block_kind_matches_data(self) -> "RenderedSection":
+        data_kind = getattr(self.block_data, "kind", None)
+        if data_kind is not None and data_kind != self.block_kind:
+            raise ValueError(
+                f"block_kind={self.block_kind} but block_data.kind={data_kind}"
+            )
+        return self
 
 
 FetchAngle = Literal["news", "commentary", "official", "explainer"]
@@ -805,3 +818,5 @@ class Trace(_Frozen):
         "approved_published", "rejected", "draft_saved", "auto_approved"
     ]
     approval: TraceApproval
+
+
