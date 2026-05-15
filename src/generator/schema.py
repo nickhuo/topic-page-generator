@@ -558,6 +558,71 @@ BlockKind = Literal[
     "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions"
 ]
 
+# ---------------------------------------------------------------------------
+# Editor-architecture section types (Plan 1 foundation, not yet wired).
+# ---------------------------------------------------------------------------
+BackboneSectionId = Literal[
+    "overview",
+    "key_takeaways",
+    "timeline",
+    "background",
+    "key_facts",
+    "media_coverage",
+]
+
+SectionKind = Literal["backbone", "curated"]
+
+
+class AcceptanceCriteria(_Frozen):
+    """What the research loop must achieve before a section is considered done."""
+
+    description: str
+    min_sources: int = 1
+    min_publishers: int = 1
+    required_facets: list[str] = Field(default_factory=list)
+    forbid_single_perspective: bool = False
+
+
+class SectionPlan(_Frozen):
+    """One section to render on the page — produced by the editorial planner.
+
+    `section_id` is a BackboneSectionId literal when `kind="backbone"`, and a
+    free-form snake_case string for curated sections (e.g. "people_relationships",
+    "kpi_dashboard"). Validation is deferred to the planner stage.
+    """
+
+    section_id: str
+    kind: SectionKind
+    title: str
+    rank: int = Field(ge=1, le=20)
+    block_kind: BlockKind
+    intent: str
+    acceptance: AcceptanceCriteria
+
+
+class SectionPlanOutput(_Frozen):
+    """Combined output of backbone + curation planners."""
+
+    sections: list[SectionPlan]
+
+
+class RenderedSection(_Frozen):
+    """A fully extracted section, ready for the renderer.
+
+    Replaces what TypedModule carried in the old architecture: block data,
+    citations, source attribution, and the section's eval outcome. Confidence
+    is computed at render time from `sources_used`, not stored here.
+    """
+
+    section_id: str
+    block_kind: BlockKind
+    block_data: Any  # discriminated RenderBlock; kept Any to avoid forward-ref cycle
+    citations: list["Citation"] = Field(default_factory=list)
+    sources_used: list["Source"] = Field(default_factory=list)
+    eval_passed: bool = True
+    eval_notes: str | None = None
+
+
 FetchAngle = Literal["news", "commentary", "official", "explainer"]
 
 
