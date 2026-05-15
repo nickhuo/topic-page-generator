@@ -1,0 +1,20 @@
+{% if page.wikipedia_card %}
+<section class="ref-card ref-wiki">
+  <h3 class="ref-card__title">{{ page.wikipedia_card.title }}</h3>
+  {% if page.wikipedia_card.thumbnail_url %}
+    <img
+      class="ref-wiki__thumb"
+      src="{{ page.wikipedia_card.thumbnail_url }}"
+      alt="{{ page.wikipedia_card.title }}"
+      loading="lazy"
+    >
+  {% endif %}
+  <p class="ref-wiki__summary">{{ page.wikipedia_card.summary_text }}</p>
+  <p class="ref-wiki__attr">
+    Excerpt from
+    <a href="{{ page.wikipedia_card.article_url }}" rel="noopener external" target="_blank">Wikipedia</a>,
+    available under
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener external" target="_blank">CC BY-SA 4.0</a>.
+  </p>
+</section>
+{% endif %}

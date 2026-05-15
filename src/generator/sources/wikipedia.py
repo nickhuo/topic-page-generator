@@ -34,7 +34,9 @@ async def fetch_wikipedia_card(title: str) -> WikipediaCardData | None:
     url = _BASE_URL + quote(title, safe="")
     headers = {"Accept": "application/json"}
     try:
-        async with httpx.AsyncClient(timeout=_TIMEOUT_SECONDS, headers=headers) as client:
+        async with httpx.AsyncClient(
+            timeout=_TIMEOUT_SECONDS, headers=headers
+        ) as client:
             resp = await client.get(url)
             if resp.status_code != 200:
                 return None

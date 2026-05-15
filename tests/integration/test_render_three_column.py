@@ -129,6 +129,34 @@ def test_event_page_accepts_optional_wikipedia_card():
     assert page.wikipedia_card.title == "t"
 
 
+def test_wikipedia_card_renders_with_attribution():
+    from generator.schema import WikipediaCardData
+
+    page = canned_event_page().model_copy(
+        update={
+            "wikipedia_card": WikipediaCardData(
+                title="Test Entity",
+                summary_text="A short summary about Test Entity.",
+                thumbnail_url="https://upload.wikimedia.org/x.jpg",
+                article_url="https://en.wikipedia.org/wiki/Test_Entity",
+                retrieved_at="2026-05-14T00:00:00Z",
+            )
+        }
+    )
+    html = render_html(page)
+    assert "Wikipedia" in html
+    assert "CC BY-SA" in html
+    assert "Test Entity" in html
+    assert "https://en.wikipedia.org/wiki/Test_Entity" in html
+
+
+def test_wikipedia_card_absent_renders_nothing():
+    page = canned_event_page()
+    html = render_html(page)
+    assert "from Wikipedia" not in html
+    assert "CC BY-SA" not in html
+
+
 def test_reference_rail_renders_milestones_only():
     from generator.schema import (
         ScheduleData,
