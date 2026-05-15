@@ -122,6 +122,16 @@ class Citation(_Frozen):
     claim_text: str
 
 
+class WikipediaCardData(_Frozen):
+    """Reference rail card data fetched from the Wikipedia REST summary API."""
+
+    title: str
+    summary_text: str = Field(max_length=600)
+    thumbnail_url: HttpUrl | None = None
+    article_url: HttpUrl
+    retrieved_at: ISO8601
+
+
 # ---------------------------------------------------------------------------
 # §3 Module base
 # ---------------------------------------------------------------------------
