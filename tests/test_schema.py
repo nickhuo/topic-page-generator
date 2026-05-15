@@ -181,9 +181,7 @@ def test_reaction_item_stakeholder_tier_optional():
 def test_schedule_item_is_milestone_defaults_false():
     from generator.schema import ScheduleItem
 
-    s = ScheduleItem(
-        time_iso="2026-05-14T00:00:00Z", label="x", source_id="s1"
-    )
+    s = ScheduleItem(time_iso="2026-05-14T00:00:00Z", label="x", source_id="s1")
     assert s.is_milestone is False
 
 

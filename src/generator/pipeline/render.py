@@ -114,10 +114,20 @@ def _select_palette_id(page: EventPage) -> str:
     }.get(preset, "neutral_news")
 
 
-def _build_sections(page: EventPage) -> list[dict]:
-    """Assemble the ordered list of need sections for the template."""
+def _build_sections(
+    page: EventPage, *, consumed_by_chrome: set[str] | None = None
+) -> list[dict]:
+    """Assemble the ordered list of need sections for the template.
+
+    ``consumed_by_chrome`` lists module kinds that have already been rendered
+    by page chrome (e.g. the schedule module when its milestones are shown in
+    the right reference rail) so they don't get re-emitted as orphan blocks.
+    """
     modules_by_kind = {m.kind: m for m in page.modules}
-    rendered: set[str] = set(_CHROME_KINDS) & set(modules_by_kind.keys())
+    extra_consumed = consumed_by_chrome or set()
+    rendered: set[str] = (set(_CHROME_KINDS) | extra_consumed) & set(
+        modules_by_kind.keys()
+    )
     sections: list[dict] = []
 
     activated = sorted(
@@ -167,6 +177,42 @@ def _build_sections(page: EventPage) -> list[dict]:
     return sections
 
 
+def _build_milestones(page: EventPage) -> list[dict]:
+    """Build the right-rail milestone timeline entries from the schedule module.
+
+    Returns at most 6 items, sorted chronologically. Each item is a dict with
+    ``day``, ``time``, ``label``, ``location``, ``state`` where state is one of
+    ``past``/``future``/``current``. The chronologically-last future entry is
+    promoted to ``current`` (the next-up milestone). Returns ``[]`` when no
+    schedule module exists or no items are flagged ``is_milestone``.
+    """
+    sched = next((m for m in page.modules if m.kind == "schedule"), None)
+    if sched is None:
+        return []
+    now = datetime.now(timezone.utc)
+    items = [i for i in sched.data.items if i.is_milestone]
+    items.sort(key=lambda i: i.time_iso)
+    out: list[dict] = []
+    for i in items[:6]:
+        try:
+            ts = datetime.fromisoformat(i.time_iso.replace("Z", "+00:00"))
+        except ValueError:
+            ts = None
+        state = "past" if ts and ts < now else "future"
+        out.append(
+            {
+                "day": ts.strftime("%b %d") if ts else i.time_iso[:10],
+                "time": ts.strftime("%H:%M UTC") if ts else None,
+                "label": i.label,
+                "location": i.location,
+                "state": state,
+            }
+        )
+    if out and out[-1]["state"] == "future":
+        out[-1]["state"] = "current"
+    return out
+
+
 def render_html(page: EventPage) -> str:
     env = Environment(
         loader=FileSystemLoader(str(_TEMPLATES_DIR)),
@@ -181,7 +227,11 @@ def render_html(page: EventPage) -> str:
     countdown_module = next((m for m in page.modules if m.kind == "countdown"), None)
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
-    sections = _build_sections(page)
+    milestones = _build_milestones(page)
+    # When the schedule module has driven the right-rail milestone timeline,
+    # don't also re-emit it as an inline orphan block in the main flow.
+    consumed_by_chrome = {"schedule"} if milestones else set()
+    sections = _build_sections(page, consumed_by_chrome=consumed_by_chrome)
 
     template = env.get_template("layout.html")
     return template.render(
@@ -194,4 +244,5 @@ def render_html(page: EventPage) -> str:
         stylesheet=stylesheet,
         toc_js=toc_js,
         jsonld=_build_jsonld(page),
+        milestones=milestones,
     )

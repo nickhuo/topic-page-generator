@@ -99,3 +99,46 @@ def test_reactions_stakeholders_rendered_before_third_party():
     pos_a0 = html.find("A0")
     pos_a3 = html.find("A3")
     assert 0 <= pos_a0 < pos_a3
+
+
+def test_reference_rail_renders_milestones_only():
+    from generator.schema import (
+        ScheduleData,
+        ScheduleItem,
+        ScheduleModule,
+    )
+    from tests.fixtures import canned_event_page, conf
+
+    page = canned_event_page()
+    sched = ScheduleModule(
+        module_id="m_sched",
+        serves_needs=["when_where"],
+        citations=[],
+        confidence=conf(),
+        slot="primary",
+        artifact="Timeline",
+        inclusion_reason="high",
+        data=ScheduleData(
+            timezone="UTC",
+            items=[
+                ScheduleItem(
+                    time_iso="2026-05-14T09:00:00Z",
+                    label="Kickoff",
+                    location="Stadium",
+                    is_milestone=True,
+                    source_id="s1",
+                ),
+                ScheduleItem(
+                    time_iso="2026-05-14T09:15:00Z",
+                    label="Throw-in",
+                    is_milestone=False,
+                    source_id="s1",
+                ),
+            ],
+        ),
+    )
+    page = page.model_copy(update={"modules": list(page.modules) + [sched]})
+    html = render_html(page)
+    assert "Kickoff" in html
+    assert "Throw-in" not in html
+    assert 'class="ref-timeline"' in html
