@@ -1,0 +1,16 @@
+{
+  "id": "x",
+  "object": "chat.completion",
+  "model": "anthropic/claude-haiku-4-5",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"kind\":\"timeline\",\"entries\":[{\"title\":\"Announcement\",\"time\":\"2026-02-01\",\"importance\":\"feature\",\"temporal_phase\":\"past\",\"source_id\":\"s1\"},{\"title\":\"Keynote\",\"time\":\"2026-03-19\",\"importance\":\"breaking\",\"temporal_phase\":\"present\",\"source_id\":\"s1\"},{\"title\":\"Press follow-up\",\"time\":\"2026-03-25\",\"importance\":\"normal\",\"temporal_phase\":\"future\",\"source_id\":\"s1\"}]}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 400, "completion_tokens": 80, "total_tokens": 480}
+}

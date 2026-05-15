@@ -1,0 +1,16 @@
+{
+  "id": "chatcmpl-fake-research-eval-gap",
+  "object": "chat.completion",
+  "model": "anthropic/claude-sonnet-4-6",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"satisfied\":false,\"gaps\":[\"no source covering the keynote date\"],\"next_query_hint\":\"NVIDIA GTC 2026 keynote date\"}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 300, "completion_tokens": 40, "total_tokens": 340}
+}

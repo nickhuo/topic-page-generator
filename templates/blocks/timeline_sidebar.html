@@ -1,0 +1,27 @@
+{% set phase_order = ["past", "present", "future"] %}
+{% set phase_labels = {"past": "Past", "present": "Now", "future": "Upcoming"} %}
+{% set entries_by_phase = {"past": [], "present": [], "future": []} %}
+{% for entry in block.entries %}
+  {% set _ = entries_by_phase[entry.temporal_phase].append(entry) %}
+{% endfor %}
+
+<ol class="ref-timeline">
+  {% for phase in phase_order %}
+    {% for entry in entries_by_phase[phase] %}
+      <li class="ref-timeline__item ref-timeline__item--{{ phase }}{% if entry.importance == 'breaking' %} ref-timeline__item--breaking{% endif %}">
+        {% if entry.time %}
+          <time class="ref-timeline__date">{{ entry.time[:10] if entry.time|length > 10 else entry.time }}</time>
+        {% else %}
+          <span class="ref-timeline__date">{{ phase_labels[phase] }}</span>
+        {% endif %}
+        <div class="ref-timeline__label">{{ entry.title }}</div>
+        {% if entry.location %}
+          <div class="ref-timeline__loc">{{ entry.location }}</div>
+        {% endif %}
+        {% if entry.source_id and source_index[entry.source_id] %}
+          <sup class="cite-num" data-cite="{{ entry.source_id }}"><a href="#src-{{ source_index[entry.source_id] }}">[{{ source_index[entry.source_id] }}]</a></sup>
+        {% endif %}
+      </li>
+    {% endfor %}
+  {% endfor %}
+</ol>

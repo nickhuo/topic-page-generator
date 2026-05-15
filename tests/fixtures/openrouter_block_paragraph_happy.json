@@ -1,0 +1,16 @@
+{
+  "id": "x",
+  "object": "chat.completion",
+  "model": "anthropic/claude-haiku-4-5",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"kind\":\"paragraph\",\"style\":\"prose\",\"paragraphs_md\":[\"NVIDIA opened GTC 2026 with a keynote in San Jose.\",\"The new GPU was the headline.\"],\"pull_quotes\":[],\"citations\":[{\"source_id\":\"s1\",\"claim_text\":\"NVIDIA held GTC 2026 in San Jose.\"}]}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 400, "completion_tokens": 60, "total_tokens": 460}
+}

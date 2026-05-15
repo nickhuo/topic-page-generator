@@ -55,6 +55,10 @@ Field guidance when `is_hot_event=true`:
   one or more facts above. Must contain at least one ID.
 - `canonical_title` — A clean, human-readable page title (≤80 chars)
   derived from `entities` and `what`. Avoid clickbait.
+- `facts.subtitle` — A single descriptive sentence (≤240 chars) summarising
+  the event. Must be grounded in the supporting evidence — paraphrase what
+  the sources say. This becomes the page subtitle under the hero title.
+  Avoid restating the title verbatim; add the so-what / stakes / context.
 
 Field guidance when `is_hot_event=false`:
 - `rejection_reason` — One sentence explaining what you saw. Examples:
@@ -95,6 +99,7 @@ OUTPUT:
     "when": "2026-05-14T08:30:00Z",
     "where": "Beijing, China",
     "why": "First state visit since re-election; focus on trade tariffs.",
+    "subtitle": "The first state visit of Trump's second term opens a three-day summit with Xi Jinping focused on trade tariffs.",
     "supporting_sources": ["src_a1b2", "src_c3d4"]
   },
   "canonical_title": "Trump's 2026 state visit to China",

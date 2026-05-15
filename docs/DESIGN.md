@@ -1,5 +1,11 @@
 # Design Document — Topic Page Generator
 
+> **Status (2026-05-15):** This document predates the editor-architecture refactor.
+> The current pipeline is documented in `CLAUDE.md` and detailed in
+> `docs/superpowers/plans/2026-05-15-editor-architecture-*.md`. Sections below
+> referring to the Module-driven pipeline, NeedPlanOutput, or extract.run are
+> historical context only.
+
 > Evaluator-facing design document for the Newsbreak take-home. Currently a scaffold; sections will be filled in as implementation proceeds. See [`PRD.md`](./PRD.md) for the planning view and [`schema.md`](./schema.md) for the full data contract.
 
 ## Contents

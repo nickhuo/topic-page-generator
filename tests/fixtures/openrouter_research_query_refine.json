@@ -1,0 +1,16 @@
+{
+  "id": "chatcmpl-fake-query",
+  "object": "chat.completion",
+  "model": "anthropic/claude-haiku-4-5",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"query\":\"NVIDIA GTC 2026 keynote date schedule\"}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 200, "completion_tokens": 12, "total_tokens": 212}
+}

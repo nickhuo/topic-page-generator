@@ -1,0 +1,16 @@
+{
+  "id": "chatcmpl-fake-curation",
+  "object": "chat.completion",
+  "model": "anthropic/claude-sonnet-4-6",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"sections\":[{\"section_id\":\"where_to_watch\",\"kind\":\"curated\",\"title\":\"Where to watch\",\"rank\":7,\"block_kind\":\"newsfeed\",\"intent\":\"Stream and broadcast options for the keynote.\",\"acceptance\":{\"description\":\"At least 3 channels.\",\"min_sources\":1,\"min_publishers\":1,\"required_facets\":[],\"forbid_single_perspective\":false}}]}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 200, "completion_tokens": 80, "total_tokens": 280}
+}

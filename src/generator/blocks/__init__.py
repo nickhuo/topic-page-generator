@@ -1,16 +1,10 @@
 """Render blocks — the presentation contract layer.
 
-A Module owns *what* data is extracted (content contract). A Block owns *how*
-that data is rendered (presentation contract). Modules adapt themselves into
-blocks via `Module.to_block()` (added in Phase 1 cutover); templates only
+A Block owns *how* data is rendered (presentation contract). Templates only
 consume blocks. The two layers stay orthogonal so visual changes don't ripple
 into LLM prompts.
 """
 
-from generator.blocks.converter import (
-    default_block_kind,
-    module_to_block,
-)
 from generator.blocks.schema import (
     ChartBlockData,
     ChartSeries,
@@ -45,6 +39,4 @@ __all__ = [
     "RenderBlock",
     "TimelineBlockData",
     "TimelineEntry",
-    "default_block_kind",
-    "module_to_block",
 ]

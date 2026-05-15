@@ -58,10 +58,10 @@ class EditorPrompter:
         - ("retry", str): user supplied a reformulated sentence; CLI re-runs ground.
         """
         if self.auto:
-            kind = "accept_module" if output.is_hot_event else "reject_page"
+            kind = "accept_section" if output.is_hot_event else "reject_page"
             self._log(
                 action=kind,
-                target={"module_kind": "ground"},
+                target={"section_id": "ground"},
                 reason="auto_mode",
             )
             decision: GroundDecision = "accept" if output.is_hot_event else "reject"
@@ -84,14 +84,14 @@ class EditorPrompter:
             if choice == "r":
                 new_sentence = Prompt.ask("New sentence")
                 self._log(
-                    action="edit_module_field",
-                    target={"module_kind": "ground", "field_path": "input_sentence"},
+                    action="edit_section_field",
+                    target={"section_id": "ground", "field_path": "input_sentence"},
                     reason="manual_reformulate",
                 )
                 return "retry", new_sentence.strip()
             self._log(
                 action="reject_page",
-                target={"module_kind": "ground"},
+                target={"section_id": "ground"},
                 reason="manual_reject_not_hot",
             )
             return "reject", output
@@ -102,7 +102,7 @@ class EditorPrompter:
             # Should not happen per schema contract, but guard anyway.
             self._log(
                 action="reject_page",
-                target={"module_kind": "ground"},
+                target={"section_id": "ground"},
                 reason="missing_facts",
             )
             return "reject", output
@@ -116,15 +116,15 @@ class EditorPrompter:
             )
             if choice == "y":
                 self._log(
-                    action="accept_module",
-                    target={"module_kind": "ground"},
+                    action="accept_section",
+                    target={"section_id": "ground"},
                     reason="manual_accept",
                 )
                 return "accept", output.model_copy(update={"facts": facts})
             if choice == "n":
                 self._log(
                     action="reject_page",
-                    target={"module_kind": "ground"},
+                    target={"section_id": "ground"},
                     reason="manual_reject_facts",
                 )
                 return "reject", output
@@ -133,8 +133,8 @@ class EditorPrompter:
             if edited is None:
                 continue  # validation failed, loop
             self._log(
-                action="edit_module_field",
-                target={"module_kind": "ground", "field_path": "facts"},
+                action="edit_section_field",
+                target={"section_id": "ground", "field_path": "facts"},
                 before=facts.model_dump(),
                 after=edited.model_dump(),
                 reason="manual_edit",
@@ -171,14 +171,19 @@ class EditorPrompter:
             return None
 
     # ------------------------------------------------------------------
-    # 2. plan_review
+    # 2. plan_review — DEPRECATED: no NeedPlanOutput in the editor architecture.
+    #    Kept as a no-op for backward compatibility; will be removed in a follow-up.
     # ------------------------------------------------------------------
     def plan_review(self, plan):
-        """Editor touchpoint for the needs-driven plan."""
+        """Editor touchpoint for the needs-driven plan.
+
+        DEPRECATED: The editor architecture does not use NeedPlanOutput.
+        This method is a no-op and will be removed in a future cleanup.
+        """
         if self.auto:
             self._log(
-                action="accept_module",
-                target={"module_kind": "plan"},
+                action="accept_section",
+                target={"section_id": "plan"},
                 reason="auto_mode",
             )
             return plan
@@ -215,9 +220,9 @@ class EditorPrompter:
                     ]
                     plan = plan.model_copy(update={"need_plans": new_plans})
                     self._log(
-                        action="edit_module_field",
+                        action="edit_section_field",
                         target={
-                            "module_kind": "plan",
+                            "section_id": "plan",
                             "field_path": f"need_plans[{toggle}].activated",
                         },
                         before=p.activated,
@@ -228,94 +233,9 @@ class EditorPrompter:
         return plan
 
     # ------------------------------------------------------------------
-    # 3. module_review
+    # 3. final_approval
     # ------------------------------------------------------------------
-    def module_review(self, module):
-        if self.auto:
-            self._log(
-                action="accept_module",
-                target={"module_kind": module.kind},
-                reason="auto_mode",
-            )
-            return ("keep", module)
-
-        while True:
-            json_lines = module.model_dump_json(indent=2).splitlines()
-            preview = "\n".join(json_lines[:30])
-            if len(json_lines) > 30:
-                preview += "\n... (truncated)"
-            self.console.print(
-                Panel(preview, title=f"Module: {module.kind}", expand=False)
-            )
-
-            choice = Prompt.ask(
-                "[a]ccept / [r]egenerate / [e]dit / [s]kip / [v]iew sources",
-                choices=["a", "r", "e", "s", "v"],
-                default="a",
-            )
-
-            if choice == "a":
-                self._log(
-                    action="accept_module",
-                    target={"module_kind": module.kind},
-                    reason="manual_accept",
-                )
-                return ("keep", module)
-
-            elif choice == "r":
-                self._log(
-                    action="regenerate_module",
-                    target={"module_kind": module.kind},
-                    reason="manual_regen",
-                )
-                return ("regen", module)
-
-            elif choice == "s":
-                self._log(
-                    action="skip_module",
-                    target={"module_kind": module.kind},
-                    reason="manual_skip",
-                )
-                return ("skip", module)
-
-            elif choice == "v":
-                conf = module.confidence
-                citations = getattr(conf, "citations", None)
-                self.console.print(citations if citations is not None else conf)
-                # loop again
-
-            elif choice == "e":
-                old_module = module
-                json_text = module.model_dump_json(indent=2)
-                tmp = tempfile.NamedTemporaryFile(
-                    suffix=".json", mode="w", delete=False
-                )
-                tmp.write(json_text)
-                tmp.close()
-                tmp_path = tmp.name
-                subprocess.call([os.environ.get("EDITOR", "vi"), tmp_path])
-                with open(tmp_path) as f:
-                    new_text = f.read()
-                try:
-                    new_module = type(module).model_validate_json(new_text)
-                except ValidationError as exc:
-                    self.console.print(f"[red]Validation error:[/red] {exc}")
-                    continue  # loop again, no log
-                self._log(
-                    action="edit_module_field",
-                    target={"module_kind": module.kind},
-                    before=old_module.model_dump(),
-                    after=new_module.model_dump(),
-                    reason="manual_edit",
-                )
-                return ("keep", new_module)
-
-    # ------------------------------------------------------------------
-    # 4. final_approval
-    # ------------------------------------------------------------------
-    def final_approval(
-        self, html_path: str | Path
-    ) -> Literal["approve", "reject"] | tuple[Literal["regen"], str]:
+    def final_approval(self, html_path: str | Path) -> Literal["approve", "reject"]:
         if self.auto:
             self._log(action="approve_page", reason="auto_mode")
             return "approve"
@@ -324,7 +244,7 @@ class EditorPrompter:
         self.console.print("Draft opened in browser. Review the page.")
 
         while True:
-            raw = Prompt.ask("Approve? [y]es / [n]o / [r] <module-kind>")
+            raw = Prompt.ask("Approve? [y]es / [n]o")
             raw = raw.strip()
             if raw == "y":
                 self._log(action="approve_page", reason="manual_approve")
@@ -332,15 +252,5 @@ class EditorPrompter:
             elif raw == "n":
                 self._log(action="reject_page", reason="manual_reject")
                 return "reject"
-            elif raw.startswith("r "):
-                kind = raw[2:].strip()
-                self._log(
-                    action="regenerate_module",
-                    target={"module_kind": kind},
-                    reason="final_approval_regen",
-                )
-                return ("regen", kind)
             else:
-                self.console.print(
-                    "[red]Invalid input.[/red] Enter y, n, or r <module-kind>."
-                )
+                self.console.print("[red]Invalid input.[/red] Enter y or n.")

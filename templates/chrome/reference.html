@@ -1,4 +1,7 @@
 <aside class="page-reference" aria-label="Reference">
-  {% include "chrome/reference_timeline.html" ignore missing %}
+  {% for section in sidebar_sections | default([]) %}
+    {% set section_index = loop.index %}
+    {% include "needs/sidebar_section.html" %}
+  {% endfor %}
   {% include "chrome/reference_wikipedia.html" ignore missing %}
 </aside>
