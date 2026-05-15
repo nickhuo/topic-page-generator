@@ -10,10 +10,4 @@
       {% endif %}
     </p>
   {% endfor %}
-  {% for pq in block.pull_quotes %}
-    <blockquote class="pull-quote">
-      <p>{{ pq.quote }}</p>
-      {% if pq.attribution %}<cite>&mdash; {{ pq.attribution }}</cite>{% endif %}
-    </blockquote>
-  {% endfor %}
 </div>

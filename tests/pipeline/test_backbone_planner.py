@@ -18,13 +18,12 @@ def _facts() -> EventFacts:
     )
 
 
-def test_emits_four_backbone_sections_in_canonical_order():
+def test_emits_three_backbone_sections_in_canonical_order():
     sections = build_backbone_sections(_facts(), canonical_title="NVIDIA GTC 2026")
     ids = [s.section_id for s in sections]
     assert ids == [
         "overview",
         "timeline",
-        "background",
         "media_coverage",
     ]
 
@@ -33,7 +32,7 @@ def test_each_section_is_kind_backbone_with_unique_rank():
     sections = build_backbone_sections(_facts(), canonical_title="t")
     assert all(s.kind == "backbone" for s in sections)
     ranks = [s.rank for s in sections]
-    assert ranks == [1, 2, 3, 4]
+    assert ranks == [1, 2, 3]
 
 
 def test_block_kind_mapping_matches_design():
@@ -41,16 +40,14 @@ def test_block_kind_mapping_matches_design():
     by_id = {s.section_id: s for s in sections}
     assert by_id["overview"].block_kind == "paragraph"
     assert by_id["timeline"].block_kind == "timeline"
-    assert by_id["background"].block_kind == "paragraph"
     assert by_id["media_coverage"].block_kind == "newsfeed"
 
 
-def test_placement_routes_timeline_and_background_to_sidebar():
+def test_placement_routes_timeline_to_sidebar():
     sections = build_backbone_sections(_facts(), canonical_title="t")
     by_id = {s.section_id: s for s in sections}
     assert by_id["overview"].placement == "main"
     assert by_id["timeline"].placement == "sidebar"
-    assert by_id["background"].placement == "sidebar"
     assert by_id["media_coverage"].placement == "main"
 
 

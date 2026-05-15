@@ -18,7 +18,6 @@ def test_backbone_section_id_is_closed_enum():
     valid = {
         "overview",
         "timeline",
-        "background",
         "media_coverage",
     }
     for sid in valid:
@@ -72,11 +71,11 @@ def test_section_plan_output_orders_by_rank_field_not_position():
     out = SectionPlanOutput(
         sections=[
             SectionPlan(
-                section_id="background",
+                section_id="media_coverage",
                 kind="backbone",
-                title="b",
+                title="m",
                 rank=4,
-                block_kind="paragraph",
+                block_kind="newsfeed",
                 intent="i",
                 acceptance=AcceptanceCriteria(description="d"),
             ),
@@ -91,7 +90,7 @@ def test_section_plan_output_orders_by_rank_field_not_position():
             ),
         ]
     )
-    assert [s.section_id for s in out.sections] == ["background", "overview"]
+    assert [s.section_id for s in out.sections] == ["media_coverage", "overview"]
     assert [s.rank for s in out.sections] == [4, 1]
 
 

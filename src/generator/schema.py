@@ -311,7 +311,6 @@ BlockKind = Literal[
 BackboneSectionId = Literal[
     "overview",
     "timeline",
-    "background",
     "media_coverage",
 ]
 

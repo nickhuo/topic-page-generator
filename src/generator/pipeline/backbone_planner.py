@@ -1,11 +1,10 @@
-"""Backbone planner — deterministic 4-section emitter.
+"""Backbone planner — deterministic 3-section emitter.
 
-Zero LLM calls. Emits exactly four always-on sections in canonical order:
+Zero LLM calls. Emits exactly three always-on sections in canonical order:
 
     1. overview        → paragraph, main
     2. timeline        → timeline,  sidebar  (past / present / future)
-    3. background      → paragraph, sidebar
-    4. media_coverage  → newsfeed,  main     (image-only, ≤5, newest first)
+    3. media_coverage  → newsfeed,  main     (image-only, ≤5, newest first)
 
 Hero (title + subtitle) is rendered from `EventPage.subject` and is not a
 backbone section. Acceptance criteria default to the matching BlockSpec's
@@ -29,29 +28,25 @@ from generator.schema import (
 _BACKBONE_ORDER: tuple[BackboneSectionId, ...] = (
     "overview",
     "timeline",
-    "background",
     "media_coverage",
 )
 
 _BLOCK_KIND_FOR_ID: dict[BackboneSectionId, BlockKind] = {
     "overview": "paragraph",
     "timeline": "timeline",
-    "background": "paragraph",
     "media_coverage": "newsfeed",
 }
 
 _PLACEMENT_FOR_ID: dict[BackboneSectionId, Placement] = {
     "overview": "main",
     "timeline": "sidebar",
-    "background": "sidebar",
     "media_coverage": "main",
 }
 
 _TITLES: dict[BackboneSectionId, str] = {
     "overview": "Overview",
     "timeline": "Timeline",
-    "background": "Background",
-    "media_coverage": "Media coverage",
+    "media_coverage": "Featured Coverage",
 }
 
 
@@ -68,23 +63,6 @@ def _intent_for(section_id: BackboneSectionId, canonical_title: str) -> str:
             "evidence supports it — at least one entry for events that "
             "already happened (past), the current/just-broken development "
             "(present), and any scheduled or expected next steps (future)."
-        ),
-        "background": (
-            f"ONE short paragraph (<=100 words) of context the reader must "
-            f"already know to make sense of {canonical_title}. Treat this as "
-            f"prerequisite knowledge that predates the event: the institution's "
-            f"or relationship's history, the long-running structural backdrop, "
-            f"format/precedent facts, or the slow build-up over months or years. "
-            f"Do NOT describe what just happened, who attended, what was "
-            f"announced, or how big a moment this is — Overview already covers "
-            f"that. "
-            f"Anti-pattern: 'The 2026 World Cup represents a historic moment... "
-            f"the tournament arrives amid global attention'. "
-            f"Good pattern: 'The FIFA World Cup, held every four years since "
-            f"1930, expands to 48 teams in 2026 — its first format change since "
-            f"1998. Estadio Azteca becomes the only venue to host matches "
-            f"across three different World Cups (1970, 1986, 2026).' "
-            f"Renders in the sidebar — be dense and specific, no throat-clearing."
         ),
         "media_coverage": (
             "Up to five high-signal external articles from distinct publishers, "
@@ -126,7 +104,7 @@ def _acceptance_for(
 def build_backbone_sections(
     facts: EventFacts, canonical_title: str
 ) -> list[SectionPlan]:
-    """Return the 4 always-on backbone sections in canonical rank order."""
+    """Return the 3 always-on backbone sections in canonical rank order."""
     sections: list[SectionPlan] = []
     for rank, section_id in enumerate(_BACKBONE_ORDER, start=1):
         block_kind = _BLOCK_KIND_FOR_ID[section_id]

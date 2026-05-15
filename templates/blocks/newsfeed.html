@@ -19,11 +19,6 @@
               {% if card.published_at %}
                 <time class="news-card__date">{{ card.published_at[:10] }}</time>
               {% endif %}
-              {% if card.source_id and source_index[card.source_id] %}
-                <span class="cite-num" data-cite="{{ card.source_id }}">
-                  <a href="#src-{{ source_index[card.source_id] }}">[{{ source_index[card.source_id] }}]</a>
-                </span>
-              {% endif %}
             </p>
           </div>
         </li>

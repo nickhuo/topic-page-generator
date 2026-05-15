@@ -251,8 +251,8 @@ body {
   left: 0;
   z-index: 50;
   display: none;
-  width: 320px; max-width: calc(100vw - 32px);
-  padding: var(--sp-3);
+  width: 440px; max-width: calc(100vw - 32px);
+  padding: var(--sp-4);
   background: var(--bg);
   border: 1px solid var(--rule);
   border-radius: 8px;
@@ -283,15 +283,15 @@ body {
   max-height: 380px; overflow-y: auto;
 }
 .cite-popover__card {
-  display: grid; grid-template-columns: 56px 1fr;
-  gap: var(--sp-3);
+  display: grid; grid-template-columns: 64px 1fr;
+  gap: var(--sp-3); align-items: start;
   text-decoration: none; color: inherit;
-  padding: 6px; margin: -6px;
+  padding: 8px; margin: -8px;
   border-radius: 6px;
 }
 .cite-popover__card:hover { background: var(--surface); }
 .cite-popover__thumb {
-  width: 56px; height: 56px;
+  width: 64px; height: 64px;
   border-radius: 6px; overflow: hidden;
   object-fit: cover; display: block;
   background: var(--surface);
@@ -311,7 +311,7 @@ body {
 .cite-popover__favicon { border-radius: 50%; }
 .cite-popover__headline {
   font-family: var(--serif); font-weight: 600;
-  font-size: 13px; line-height: 1.35;
+  font-size: 14px; line-height: 1.35;
   color: var(--ink);
   display: -webkit-box; -webkit-line-clamp: 2;
   -webkit-box-orient: vertical; overflow: hidden;
@@ -334,22 +334,6 @@ body {
   font-size: 15.5px; line-height: 1.8; color: var(--ink-2);
   margin-bottom: var(--sp-4); text-wrap: pretty; max-width: 680px;
 }
-.pull-quote {
-  margin: var(--sp-5) 0;
-  padding: var(--sp-5) var(--sp-5);
-  border-left: 2px solid var(--ink);
-  background: var(--surface);
-  border-radius: 0 6px 6px 0;
-}
-.pull-quote p {
-  font-family: var(--serif); font-size: 1.05rem; font-style: italic;
-  line-height: 1.6; color: var(--ink-2); margin-bottom: var(--sp-2) !important;
-}
-.pull-quote cite {
-  display: block; font-size: 12px; font-style: normal;
-  color: var(--muted); font-weight: 600;
-}
-
 /* =========================================================================
    BLOCK: factsheet
    ========================================================================= */
@@ -413,7 +397,11 @@ body {
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
 
-.news-card__body    { min-width: 0; padding: var(--sp-4); }
+.news-card__body    {
+  min-width: 0; padding: var(--sp-4);
+  flex: 1 1 auto;
+  display: flex; flex-direction: column;
+}
 .news-card__outlet  {
   display: flex; align-items: center; gap: 5px;
   font-size: 10px; font-weight: 800; color: var(--ink);
@@ -428,6 +416,7 @@ body {
 }
 .news-card__meta {
   font-size: 11px; color: var(--faint); display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap;
+  margin-top: auto; padding-top: var(--sp-3);
 }
 .news-card__pub { font-weight: 700; color: var(--ink-2); }
 
@@ -657,42 +646,114 @@ body {
 }
 .page-reference::-webkit-scrollbar { display: none; }
 
-/* Sidebar card shell */
+/* Sidebar card shell — open editorial style, no boxing */
 .ref-card {
-  border: 1px solid var(--rule); border-radius: 8px;
-  padding: 18px 20px; background: var(--bg);
+  background: transparent;
+  padding: 0;
+  position: relative;
+}
+.ref-card + .ref-card {
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--rule);
 }
 .ref-card__title {
-  font-size: 10px; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--faint); margin-bottom: var(--sp-4);
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-2);
+  margin-bottom: var(--sp-4);
 }
 
-/* Timeline in sidebar */
-.ref-timeline { list-style: none; position: relative; padding-left: 22px; }
+/* Timeline in sidebar
+   Geometry:
+     rail at x = 4px (1px hairline)
+     markers centered on rail (center at x = 4.5px)
+     content begins at padding-left of OL
+*/
+.ref-timeline {
+  list-style: none; position: relative;
+  padding-left: 22px;
+  margin: 0;
+}
 .ref-timeline::before {
   content: ""; position: absolute;
-  left: 5px; top: 6px; bottom: 6px;
+  left: 4px; top: 4px; bottom: 4px;
   width: 1px; background: var(--rule);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
 }
-.ref-timeline__item { position: relative; padding-bottom: 16px; }
-.ref-timeline__item:last-child { padding-bottom: 0; }
+.ref-timeline__item {
+  position: relative;
+  padding: 2px 0 var(--sp-4) 0;
+  margin: 0;
+}
+.ref-timeline__item:first-child { padding-top: 0; }
+.ref-timeline__item:last-child  { padding-bottom: 0; }
+
+/* Default marker — centered on rail at x = 4.5px */
 .ref-timeline__item::before {
   content: ""; position: absolute;
-  left: -18px; top: 5px;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--bg); border: 1.5px solid var(--faint);
+  left: -17px; top: 7px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--faint);
+  transition: transform .25s ease, box-shadow .3s ease;
 }
-.ref-timeline__item--past { opacity: .5; }
-.ref-timeline__item--past::before { background: var(--faint); border-color: var(--faint); }
-.ref-timeline__item--current::before { background: var(--ink); border-color: var(--ink); width: 12px; height: 12px; left: -19px; top: 4px; }
+
+/* PAST — settled, low-volume */
+.ref-timeline__item--past::before {
+  width: 5px; height: 5px;
+  left: -16px; top: 9px;
+  background: var(--faint);
+}
+.ref-timeline__item--past .ref-timeline__date  { color: var(--faint); }
+.ref-timeline__item--past .ref-timeline__label { color: var(--ink-2); font-weight: 500; }
+.ref-timeline__item--past .ref-timeline__loc   { color: var(--faint); }
+
+/* PRESENT — filled ink with soft halo */
+.ref-timeline__item--present::before,
+.ref-timeline__item--current::before {
+  width: 9px; height: 9px;
+  left: -18px; top: 6px;
+  background: var(--ink);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--ink) 14%, transparent);
+}
+.ref-timeline__item--present .ref-timeline__date,
+.ref-timeline__item--current .ref-timeline__date {
+  color: var(--ink); font-weight: 700;
+}
+.ref-timeline__item--present .ref-timeline__label,
+.ref-timeline__item--current .ref-timeline__label {
+  color: var(--ink); font-weight: 700;
+}
+
+/* FUTURE — clean open ring */
+.ref-timeline__item--future::before {
+  width: 8px; height: 8px;
+  left: -17px; top: 6px;
+  background: var(--bg);
+  border: 1.5px solid var(--ink-2);
+}
+.ref-timeline__item--future .ref-timeline__date  { color: var(--ink-2); }
+.ref-timeline__item--future .ref-timeline__label { color: var(--ink-2); font-weight: 600; }
+
 .ref-timeline__date {
-  font-size: 10.5px; color: var(--faint); text-transform: uppercase;
-  letter-spacing: .05em; display: block; margin-bottom: 2px;
+  font-size: 10.5px; color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  display: block; margin-bottom: 3px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
 }
-.ref-timeline__item--current .ref-timeline__date { color: var(--ink); font-weight: 700; }
-.ref-timeline__label { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-.ref-timeline__item--past .ref-timeline__label { color: var(--muted); font-weight: 500; }
-.ref-timeline__loc { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+.ref-timeline__label {
+  font-size: 13px; font-weight: 600;
+  color: var(--ink); line-height: 1.4;
+  text-wrap: pretty;
+}
+.ref-timeline__loc {
+  font-size: 11.5px; color: var(--muted);
+  margin-top: 3px; line-height: 1.4;
+}
+
+/* Cite link slot — keep small in sidebar */
+.ref-timeline__item .cite-num { font-size: 9.5px; margin-left: 2px; }
 
 /* Wikipedia / Background card */
 .ref-wiki__thumb {
@@ -726,17 +787,6 @@ body {
   margin-bottom: var(--sp-3);
 }
 .ref-prose p:last-child { margin-bottom: 0; }
-
-/* Future-phase timeline marker — open ring */
-.ref-timeline__item--future::before {
-  background: var(--bg); border-color: var(--ink); border-style: dashed;
-}
-.ref-timeline__item--future .ref-timeline__date { color: var(--ink-2); }
-.ref-timeline__item--present::before {
-  background: var(--ink); border-color: var(--ink);
-  width: 12px; height: 12px; left: -19px; top: 4px;
-}
-.ref-timeline__item--present .ref-timeline__date { color: var(--ink); font-weight: 700; }
 
 /* =========================================================================
    MOBILE

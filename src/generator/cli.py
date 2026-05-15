@@ -293,7 +293,7 @@ def regen_section(
     from generator.schema import SectionPlan
 
     spec_cls = get_spec(existing.block_kind)
-    _backbone_ids = {"overview", "timeline", "background", "media_coverage"}
+    _backbone_ids = {"overview", "timeline", "media_coverage"}
     stub_section = SectionPlan(
         section_id=existing.section_id,
         kind="curated" if existing.section_id not in _backbone_ids else "backbone",
