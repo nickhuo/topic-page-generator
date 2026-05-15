@@ -36,6 +36,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 _TEMPLATES_DIR = _PROJECT_ROOT / "templates"
 
 _CHROME_KINDS = {"hero", "countdown"}
+_MAX_MILESTONES = 6
 
 
 def slugify(text: str) -> str:
@@ -180,29 +181,40 @@ def _build_sections(
 def _build_milestones(page: EventPage) -> list[dict]:
     """Build the right-rail milestone timeline entries from the schedule module.
 
-    Returns at most 6 items, sorted chronologically. Each item is a dict with
-    ``day``, ``time``, ``label``, ``location``, ``state`` where state is one of
-    ``past``/``future``/``current``. The chronologically-last future entry is
-    promoted to ``current`` (the next-up milestone). Returns ``[]`` when no
-    schedule module exists or no items are flagged ``is_milestone``.
+    Returns at most ``_MAX_MILESTONES`` items, sorted chronologically. Each
+    item is a dict with ``day``, ``time``, ``label``, ``location``, ``state``
+    where state is one of ``past``/``future``/``current``. The
+    chronologically-last future entry is promoted to ``current`` (the next-up
+    milestone). Items whose ``time_iso`` cannot be parsed are silently dropped.
+    Returns ``[]`` when no schedule module exists or no items are flagged
+    ``is_milestone``.
     """
     sched = next((m for m in page.modules if m.kind == "schedule"), None)
     if sched is None:
         return []
     now = datetime.now(timezone.utc)
-    items = [i for i in sched.data.items if i.is_milestone]
-    items.sort(key=lambda i: i.time_iso)
-    out: list[dict] = []
-    for i in items[:6]:
+
+    # Parse timestamps first; drop items that cannot be parsed.
+    parsed: list[tuple[datetime, object]] = []
+    for i in [item for item in sched.data.items if item.is_milestone]:
         try:
             ts = datetime.fromisoformat(i.time_iso.replace("Z", "+00:00"))
         except ValueError:
-            ts = None
-        state = "past" if ts and ts < now else "future"
+            continue
+        parsed.append((ts, i))
+
+    # Sort by parsed datetime, then cap.
+    parsed.sort(key=lambda pair: pair[0])
+    parsed = parsed[:_MAX_MILESTONES]
+
+    out: list[dict] = []
+    for ts, i in parsed:
+        ts_utc = ts.astimezone(timezone.utc)
+        state = "past" if ts_utc < now else "future"
         out.append(
             {
-                "day": ts.strftime("%b %d") if ts else i.time_iso[:10],
-                "time": ts.strftime("%H:%M UTC") if ts else None,
+                "day": ts_utc.strftime("%b %d"),
+                "time": ts_utc.strftime("%H:%M UTC"),
                 "label": i.label,
                 "location": i.location,
                 "state": state,
