@@ -6,9 +6,9 @@ this file is wrong.
 
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal
+from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -16,7 +16,6 @@ from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator, mod
 # ---------------------------------------------------------------------------
 ISO8601 = str  # TODO: tighten to datetime with serializer if downstream needs it
 SourceId = str
-ModuleId = str
 PageId = str
 TraceId = str
 
@@ -27,17 +26,6 @@ TraceId = str
 SourceTier = Literal["T0", "T1", "T2", "T3"]
 Sentiment = Literal["positive", "neutral", "negative"]
 Priority = Literal["required", "high", "medium", "low"]
-Slot = Literal["hero", "primary", "aside", "tail", "footer"]
-NeedId = Literal[
-    "what_happened",
-    "when_where",
-    "who_involved",
-    "current_state",
-    "why_matters",
-    "world_reaction",
-    "what_can_do",
-    "what_next",
-]
 
 ConfidenceFlag = Literal[
     "single_source",
@@ -109,9 +97,6 @@ class Source(_Frozen):
     language: str
     rights: SourceRights
     archive_url: HttpUrl | None = None
-    # Phase-1 needs-driven additions. Default-empty / None so existing code paths
-    # keep working until plan.py + fetch.py are switched over.
-    serves_needs: list[NeedId] = Field(default_factory=list)
     # Editor-architecture: which SectionPlan.section_id values this source backs.
     serves_sections: list[str] = Field(default_factory=list)
     thumbnail_url: HttpUrl | None = None
@@ -136,7 +121,7 @@ class WikipediaCardData(_Frozen):
 
 
 # ---------------------------------------------------------------------------
-# §3 Module base
+# §3 Confidence signals (shared by sections)
 # ---------------------------------------------------------------------------
 class ConfidenceSignals(_Frozen):
     source_count: int
@@ -151,262 +136,6 @@ class ModuleConfidence(_Frozen):
     field_level: dict[str, float] = Field(default_factory=dict)
     signals: ConfidenceSignals
     flags: list[ConfidenceFlag] = Field(default_factory=list)
-
-
-class _BaseModule(_Frozen):
-    """Shared fields for every typed module. `kind` is the union discriminator."""
-
-    module_id: ModuleId
-    serves_needs: list[NeedId]
-    citations: list[Citation]
-    confidence: ModuleConfidence
-    slot: Slot
-    artifact: str
-    artifact_alternatives: list[str] = Field(default_factory=list)
-    inclusion_reason: Priority
-
-
-# ---------------------------------------------------------------------------
-# §3 Module data payloads and the 12 module variants
-# ---------------------------------------------------------------------------
-class OverviewBullet(_Frozen):
-    text: str = Field(min_length=1)
-    source_id: SourceId
-
-    @field_validator("text")
-    @classmethod
-    def _cap_words(cls, v: str) -> str:
-        if len(v.split()) > 18:
-            raise ValueError("overview bullet text must be <= 18 words")
-        return v
-
-
-class HeroData(_Frozen):
-    title: str = Field(max_length=80)
-    subtitle: str | None = Field(default=None, max_length=120)
-    summary: str = Field(max_length=140)
-    image_url: HttpUrl | None = None
-    image_alt: str  # TODO: enforce non-empty only when image_url is set
-    badge_label: str | None = None
-    overview_bullets: list[OverviewBullet] | None = Field(
-        default=None, min_length=3, max_length=4
-    )
-
-
-class HeroModule(_BaseModule):
-    kind: Literal["hero"] = "hero"
-    data: HeroData
-
-
-class InfoboxRow(_Frozen):
-    label: str
-    value: str | list[str]
-    source_id: SourceId
-
-
-class InfoboxData(_Frozen):
-    rows: list[InfoboxRow]  # 5–9 recommended, not enforced
-
-
-class InfoboxModule(_BaseModule):
-    kind: Literal["infobox"] = "infobox"
-    data: InfoboxData
-
-
-class ScheduleItem(_Frozen):
-    time_iso: ISO8601
-    label: str
-    location: str | None = None
-    duration_min: int | None = None
-    is_milestone: bool = False
-    source_id: SourceId
-
-
-class ScheduleData(_Frozen):
-    items: list[ScheduleItem]
-    timezone: str
-
-
-class ScheduleModule(_BaseModule):
-    kind: Literal["schedule"] = "schedule"
-    data: ScheduleData
-
-
-class KPITile(_Frozen):
-    value: str
-    unit: str | None = None
-    label: str
-    comparison: str | None = None
-    source_id: SourceId
-
-
-class KPINumbersData(_Frozen):
-    tiles: list[KPITile] = Field(min_length=1, max_length=4)
-
-
-class KPINumbersModule(_BaseModule):
-    kind: Literal["kpi_numbers"] = "kpi_numbers"
-    data: KPINumbersData
-
-
-class ComparisonSubject(_Frozen):
-    name: str
-    label: str | None = None
-
-
-class ComparisonCell(_Frozen):
-    value: str
-    source_id: SourceId
-
-
-class ComparisonAxis(_Frozen):
-    label: str
-    cells: list[
-        ComparisonCell
-    ]  # length must equal subjects length (enforced at extract)
-
-
-class ComparisonData(_Frozen):
-    subjects: list[ComparisonSubject] = Field(min_length=2, max_length=3)
-    axes: list[ComparisonAxis]
-
-
-class ComparisonModule(_BaseModule):
-    kind: Literal["comparison"] = "comparison"
-    data: ComparisonData
-
-
-class ChangelogEntry(_Frozen):
-    label: str
-    description: str  # ≤80 words; enforced at extract
-    importance: Literal["breaking", "feature", "minor"]
-    source_id: SourceId
-
-
-class ChangelogData(_Frozen):
-    version_label: str
-    previous_version_label: str | None = None
-    entries: list[ChangelogEntry]
-
-
-class ChangelogModule(_BaseModule):
-    kind: Literal["changelog"] = "changelog"
-    data: ChangelogData
-
-
-class ReactionItem(_Frozen):
-    author: str
-    author_role: str
-    quote: str = Field(max_length=280)
-    sentiment: Sentiment
-    source_id: SourceId
-    stakeholder_tier: Literal["stakeholder", "adjacent", "third_party"] | None = None
-    author_image_url: HttpUrl | None = None
-
-
-class ReactionAggregate(_Frozen):
-    positive_count: int
-    neutral_count: int
-    negative_count: int
-
-
-class ReactionsData(_Frozen):
-    items: list[ReactionItem] = Field(min_length=5, max_length=15)
-    aggregate_sentiment: ReactionAggregate | None = None
-
-
-class ReactionsModule(_BaseModule):
-    kind: Literal["reactions"] = "reactions"
-    data: ReactionsData
-
-
-class MediaCoverageItem(_Frozen):
-    headline: str
-    publisher: str
-    publisher_tier: SourceTier
-    published_at: ISO8601
-    url: HttpUrl
-    snippet: str  # ≤30 words; enforced at extract
-    perspective: Literal["favorable", "critical", "neutral"] | None = None
-    sub_topic: str | None = None
-    source_id: SourceId
-
-
-class MediaCoverageData(_Frozen):
-    items: list[MediaCoverageItem]
-    grouping_strategy: Literal["by_perspective", "by_subtopic", "by_time", "flat"]
-
-
-class MediaCoverageModule(_BaseModule):
-    kind: Literal["media_coverage"] = "media_coverage"
-    data: MediaCoverageData
-
-
-class OfficialStatementItem(_Frozen):
-    author: str
-    role: str
-    organization: str
-    quote: str
-    made_at: ISO8601
-    source_url: HttpUrl
-    source_id: SourceId
-
-
-class OfficialStatementsData(_Frozen):
-    items: list[OfficialStatementItem]
-
-
-class OfficialStatementsModule(_BaseModule):
-    kind: Literal["official_statements"] = "official_statements"
-    data: OfficialStatementsData
-
-
-class WhereToWatchChannel(_Frozen):
-    type: Literal["tv", "streaming", "in_person", "radio", "api", "app"]
-    name: str
-    region: str | None = None
-    url: HttpUrl | None = None
-    cost: str | None = None
-    source_id: SourceId
-
-
-class WhereToWatchData(_Frozen):
-    channels: list[WhereToWatchChannel]
-
-
-class WhereToWatchModule(_BaseModule):
-    kind: Literal["where_to_watch"] = "where_to_watch"
-    data: WhereToWatchData
-
-
-class BackgroundParagraph(_Frozen):
-    text: str
-    citations: list[Citation]
-
-
-class BackgroundData(_Frozen):
-    paragraphs: list[BackgroundParagraph] = Field(min_length=1, max_length=2)
-
-
-class BackgroundModule(_BaseModule):
-    kind: Literal["background"] = "background"
-    data: BackgroundData
-
-
-TypedModule = Annotated[
-    HeroModule
-    | InfoboxModule
-    | ScheduleModule
-    | KPINumbersModule
-    | ComparisonModule
-    | ChangelogModule
-    | ReactionsModule
-    | MediaCoverageModule
-    | OfficialStatementsModule
-    | WhereToWatchModule
-    | BackgroundModule,
-    Field(discriminator="kind"),
-]
 
 
 # ---------------------------------------------------------------------------
@@ -501,23 +230,13 @@ class EventPage(_Frozen):
     input_sentence: str
     generated_at: ISO8601
     subject: EventSubject
-    modules: list[TypedModule]
     layout: EventLayout
     sources: list[Source]
-    needs_coverage: dict[NeedId, list[ModuleId]]
-    uncovered_needs: list[NeedId]
-    # The needs curation plan that produced this page (Phase 1 cutover).
-    # Optional during migration so older fixtures still round-trip; once all
-    # outputs are produced by the new plan stage, mark required.
-    need_plans: list["NeedCurationPlan"] = Field(default_factory=list)
+    editorial_sections: list["RenderedSection"]
     # Optional Wikipedia reference card surfaced in the right rail. Filled
     # by the ground stage when a confident canonical title is available; the
     # render path no-ops cleanly when this is None.
     wikipedia_card: WikipediaCardData | None = None
-    # Editorial-architecture render path: list of fully-extracted sections.
-    # When present, render walks this list instead of the legacy modules path.
-    # Plan 5 will remove the conditional + legacy fields.
-    editorial_sections: list["RenderedSection"] | None = None
     meta: EventMeta
 
 
@@ -558,15 +277,12 @@ class GroundOutput(_Frozen):
 
 
 # ---------------------------------------------------------------------------
-# Phase-1 needs-driven plan types — the only plan contract.
+# Editor-architecture section types
 # ---------------------------------------------------------------------------
 BlockKind = Literal[
     "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions"
 ]
 
-# ---------------------------------------------------------------------------
-# Editor-architecture section types (Plan 1 foundation, not yet wired).
-# ---------------------------------------------------------------------------
 BackboneSectionId = Literal[
     "overview",
     "key_takeaways",
@@ -660,73 +376,6 @@ class RenderedSection(_Frozen):
         return self
 
 
-FetchAngle = Literal["news", "commentary", "official", "explainer"]
-
-
-class FetchQuery(_Frozen):
-    """A single Tavily-bound search the plan stage emits for a particular need."""
-
-    query: str
-    time_range_days: int | None = None
-    angle: FetchAngle | None = None
-    notes: str | None = None
-
-
-class TierQuota(_Frozen):
-    """Minimum number of sources required per publisher tier on a need."""
-
-    t0: int = 0
-    t1: int = 0
-    t2: int = 0
-
-
-class NeedCurationPlan(_Frozen):
-    """Plan-stage instructions for one reader need.
-
-    All 8 needs always appear in PlanOutput.need_plans; `activated=False` means
-    the LLM (or editor) decided this need has no substance for this event and
-    it should not be surfaced on the page.
-    """
-
-    need_id: NeedId
-    activated: bool
-    rank: int = Field(ge=1, le=8)
-    section_title: str
-    rationale: str
-    fetch_queries: list[FetchQuery] = Field(default_factory=list)
-    assigned_modules: list[str] = Field(default_factory=list)
-    render_overrides: dict[str, BlockKind] = Field(default_factory=dict)
-    publisher_quota: TierQuota = Field(default_factory=TierQuota)
-    category: Literal["fact", "opinion"] | None = None
-    opinion_subtag: str | None = None
-
-
-class NeedPlanOutput(_Frozen):
-    """Output of the new needs-driven plan stage (Phase 1 cutover target).
-
-    Distinct from legacy PlanOutput so both can coexist during migration.
-    """
-
-    need_plans: list[NeedCurationPlan]
-    layout_preset_id: AestheticPresetId  # carries over the deterministic preset hint
-
-
-class AestheticOverrides(_Frozen):
-    palette: PaletteId | None = None
-    density: Density | None = None
-    typography_weight: TypographyWeight | None = None
-    hero_mood: HeroMood | None = None
-    copy_register: CopyRegister | None = None
-
-
-class AestheticPlanOutput(_Frozen):
-    preset_id: AestheticPresetId
-    preset_confidence: float = Field(ge=0.0, le=1.0)
-    alternatives_considered: list[AestheticPresetId] = Field(default_factory=list)
-    aesthetic_overrides: AestheticOverrides
-    reasoning: str
-
-
 class ConsistencyIssue(_Frozen):
     severity: Literal["warning", "error"]
     module_kind: str
@@ -818,5 +467,3 @@ class Trace(_Frozen):
         "approved_published", "rejected", "draft_saved", "auto_approved"
     ]
     approval: TraceApproval
-
-

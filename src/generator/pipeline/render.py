@@ -59,12 +59,8 @@ def build_editorial_page(
         input_sentence=input_sentence,
         generated_at=datetime.now(timezone.utc).isoformat(),
         subject=subject,
-        modules=[],  # editorial path: no modules
         layout=layout,
         sources=sources,
-        needs_coverage={},
-        uncovered_needs=[],
-        need_plans=[],
         wikipedia_card=wikipedia_card,
         editorial_sections=editorial_sections,
         meta=meta,
@@ -142,7 +138,7 @@ def render_html(page: EventPage) -> str:
     toc_js = (_TEMPLATES_DIR / "toc.js").read_text(encoding="utf-8")
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
-    sections = _build_editorial_section_dicts(page.editorial_sections or [])
+    sections = _build_editorial_section_dicts(page.editorial_sections)
 
     template = env.get_template("layout.html")
     return template.render(

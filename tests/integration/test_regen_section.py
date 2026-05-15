@@ -65,12 +65,8 @@ def _make_page(sections: list[RenderedSection] | None = None) -> EventPage:
         input_sentence="test event for regen-section",
         generated_at="2026-05-01T00:00:00+00:00",
         subject=EventSubject(title="Test Event", entities=["Test Entity"]),
-        modules=[],
         layout=EventLayout(preset_id="product_focus", overrides=None),
         sources=[_make_source()],
-        needs_coverage={},
-        uncovered_needs=[],
-        need_plans=[],
         editorial_sections=sections,
         meta=EventMeta(
             last_updated="2026-05-01T00:00:00+00:00",

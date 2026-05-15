@@ -9,20 +9,6 @@ from generator.pipeline.trace import TraceRecorder
 from generator.schema import (
     EventFacts,
     GroundOutput,
-    NeedCurationPlan,
-    NeedPlanOutput,
-    TierQuota,
-)
-
-_ALL_NEEDS = (
-    "what_happened",
-    "when_where",
-    "who_involved",
-    "current_state",
-    "why_matters",
-    "world_reaction",
-    "what_can_do",
-    "what_next",
 )
 
 # ---------------------------------------------------------------------------
@@ -177,75 +163,7 @@ def test_ground_review_interactive_quit_on_not_hot(monkeypatch) -> None:
 
 
 # ---------------------------------------------------------------------------
-# 3. plan_review (DEPRECATED — kept for backward compat; tests remain as regression)
-# ---------------------------------------------------------------------------
-
-
-def _plan() -> NeedPlanOutput:
-    plans = [
-        NeedCurationPlan(
-            need_id=nid,
-            activated=(idx < 3),
-            rank=idx + 1,
-            section_title=f"Section {nid}",
-            rationale="test",
-            fetch_queries=[],
-            assigned_modules=["hero"] if idx == 0 else [],
-            publisher_quota=TierQuota(),
-        )
-        for idx, nid in enumerate(_ALL_NEEDS)
-    ]
-    return NeedPlanOutput(need_plans=plans, layout_preset_id="live_dominance")
-
-
-def test_plan_review_auto_mode() -> None:
-    recorder = _recorder()
-    prompter = _prompter(auto_mode=True, recorder=recorder)
-    plan = _plan()
-    result = prompter.plan_review(plan)
-    assert result is plan
-    trace = recorder.finalize(auto_mode=True)
-    assert any(a.reason == "auto_mode" for a in trace.editor_actions)
-
-
-def test_plan_review_interactive_toggles_need(monkeypatch) -> None:
-    recorder = _recorder()
-    prompter = _prompter(auto_mode=False, recorder=recorder)
-    plan = _plan()
-    # what_happened is activated by default; toggle should deactivate it.
-    monkeypatch.setattr(
-        rich.prompt.Prompt,
-        "ask",
-        staticmethod(lambda *a, **k: "what_happened"),
-    )
-    result = prompter.plan_review(plan)
-    wh = next(p for p in result.need_plans if p.need_id == "what_happened")
-    assert wh.activated is False
-    trace = recorder.finalize(auto_mode=False)
-    assert any(a.action == "edit_section_field" for a in trace.editor_actions)
-
-
-def test_plan_review_interactive_keep(monkeypatch) -> None:
-    recorder = _recorder()
-    prompter = _prompter(auto_mode=False, recorder=recorder)
-    plan = _plan()
-
-    monkeypatch.setattr(
-        rich.prompt.Prompt,
-        "ask",
-        staticmethod(lambda *a, **k: ""),
-    )
-
-    result = prompter.plan_review(plan)
-    # No edit made → plan unchanged in content and no editor action logged.
-    wh = next(p for p in result.need_plans if p.need_id == "what_happened")
-    assert wh.activated is True
-    trace = recorder.finalize(auto_mode=False)
-    assert trace.editor_actions == []
-
-
-# ---------------------------------------------------------------------------
-# 4. final_approval
+# 3. final_approval
 # ---------------------------------------------------------------------------
 
 

@@ -92,7 +92,6 @@ def test_editorial_page_renders_two_sections():
         meta=_meta(),
     )
     assert page.editorial_sections == sections
-    assert page.modules == []  # editorial path has no modules
 
     html = render_html(page)
     assert "NVIDIA held its keynote." in html

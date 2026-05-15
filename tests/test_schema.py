@@ -15,35 +15,7 @@ def _minimal_page_dict() -> dict:
             "entities": ["Test Entity"],
             "when": "2026-05-01T00:00:00Z",
         },
-        "modules": [
-            {
-                "kind": "hero",
-                "module_id": "mod_hero",
-                "serves_needs": ["what_happened"],
-                "citations": [{"source_id": "src_001", "claim_text": "A claim."}],
-                "confidence": {
-                    "overall": 0.9,
-                    "field_level": {},
-                    "signals": {
-                        "source_count": 1,
-                        "publisher_count": 1,
-                        "highest_tier": "T0",
-                        "schema_passes": True,
-                        "cross_source_agreement": 1.0,
-                    },
-                    "flags": [],
-                },
-                "slot": "hero",
-                "artifact": "HeroBanner",
-                "artifact_alternatives": [],
-                "inclusion_reason": "required",
-                "data": {
-                    "title": "Test Hero Title",
-                    "summary": "Test summary.",
-                    "image_alt": "test",
-                },
-            }
-        ],
+        "editorial_sections": [],
         "layout": {"preset_id": "product_focus"},
         "sources": [
             {
@@ -56,25 +28,6 @@ def _minimal_page_dict() -> dict:
                 "language": "en",
                 "rights": {"max_excerpt_words": 10000, "can_paraphrase": True},
             }
-        ],
-        "needs_coverage": {
-            "what_happened": ["mod_hero"],
-            "when_where": [],
-            "who_involved": [],
-            "current_state": [],
-            "why_matters": [],
-            "world_reaction": [],
-            "what_can_do": [],
-            "what_next": [],
-        },
-        "uncovered_needs": [
-            "when_where",
-            "who_involved",
-            "current_state",
-            "why_matters",
-            "world_reaction",
-            "what_can_do",
-            "what_next",
         ],
         "meta": {
             "last_updated": "2026-05-13T12:00:00Z",
@@ -90,8 +43,8 @@ def test_event_page_roundtrip() -> None:
     redump = page.model_dump(mode="json", exclude_none=True)
     # Roundtrip back through validation must succeed.
     EventPage.model_validate(redump)
-    assert page.modules[0].kind == "hero"
     assert page.layout.preset_id == "product_focus"
+    assert page.editorial_sections == []
 
 
 def test_stage_trace_accepts_llm_calls():
@@ -115,86 +68,44 @@ def test_stage_trace_accepts_llm_calls():
     assert st.llm_calls[0].model == "anthropic/claude-haiku-4-5"
 
 
-def test_discriminated_union_rejects_unknown_kind() -> None:
+def test_event_page_requires_editorial_sections() -> None:
     import pytest
     from pydantic import ValidationError
 
     data = _minimal_page_dict()
-    data["modules"][0]["kind"] = "not_a_real_kind"
+    del data["editorial_sections"]
     with pytest.raises(ValidationError):
         EventPage.model_validate(data)
 
 
-def test_hero_data_accepts_overview_bullets():
-    from generator.schema import HeroData, OverviewBullet
+def test_source_has_no_serves_needs_field() -> None:
+    from generator.schema import Source, Publisher, SourceRights
 
-    bullets = [OverviewBullet(text="Point one.", source_id="s1") for _ in range(3)]
-    hd = HeroData(title="t", summary="s", image_alt="", overview_bullets=bullets)
-    assert len(hd.overview_bullets) == 3
-
-
-def test_hero_data_overview_bullets_optional():
-    from generator.schema import HeroData
-
-    hd = HeroData(title="t", summary="s", image_alt="")
-    assert hd.overview_bullets is None
-
-
-def test_overview_bullet_text_capped_at_18_words():
-    import pytest
-    from pydantic import ValidationError
-    from generator.schema import OverviewBullet
-
-    with pytest.raises(ValidationError):
-        OverviewBullet(text=" ".join(["w"] * 19), source_id="s1")
-
-
-def test_need_plan_category_defaults_none():
-    from generator.schema import NeedCurationPlan
-
-    p = NeedCurationPlan(
-        need_id="what_happened",
-        activated=True,
-        rank=1,
-        section_title="t",
-        rationale="r",
+    s = Source(
+        id="s1",
+        url="https://example.com/a",
+        publisher=Publisher(name="P", tier="T0"),
+        title="T",
+        published_at="2026-05-01T00:00:00Z",
+        fetched_at="2026-05-01T00:00:00Z",
+        language="en",
+        rights=SourceRights(max_excerpt_words=999, can_paraphrase=True),
     )
-    assert p.category is None
-    assert p.opinion_subtag is None
+    assert not hasattr(s, "serves_needs")
 
 
-def test_reaction_item_stakeholder_tier_optional():
-    from generator.schema import ReactionItem
+def test_source_has_serves_sections_field() -> None:
+    from generator.schema import Source, Publisher, SourceRights
 
-    r = ReactionItem(
-        author="A",
-        author_role="role",
-        quote="q",
-        sentiment="positive",
-        source_id="s1",
+    s = Source(
+        id="s1",
+        url="https://example.com/a",
+        publisher=Publisher(name="P", tier="T0"),
+        title="T",
+        published_at="2026-05-01T00:00:00Z",
+        fetched_at="2026-05-01T00:00:00Z",
+        language="en",
+        rights=SourceRights(max_excerpt_words=999, can_paraphrase=True),
+        serves_sections=["overview"],
     )
-    assert r.stakeholder_tier is None
-    assert r.author_image_url is None
-
-
-def test_schedule_item_is_milestone_defaults_false():
-    from generator.schema import ScheduleItem
-
-    s = ScheduleItem(time_iso="2026-05-14T00:00:00Z", label="x", source_id="s1")
-    assert s.is_milestone is False
-
-
-def test_reaction_item_accepts_stakeholder_tier():
-    from generator.schema import ReactionItem
-
-    r = ReactionItem(
-        author="A",
-        author_role="role",
-        quote="q",
-        sentiment="positive",
-        source_id="s1",
-        stakeholder_tier="stakeholder",
-        author_image_url="https://x.test/a.jpg",
-    )
-    assert r.stakeholder_tier == "stakeholder"
-    assert str(r.author_image_url).startswith("https://")
+    assert s.serves_sections == ["overview"]
