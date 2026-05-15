@@ -50,9 +50,7 @@ def _rank_to_priority(rank: int) -> Priority:
     return "low"
 
 
-def _plan_for_kind(
-    need_plan: NeedPlanOutput, kind: str
-) -> NeedCurationPlan | None:
+def _plan_for_kind(need_plan: NeedPlanOutput, kind: str) -> NeedCurationPlan | None:
     """Find the activated need plan whose assigned_modules contains this kind."""
     for plan in sorted(need_plan.need_plans, key=lambda p: p.rank):
         if not plan.activated:
@@ -74,9 +72,7 @@ def _max_time_range_days(need_plan: NeedPlanOutput) -> int:
     return days
 
 
-def _filter_evidence(
-    pool: list[Source], need_plan: NeedPlanOutput
-) -> list[Source]:
+def _filter_evidence(pool: list[Source], need_plan: NeedPlanOutput) -> list[Source]:
     """Time-window filter on the source pool.
 
     Tier filtering used to live here too via PlanOutput.source_strategy; the

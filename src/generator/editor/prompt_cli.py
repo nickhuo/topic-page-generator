@@ -169,7 +169,10 @@ class EditorPrompter:
                     plan = plan.model_copy(update={"need_plans": new_plans})
                     self._log(
                         action="edit_module_field",
-                        target={"module_kind": "plan", "field_path": f"need_plans[{toggle}].activated"},
+                        target={
+                            "module_kind": "plan",
+                            "field_path": f"need_plans[{toggle}].activated",
+                        },
                         before=p.activated,
                         after=not p.activated,
                         reason="editor toggled need",
