@@ -229,23 +229,6 @@ def _to_newsfeed(
                 )
             )
         grouping = module.data.grouping_strategy
-    elif module.kind == "reactions":
-        variant = "quotes"
-        grouping = "flat"
-        for it in module.data.items:
-            src = src_by_id.get(it.source_id)
-            cards.append(
-                NewsCard(
-                    url=src.url if src else "https://example.invalid/",  # type: ignore[arg-type]
-                    title=f"{it.author} — {it.author_role}",
-                    publisher=src.publisher.name if src else "Unknown",
-                    tier=src.publisher.tier if src else "T3",
-                    published_at=src.published_at if src else None,
-                    summary=it.quote,
-                    source_id=it.source_id,
-                    thumbnail_url=src.thumbnail_url if src else None,
-                )
-            )
     elif module.kind == "official_statements":
         variant = "quotes"
         grouping = "flat"

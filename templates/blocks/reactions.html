@@ -14,9 +14,11 @@
         <span class="quote-card__sentiment quote-card__sentiment--{{ c.sentiment }}" aria-label="{{ c.sentiment }}"></span>
       </div>
       <blockquote class="quote-card__quote">{{ c.quote }}</blockquote>
-      <p class="quote-card__cite">
-        <a href="#src-{{ source_index[c.source_id] }}">[{{ source_index[c.source_id] }}]</a>
-      </p>
+      {% if c.source_id and source_index[c.source_id] %}
+        <p class="quote-card__cite">
+          <a href="#src-{{ source_index[c.source_id] }}">[{{ source_index[c.source_id] }}]</a>
+        </p>
+      {% endif %}
     </li>
   {% endfor %}
 </ul>
