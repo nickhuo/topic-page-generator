@@ -32,6 +32,7 @@ from generator.sources.brave import (
     BraveImageResult,
     fetch_brave_images,
 )
+from generator.sources.og_image import enrich_thumbnails
 
 logger = logging.getLogger(__name__)
 
@@ -76,6 +77,14 @@ async def extract_one_section(
 ) -> RenderedSection | None:
     spec_cls = get_spec(section.block_kind)
     spec = spec_cls()
+
+    # Newsfeed sections render image-only cards. Tavily's per-query image
+    # pool can't be mapped to individual articles by host (CDN-hosted media,
+    # third-party images), so we enrich each source's thumbnail_url here by
+    # parsing the article's <meta property="og:image"> tag. Failures are
+    # silent — image-less sources just won't appear in the final cards.
+    if section.block_kind == "newsfeed":
+        await enrich_thumbnails(sources)
 
     # Gallery sections require Brave image search before LLM extraction.
     image_manifest: list[BraveImageResult] | None = None
