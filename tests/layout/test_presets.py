@@ -22,10 +22,6 @@ def test_live_dominance_signals_live_pill():
     assert PRESETS["live_dominance"].signals.live_pill is True
 
 
-def test_imminent_event_countdown_in_hero():
-    assert PRESETS["imminent_event"].signals.countdown_in_hero is True
-
-
 def test_product_focus_uses_minimal_tech_palette():
     assert PRESETS["product_focus"].design_tokens.palette == "minimal_tech"
     assert PRESETS["product_focus"].design_tokens.density == "sparse"

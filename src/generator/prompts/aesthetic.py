@@ -15,8 +15,8 @@ Choose exactly one AestheticPresetId:
 - `reference` — fallback for generic entity pages / unclear posture
 
 You may also propose `aesthetic_overrides`:
-- `palette`: festive_warm | minimal_tech | urgent_red | muted_solemn |
-  bold_sport | neutral_news
+- `palette`: festive_warm | minimal_tech | urgent_red | urgent_light |
+  muted_solemn | bold_sport | neutral_news
 - `density`: compact | standard | sparse
 - `typography_weight`: tight | standard | loose
 - `hero_mood`: solemn_portrait | celebratory_kinetic | minimalist_product |

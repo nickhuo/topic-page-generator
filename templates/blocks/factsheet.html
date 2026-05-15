@@ -11,7 +11,9 @@
           {{ row.value }}
         {% endif %}
         {% if row.source_id and source_index[row.source_id] %}
-          <sup class="cite-num" data-cite="{{ row.source_id }}"><a href="#src-{{ source_index[row.source_id] }}">[{{ source_index[row.source_id] }}]</a></sup>
+          <span class="cite-num" data-cite="{{ row.source_id }}">
+            <a href="#src-{{ source_index[row.source_id] }}">[{{ source_index[row.source_id] }}]</a>
+          </span>
         {% endif %}
       </dd>
     </div>

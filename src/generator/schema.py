@@ -44,6 +44,7 @@ ConfidenceFlag = Literal[
     "single_source",
     "low_tier_only",
     "contested_fact",
+    "single_sentiment_perspective",
 ]
 
 # Aesthetic enums (§6)
@@ -54,6 +55,7 @@ PaletteId = Literal[
     "festive_warm",
     "minimal_tech",
     "urgent_red",
+    "urgent_light",
     "muted_solemn",
     "bold_sport",
     "neutral_news",
@@ -229,17 +231,6 @@ class ScheduleModule(_BaseModule):
     data: ScheduleData
 
 
-class CountdownData(_Frozen):
-    target_at: ISO8601
-    label: str
-    source_id: SourceId
-
-
-class CountdownModule(_BaseModule):
-    kind: Literal["countdown"] = "countdown"
-    data: CountdownData
-
-
 class KPITile(_Frozen):
     value: str
     unit: str | None = None
@@ -405,7 +396,6 @@ TypedModule = Annotated[
     HeroModule
     | InfoboxModule
     | ScheduleModule
-    | CountdownModule
     | KPINumbersModule
     | ComparisonModule
     | ChangelogModule
@@ -459,7 +449,6 @@ class DesignTokens(_Frozen):
 
 class LayoutSignals(_Frozen):
     live_pill: bool
-    countdown_in_hero: bool
     sticky_top_strip: Literal["live", "breaking"] | None = None
 
 

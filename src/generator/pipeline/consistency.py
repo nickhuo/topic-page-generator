@@ -80,8 +80,33 @@ async def run(
         regens_used += 1
         result = await _consistency_call(current)
 
+    current = [_flag_reactions_sentiment(m) for m in current]
     needs_coverage, uncovered = _compute_needs_coverage(current)
     return result, current, needs_coverage, uncovered
+
+
+def _flag_reactions_sentiment(module: TypedModule) -> TypedModule:
+    """Flag reactions modules whose cards span fewer than 2 distinct sentiments.
+
+    The Perspectives UI needs at least two sentiment groups to render tabs; a
+    single-sentiment block degrades to a flat list. Surface this as a soft
+    confidence flag so the editor HITL can decide whether to regenerate.
+    """
+    if module.kind != "reactions":
+        return module
+    sentiments = {
+        item.sentiment for item in module.data.items if item.sentiment is not None
+    }
+    if len(sentiments) >= 2:
+        return module
+    if "single_sentiment_perspective" in module.confidence.flags:
+        return module
+    new_confidence = module.confidence.model_copy(
+        update={
+            "flags": [*module.confidence.flags, "single_sentiment_perspective"],
+        }
+    )
+    return module.model_copy(update={"confidence": new_confidence})
 
 
 def _compute_needs_coverage(

@@ -42,7 +42,6 @@ _DEFAULT_BLOCK_KIND: dict[str, BlockKind] = {
     "hero": "paragraph",  # hero is chrome, but if it ever flows into a section, paragraph form
     "infobox": "factsheet",
     "schedule": "timeline",
-    "countdown": "timeline",  # also chrome usually; timeline is the fallback
     "kpi_numbers": "chart",
     "comparison": "chart",
     "changelog": "timeline",
@@ -166,14 +165,6 @@ def _to_timeline(module: TypedModule) -> TimelineBlockData:
                     source_id=e.source_id,
                 )
             )
-    elif module.kind == "countdown":
-        entries.append(
-            TimelineEntry(
-                title=module.data.label,
-                time=module.data.target_at,
-                source_id=module.data.source_id,
-            )
-        )
     if not entries:
         entries = [TimelineEntry(title="(no entries)")]
     return TimelineBlockData(entries=entries, timezone=timezone)
@@ -309,7 +300,9 @@ def _reactions_to_block(
             author=r.author,
             author_role=r.author_role,
             quote=r.quote,
-            sentiment=r.sentiment,
+            sentiment=r.sentiment
+            if r.sentiment in {"positive", "neutral", "negative"}
+            else "neutral",
             stakeholder_tier=r.stakeholder_tier,
             author_image_url=r.author_image_url,
             source_id=r.source_id,

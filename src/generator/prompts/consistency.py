@@ -11,7 +11,7 @@ Review the assembled modules for cross-module conflicts:
 - date_mismatch: two modules cite different dates for the same event element
 - contradictory_fact: numeric or attribute values disagree
 - incoherent_combination: modules whose presence together makes no sense
-   (e.g., countdown for an event that already happened, kpi_numbers without data)
+   (e.g., schedule with no upcoming items for a "what's next" need, kpi_numbers without data)
 
 For each issue, set:
   severity: "warning" | "error"

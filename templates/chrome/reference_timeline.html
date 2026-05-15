@@ -1,17 +1,16 @@
 {% if milestones %}
-<section class="ref-card">
-  <h3 class="ref-card__title">Timeline</h3>
+<div class="ref-card">
+  <p class="ref-card__title">Timeline</p>
   <ol class="ref-timeline">
     {% for m in milestones %}
       <li class="ref-timeline__item ref-timeline__item--{{ m.state }}">
-        <p class="ref-timeline__date">
-          <span class="ref-timeline__day">{{ m.day }}</span>
-          {% if m.time %}<span class="ref-timeline__time">{{ m.time }}</span>{% endif %}
-        </p>
-        <p class="ref-timeline__label">{{ m.label }}</p>
-        {% if m.location %}<p class="ref-timeline__loc">📍 {{ m.location }}</p>{% endif %}
+        <time class="ref-timeline__date">{{ m.day }}{% if m.time %} &middot; {{ m.time }}{% endif %}</time>
+        <div class="ref-timeline__label">{{ m.label }}</div>
+        {% if m.location %}
+          <div class="ref-timeline__loc">{{ m.location }}</div>
+        {% endif %}
       </li>
     {% endfor %}
   </ol>
-</section>
+</div>
 {% endif %}

@@ -26,7 +26,7 @@ The 8 reader needs (NeedId values). For each one you must decide activation:
 - why_matters       — significance, context, stakes.
 - world_reaction    — what fans / critics / pundits / public are saying.
 - what_can_do       — actionable: where to watch, tickets, sign up, official site.
-- what_next         — what comes next: future schedule, countdown, predictions.
+- what_next         — what comes next: future schedule, milestones, predictions.
 """
 
 _MODULE_CATALOG = """\
@@ -35,11 +35,13 @@ Available module kinds (assigned_modules takes from this list):
   hero            — page-top identity (title + image + summary)
   infobox         — key-value facts table (when, where, who, etc.)
   schedule        — chronological list of events/games/dates
-  countdown       — countdown to a specific upcoming datetime
   kpi_numbers     — 1-4 numeric tiles (price, viewers, sales)
   comparison      — 2-3 subjects compared across axes
   changelog       — versioned changes (product/feature releases)
-  reactions       — quotes from public/fans (5-15 items)
+  reactions       — quotes from public/fans (5-15 items). The page renders
+                    these as Perspectives tabs grouped by `sentiment`; cards
+                    must span at least two sentiments (positive / neutral /
+                    negative) so multiple tabs appear.
   media_coverage  — headline list with publisher attribution
   official_statements — quotes from authoritative roles
   where_to_watch  — TV / streaming / in-person channels

@@ -34,7 +34,6 @@ _TIER_RANK: dict[SourceTier, int] = {"T0": 0, "T1": 1, "T2": 2, "T3": 3}
 # field still lives on EventPage.modules for downstream tooling/legacy traces.
 _DEFAULT_SLOT_BY_KIND: dict[str, Slot] = {
     "hero": "hero",
-    "countdown": "hero",
     "infobox": "aside",
     "media_coverage": "tail",
 }
@@ -233,7 +232,6 @@ def _typed_module_class_for(kind: str):
         HeroModule,
         InfoboxModule,
         ScheduleModule,
-        CountdownModule,
         KPINumbersModule,
         ComparisonModule,
         ChangelogModule,
@@ -248,7 +246,6 @@ def _typed_module_class_for(kind: str):
         "hero": HeroModule,
         "infobox": InfoboxModule,
         "schedule": ScheduleModule,
-        "countdown": CountdownModule,
         "kpi_numbers": KPINumbersModule,
         "comparison": ComparisonModule,
         "changelog": ChangelogModule,

@@ -40,7 +40,6 @@ ALL_KINDS = [
     "hero",
     "infobox",
     "schedule",
-    "countdown",
     "kpi_numbers",
     "comparison",
     "changelog",
@@ -56,7 +55,6 @@ _KIND_TO_SCHEMA_NAME = {
     "hero": "HeroData",
     "infobox": "InfoboxData",
     "schedule": "ScheduleData",
-    "countdown": "CountdownData",
     "kpi_numbers": "KPINumbersData",
     "comparison": "ComparisonData",
     "changelog": "ChangelogData",
@@ -207,12 +205,6 @@ def _module_data_payload(kind: str, source_ids: list[str]) -> dict[str, Any]:
     if kind == "schedule":
         # Empty items → should_render returns False → legitimately skipped
         return {"items": [], "timezone": "America/Los_Angeles"}
-    if kind == "countdown":
-        return {
-            "target_at": "2026-06-01T00:00:00+00:00",
-            "label": "next milestone",
-            "source_id": sid,
-        }
     if kind == "where_to_watch":
         # Empty channels → should_render returns False → legitimately skipped
         return {"channels": []}

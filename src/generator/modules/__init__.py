@@ -15,7 +15,6 @@ def all_modules() -> list[type["Module"]]:
         hero,
         infobox,
         schedule,
-        countdown,
         kpi_numbers,
         comparison,
         changelog,

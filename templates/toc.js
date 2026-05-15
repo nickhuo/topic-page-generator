@@ -1,21 +1,38 @@
 (() => {
-  const items = document.querySelectorAll('.page-toc__item');
-  if (!items.length || !('IntersectionObserver' in window)) return;
-  const map = new Map();
-  items.forEach((li) => map.set(li.dataset.target, li));
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        const li = map.get(e.target.id);
-        if (!li) return;
+  /* ── Horizontal nav scroll spy ── */
+  const navItems = document.querySelectorAll('.nav__item[data-section]');
+  const sections = [...document.querySelectorAll('.need-section[data-need]')];
+
+  if (navItems.length && sections.length && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
         if (e.isIntersecting) {
-          items.forEach((x) => x.classList.remove('is-active'));
-          li.classList.add('is-active');
+          navItems.forEach(i => i.classList.remove('is-active'));
+          const active = document.querySelector(`.nav__item[data-section="${e.target.dataset.need}"]`);
+          if (active) active.classList.add('is-active');
         }
-        if (e.boundingClientRect.top < 0) li.classList.add('is-visited');
       });
-    },
-    { rootMargin: '-40% 0px -55% 0px' }
-  );
-  document.querySelectorAll('main .need-section').forEach((s) => observer.observe(s));
+    }, { rootMargin: '-15% 0px -75% 0px' });
+
+    sections.forEach(s => obs.observe(s));
+  }
+
+  /* ── Perspectives tabs ── */
+  document.querySelectorAll('.pv-tabs').forEach(tabBar => {
+    const block = tabBar.closest('.block--reactions');
+    if (!block) return;
+    const tabs   = tabBar.querySelectorAll('.pv-tab');
+    const panels = block.querySelectorAll('.pv-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = block.querySelector(`#${target}`);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  });
 })();

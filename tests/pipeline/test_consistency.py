@@ -11,13 +11,18 @@ import respx
 
 from generator.llm.trace_buffer import reset
 from generator.modules.base import PlanContext
-from generator.pipeline.consistency import _compute_needs_coverage, run
+from generator.pipeline.consistency import (
+    _compute_needs_coverage,
+    _flag_reactions_sentiment,
+    run,
+)
 from generator.schema import (
     AestheticOverrides,
     AestheticPlanOutput,
+    ChangelogData,
+    ChangelogEntry,
+    ChangelogModule,
     ConfidenceSignals,
-    CountdownData,
-    CountdownModule,
     EventSubject,
     HeroData,
     HeroModule,
@@ -28,6 +33,9 @@ from generator.schema import (
     NeedCurationPlan,
     NeedPlanOutput,
     Publisher,
+    ReactionItem,
+    ReactionsData,
+    ReactionsModule,
     Source,
     SourceRights,
     TierQuota,
@@ -116,7 +124,7 @@ def _make_subject() -> EventSubject:
 def _make_ctx() -> PlanContext:
     return PlanContext(
         subject=_make_subject(),
-        need_plan=_make_plan(["hero", "countdown"]),
+        need_plan=_make_plan(["hero", "changelog"]),
         aesthetic=_make_aesthetic(),
     )
 
@@ -166,21 +174,27 @@ def _make_infobox_module() -> InfoboxModule:
     )
 
 
-def _make_countdown_module() -> CountdownModule:
-    return CountdownModule.model_construct(
-        kind="countdown",
-        module_id="mod_countdown",
+def _make_changelog_module() -> ChangelogModule:
+    return ChangelogModule.model_construct(
+        kind="changelog",
+        module_id="mod_changelog",
         serves_needs=["what_next"],
         citations=[],
         confidence=_make_confidence(),
         slot="primary",
-        artifact="Countdown",
+        artifact="Changelog",
         artifact_alternatives=[],
         inclusion_reason="medium",
-        data=CountdownData(
-            target_at="2020-01-01T00:00:00Z",  # past date — intentionally "bad"
-            label="Event launch",
-            source_id="src_1",
+        data=ChangelogData(
+            version_label="5.5",
+            entries=[
+                ChangelogEntry(
+                    label="Default model swap",
+                    description="GPT-5.5 Instant replaces GPT-5.3 as the ChatGPT default.",
+                    importance="feature",
+                    source_id="src_1",
+                ),
+            ],
         ),
     )
 
@@ -272,7 +286,7 @@ async def test_remove_action_drops_module(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
 
-    countdown = _make_countdown_module()
+    changelog = _make_changelog_module()
     hero = _make_hero_module()
 
     first_response = json.dumps(
@@ -281,9 +295,9 @@ async def test_remove_action_drops_module(monkeypatch):
             "issues": [
                 {
                     "severity": "warning",
-                    "module_kind": "countdown",
-                    "field_path": "target_at",
-                    "description": "event already happened",
+                    "module_kind": "changelog",
+                    "field_path": "entries",
+                    "description": "changelog not relevant for this event",
                     "recommended_action": "remove",
                 }
             ],
@@ -305,11 +319,11 @@ async def test_remove_action_drops_module(monkeypatch):
     )
 
     result, modules_out, needs_coverage, uncovered = await run(
-        [countdown, hero], _make_ctx(), []
+        [changelog, hero], _make_ctx(), []
     )
 
     kinds_out = {m.kind for m in modules_out}
-    assert "countdown" not in kinds_out
+    assert "changelog" not in kinds_out
     assert "hero" in kinds_out
     assert result.passes is True
 
@@ -425,3 +439,53 @@ async def test_llm_failure_falls_back_to_passes_true(monkeypatch):
     # Modules are returned unchanged
     assert len(modules_out) == 1
     assert modules_out[0].kind == "hero"
+
+
+# ---------------------------------------------------------------------------
+# Sentiment-coverage flag for reactions
+# ---------------------------------------------------------------------------
+
+
+def _make_reactions_module(sentiments: list[str]) -> ReactionsModule:
+    items = [
+        ReactionItem(
+            author=f"Author {i}",
+            author_role="Analyst",
+            quote=f"Quote {i}",
+            sentiment=s,
+            source_id="src_1",
+            stakeholder_tier="third_party",
+        )
+        for i, s in enumerate(sentiments)
+    ]
+    return ReactionsModule.model_construct(
+        kind="reactions",
+        module_id="mod_reactions",
+        serves_needs=["world_reaction"],
+        citations=[],
+        confidence=_make_confidence(),
+        slot="primary",
+        artifact="ReactionsList",
+        artifact_alternatives=[],
+        inclusion_reason="medium",
+        data=ReactionsData(items=items),
+    )
+
+
+def test_flag_reactions_single_sentiment():
+    mod = _make_reactions_module(["positive"] * 5)
+    flagged = _flag_reactions_sentiment(mod)
+    assert "single_sentiment_perspective" in flagged.confidence.flags
+
+
+def test_flag_reactions_multiple_sentiments_no_flag():
+    mod = _make_reactions_module(
+        ["positive", "negative", "positive", "neutral", "negative"]
+    )
+    flagged = _flag_reactions_sentiment(mod)
+    assert "single_sentiment_perspective" not in flagged.confidence.flags
+
+
+def test_flag_reactions_non_reactions_pass_through():
+    hero = _make_hero_module()
+    assert _flag_reactions_sentiment(hero) is hero

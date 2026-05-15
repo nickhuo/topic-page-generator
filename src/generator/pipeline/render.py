@@ -1,11 +1,12 @@
-"""Stage 7 — Render. EventPage → editorial single-column HTML.
+"""Stage 7 — Render. EventPage → editorial two-column HTML.
 
 The page is structured as:
-  chrome (hero + countdown)  →  needs nav  →  N need sections  →  footer
+  chrome (hero)  →  horizontal sticky nav  →  N need sections (main column)
+                                          ↘  reference sidebar (right column)
 
 Each need section emits a typed-block sequence: paragraph / timeline / chart
-/ newsfeed / factsheet / map. Modules adapt themselves to one of these
-shapes via `blocks.module_to_block()`.
+/ newsfeed / factsheet / map / reactions. Modules adapt themselves to one of
+these shapes via `blocks.module_to_block()`.
 """
 
 from __future__ import annotations
@@ -35,7 +36,7 @@ from generator.schema import (
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 _TEMPLATES_DIR = _PROJECT_ROOT / "templates"
 
-_CHROME_KINDS = {"hero", "countdown"}
+_CHROME_KINDS = {"hero"}
 _MAX_MILESTONES = 6
 
 
@@ -108,7 +109,7 @@ def _select_palette_id(page: EventPage) -> str:
     # Aesthetic overrides aren't stored on the page directly; preset is.
     preset = page.layout.preset_id
     return {
-        "live_dominance": "urgent_red",
+        "live_dominance": "urgent_light",
         "product_focus": "minimal_tech",
         "imminent_event": "bold_sport",
         "reference": "neutral_news",
@@ -122,7 +123,7 @@ def _build_sections(
 
     ``consumed_by_chrome`` lists module kinds that have already been rendered
     by page chrome (e.g. the schedule module when its milestones are shown in
-    the right reference rail) so they don't get re-emitted as orphan blocks.
+    the right reference sidebar) so they don't get re-emitted as orphan blocks.
     """
     modules_by_kind = {m.kind: m for m in page.modules}
     extra_consumed = consumed_by_chrome or set()
@@ -236,7 +237,6 @@ def render_html(page: EventPage) -> str:
     toc_js = (_TEMPLATES_DIR / "toc.js").read_text(encoding="utf-8")
 
     hero_module = next((m for m in page.modules if m.kind == "hero"), None)
-    countdown_module = next((m for m in page.modules if m.kind == "countdown"), None)
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
     milestones = _build_milestones(page)
@@ -249,7 +249,6 @@ def render_html(page: EventPage) -> str:
     return template.render(
         page=page,
         hero_module=hero_module,
-        countdown_module=countdown_module,
         sections=sections,
         source_index=source_index,
         palette_css_block=palette_block,

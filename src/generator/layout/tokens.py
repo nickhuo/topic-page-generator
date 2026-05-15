@@ -57,6 +57,17 @@ PALETTES: dict[PaletteId, dict[str, str]] = {
         "--font-weight-body": "400",
         "--font-weight-heading": "800",
     },
+    "urgent_light": {
+        "--color-bg": "#fbfaf7",
+        "--color-surface": "#ffffff",
+        "--color-ink": "#0a0a0a",
+        "--color-ink-muted": "#525252",
+        "--color-accent": "#dc2626",
+        "--color-accent-ink": "#ffffff",
+        "--color-divider": "#e7e5e4",
+        "--font-weight-body": "400",
+        "--font-weight-heading": "800",
+    },
     "muted_solemn": {
         "--color-bg": "#f5f5f4",
         "--color-surface": "#ffffff",

@@ -16,8 +16,6 @@ from generator.schema import (
     ComparisonModule,
     ComparisonSubject,
     ConfidenceSignals,
-    CountdownData,
-    CountdownModule,
     EventLayout,
     EventMeta,
     EventPage,
@@ -333,19 +331,6 @@ def make_full_event_page(preset_id: str = "reference"):
         ),
     )
 
-    countdown = CountdownModule(
-        module_id="m_cd",
-        serves_needs=["what_next"],
-        citations=[],
-        confidence=conf(),
-        slot="hero",
-        artifact="CountdownBlock",
-        inclusion_reason="required",
-        data=CountdownData(
-            target_at="2026-06-11T18:00:00Z", label="Until kickoff", source_id="s1"
-        ),
-    )
-
     kpi = KPINumbersModule(
         module_id="m_kpi",
         serves_needs=["current_state"],
@@ -496,7 +481,6 @@ def make_full_event_page(preset_id: str = "reference"):
             hero,
             info,
             sched,
-            countdown,
             kpi,
             cmp_,
             changelog,

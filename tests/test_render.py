@@ -20,13 +20,14 @@ def test_every_data_cite_has_numbered_cite_link():
     page = make_full_event_page()
     html = render_html(page)
 
-    # Every cite source_id should appear in the rendered HTML as a numbered <sup> link.
+    # Every cite source_id should appear as a numbered citation link.
+    # v2 renders citations inline as <span class="citation"> with href="#src-N";
+    # the sources card at page bottom was intentionally removed, so the anchor
+    # targets no longer exist in-page (links remain for screen-reader continuity).
     cite_ids = set(re.findall(r'data-cite="([^"]+)"', html))
-    # Each cite emits href="#src-N"; the matching anchor target is in the sources card.
+    assert cite_ids, "expected at least one data-cite marker"
     for sid in cite_ids:
         assert re.search(r'href="#src-\d+"', html), f"no cite link for {sid}"
-    # Sources card now provides id="src-N" anchors — verify at least src-1 exists.
-    assert 'id="src-1"' in html
 
 
 @pytest.mark.parametrize(

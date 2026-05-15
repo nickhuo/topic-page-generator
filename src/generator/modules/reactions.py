@@ -39,6 +39,7 @@ Rules:
   * "adjacent" — industry expert, regulator, or competitor whose opinion materially shapes the story.
   * "third_party" — pundits, fans, generic commentators.
 - Prefer stakeholders. Aim for at least 2 stakeholder items if the evidence supports it.
+- The page renders these as Perspectives tabs grouped by `sentiment` (positive → "Optimistic", negative → "Critical", neutral → "Analytical"). Surface at least TWO distinct sentiment values across the cards so multiple tabs appear. If the evidence genuinely supports only one sentiment, output fewer cards rather than fabricate dissent.
 - Set author_image_url ONLY if an unambiguous photo URL is present in the evidence (og:image of a profile page, Wikidata image). Otherwise omit.
 """
 

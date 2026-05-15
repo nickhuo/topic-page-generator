@@ -18,7 +18,7 @@ from generator.schema import (
 )
 
 # Allowed in aux slot. Schema forbids media_coverage / schedule / reactions.
-_AUX_WHITELIST = ["infobox", "countdown", "kpi_numbers", "where_to_watch"]
+_AUX_WHITELIST = ["infobox", "kpi_numbers", "where_to_watch"]
 
 
 def _container() -> ContainerPadding:
@@ -29,7 +29,7 @@ def _mobile() -> MobileLayout:
     return MobileLayout(
         breakpoint_px=768,
         aux_strategy="inline_after_hero",
-        aux_priority_in_mobile=["infobox", "countdown", "where_to_watch"],
+        aux_priority_in_mobile=["infobox", "where_to_watch"],
     )
 
 
@@ -49,9 +49,7 @@ PRESETS: dict[AestheticPresetId, LayoutConfig] = {
         design_tokens=DesignTokens(
             palette="festive_warm", density="standard", typography_scale="standard"
         ),
-        signals=LayoutSignals(
-            live_pill=True, countdown_in_hero=False, sticky_top_strip="live"
-        ),
+        signals=LayoutSignals(live_pill=True, sticky_top_strip="live"),
     ),
     "product_focus": LayoutConfig(
         container_max_width=1180,
@@ -68,9 +66,7 @@ PRESETS: dict[AestheticPresetId, LayoutConfig] = {
         design_tokens=DesignTokens(
             palette="minimal_tech", density="sparse", typography_scale="loose"
         ),
-        signals=LayoutSignals(
-            live_pill=False, countdown_in_hero=False, sticky_top_strip=None
-        ),
+        signals=LayoutSignals(live_pill=False, sticky_top_strip=None),
     ),
     "imminent_event": LayoutConfig(
         container_max_width=1180,
@@ -87,9 +83,7 @@ PRESETS: dict[AestheticPresetId, LayoutConfig] = {
         design_tokens=DesignTokens(
             palette="bold_sport", density="standard", typography_scale="standard"
         ),
-        signals=LayoutSignals(
-            live_pill=False, countdown_in_hero=True, sticky_top_strip=None
-        ),
+        signals=LayoutSignals(live_pill=False, sticky_top_strip=None),
     ),
     "reference": LayoutConfig(
         container_max_width=1180,
@@ -106,9 +100,7 @@ PRESETS: dict[AestheticPresetId, LayoutConfig] = {
         design_tokens=DesignTokens(
             palette="neutral_news", density="standard", typography_scale="standard"
         ),
-        signals=LayoutSignals(
-            live_pill=False, countdown_in_hero=False, sticky_top_strip=None
-        ),
+        signals=LayoutSignals(live_pill=False, sticky_top_strip=None),
     ),
 }
 

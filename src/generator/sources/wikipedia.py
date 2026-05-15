@@ -1,4 +1,4 @@
-"""Wikipedia REST summary fetcher for the reference rail card.
+"""Wikipedia REST summary fetcher for the reference sidebar card.
 
 Calls the public `/api/rest_v1/page/summary/{title}` endpoint, which returns the
 lead extract, thumbnail, and canonical article URL. Failures (network, 404,
