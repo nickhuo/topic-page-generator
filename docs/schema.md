@@ -1,5 +1,11 @@
 # Data Schemas
 
+> **Status (2026-05-15):** This document predates the editor-architecture refactor.
+> The current pipeline is documented in `CLAUDE.md` and detailed in
+> `docs/superpowers/plans/2026-05-15-editor-architecture-*.md`. Sections below
+> referring to the Module-driven pipeline, NeedPlanOutput, or extract.run are
+> historical context only.
+
 > Type definitions for the topic page generator. Written in TypeScript-style for readability; will be implemented in Python as Pydantic models. Every schema here is the **source of truth** — pipeline stages and templates conform to these types.
 
 ## Contents

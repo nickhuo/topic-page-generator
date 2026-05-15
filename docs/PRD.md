@@ -1,5 +1,11 @@
 # Topic Page Generator — PRD
 
+> **Status (2026-05-15):** This document predates the editor-architecture refactor.
+> The current pipeline is documented in `CLAUDE.md` and detailed in
+> `docs/superpowers/plans/2026-05-15-editor-architecture-*.md`. Sections below
+> referring to the Module-driven pipeline, NeedPlanOutput, or extract.run are
+> historical context only.
+
 > Planning document for the one-week Newsbreak take-home. Not a design doc. Intended audience: me (Nick), for execution clarity.
 
 ## Contents
