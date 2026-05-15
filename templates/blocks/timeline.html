@@ -1,15 +1,53 @@
-<ol class="block block--timeline">
-  {% for entry in block.entries %}
-    <li class="timeline__entry timeline__entry--{{ entry.importance }}">
-      {% if entry.time %}<time class="timeline__time">{{ entry.time }}</time>{% endif %}
-      <div class="timeline__body">
-        <h3 class="timeline__title">{{ entry.title }}</h3>
-        {% if entry.location %}<p class="timeline__loc">{{ entry.location }}</p>{% endif %}
-        {% if entry.description %}<p class="timeline__desc">{{ entry.description }}</p>{% endif %}
-        {% if entry.source_id and source_index[entry.source_id] %}
-          <sup class="cite-num" data-cite="{{ entry.source_id }}"><a href="#src-{{ source_index[entry.source_id] }}">[{{ source_index[entry.source_id] }}]</a></sup>
-        {% endif %}
+{% set _entries = block.entries %}
+{% set _total = _entries | length %}
+{% set _visible_n = 5 %}
+{% set _has_collapse = _total > _visible_n %}
+{% set _collapsed = _entries[: _total - _visible_n] if _has_collapse else [] %}
+{% set _visible = _entries[_total - _visible_n :] if _has_collapse else _entries %}
+
+<div class="timeline">
+  {% if _has_collapse %}
+    <button type="button"
+            class="timeline__expand"
+            aria-expanded="false"
+            data-collapsed-label="Show {{ _collapsed | length }} earlier {{ 'event' if _collapsed | length == 1 else 'events' }}"
+            data-expanded-label="Hide earlier {{ 'event' if _collapsed | length == 1 else 'events' }}">
+      <span class="timeline__expand-chev" aria-hidden="true"></span>
+      <span class="timeline__expand-label">Show {{ _collapsed | length }} earlier {{ 'event' if _collapsed | length == 1 else 'events' }}</span>
+    </button>
+    <div class="timeline__earlier" data-open="false">
+      <div class="timeline__earlier-inner">
+        <ol class="block block--timeline block--timeline--earlier">
+          {% for entry in _collapsed %}
+            <li class="timeline__entry timeline__entry--{{ entry.importance }}" data-phase="{{ entry.temporal_phase }}">
+              {% if entry.time %}<time class="timeline__time">{{ entry.time }}</time>{% endif %}
+              <div class="timeline__body">
+                <h3 class="timeline__title">{{ entry.title }}</h3>
+                {% if entry.location %}<p class="timeline__loc">{{ entry.location }}</p>{% endif %}
+                {% if entry.description %}<p class="timeline__desc">{{ entry.description }}</p>{% endif %}
+                {% if entry.source_id and source_index[entry.source_id] %}
+                  <sup class="cite-num" data-cite="{{ entry.source_id }}"><a href="#src-{{ source_index[entry.source_id] }}">[{{ source_index[entry.source_id] }}]</a></sup>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ol>
       </div>
-    </li>
-  {% endfor %}
-</ol>
+    </div>
+  {% endif %}
+  <ol class="block block--timeline">
+    {% for entry in _visible %}
+      <li class="timeline__entry timeline__entry--{{ entry.importance }}" data-phase="{{ entry.temporal_phase }}">
+        {% if entry.time %}<time class="timeline__time">{{ entry.time }}</time>{% endif %}
+        <div class="timeline__body">
+          <h3 class="timeline__title">{{ entry.title }}</h3>
+          {% if entry.location %}<p class="timeline__loc">{{ entry.location }}</p>{% endif %}
+          {% if entry.description %}<p class="timeline__desc">{{ entry.description }}</p>{% endif %}
+          {% if entry.source_id and source_index[entry.source_id] %}
+            <sup class="cite-num" data-cite="{{ entry.source_id }}"><a href="#src-{{ source_index[entry.source_id] }}">[{{ source_index[entry.source_id] }}]</a></sup>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+</div>
