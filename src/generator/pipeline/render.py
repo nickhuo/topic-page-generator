@@ -29,8 +29,10 @@ from generator.schema import (
     EventSubject,
     NeedCurationPlan,
     NeedId,
+    RenderedSection,
     Source,
     TypedModule,
+    WikipediaCardData,
 )
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -79,6 +81,55 @@ def build_page(
             pipeline_trace_id=trace_id,
         ),
     )
+
+
+def build_editorial_page(
+    *,
+    input_sentence: str,
+    page_id: str,
+    subject: EventSubject,
+    layout: EventLayout,
+    sources: list[Source],
+    editorial_sections: list[RenderedSection],
+    trace_id: str,
+    meta: EventMeta,
+    wikipedia_card: WikipediaCardData | None = None,
+) -> EventPage:
+    """Construct an EventPage that uses the editorial render path."""
+    return EventPage(
+        page_id=page_id,
+        input_sentence=input_sentence,
+        generated_at=datetime.now(timezone.utc).isoformat(),
+        subject=subject,
+        modules=[],  # editorial path: no modules
+        layout=layout,
+        sources=sources,
+        needs_coverage={},
+        uncovered_needs=[],
+        need_plans=[],
+        wikipedia_card=wikipedia_card,
+        editorial_sections=editorial_sections,
+        meta=meta,
+    )
+
+
+def _build_editorial_section_dicts(
+    editorial: list[RenderedSection],
+) -> list[dict]:
+    """Mirror _build_sections() shape for use with templates/needs/section.html."""
+    out = []
+    for idx, rs in enumerate(editorial, start=1):
+        out.append(
+            {
+                "need_id": rs.section_id,
+                "section_id": rs.section_id,
+                "title": rs.section_id.replace("_", " ").title(),
+                "category": None,  # no fact/opinion chip in editorial path
+                "blocks": [rs.block_data],
+                "section_index": idx,
+            }
+        )
+    return out
 
 
 def subject_from_facts(facts: EventFacts, canonical_title: str) -> EventSubject:
@@ -156,6 +207,7 @@ def _build_sections(
             sections.append(
                 {
                     "need_id": plan.need_id,
+                    "section_id": plan.need_id,
                     "title": plan.section_title,
                     "rationale": plan.rationale,
                     "category": plan.category,
@@ -174,6 +226,7 @@ def _build_sections(
         sections.append(
             {
                 "need_id": "more",
+                "section_id": "more",
                 "title": "More on this topic",
                 "rationale": "",
                 "category": None,
@@ -249,7 +302,10 @@ def render_html(page: EventPage) -> str:
     # When the schedule module has driven the right-rail milestone timeline,
     # don't also re-emit it as an inline orphan block in the main flow.
     consumed_by_chrome = {"schedule"} if milestones else set()
-    sections = _build_sections(page, consumed_by_chrome=consumed_by_chrome)
+    if page.editorial_sections is not None:
+        sections = _build_editorial_section_dicts(page.editorial_sections)
+    else:
+        sections = _build_sections(page, consumed_by_chrome=consumed_by_chrome)
 
     template = env.get_template("layout.html")
     return template.render(

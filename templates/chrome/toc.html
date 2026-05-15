@@ -1,8 +1,8 @@
 <nav class="nav" aria-label="Page sections">
   <div class="nav__inner">
     {% for section in sections %}
-      <div class="nav__item" data-section="{{ section.need_id }}">
-        <a href="#need-{{ section.need_id }}">{{ section.title }}</a>
+      <div class="nav__item" data-section="{{ section.section_id | default(section.need_id) }}">
+        <a href="#section-{{ section.section_id | default(section.need_id) }}">{{ section.title }}</a>
       </div>
     {% endfor %}
   </div>

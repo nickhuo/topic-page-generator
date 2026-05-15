@@ -1,7 +1,8 @@
-<section id="need-{{ section.need_id }}"
+<section id="section-{{ section.section_id | default(section.need_id) }}"
          class="need-section"
-         data-need="{{ section.need_id }}"
+         data-need="{{ section.section_id | default(section.need_id) }}"
          data-screen-label="{{ '%02d' % (section_index | default(1)) }} {{ section.title }}">
+  {% if section.category %}
   <div class="need-section__eyebrow">
     <span class="need-section__chip">
       {%- if section.category == "opinion" -%}Opinion
@@ -9,6 +10,7 @@
       {%- endif -%}
     </span>
   </div>
+  {% endif %}
 
   <h2 class="need-section__title">{{ section.title }}</h2>
 
