@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import uuid
 from pathlib import Path
 from typing import Any
@@ -104,6 +105,29 @@ def generate(
 
         subject = subject_from_facts(ground_out.facts, ground_out.canonical_title)
         slug = slugify(ground_out.canonical_title)
+
+        # Editor-architecture flag: new planner path (gated behind env var).
+        if os.getenv("USE_EDITOR_ARCHITECTURE") == "1":
+            from generator.pipeline.backbone_planner import build_backbone_sections
+            from generator.pipeline.curation_planner import run_curation_stage
+            from generator.schema import SectionPlanOutput
+
+            backbone = build_backbone_sections(
+                ground_out.facts,
+                canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
+            )
+            with recorder.stage("curation"):
+                curation_out = await run_curation_stage(
+                    facts=ground_out.facts,
+                    canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
+                    backbone=backbone,
+                )
+
+            combined = SectionPlanOutput(
+                sections=backbone + list(curation_out.sections)
+            )
+            typer.echo(combined.model_dump_json(indent=2))
+            raise typer.Exit(code=0)
 
         # Stage 2a: Plan.
         with recorder.stage("plan"):
