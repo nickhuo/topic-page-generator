@@ -205,6 +205,7 @@ class ScheduleItem(_Frozen):
     label: str
     location: str | None = None
     duration_min: int | None = None
+    is_milestone: bool = False
     source_id: SourceId
 
 
