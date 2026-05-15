@@ -280,7 +280,7 @@ class GroundOutput(_Frozen):
 # Editor-architecture section types
 # ---------------------------------------------------------------------------
 BlockKind = Literal[
-    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions"
+    "paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions", "gallery"
 ]
 
 BackboneSectionId = Literal[

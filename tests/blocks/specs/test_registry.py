@@ -3,7 +3,7 @@ import pytest
 from generator.blocks.specs import ALL_BLOCK_KINDS, BlockSpec, get_spec
 
 
-def test_registry_covers_all_seven_block_kinds():
+def test_registry_covers_all_eight_block_kinds():
     expected = {
         "paragraph",
         "timeline",
@@ -12,13 +12,14 @@ def test_registry_covers_all_seven_block_kinds():
         "factsheet",
         "map",
         "reactions",
+        "gallery",
     }
     assert set(ALL_BLOCK_KINDS) == expected
 
 
 @pytest.mark.parametrize(
     "kind",
-    ["paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions"],
+    ["paragraph", "timeline", "chart", "newsfeed", "factsheet", "map", "reactions", "gallery"],
 )
 def test_get_spec_returns_subclass(kind):
     spec_cls = get_spec(kind)

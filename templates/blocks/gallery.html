@@ -1,0 +1,19 @@
+<div class="block block--gallery">
+  <ul class="gallery-grid">
+    {% for item in block.items %}
+      <li class="gallery-item">
+        <figure>
+          <img src="{{ item.image_url }}"
+               {% if item.alt_text %}alt="{{ item.alt_text }}"{% else %}alt=""{% endif %}
+               loading="lazy" />
+          <figcaption>
+            {{ item.caption }}
+            {% if item.source_url %}
+              <a class="gallery-source" href="{{ item.source_url }}" rel="noopener noreferrer" target="_blank">source</a>
+            {% endif %}
+          </figcaption>
+        </figure>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

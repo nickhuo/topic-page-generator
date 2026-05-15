@@ -159,6 +159,19 @@ class ReactionsBlock(_Frozen):
     cards: list[QuoteCard] = Field(max_length=4)
 
 
+class GalleryItem(_Frozen):
+    image_url: HttpUrl
+    caption: str = Field(min_length=1, max_length=240)
+    alt_text: str | None = Field(default=None, max_length=160)
+    source_url: HttpUrl | None = None
+
+
+class GalleryBlockData(_Frozen):
+    kind: Literal["gallery"] = "gallery"
+    items: list[GalleryItem] = Field(min_length=1, max_length=12)
+    citations: list[Citation] = Field(default_factory=list)
+
+
 RenderBlock = Annotated[
     ParagraphBlockData
     | TimelineBlockData
@@ -166,6 +179,7 @@ RenderBlock = Annotated[
     | NewsfeedBlockData
     | FactsheetBlockData
     | MapBlockData
-    | ReactionsBlock,
+    | ReactionsBlock
+    | GalleryBlockData,
     Field(discriminator="kind"),
 ]
