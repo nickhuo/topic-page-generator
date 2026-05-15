@@ -8,10 +8,12 @@ httpx call, Pydantic response model, env-driven auth.
 from __future__ import annotations
 
 import os
-from typing import Any
+from typing import Any, Literal
 
 import httpx
 from pydantic import BaseModel, ConfigDict, HttpUrl
+
+BraveImageSize = Literal["small", "medium", "large", "wallpaper"]
 
 _ENDPOINT = "https://api.search.brave.com/res/v1/images/search"
 _MAX_COUNT = 200  # Brave's documented hard cap
@@ -53,9 +55,13 @@ async def fetch_brave_images(
     query: str,
     *,
     count: int = 10,
+    size: BraveImageSize | None = "large",
     timeout: float = 12.0,
 ) -> list[BraveImageResult]:
     """Fetch image results for `query`. Returns up to `count` items.
+
+    `size` biases Brave toward a resolution bucket; pass None to omit the
+    parameter entirely.
 
     Raises BraveConfigError if BRAVE_API_KEY is unset.
     Raises httpx.HTTPStatusError on non-2xx responses (caller decides recovery).
@@ -65,13 +71,15 @@ async def fetch_brave_images(
         raise BraveConfigError("BRAVE_API_KEY not set")
 
     clamped = max(1, min(count, _MAX_COUNT))
-    params = {
+    params: dict[str, Any] = {
         "q": query,
         "count": clamped,
         "safesearch": "strict",
         "spellcheck": "false",
         "country": "ALL",
     }
+    if size is not None:
+        params["size"] = size
     headers = {
         "X-Subscription-Token": api_key,
         "Accept": "application/json",
@@ -97,7 +105,9 @@ async def fetch_brave_images(
                     title=item.get("title"),
                     publisher=item.get("source"),
                     width=img_meta.get("width") if isinstance(img_meta, dict) else None,
-                    height=img_meta.get("height") if isinstance(img_meta, dict) else None,
+                    height=img_meta.get("height")
+                    if isinstance(img_meta, dict)
+                    else None,
                     thumbnail_url=thumb.get("src") if isinstance(thumb, dict) else None,
                 )
             )

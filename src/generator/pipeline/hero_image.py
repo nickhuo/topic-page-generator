@@ -28,10 +28,22 @@ def _to_hero(result: BraveImageResult) -> HeroImage:
     )
 
 
+def _pick_largest(results: list[BraveImageResult]) -> BraveImageResult:
+    """Pick the largest-area result; preserve Brave's order as tie-breaker."""
+    best_idx = 0
+    best_score = (results[0].width or 0) * (results[0].height or 0)
+    for i, r in enumerate(results[1:], start=1):
+        score = (r.width or 0) * (r.height or 0)
+        if score > best_score:
+            best_idx = i
+            best_score = score
+    return results[best_idx]
+
+
 async def run_hero_image_stage(
     canonical_title: str,
     *,
-    count: int = 5,
+    count: int = 10,
 ) -> HeroImage | None:
     """Best-effort hero image fetch. Never raises."""
     if not canonical_title.strip():
@@ -46,7 +58,7 @@ async def run_hero_image_stage(
         return None
     if not results:
         return None
-    return _to_hero(results[0])
+    return _to_hero(_pick_largest(results))
 
 
 __all__ = ["run_hero_image_stage"]

@@ -20,7 +20,11 @@ _THREE_RESULTS = {
             "url": "https://example.com/article-1",
             "title": "Image One Title",
             "source": "Example Publisher",
-            "image": {"url": "https://example.com/img1.jpg", "width": 1280, "height": 720},
+            "image": {
+                "url": "https://example.com/img1.jpg",
+                "width": 1280,
+                "height": 720,
+            },
             "properties": {"url": "https://example.com/orig1.jpg"},
             "thumbnail": {"src": "https://example.com/thumb1.jpg"},
         },
@@ -28,7 +32,11 @@ _THREE_RESULTS = {
             "url": "https://news.example.org/story-2",
             "title": "Image Two Title",
             "source": "News Org",
-            "image": {"url": "https://news.example.org/img2.jpg", "width": 800, "height": 600},
+            "image": {
+                "url": "https://news.example.org/img2.jpg",
+                "width": 800,
+                "height": 600,
+            },
             "properties": {"url": "https://news.example.org/orig2.jpg"},
             "thumbnail": {"src": "https://news.example.org/thumb2.jpg"},
         },
@@ -36,7 +44,11 @@ _THREE_RESULTS = {
             "url": "https://media.site.com/photo-3",
             "title": "Image Three Title",
             "source": "Media Site",
-            "image": {"url": "https://media.site.com/img3.jpg", "width": 640, "height": 480},
+            "image": {
+                "url": "https://media.site.com/img3.jpg",
+                "width": 640,
+                "height": 480,
+            },
             "properties": {"url": "https://media.site.com/orig3.jpg"},
             "thumbnail": {"src": "https://media.site.com/thumb3.jpg"},
         },
@@ -67,6 +79,19 @@ async def test_fetch_brave_images_happy(monkeypatch):
     assert sent_headers.get("x-subscription-token") == "brave-test-key"
     assert "authorization" not in sent_headers
 
+    # Default size bucket is "large"
+    assert "size=large" in str(route.calls.last.request.url)
+
+
+@respx.mock
+async def test_fetch_brave_images_size_none_omits_param(monkeypatch):
+    monkeypatch.setenv("BRAVE_API_KEY", "brave-test-key")
+    route = respx.get(_ENDPOINT).mock(
+        return_value=httpx.Response(200, json={"results": []})
+    )
+    await fetch_brave_images("q", size=None)
+    assert "size=" not in str(route.calls.last.request.url)
+
 
 @respx.mock
 async def test_fetch_brave_images_missing_key_raises(monkeypatch):
@@ -85,6 +110,7 @@ async def test_fetch_brave_images_count_clamped():
         return httpx.Response(200, json={"results": []})
 
     import os
+
     os.environ["BRAVE_API_KEY"] = "key-for-clamp-test"
 
     respx.get(_ENDPOINT).mock(side_effect=_capture)
@@ -110,7 +136,11 @@ async def test_fetch_brave_images_handles_missing_optional_fields(monkeypatch):
                 "url": "https://example.com/a1",
                 "title": "A1",
                 "source": "Pub",
-                "image": {"url": "https://example.com/a1.jpg", "width": 100, "height": 100},
+                "image": {
+                    "url": "https://example.com/a1.jpg",
+                    "width": 100,
+                    "height": 100,
+                },
             },
             # Has only thumbnail (no image, no properties)
             {

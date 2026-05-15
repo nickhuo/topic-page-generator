@@ -17,18 +17,47 @@ async def test_returns_hero_when_brave_returns_results(monkeypatch):
                 publisher="Reuters",
             )
         ]
-    monkeypatch.setattr(
-        "generator.pipeline.hero_image.fetch_brave_images", fake_brave
-    )
+
+    monkeypatch.setattr("generator.pipeline.hero_image.fetch_brave_images", fake_brave)
     out = await run_hero_image_stage("2026 FIFA World Cup")
     assert isinstance(out, HeroImage)
     assert str(out.image_url).startswith("https://img.example/")
     assert out.publisher == "Reuters"
 
 
+async def test_picks_largest_area_not_first(monkeypatch):
+    async def fake_brave(query, *, count=10, timeout=12.0):
+        return [
+            BraveImageResult(
+                image_url="https://img.example/small.jpg",
+                title="small",
+                width=400,
+                height=300,
+            ),
+            BraveImageResult(
+                image_url="https://img.example/huge.jpg",
+                title="huge",
+                width=2400,
+                height=1600,
+            ),
+            BraveImageResult(
+                image_url="https://img.example/medium.jpg",
+                title="medium",
+                width=1000,
+                height=800,
+            ),
+        ]
+
+    monkeypatch.setattr("generator.pipeline.hero_image.fetch_brave_images", fake_brave)
+    out = await run_hero_image_stage("anything")
+    assert out is not None
+    assert str(out.image_url) == "https://img.example/huge.jpg"
+
+
 async def test_returns_none_when_brave_unconfigured(monkeypatch):
     async def raising_brave(query, *, count=5, timeout=12.0):
         raise BraveConfigError("no key")
+
     monkeypatch.setattr(
         "generator.pipeline.hero_image.fetch_brave_images", raising_brave
     )
@@ -39,9 +68,8 @@ async def test_returns_none_when_brave_unconfigured(monkeypatch):
 async def test_returns_none_on_empty_results(monkeypatch):
     async def empty_brave(query, *, count=5, timeout=12.0):
         return []
-    monkeypatch.setattr(
-        "generator.pipeline.hero_image.fetch_brave_images", empty_brave
-    )
+
+    monkeypatch.setattr("generator.pipeline.hero_image.fetch_brave_images", empty_brave)
     out = await run_hero_image_stage("anything")
     assert out is None
 
@@ -49,6 +77,7 @@ async def test_returns_none_on_empty_results(monkeypatch):
 async def test_returns_none_on_unexpected_error(monkeypatch):
     async def crashing_brave(query, *, count=5, timeout=12.0):
         raise RuntimeError("network died")
+
     monkeypatch.setattr(
         "generator.pipeline.hero_image.fetch_brave_images", crashing_brave
     )
