@@ -1,5 +1,11 @@
 """Stage 2 — Disambiguation. Conditionally fires Tavily + LLM."""
 
+# TODO(wikipedia): After disambiguation resolves a canonical entity (enwiki sitelink
+# from Wikidata), call generator.sources.wikipedia.fetch_wikipedia_card(title) and
+# attach the result to EventPage.wikipedia_card via build_page(). The fetcher,
+# schema field, and render template all already exist (PR-F); only the wiring is
+# missing. Fail soft — the fetcher returns None on any error.
+
 from __future__ import annotations
 
 import logging
