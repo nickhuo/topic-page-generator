@@ -17,9 +17,8 @@ from generator.schema import (
     AestheticOverrides,
     AestheticPlanOutput,
     ConsistencyCheckOutput,
-    DisambiguationChosen,
-    DisambiguationOutput,
-    TriageOutput,
+    EventFacts,
+    GroundOutput,
 )
 from tests.fixtures import make_full_event_page, source
 
@@ -28,26 +27,18 @@ from tests.fixtures import make_full_event_page, source
 # Canned stage outputs (all confidence values > 0.85 so no HITL fires)
 # ---------------------------------------------------------------------------
 
-_TRIAGE = TriageOutput(
-    is_event=True,
-    primary_entity="Test Event",
-    event_type_hint="product_launch",
-    temporal_posture="recent",
-    time_anchor="2026-05-14T00:00:00+00:00",
-    confidence=0.95,
-    alternatives=[],
-    reasoning="canned triage for e2e test",
-)
-
-_DISAMB = DisambiguationOutput(
-    resolved=True,
-    chosen=DisambiguationChosen(
-        entity="Test Event",
-        event_type_hint="product_launch",
-        time_anchor="2026-05-14T00:00:00+00:00",
+_GROUND = GroundOutput(
+    is_hot_event=True,
+    rejection_reason=None,
+    facts=EventFacts(
+        entities=["Test Event"],
+        what="Test Event rolled out for an end-to-end pipeline check.",
+        when="2026-05-14T00:00:00+00:00",
         supporting_sources=[],
     ),
-    unresolved_candidates=[],
+    canonical_title="Test Event rollout",
+    confidence=0.95,
+    reasoning="canned ground for e2e test",
 )
 
 _AESTHETIC = AestheticPlanOutput(
@@ -74,28 +65,21 @@ _CONSISTENCY = ConsistencyCheckOutput(passes=True, issues=[])
 def _patch_pipeline(monkeypatch, tmp_output_dir: Path) -> None:
     """Wire all LLM/fetch stage entrypoints to return canned data."""
     import generator.cli as cli_mod
-    import generator.pipeline.triage as triage_mod
-    import generator.pipeline.disambiguate as disamb_mod
+    import generator.pipeline.ground as ground_mod
     import generator.pipeline.plan as plan_mod
     import generator.pipeline.fetch as fetch_mod
     import generator.pipeline.extract as extract_mod
     import generator.pipeline.consistency as consistency_mod
     import generator.pipeline.render as render_mod
 
-    # --- triage
-    async def fake_triage(sentence, **kw):
-        return _TRIAGE
+    # --- ground
+    async def fake_ground(sentence, **kw):
+        return _GROUND
 
-    monkeypatch.setattr(triage_mod, "run", fake_triage)
+    monkeypatch.setattr(ground_mod, "run", fake_ground)
 
-    # --- disambiguate (already short-circuits at confidence>=0.85 but patch anyway)
-    async def fake_disamb(triage, **kw):
-        return _DISAMB
-
-    monkeypatch.setattr(disamb_mod, "run", fake_disamb)
-
-    # --- aesthetic plan (plan stage 3a is deterministic; patch only 3b LLM call)
-    async def fake_aesthetic(triage, plan, evidence_preview, **kw):
+    # --- aesthetic plan
+    async def fake_aesthetic(facts, title, plan, evidence_preview, **kw):
         return _AESTHETIC
 
     monkeypatch.setattr(plan_mod, "run_aesthetic_stage", fake_aesthetic)

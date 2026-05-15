@@ -1,4 +1,4 @@
-"""Module ABC contract: schema, prompt, queries, artifact, render gate, confidence."""
+"""Module ABC contract: schema, prompt, artifact, render gate, confidence."""
 
 from __future__ import annotations
 
@@ -42,9 +42,6 @@ class Module(ABC):
 
         if hasattr(cls, "kind"):
             MODULE_REGISTRY[cls.kind] = cls
-
-    @abstractmethod
-    def queries(self, ctx: "PlanContext") -> list[str]: ...
 
     def default_artifact(self, ctx: "PlanContext", data: BaseModel) -> str:
         """Pick the canonical artifact name for this module kind.

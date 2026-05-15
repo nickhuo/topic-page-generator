@@ -107,8 +107,8 @@ def _build_messages(
     regen_feedback: str | None = None,
 ) -> list[dict]:
     user = module.extraction_prompt_template.format(
-        primary_entity=ctx.subject.primary_entity,
-        event_type_hint=ctx.subject.event_type_hint,
+        title=ctx.subject.title,
+        entities=", ".join(ctx.subject.entities),
         evidence_block=_render_evidence_block(evidence),
     )
     if regen_feedback:

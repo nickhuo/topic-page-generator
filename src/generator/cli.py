@@ -2,12 +2,12 @@
 
 Commands
 --------
-``generate run "<sentence>"``  — full 8-stage pipeline (was the only command).
-``generate regen-module <kind> <data.json>``  — re-run Stage 5 for one module.
+``generate run "<sentence>"``  — full 7-stage pipeline (was the only command).
+``generate regen-module <kind> <data.json>``  — re-run module extraction.
 
 .. note::
    The old bare invocation ``generate "<sentence>"`` no longer works; use
-   ``generate run "<sentence>"`` instead.  The README will be updated in Task 7.
+   ``generate run "<sentence>"`` instead.
 """
 
 from __future__ import annotations
@@ -28,27 +28,17 @@ from generator.editor.prompt_cli import EditorPrompter, _now
 from generator.llm.client import LLMConfigError, LLMOutputError
 from generator.llm.trace_buffer import reset as _reset_llm_calls
 from generator.modules.base import PlanContext
-from generator.pipeline import consistency, disambiguate, extract, plan, render, triage
+from generator.pipeline import consistency, extract, ground, plan, render
 from generator.pipeline.extract import extract_one_module
 from generator.pipeline.fetch import EmptyEvidencePoolError, run_fetch_stage
-from generator.pipeline.render import slugify
+from generator.pipeline.render import slugify, subject_from_facts
 from generator.pipeline.trace import TraceRecorder
-from generator.schema import EventSubject, TriageOutput
 
 console = Console()
 
 app = typer.Typer(no_args_is_help=True)
 
 _OUTPUT_DIR = Path(__file__).resolve().parents[2] / "output"
-
-
-def _subject_from_triage(t: TriageOutput) -> EventSubject:
-    return EventSubject(
-        primary_entity=t.primary_entity or "Unknown",
-        event_type_hint=t.event_type_hint or "generic",
-        temporal_posture=t.temporal_posture or "recent",
-        time_anchor=t.time_anchor,
-    )
 
 
 @app.command("run")
@@ -63,7 +53,7 @@ def generate(
         help="Enable the optional plan-override HITL touchpoint.",
     ),
 ) -> None:
-    """Run the 8-stage pipeline on a one-sentence input."""
+    """Run the 7-stage pipeline on a one-sentence input."""
     # Load .env files so OPENROUTER_API_KEY / TAVILY_API_KEY / MODEL_* overrides
     # don't have to be exported in every shell. .env.local wins over .env.
     load_dotenv(".env")
@@ -81,29 +71,45 @@ def generate(
     output_paths: dict[str, Any] = {}
 
     async def _run() -> None:
-        with recorder.stage("triage"):
-            triage_out = await triage.run(sentence)
-            console.print(
-                f"[green]✓[/green] Triage  confidence={triage_out.confidence}"
-            )
+        # Stage 1: Ground (with optional reformulation loop).
+        current_sentence = sentence
+        while True:
+            with recorder.stage("ground"):
+                ground_out = await ground.run(current_sentence)
+                console.print(
+                    f"[green]✓[/green] Ground  is_hot_event={ground_out.is_hot_event} "
+                    f"confidence={ground_out.confidence}"
+                )
 
-        triage_out = prompter.triage_review(
-            triage_out, confidence=triage_out.confidence
-        )
+            decision, payload = prompter.ground_review(ground_out)
+            if decision == "retry" and isinstance(payload, str):
+                current_sentence = payload
+                console.print(f"[dim]retrying with:[/dim] {current_sentence}")
+                continue
+            if decision == "reject" or not ground_out.is_hot_event:
+                console.print(
+                    "[bold red]Stopping:[/bold red] not an unfolding hot event."
+                )
+                if ground_out.rejection_reason:
+                    console.print(f"  reason: {ground_out.rejection_reason}")
+                raise typer.Exit(code=5)
+            # decision == "accept"
+            assert isinstance(payload, type(ground_out))  # for type narrowing
+            ground_out = payload
+            break
 
-        slug = slugify(triage_out.primary_entity or sentence)
+        if ground_out.facts is None or not ground_out.canonical_title:
+            console.print("[bold red]Ground returned no facts. Aborting.[/bold red]")
+            raise typer.Exit(code=4)
 
-        with recorder.stage("disambiguate"):
-            disamb_out = await disambiguate.run(triage_out)
-            console.print(
-                f"[green]✓[/green] Disambiguate  resolved={disamb_out.resolved}"
-            )
+        subject = subject_from_facts(ground_out.facts, ground_out.canonical_title)
+        slug = slugify(ground_out.canonical_title)
 
-        if not disamb_out.resolved:
-            disamb_out = prompter.disambiguation_review(disamb_out)
-
+        # Stage 2a: Plan.
         with recorder.stage("plan"):
-            need_plan_out = await plan.run_plan_stage(triage_out, disamb_out)
+            need_plan_out = await plan.run_plan_stage(
+                ground_out.facts, ground_out.canonical_title
+            )
             activated = [p for p in need_plan_out.need_plans if p.activated]
             console.print(
                 f"[green]✓[/green] Plan  activated_needs={len(activated)}/8 "
@@ -113,17 +119,17 @@ def generate(
         if review_plan:
             need_plan_out = prompter.plan_review(need_plan_out)
 
+        # Stage 3: Fetch.
         try:
             with recorder.stage("fetch"):
-                sources = await run_fetch_stage(
-                    need_plan_out, _subject_from_triage(triage_out)
-                )
+                sources = await run_fetch_stage(need_plan_out, subject)
         except EmptyEvidencePoolError as exc:
             console.print(f"[bold red]Fetch failed:[/bold red] {exc}")
             raise typer.Exit(code=3) from exc
         except httpx.HTTPError as exc:
             console.print(f"[bold red]Network error during fetch:[/bold red] {exc}")
             raise typer.Exit(code=3) from exc
+
         console.print(f"[green]✓[/green] Fetch  sources={len(sources)}")
 
         # Build a small evidence preview to pass into the aesthetic prompt.
@@ -131,20 +137,24 @@ def generate(
             f"- {s.publisher.tier} {s.publisher.name}: {s.title}" for s in sources[:6]
         )
 
+        # Stage 2b: Aesthetic.
         with recorder.stage("aesthetic_plan"):
             aesthetic_out = await plan.run_aesthetic_stage(
-                triage_out, need_plan_out, evidence_preview
+                ground_out.facts,
+                ground_out.canonical_title,
+                need_plan_out,
+                evidence_preview,
             )
             console.print(
                 f"[green]✓[/green] Aesthetic  preset={aesthetic_out.preset_id}"
             )
 
-        subject = _subject_from_triage(triage_out)
-
+        # Stage 4: Extract.
         with recorder.stage("extract"):
             modules = await extract.run(need_plan_out, aesthetic_out, subject, sources)
             console.print(f"[green]✓[/green] Extract  modules={len(modules)}")
 
+        # Stage 5: Consistency.
         with recorder.stage("consistency"):
             ctx = PlanContext(
                 subject=subject, need_plan=need_plan_out, aesthetic=aesthetic_out
@@ -156,7 +166,7 @@ def generate(
                 f"[green]✓[/green] Consistency  passes={consistency_out.passes}"
             )
 
-        # Stage 5 module review touchpoint
+        # Module review touchpoint.
         reviewed: list = []
         for m in modules:
             needs_review = getattr(m.confidence, "overall", 1.0) < 0.80 or bool(
@@ -186,11 +196,12 @@ def generate(
                 reviewed.append(m2)
         modules = reviewed
 
+        # Stage 6: Render.
         with recorder.stage("render"):
             page = render.build_page(
                 input_sentence=sentence,
                 page_id=page_id,
-                triage=triage_out,
+                subject=subject,
                 aesthetic=aesthetic_out,
                 sources=sources,
                 modules=modules,
@@ -204,6 +215,7 @@ def generate(
                 f"[green]✓[/green] Render  modules_in_page={len(page.modules)}"
             )
 
+        # Stage 7: Deliver.
         with recorder.stage("deliver"):
             _OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
             output_paths["html"] = _OUTPUT_DIR / f"{slug}.html"
@@ -243,7 +255,7 @@ def generate(
                     page = render.build_page(
                         input_sentence=sentence,
                         page_id=page_id,
-                        triage=triage_out,
+                        subject=subject,
                         aesthetic=aesthetic_out,
                         sources=sources,
                         modules=modules,
@@ -270,6 +282,8 @@ def generate(
 
     try:
         asyncio.run(_run())
+    except typer.Exit:
+        raise
     except LLMConfigError as exc:
         console.print(f"[bold red]LLM configuration error:[/bold red] {exc}")
         raise typer.Exit(code=1) from exc
@@ -305,8 +319,10 @@ def regen_module(
         help="Path to an existing <slug>.data.json file.",
     ),
 ) -> None:
-    """Re-run Stage 5 for one module against the cached evidence pool."""
+    """Re-run module extraction for one module against the cached evidence pool."""
     from generator.modules import MODULE_REGISTRY, all_modules  # noqa: F401 — populates registry
+    from generator.pipeline.extract import _filter_evidence
+    from generator.pipeline.render import render_html
     from generator.schema import (
         AestheticOverrides,
         AestheticPlanOutput,
@@ -318,8 +334,6 @@ def regen_module(
         TierQuota,
         Trace,
     )
-    from generator.pipeline.extract import _filter_evidence
-    from generator.pipeline.render import render_html
 
     # ------------------------------------------------------------------ load
     page = EventPage.model_validate_json(data_json_path.read_text())
@@ -338,9 +352,6 @@ def regen_module(
     module_instance = ModuleCls()
 
     # ------------------------------------------------------------------ rebuild PlanContext
-    # Prefer reusing the saved need_plans verbatim; if they're empty (older
-    # outputs from before Phase 1 landed) synthesize a minimal stub that lists
-    # every module kind under the `what_happened` need so extract still runs.
     if page.need_plans:
         need_plan_stub = NeedPlanOutput(
             need_plans=list(page.need_plans),
@@ -406,9 +417,9 @@ def regen_module(
 
     # ------------------------------------------------------------------ update page
     updated_modules = [new_typed if m.kind == kind else m for m in page.modules]
-    # Build a fresh EventPage preserving all existing metadata.
-    from generator.schema import EventMeta
     from datetime import datetime, timezone
+
+    from generator.schema import EventMeta
 
     now_iso = datetime.now(timezone.utc).isoformat()
     updated_page = EventPage(

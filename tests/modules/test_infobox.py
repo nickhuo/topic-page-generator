@@ -16,7 +16,7 @@ def test_infobox_metadata():
     assert "Infobox" in InfoboxModule.allowed_artifacts
     assert InfoboxModule.data_schema is InfoboxData
     assert isinstance(InfoboxModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in InfoboxModule.extraction_prompt_template
+    assert "{title}" in InfoboxModule.extraction_prompt_template
     assert "{evidence_block}" in InfoboxModule.extraction_prompt_template
 
 

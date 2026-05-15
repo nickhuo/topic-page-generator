@@ -21,7 +21,7 @@ def test_comparison_metadata():
     assert "ComparisonTable" in ComparisonModule.allowed_artifacts
     assert ComparisonModule.data_schema is ComparisonData
     assert isinstance(ComparisonModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in ComparisonModule.extraction_prompt_template
+    assert "{title}" in ComparisonModule.extraction_prompt_template
     assert "{evidence_block}" in ComparisonModule.extraction_prompt_template
 
 

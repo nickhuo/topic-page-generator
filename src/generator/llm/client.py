@@ -31,8 +31,7 @@ _ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 _TRANSIENT = (httpx.TimeoutException, httpx.NetworkError)
 
 _STAGE_FALLBACK_MODELS = {
-    "triage": "anthropic/claude-haiku-4-5",
-    "disambiguate": "anthropic/claude-sonnet-4-6",
+    "ground": "anthropic/claude-sonnet-4-6",
     "plan": "anthropic/claude-sonnet-4-6",
     "aesthetic": "anthropic/claude-haiku-4-5",
     "extract": "anthropic/claude-haiku-4-5",

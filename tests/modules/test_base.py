@@ -42,10 +42,8 @@ def test_module_abc_cannot_instantiate():
 
 def _make_ctx() -> PlanContext:
     subject = EventSubject(
-        primary_entity="GPT-5.5 Instant (OpenAI)",
-        event_type_hint="product_launch",
-        temporal_posture="recent",
-        time_anchor=None,
+        title="GPT-5.5 Instant rollout",
+        entities=["GPT-5.5 Instant (OpenAI)"],
     )
     need_plans = [
         NeedCurationPlan(

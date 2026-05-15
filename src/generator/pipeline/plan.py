@@ -1,4 +1,4 @@
-"""Stage 3 — Plan (LLM, needs-driven) + Aesthetic Plan (LLM)."""
+"""Stage 2 — Plan (LLM, needs-driven) + Aesthetic Plan (LLM)."""
 
 from __future__ import annotations
 
@@ -9,10 +9,9 @@ from generator.prompts.aesthetic import build_aesthetic_messages
 from generator.prompts.plan import build_need_plan_messages
 from generator.schema import (
     AestheticPlanOutput,
-    DisambiguationOutput,
+    EventFacts,
     NeedCurationPlan,
     NeedPlanOutput,
-    TriageOutput,
 )
 
 log = logging.getLogger(__name__)
@@ -35,12 +34,12 @@ def infer_default_category(assigned_modules: list[str]) -> str | None:
 
 
 async def run_plan_stage(
-    triage: TriageOutput,
-    disamb: DisambiguationOutput,
+    facts: EventFacts,
+    canonical_title: str,
     *,
     model: str | None = None,
 ) -> NeedPlanOutput:
-    """LLM Stage 3a: curate the page as a sequence of need sections.
+    """LLM Stage 2a: curate the page as a sequence of need sections.
 
     For each of the 8 reader needs the LLM decides: activation, rank,
     event-specific H2 (`section_title`), rationale, 1–2 Tavily fetch_queries,
@@ -48,7 +47,7 @@ async def run_plan_stage(
     """
     out = await call_structured(
         model=model or get_default_model("plan"),
-        messages=build_need_plan_messages(triage, disamb),
+        messages=build_need_plan_messages(facts, canonical_title),
         response_model=NeedPlanOutput,
     )
     finalised: list[NeedCurationPlan] = []
@@ -62,16 +61,19 @@ async def run_plan_stage(
 
 
 async def run_aesthetic_stage(
-    triage: TriageOutput,
+    facts: EventFacts,
+    canonical_title: str,
     need_plan: NeedPlanOutput,
     evidence_preview: str,
     *,
     model: str | None = None,
 ) -> AestheticPlanOutput:
-    """LLM Stage 3b: pick aesthetic preset + closed-enum overrides."""
+    """LLM Stage 2b: pick aesthetic preset + closed-enum overrides."""
     out = await call_structured(
         model=model or get_default_model("aesthetic"),
-        messages=build_aesthetic_messages(triage, need_plan, evidence_preview),
+        messages=build_aesthetic_messages(
+            facts, canonical_title, need_plan, evidence_preview
+        ),
         response_model=AestheticPlanOutput,
     )
 

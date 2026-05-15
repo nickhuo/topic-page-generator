@@ -1,4 +1,4 @@
-"""Tests for EditorPrompter — all five HITL touchpoints."""
+"""Tests for EditorPrompter — all HITL touchpoints."""
 
 from __future__ import annotations
 
@@ -7,13 +7,11 @@ import rich.prompt
 from generator.editor.prompt_cli import EditorPrompter
 from generator.pipeline.trace import TraceRecorder
 from generator.schema import (
-    DisambiguationCandidate,
-    DisambiguationOutput,
+    EventFacts,
+    GroundOutput,
     NeedCurationPlan,
     NeedPlanOutput,
     TierQuota,
-    TriageAlternative,
-    TriageOutput,
 )
 
 _ALL_NEEDS = (
@@ -31,22 +29,6 @@ _ALL_NEEDS = (
 # Shared helpers
 # ---------------------------------------------------------------------------
 
-_TRIAGE_LOW = TriageOutput.model_construct(
-    is_event=True,
-    confidence=0.5,
-    reasoning="low confidence stub",
-    alternatives=[
-        {"entity": "X", "event_type_hint": "launch", "rationale": "alt"},
-    ],
-)
-
-_TRIAGE_HIGH = TriageOutput.model_construct(
-    is_event=True,
-    confidence=0.9,
-    reasoning="high confidence stub",
-    alternatives=[],
-)
-
 
 def _recorder() -> TraceRecorder:
     return TraceRecorder(input_sentence="test sentence", page_id="page_test")
@@ -61,157 +43,137 @@ def _prompter(auto_mode: bool, recorder: TraceRecorder | None = None) -> EditorP
     )
 
 
-# ---------------------------------------------------------------------------
-# 1. triage_review — existing tests (Task 2)
-# ---------------------------------------------------------------------------
-
-
-def test_auto_mode_logs_low_confidence_triage() -> None:
-    recorder = _recorder()
-    prompter = EditorPrompter(auto_mode=True, recorder=recorder)
-    result = prompter.triage_review(_TRIAGE_LOW, confidence=0.5)
-
-    assert result is _TRIAGE_LOW
-    trace = recorder.finalize(auto_mode=True)
-    reasons = [a.reason for a in trace.editor_actions]
-    assert "auto_mode" in reasons, f"Expected 'auto_mode' reason, got: {reasons}"
-
-
-def test_high_confidence_triage_no_op() -> None:
-    recorder = _recorder()
-    prompter = EditorPrompter(auto_mode=True, recorder=recorder)
-    result = prompter.triage_review(_TRIAGE_HIGH, confidence=0.9)
-
-    assert result is _TRIAGE_HIGH
-    trace = recorder.finalize(auto_mode=True)
-    assert trace.editor_actions == [], (
-        f"Expected no editor actions for high-confidence, got: {trace.editor_actions}"
+def _ground_hot() -> GroundOutput:
+    return GroundOutput(
+        is_hot_event=True,
+        rejection_reason=None,
+        facts=EventFacts(
+            entities=["Test Event"],
+            what="Test event happened.",
+            when="2026-05-14T00:00:00+00:00",
+            supporting_sources=["s1"],
+        ),
+        canonical_title="Test Event",
+        confidence=0.92,
+        reasoning="fresh evidence",
     )
 
 
-def test_triage_review_interactive_pick_alternative(monkeypatch) -> None:
-    """Pick alternative 1 — mutates primary_entity, logs override_archetype."""
-    recorder = _recorder()
-    prompter = _prompter(auto_mode=False, recorder=recorder)
-
-    triage = TriageOutput(
-        is_event=True,
-        primary_entity="OldEntity",
-        event_type_hint="conference",
-        temporal_posture="imminent",
-        confidence=0.5,
-        reasoning="test",
-        alternatives=[
-            TriageAlternative(
-                entity="NewEntity",
-                event_type_hint="summit",
-                rationale="better match",
-            )
-        ],
+def _ground_not_hot() -> GroundOutput:
+    return GroundOutput(
+        is_hot_event=False,
+        rejection_reason="Query reads as evergreen tutorial.",
+        facts=None,
+        canonical_title=None,
+        confidence=0.95,
+        reasoning="no time-bound event in evidence",
     )
-
-    monkeypatch.setattr(
-        rich.prompt.IntPrompt,
-        "ask",
-        staticmethod(lambda *a, **k: 1),
-    )
-
-    result = prompter.triage_review(triage, confidence=0.5)
-    assert result.primary_entity == "NewEntity"
-
-    trace = recorder.finalize(auto_mode=False)
-    actions = trace.editor_actions
-    assert len(actions) == 1
-    assert actions[0].action == "override_archetype"
-    assert actions[0].reason == "low_confidence_pick"
-    assert actions[0].before == "OldEntity"
-    assert actions[0].after == "NewEntity"
-
-
-def test_triage_review_interactive_keep_current(monkeypatch) -> None:
-    """Pick 0 — keeps current, no log."""
-    recorder = _recorder()
-    prompter = _prompter(auto_mode=False, recorder=recorder)
-
-    triage = TriageOutput(
-        is_event=True,
-        primary_entity="OriginalEntity",
-        event_type_hint="conference",
-        temporal_posture="imminent",
-        confidence=0.5,
-        reasoning="test",
-        alternatives=[
-            TriageAlternative(entity="Alt", event_type_hint="x", rationale="r")
-        ],
-    )
-
-    monkeypatch.setattr(
-        rich.prompt.IntPrompt,
-        "ask",
-        staticmethod(lambda *a, **k: 0),
-    )
-
-    result = prompter.triage_review(triage, confidence=0.5)
-    assert result.primary_entity == "OriginalEntity"
-
-    trace = recorder.finalize(auto_mode=False)
-    assert trace.editor_actions == []
 
 
 # ---------------------------------------------------------------------------
-# 2. disambiguation_review
+# 1. ground_review
 # ---------------------------------------------------------------------------
 
 
-def _disamb_unresolved() -> DisambiguationOutput:
-    return DisambiguationOutput(
-        resolved=False,
-        chosen=None,
-        unresolved_candidates=[
-            DisambiguationCandidate(
-                entity="EntityA",
-                event_type_hint="summit",
-                rationale="reason A",
-                supporting_sources=["s1"],
-            ),
-            DisambiguationCandidate(
-                entity="EntityB",
-                event_type_hint="conference",
-                rationale="reason B",
-                supporting_sources=["s2"],
-            ),
-        ],
-    )
-
-
-def test_disambiguation_review_auto_mode() -> None:
+def test_ground_review_auto_mode_accepts_hot_event() -> None:
     recorder = _recorder()
     prompter = _prompter(auto_mode=True, recorder=recorder)
-    disamb = _disamb_unresolved()
-    result = prompter.disambiguation_review(disamb)
-    assert result is disamb
+    out = _ground_hot()
+    decision, payload = prompter.ground_review(out)
+    assert decision == "accept"
+    assert payload is out
     trace = recorder.finalize(auto_mode=True)
     assert any(a.reason == "auto_mode" for a in trace.editor_actions)
 
 
-def test_disambiguation_review_interactive_pick(monkeypatch) -> None:
+def test_ground_review_auto_mode_rejects_non_hot() -> None:
     recorder = _recorder()
-    prompter = _prompter(auto_mode=False, recorder=recorder)
-    disamb = _disamb_unresolved()
-
-    monkeypatch.setattr(
-        rich.prompt.IntPrompt,
-        "ask",
-        staticmethod(lambda *a, **k: 1),
+    prompter = _prompter(auto_mode=True, recorder=recorder)
+    out = _ground_not_hot()
+    decision, payload = prompter.ground_review(out)
+    assert decision == "reject"
+    assert payload is out
+    trace = recorder.finalize(auto_mode=True)
+    actions = trace.editor_actions
+    assert any(
+        a.reason == "auto_mode" and a.action == "reject_page" for a in actions
     )
 
-    result = prompter.disambiguation_review(disamb)
-    assert result.resolved is True
-    assert result.chosen is not None
-    assert result.chosen.entity == "EntityA"
 
+def test_ground_review_interactive_accepts_facts(monkeypatch) -> None:
+    recorder = _recorder()
+    prompter = _prompter(auto_mode=False, recorder=recorder)
+    out = _ground_hot()
+
+    answers = iter(["y"])
+    monkeypatch.setattr(
+        rich.prompt.Prompt,
+        "ask",
+        staticmethod(lambda *a, **k: next(answers)),
+    )
+
+    decision, payload = prompter.ground_review(out)
+    assert decision == "accept"
+    assert payload.facts == out.facts
     trace = recorder.finalize(auto_mode=False)
-    assert any(a.reason == "manual_disambiguation" for a in trace.editor_actions)
+    assert any(a.action == "accept_module" for a in trace.editor_actions)
+
+
+def test_ground_review_interactive_reject_facts(monkeypatch) -> None:
+    recorder = _recorder()
+    prompter = _prompter(auto_mode=False, recorder=recorder)
+    out = _ground_hot()
+
+    answers = iter(["n"])
+    monkeypatch.setattr(
+        rich.prompt.Prompt,
+        "ask",
+        staticmethod(lambda *a, **k: next(answers)),
+    )
+
+    decision, _ = prompter.ground_review(out)
+    assert decision == "reject"
+    trace = recorder.finalize(auto_mode=False)
+    assert any(a.action == "reject_page" for a in trace.editor_actions)
+
+
+def test_ground_review_interactive_reformulate(monkeypatch) -> None:
+    recorder = _recorder()
+    prompter = _prompter(auto_mode=False, recorder=recorder)
+    out = _ground_not_hot()
+
+    answers = iter(["r", "Trump visits China"])
+    monkeypatch.setattr(
+        rich.prompt.Prompt,
+        "ask",
+        staticmethod(lambda *a, **k: next(answers)),
+    )
+
+    decision, payload = prompter.ground_review(out)
+    assert decision == "retry"
+    assert payload == "Trump visits China"
+    trace = recorder.finalize(auto_mode=False)
+    assert any(a.reason == "manual_reformulate" for a in trace.editor_actions)
+
+
+def test_ground_review_interactive_quit_on_not_hot(monkeypatch) -> None:
+    recorder = _recorder()
+    prompter = _prompter(auto_mode=False, recorder=recorder)
+    out = _ground_not_hot()
+
+    answers = iter(["q"])
+    monkeypatch.setattr(
+        rich.prompt.Prompt,
+        "ask",
+        staticmethod(lambda *a, **k: next(answers)),
+    )
+
+    decision, _ = prompter.ground_review(out)
+    assert decision == "reject"
+    trace = recorder.finalize(auto_mode=False)
+    assert any(
+        a.reason == "manual_reject_not_hot" for a in trace.editor_actions
+    )
 
 
 # ---------------------------------------------------------------------------

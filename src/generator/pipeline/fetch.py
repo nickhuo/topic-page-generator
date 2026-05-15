@@ -101,7 +101,7 @@ async def run_fetch_stage(
     dedupe URLs while preserving need attribution, blacklist AI-content
     domains, enrich thumbnails+summaries via OG scrape, then sort by
     (tier asc, published_at desc)."""
-    entity = subject.primary_entity
+    entity = subject.entities[0]
     sem = asyncio.Semaphore(_FETCH_CONCURRENCY)
 
     # Collect (need_id, query, days) triples from activated plans.

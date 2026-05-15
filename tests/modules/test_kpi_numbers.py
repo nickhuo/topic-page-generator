@@ -16,7 +16,7 @@ def test_kpi_numbers_metadata():
     assert "KPITiles" in KPINumbersModule.allowed_artifacts
     assert KPINumbersModule.data_schema is KPINumbersData
     assert isinstance(KPINumbersModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in KPINumbersModule.extraction_prompt_template
+    assert "{title}" in KPINumbersModule.extraction_prompt_template
     assert "{evidence_block}" in KPINumbersModule.extraction_prompt_template
 
 

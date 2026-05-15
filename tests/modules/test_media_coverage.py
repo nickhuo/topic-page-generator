@@ -16,7 +16,7 @@ def test_media_coverage_metadata():
     assert "CoverageList" in MediaCoverageModule.allowed_artifacts
     assert MediaCoverageModule.data_schema is MediaCoverageData
     assert isinstance(MediaCoverageModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in MediaCoverageModule.extraction_prompt_template
+    assert "{title}" in MediaCoverageModule.extraction_prompt_template
     assert "{evidence_block}" in MediaCoverageModule.extraction_prompt_template
 
 

@@ -11,10 +11,9 @@ def _minimal_page_dict() -> dict:
         "input_sentence": "Test event happened.",
         "generated_at": "2026-05-13T12:00:00Z",
         "subject": {
-            "primary_entity": "Test Entity",
-            "event_type_hint": "product_launch",
-            "temporal_posture": "recent",
-            "time_anchor": "2026-05-01T00:00:00Z",
+            "title": "Test Entity launch",
+            "entities": ["Test Entity"],
+            "when": "2026-05-01T00:00:00Z",
         },
         "modules": [
             {
@@ -99,7 +98,7 @@ def test_stage_trace_accepts_llm_calls():
     from generator.schema import StageTrace, LLMCall
 
     st = StageTrace(
-        stage="triage",
+        stage="ground",
         started_at="2026-05-13T12:00:00Z",
         duration_ms=120,
         outcome="success",

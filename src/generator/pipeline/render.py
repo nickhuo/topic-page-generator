@@ -22,6 +22,7 @@ from generator.blocks import module_to_block
 from generator.layout.tokens import palette_css_vars
 from generator.schema import (
     AestheticPlanOutput,
+    EventFacts,
     EventLayout,
     EventMeta,
     EventPage,
@@ -29,7 +30,6 @@ from generator.schema import (
     NeedCurationPlan,
     NeedId,
     Source,
-    TriageOutput,
     TypedModule,
 )
 
@@ -50,7 +50,7 @@ def slugify(text: str) -> str:
 def build_page(
     input_sentence: str,
     page_id: str,
-    triage: TriageOutput,
+    subject: EventSubject,
     aesthetic: AestheticPlanOutput,
     sources: list[Source],
     modules: list[TypedModule],
@@ -65,12 +65,7 @@ def build_page(
         page_id=page_id,
         input_sentence=input_sentence,
         generated_at=now,
-        subject=EventSubject(
-            primary_entity=triage.primary_entity or "Unknown",
-            event_type_hint=triage.event_type_hint or "generic",
-            temporal_posture=triage.temporal_posture or "recent",
-            time_anchor=triage.time_anchor,
-        ),
+        subject=subject,
         modules=modules,
         layout=EventLayout(preset_id=aesthetic.preset_id, overrides=None),
         sources=sources,
@@ -86,18 +81,29 @@ def build_page(
     )
 
 
+def subject_from_facts(facts: EventFacts, canonical_title: str) -> EventSubject:
+    return EventSubject(
+        title=canonical_title,
+        entities=facts.entities,
+        when=facts.when,
+        where=facts.where,
+    )
+
+
 def _build_jsonld(page: EventPage) -> str:
-    schema_type = "Event" if page.subject.time_anchor else "NewsArticle"
+    schema_type = "Event" if page.subject.when else "NewsArticle"
     data: dict = {
         "@context": "https://schema.org",
         "@type": schema_type,
-        "name": page.subject.primary_entity,
+        "name": page.subject.title,
         "description": page.input_sentence,
     }
-    if page.subject.time_anchor:
-        data["startDate"] = page.subject.time_anchor
+    if page.subject.when:
+        data["startDate"] = page.subject.when
     else:
         data["datePublished"] = page.meta.last_updated
+    if page.subject.where:
+        data["location"] = page.subject.where
     return json.dumps(data, separators=(",", ":"))
 
 

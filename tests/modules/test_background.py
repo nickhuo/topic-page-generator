@@ -16,7 +16,7 @@ def test_background_metadata():
     assert "Prose" in BackgroundModule.allowed_artifacts
     assert BackgroundModule.data_schema is BackgroundData
     assert isinstance(BackgroundModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in BackgroundModule.extraction_prompt_template
+    assert "{title}" in BackgroundModule.extraction_prompt_template
     assert "{evidence_block}" in BackgroundModule.extraction_prompt_template
     # Verify the mandated special prompt text is present
     assert "Synthesize 1" in BackgroundModule.extraction_prompt_template

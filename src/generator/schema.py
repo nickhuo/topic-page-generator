@@ -25,7 +25,6 @@ TraceId = str
 # Enumerations
 # ---------------------------------------------------------------------------
 SourceTier = Literal["T0", "T1", "T2", "T3"]
-TemporalPosture = Literal["live", "imminent", "recent", "past"]
 Sentiment = Literal["positive", "neutral", "negative"]
 Priority = Literal["required", "high", "medium", "low"]
 Slot = Literal["hero", "primary", "aside", "tail", "footer"]
@@ -467,10 +466,18 @@ class LayoutConfig(_Frozen):
 # §2 Page root
 # ---------------------------------------------------------------------------
 class EventSubject(_Frozen):
-    primary_entity: str
-    event_type_hint: str
-    temporal_posture: TemporalPosture
-    time_anchor: ISO8601 | None = None
+    """Page-level identity, derived from the ground stage's EventFacts.
+
+    `entities[0]` is the primary entity (the main subject of the page);
+    additional entries are co-actors (e.g. ["Donald Trump", "China"] for
+    "Trump visits China"). `when` and `where` are sourced from the
+    supporting evidence, not from LLM parametric memory.
+    """
+
+    title: str
+    entities: list[str] = Field(min_length=1)
+    when: ISO8601 | None = None
+    where: str | None = None
 
 
 class EventLayout(_Frozen):
@@ -501,8 +508,8 @@ class EventPage(_Frozen):
     # Optional during migration so older fixtures still round-trip; once all
     # outputs are produced by the new plan stage, mark required.
     need_plans: list["NeedCurationPlan"] = Field(default_factory=list)
-    # Optional Wikipedia reference card surfaced in the right rail. Filled by
-    # the disambiguate stage when a confident entity title is available; the
+    # Optional Wikipedia reference card surfaced in the right rail. Filled
+    # by the ground stage when a confident canonical title is available; the
     # render path no-ops cleanly when this is None.
     wikipedia_card: WikipediaCardData | None = None
     meta: EventMeta
@@ -511,41 +518,37 @@ class EventPage(_Frozen):
 # ---------------------------------------------------------------------------
 # §4 Pipeline stage outputs
 # ---------------------------------------------------------------------------
-class TriageAlternative(_Frozen):
-    entity: str
-    event_type_hint: str
-    rationale: str
+class EventFacts(_Frozen):
+    """Grounded facts about the event, extracted from Tavily evidence.
+
+    Produced by the ground stage's LLM call over real search results — every
+    field traces back to one or more `supporting_sources`. `when` MUST come
+    from a source's `published_at` or in-body date, never from parametric
+    memory.
+    """
+
+    entities: list[str] = Field(min_length=1)
+    what: str
+    when: ISO8601 | None = None
+    where: str | None = None
+    why: str | None = None
+    supporting_sources: list[SourceId] = Field(default_factory=list)
 
 
-class TriageOutput(_Frozen):
-    is_event: bool
-    primary_entity: str | None = None
-    event_type_hint: str | None = None
-    temporal_posture: TemporalPosture | None = None
-    time_anchor: ISO8601 | None = None
+class GroundOutput(_Frozen):
+    """Stage 1 output. Combines the "is this an unfolding hot event?" gate
+    with grounded fact extraction in a single LLM call over Tavily evidence.
+
+    When `is_hot_event=False`, `rejection_reason` explains why and `facts`
+    is None. When True, `facts` and `canonical_title` are populated.
+    """
+
+    is_hot_event: bool
+    rejection_reason: str | None = None
+    facts: EventFacts | None = None
+    canonical_title: str | None = None
     confidence: float = Field(ge=0.0, le=1.0)
-    alternatives: list[TriageAlternative] = Field(default_factory=list)
     reasoning: str
-
-
-class DisambiguationChosen(_Frozen):
-    entity: str
-    event_type_hint: str
-    time_anchor: ISO8601
-    supporting_sources: list[SourceId]
-
-
-class DisambiguationCandidate(_Frozen):
-    entity: str
-    event_type_hint: str
-    rationale: str
-    supporting_sources: list[SourceId]
-
-
-class DisambiguationOutput(_Frozen):
-    resolved: bool
-    chosen: DisambiguationChosen | None = None
-    unresolved_candidates: list[DisambiguationCandidate] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------

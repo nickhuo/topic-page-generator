@@ -34,12 +34,6 @@ type SourceTier =
   | "T2"   // Wikipedia / Wikidata
   | "T3";  // other public web (regional, trade, blogs)
 
-type TemporalPosture =
-  | "live"     // happening now (Eurovision opening night)
-  | "imminent" // scheduled within ~30 days (World Cup pre-kickoff)
-  | "recent"   // happened within ~7 days (GPT-5.5 rolled out 7 days ago)
-  | "past";    // happened >7 days ago
-
 type Sentiment = "positive" | "neutral" | "negative";
 
 type Priority = "required" | "high" | "medium" | "low";
@@ -106,10 +100,10 @@ type EventPage = {
   generated_at: ISO8601;
 
   subject: {
-    primary_entity: string;          // "GPT-5.5 Instant", "Eurovision 2026"
-    event_type_hint: string;         // soft tag, e.g. "product_launch"
-    temporal_posture: TemporalPosture;
-    time_anchor?: ISO8601;           // event date if event-bound
+    title: string;                   // canonical page title from the ground stage
+    entities: string[];              // all actors involved, entities[0] is the primary
+    when?: ISO8601;                  // event datetime sourced from evidence
+    where?: string;                  // event location if stated by a source
   };
 
   modules: TypedModule[];            // discriminated union, see §3
@@ -428,42 +422,33 @@ type BackgroundModule = BaseModuleFields & {
 
 ## 4. Pipeline Stage Outputs
 
-### `TriageOutput` — Stage 1
+### `EventFacts` — facts derived from evidence
 
 ```typescript
-type TriageOutput = {
-  is_event: boolean;
-  primary_entity?: string;
-  event_type_hint?: string;          // "product_launch", "live_cultural_event"
-  temporal_posture?: TemporalPosture;
-  time_anchor?: ISO8601;
-  confidence: number;                // 0–1
-  alternatives?: Array<{
-    entity: string;
-    event_type_hint: string;
-    rationale: string;
-  }>;
-  reasoning: string;                 // short LLM rationale, for audit
+type EventFacts = {
+  entities: string[];                // actors, in order of centrality
+  what: string;                      // one-sentence event description
+  when?: ISO8601;                    // sourced from a supporting source
+  where?: string;                    // sourced from a supporting source
+  why?: string;                      // optional motivation/context
+  supporting_sources: SourceId[];    // IDs of the evidence backing every fact
 };
 ```
 
-### `DisambiguationOutput` — Stage 2
+### `GroundOutput` — Stage 1
+
+The ground stage merges the old triage + disambiguate steps. One Tavily
+search (using the raw input sentence) feeds one LLM call that both gates
+"is this an unfolding hot event?" and extracts `EventFacts`.
 
 ```typescript
-type DisambiguationOutput = {
-  resolved: boolean;
-  chosen?: {
-    entity: string;
-    event_type_hint: string;
-    time_anchor: ISO8601;
-    supporting_sources: SourceId[];
-  };
-  unresolved_candidates?: Array<{
-    entity: string;
-    event_type_hint: string;
-    rationale: string;
-    supporting_sources: SourceId[];
-  }>;
+type GroundOutput = {
+  is_hot_event: boolean;
+  rejection_reason?: string;         // set when is_hot_event=false
+  facts?: EventFacts;                // set when is_hot_event=true
+  canonical_title?: string;          // human-readable page title
+  confidence: number;                // 0–1
+  reasoning: string;                 // short LLM rationale, for audit
 };
 ```
 

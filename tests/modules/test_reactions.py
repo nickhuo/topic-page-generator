@@ -15,7 +15,7 @@ def test_reactions_metadata():
     assert "ReactionsList" in ReactionsModule.allowed_artifacts
     assert ReactionsModule.data_schema is ReactionsData
     assert isinstance(ReactionsModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in ReactionsModule.extraction_prompt_template
+    assert "{title}" in ReactionsModule.extraction_prompt_template
     assert "{evidence_block}" in ReactionsModule.extraction_prompt_template
 
 

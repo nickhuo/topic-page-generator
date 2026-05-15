@@ -11,15 +11,18 @@ from typing import Literal
 from pydantic import ValidationError
 from rich.console import Console
 from rich.panel import Panel
-from rich.prompt import IntPrompt, Prompt
+from rich.prompt import Prompt
 from rich.table import Table
 
 from generator.pipeline.trace import TraceRecorder
-from generator.schema import EditorAction
+from generator.schema import EditorAction, EventFacts, GroundOutput
 
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+GroundDecision = Literal["accept", "reject", "retry"]
 
 
 class EditorPrompter:
@@ -42,89 +45,133 @@ class EditorPrompter:
         )
 
     # ------------------------------------------------------------------
-    # 1. triage_review
+    # 1. ground_review — gate + fact confirmation
     # ------------------------------------------------------------------
-    def triage_review(self, triage, *, confidence: float):
-        if confidence >= 0.85:
-            return triage
+    def ground_review(
+        self, output: GroundOutput
+    ) -> tuple[GroundDecision, GroundOutput | str]:
+        """Editor touchpoint for the ground stage.
+
+        Returns one of:
+        - ("accept", GroundOutput): proceed to plan; output.facts may have been edited.
+        - ("reject", GroundOutput): not a hot event or user said no; CLI exits 5.
+        - ("retry", str): user supplied a reformulated sentence; CLI re-runs ground.
+        """
         if self.auto:
+            kind = "accept_module" if output.is_hot_event else "reject_page"
             self._log(
-                action="accept_module",
-                target={"module_kind": "triage"},
+                action=kind,
+                target={"module_kind": "ground"},
                 reason="auto_mode",
             )
-            return triage
+            decision: GroundDecision = "accept" if output.is_hot_event else "reject"
+            return decision, output
 
-        # Interactive path
-        alts = triage.alternatives or []
-        if not alts:
-            return triage
-
-        self.console.print(
-            f"[yellow]Low confidence ({confidence:.2f}). Alternatives:[/yellow]"
-        )
-        for i, alt in enumerate(alts, start=1):
-            display = (
-                getattr(alt, "label", None) or getattr(alt, "entity", None) or str(alt)
+        if not output.is_hot_event:
+            self.console.print(
+                Panel(
+                    f"[yellow]Not a hot event.[/yellow]\n\n"
+                    f"Reason: {output.rejection_reason or '(no reason given)'}",
+                    title="Ground rejected",
+                    expand=False,
+                )
             )
-            self.console.print(f"  {i}. {display}")
-
-        pick = IntPrompt.ask("Pick alternative [0 to keep current, 1..N]", default=0)
-        if pick == 0:
-            return triage
-
-        chosen = alts[pick - 1]
-        old_primary = triage.primary_entity
-        new_primary = (
-            getattr(chosen, "label", None)
-            or getattr(chosen, "entity", None)
-            or str(chosen)
-        )
-        triage.primary_entity = new_primary
-        self._log(
-            action="override_archetype",
-            target={"module_kind": "triage"},
-            before=old_primary,
-            after=new_primary,
-            reason="low_confidence_pick",
-        )
-        return triage
-
-    # ------------------------------------------------------------------
-    # 2. disambiguation_review
-    # ------------------------------------------------------------------
-    def disambiguation_review(self, disamb):
-        if self.auto:
+            choice = Prompt.ask(
+                "[r]eformulate sentence / [q]uit",
+                choices=["r", "q"],
+                default="q",
+            )
+            if choice == "r":
+                new_sentence = Prompt.ask("New sentence")
+                self._log(
+                    action="edit_module_field",
+                    target={"module_kind": "ground", "field_path": "input_sentence"},
+                    reason="manual_reformulate",
+                )
+                return "retry", new_sentence.strip()
             self._log(
-                action="accept_module",
-                target={"module_kind": "disambiguation"},
-                reason="auto_mode",
+                action="reject_page",
+                target={"module_kind": "ground"},
+                reason="manual_reject_not_hot",
             )
-            return disamb
+            return "reject", output
 
-        candidates = (disamb.unresolved_candidates or [])[:3]
-        if not candidates:
-            return disamb
+        # Hot event path — show facts and confirm/edit.
+        facts = output.facts
+        if facts is None:
+            # Should not happen per schema contract, but guard anyway.
+            self._log(
+                action="reject_page",
+                target={"module_kind": "ground"},
+                reason="missing_facts",
+            )
+            return "reject", output
 
-        self.console.print("[yellow]Disambiguation needed. Candidates:[/yellow]")
-        for i, cand in enumerate(candidates, start=1):
-            name = getattr(cand, "entity", None) or str(cand)
-            desc = getattr(cand, "rationale", None) or getattr(cand, "description", "")
-            self.console.print(f"  {i}. {name} — {desc}")
+        while True:
+            self._render_facts(facts, output.canonical_title)
+            choice = Prompt.ask(
+                "[y]es accept / [n]o reject / [e]dit facts",
+                choices=["y", "n", "e"],
+                default="y",
+            )
+            if choice == "y":
+                self._log(
+                    action="accept_module",
+                    target={"module_kind": "ground"},
+                    reason="manual_accept",
+                )
+                return "accept", output.model_copy(update={"facts": facts})
+            if choice == "n":
+                self._log(
+                    action="reject_page",
+                    target={"module_kind": "ground"},
+                    reason="manual_reject_facts",
+                )
+                return "reject", output
+            # Edit path
+            edited = self._edit_facts(facts)
+            if edited is None:
+                continue  # validation failed, loop
+            self._log(
+                action="edit_module_field",
+                target={"module_kind": "ground", "field_path": "facts"},
+                before=facts.model_dump(),
+                after=edited.model_dump(),
+                reason="manual_edit",
+            )
+            facts = edited
 
-        pick = IntPrompt.ask("Pick candidate 1..N", default=1)
-        chosen = candidates[pick - 1]
-        disamb.resolved = True
-        disamb.chosen = chosen
-        self._log(
-            action="accept_module",
-            target={"module_kind": "disambiguation"},
-            reason="manual_disambiguation",
+    def _render_facts(self, facts: EventFacts, canonical_title: str | None) -> None:
+        table = Table(title=canonical_title or "Event facts", show_header=False)
+        table.add_column("Field", style="bold")
+        table.add_column("Value")
+        table.add_row("entities", ", ".join(facts.entities))
+        table.add_row("what", facts.what)
+        table.add_row("when", facts.when or "(unknown)")
+        table.add_row("where", facts.where or "(unknown)")
+        table.add_row("why", facts.why or "(none)")
+        table.add_row(
+            "supporting_sources",
+            ", ".join(facts.supporting_sources) or "(none)",
         )
-        return disamb
+        self.console.print(table)
+
+    def _edit_facts(self, facts: EventFacts) -> EventFacts | None:
+        json_text = facts.model_dump_json(indent=2)
+        tmp = tempfile.NamedTemporaryFile(suffix=".json", mode="w", delete=False)
+        tmp.write(json_text)
+        tmp.close()
+        subprocess.call([os.environ.get("EDITOR", "vi"), tmp.name])
+        with open(tmp.name) as f:
+            new_text = f.read()
+        try:
+            return EventFacts.model_validate_json(new_text)
+        except ValidationError as exc:
+            self.console.print(f"[red]Validation error:[/red] {exc}")
+            return None
 
     # ------------------------------------------------------------------
-    # 3. plan_review
+    # 2. plan_review
     # ------------------------------------------------------------------
     def plan_review(self, plan):
         """Editor touchpoint for the needs-driven plan."""
@@ -181,7 +228,7 @@ class EditorPrompter:
         return plan
 
     # ------------------------------------------------------------------
-    # 4. module_review
+    # 3. module_review
     # ------------------------------------------------------------------
     def module_review(self, module):
         if self.auto:
@@ -264,7 +311,7 @@ class EditorPrompter:
                 return ("keep", new_module)
 
     # ------------------------------------------------------------------
-    # 5. final_approval
+    # 4. final_approval
     # ------------------------------------------------------------------
     def final_approval(
         self, html_path: str | Path

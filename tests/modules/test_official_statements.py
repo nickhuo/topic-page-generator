@@ -15,7 +15,7 @@ def test_official_statements_metadata():
     assert "StatementsList" in OfficialStatementsModule.allowed_artifacts
     assert OfficialStatementsModule.data_schema is OfficialStatementsData
     assert isinstance(OfficialStatementsModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in OfficialStatementsModule.extraction_prompt_template
+    assert "{title}" in OfficialStatementsModule.extraction_prompt_template
     assert "{evidence_block}" in OfficialStatementsModule.extraction_prompt_template
 
 

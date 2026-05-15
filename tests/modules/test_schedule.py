@@ -16,7 +16,7 @@ def test_schedule_metadata():
     assert "ScheduleList" in ScheduleModule.allowed_artifacts
     assert ScheduleModule.data_schema is ScheduleData
     assert isinstance(ScheduleModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in ScheduleModule.extraction_prompt_template
+    assert "{title}" in ScheduleModule.extraction_prompt_template
     assert "{evidence_block}" in ScheduleModule.extraction_prompt_template
 
 

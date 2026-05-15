@@ -16,7 +16,7 @@ def test_changelog_metadata():
     assert "Changelog" in ChangelogModule.allowed_artifacts
     assert ChangelogModule.data_schema is ChangelogData
     assert isinstance(ChangelogModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in ChangelogModule.extraction_prompt_template
+    assert "{title}" in ChangelogModule.extraction_prompt_template
     assert "{evidence_block}" in ChangelogModule.extraction_prompt_template
 
 

@@ -74,9 +74,7 @@ def _mk_plan(*need_ids: str) -> NeedPlanOutput:
 
 
 PLAN = _mk_plan("what_happened", "world_reaction")
-SUBJECT = EventSubject(
-    primary_entity="OpenAI", event_type_hint="product_launch", temporal_posture="recent"
-)
+SUBJECT = EventSubject(title="OpenAI launch", entities=["OpenAI"])
 
 
 async def test_run_fetch_dedup_blacklist_sort(monkeypatch):

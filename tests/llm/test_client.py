@@ -11,7 +11,7 @@ from generator.llm.client import (
     LLMConfigError,
 )
 from generator.llm.trace_buffer import drain, reset
-from generator.schema import TriageOutput
+from generator.schema import GroundOutput
 
 FIX = Path(__file__).parent.parent / "fixtures"
 
@@ -20,16 +20,16 @@ FIX = Path(__file__).parent.parent / "fixtures"
 async def test_call_structured_happy_path(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
-    payload = json.loads((FIX / "openrouter_triage_happy.json").read_text())
+    payload = json.loads((FIX / "openrouter_ground_happy.json").read_text())
     respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         return_value=httpx.Response(200, json=payload)
     )
     out = await call_structured(
         model="anthropic/claude-haiku-4-5",
         messages=[{"role": "user", "content": "hi"}],
-        response_model=TriageOutput,
+        response_model=GroundOutput,
     )
-    assert isinstance(out, TriageOutput)
+    assert isinstance(out, GroundOutput)
     assert out.confidence == 0.92
     calls = drain()
     assert len(calls) == 1
@@ -41,7 +41,7 @@ async def test_call_structured_happy_path(monkeypatch):
 async def test_call_structured_retries_on_5xx(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
-    payload = json.loads((FIX / "openrouter_triage_happy.json").read_text())
+    payload = json.loads((FIX / "openrouter_ground_happy.json").read_text())
     route = respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         side_effect=[
             httpx.Response(503),
@@ -51,7 +51,7 @@ async def test_call_structured_retries_on_5xx(monkeypatch):
     out = await call_structured(
         model="anthropic/claude-haiku-4-5",
         messages=[{"role": "user", "content": "hi"}],
-        response_model=TriageOutput,
+        response_model=GroundOutput,
     )
     assert out.confidence == 0.92
     assert route.call_count == 2
@@ -65,7 +65,7 @@ async def test_call_structured_clamps_overflow_floats(monkeypatch):
     """LLM emits confidence=1.0001; client clamps to 1.0 before Pydantic."""
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
-    bad = json.loads((FIX / "openrouter_triage_happy.json").read_text())
+    bad = json.loads((FIX / "openrouter_ground_happy.json").read_text())
     inner = json.loads(bad["choices"][0]["message"]["content"])
     inner["confidence"] = 1.0001
     bad["choices"][0]["message"]["content"] = json.dumps(inner)
@@ -75,7 +75,7 @@ async def test_call_structured_clamps_overflow_floats(monkeypatch):
     out = await call_structured(
         model="anthropic/claude-haiku-4-5",
         messages=[{"role": "user", "content": "hi"}],
-        response_model=TriageOutput,
+        response_model=GroundOutput,
     )
     assert out.confidence == 1.0
 
@@ -85,7 +85,7 @@ async def test_call_structured_retries_on_validation_error(monkeypatch):
     """First reply has wrong type; second reply is valid; one retry exhausted."""
     monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test")
     reset()
-    bad = json.loads((FIX / "openrouter_triage_happy.json").read_text())
+    bad = json.loads((FIX / "openrouter_ground_happy.json").read_text())
     inner = json.loads(bad["choices"][0]["message"]["content"])
     inner["confidence"] = "very-high"  # wrong type
     bad_payload = {
@@ -98,7 +98,7 @@ async def test_call_structured_retries_on_validation_error(monkeypatch):
             }
         ],
     }
-    good = json.loads((FIX / "openrouter_triage_happy.json").read_text())
+    good = json.loads((FIX / "openrouter_ground_happy.json").read_text())
     route = respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         side_effect=[
             httpx.Response(200, json=bad_payload),
@@ -108,7 +108,7 @@ async def test_call_structured_retries_on_validation_error(monkeypatch):
     out = await call_structured(
         model="anthropic/claude-haiku-4-5",
         messages=[{"role": "user", "content": "hi"}],
-        response_model=TriageOutput,
+        response_model=GroundOutput,
     )
     assert out.confidence == 0.92
     assert route.call_count == 2
@@ -127,7 +127,7 @@ def test_missing_api_key_raises(monkeypatch):
             call_structured(
                 model="m",
                 messages=[{"role": "user", "content": "x"}],
-                response_model=TriageOutput,
+                response_model=GroundOutput,
             )
         )
 

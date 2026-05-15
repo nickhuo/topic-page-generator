@@ -231,10 +231,9 @@ def _mock_response(kind: str, source_ids: list[str]) -> dict[str, Any]:
 
 def _ctx_for_product_launch():
     subject = EventSubject(
-        primary_entity="GPT-5.5 Instant (OpenAI)",
-        event_type_hint="product_launch",
-        temporal_posture="recent",
-        time_anchor="2026-05-12T00:00:00+00:00",
+        title="GPT-5.5 Instant rollout",
+        entities=["GPT-5.5 Instant (OpenAI)"],
+        when="2026-05-12T00:00:00+00:00",
     )
     plans = []
     for idx, nid in enumerate(_ALL_NEEDS):

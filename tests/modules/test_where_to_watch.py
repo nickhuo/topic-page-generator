@@ -15,7 +15,7 @@ def test_where_to_watch_metadata():
     assert "ChannelList" in WhereToWatchModule.allowed_artifacts
     assert WhereToWatchModule.data_schema is WhereToWatchData
     assert isinstance(WhereToWatchModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in WhereToWatchModule.extraction_prompt_template
+    assert "{title}" in WhereToWatchModule.extraction_prompt_template
     assert "{evidence_block}" in WhereToWatchModule.extraction_prompt_template
 
 

@@ -1,7 +1,6 @@
 """Needs-driven plan prompt — produces NeedPlanOutput.
 
-Replaces the deterministic archetype_table lookup. The LLM decides, for each
-of the 8 reader needs:
+The LLM decides, for each of the 8 reader needs:
   - activated: does this need have substance to talk about for this event?
   - rank: in what reading order?
   - section_title: event-specific H2 (NOT the literal need name)
@@ -14,7 +13,7 @@ of the 8 reader needs:
 from __future__ import annotations
 
 from generator.prompts.base_preamble import BASE_PREAMBLE
-from generator.schema import DisambiguationOutput, TriageOutput
+from generator.schema import EventFacts
 
 _NEED_BRIEFS = """\
 The 8 reader needs (NeedId values). For each one you must decide activation:
@@ -91,28 +90,20 @@ OUTPUT REQUIREMENTS — read carefully:
    for tiers that aren't needed.
 
 8. layout_preset_id: pick one of `live_dominance` / `product_focus` /
-   `imminent_event` / `reference` based on temporal posture and event type.
+   `imminent_event` / `reference` based on the event's tempo and tone.
 """
 
 
 def build_need_plan_messages(
-    triage: TriageOutput, disamb: DisambiguationOutput
+    facts: EventFacts, canonical_title: str
 ) -> list[dict]:
-    chosen_entity = (
-        disamb.chosen.entity if disamb.chosen else triage.primary_entity or "Unknown"
-    )
-    chosen_type = (
-        disamb.chosen.event_type_hint
-        if disamb.chosen
-        else triage.event_type_hint or "generic"
-    )
-    time_anchor = disamb.chosen.time_anchor if disamb.chosen else triage.time_anchor
     payload = (
-        f"EVENT: {chosen_entity}\n"
-        f"EVENT_TYPE_HINT: {chosen_type}\n"
-        f"TEMPORAL_POSTURE: {triage.temporal_posture}\n"
-        f"TIME_ANCHOR: {time_anchor or 'unknown'}\n\n"
-        f"TRIAGE_REASONING: {triage.reasoning}\n\n"
+        f"TITLE: {canonical_title}\n"
+        f"ENTITIES: {', '.join(facts.entities)}\n"
+        f"WHAT: {facts.what}\n"
+        f"WHEN: {facts.when or 'unknown'}\n"
+        f"WHERE: {facts.where or 'unknown'}\n"
+        f"WHY: {facts.why or 'unknown'}\n\n"
         "OUTPUT a NeedPlanOutput now."
     )
     system = (

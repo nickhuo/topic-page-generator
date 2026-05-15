@@ -30,7 +30,7 @@ def test_hero_metadata():
     assert "HeroBanner" in HeroModule.allowed_artifacts
     assert HeroModule.data_schema is HeroData
     assert isinstance(HeroModule.extraction_prompt_template, str)
-    assert "{primary_entity}" in HeroModule.extraction_prompt_template
+    assert "{title}" in HeroModule.extraction_prompt_template
     assert "{evidence_block}" in HeroModule.extraction_prompt_template
 
 

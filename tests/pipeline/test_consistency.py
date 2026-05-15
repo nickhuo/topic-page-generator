@@ -115,9 +115,8 @@ def _make_aesthetic() -> AestheticPlanOutput:
 
 def _make_subject() -> EventSubject:
     return EventSubject(
-        primary_entity="GPT-5.5 Instant (OpenAI)",
-        event_type_hint="product_launch",
-        temporal_posture="recent",
+        title="GPT-5.5 Instant rollout",
+        entities=["GPT-5.5 Instant (OpenAI)"],
     )
 
 
