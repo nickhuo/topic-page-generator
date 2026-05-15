@@ -1,0 +1,16 @@
+{
+  "id": "chatcmpl-fake-research-eval-ok",
+  "object": "chat.completion",
+  "model": "anthropic/claude-sonnet-4-6",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"satisfied\":true,\"gaps\":[],\"next_query_hint\":null}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {"prompt_tokens": 300, "completion_tokens": 20, "total_tokens": 320}
+}
