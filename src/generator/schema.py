@@ -512,6 +512,10 @@ class EventPage(_Frozen):
     # Optional during migration so older fixtures still round-trip; once all
     # outputs are produced by the new plan stage, mark required.
     need_plans: list["NeedCurationPlan"] = Field(default_factory=list)
+    # Optional Wikipedia reference card surfaced in the right rail. Filled by
+    # the disambiguate stage when a confident entity title is available; the
+    # render path no-ops cleanly when this is None.
+    wikipedia_card: WikipediaCardData | None = None
     meta: EventMeta
 
 

@@ -110,6 +110,25 @@ def test_sources_render_in_card_not_ol_in_footer():
     assert 'class="sources-card"' in html
 
 
+def test_event_page_accepts_optional_wikipedia_card():
+    from generator.schema import WikipediaCardData
+
+    base = canned_event_page()
+    assert base.wikipedia_card is None  # field exists, defaults to None
+    page = base.model_copy(
+        update={
+            "wikipedia_card": WikipediaCardData(
+                title="t",
+                summary_text="s",
+                article_url="https://en.wikipedia.org/wiki/t",
+                retrieved_at="2026-05-14T00:00:00Z",
+            )
+        }
+    )
+    assert page.wikipedia_card is not None
+    assert page.wikipedia_card.title == "t"
+
+
 def test_reference_rail_renders_milestones_only():
     from generator.schema import (
         ScheduleData,
