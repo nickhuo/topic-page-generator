@@ -309,6 +309,14 @@ def test_editor_pipeline_smoke(monkeypatch, tmp_path):
     monkeypatch.setattr(_ground_mod, "fetch_tavily", _fake_fetch_tavily)
     monkeypatch.setattr(_research_mod, "fetch_tavily", _fake_fetch_tavily)
 
+    # Stub Brave Image Search — no key in CI; hero image gracefully absent.
+    async def _fake_brave(query, *, count=5, timeout=12.0):
+        return []  # mirror no-BRAVE_API_KEY path
+
+    monkeypatch.setattr(
+        "generator.pipeline.hero_image.fetch_brave_images", _fake_brave
+    )
+
     # Invoke CLI
     runner = CliRunner()
     result = runner.invoke(

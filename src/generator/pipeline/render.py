@@ -25,6 +25,7 @@ from generator.schema import (
     EventMeta,
     EventPage,
     EventSubject,
+    HeroImage,
     RenderedSection,
     Source,
     WikipediaCardData,
@@ -52,6 +53,7 @@ def build_editorial_page(
     trace_id: str,
     meta: EventMeta,
     wikipedia_card: WikipediaCardData | None = None,
+    hero_image: HeroImage | None = None,
 ) -> EventPage:
     """Construct an EventPage that uses the editorial render path."""
     return EventPage(
@@ -62,6 +64,7 @@ def build_editorial_page(
         layout=layout,
         sources=sources,
         wikipedia_card=wikipedia_card,
+        hero_image=hero_image,
         editorial_sections=editorial_sections,
         meta=meta,
     )
@@ -159,11 +162,11 @@ def _build_hero_context(page: EventPage) -> dict:
     """Hero data for the page chrome.
 
     Always populated — even a minimum-viable hero has the canonical title +
-    a dateline. If an editorial section with block_kind="gallery" exists, the
-    first gallery item's image becomes the hero image.
+    a dateline. Prefers page.hero_image (dedicated Brave fetch); falls back to
+    the first gallery section's first image.
     """
     subtitle = _hero_subtitle(page)
-    image_url, image_alt = _hero_image(page.editorial_sections)
+    image_url, image_alt = _hero_image(page)
     dateline = _hero_dateline(page.subject)
     return {
         "title": page.subject.title,
@@ -187,9 +190,11 @@ def _hero_subtitle(page: EventPage) -> str | None:
     return None
 
 
-def _hero_image(sections: list[RenderedSection]) -> tuple[str | None, str | None]:
-    """First image from the first gallery section, if any."""
-    for rs in sections:
+def _hero_image(page: EventPage) -> tuple[str | None, str | None]:
+    """Page's hero image: prefer the dedicated hero_image, fall back to gallery."""
+    if page.hero_image is not None:
+        return str(page.hero_image.image_url), page.hero_image.alt_text
+    for rs in page.editorial_sections:
         if rs.block_kind == "gallery":
             items = getattr(rs.block_data, "items", None) or []
             if items:

@@ -120,6 +120,19 @@ class WikipediaCardData(_Frozen):
     retrieved_at: ISO8601
 
 
+class HeroImage(_Frozen):
+    """Background image for the page chrome hero.
+
+    Fetched once at pipeline start (via Brave Image Search). Decorative —
+    pipeline must not fail if this is None.
+    """
+
+    image_url: HttpUrl
+    alt_text: str | None = None
+    source_url: HttpUrl | None = None
+    publisher: str | None = None
+
+
 # ---------------------------------------------------------------------------
 # §3 Confidence signals (shared by sections)
 # ---------------------------------------------------------------------------
@@ -237,6 +250,9 @@ class EventPage(_Frozen):
     # by the ground stage when a confident canonical title is available; the
     # render path no-ops cleanly when this is None.
     wikipedia_card: WikipediaCardData | None = None
+    # Optional hero background image fetched via Brave Image Search. Decorative
+    # — page renders cleanly when None.
+    hero_image: HeroImage | None = None
     meta: EventMeta
 
 

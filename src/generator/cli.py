@@ -100,6 +100,18 @@ def generate(
             console.print("[bold red]Ground returned no facts. Aborting.[/bold red]")
             raise typer.Exit(code=4)
 
+        # Stage 1b: Hero image (best-effort, decorative — never raises).
+        from generator.pipeline.hero_image import run_hero_image_stage
+
+        with recorder.stage("hero_image"):
+            hero_image = await run_hero_image_stage(ground_out.canonical_title)
+            if hero_image:
+                console.print(
+                    f"[green]✓[/green] Hero image  {hero_image.publisher or 'fetched'}"
+                )
+            else:
+                console.print("[dim]· Hero image skipped (no Brave key or no results)[/dim]")
+
         # Editor architecture: planners → research → block_extract → render → deliver
         from generator.pipeline.backbone_planner import build_backbone_sections
         from generator.pipeline.curation_planner import run_curation_stage
@@ -182,6 +194,7 @@ def generate(
                     pipeline_trace_id=recorder.trace_id,
                 ),
                 wikipedia_card=_wp_card,
+                hero_image=hero_image,
             )
             html = render_html(editorial_page)
             console.print(
