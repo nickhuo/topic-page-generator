@@ -23,8 +23,13 @@ def test_blockspec_subclass_must_declare_required_classvars():
 
 
 def test_blockspec_subclass_with_classvars_instantiates():
+    from generator.blocks.specs import _REGISTRY
+
     class _Dummy(BaseModel):
         text: str
+
+    # Save the existing registry entry so we can restore it after the test.
+    _prior = _REGISTRY.get("paragraph")
 
     class _DummySpec(BlockSpec):
         kind = "paragraph"
@@ -36,7 +41,14 @@ def test_blockspec_subclass_with_classvars_instantiates():
         def is_minimum_viable(self, data):
             return bool(data.text)
 
-    spec = _DummySpec()
-    assert spec.kind == "paragraph"
-    assert spec.is_minimum_viable(_Dummy(text="x")) is True
-    assert spec.is_minimum_viable(_Dummy(text="")) is False
+    try:
+        spec = _DummySpec()
+        assert spec.kind == "paragraph"
+        assert spec.is_minimum_viable(_Dummy(text="x")) is True
+        assert spec.is_minimum_viable(_Dummy(text="")) is False
+    finally:
+        # Restore the original spec so other tests see ParagraphBlockSpec.
+        if _prior is not None:
+            _REGISTRY["paragraph"] = _prior
+        else:
+            _REGISTRY.pop("paragraph", None)

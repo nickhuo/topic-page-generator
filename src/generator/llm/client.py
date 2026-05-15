@@ -39,6 +39,7 @@ _STAGE_FALLBACK_MODELS = {
     "aesthetic": "anthropic/claude-haiku-4-5",
     "extract": "anthropic/claude-haiku-4-5",
     "consistency": "anthropic/claude-haiku-4-5",
+    "block_extract": "anthropic/claude-haiku-4-5",
 }
 
 
