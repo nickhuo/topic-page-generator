@@ -22,10 +22,11 @@ def test_every_data_cite_has_numbered_cite_link():
 
     # Every cite source_id should appear in the rendered HTML as a numbered <sup> link.
     cite_ids = set(re.findall(r'data-cite="([^"]+)"', html))
-    # Each cite emits href="#src-N"; the matching anchor target (sources card)
-    # is added in a later PR. Spot-check the cite links exist.
+    # Each cite emits href="#src-N"; the matching anchor target is in the sources card.
     for sid in cite_ids:
         assert re.search(r'href="#src-\d+"', html), f"no cite link for {sid}"
+    # Sources card now provides id="src-N" anchors — verify at least src-1 exists.
+    assert 'id="src-1"' in html
 
 
 @pytest.mark.parametrize(

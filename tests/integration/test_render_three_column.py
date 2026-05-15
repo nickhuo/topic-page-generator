@@ -101,6 +101,15 @@ def test_reactions_stakeholders_rendered_before_third_party():
     assert 0 <= pos_a0 < pos_a3
 
 
+def test_sources_render_in_card_not_ol_in_footer():
+    page = canned_event_page()
+    html = render_html(page)
+    footer_start = html.find("<footer")
+    footer_block = html[footer_start:]
+    assert "<ol" not in footer_block
+    assert 'class="sources-card"' in html
+
+
 def test_reference_rail_renders_milestones_only():
     from generator.schema import (
         ScheduleData,
