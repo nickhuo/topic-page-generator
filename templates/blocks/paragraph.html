@@ -1,6 +1,14 @@
+{% set fallback_ids = block.citations | map(attribute='source_id') | list %}
 <div class="block block--paragraph">
   {% for p in block.paragraphs_md %}
-    <p>{{ p }}{% for c in block.citations %}<span class="cite-num" data-cite="{{ c.source_id }}"><a href="#src-{{ source_index[c.source_id] }}">[{{ source_index[c.source_id] }}]</a></span>{% endfor %}</p>
+    {% set sids = block.paragraph_sources[loop.index0] if block.paragraph_sources and block.paragraph_sources|length > loop.index0 else fallback_ids %}
+    {% set cluster = cite_cluster(sids) %}
+    <p>
+      {{ p }}
+      {% if cluster %}
+        {% include "chrome/cite_cluster.html" %}
+      {% endif %}
+    </p>
   {% endfor %}
   {% for pq in block.pull_quotes %}
     <blockquote class="pull-quote">

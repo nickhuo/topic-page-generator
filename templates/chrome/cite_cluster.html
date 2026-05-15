@@ -1,0 +1,44 @@
+{# cluster: dict from _build_cite_cluster() — caller checks truthiness. #}
+<span class="cite-cluster" tabindex="0" aria-label="{{ cluster.total }} sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    {% for logo in cluster.logos %}
+      <img class="cite-logo"
+           src="{{ logo.favicon_url }}"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    {% endfor %}
+  </span>
+  <span class="cite-cluster__count">
+    {%- if cluster.extra > 0 -%}+{{ cluster.extra }} more
+    {%- else -%}{{ cluster.total }} source{% if cluster.total != 1 %}s{% endif %}
+    {%- endif -%}
+  </span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources ({{ cluster.total }})</span>
+    <span class="cite-popover__list">
+      {% for card in cluster.cards %}
+        <a class="cite-popover__card" href="{{ card.url }}" rel="noopener noreferrer" target="_blank">
+          {% if card.thumbnail_url %}
+            <img class="cite-popover__thumb" src="{{ card.thumbnail_url }}" alt="" loading="lazy">
+          {% else %}
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder">
+              <img src="{{ card.favicon_url }}" alt="" width="24" height="24">
+            </span>
+          {% endif %}
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="{{ card.favicon_url }}" alt="" width="14" height="14">
+              {{ card.publisher }}
+            </span>
+            <span class="cite-popover__headline">{{ card.title }}</span>
+            {% if card.summary %}
+              <span class="cite-popover__summary">{{ card.summary }}</span>
+            {% endif %}
+          </span>
+        </a>
+      {% endfor %}
+    </span>
+  </span>
+</span>

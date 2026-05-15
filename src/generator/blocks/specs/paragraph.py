@@ -26,8 +26,16 @@ Schema:
 - style: "prose" for flowing paragraphs, "bullets" for a tight list.
 - paragraphs_md: 1-4 markdown strings. For prose, each is a paragraph (60-140 words).
   For bullets, each is one bullet line (<=24 words, no leading dash).
+- paragraph_sources: REQUIRED. A list of source_id lists, EXACTLY the same
+  length as `paragraphs_md`. paragraph_sources[i] is the set of source_ids
+  that back paragraphs_md[i]. Every paragraph must cite at least 1 source.
+  Aim for 2-4 distinct sources per paragraph (different publishers when
+  possible) so the page can render a stacked-publisher attribution.
+  Do NOT inline `[1]` / `[^1]` markers in `paragraphs_md` — the renderer
+  composes attribution from this field.
 - pull_quotes: optional 0-2 stand-out quotes from the evidence.
-- citations: cite every factual claim via source_id.
+- citations: cite every factual claim via source_id (flat list, kept for
+  back-compat — should mirror the union of paragraph_sources).
 """
 
     def is_minimum_viable(self, data: ParagraphBlockData) -> bool:

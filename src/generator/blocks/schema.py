@@ -119,6 +119,12 @@ class ParagraphBlockData(_Frozen):
     kind: Literal["paragraph"] = "paragraph"
     style: Literal["prose", "bullets"] = "prose"
     paragraphs_md: list[str] = Field(min_length=1)
+    # Per-paragraph source attribution: paragraph_sources[i] is the list of
+    # source_ids that ground paragraphs_md[i]. Parallel to paragraphs_md.
+    # Empty list (or shorter than paragraphs_md) means "fall back to all of
+    # `citations` for that paragraph" — the renderer aggregates these into a
+    # cite-cluster (stacked publisher favicons + hover popover) per paragraph.
+    paragraph_sources: list[list[SourceId]] = Field(default_factory=list)
     pull_quotes: list[PullQuote] = Field(default_factory=list)
     citations: list[Citation] = Field(default_factory=list)
 

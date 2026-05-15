@@ -13,21 +13,17 @@ def test_render_contains_landmarks():
     assert len(re.findall(r"<header\b", html)) == 1
     assert len(re.findall(r"<main\b", html)) == 1
     assert len(re.findall(r"<footer\b", html)) == 1
-    assert "data-cite" in html
+    # Paragraph sources render as a cite-cluster (stacked publisher favicons).
+    assert "cite-cluster" in html
 
 
-def test_every_data_cite_has_numbered_cite_link():
+def test_cite_cluster_resolves_publisher_logos_and_links():
     page = make_full_event_page()
     html = render_html(page)
-
-    # Every cite source_id should appear as a numbered citation link.
-    # v2 renders citations inline as <span class="citation"> with href="#src-N";
-    # the sources card at page bottom was intentionally removed, so the anchor
-    # targets no longer exist in-page (links remain for screen-reader continuity).
-    cite_ids = set(re.findall(r'data-cite="([^"]+)"', html))
-    assert cite_ids, "expected at least one data-cite marker"
-    for sid in cite_ids:
-        assert re.search(r'href="#src-\d+"', html), f"no cite link for {sid}"
+    # The cluster should mount the s2 favicon CDN for each cited source's host.
+    assert "google.com/s2/favicons" in html
+    # And the popover should link out to the source URL (target=_blank, external).
+    assert 'target="_blank"' in html
 
 
 @pytest.mark.parametrize(
@@ -43,7 +39,7 @@ def test_renders_all_four_presets(preset_id):
     page = make_full_event_page(preset_id=preset_id)
     html = render_html(page)
     assert "<html" in html and "</html>" in html
-    assert "data-cite" in html
+    assert "cite-cluster" in html
     # Header, main, footer always present.
     assert "<header" in html and "<main" in html and "<footer" in html
 

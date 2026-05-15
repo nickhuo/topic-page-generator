@@ -161,9 +161,17 @@ def render_html(page: EventPage) -> str:
     toc_js = (_TEMPLATES_DIR / "toc.js").read_text(encoding="utf-8")
 
     source_index = {s.id: i + 1 for i, s in enumerate(page.sources)}
+    source_by_id = {s.id: s for s in page.sources}
     all_sections = _build_editorial_section_dicts(page.editorial_sections)
     main_sections, sidebar_sections = _partition_by_placement(all_sections)
     hero = _build_hero_context(page)
+
+    # Jinja helper: turn a list of source_ids into a cite-cluster context dict
+    # (stacked favicons + popover mini-newsfeed). Templates call this per
+    # paragraph / per entry rather than rendering raw `[N]` markers.
+    env.globals["cite_cluster"] = lambda source_ids: _build_cite_cluster(
+        source_ids or [], source_by_id, source_index
+    )
 
     template = env.get_template("layout.html")
     return template.render(
@@ -178,6 +186,69 @@ def render_html(page: EventPage) -> str:
         jsonld=_build_jsonld(page),
         milestones=[],
     )
+
+
+# --- Cite cluster (stacked publisher favicons + hover popover) ----------------
+_MAX_STACKED_LOGOS = 3
+_S2_FAVICON = "https://www.google.com/s2/favicons?domain={host}&sz=64"
+
+
+def _favicon_for(source) -> str:
+    host = ""
+    url = str(getattr(source, "url", "") or "")
+    if "://" in url:
+        host = url.split("://", 1)[1].split("/", 1)[0]
+    return _S2_FAVICON.format(host=host or "example.com")
+
+
+def _build_cite_cluster(
+    source_ids: list[str],
+    source_by_id: dict[str, "Source"],
+    source_index: dict[str, int],
+) -> dict | None:
+    """Build a cite-cluster context: stacked logos + popover cards.
+
+    Returns None when there are no resolvable sources — templates use
+    `{% set cluster = cite_cluster([...]) %}{% if cluster %}…` to skip.
+    De-duplicates `source_ids` while preserving order.
+    """
+    seen: set[str] = set()
+    resolved = []
+    for sid in source_ids:
+        if sid in seen or sid not in source_by_id:
+            continue
+        seen.add(sid)
+        resolved.append(source_by_id[sid])
+    if not resolved:
+        return None
+
+    logos = [
+        {
+            "favicon_url": _favicon_for(s),
+            "publisher": s.publisher.name,
+        }
+        for s in resolved[:_MAX_STACKED_LOGOS]
+    ]
+    cards = [
+        {
+            "source_id": s.id,
+            "url": str(s.url),
+            "title": s.title,
+            "publisher": s.publisher.name,
+            "favicon_url": _favicon_for(s),
+            "summary": (s.summary or "")[:240],
+            "thumbnail_url": str(s.thumbnail_url) if s.thumbnail_url else None,
+            "ref_number": source_index.get(s.id),
+        }
+        for s in resolved
+    ]
+    extra = max(0, len(resolved) - _MAX_STACKED_LOGOS)
+    return {
+        "logos": logos,
+        "total": len(resolved),
+        "extra": extra,
+        "cards": cards,
+    }
 
 
 def _build_hero_context(page: EventPage) -> dict:
