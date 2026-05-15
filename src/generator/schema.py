@@ -771,15 +771,15 @@ class StageTrace(_Frozen):
 
 
 class EditorActionTarget(_Frozen):
-    module_kind: str | None = None
+    section_id: str | None = None
     field_path: str | None = None
 
 
 EditorActionKind = Literal[
-    "accept_module",
-    "regenerate_module",
-    "edit_module_field",
-    "skip_module",
+    "accept_section",
+    "regenerate_section",
+    "edit_section_field",
+    "skip_section",
     "override_archetype",
     "override_preset",
     "approve_page",
