@@ -312,6 +312,7 @@ BackboneSectionId = Literal[
     "overview",
     "timeline",
     "media_coverage",
+    "latest_news",
 ]
 
 SectionKind = Literal["backbone", "curated"]

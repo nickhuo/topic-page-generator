@@ -19,6 +19,7 @@ def test_backbone_section_id_is_closed_enum():
         "overview",
         "timeline",
         "media_coverage",
+        "latest_news",
     }
     for sid in valid:
         sp = SectionPlan(

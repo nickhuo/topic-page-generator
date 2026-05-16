@@ -32,14 +32,17 @@ Block kinds you can choose for each curated section (closed enum):
   spokespeople, headline performers) with name + role + one-sentence "why
   they matter to THIS event" bio. Skip when the cast is anonymous, generic,
   or already covered by paragraph prose.
-- latest_news: vertical stack of 4–8 landscape news cards, newest first. Use
-  ONLY as a closing "what to read next" section when there is a steady stream
-  of fresh reporting beyond what overview / media_coverage already covers.
-  At most ONE latest_news section per page.
 
 FORBIDDEN for curation:
 - timeline: emitted only by the backbone planner (always sidebar). Never
   propose a timeline section here.
+- latest_news: emitted only by the backbone planner (always at the bottom
+  of the main column, strict chronological feed). Never propose a
+  latest_news section here. The page already has BOTH media_coverage
+  (top/featured stories, editor-curated, large image cards) AND latest_news
+  (newest-first chronological dump) from the backbone — do NOT add a third
+  news-card section under any other slug. The two backbone sections already
+  cover both the "what's important" and "what's newest" axes.
 """
 
 _INSTRUCTIONS = """\

@@ -1,10 +1,16 @@
-"""Backbone planner — deterministic 3-section emitter.
+"""Backbone planner — deterministic 4-section emitter.
 
-Zero LLM calls. Emits exactly three always-on sections in canonical order:
+Zero LLM calls. Emits exactly four always-on sections in canonical order:
 
-    1. overview        → paragraph, main
-    2. timeline        → timeline,  sidebar  (past / present / future)
-    3. media_coverage  → newsfeed,  main     (image-only, ≤5, newest first)
+    1. overview        → paragraph,    main     (lede prose)
+    2. timeline        → timeline,     sidebar  (past / present / future)
+    3. media_coverage  → newsfeed,     main     (top/featured stories, ≤5, big image cards, horizontal)
+    4. latest_news     → latest_news,  main     (strict chronological feed, 4–15, vertical stack)
+
+`media_coverage` and `latest_news` are deliberately split: the former is the
+editor's "what matters" carousel (curated picks, depth/scoops, image-heavy);
+the latter is the "what's newest" chronological dump (sorted strictly by
+published_at DESC, no editorial reranking). The two coexist on every page.
 
 Hero (title + subtitle) is rendered from `EventPage.subject` and is not a
 backbone section. Acceptance criteria default to the matching BlockSpec's
@@ -29,24 +35,28 @@ _BACKBONE_ORDER: tuple[BackboneSectionId, ...] = (
     "overview",
     "timeline",
     "media_coverage",
+    "latest_news",
 )
 
 _BLOCK_KIND_FOR_ID: dict[BackboneSectionId, BlockKind] = {
     "overview": "paragraph",
     "timeline": "timeline",
     "media_coverage": "newsfeed",
+    "latest_news": "latest_news",
 }
 
 _PLACEMENT_FOR_ID: dict[BackboneSectionId, Placement] = {
     "overview": "main",
     "timeline": "sidebar",
     "media_coverage": "main",
+    "latest_news": "main",
 }
 
 _TITLES: dict[BackboneSectionId, str] = {
     "overview": "Overview",
     "timeline": "Timeline",
     "media_coverage": "Featured Coverage",
+    "latest_news": "Latest News",
 }
 
 
@@ -65,9 +75,23 @@ def _intent_for(section_id: BackboneSectionId, canonical_title: str) -> str:
             "(present), and any scheduled or expected next steps (future)."
         ),
         "media_coverage": (
-            "Up to five high-signal external articles from distinct publishers, "
-            "biased toward T0/T1 outlets. Every card MUST have a thumbnail_url "
-            "— drop cards without images. Sort newest first by published_at."
+            "Up to five TOP / FEATURED external articles about "
+            f"{canonical_title} — the stories an editor would put above the "
+            "fold: scoops, in-depth reporting, analysis from authoritative "
+            "outlets. Bias toward T0/T1 publishers; prefer depth and context "
+            "over raw recency (that's what latest_news handles). Every card "
+            "MUST have a thumbnail_url — drop cards without images. Among the "
+            "selected featured stories, sort newest first."
+        ),
+        "latest_news": (
+            f"Strictly chronological feed of the most recent reporting about "
+            f"{canonical_title}. Sort by published_at DESCENDING; the order "
+            "IS the editorial — do not re-rank for prominence, do not "
+            "deduplicate by angle, do not prefer feature pieces. This is the "
+            "opposite of media_coverage (which is editor-curated top/featured "
+            "stories with large hero images). Every card MUST have "
+            "published_at; drop cards without dates. Prefer breadth (more "
+            "publishers, more recency) over depth."
         ),
     }[section_id]
 
