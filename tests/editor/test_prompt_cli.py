@@ -81,9 +81,7 @@ def test_ground_review_auto_mode_rejects_non_hot() -> None:
     assert payload is out
     trace = recorder.finalize(auto_mode=True)
     actions = trace.editor_actions
-    assert any(
-        a.reason == "auto_mode" and a.action == "reject_page" for a in actions
-    )
+    assert any(a.reason == "auto_mode" and a.action == "reject_page" for a in actions)
 
 
 def test_ground_review_interactive_accepts_facts(monkeypatch) -> None:
@@ -157,9 +155,7 @@ def test_ground_review_interactive_quit_on_not_hot(monkeypatch) -> None:
     decision, _ = prompter.ground_review(out)
     assert decision == "reject"
     trace = recorder.finalize(auto_mode=False)
-    assert any(
-        a.reason == "manual_reject_not_hot" for a in trace.editor_actions
-    )
+    assert any(a.reason == "manual_reject_not_hot" for a in trace.editor_actions)
 
 
 # ---------------------------------------------------------------------------

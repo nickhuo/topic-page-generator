@@ -19,7 +19,9 @@ def test_gallery_spec_metadata():
 def test_gallery_minimum_viable_requires_two_items():
     spec = GalleryBlockSpec()
     one = GalleryBlockData(items=[_item()])
-    two = GalleryBlockData(items=[_item("https://a.com/1.jpg"), _item("https://a.com/2.jpg")])
+    two = GalleryBlockData(
+        items=[_item("https://a.com/1.jpg"), _item("https://a.com/2.jpg")]
+    )
     assert spec.is_minimum_viable(one) is False
     assert spec.is_minimum_viable(two) is True
 

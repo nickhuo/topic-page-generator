@@ -50,7 +50,11 @@ def test_system_message_lists_curated_block_kinds():
     )
     system = msgs[0]["content"]
     for kind in [
-        "paragraph", "chart", "newsfeed", "reactions", "gallery",
+        "paragraph",
+        "chart",
+        "newsfeed",
+        "reactions",
+        "gallery",
     ]:
         assert kind in system, f"block kind {kind} missing from prompt"
     # timeline is mentioned in the FORBIDDEN section

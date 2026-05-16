@@ -15,7 +15,13 @@ from rich.prompt import Prompt
 from rich.table import Table
 
 from generator.pipeline.trace import TraceRecorder
-from generator.schema import EditorAction, EventFacts, GroundOutput
+from generator.schema import (
+    EditorAction,
+    EventFacts,
+    GroundOutput,
+    RenderedSection,
+    SectionPlan,
+)
 
 
 def _now() -> str:
@@ -23,6 +29,42 @@ def _now() -> str:
 
 
 GroundDecision = Literal["accept", "reject", "retry"]
+
+
+def _preview_for_block(rs: RenderedSection) -> str:
+    """Short human-readable preview of a RenderedSection's block_data.
+
+    Pulls the most useful one-liner per block kind. Falls back to a generic
+    repr if the data shape is unfamiliar.
+    """
+    data = rs.block_data
+    kind = rs.block_kind
+    try:
+        if kind == "paragraph":
+            text = getattr(data, "text", "") or ""
+            first = text.split(". ")[0]
+            return (first[:120] + "…") if len(first) > 120 else first
+        if kind in ("latest_news", "newsfeed"):
+            cards = getattr(data, "cards", None) or []
+            return f"{len(cards)} cards"
+        if kind == "gallery":
+            images = getattr(data, "images", None) or []
+            return f"{len(images)} images"
+        if kind == "timeline":
+            entries = getattr(data, "entries", None) or []
+            return f"{len(entries)} entries"
+        if kind == "people":
+            cards = getattr(data, "cards", None) or []
+            names = ", ".join(getattr(c, "name", "?") for c in cards[:3])
+            return f"{len(cards)} people: {names}"
+        if kind == "reactions":
+            quotes = getattr(data, "quotes", None) or []
+            return f"{len(quotes)} reactions"
+        if kind == "chart":
+            return getattr(data, "title", "") or "chart"
+    except Exception:
+        pass
+    return type(data).__name__
 
 
 class EditorPrompter:
@@ -171,14 +213,20 @@ class EditorPrompter:
             return None
 
     # ------------------------------------------------------------------
-    # 2. plan_review — DEPRECATED: no NeedPlanOutput in the editor architecture.
-    #    Kept as a no-op for backward compatibility; will be removed in a follow-up.
+    # 2. plan_review — review curation output before research kicks off.
+    # Backbone is read-only (deterministic); curated sections can be dropped
+    # to save research budget.
     # ------------------------------------------------------------------
-    def plan_review(self, plan):
-        """Editor touchpoint for the needs-driven plan.
+    def plan_review(
+        self,
+        *,
+        backbone: list[SectionPlan],
+        curated: list[SectionPlan],
+    ) -> tuple[Literal["accept", "reject"], list[SectionPlan]]:
+        """Returns ('accept', curated_after_drops) or ('reject', []).
 
-        DEPRECATED: The editor architecture does not use NeedPlanOutput.
-        This method is a no-op and will be removed in a future cleanup.
+        Backbone is never modified. Caller is responsible for combining
+        `backbone + curated_after_drops` before passing to research.
         """
         if self.auto:
             self._log(
@@ -186,51 +234,151 @@ class EditorPrompter:
                 target={"section_id": "plan"},
                 reason="auto_mode",
             )
-            return plan
+            return "accept", list(curated)
 
-        table = Table(title="Plan Review — Needs Curation")
-        table.add_column("Rank", style="bold")
-        table.add_column("Need")
-        table.add_column("On")
-        table.add_column("Section Title")
-        table.add_column("Modules")
-        table.add_column("Queries")
-        for p in sorted(plan.need_plans, key=lambda x: x.rank):
+        remaining = list(curated)
+        while True:
+            self._render_plan(backbone, remaining)
+            if not remaining:
+                hint = "[a]ccept / [q]uit"
+            else:
+                hint = "[a]ccept / [d]rop <section_id> / [q]uit"
+            choice = Prompt.ask(hint, default="a")
+            choice = choice.strip()
+            if choice == "a":
+                self._log(
+                    action="accept_section",
+                    target={"section_id": "plan"},
+                    reason="manual_accept",
+                )
+                return "accept", remaining
+            if choice == "q":
+                self._log(
+                    action="reject_page",
+                    target={"section_id": "plan"},
+                    reason="manual_reject_plan",
+                )
+                return "reject", []
+            if choice.startswith("d "):
+                target_id = choice[2:].strip()
+                hit = next((s for s in remaining if s.section_id == target_id), None)
+                if hit is None:
+                    self.console.print(
+                        f"[red]No curated section with id '{target_id}'.[/red]"
+                    )
+                    continue
+                remaining = [s for s in remaining if s.section_id != target_id]
+                self._log(
+                    action="skip_section",
+                    target={"section_id": target_id},
+                    reason="manual_drop_in_plan_review",
+                )
+                continue
+            self.console.print(
+                "[red]Invalid input.[/red] Use 'a', 'q', or 'd <section_id>'."
+            )
+
+    def _render_plan(
+        self,
+        backbone: list[SectionPlan],
+        curated: list[SectionPlan],
+    ) -> None:
+        bt = Table(title="Backbone (read-only)", show_header=True)
+        bt.add_column("rank", style="dim", justify="right")
+        bt.add_column("section_id", style="dim")
+        bt.add_column("title", style="dim")
+        bt.add_column("block", style="dim")
+        for s in sorted(backbone, key=lambda x: x.rank):
+            bt.add_row(str(s.rank), s.section_id, s.title[:50], s.block_kind)
+        self.console.print(bt)
+
+        ct = Table(title="Curated (drop with 'd <section_id>')", show_header=True)
+        ct.add_column("rank", justify="right")
+        ct.add_column("section_id", style="bold")
+        ct.add_column("title")
+        ct.add_column("block")
+        ct.add_column("intent", overflow="ellipsis", max_width=50)
+        if not curated:
+            ct.add_row("-", "-", "(none — backbone only)", "-", "-")
+        else:
+            for s in sorted(curated, key=lambda x: x.rank):
+                ct.add_row(
+                    str(s.rank),
+                    s.section_id,
+                    s.title[:50],
+                    s.block_kind,
+                    s.intent,
+                )
+        self.console.print(ct)
+
+    # ------------------------------------------------------------------
+    # 2b. sections_review — after block_extract, before render.
+    # Drop any rendered section that looks bad. Regenerate is out of scope
+    # for this gate; user is pointed at `generate regen-section` instead.
+    # ------------------------------------------------------------------
+    def sections_review(self, rendered: list[RenderedSection]) -> list[RenderedSection]:
+        if self.auto:
+            self._log(
+                action="accept_section",
+                target={"section_id": "sections"},
+                reason="auto_mode",
+            )
+            return list(rendered)
+
+        remaining = list(rendered)
+        while True:
+            self._render_sections(remaining)
+            choice = Prompt.ask(
+                "[a]ccept all / [d]rop <section_id> / [r]egen <section_id>",
+                default="a",
+            ).strip()
+            if choice == "a":
+                self._log(
+                    action="accept_section",
+                    target={"section_id": "sections"},
+                    reason="manual_accept",
+                )
+                return remaining
+            if choice.startswith("d "):
+                target = choice[2:].strip()
+                hit = next((s for s in remaining if s.section_id == target), None)
+                if hit is None:
+                    self.console.print(f"[red]No section with id '{target}'.[/red]")
+                    continue
+                remaining = [s for s in remaining if s.section_id != target]
+                self._log(
+                    action="skip_section",
+                    target={"section_id": target},
+                    reason="manual_drop_in_sections_review",
+                )
+                continue
+            if choice.startswith("r "):
+                target = choice[2:].strip()
+                self.console.print(
+                    f"[yellow]regen[/yellow] not supported inline. "
+                    f"After this run finishes, use: "
+                    f"[bold]uv run generate regen-section {target} "
+                    "output/<slug>.data.json[/bold]"
+                )
+                continue
+            self.console.print(
+                "[red]Invalid input.[/red] Use 'a', 'd <id>', or 'r <id>'."
+            )
+
+    def _render_sections(self, rendered: list[RenderedSection]) -> None:
+        table = Table(title="Section drafts", show_header=True)
+        table.add_column("section_id", style="bold")
+        table.add_column("block")
+        table.add_column("cites", justify="right")
+        table.add_column("preview", overflow="ellipsis", max_width=80)
+        for rs in rendered:
             table.add_row(
-                str(p.rank),
-                p.need_id,
-                "✓" if p.activated else "✗",
-                p.section_title[:50],
-                ",".join(p.assigned_modules)[:40],
-                str(len(p.fetch_queries)),
+                rs.section_id,
+                rs.block_kind,
+                str(len(rs.citations)),
+                _preview_for_block(rs),
             )
         self.console.print(table)
-        toggle = Prompt.ask(
-            "Toggle a need by id (e.g. 'world_reaction'), or enter to accept",
-            default="",
-        )
-        if toggle:
-            for p in plan.need_plans:
-                if p.need_id == toggle:
-                    new_plans = [
-                        pp.model_copy(update={"activated": not pp.activated})
-                        if pp.need_id == toggle
-                        else pp
-                        for pp in plan.need_plans
-                    ]
-                    plan = plan.model_copy(update={"need_plans": new_plans})
-                    self._log(
-                        action="edit_section_field",
-                        target={
-                            "section_id": "plan",
-                            "field_path": f"need_plans[{toggle}].activated",
-                        },
-                        before=p.activated,
-                        after=not p.activated,
-                        reason="editor toggled need",
-                    )
-                    break
-        return plan
 
     # ------------------------------------------------------------------
     # 3. final_approval

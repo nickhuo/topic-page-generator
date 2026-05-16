@@ -103,7 +103,7 @@ async def test_extract_drops_section_when_minimum_viable_fails(monkeypatch):
                 "index": 0,
                 "message": {
                     "role": "assistant",
-                    "content": "{\"kind\":\"paragraph\",\"style\":\"prose\",\"paragraphs_md\":[\"   \"],\"pull_quotes\":[],\"citations\":[]}",
+                    "content": '{"kind":"paragraph","style":"prose","paragraphs_md":["   "],"pull_quotes":[],"citations":[]}',
                 },
                 "finish_reason": "stop",
             }
@@ -133,7 +133,7 @@ async def test_extract_drops_section_with_uncited_source_id(monkeypatch):
                 "index": 0,
                 "message": {
                     "role": "assistant",
-                    "content": "{\"kind\":\"paragraph\",\"style\":\"prose\",\"paragraphs_md\":[\"Something real.\"],\"pull_quotes\":[],\"citations\":[{\"source_id\":\"s_FAKE\"}]}",
+                    "content": '{"kind":"paragraph","style":"prose","paragraphs_md":["Something real."],"pull_quotes":[],"citations":[{"source_id":"s_FAKE"}]}',
                 },
                 "finish_reason": "stop",
             }
@@ -153,9 +153,10 @@ async def test_run_block_extract_stage_parallel(monkeypatch):
     """run_block_extract_stage gathers all sections in parallel and drops None results."""
 
     async def fake_extract(
-        *, section, sources, canonical_title, entities=None, model=None
+        *, section, sources, canonical_title, entities=None, model=None, reporter=None
     ):
         from generator.blocks.schema import ParagraphBlockData
+
         if section.section_id == "drop":
             return None
         return RenderedSection(
@@ -180,6 +181,7 @@ async def test_run_block_extract_stage_parallel(monkeypatch):
 # Gallery-path tests
 # ---------------------------------------------------------------------------
 
+
 def _gallery_section(sid: str = "photos") -> SectionPlan:
     return SectionPlan(
         section_id=sid,
@@ -201,6 +203,7 @@ async def test_extract_gallery_section_calls_brave_and_llm(monkeypatch):
 
     async def fake_brave(query, *, count=10, timeout=12.0):
         from generator.sources.brave import BraveImageResult
+
         return [
             BraveImageResult(
                 image_url=f"https://img.example/{i}.jpg",
@@ -259,6 +262,7 @@ async def test_extract_gallery_drops_section_when_brave_misconfigured(monkeypatc
 
     async def raising_brave(query, *, count=10, timeout=12.0):
         from generator.sources.brave import BraveConfigError
+
         raise BraveConfigError("no key")
 
     monkeypatch.setattr(
@@ -281,6 +285,7 @@ async def test_extract_gallery_drops_section_when_brave_returns_too_few(monkeypa
 
     async def thin_brave(query, *, count=10, timeout=12.0):
         from generator.sources.brave import BraveImageResult
+
         return [BraveImageResult(image_url="https://img.example/0.jpg", title="x")]
 
     monkeypatch.setattr(

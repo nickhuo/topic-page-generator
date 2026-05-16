@@ -106,9 +106,7 @@ def _fold_into_overview(sections: list[dict]) -> list[dict]:
     No-op if there is no Overview section (defensive — keeps the chart visible
     as its own section rather than silently dropping content).
     """
-    overview = next(
-        (s for s in sections if s.get("section_id") == "overview"), None
-    )
+    overview = next((s for s in sections if s.get("section_id") == "overview"), None)
     if overview is None:
         return sections
     kept: list[dict] = []

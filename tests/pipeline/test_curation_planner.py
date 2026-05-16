@@ -72,9 +72,7 @@ async def test_curation_stage_records_llm_call(monkeypatch):
     respx.post("https://openrouter.ai/api/v1/chat/completions").mock(
         return_value=httpx.Response(200, json=payload)
     )
-    await run_curation_stage(
-        facts=_facts(), canonical_title="t", backbone=_backbone()
-    )
+    await run_curation_stage(facts=_facts(), canonical_title="t", backbone=_backbone())
     calls = drain()
     assert len(calls) == 1
     # Stage attribution happens at TraceRecorder layer, not on LLMCall itself.
@@ -94,7 +92,7 @@ async def test_curation_stage_returns_empty_when_llm_returns_empty(monkeypatch):
         "choices": [
             {
                 "index": 0,
-                "message": {"role": "assistant", "content": "{\"sections\":[]}"},
+                "message": {"role": "assistant", "content": '{"sections":[]}'},
                 "finish_reason": "stop",
             }
         ],

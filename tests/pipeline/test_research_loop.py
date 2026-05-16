@@ -67,7 +67,9 @@ async def test_loop_exits_when_eval_satisfied_first_iteration(monkeypatch):
         return "initial query"
 
     monkeypatch.setattr("generator.pipeline.research.fetch_tavily", fake_tavily)
-    monkeypatch.setattr("generator.pipeline.research.run_research_eval_stage", fake_eval)
+    monkeypatch.setattr(
+        "generator.pipeline.research.run_research_eval_stage", fake_eval
+    )
     monkeypatch.setattr("generator.pipeline.research._gen_query", fake_query)
 
     result = await run_research_stage(
@@ -85,10 +87,12 @@ async def test_loop_exits_when_eval_satisfied_first_iteration(monkeypatch):
 
 async def test_loop_iterates_when_eval_unsatisfied(monkeypatch):
     """When eval is unsatisfied, the loop refines query and runs again."""
-    eval_returns = iter([
-        ResearchEvalResult(satisfied=False, gaps=["x"], next_query_hint="more"),
-        ResearchEvalResult(satisfied=True, gaps=[], next_query_hint=None),
-    ])
+    eval_returns = iter(
+        [
+            ResearchEvalResult(satisfied=False, gaps=["x"], next_query_hint="more"),
+            ResearchEvalResult(satisfied=True, gaps=[], next_query_hint=None),
+        ]
+    )
     call_log = {"tavily": 0, "eval": 0, "query": 0}
 
     async def fake_tavily(query, **_):
@@ -104,7 +108,9 @@ async def test_loop_iterates_when_eval_unsatisfied(monkeypatch):
         return f"q{call_log['query']}"
 
     monkeypatch.setattr("generator.pipeline.research.fetch_tavily", fake_tavily)
-    monkeypatch.setattr("generator.pipeline.research.run_research_eval_stage", fake_eval)
+    monkeypatch.setattr(
+        "generator.pipeline.research.run_research_eval_stage", fake_eval
+    )
     monkeypatch.setattr("generator.pipeline.research._gen_query", fake_query)
 
     await run_research_stage(
@@ -133,7 +139,9 @@ async def test_loop_respects_max_iterations(monkeypatch):
         return "q"
 
     monkeypatch.setattr("generator.pipeline.research.fetch_tavily", fake_tavily)
-    monkeypatch.setattr("generator.pipeline.research.run_research_eval_stage", fake_eval)
+    monkeypatch.setattr(
+        "generator.pipeline.research.run_research_eval_stage", fake_eval
+    )
     monkeypatch.setattr("generator.pipeline.research._gen_query", fake_query)
 
     await run_research_stage(
@@ -164,7 +172,9 @@ async def test_global_tavily_cap_across_sections(monkeypatch):
         return "q"
 
     monkeypatch.setattr("generator.pipeline.research.fetch_tavily", fake_tavily)
-    monkeypatch.setattr("generator.pipeline.research.run_research_eval_stage", fake_eval)
+    monkeypatch.setattr(
+        "generator.pipeline.research.run_research_eval_stage", fake_eval
+    )
     monkeypatch.setattr("generator.pipeline.research._gen_query", fake_query)
 
     # 6 sections, each would naturally want max_iterations=3 → 18 calls; cap at 5.
@@ -194,7 +204,9 @@ async def test_seed_sources_prepended_to_every_section(monkeypatch):
         return "q"
 
     monkeypatch.setattr("generator.pipeline.research.fetch_tavily", fake_tavily)
-    monkeypatch.setattr("generator.pipeline.research.run_research_eval_stage", fake_eval)
+    monkeypatch.setattr(
+        "generator.pipeline.research.run_research_eval_stage", fake_eval
+    )
     monkeypatch.setattr("generator.pipeline.research._gen_query", fake_query)
 
     seed = [_fake_source("https://wikidata.org/wiki/Q1", pub="Wikidata")]

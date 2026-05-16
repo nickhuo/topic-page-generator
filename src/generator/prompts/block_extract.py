@@ -30,9 +30,7 @@ def _format_evidence_block(sources: list[Source]) -> str:
         return "(no evidence)"
     lines = []
     for s in sources:
-        thumb_line = (
-            f"  image_url: {s.thumbnail_url}\n" if s.thumbnail_url else ""
-        )
+        thumb_line = f"  image_url: {s.thumbnail_url}\n" if s.thumbnail_url else ""
         line = (
             f'<src id="{s.id}" tier="{s.publisher.tier}" '
             f'publisher="{s.publisher.name}" '
@@ -116,9 +114,7 @@ def build_block_extract_messages(
     return [
         {
             "role": "system",
-            "content": (
-                BASE_PREAMBLE + "\n\n" + spec.extraction_prompt_fragment
-            ),
+            "content": (BASE_PREAMBLE + "\n\n" + spec.extraction_prompt_fragment),
         },
         {"role": "user", "content": user},
     ]

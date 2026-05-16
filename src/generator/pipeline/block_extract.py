@@ -20,6 +20,7 @@ import logging
 
 from generator.blocks.specs import get_spec
 from generator.llm.client import call_structured, get_default_model
+from generator.pipeline.reporter import NullReporter, PipelineReporter
 from generator.prompts.block_extract import build_block_extract_messages
 from generator.schema import (
     Citation,
@@ -148,7 +149,10 @@ async def extract_one_section(
     canonical_title: str,
     entities: list[str] | None = None,
     model: str | None = None,
+    reporter: PipelineReporter | None = None,
 ) -> RenderedSection | None:
+    r = reporter or NullReporter()
+    r.section_event(section.section_id, "extract_started", kind=section.block_kind)
     spec_cls = get_spec(section.block_kind)
     spec = spec_cls()
 
@@ -182,6 +186,11 @@ async def extract_one_section(
                 section.section_id,
                 exc,
             )
+            r.section_event(
+                section.section_id,
+                "extract_dropped",
+                reason="brave_not_configured",
+            )
             return None
         if len(results) < _GALLERY_MIN_IMAGES:
             logger.info(
@@ -190,6 +199,13 @@ async def extract_one_section(
                 section.section_id,
                 len(results),
                 _GALLERY_MIN_IMAGES,
+            )
+            r.section_event(
+                section.section_id,
+                "extract_dropped",
+                reason="gallery_insufficient_images",
+                got=len(results),
+                need=_GALLERY_MIN_IMAGES,
             )
             return None
         image_manifest = results
@@ -211,6 +227,12 @@ async def extract_one_section(
         )
     except Exception as exc:
         logger.warning("block_extract failed for %s: %s", section.section_id, exc)
+        r.section_event(
+            section.section_id,
+            "extract_dropped",
+            reason="llm_error",
+            error=str(exc)[:120],
+        )
         return None
 
     # Spec-defined normalization (filter/sort/cap items) before integrity checks.
@@ -257,12 +279,19 @@ async def extract_one_section(
             section.section_id,
             unknown,
         )
+        r.section_event(
+            section.section_id,
+            "extract_dropped",
+            reason="citation_integrity",
+            unknown=sorted(unknown),
+        )
         return None
 
     if not spec.is_minimum_viable(data):
         logger.info(
             "block_extract dropped %s: is_minimum_viable=False", section.section_id
         )
+        r.section_event(section.section_id, "extract_dropped", reason="below_threshold")
         return None
 
     sources_by_id = {s.id: s for s in sources}
@@ -276,6 +305,7 @@ async def extract_one_section(
     ]
     sources_used = [s for s in sources if s.id in cited_ids]
 
+    r.section_event(section.section_id, "extract_ok", citations=len(citations))
     return RenderedSection(
         section_id=section.section_id,
         block_kind=section.block_kind,
@@ -294,6 +324,7 @@ async def run_block_extract_stage(
     evidence_by_section: dict[str, list[Source]],
     canonical_title: str,
     entities: list[str] | None = None,
+    reporter: PipelineReporter | None = None,
 ) -> list[RenderedSection]:
     """Extract all sections in parallel. Dropped sections are filtered out."""
     coros = [
@@ -302,6 +333,7 @@ async def run_block_extract_stage(
             sources=evidence_by_section.get(s.section_id, []),
             canonical_title=canonical_title,
             entities=entities,
+            reporter=reporter,
         )
         for s in sections
     ]

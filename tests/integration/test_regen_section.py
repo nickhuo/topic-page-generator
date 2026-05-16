@@ -64,7 +64,9 @@ def _make_page(sections: list[RenderedSection] | None = None) -> EventPage:
         page_id="page_test01",
         input_sentence="test event for regen-section",
         generated_at="2026-05-01T00:00:00+00:00",
-        subject=EventSubject(title="Test Event", subtitle="Test subtitle.", entities=["Test Entity"]),
+        subject=EventSubject(
+            title="Test Event", subtitle="Test subtitle.", entities=["Test Entity"]
+        ),
         layout=EventLayout(preset_id="product_focus", overrides=None),
         sources=[_make_source()],
         editorial_sections=sections,
@@ -128,9 +130,7 @@ def _patch_extract_one_section(monkeypatch, new_section: RenderedSection | None 
     async def _fake(*, section, sources, canonical_title, model=None):
         return new_section
 
-    monkeypatch.setattr(
-        "generator.pipeline.block_extract.extract_one_section", _fake
-    )
+    monkeypatch.setattr("generator.pipeline.block_extract.extract_one_section", _fake)
     # Also patch the import in cli.py's local scope — cli.py imports inside the function
     # so we patch the source module only.
 

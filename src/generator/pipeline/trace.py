@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import os
+import tempfile
 import time
 import uuid
 from contextlib import contextmanager
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Iterator
 
 from generator.llm.trace_buffer import drain as _drain_llm_calls
@@ -53,6 +56,54 @@ class TraceRecorder:
 
     def record_editor_action(self, action: EditorAction) -> None:
         self._editor_actions.append(action)
+
+    def _snapshot(self, *, final_outcome: str = "in_progress") -> Trace:
+        """Build a Trace from current state without ending the run."""
+        now = datetime.now(timezone.utc)
+        return Trace(
+            trace_id=self.trace_id,
+            page_id=self.page_id,
+            input_sentence=self.input_sentence,
+            started_at=self.started_at.isoformat(),
+            ended_at=now.isoformat(),
+            total_duration_ms=int((now - self.started_at).total_seconds() * 1000),
+            total_cost_usd=0.0,
+            pipeline_trace=list(self.stages),
+            editor_actions=list(self._editor_actions),
+            final_outcome=final_outcome,  # type: ignore[arg-type]
+            approval=TraceApproval(
+                actor="cli_user@local",
+                approved_at=None,
+                auto_mode=False,
+            ),
+        )
+
+    def flush_partial(self, out_dir: Path, basename: str) -> Path:
+        """Atomically write the current trace snapshot to {out_dir}/{basename}.trace.json.
+
+        Schema validation of `final_outcome` only allows the four published
+        values, so on partial flush we use "draft_saved" as a stand-in.
+        """
+        out_dir.mkdir(parents=True, exist_ok=True)
+        target = out_dir / f"{basename}.trace.json"
+        # "draft_saved" is the closest published-enum value to "in progress".
+        snapshot = self._snapshot(final_outcome="draft_saved")
+        payload = snapshot.model_dump_json(indent=2)
+        fd, tmp_path = tempfile.mkstemp(
+            prefix=f".{basename}.trace.", suffix=".tmp", dir=str(out_dir)
+        )
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                fh.write(payload)
+            os.replace(tmp_path, target)
+        except Exception:
+            # Clean up tmp on failure; never raise from a flush.
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+            raise
+        return target
 
     def finalize(
         self, *, auto_mode: bool = True, final_outcome: str | None = None

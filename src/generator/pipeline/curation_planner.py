@@ -11,6 +11,7 @@ LLMOutputError which the CLI maps to exit code 4.
 from __future__ import annotations
 
 from generator.llm.client import call_structured, get_default_model
+from generator.pipeline.reporter import NullReporter, PipelineReporter
 from generator.prompts.curation import build_curation_messages
 from generator.schema import EventFacts, SectionPlan, SectionPlanOutput
 
@@ -21,6 +22,7 @@ async def run_curation_stage(
     backbone: list[SectionPlan],
     *,
     model: str | None = None,
+    reporter: PipelineReporter | None = None,
 ) -> SectionPlanOutput:
     """One LLM call. Returns 0-4 curated sections to complement the backbone.
 
@@ -39,9 +41,16 @@ async def run_curation_stage(
     )
     # Hard contract: curated sections always render in the main column.
     # The sidebar is reserved for the backbone timeline (and chrome cards).
-    return SectionPlanOutput(
+    out = SectionPlanOutput(
         sections=[s.model_copy(update={"placement": "main"}) for s in raw.sections]
     )
+    r = reporter or NullReporter()
+    if out.sections:
+        titles = ", ".join(f"{s.title}({s.block_kind})" for s in out.sections)
+        r.note(f"curation: kept {len(out.sections)} curated sections — {titles}")
+    else:
+        r.note("curation: no curated sections (backbone only)")
+    return out
 
 
 __all__ = ["run_curation_stage"]

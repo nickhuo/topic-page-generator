@@ -30,6 +30,7 @@ from generator.llm.client import LLMConfigError, LLMOutputError
 from generator.llm.trace_buffer import reset as _reset_llm_calls
 from generator.pipeline import ground
 from generator.pipeline.render import slugify, subject_from_facts
+from generator.pipeline.reporter import NullReporter, RichReporter
 from generator.pipeline.trace import TraceRecorder
 
 console = Console()
@@ -64,9 +65,23 @@ def generate(
     page_id = f"page_{uuid.uuid4().hex[:8]}"
     recorder = TraceRecorder(sentence, page_id)
     prompter = EditorPrompter(auto_mode=auto, recorder=recorder)
+    reporter = (
+        RichReporter(console) if (console.is_terminal and not auto) else NullReporter()
+    )
     _reset_llm_calls()
 
     output_paths: dict[str, Any] = {}
+
+    # Trace is flushed incrementally so Ctrl-C / crash still leaves a partial
+    # trace.json on disk. Filename starts as page_id; renamed to <slug>.trace.json
+    # once we know the slug (post-ground).
+    trace_state: dict[str, str] = {"basename": page_id}
+
+    def _flush_trace() -> None:
+        try:
+            recorder.flush_partial(_OUTPUT_DIR, trace_state["basename"])
+        except Exception as exc:  # never let trace flush kill the run
+            console.print(f"[dim]trace flush failed: {exc}[/dim]")
 
     async def _run() -> None:
         # Stage 1: Ground (with optional reformulation loop).
@@ -100,6 +115,11 @@ def generate(
             console.print("[bold red]Ground returned no facts. Aborting.[/bold red]")
             raise typer.Exit(code=4)
 
+        # Now that we know the slug, switch the partial-trace filename so the
+        # final and partial trace files share a name.
+        trace_state["basename"] = slugify(ground_out.canonical_title)
+        _flush_trace()
+
         # Stage 1b: Hero image (best-effort, decorative — never raises).
         from generator.pipeline.hero_image import run_hero_image_stage
 
@@ -113,6 +133,7 @@ def generate(
                 console.print(
                     "[dim]· Hero image skipped (no Brave key or no results)[/dim]"
                 )
+        _flush_trace()
 
         # Editor architecture: planners → research → block_extract → render → deliver
         from generator.pipeline.backbone_planner import build_backbone_sections
@@ -129,9 +150,20 @@ def generate(
                 canonical_title=ground_out.canonical_title
                 or ground_out.facts.what[:80],
                 backbone=backbone,
+                reporter=reporter,
             )
+        _flush_trace()
 
-        combined = SectionPlanOutput(sections=backbone + list(curation_out.sections))
+        # HITL: plan_review — let editor prune curated sections before research.
+        plan_decision, curated_after_review = prompter.plan_review(
+            backbone=backbone,
+            curated=list(curation_out.sections),
+        )
+        if plan_decision == "reject":
+            console.print("[bold red]Plan rejected by editor. Stopping.[/bold red]")
+            raise typer.Exit(code=5)
+
+        combined = SectionPlanOutput(sections=backbone + curated_after_review)
 
         # Stage 3: per-section research loop.
         from generator.pipeline.research import run_research_stage
@@ -145,12 +177,15 @@ def generate(
         seed_sources = [wd_source] if wd_source else []
 
         with recorder.stage("research"):
-            pools = await run_research_stage(
-                sections=combined.sections,
-                canonical_title=ground_out.canonical_title,
-                facts=ground_out.facts,
-                seed_sources=seed_sources,
-            )
+            with reporter.live_section_table([s.section_id for s in combined.sections]):
+                pools = await run_research_stage(
+                    sections=combined.sections,
+                    canonical_title=ground_out.canonical_title,
+                    facts=ground_out.facts,
+                    seed_sources=seed_sources,
+                    reporter=reporter,
+                )
+        _flush_trace()
 
         # Stage 4: block-driven extraction.
         from generator.pipeline.block_extract import run_block_extract_stage
@@ -161,10 +196,20 @@ def generate(
                 evidence_by_section=pools,
                 canonical_title=ground_out.canonical_title,
                 entities=ground_out.facts.entities,
+                reporter=reporter,
             )
         console.print(
             f"[green]✓[/green] Block extract  sections={len(rendered_sections)}"
         )
+        _flush_trace()
+
+        # HITL: sections_review — let editor drop bad sections before render.
+        rendered_sections = prompter.sections_review(rendered_sections)
+        if not rendered_sections:
+            console.print(
+                "[bold red]All sections dropped by editor. Stopping.[/bold red]"
+            )
+            raise typer.Exit(code=5)
 
         # Stage 5: render.
         from generator.pipeline.render import (
@@ -199,6 +244,7 @@ def generate(
             console.print(
                 f"[green]✓[/green] Render  sections={len(editorial_page.editorial_sections or [])}"
             )
+        _flush_trace()
 
         # Stage 6: Deliver.
         slug = slugify(ground_out.canonical_title)

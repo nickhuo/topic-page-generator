@@ -206,9 +206,7 @@ def _pick_response(request: httpx.Request) -> httpx.Response:
         return httpx.Response(200, json=_RESEARCH_EVAL_RESPONSE)
 
     # 1. Block-extract: identified by response_format.json_schema.name
-    schema_name = (
-        body.get("response_format", {}).get("json_schema", {}).get("name", "")
-    )
+    schema_name = body.get("response_format", {}).get("json_schema", {}).get("name", "")
     if schema_name in _BLOCK_SCHEMA_CONTENTS:
         return httpx.Response(200, json=_block_response(schema_name))
 
@@ -285,7 +283,9 @@ def test_editor_pipeline_smoke(monkeypatch, tmp_path):
 
     # Patch in the source modules (where the names are defined)
     monkeypatch.setattr("generator.sources.tavily.fetch_tavily", _fake_fetch_tavily)
-    monkeypatch.setattr("generator.sources.wikidata.fetch_wikidata", _fake_fetch_wikidata)
+    monkeypatch.setattr(
+        "generator.sources.wikidata.fetch_wikidata", _fake_fetch_wikidata
+    )
     monkeypatch.setattr(
         "generator.sources.wikipedia.fetch_wikipedia_card", _fake_fetch_wikipedia_card
     )
@@ -301,9 +301,7 @@ def test_editor_pipeline_smoke(monkeypatch, tmp_path):
     async def _fake_brave(query, *, count=5, timeout=12.0):
         return []  # mirror no-BRAVE_API_KEY path
 
-    monkeypatch.setattr(
-        "generator.pipeline.hero_image.fetch_brave_images", _fake_brave
-    )
+    monkeypatch.setattr("generator.pipeline.hero_image.fetch_brave_images", _fake_brave)
 
     # Invoke CLI
     runner = CliRunner()
