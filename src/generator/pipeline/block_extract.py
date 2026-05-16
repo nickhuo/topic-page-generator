@@ -261,7 +261,9 @@ async def extract_one_section(
                 if card.profile_url is None and info.profile_url:
                     update["profile_url"] = info.profile_url
                 try:
-                    new_cards[idx] = card.model_copy(update=update)
+                    new_cards[idx] = type(card).model_validate(
+                        {**card.model_dump(), **update}
+                    )
                 except Exception as exc:
                     logger.debug(
                         "people: invalid image_url for %s (%s)", card.name, exc

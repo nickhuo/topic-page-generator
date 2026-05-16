@@ -15,8 +15,11 @@ import logging
 from datetime import datetime, timezone
 
 import httpx
+from pydantic import HttpUrl, TypeAdapter
 
 from generator.schema import Source
+
+_HTTP_URL_ADAPTER = TypeAdapter(HttpUrl)
 
 log = logging.getLogger(__name__)
 
@@ -83,7 +86,7 @@ async def _enrich_one(client: httpx.AsyncClient, source: Source) -> Source:
     if needs_image and "image" in og:
         # Validate URL shape — pydantic HttpUrl rejects invalid ones.
         try:
-            update["thumbnail_url"] = og["image"]
+            update["thumbnail_url"] = _HTTP_URL_ADAPTER.validate_python(og["image"])
         except ValueError:
             pass
     if needs_summary and "description" in og:

@@ -14,13 +14,17 @@ rendered card must have a thumbnail.
 from __future__ import annotations
 
 import asyncio
+import html as html_mod
 import logging
 import re
 from urllib.parse import urljoin
 
 import httpx
+from pydantic import HttpUrl, TypeAdapter
 
 from generator.schema import Source
+
+_HTTP_URL_ADAPTER = TypeAdapter(HttpUrl)
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +67,7 @@ def extract_og_image(html: str, base_url: str) -> str | None:
     for pattern in _OG_PATTERNS:
         m = pattern.search(head)
         if m:
-            raw = m.group(1).strip()
+            raw = html_mod.unescape(m.group(1).strip())
             if not raw:
                 continue
             return urljoin(base_url, raw)
@@ -90,7 +94,7 @@ async def _fetch_one(
     if not image_url:
         return
     try:
-        source.thumbnail_url = image_url  # type: ignore[assignment]
+        source.thumbnail_url = _HTTP_URL_ADAPTER.validate_python(image_url)
     except Exception as exc:
         logger.debug("og_image: invalid url for %s: %s (%s)", url, image_url, exc)
 
@@ -149,7 +153,8 @@ async def enrich_news_card_thumbnails(
         if isinstance(image_url, Exception) or not image_url:
             continue
         try:
-            out[idx] = cards[idx].model_copy(update={"thumbnail_url": image_url})
+            validated = _HTTP_URL_ADAPTER.validate_python(image_url)
+            out[idx] = cards[idx].model_copy(update={"thumbnail_url": validated})
         except Exception as exc:  # invalid URL → leave unchanged
             logger.debug("og_image: invalid url %s (%s)", image_url, exc)
     return out
