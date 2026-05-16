@@ -11,13 +11,24 @@ def test_registry_covers_all_block_kinds():
         "newsfeed",
         "reactions",
         "gallery",
+        "latest_news",
+        "people",
     }
     assert set(ALL_BLOCK_KINDS) == expected
 
 
 @pytest.mark.parametrize(
     "kind",
-    ["paragraph", "timeline", "chart", "newsfeed", "reactions", "gallery"],
+    [
+        "paragraph",
+        "timeline",
+        "chart",
+        "newsfeed",
+        "reactions",
+        "gallery",
+        "latest_news",
+        "people",
+    ],
 )
 def test_get_spec_returns_subclass(kind):
     spec_cls = get_spec(kind)

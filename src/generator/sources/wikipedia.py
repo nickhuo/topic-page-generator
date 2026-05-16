@@ -20,6 +20,12 @@ log = logging.getLogger(__name__)
 _TIMEOUT_SECONDS = 5.0
 _SUMMARY_MAX_CHARS = 600
 _BASE_URL = "https://en.wikipedia.org/api/rest_v1/page/summary/"
+# Wikimedia API policy requires an identifying User-Agent. Without one the
+# REST endpoint returns 403.
+_USER_AGENT = (
+    "topic-page-generator/0.1 (https://github.com/NickHuo/topic-page-generator) "
+    "httpx/python"
+)
 
 
 def _truncate(text: str) -> str:
@@ -32,7 +38,7 @@ def _truncate(text: str) -> str:
 async def fetch_wikipedia_card(title: str) -> WikipediaCardData | None:
     """Fetch the Wikipedia summary for `title`, or None on any failure."""
     url = _BASE_URL + quote(title, safe="")
-    headers = {"Accept": "application/json"}
+    headers = {"Accept": "application/json", "User-Agent": _USER_AGENT}
     try:
         async with httpx.AsyncClient(
             timeout=_TIMEOUT_SECONDS, headers=headers

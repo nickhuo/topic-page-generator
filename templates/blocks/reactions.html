@@ -1,100 +1,103 @@
 {#
-  Reactions → Perspectives tab layout.
-  Groups items by sentiment: positive → "Optimistic", negative → "Critical", neutral → "Analytical".
-  Non-empty groups get a tab; the first non-empty group is active by default.
-  Tab switching is handled by toc.js (perspectives tabs section).
+  Opinions (formerly Perspectives) — groups quote cards by sentiment.
+  Each card is a link to the original article. Tab switching is wired in
+  toc.js (.opinions__tabs handler).
+
+  Backward-compat: if a card lacks `article_url`, the card renders as a
+  plain <div> (no link); legacy traces still validate.
 #}
+
+{% macro render_card(c, source_index) %}
+  {% set has_link = c.article_url %}
+  {% set tag = "a" if has_link else "div" %}
+  <{{ tag }} class="opinion-card"
+    {% if has_link %} href="{{ c.article_url }}" target="_blank" rel="noopener noreferrer"{% endif %}>
+    <blockquote class="opinion-card__quote">{{ c.quote }}</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        {% if c.author_image_url %}
+          <img src="{{ c.author_image_url }}" alt="">
+        {% else %}
+          {% set parts = c.author.split() %}
+          {% if parts | length >= 2 %}
+            {% set initials = (parts[0][0] ~ parts[-1][0]) | upper %}
+          {% else %}
+            {% set initials = c.author[:2] | upper %}
+          {% endif %}
+          <span>{{ initials }}</span>
+        {% endif %}
+      </span>
+      <span class="opinion-card__who">
+        <strong>{{ c.author }}</strong>
+        {% if c.author_role %}
+          <span class="opinion-card__role">{{ c.author_role }}</span>
+        {% endif %}
+      </span>
+    </footer>
+    {% if c.publisher or c.article_title or c.article_url %}
+      <div class="opinion-card__article">
+        {% if c.publisher_logo_url %}
+          <img class="opinion-card__pub-logo" src="{{ c.publisher_logo_url }}" alt="">
+        {% elif c.article_url %}
+          {% set host = c.article_url | string | replace('https://', '') | replace('http://', '') %}
+          {% set host = host.split('/')[0] %}
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain={{ host }}&sz=64"
+               alt="">
+        {% endif %}
+        {% if c.publisher %}<span class="opinion-card__pub">{{ c.publisher }}</span>{% endif %}
+        {% if c.publisher and c.article_title %}<span class="opinion-card__article-divider">·</span>{% endif %}
+        {% if c.article_title %}
+          <span class="opinion-card__article-title">{{ c.article_title }}</span>
+        {% endif %}
+        {% if has_link %}
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {% endif %}
+      </div>
+    {% endif %}
+  </{{ tag }}>
+{% endmacro %}
 
 {% set positives = block.cards | selectattr("sentiment", "equalto", "positive") | list %}
 {% set negatives = block.cards | selectattr("sentiment", "equalto", "negative") | list %}
 {% set neutrals  = block.cards | selectattr("sentiment", "equalto", "neutral")  | list %}
 
-{# Build ordered list of non-empty groups #}
-{% set ns = namespace(first_id="", group_count=0) %}
-{% if positives %}{% set ns.group_count = ns.group_count + 1 %}{% if not ns.first_id %}{% set ns.first_id = "pv-positive" %}{% endif %}{% endif %}
-{% if negatives %}{% set ns.group_count = ns.group_count + 1 %}{% if not ns.first_id %}{% set ns.first_id = "pv-negative" %}{% endif %}{% endif %}
-{% if neutrals  %}{% set ns.group_count = ns.group_count + 1 %}{% if not ns.first_id %}{% set ns.first_id = "pv-neutral"  %}{% endif %}{% endif %}
+{% set ns = namespace(first="", group_count=0) %}
+{% if positives %}{% set ns.group_count = ns.group_count + 1 %}{% if not ns.first %}{% set ns.first = "positive" %}{% endif %}{% endif %}
+{% if negatives %}{% set ns.group_count = ns.group_count + 1 %}{% if not ns.first %}{% set ns.first = "negative" %}{% endif %}{% endif %}
+{% if neutrals  %}{% set ns.group_count = ns.group_count + 1 %}{% if not ns.first %}{% set ns.first = "neutral"  %}{% endif %}{% endif %}
 
-<div class="block block--reactions{% if ns.group_count < 2 %} block--reactions-flat{% endif %}">
+<div class="block block--opinions{% if ns.group_count < 2 %} block--opinions-flat{% endif %}">
+  <section class="opinions" aria-label="Opinions">
+    <div class="opinions__tabs" role="tablist"{% if ns.group_count < 2 %} hidden{% endif %}>
+      {% if positives %}
+        <button class="opinions__tab{% if ns.first == 'positive' %} is-active{% endif %}"
+                data-tier="positive" role="tab">Optimistic</button>
+      {% endif %}
+      {% if negatives %}
+        <button class="opinions__tab{% if ns.first == 'negative' %} is-active{% endif %}"
+                data-tier="negative" role="tab">Critical</button>
+      {% endif %}
+      {% if neutrals %}
+        <button class="opinions__tab{% if ns.first == 'neutral' %} is-active{% endif %}"
+                data-tier="neutral" role="tab">Analytical</button>
+      {% endif %}
+    </div>
 
-  {# Tab bar — hidden when only a single sentiment group exists #}
-  <div class="pv-tabs" role="tablist"{% if ns.group_count < 2 %} hidden{% endif %}>
     {% if positives %}
-      <div class="pv-tab{% if ns.first_id == 'pv-positive' %} active{% endif %}"
-           data-tab="pv-positive" role="tab" tabindex="0">Optimistic</div>
+      <ul class="opinions__panel{% if ns.first == 'positive' %} is-active{% endif %}" data-tier="positive">
+        {% for c in positives %}<li>{{ render_card(c, source_index) }}</li>{% endfor %}
+      </ul>
     {% endif %}
     {% if negatives %}
-      <div class="pv-tab{% if ns.first_id == 'pv-negative' %} active{% endif %}"
-           data-tab="pv-negative" role="tab" tabindex="0">Critical</div>
+      <ul class="opinions__panel{% if ns.first == 'negative' %} is-active{% endif %}" data-tier="negative">
+        {% for c in negatives %}<li>{{ render_card(c, source_index) }}</li>{% endfor %}
+      </ul>
     {% endif %}
     {% if neutrals %}
-      <div class="pv-tab{% if ns.first_id == 'pv-neutral' %} active{% endif %}"
-           data-tab="pv-neutral" role="tab" tabindex="0">Analytical</div>
+      <ul class="opinions__panel{% if ns.first == 'neutral' %} is-active{% endif %}" data-tier="neutral">
+        {% for c in neutrals %}<li>{{ render_card(c, source_index) }}</li>{% endfor %}
+      </ul>
     {% endif %}
-  </div>
-
-  {# Panels #}
-  {% if positives %}
-    <div class="pv-panel{% if ns.first_id == 'pv-positive' %} active{% endif %}" id="pv-positive" role="tabpanel">
-      {% for c in positives %}
-        <div class="pv-item">
-          <p class="pv-item__quote">{{ c.quote }}</p>
-          <div class="pv-item__footer">
-            <div class="pv-item__person">
-              <div class="pv-item__name">{{ c.author }}</div>
-              <div class="pv-item__role">{{ c.author_role }}</div>
-            </div>
-            {% if c.source_id and source_index[c.source_id] %}
-              <a class="pv-item__src" href="#src-{{ source_index[c.source_id] }}">
-                [{{ source_index[c.source_id] }}]
-              </a>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  {% if negatives %}
-    <div class="pv-panel{% if ns.first_id == 'pv-negative' %} active{% endif %}" id="pv-negative" role="tabpanel">
-      {% for c in negatives %}
-        <div class="pv-item">
-          <p class="pv-item__quote">{{ c.quote }}</p>
-          <div class="pv-item__footer">
-            <div class="pv-item__person">
-              <div class="pv-item__name">{{ c.author }}</div>
-              <div class="pv-item__role">{{ c.author_role }}</div>
-            </div>
-            {% if c.source_id and source_index[c.source_id] %}
-              <a class="pv-item__src" href="#src-{{ source_index[c.source_id] }}">
-                [{{ source_index[c.source_id] }}]
-              </a>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  {% if neutrals %}
-    <div class="pv-panel{% if ns.first_id == 'pv-neutral' %} active{% endif %}" id="pv-neutral" role="tabpanel">
-      {% for c in neutrals %}
-        <div class="pv-item">
-          <p class="pv-item__quote">{{ c.quote }}</p>
-          <div class="pv-item__footer">
-            <div class="pv-item__person">
-              <div class="pv-item__name">{{ c.author }}</div>
-              <div class="pv-item__role">{{ c.author_role }}</div>
-            </div>
-            {% if c.source_id and source_index[c.source_id] %}
-              <a class="pv-item__src" href="#src-{{ source_index[c.source_id] }}">
-                [{{ source_index[c.source_id] }}]
-              </a>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-
+  </section>
 </div>

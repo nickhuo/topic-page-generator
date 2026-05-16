@@ -160,6 +160,7 @@ def generate(
                 sections=combined.sections,
                 evidence_by_section=pools,
                 canonical_title=ground_out.canonical_title,
+                entities=ground_out.facts.entities,
             )
         console.print(
             f"[green]✓[/green] Block extract  sections={len(rendered_sections)}"

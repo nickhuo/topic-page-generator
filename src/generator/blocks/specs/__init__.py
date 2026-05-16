@@ -18,6 +18,8 @@ from generator.blocks.specs import chart as _chart  # noqa: E402, F401
 from generator.blocks.specs import newsfeed as _newsfeed  # noqa: E402, F401
 from generator.blocks.specs import reactions as _reactions  # noqa: E402, F401
 from generator.blocks.specs import gallery as _gallery  # noqa: E402, F401
+from generator.blocks.specs import latest_news as _latest_news  # noqa: E402, F401
+from generator.blocks.specs import people as _people  # noqa: E402, F401
 
 
 def get_spec(kind: BlockKind) -> type[BlockSpec]:

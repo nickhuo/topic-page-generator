@@ -32,13 +32,86 @@ from generator.sources.brave import (
     BraveImageResult,
     fetch_brave_images,
 )
-from generator.sources.og_image import enrich_thumbnails
+from generator.sources.og_image import enrich_news_card_thumbnails, enrich_thumbnails
+from generator.sources.wikipedia import fetch_wikipedia_card
 
 logger = logging.getLogger(__name__)
 
 # Minimum number of Brave image results required to proceed with gallery extraction.
 # Gallery spec requires ≥2 images; we want headroom for the LLM to pick from.
 _GALLERY_MIN_IMAGES = 3
+
+
+class PersonImage:
+    """One resolved person image: source-of-record + thumbnail + profile URL.
+
+    Used to build the PEOPLE_IMAGE_MANIFEST / AUTHOR_IMAGE_MANIFEST injected
+    above the evidence block so the LLM never invents image URLs.
+    """
+
+    __slots__ = ("name", "image_url", "profile_url", "image_source")
+
+    def __init__(
+        self,
+        *,
+        name: str,
+        image_url: str,
+        profile_url: str | None,
+        image_source: str,
+    ):
+        self.name = name
+        self.image_url = image_url
+        self.profile_url = profile_url
+        self.image_source = image_source
+
+
+async def _resolve_person_image(name: str) -> PersonImage | None:
+    """Try Wikipedia first; fall back to Brave image search.
+
+    People sections are explicitly curated — headline performers, decision
+    makers, named principals — so a Brave first-result for "<name> portrait"
+    is acceptable when Wikipedia has no thumbnail. Returns None when both
+    miss or Brave isn't configured.
+    """
+    card = await fetch_wikipedia_card(name)
+    if card is not None and card.thumbnail_url is not None:
+        return PersonImage(
+            name=name,
+            image_url=str(card.thumbnail_url),
+            profile_url=str(card.article_url) if card.article_url else None,
+            image_source="wikipedia",
+        )
+    try:
+        results = await fetch_brave_images(f"{name} portrait", count=3)
+    except BraveConfigError:
+        return None
+    except Exception as exc:  # network / parse errors — silent miss
+        logger.debug("brave fallback failed for %s: %s", name, exc)
+        return None
+    if not results:
+        return None
+    pick = results[0]
+    return PersonImage(
+        name=name,
+        image_url=str(pick.image_url),
+        profile_url=str(pick.source_url) if pick.source_url else None,
+        image_source="brave",
+    )
+
+
+async def _resolve_person_manifest(names: list[str]) -> list[PersonImage]:
+    """Resolve a parallel batch of names; drop entries with no portrait."""
+    if not names:
+        return []
+    coros = [_resolve_person_image(n) for n in names]
+    results = await asyncio.gather(*coros, return_exceptions=True)
+    manifest: list[PersonImage] = []
+    for r in results:
+        if isinstance(r, Exception):
+            continue
+        if r is not None:
+            manifest.append(r)
+    return manifest
 
 
 def _brave_query_for_section(section: SectionPlan, canonical_title: str) -> str:
@@ -73,6 +146,7 @@ async def extract_one_section(
     section: SectionPlan,
     sources: list[Source],
     canonical_title: str,
+    entities: list[str] | None = None,
     model: str | None = None,
 ) -> RenderedSection | None:
     spec_cls = get_spec(section.block_kind)
@@ -85,6 +159,15 @@ async def extract_one_section(
     # silent — image-less sources just won't appear in the final cards.
     if section.block_kind == "newsfeed":
         await enrich_thumbnails(sources)
+
+    # Person manifest: pre-resolve Wikipedia portraits for people + reactions
+    # so the LLM never invents image URLs.
+    people_manifest: list[PersonImage] | None = None
+    if section.block_kind in ("people", "reactions") and entities:
+        people_manifest = await _resolve_person_manifest(entities)
+        if section.block_kind == "people" and not people_manifest:
+            # Allow people sections without images — bio + role still informative.
+            people_manifest = []
 
     # Gallery sections require Brave image search before LLM extraction.
     image_manifest: list[BraveImageResult] | None = None
@@ -117,6 +200,7 @@ async def extract_one_section(
         sources=sources,
         canonical_title=canonical_title,
         image_manifest=image_manifest,
+        people_manifest=people_manifest,
     )
     resolved_model = model or get_default_model("block_extract")
     try:
@@ -131,6 +215,37 @@ async def extract_one_section(
 
     # Spec-defined normalization (filter/sort/cap items) before integrity checks.
     data = spec.postprocess(data)
+
+    # Post-extract image enrichment.
+    if section.block_kind == "latest_news" and getattr(data, "cards", None):
+        enriched_cards = await enrich_news_card_thumbnails(list(data.cards))
+        if enriched_cards != list(data.cards):
+            data = data.model_copy(update={"cards": enriched_cards})
+    elif section.block_kind == "people" and getattr(data, "cards", None):
+        targets = [(i, c) for i, c in enumerate(data.cards) if c.image_url is None]
+        if targets:
+            resolved = await asyncio.gather(
+                *(_resolve_person_image(c.name) for _, c in targets),
+                return_exceptions=True,
+            )
+            new_cards = list(data.cards)
+            for (idx, card), info in zip(targets, resolved, strict=True):
+                if isinstance(info, Exception) or info is None:
+                    continue
+                update = {
+                    "image_url": info.image_url,
+                    "image_source": info.image_source,
+                }
+                if card.profile_url is None and info.profile_url:
+                    update["profile_url"] = info.profile_url
+                try:
+                    new_cards[idx] = card.model_copy(update=update)
+                except Exception as exc:
+                    logger.debug(
+                        "people: invalid image_url for %s (%s)", card.name, exc
+                    )
+            if new_cards != list(data.cards):
+                data = data.model_copy(update={"cards": new_cards})
 
     # Citation integrity: every cited source_id must be in the pool.
     pool_ids = {s.id for s in sources}
@@ -178,6 +293,7 @@ async def run_block_extract_stage(
     sections: list[SectionPlan],
     evidence_by_section: dict[str, list[Source]],
     canonical_title: str,
+    entities: list[str] | None = None,
 ) -> list[RenderedSection]:
     """Extract all sections in parallel. Dropped sections are filtered out."""
     coros = [
@@ -185,6 +301,7 @@ async def run_block_extract_stage(
             section=s,
             sources=evidence_by_section.get(s.section_id, []),
             canonical_title=canonical_title,
+            entities=entities,
         )
         for s in sections
     ]

@@ -304,6 +304,8 @@ BlockKind = Literal[
     "newsfeed",
     "reactions",
     "gallery",
+    "latest_news",
+    "people",
 ]
 
 BackboneSectionId = Literal[

@@ -32,10 +32,15 @@ async def run_curation_stage(
     messages = build_curation_messages(
         facts=facts, canonical_title=canonical_title, backbone=backbone
     )
-    return await call_structured(
+    raw = await call_structured(
         model=resolved_model,
         messages=messages,
         response_model=SectionPlanOutput,
+    )
+    # Hard contract: curated sections always render in the main column.
+    # The sidebar is reserved for the backbone timeline (and chrome cards).
+    return SectionPlanOutput(
+        sections=[s.model_copy(update={"placement": "main"}) for s in raw.sections]
     )
 
 

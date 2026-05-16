@@ -1,0 +1,53 @@
+{#
+  Latest News block — vertical stack of landscape-composition cards.
+  The whole card surface is a link to the original article. Cards beyond
+  the initial visible window start collapsed; the "Load more" button
+  reveals them in batches (see templates/toc.js).
+#}
+{% set _initial_visible = 5 %}
+{% set _step = 5 %}
+{% set _total = block.cards | length %}
+{% set _has_more = _total > _initial_visible %}
+<div class="block block--latest-news"
+     data-initial-visible="{{ _initial_visible }}"
+     data-step="{{ _step }}"
+     data-total="{{ _total }}">
+  <ol class="latest-news__list">
+    {% for card in block.cards %}
+      <li class="ln-card{% if loop.index0 >= _initial_visible %} ln-card--collapsed{% endif %}">
+        <a class="ln-card__link{% if not card.thumbnail_url %} ln-card__link--no-media{% endif %}" href="{{ card.url }}" target="_blank" rel="noopener noreferrer">
+          {% if card.thumbnail_url %}
+            <figure class="ln-card__media">
+              <img src="{{ card.thumbnail_url }}" alt="" loading="lazy">
+            </figure>
+          {% endif %}
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              {% set host = card.url | string | replace('https://', '') | replace('http://', '') %}
+              {% set host = host.split('/')[0] %}
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain={{ host }}&sz=64"
+                   alt="">
+              <span>{{ card.publisher }}</span>
+              {% if card.published_at %}
+                <time datetime="{{ card.published_at }}">{{ card.published_at[:10] }}</time>
+              {% endif %}
+            </header>
+            <h3 class="ln-card__title">{{ card.title }}</h3>
+            {% if card.summary %}
+              <p class="ln-card__summary">{{ card.summary }}</p>
+            {% endif %}
+          </div>
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+  {% if _has_more %}
+    <button type="button"
+            class="latest-news__more"
+            data-remaining="{{ _total - _initial_visible }}">
+      <span class="latest-news__more-label">Load {{ _step if (_total - _initial_visible) >= _step else (_total - _initial_visible) }} more</span>
+      <span class="latest-news__more-chev" aria-hidden="true"></span>
+    </button>
+  {% endif %}
+</div>

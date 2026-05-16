@@ -152,7 +152,9 @@ async def test_extract_drops_section_with_uncited_source_id(monkeypatch):
 async def test_run_block_extract_stage_parallel(monkeypatch):
     """run_block_extract_stage gathers all sections in parallel and drops None results."""
 
-    async def fake_extract(*, section, sources, canonical_title, model=None):
+    async def fake_extract(
+        *, section, sources, canonical_title, entities=None, model=None
+    ):
         from generator.blocks.schema import ParagraphBlockData
         if section.section_id == "drop":
             return None

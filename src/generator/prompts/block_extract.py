@@ -21,6 +21,7 @@ from generator.prompts.base_preamble import BASE_PREAMBLE
 from generator.schema import SectionPlan, Source
 
 if TYPE_CHECKING:
+    from generator.pipeline.block_extract import PersonImage
     from generator.sources.brave import BraveImageResult
 
 
@@ -60,6 +61,30 @@ def _format_image_manifest(images: list[BraveImageResult]) -> str:
     return "\n".join(lines)
 
 
+def _format_people_manifest(people: list[PersonImage]) -> str:
+    """Serialize resolved person portraits for the LLM to copy verbatim.
+
+    Used by `people` (PersonCard.image_url) and `reactions`
+    (QuoteCard.author_image_url). The LLM MUST NOT invent URLs — only use
+    values from this manifest, or omit the image field entirely.
+    """
+    if not people:
+        return (
+            "<people_image_manifest>\n"
+            "  (no portraits resolved — leave image fields empty)\n"
+            "</people_image_manifest>"
+        )
+    lines = ["<people_image_manifest>"]
+    for p in people:
+        lines.append(f'- name: "{p.name}"')
+        lines.append(f"  image_url: {p.image_url}")
+        if p.profile_url:
+            lines.append(f"  profile_url: {p.profile_url}")
+        lines.append(f"  image_source: {p.image_source}")
+    lines.append("</people_image_manifest>")
+    return "\n".join(lines)
+
+
 def build_block_extract_messages(
     *,
     section: SectionPlan,
@@ -67,12 +92,15 @@ def build_block_extract_messages(
     sources: list[Source],
     canonical_title: str,
     image_manifest: list[BraveImageResult] | None = None,
+    people_manifest: list[PersonImage] | None = None,
 ) -> list[dict]:
     evidence_block = _format_evidence_block(sources)
 
     manifest_block = ""
     if image_manifest is not None:
         manifest_block = _format_image_manifest(image_manifest) + "\n\n"
+    if people_manifest is not None:
+        manifest_block += _format_people_manifest(people_manifest) + "\n\n"
 
     user = (
         f"CANONICAL_TITLE: {canonical_title}\n"

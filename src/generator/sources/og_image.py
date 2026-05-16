@@ -95,6 +95,66 @@ async def _fetch_one(
         logger.debug("og_image: invalid url for %s: %s (%s)", url, image_url, exc)
 
 
+async def _fetch_og_image(client: httpx.AsyncClient, url: str) -> str | None:
+    """Single-URL helper: fetch page, parse og:image. Returns None on any failure."""
+    try:
+        resp = await client.get(url, follow_redirects=True)
+    except (httpx.HTTPError, httpx.InvalidURL) as exc:
+        logger.debug("og_image: fetch failed for %s: %s", url, exc)
+        return None
+    if resp.status_code != 200:
+        logger.debug("og_image: %s -> %s", url, resp.status_code)
+        return None
+    return extract_og_image(resp.text, base_url=str(resp.url))
+
+
+async def enrich_news_card_thumbnails(
+    cards: list,
+    *,
+    concurrency: int = _DEFAULT_CONCURRENCY,
+    timeout: float = _DEFAULT_TIMEOUT,
+) -> list:
+    """Return a new list of NewsCards with thumbnail_url populated where possible.
+
+    NewsCard is frozen — cards that get a hit are replaced via model_copy;
+    others pass through unchanged. Cards already carrying a thumbnail_url are
+    untouched.
+    """
+    if not cards:
+        return cards
+    targets: list[tuple[int, str]] = [
+        (i, str(c.url)) for i, c in enumerate(cards) if c.thumbnail_url is None
+    ]
+    if not targets:
+        return cards
+    sem = asyncio.Semaphore(max(1, concurrency))
+    limits = httpx.Limits(max_connections=concurrency * 2)
+
+    async def _bound(url: str) -> str | None:
+        async with sem:
+            return await _fetch_og_image(client, url)
+
+    async with httpx.AsyncClient(
+        timeout=timeout,
+        headers={"User-Agent": _USER_AGENT, "Accept": "text/html,*/*;q=0.8"},
+        limits=limits,
+    ) as client:
+        results = await asyncio.gather(
+            *(_bound(url) for _, url in targets),
+            return_exceptions=True,
+        )
+
+    out = list(cards)
+    for (idx, _url), image_url in zip(targets, results, strict=True):
+        if isinstance(image_url, Exception) or not image_url:
+            continue
+        try:
+            out[idx] = cards[idx].model_copy(update={"thumbnail_url": image_url})
+        except Exception as exc:  # invalid URL → leave unchanged
+            logger.debug("og_image: invalid url %s (%s)", image_url, exc)
+    return out
+
+
 async def enrich_thumbnails(
     sources: list[Source],
     *,
@@ -123,4 +183,4 @@ async def enrich_thumbnails(
         )
 
 
-__all__ = ["enrich_thumbnails", "extract_og_image"]
+__all__ = ["enrich_news_card_thumbnails", "enrich_thumbnails", "extract_og_image"]

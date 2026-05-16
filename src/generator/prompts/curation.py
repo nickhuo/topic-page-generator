@@ -20,11 +20,22 @@ Block kinds you can choose for each curated section (closed enum):
 
 - paragraph: prose or bullet text. Use for narrative, analysis, explainer.
 - chart: stat callouts, bar series, or compare tables. Use for quantitative payloads.
-- newsfeed: external link cards. Use for "where to watch", "channels", "quote roundup".
+- newsfeed: horizontal scroll of external link cards. Use for "where to watch",
+  "channels", "quote roundup".
 - reactions: 2–4 quote cards spanning multiple sentiments or stakeholder tiers.
+  Each card links directly to the source article.
 - gallery: image cards with one-sentence captions. Use when visuals (photos
   of the event, the venue, key people) materially add information that prose
   can't. Requires BRAVE_API_KEY to fetch images at extraction time.
+- people: 2–6 portrait cards answering "Who is involved?". Use ONLY when the
+  reader benefits from seeing the principal figures (decision-makers, official
+  spokespeople, headline performers) with name + role + one-sentence "why
+  they matter to THIS event" bio. Skip when the cast is anonymous, generic,
+  or already covered by paragraph prose.
+- latest_news: vertical stack of 4–8 landscape news cards, newest first. Use
+  ONLY as a closing "what to read next" section when there is a steady stream
+  of fresh reporting beyond what overview / media_coverage already covers.
+  At most ONE latest_news section per page.
 
 FORBIDDEN for curation:
 - timeline: emitted only by the backbone planner (always sidebar). Never
@@ -47,11 +58,14 @@ Rules:
    BackboneSectionId.
 5. `kind` must be `"curated"`.
 6. `rank` starts at 5 (after the 4 backbone ranks) and increments. No gaps.
-7. `block_kind` must be one of the 7 closed-enum kinds above.
+7. `block_kind` must be one of the closed-enum kinds above.
 8. `intent`: one sentence describing what the section answers and how.
 9. `acceptance.description`: one sentence describing what success looks like.
    Set `min_sources` and `min_publishers` honestly — a niche curated section
    often needs only 1 source, a reactions block needs ≥2 distinct sentiments.
+10. Do NOT set `placement`. All curated sections render in the main column;
+    the right sidebar is reserved for the backbone timeline. Any value you
+    emit for `placement` will be overridden to "main".
 
 Triage hints for picking sections:
 - Sports / live event: consider "where_to_watch" (newsfeed variant=channels)

@@ -23,6 +23,9 @@
       {% elif block.kind == "newsfeed" %}{% include "blocks/newsfeed.html" %}
       {% elif block.kind == "reactions" %}{% include "blocks/reactions.html" ignore missing %}
       {% elif block.kind == "gallery" %}{% include "blocks/gallery.html" %}
+      {% elif block.kind == "people" %}{% include "blocks/people.html" %}
+      {% elif block.kind == "latest_news" %}{% include "blocks/latest_news.html" %}
+      {% else %}<!-- unhandled block.kind={{ block.kind }} -->
       {% endif %}{# timeline blocks render in the sidebar only — see sidebar_section.html #}
     {% endfor %}
   </div>

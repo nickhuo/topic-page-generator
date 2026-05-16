@@ -98,6 +98,25 @@ class QuoteCard(_Frozen):
     stakeholder_tier: Literal["stakeholder", "adjacent", "third_party"] | None = None
     author_image_url: HttpUrl | None = None
     source_id: SourceId
+    # Article attribution — when present, the whole card links to article_url
+    # (replaces the previous numeric [N] anchor citation).
+    article_title: str | None = None
+    article_url: HttpUrl | None = None
+    publisher: str | None = None
+    publisher_logo_url: HttpUrl | None = None
+
+
+class PersonCard(_Frozen):
+    """A single person profile in a `people` block."""
+
+    name: str = Field(min_length=1, max_length=80)
+    role: str = Field(min_length=1, max_length=120)
+    bio: str = Field(min_length=1, max_length=260)
+    image_url: HttpUrl | None = None
+    image_source: Literal["wikipedia", "wikidata", "brave", "none"] = "none"
+    image_credit_url: HttpUrl | None = None
+    profile_url: HttpUrl | None = None  # Wikipedia / official page
+    source_ids: list[SourceId] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -157,12 +176,33 @@ class GalleryBlockData(_Frozen):
     citations: list[Citation] = Field(default_factory=list)
 
 
+class LatestNewsBlockData(_Frozen):
+    """A vertical stack of landscape-composition news cards.
+
+    Distinct from `newsfeed` (horizontal scroll carousel): rendered as a
+    full-width vertical list, intended as a closing "Latest news" section.
+    Reuses `NewsCard` as the per-item shape.
+    """
+
+    kind: Literal["latest_news"] = "latest_news"
+    cards: list[NewsCard] = Field(min_length=1, max_length=8)
+
+
+class PeopleBlockData(_Frozen):
+    """Profile cards for "Who is involved" needs."""
+
+    kind: Literal["people"] = "people"
+    cards: list[PersonCard] = Field(min_length=2, max_length=6)
+
+
 RenderBlock = Annotated[
     ParagraphBlockData
     | TimelineBlockData
     | ChartBlockData
     | NewsfeedBlockData
     | ReactionsBlock
-    | GalleryBlockData,
+    | GalleryBlockData
+    | LatestNewsBlockData
+    | PeopleBlockData,
     Field(discriminator="kind"),
 ]

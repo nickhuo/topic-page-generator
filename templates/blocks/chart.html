@@ -8,9 +8,6 @@
           <div class="stat__value">{{ s.value }}{% if s.unit %} <span class="stat__unit">{{ s.unit }}</span>{% endif %}</div>
           <div class="stat__label">{{ s.label }}</div>
           {% if s.comparison %}<div class="stat__cmp">{{ s.comparison }}</div>{% endif %}
-          {% if s.source_id and source_index[s.source_id] %}
-            <sup class="cite-num" data-cite="{{ s.source_id }}"><a href="#src-{{ source_index[s.source_id] }}">[{{ source_index[s.source_id] }}]</a></sup>
-          {% endif %}
         </div>
       {% endfor %}
     </div>

@@ -86,19 +86,61 @@ def _build_editorial_section_dicts(
                 "blocks": [rs.block_data],
                 "section_index": idx,
                 "placement": rs.placement,
+                "block_kind": rs.block_kind,
             }
         )
     return out
 
 
+_SIDEBAR_ALLOWED_KINDS = frozenset({"timeline", "paragraph"})
+
+# Block kinds that should never stand as their own section — they fold into
+# Overview as supporting blocks. Keeps "fast facts"-style stat-rows attached
+# to the lede rather than getting their own H2 and nav chip.
+_FOLD_INTO_OVERVIEW_KINDS = frozenset({"chart"})
+
+
+def _fold_into_overview(sections: list[dict]) -> list[dict]:
+    """Attach chart sections to Overview as trailing blocks; drop them as standalone.
+
+    No-op if there is no Overview section (defensive — keeps the chart visible
+    as its own section rather than silently dropping content).
+    """
+    overview = next(
+        (s for s in sections if s.get("section_id") == "overview"), None
+    )
+    if overview is None:
+        return sections
+    kept: list[dict] = []
+    for s in sections:
+        if s is overview:
+            kept.append(s)
+            continue
+        if s.get("block_kind") in _FOLD_INTO_OVERVIEW_KINDS:
+            overview["blocks"].extend(s["blocks"])
+            continue
+        kept.append(s)
+    for new_idx, s in enumerate(kept, start=1):
+        s["section_index"] = new_idx
+    return kept
+
+
 def _partition_by_placement(
     section_dicts: list[dict],
 ) -> tuple[list[dict], list[dict]]:
-    """Split rendered sections into (main_column, sidebar_column)."""
+    """Split rendered sections into (main_column, sidebar_column).
+
+    The sidebar is reserved for the backbone timeline and paragraph
+    (background) sections only. Any other block kind that asks for
+    `placement="sidebar"` is silently coerced to main — the 320px column
+    can't render charts, newsfeed scrollers, factsheets, etc. legibly.
+    """
     main: list[dict] = []
     sidebar: list[dict] = []
     for s in section_dicts:
-        (sidebar if s.get("placement") == "sidebar" else main).append(s)
+        wants_sidebar = s.get("placement") == "sidebar"
+        kind_ok = s.get("block_kind") in _SIDEBAR_ALLOWED_KINDS
+        (sidebar if wants_sidebar and kind_ok else main).append(s)
     # Re-index main sections so the chip nav and screen-label numbering stay
     # contiguous after sidebar sections are pulled out.
     for new_idx, s in enumerate(main, start=1):
@@ -165,6 +207,7 @@ def render_html(page: EventPage) -> str:
     source_by_id = {s.id: s for s in page.sources}
     all_sections = _build_editorial_section_dicts(page.editorial_sections)
     main_sections, sidebar_sections = _partition_by_placement(all_sections)
+    main_sections = _fold_into_overview(main_sections)
     hero = _build_hero_context(page)
 
     # Jinja helper: turn a list of source_ids into a cite-cluster context dict

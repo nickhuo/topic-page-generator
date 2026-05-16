@@ -1,0 +1,42 @@
+{#
+  People block — "Who is involved" portrait cards.
+  Three per row; 16:9 portrait area on top.
+  Falls back to two-character initials when no image_url is available.
+#}
+<div class="block block--people">
+  <ul class="people__grid">
+    {% for p in block.cards %}
+      <li class="person-card{% if not p.image_url %} person-card--no-image{% endif %}">
+        <div class="person-card__media">
+          {% if p.image_url %}
+            <img src="{{ p.image_url }}" alt="{{ p.name }}" loading="lazy">
+          {% else %}
+            {% set parts = p.name.split() %}
+            {% if parts | length >= 2 %}
+              {% set initials = (parts[0][0] ~ parts[-1][0]) | upper %}
+            {% else %}
+              {% set initials = p.name[:2] | upper %}
+            {% endif %}
+            <span class="person-card__initials" aria-hidden="true">{{ initials }}</span>
+          {% endif %}
+        </div>
+        <div class="person-card__body">
+          <h3 class="person-card__name">
+            {% if p.profile_url %}
+              <a href="{{ p.profile_url }}" target="_blank" rel="noopener noreferrer">{{ p.name }}</a>
+            {% else %}
+              {{ p.name }}
+            {% endif %}
+          </h3>
+          <p class="person-card__role">{{ p.role }}</p>
+          <p class="person-card__bio">{{ p.bio }}</p>
+          {% if p.image_credit_url and p.image_source not in ("wikipedia", "none") %}
+            <a class="person-card__credit"
+               href="{{ p.image_credit_url }}"
+               target="_blank" rel="noopener noreferrer">image: {{ p.image_source }}</a>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
