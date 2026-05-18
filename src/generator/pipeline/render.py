@@ -214,6 +214,7 @@ def render_html(page: EventPage) -> str:
     env.globals["cite_cluster"] = lambda source_ids: _build_cite_cluster(
         source_ids or [], source_by_id, source_index
     )
+    env.globals["today_iso"] = datetime.now(timezone.utc).date().isoformat()
 
     template = env.get_template("layout.html")
     return template.render(

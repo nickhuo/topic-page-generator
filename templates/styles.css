@@ -455,13 +455,102 @@ body {
 .newsfeed-nav svg { width: 18px; height: 18px; }
 
 .news-card__media {
+  position: relative;
   width: 100%; aspect-ratio: 16 / 9;
   overflow: hidden; margin: 0;
   background: var(--surface);
+  container-type: inline-size;
 }
-.news-card__media img {
+.news-card__media .news-card__photo {
+  position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover; display: block;
+  z-index: 2;
 }
+
+/* Fallback shown when no thumbnail, or when the photo errors out
+   (onerror toggles .news-card__media--fallback on the figure). */
+.news-card__fallback {
+  position: absolute; inset: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: end;
+  justify-items: start;
+  padding: var(--sp-4) var(--sp-5);
+  background:
+    radial-gradient(
+      120% 90% at 88% 14%,
+      color-mix(in oklab, var(--ink) 6%, var(--surface)) 0%,
+      var(--surface) 58%,
+      color-mix(in oklab, var(--ink) 2%, var(--surface)) 100%
+    );
+  overflow: hidden;
+}
+.news-card__fallback::before {
+  /* Soft engraved hatch — purely decorative, very low contrast. */
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -38deg,
+    transparent 0 14px,
+    color-mix(in oklab, var(--ink) 5%, transparent) 14px 15px
+  );
+  opacity: .55;
+  pointer-events: none;
+}
+.news-card__fallback::after {
+  /* Hairline rule that separates the monogram from the wordmark line. */
+  content: "";
+  position: absolute;
+  left: var(--sp-5); right: var(--sp-5);
+  bottom: calc(var(--sp-4) + 22px);
+  height: 1px;
+  background: color-mix(in oklab, var(--ink) 14%, transparent);
+}
+.news-card__fallback-mark {
+  position: absolute;
+  top: -10%;
+  right: -4%;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(120px, 32cqi, 220px);
+  line-height: 1;
+  color: color-mix(in oklab, var(--ink) 8%, transparent);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+.news-card__fallback-logo {
+  position: relative;
+  width: 44px; height: 44px;
+  padding: 8px;
+  background: var(--bg);
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--ink) 10%, transparent),
+    0 6px 16px -10px color-mix(in oklab, var(--ink) 40%, transparent);
+  object-fit: contain;
+  align-self: end;
+  grid-row: 1;
+}
+.news-card__fallback-name {
+  position: relative;
+  grid-row: 2;
+  margin-top: var(--sp-3);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* When a thumbnail loads, the photo sits above and hides the fallback.
+   When in fallback state, hide any leftover img element. */
+.news-card__media--fallback .news-card__photo { display: none; }
 
 .news-card__body    {
   min-width: 0; padding: var(--sp-4);
@@ -873,6 +962,84 @@ body {
   margin-bottom: var(--sp-3);
 }
 .ref-prose p:last-child { margin-bottom: 0; }
+
+/* =========================================================================
+   GALLERY (photo grid block)
+   ========================================================================= */
+.block--gallery { /* outer hook — no styles needed; spacing comes from
+                     .need-section__blocks > * + * rhythm */ }
+
+.gallery-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-4);
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-item { list-style: none; }
+
+.gallery-item figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.gallery-item figure > img,
+.gallery-item .gallery-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--rule) 70%, transparent);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+
+/* Hover lift on the image itself — figure isn't overflow-clipped, so the
+   1px transform stays inside the border without jitter. */
+.gallery-item:hover figure > img {
+  transform: scale(1.015);
+}
+
+.gallery-item figcaption {
+  margin-top: var(--sp-2);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gallery-source {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s ease-out;
+}
+.gallery-source::before {
+  content: "·";
+  margin-right: 6px;
+  color: var(--faint);
+  font-weight: 400;
+}
+.gallery-source:hover { color: var(--link); }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item figure > img { transition: none; }
+  .gallery-item:hover figure > img { transform: none; }
+}
 
 /* =========================================================================
    MOBILE

@@ -1,30 +1,30 @@
-{% set phase_order = ["past", "present", "future"] %}
-{% set phase_labels = {"past": "Past", "present": "Now", "future": "Upcoming"} %}
-{% set entries_by_phase = {"past": [], "present": [], "future": []} %}
+{# Highlight only the single most-recent past entry (date <= today). #}
+{% set ns = namespace(best_idx=-1, best_date="") %}
 {% for entry in block.entries %}
-  {% set _ = entries_by_phase[entry.temporal_phase].append(entry) %}
+  {% set d = (entry.time[:10] if entry.time and entry.time|length >= 10 else "") %}
+  {% if d and d <= today_iso and d > ns.best_date %}
+    {% set ns.best_date = d %}
+    {% set ns.best_idx = loop.index0 %}
+  {% endif %}
 {% endfor %}
 
 <ol class="ref-timeline">
-  {% for phase in phase_order %}
-    {% for entry in entries_by_phase[phase] %}
-      <li class="ref-timeline__item ref-timeline__item--{{ phase }}{% if entry.importance == 'breaking' %} ref-timeline__item--breaking{% endif %}">
-        {% if entry.time %}
-          <time class="ref-timeline__date">{{ entry.time[:10] if entry.time|length > 10 else entry.time }}</time>
+  {% for entry in block.entries %}
+    {% set phase = "current" if loop.index0 == ns.best_idx else "past" %}
+    <li class="ref-timeline__item ref-timeline__item--{{ phase }}{% if entry.importance == 'breaking' %} ref-timeline__item--breaking{% endif %}">
+      {% if entry.time %}
+        <time class="ref-timeline__date">{{ entry.time[:10] if entry.time|length > 10 else entry.time }}</time>
+      {% endif %}
+      <div class="ref-timeline__label">
+        {% if entry.source_id and source_index[entry.source_id] %}
+          <a href="#src-{{ source_index[entry.source_id] }}">{{ entry.title }}</a>
         {% else %}
-          <span class="ref-timeline__date">{{ phase_labels[phase] }}</span>
+          {{ entry.title }}
         {% endif %}
-        <div class="ref-timeline__label">
-          {% if entry.source_id and source_index[entry.source_id] %}
-            <a href="#src-{{ source_index[entry.source_id] }}">{{ entry.title }}</a>
-          {% else %}
-            {{ entry.title }}
-          {% endif %}
-        </div>
-        {% if entry.location %}
-          <div class="ref-timeline__loc">{{ entry.location }}</div>
-        {% endif %}
-      </li>
-    {% endfor %}
+      </div>
+      {% if entry.location %}
+        <div class="ref-timeline__loc">{{ entry.location }}</div>
+      {% endif %}
+    </li>
   {% endfor %}
 </ol>

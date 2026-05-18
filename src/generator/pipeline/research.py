@@ -37,7 +37,7 @@ from generator.sources.tavily import fetch_tavily
 
 DEFAULT_MAX_ITERATIONS_PER_SECTION = 3
 DEFAULT_MAX_FETCH_CALLS_PER_SECTION = 4
-DEFAULT_MAX_TOTAL_TAVILY = 30
+DEFAULT_MAX_TOTAL_TAVILY = 50
 
 
 @dataclass
