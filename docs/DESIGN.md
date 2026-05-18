@@ -201,6 +201,8 @@ Every page produces a `<slug>.trace.json` alongside the HTML and data. The trace
 - **`sections_review`** — between block_extract and render. After every section has been extracted, the editor can drop any rendered section whose output isn't worth shipping. Survivors go to render; the trace records each drop.
 - **`final_approval`** — after render, before delivery. The editor opens the HTML in a browser and approves or rejects the page.
 
+Screenshots of the `ground_review` reject path and the `plan_review` Curation Panel are in the [Appendix](#appendix-hitl-touchpoints-in-the-cli) at the bottom of this document.
+
 The remaining HITL gap is a side-by-side **diff UI** for re-extracted sections. `regen-section` re-runs block_extract for a single section against the frozen pool, but the editor reads the new section without a diff against the previous one. That's the P0 item in §8.
 
 `--auto` short-circuits all four gates. This is the "full autonomy" position on the Karpathy slider from §1; the default CLI invocation is the HITL position.
@@ -359,3 +361,21 @@ Each item: what's broken today, the rough shape of a fix, what it should produce
 **Broader and more diverse news source pool.** Right now `media_coverage` and `latest_news` often feel thin — Tavily plus a few T0 publishers is enough to populate them but not enough to feel like a real newsdesk view. Adding a second news backend (Brave News / SerpAPI / curated RSS) and pushing `research_eval` to prefer publisher diversity over more results from the same outlet would give the page real multi-source breadth — the difference between aggregator and curated digest.
 
 **More multimedia block kinds.** The current block registry is enough to ship a credible page but the visual variety stalls when an event has data that *wants* to be drawn. Adding richer infographics, line / area charts for time-series, dedicated bar / comparison variants, and a deterministic map renderer (LLM supplies coordinates and labels, never markup) — each as a new `BlockSpec` paired with a Jinja template — would let curation propose them, and pages would start to *look* like the event they cover instead of converging on prose-and-newsfeed for every archetype.
+
+---
+
+## Appendix: HITL touchpoints in the CLI
+
+The screenshots below illustrate the editor-in-the-loop gates described in §3 — they are auxiliary to the prose above, not a separate spec.
+
+**Ground review — reject path.** A non-hot input ("why attention is all you need?") is gated at the ground stage with `is_hot_event=False` and a reason explaining why; the editor can reformulate the sentence or quit. This is the exit-code-5 path described in §1.
+
+![Ground rejected — reformulate or quit](images/hitl-ground-reject.png)
+
+**Curation review — comment / drop sections.** After backbone (read-only) + curated sections are presented, the editor can drop curated or backbone sections or attach comments that pass through to later stages as `editor_notes`. Backbone rows are marked read-only.
+
+![Curation review — comment or drop sections](images/hitl-curation-review.png)
+
+**Curation review — add a section.** The same gate also lets the editor append a new section by describing it in one or two sentences. The added section flows into the same research / block_extract pipeline as the planner's own proposals.
+
+![Curation review — add a new section](images/hitl-add-section.png)
