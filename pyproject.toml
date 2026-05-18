@@ -13,6 +13,7 @@ dependencies = [
     "python-dotenv>=1.0",
     "tenacity>=8.2",
     "selectolax>=0.4.8",
+    "questionary>=2.1.1",
 ]
 
 [project.scripts]

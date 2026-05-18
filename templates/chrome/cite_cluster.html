@@ -23,8 +23,9 @@
           {% if card.thumbnail_url %}
             <img class="cite-popover__thumb" src="{{ card.thumbnail_url }}" alt="" loading="lazy">
           {% else %}
-            <span class="cite-popover__thumb cite-popover__thumb--placeholder">
-              <img src="{{ card.favicon_url }}" alt="" width="24" height="24">
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="{{ card.favicon_url }}" alt="" loading="lazy">
             </span>
           {% endif %}
           <span class="cite-popover__body">

@@ -91,6 +91,7 @@ def build_block_extract_messages(
     canonical_title: str,
     image_manifest: list[BraveImageResult] | None = None,
     people_manifest: list[PersonImage] | None = None,
+    editor_note: str | None = None,
 ) -> list[dict]:
     evidence_block = _format_evidence_block(sources)
 
@@ -100,6 +101,14 @@ def build_block_extract_messages(
     if people_manifest is not None:
         manifest_block += _format_people_manifest(people_manifest) + "\n\n"
 
+    editor_line = ""
+    if editor_note:
+        editor_line = (
+            f"EDITOR_NOTE: {editor_note}\n"
+            "(Treat EDITOR_NOTE as a hard editorial constraint that overrides "
+            "earlier instructions unless following it would invalidate citation integrity.)\n\n"
+        )
+
     user = (
         f"CANONICAL_TITLE: {canonical_title}\n"
         f"SECTION_ID: {section.section_id}\n"
@@ -107,7 +116,8 @@ def build_block_extract_messages(
         f"INTENT: {section.intent}\n"
         f"ACCEPTANCE: {section.acceptance.description}\n"
         f"BLOCK_KIND: {section.block_kind}\n"
-        f"\n{manifest_block}"
+        f"\n{editor_line}"
+        f"{manifest_block}"
         f"<evidence>\n{evidence_block}\n</evidence>\n"
         f"\nOUTPUT a {section.block_kind} block JSON now."
     )

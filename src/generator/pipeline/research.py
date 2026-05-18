@@ -22,11 +22,13 @@ import asyncio
 import os
 from dataclasses import dataclass
 
+from generator.editor.notes import merge_note
 from generator.llm.client import call_structured, get_default_model
 from generator.pipeline.reporter import NullReporter, PipelineReporter
 from generator.pipeline.research_eval import run_research_eval_stage
 from generator.prompts.research_query import build_research_query_messages
 from generator.schema import (
+    EditorNotes,
     EventFacts,
     SectionPlan,
     Source,
@@ -86,6 +88,7 @@ async def _gen_query(
     section: SectionPlan,
     previous_gaps: list[str] | None,
     previous_query: str | None,
+    editor_note: str | None = None,
     model: str | None = None,
 ) -> str:
     """Generate (or refine) one Tavily query via the research-query LLM call."""
@@ -98,6 +101,7 @@ async def _gen_query(
         section=section,
         previous_gaps=previous_gaps,
         previous_query=previous_query,
+        editor_note=editor_note,
     )
     from pydantic import BaseModel, Field
 
@@ -121,6 +125,7 @@ async def _section_loop(
     global_counter: _GlobalCounter,
     primary_entity: str,
     reporter: PipelineReporter,
+    editor_note: str | None = None,
 ) -> list[Source]:
     pool: list[Source] = list(seed_sources)  # always start with seeds
     previous_gaps: list[str] | None = None
@@ -140,6 +145,7 @@ async def _section_loop(
             section=section,
             previous_gaps=previous_gaps,
             previous_query=previous_query,
+            editor_note=editor_note,
         )
         reporter.section_event(
             section.section_id,
@@ -199,6 +205,7 @@ async def run_research_stage(
     seed_sources: list[Source],
     budget: ResearchBudget | None = None,
     reporter: PipelineReporter | None = None,
+    notes: EditorNotes | None = None,
 ) -> dict[str, list[Source]]:
     """Run the per-section research loop in parallel under a global budget."""
     b = budget or ResearchBudget.from_env()
@@ -217,6 +224,7 @@ async def run_research_stage(
             global_counter=global_counter,
             primary_entity=primary_entity,
             reporter=r,
+            editor_note=merge_note(s.section_id, notes),
         )
         for s in sections
     ]

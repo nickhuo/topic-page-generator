@@ -461,6 +461,8 @@ EditorActionKind = Literal[
     "approve_page",
     "reject_page",
     "save_draft",
+    "comment_section",
+    "add_section",
 ]
 
 
@@ -472,6 +474,19 @@ class EditorAction(_Frozen):
     before: Any = None
     after: Any = None
     reason: str | None = None
+
+
+class EditorNotes(_Frozen):
+    """Editor commentary collected at the plan_review HITL gate.
+
+    `section_comments` maps `SectionPlan.section_id` to a free-form editorial
+    note. `global_comment` applies to every section (research + extraction).
+    Both flow into research_query and block_extract prompts as hard editorial
+    constraints.
+    """
+
+    section_comments: dict[str, str] = Field(default_factory=dict)
+    global_comment: str | None = None
 
 
 class TraceApproval(_Frozen):

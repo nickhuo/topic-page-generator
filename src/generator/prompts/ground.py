@@ -18,6 +18,13 @@ topic page about, and (2) zero or more <evidence> blocks from a recent web
 search. Decide whether this is an **unfolding hot event** worth a topic
 page; if so, extract the basic facts. If not, explain why and stop.
 
+**Grounding rule (strict).** Every value in `facts` and `canonical_title`
+must be derivable from the Title or Snippet of an <evidence> block. Do
+NOT use prior knowledge to fill in details the evidence does not state —
+your training cutoff may predate this event, and guessing here corrupts
+the whole pipeline. If the evidence is silent on a field, omit it (or
+set it to null where the schema allows).
+
 Definition of "unfolding hot event":
 - A real-world event that is happening now, imminent within ~30 days, or
   broke within the last ~7 days.
@@ -44,21 +51,22 @@ Field guidance when `is_hot_event=true`:
 - `facts.what` — One factual sentence describing the event itself, in
   past or present tense depending on what the sources say.
 - `facts.when` — ISO8601 datetime of the event. **MUST be sourced from a
-  supporting evidence block's published date or in-body date — never
+  supporting evidence block's published date, Snippet, or Title — never
   guess from prior knowledge.** Omit if no source supports a specific
   date.
-- `facts.where` — Location if any source explicitly states one. Omit
-  otherwise.
-- `facts.why` — One short clause of motivation/context, only if a source
-  explicitly explains it. Optional.
+- `facts.where` — Location if a Snippet or Title explicitly states one.
+  Omit otherwise — do not infer from prior knowledge.
+- `facts.why` — One short clause of motivation/context, only if a
+  Snippet or Title explicitly explains it. Optional, omit otherwise.
 - `facts.supporting_sources` — IDs of every evidence block that grounds
   one or more facts above. Must contain at least one ID.
 - `canonical_title` — A clean, human-readable page title (≤80 chars)
   derived from `entities` and `what`. Avoid clickbait.
 - `facts.subtitle` — A single descriptive sentence (≤240 chars) summarising
-  the event. Must be grounded in the supporting evidence — paraphrase what
-  the sources say. This becomes the page subtitle under the hero title.
-  Avoid restating the title verbatim; add the so-what / stakes / context.
+  the event. Must paraphrase what the Snippets and Titles say — every
+  clause must trace to an <evidence> block. Do NOT add stakes or context
+  the evidence does not state. This becomes the page subtitle under the
+  hero title. Avoid restating the title verbatim.
 
 Field guidance when `is_hot_event=false`:
 - `rejection_reason` — One sentence explaining what you saw. Examples:
@@ -80,6 +88,9 @@ Title: Trump arrives in Beijing for first state visit since re-election
 Publisher: Reuters (T0)
 URL: https://reuters.com/...
 Published: 2026-05-14T08:30:00Z
+Snippet: President Donald Trump landed in Beijing on Thursday for a
+three-day state visit, his first since winning re-election. Officials
+said the agenda focuses on trade tariffs and semiconductor exports.
 </evidence>
 
 <evidence id="src_c3d4">
@@ -87,6 +98,9 @@ Title: Xi and Trump expected to discuss trade tariffs in three-day summit
 Publisher: AP (T0)
 URL: https://apnews.com/...
 Published: 2026-05-14T10:00:00Z
+Snippet: Xi Jinping will host Trump for talks centered on the bilateral
+trade relationship, with tariff rollbacks and export controls topping
+the agenda over the three-day summit.
 </evidence>
 
 OUTPUT:
@@ -127,15 +141,23 @@ OUTPUT:
 """
 
 
+_SNIPPET_CHAR_BUDGET = 600
+
+
 def build_ground_messages(sentence: str, evidence: list[Source]) -> list[dict]:
     blocks: list[str] = []
     for s in evidence[:8]:  # cap to keep prompt small
+        snippet = (s.summary or "").strip()
+        if len(snippet) > _SNIPPET_CHAR_BUDGET:
+            snippet = snippet[:_SNIPPET_CHAR_BUDGET].rstrip() + "…"
+        snippet_line = f"Snippet: {snippet}\n" if snippet else ""
         blocks.append(
             f'<evidence id="{s.id}">\n'
             f"Title: {s.title}\n"
             f"Publisher: {s.publisher.name} ({s.publisher.tier})\n"
             f"URL: {s.url}\n"
             f"Published: {s.published_at}\n"
+            f"{snippet_line}"
             f"</evidence>"
         )
     evidence_text = "\n\n".join(blocks) if blocks else "(no evidence retrieved)"

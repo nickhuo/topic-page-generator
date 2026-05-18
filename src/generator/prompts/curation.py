@@ -15,7 +15,7 @@ import json
 from generator.prompts.base_preamble import BASE_PREAMBLE
 from generator.schema import EventFacts, SectionPlan
 
-_BLOCK_KIND_CATALOG = """\
+BLOCK_KIND_CATALOG = """\
 Block kinds you can choose for each curated section (closed enum):
 
 - paragraph: prose or bullet text. Use for narrative, analysis, explainer.
@@ -46,7 +46,7 @@ FORBIDDEN for curation:
 """
 
 _INSTRUCTIONS = """\
-You are the curation planner. The backbone planner has already chosen four
+You are the curation planner and professional news editor. The backbone planner has already chosen four
 always-on sections (listed under "ALREADY CHOSEN"). Your job: decide which
 0 to 4 additional sections would make THIS event meaningfully richer.
 
@@ -110,7 +110,7 @@ def build_curation_messages(
         {
             "role": "system",
             "content": (
-                BASE_PREAMBLE + "\n\n" + _BLOCK_KIND_CATALOG + "\n" + _INSTRUCTIONS
+                BASE_PREAMBLE + "\n\n" + BLOCK_KIND_CATALOG + "\n" + _INSTRUCTIONS
             ),
         },
         {
@@ -124,4 +124,4 @@ def build_curation_messages(
     ]
 
 
-__all__ = ["build_curation_messages"]
+__all__ = ["BLOCK_KIND_CATALOG", "build_curation_messages"]

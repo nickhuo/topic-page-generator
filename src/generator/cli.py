@@ -154,10 +154,12 @@ def generate(
             )
         _flush_trace()
 
-        # HITL: plan_review — let editor prune curated sections before research.
-        plan_decision, curated_after_review = prompter.plan_review(
+        # HITL: plan_review — multi-select edit + per-section comments + add.
+        plan_decision, curated_after_review, editor_notes = await prompter.plan_review(
             backbone=backbone,
             curated=list(curation_out.sections),
+            facts=ground_out.facts,
+            canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
         )
         if plan_decision == "reject":
             console.print("[bold red]Plan rejected by editor. Stopping.[/bold red]")
@@ -184,6 +186,7 @@ def generate(
                     facts=ground_out.facts,
                     seed_sources=seed_sources,
                     reporter=reporter,
+                    notes=editor_notes,
                 )
         _flush_trace()
 
@@ -197,14 +200,24 @@ def generate(
                 canonical_title=ground_out.canonical_title,
                 entities=ground_out.facts.entities,
                 reporter=reporter,
+                notes=editor_notes,
             )
         console.print(
             f"[green]✓[/green] Block extract  sections={len(rendered_sections)}"
         )
         _flush_trace()
 
-        # HITL: sections_review — let editor drop bad sections before render.
-        rendered_sections = prompter.sections_review(rendered_sections)
+        # HITL: sections_review — editor can accept/regen/edit/add/drop sections.
+        rendered_sections, editor_notes = await prompter.sections_review(
+            rendered=rendered_sections,
+            plans=combined.sections,
+            pools=pools,
+            canonical_title=ground_out.canonical_title,
+            entities=ground_out.facts.entities,
+            facts=ground_out.facts,
+            notes=editor_notes,
+            seed_sources=seed_sources,
+        )
         if not rendered_sections:
             console.print(
                 "[bold red]All sections dropped by editor. Stopping.[/bold red]"

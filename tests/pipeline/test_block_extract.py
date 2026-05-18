@@ -153,7 +153,14 @@ async def test_run_block_extract_stage_parallel(monkeypatch):
     """run_block_extract_stage gathers all sections in parallel and drops None results."""
 
     async def fake_extract(
-        *, section, sources, canonical_title, entities=None, model=None, reporter=None
+        *,
+        section,
+        sources,
+        canonical_title,
+        entities=None,
+        model=None,
+        reporter=None,
+        editor_note=None,
     ):
         from generator.blocks.schema import ParagraphBlockData
 

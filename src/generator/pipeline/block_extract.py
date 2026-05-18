@@ -19,11 +19,13 @@ import asyncio
 import logging
 
 from generator.blocks.specs import get_spec
+from generator.editor.notes import merge_note
 from generator.llm.client import call_structured, get_default_model
 from generator.pipeline.reporter import NullReporter, PipelineReporter
 from generator.prompts.block_extract import build_block_extract_messages
 from generator.schema import (
     Citation,
+    EditorNotes,
     RenderedSection,
     SectionPlan,
     Source,
@@ -150,6 +152,7 @@ async def extract_one_section(
     entities: list[str] | None = None,
     model: str | None = None,
     reporter: PipelineReporter | None = None,
+    editor_note: str | None = None,
 ) -> RenderedSection | None:
     r = reporter or NullReporter()
     r.section_event(section.section_id, "extract_started", kind=section.block_kind)
@@ -217,6 +220,7 @@ async def extract_one_section(
         canonical_title=canonical_title,
         image_manifest=image_manifest,
         people_manifest=people_manifest,
+        editor_note=editor_note,
     )
     resolved_model = model or get_default_model("block_extract")
     try:
@@ -327,6 +331,7 @@ async def run_block_extract_stage(
     canonical_title: str,
     entities: list[str] | None = None,
     reporter: PipelineReporter | None = None,
+    notes: EditorNotes | None = None,
 ) -> list[RenderedSection]:
     """Extract all sections in parallel. Dropped sections are filtered out."""
     coros = [
@@ -336,6 +341,7 @@ async def run_block_extract_stage(
             canonical_title=canonical_title,
             entities=entities,
             reporter=reporter,
+            editor_note=merge_note(s.section_id, notes),
         )
         for s in sections
     ]

@@ -28,6 +28,8 @@ Rules:
    ("coverage", "reactions", "analysis").
 5. If previous_gaps and previous_query are supplied, your new query MUST
    differ meaningfully from previous_query and target one of the gaps.
+6. If editor_note is present, treat it as a hard editorial constraint that
+   overrides earlier rules unless it would invalidate citation integrity.
 """
 
 
@@ -38,6 +40,7 @@ def build_research_query_messages(
     section: SectionPlan,
     previous_gaps: list[str] | None,
     previous_query: str | None,
+    editor_note: str | None = None,
 ) -> list[dict]:
     user_payload = {
         "canonical_title": canonical_title,
@@ -56,6 +59,8 @@ def build_research_query_messages(
     if previous_gaps:
         user_payload["previous_gaps"] = previous_gaps
         user_payload["previous_query"] = previous_query
+    if editor_note:
+        user_payload["editor_note"] = editor_note
 
     return [
         {"role": "system", "content": BASE_PREAMBLE + "\n\n" + _INSTRUCTIONS},

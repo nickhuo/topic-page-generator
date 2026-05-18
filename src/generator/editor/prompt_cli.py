@@ -14,13 +14,17 @@ from rich.panel import Panel
 from rich.prompt import Prompt
 from rich.table import Table
 
+import questionary
+
 from generator.pipeline.trace import TraceRecorder
 from generator.schema import (
     EditorAction,
+    EditorNotes,
     EventFacts,
     GroundOutput,
     RenderedSection,
     SectionPlan,
+    Source,
 )
 
 
@@ -119,7 +123,7 @@ class EditorPrompter:
                 )
             )
             choice = Prompt.ask(
-                "[r]eformulate sentence / [q]uit",
+                "(r)eformulate sentence / (q)uit",
                 choices=["r", "q"],
                 default="q",
             )
@@ -152,7 +156,7 @@ class EditorPrompter:
         while True:
             self._render_facts(facts, output.canonical_title)
             choice = Prompt.ask(
-                "[y]es accept / [n]o reject / [e]dit facts",
+                "(y)es accept / (n)o reject / (e)dit facts",
                 choices=["y", "n", "e"],
                 default="y",
             )
@@ -217,16 +221,20 @@ class EditorPrompter:
     # Backbone is read-only (deterministic); curated sections can be dropped
     # to save research budget.
     # ------------------------------------------------------------------
-    def plan_review(
+    async def plan_review(
         self,
         *,
         backbone: list[SectionPlan],
         curated: list[SectionPlan],
-    ) -> tuple[Literal["accept", "reject"], list[SectionPlan]]:
-        """Returns ('accept', curated_after_drops) or ('reject', []).
+        facts: EventFacts | None = None,
+        canonical_title: str | None = None,
+    ) -> tuple[Literal["accept", "reject"], list[SectionPlan], EditorNotes]:
+        """Returns (decision, curated_after_edits, editor_notes).
 
-        Backbone is never modified. Caller is responsible for combining
-        `backbone + curated_after_drops` before passing to research.
+        Backbone is never modified. Editor can:
+          - multi-select sections and either comment on them or (curated only) drop them
+          - add a brand-new curated section via natural-language description (LLM)
+          - leave a global comment that applies to every section
         """
         if self.auto:
             self._log(
@@ -234,49 +242,206 @@ class EditorPrompter:
                 target={"section_id": "plan"},
                 reason="auto_mode",
             )
-            return "accept", list(curated)
+            return "accept", list(curated), EditorNotes()
 
         remaining = list(curated)
+        section_comments: dict[str, str] = {}
+        global_comment: str | None = None
+
         while True:
             self._render_plan(backbone, remaining)
-            if not remaining:
-                hint = "[a]ccept / [q]uit"
-            else:
-                hint = "[a]ccept / [d]rop <section_id> / [q]uit"
-            choice = Prompt.ask(hint, default="a")
-            choice = choice.strip()
-            if choice == "a":
-                self._log(
-                    action="accept_section",
-                    target={"section_id": "plan"},
-                    reason="manual_accept",
+            if section_comments:
+                self.console.print(
+                    f"[dim]editor comments so far: "
+                    f"{', '.join(section_comments.keys())}[/dim]"
                 )
-                return "accept", remaining
-            if choice == "q":
+            action = await questionary.select(
+                "What next?",
+                choices=[
+                    "Accept all as-is",
+                    "Comment / drop sections",
+                    "Add a new section",
+                    "Reject plan",
+                ],
+                default="Accept all as-is",
+            ).ask_async()
+            if action is None or action == "Reject plan":
                 self._log(
                     action="reject_page",
                     target={"section_id": "plan"},
                     reason="manual_reject_plan",
                 )
-                return "reject", []
-            if choice.startswith("d "):
-                target_id = choice[2:].strip()
-                hit = next((s for s in remaining if s.section_id == target_id), None)
-                if hit is None:
+                return "reject", [], EditorNotes()
+            if action == "Accept all as-is":
+                gc = await questionary.text(
+                    "General note that applies to all sections? (blank = none)",
+                    multiline=True,
+                ).ask_async()
+                if gc and gc.strip():
+                    global_comment = gc.strip()
+                    self._log(
+                        action="comment_section",
+                        target=None,
+                        after={"comment": global_comment, "scope": "global"},
+                        reason="manual_global_comment",
+                    )
+                self._log(
+                    action="accept_section",
+                    target={"section_id": "plan"},
+                    reason="manual_accept",
+                )
+                return (
+                    "accept",
+                    remaining,
+                    EditorNotes(
+                        section_comments=section_comments,
+                        global_comment=global_comment,
+                    ),
+                )
+            if action == "Comment / drop sections":
+                remaining, section_comments = await self._edit_sections_loop(
+                    backbone=backbone,
+                    curated=remaining,
+                    section_comments=section_comments,
+                )
+                continue
+            if action == "Add a new section":
+                if facts is None or canonical_title is None:
                     self.console.print(
-                        f"[red]No curated section with id '{target_id}'.[/red]"
+                        "[red]Cannot add sections without ground facts; skipping.[/red]"
                     )
                     continue
-                remaining = [s for s in remaining if s.section_id != target_id]
+                new_section = await self._add_section_flow(
+                    facts=facts,
+                    canonical_title=canonical_title,
+                    existing=backbone + remaining,
+                )
+                if new_section is not None:
+                    remaining.append(new_section)
+                continue
+
+    async def _edit_sections_loop(
+        self,
+        *,
+        backbone: list[SectionPlan],
+        curated: list[SectionPlan],
+        section_comments: dict[str, str],
+    ) -> tuple[list[SectionPlan], dict[str, str]]:
+        all_sections = backbone + curated
+        backbone_ids = {s.section_id for s in backbone}
+        choices = [
+            questionary.Choice(
+                title=(
+                    f"[{'backbone' if s.section_id in backbone_ids else 'curated'}] "
+                    f"{s.section_id} — {s.title[:48]} ({s.block_kind})"
+                ),
+                value=s.section_id,
+            )
+            for s in all_sections
+        ]
+        picked: list[str] | None = await questionary.checkbox(
+            "Select sections to comment on or drop (space to toggle, enter to confirm)",
+            choices=choices,
+        ).ask_async()
+        if not picked:
+            return curated, section_comments
+
+        remaining = list(curated)
+        for section_id in picked:
+            is_backbone = section_id in backbone_ids
+            action_choices = ["Add / replace comment"]
+            if not is_backbone:
+                action_choices.append("Drop section")
+            action_choices.append("Skip")
+            per_action = await questionary.select(
+                f"{section_id}:",
+                choices=action_choices,
+                default="Add / replace comment",
+            ).ask_async()
+            if per_action is None or per_action == "Skip":
+                continue
+            if per_action == "Drop section":
+                hit = next((s for s in remaining if s.section_id == section_id), None)
+                if hit is None:
+                    self.console.print(
+                        f"[red]No curated section with id '{section_id}'.[/red]"
+                    )
+                    continue
+                remaining = [s for s in remaining if s.section_id != section_id]
+                section_comments.pop(section_id, None)
                 self._log(
                     action="skip_section",
-                    target={"section_id": target_id},
+                    target={"section_id": section_id},
                     reason="manual_drop_in_plan_review",
                 )
                 continue
-            self.console.print(
-                "[red]Invalid input.[/red] Use 'a', 'q', or 'd <section_id>'."
+            # Add / replace comment
+            text = await questionary.text(
+                f"Comment for {section_id} (multiline OK, blank to cancel)",
+                multiline=True,
+            ).ask_async()
+            if not text or not text.strip():
+                continue
+            previous = section_comments.get(section_id)
+            section_comments[section_id] = text.strip()
+            self._log(
+                action="comment_section",
+                target={"section_id": section_id},
+                before={"comment": previous} if previous else None,
+                after={"comment": text.strip()},
+                reason="manual_section_comment",
             )
+        return remaining, section_comments
+
+    async def _add_section_flow(
+        self,
+        *,
+        facts: EventFacts,
+        canonical_title: str,
+        existing: list[SectionPlan],
+    ) -> SectionPlan | None:
+        description = await questionary.text(
+            "Describe the new section in one or two sentences (blank to cancel)",
+            multiline=True,
+        ).ask_async()
+        if not description or not description.strip():
+            return None
+        from generator.pipeline.section_proposer import propose_section
+
+        try:
+            with self.rec.stage("section_proposer"):
+                proposed = await propose_section(
+                    description.strip(),
+                    facts=facts,
+                    canonical_title=canonical_title,
+                    existing_sections=existing,
+                )
+        except Exception as exc:
+            self.console.print(f"[red]Section proposal failed:[/red] {exc}")
+            return None
+
+        preview = Table(title=f"Proposed: {proposed.section_id}", show_header=False)
+        preview.add_column("field", style="bold")
+        preview.add_column("value")
+        preview.add_row("title", proposed.title)
+        preview.add_row("block_kind", proposed.block_kind)
+        preview.add_row("rank", str(proposed.rank))
+        preview.add_row("intent", proposed.intent)
+        preview.add_row("acceptance", proposed.acceptance.description)
+        self.console.print(preview)
+
+        confirmed = await questionary.confirm(
+            "Add this section?", default=True
+        ).ask_async()
+        if not confirmed:
+            return None
+        self._log(
+            action="add_section",
+            target={"section_id": proposed.section_id},
+            after=proposed.model_dump(),
+            reason="manual_add_section",
+        )
+        return proposed
 
     def _render_plan(
         self,
@@ -292,7 +457,7 @@ class EditorPrompter:
             bt.add_row(str(s.rank), s.section_id, s.title[:50], s.block_kind)
         self.console.print(bt)
 
-        ct = Table(title="Curated (drop with 'd <section_id>')", show_header=True)
+        ct = Table(title="Curated", show_header=True)
         ct.add_column("rank", justify="right")
         ct.add_column("section_id", style="bold")
         ct.add_column("title")
@@ -313,56 +478,305 @@ class EditorPrompter:
 
     # ------------------------------------------------------------------
     # 2b. sections_review — after block_extract, before render.
-    # Drop any rendered section that looks bad. Regenerate is out of scope
-    # for this gate; user is pointed at `generate regen-section` instead.
+    # Interactive loop: accept / regenerate / edit+regen / add / drop / reject.
     # ------------------------------------------------------------------
-    def sections_review(self, rendered: list[RenderedSection]) -> list[RenderedSection]:
+    async def sections_review(
+        self,
+        *,
+        rendered: list[RenderedSection],
+        plans: list[SectionPlan],
+        pools: dict[str, list[Source]],
+        canonical_title: str,
+        entities: list[str],
+        facts: EventFacts,
+        notes: EditorNotes,
+        seed_sources: list[Source],
+    ) -> tuple[list[RenderedSection], EditorNotes]:
+        """Editor review of extracted sections.
+
+        Returns the (possibly-edited) rendered list plus an updated EditorNotes
+        carrying any per-section comments captured during regeneration.
+        """
         if self.auto:
             self._log(
                 action="accept_section",
                 target={"section_id": "sections"},
                 reason="auto_mode",
             )
-            return list(rendered)
+            return list(rendered), notes
 
         remaining = list(rendered)
+        plans_by_id: dict[str, SectionPlan] = {p.section_id: p for p in plans}
+        pools_by_id: dict[str, list[Source]] = dict(pools)
+        section_comments = dict(notes.section_comments)
+        global_comment = notes.global_comment
+
         while True:
             self._render_sections(remaining)
-            choice = Prompt.ask(
-                "[a]ccept all / [d]rop <section_id> / [r]egen <section_id>",
-                default="a",
-            ).strip()
-            if choice == "a":
+            action = await questionary.select(
+                "What next?",
+                choices=[
+                    "Accept all as-is",
+                    "Regenerate a section",
+                    "Edit a section (then regenerate)",
+                    "Add a new section",
+                    "Drop a section",
+                    "Reject all",
+                ],
+                default="Accept all as-is",
+            ).ask_async()
+
+            if action is None or action == "Reject all":
+                self._log(
+                    action="reject_page",
+                    target={"section_id": "sections"},
+                    reason="manual_reject_sections",
+                )
+                return [], EditorNotes(
+                    section_comments=section_comments,
+                    global_comment=global_comment,
+                )
+            if action == "Accept all as-is":
                 self._log(
                     action="accept_section",
                     target={"section_id": "sections"},
                     reason="manual_accept",
                 )
-                return remaining
-            if choice.startswith("d "):
-                target = choice[2:].strip()
-                hit = next((s for s in remaining if s.section_id == target), None)
-                if hit is None:
-                    self.console.print(f"[red]No section with id '{target}'.[/red]")
+                return remaining, EditorNotes(
+                    section_comments=section_comments,
+                    global_comment=global_comment,
+                )
+            if action == "Drop a section":
+                target = await self._pick_section_id(remaining)
+                if target is None:
                     continue
                 remaining = [s for s in remaining if s.section_id != target]
+                section_comments.pop(target, None)
                 self._log(
                     action="skip_section",
                     target={"section_id": target},
                     reason="manual_drop_in_sections_review",
                 )
                 continue
-            if choice.startswith("r "):
-                target = choice[2:].strip()
-                self.console.print(
-                    f"[yellow]regen[/yellow] not supported inline. "
-                    f"After this run finishes, use: "
-                    f"[bold]uv run generate regen-section {target} "
-                    "output/<slug>.data.json[/bold]"
+            if action == "Regenerate a section":
+                target = await self._pick_section_id(remaining)
+                if target is None:
+                    continue
+                plan = plans_by_id.get(target)
+                if plan is None:
+                    self.console.print(
+                        f"[red]No plan found for '{target}'.[/red]"
+                    )
+                    continue
+                note = await questionary.text(
+                    "Editor note for this regen (blank to skip):",
+                    multiline=True,
+                ).ask_async()
+                if note and note.strip():
+                    section_comments[target] = note.strip()
+                merged_note = self._merged_note(
+                    target, section_comments, global_comment
+                )
+                regen = await self._regen_section(
+                    plan=plan,
+                    pool=pools_by_id.get(target, []),
+                    canonical_title=canonical_title,
+                    entities=entities,
+                    editor_note=merged_note,
+                )
+                if regen is None:
+                    self.console.print(
+                        f"[red]Regen of '{target}' produced no usable section.[/red]"
+                    )
+                    continue
+                remaining = [regen if s.section_id == target else s for s in remaining]
+                self._log(
+                    action="regenerate_section",
+                    target={"section_id": target},
+                    reason="manual_regen_in_sections_review",
                 )
                 continue
-            self.console.print(
-                "[red]Invalid input.[/red] Use 'a', 'd <id>', or 'r <id>'."
+            if action == "Edit a section (then regenerate)":
+                target = await self._pick_section_id(remaining)
+                if target is None:
+                    continue
+                plan = plans_by_id.get(target)
+                if plan is None:
+                    self.console.print(
+                        f"[red]No plan found for '{target}'.[/red]"
+                    )
+                    continue
+                edited_plan, note = await self._edit_plan_flow(plan)
+                if edited_plan is None:
+                    continue
+                plans_by_id[target] = edited_plan
+                if note:
+                    section_comments[target] = note
+                merged_note = self._merged_note(
+                    target, section_comments, global_comment
+                )
+                regen = await self._regen_section(
+                    plan=edited_plan,
+                    pool=pools_by_id.get(target, []),
+                    canonical_title=canonical_title,
+                    entities=entities,
+                    editor_note=merged_note,
+                )
+                if regen is None:
+                    self.console.print(
+                        f"[red]Regen of '{target}' produced no usable section.[/red]"
+                    )
+                    continue
+                remaining = [regen if s.section_id == target else s for s in remaining]
+                self._log(
+                    action="edit_section_field",
+                    target={"section_id": target, "field_path": "plan"},
+                    before=plan.model_dump(),
+                    after=edited_plan.model_dump(),
+                    reason="manual_edit_in_sections_review",
+                )
+                continue
+            if action == "Add a new section":
+                new_plan = await self._add_section_flow(
+                    facts=facts,
+                    canonical_title=canonical_title,
+                    existing=list(plans_by_id.values()),
+                )
+                if new_plan is None:
+                    continue
+                # Research + extract for the new section only.
+                new_rs = await self._research_and_extract_one(
+                    plan=new_plan,
+                    canonical_title=canonical_title,
+                    facts=facts,
+                    entities=entities,
+                    seed_sources=seed_sources,
+                    notes=EditorNotes(
+                        section_comments=section_comments,
+                        global_comment=global_comment,
+                    ),
+                )
+                if new_rs is None:
+                    self.console.print(
+                        f"[red]New section '{new_plan.section_id}' produced no usable output.[/red]"
+                    )
+                    continue
+                plans_by_id[new_plan.section_id] = new_plan
+                pools_by_id[new_plan.section_id] = new_rs.sources_used or []
+                remaining.append(new_rs)
+                continue
+
+    @staticmethod
+    def _merged_note(
+        section_id: str,
+        section_comments: dict[str, str],
+        global_comment: str | None,
+    ) -> str | None:
+        per = section_comments.get(section_id)
+        if per and global_comment:
+            return f"{per}\n\nGeneral note: {global_comment}"
+        return per or global_comment or None
+
+    async def _pick_section_id(
+        self, rendered: list[RenderedSection]
+    ) -> str | None:
+        if not rendered:
+            self.console.print("[red]No sections to pick.[/red]")
+            return None
+        choice = await questionary.select(
+            "Which section?",
+            choices=[
+                questionary.Choice(
+                    title=f"{rs.section_id} ({rs.block_kind})", value=rs.section_id
+                )
+                for rs in rendered
+            ],
+        ).ask_async()
+        return choice
+
+    async def _edit_plan_flow(
+        self, plan: SectionPlan
+    ) -> tuple[SectionPlan | None, str | None]:
+        new_title = await questionary.text(
+            "Title:", default=plan.title
+        ).ask_async()
+        if new_title is None:
+            return None, None
+        new_intent = await questionary.text(
+            "Intent:", default=plan.intent, multiline=True
+        ).ask_async()
+        if new_intent is None:
+            return None, None
+        note = await questionary.text(
+            "Editor note for the regen (blank to skip):", multiline=True
+        ).ask_async()
+        try:
+            updated = plan.model_copy(
+                update={
+                    "title": new_title.strip() or plan.title,
+                    "intent": new_intent.strip() or plan.intent,
+                }
+            )
+        except ValidationError as exc:
+            self.console.print(f"[red]Invalid edit:[/red] {exc}")
+            return None, None
+        return updated, (note.strip() if note and note.strip() else None)
+
+    async def _regen_section(
+        self,
+        *,
+        plan: SectionPlan,
+        pool: list[Source],
+        canonical_title: str,
+        entities: list[str],
+        editor_note: str | None,
+    ) -> RenderedSection | None:
+        from generator.pipeline.block_extract import extract_one_section
+
+        with self.rec.stage(f"regen:{plan.section_id}"):
+            return await extract_one_section(
+                section=plan,
+                sources=pool,
+                canonical_title=canonical_title,
+                entities=entities,
+                editor_note=editor_note,
+            )
+
+    async def _research_and_extract_one(
+        self,
+        *,
+        plan: SectionPlan,
+        canonical_title: str,
+        facts: EventFacts,
+        entities: list[str],
+        seed_sources: list[Source],
+        notes: EditorNotes,
+    ) -> RenderedSection | None:
+        from generator.pipeline.block_extract import extract_one_section
+        from generator.pipeline.research import run_research_stage
+
+        try:
+            with self.rec.stage(f"research:{plan.section_id}"):
+                pools = await run_research_stage(
+                    sections=[plan],
+                    canonical_title=canonical_title,
+                    facts=facts,
+                    seed_sources=seed_sources,
+                    notes=notes,
+                )
+        except Exception as exc:
+            self.console.print(f"[red]Research failed:[/red] {exc}")
+            return None
+        pool = pools.get(plan.section_id, [])
+        with self.rec.stage(f"extract:{plan.section_id}"):
+            return await extract_one_section(
+                section=plan,
+                sources=pool,
+                canonical_title=canonical_title,
+                entities=entities,
+                editor_note=self._merged_note(
+                    plan.section_id, notes.section_comments, notes.global_comment
+                ),
             )
 
     def _render_sections(self, rendered: list[RenderedSection]) -> None:
@@ -392,7 +806,7 @@ class EditorPrompter:
         self.console.print("Draft opened in browser. Review the page.")
 
         while True:
-            raw = Prompt.ask("Approve? [y]es / [n]o")
+            raw = Prompt.ask("Approve? (y)es / (n)o")
             raw = raw.strip()
             if raw == "y":
                 self._log(action="approve_page", reason="manual_approve")

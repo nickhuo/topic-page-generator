@@ -1,6 +1,6 @@
 # Design Document — Topic Page Generator
 
-> Take-home design doc. Companion artifacts: four built HTML pages under `output/`, the runnable CLI documented in `README.md`, the full data contract in [`schema.md`](./schema.md), and the planning view in [`PRD.md`](./PRD.md).
+> Take-home design doc. Companion artifacts: four built HTML pages under `output/`, the runnable CLI documented in `README.md`, the full data contract in [`schema.md`](./schema.md).
 
 ## Contents
 
@@ -18,11 +18,11 @@
 
 ## 0. TL;DR
 
-**Product position.** An editor-in-the-loop topic page generator. The system drafts a complete page from one sentence; the editor approves or rejects it. The editor never writes content, and the system never publishes without (at minimum) explicit final approval.
+**Product.** An editor-in-the-loop topic page generator for non-technical users. The system drafts a complete page from a single sentence; the editor steers it at four HITL gates (ground facts, section plan, extracted sections, final page) or runs the same pipeline in fully autonomous mode. The intent is to give the editor a *sliding control* over how much autonomy the system has — see §1 for the autonomy-slider framing and why this product ships only the bottom two notches.
 
-**Technical position.** A bounded, observable pipeline. LLMs are used only where the task is genuinely fuzzy (gating, fact extraction, block-level curation, per-block writing). Routing, fetching, and rendering are deterministic code. Every stage's output is a Pydantic-validated typed object; if it doesn't validate, the stage retries or falls through with a recorded outcome.
+**Pipeline.** LLMs are confined to the genuinely fuzzy tasks: gating, fact extraction, curation, on-demand section proposal, per-section block writing. Orchestration, source fetch, schema validation, rendering, and delivery are deterministic code. Every stage's output is a Pydantic-validated typed object; on validation failure the stage retries with the error fed back into the prompt, or falls through with a recorded outcome. See §2 for the stage-by-stage LLM/deterministic boundary.
 
-**Data contract.** Every fact-bearing field carries a citation pointing into a frozen evidence pool. Schema validation is the trust boundary between the LLM and the editor — if a section parsed, the editor knows every claim is traceable to a real source.
+**Data contract.** Every fact-bearing field carries a citation pointing into a frozen evidence pool. Schema validation is the trust boundary between the LLM and the editor — if a section parsed, every claim in it is traceable to a real source. Full contract in [`schema.md`](./schema.md).
 
 **Four example pages, four different event archetypes:**
 
@@ -33,79 +33,127 @@
 | [`2026-fifa-world-cup.html`](../output/2026-fifa-world-cup.html) | Scheduled sports tournament | "The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026." |
 | [`trump-xi-beijing-summit.html`](../output/trump-xi-beijing-summit.html) | Geopolitical / diplomatic event | "Trump and Xi will meet in Beijing for a bilateral summit in late May 2026." |
 
-The point of running the system across these four is to show that the *same* generator produces pages whose shape genuinely differs by event type — not the same template with words swapped (see §1 and §6).
+The point of running the system across these four is to show that the *same* generator produces pages whose shape genuinely differs by event type (see §1 and §6).
 
 ---
 
 ## 1. Product decisions
 
+### Who this is for, and the autonomy slider
+
+The implicit operator is an editor on deadline — non-technical, time-pressed, accountable for what ships. The framing I picked up from Karpathy is that any AI product should hand its user a *sliding control* over autonomy. Roughly four positions on that slider:
+
+1. **Autocomplete-style (ALM)** — the model helps with the next token.
+2. **Semi-autonomous (Semi-LM)** — the model drafts; the human re-writes liberally.
+3. **Human-in-the-loop (HITL)** — the model plans and executes; the human approves at gates.
+4. **Full autonomy** — the model runs end-to-end with no human in the path.
+
+This project ships the bottom two positions and skips the top two deliberately. `uv run generate run "..."` is the **HITL** mode: the editor reviews ground facts, the section plan, the extracted sections, and the final rendered page, and can drop, comment on, or add curated sections before research even starts. `uv run generate run --auto "..."` is the **full-autonomy** mode: every gate auto-accepts, but each decision is still recorded as an `EditorAction` so the trace can tell an evaluator whether a human ever actually saw the page. Skipping the top two (autocomplete-style and semi-autonomous) is the other half of the choice — a topic page is a structured artifact, not prose the editor wants to rewrite token-by-token; an autocomplete or co-drafting UI would land the editor inside the LLM's writing flow, which is exactly the mode this product is supposed to spare them. The lever the product is built around is **letting the editor steer the plan before the expensive stages run** — it's cheaper to drop a doomed section than to research and extract it, and the editor's structural judgment is easier to capture than their prose.
+
+### Why CLI, not a web UI
+
+Two reasons. First, scope: the build is one week and the core problem is generation, not interface design — a CLI keeps iteration speed high and avoids letting frontend work eat the schedule. Second, the user is internal staff. A real product for external editors would warrant a web UI; a take-home pipeline used by internal editors does not. A CLI is also the most honest surface for the trace artifact: every run produces `<slug>.{html, data.json, trace.json}` on disk, and the editor can grep, diff, or re-open any of them without a server.
+
+### Generalizing across event types
+
+The first instinct when scoping this was to enumerate event types — sports, entertainment, politics, economics, tech rollouts, disasters, summits — and design templates for each. I walked away from that. The set of event types is **open and effectively infinite**; trying to exhaust it turns into a content-ops problem dressed up as an engineering one, and the moment a new archetype shows up the system is stale.
+
+So I flipped the framing: instead of asking "what kinds of events exist?", ask "**what does a reader arriving at a hot-event page actually want?**" — and that question has a much older, much narrower answer. Journalism has been answering it for a century with **5W1H** (who, what, when, where, why, how). Five-or-six questions, not five-or-six hundred event types. That's a **closed set**, and a closed set is something a schema and a pipeline can be built around.
+
+**Generalization comes from anchoring on the closed set of reader needs, not from chasing the open set of event types.** Everything that follows in §1 — the topic-page definition, the deterministic backbone, the visual neutrality of the chrome — is a consequence of that one move.
+
 ### What is a topic page, as I'm defining it
 
-A topic page is not a long-form article and not a feed. It is a **fact-first aggregation surface**: a single URL where a reader who just heard about an event can, within thirty seconds, see *what happened, who's involved, when, where, what's next, and where to read more from real publishers*. The implicit user is a reader who already trusts the publication's editor — so the page's job is to be a credible structured digest, not a stylistic showpiece.
-
-The implied operator is an editor on deadline. The product I built optimizes for **"editor can audit and approve within five minutes."** That single constraint drives most of the decisions below.
+A hot-event topic page is a **fact-first aggregation surface** organized around the extended 5W1H frame: a single URL where a reader who just heard about an event can, within thirty seconds, see *what happened, who's involved, when, where, why it matters, what's next, and where to read more from real publishers*. The last two — *what's next* and *where to read more* — extend the journalism classic to cover what a feed-trained reader actually wants once the basics are settled. That frame is the editorial brief the generator is being asked to fill, and it's baked into the data model: `EventFacts` (`schema.py`) literally carries `entities`, `what`, `when`, `where`, `why` as required fields, populated by the ground stage before any page-shape decision is made.
 
 ### How the page shape is decided
 
 I deliberately rejected two extremes:
 
-1. **One template with placeholders.** Same six headings, fill in the blanks. Cheap, but every event looks identical and the system has no taste — fails the "doesn't just swap words" bar.
+1. **One template with placeholders.** Same six headings, fill in the blanks. Cheap, but every event looks identical and the system has no taste.
 2. **Free-form layout generated by an LLM.** Let the model decide the section list, the block kinds, the order, the whole composition. Maximally adaptive, but impossible to audit and indistinguishable from a hallucination machine when it goes wrong.
 
-The compromise I shipped is **deterministic backbone + LLM curation**:
+The compromise I shipped is **deterministic backbone + LLM curation + editor-in-the-loop curation panel.** It's a four-step loop, not a single call:
 
-- The backbone planner (`src/generator/pipeline/backbone_planner.py:104`) emits exactly **three always-on sections in canonical order**: `overview` (paragraph, main column), `timeline` (sidebar), `media_coverage` (newsfeed, main column). These run with zero LLM calls. They're the spine every topic page needs regardless of event type.
-- The curation planner (`src/generator/pipeline/curation_planner.py:18`) runs one LLM call that's allowed to propose **0–4 additional sections** to complement the backbone. The model picks block kinds from an enumerated set, names the sections, and assigns intent — it cannot invent block kinds and cannot write content yet. It also cannot place anything in the sidebar; curated sections always render in the main column (this is enforced post-output at line 43, not via prompt — see §4 on why).
+1. **Backbone planner** (`src/generator/pipeline/backbone_planner.py`) — deterministic, zero LLM calls. Emits exactly **four always-on sections in canonical order**: `overview` (paragraph, main), `timeline` (sidebar), `media_coverage` (newsfeed, main), `latest_news` (latest_news, main). `media_coverage` and `latest_news` are deliberately split: the former is the editor's "what matters" carousel (curated picks, depth/scoops, image-heavy); the latter is the strict chronological "what's newest" feed, sorted by `published_at` DESC with no editorial reranking. These four are the spine every topic page needs regardless of event type.
+2. **Curation Planner** (`src/generator/pipeline/curation_planner.py`) — one LLM call that proposes **0–4 additional curated sections** to complement the backbone. The model picks block kinds from an enumerated set, names the sections, and assigns intent. It cannot invent block kinds, cannot duplicate the backbone.
+3. **Plan Review — the Curation Panel** (`src/generator/editor/prompt_cli.py::plan_review`) — HITL loop. The editor sees the full proposed plan (backbone read-only + curated editable) and chooses from a menu: *accept-all (optionally with a global comment that applies to every section)*, *comment / drop sections* (multi-select; backbone is comment-only, curated can be dropped), *add a new section*, or *reject the page*. The loop runs until the editor accepts or rejects.
+4. **Section Proposer — the Generator** (`src/generator/pipeline/section_proposer.py`) — LLM call, on-demand from the panel. When the editor chooses "add a new section", they describe it in one or two sentences; this single LLM call materializes a `SectionPlan` with `kind="curated"`, `placement="main"`, and a rank appended to the existing list. Defensive guards run after the LLM: backbone-reserved block kinds (`timeline`, `latest_news`) are downgraded to `paragraph`, and any section-id collision gets a counter suffix.
 
-The behaviour of the backbone is itself shaped by `EventFacts` (the grounded who/what/when/where/why extracted in stage 1), so the same three slots produce different content for a product launch vs. a sports tournament. The curation step then *adds the section types that only make sense for this event*: `participating_countries` for Eurovision, `opening_ceremony_performers` and `tournament_fast_facts` for the World Cup, `trade_tariff_dashboard` for the Trump–Xi summit. That's the mechanism by which the page shape adapts to event type — not by switching templates, but by composing the backbone with event-specific extras.
+The backbone's *content* is shaped by `EventFacts` (the grounded who/what/when/where/why extracted in stage 1), so the same four slots produce different content for a product launch vs. a sports tournament. The curation planner then *adds the section types that only make sense for this event*: `participating_countries` for Eurovision, `opening_ceremony_performers` and `tournament_fast_facts` for the World Cup, `trade_tariff_dashboard` for the Trump–Xi summit. The panel + generator then let the editor refine that proposal — drop sections that won't pay off the research budget, add ones the LLM missed. That's the mechanism by which the page shape adapts to event type: composing a deterministic backbone with LLM-proposed extras, then giving the human one round of structural editing before any research happens.
 
-### Block-layer judgments
-
-A few decisions are worth calling out because they're encoded in code, not in prose:
-
-- **`timeline` is sidebar-only.** The backbone planner pins it there; the curation prompt is told it cannot propose a timeline. The reason: a timeline is reference material, not the lead. Putting it next to the overview gives the reader a glanceable spine without competing with the lead paragraph.
-- **Curation cannot place in the sidebar.** The sidebar belongs to the backbone (and chrome). I considered letting curation propose sidebar placement and walked it back — the sidebar's value is being predictable. If anything can land there, nothing belongs there.
-- **`gallery` is silently skipped when no Brave key is configured.** Not an error, not a degraded placeholder. The page just doesn't get a gallery section. The reason: galleries without images look broken; an absent section looks intentional. (See §7 — empty-state choices as failure-mode design.)
+**Editor notes are a first-class signal.** Per-section comments and the optional global comment captured during plan_review are bundled into an `EditorNotes` object and threaded downstream. `editor/notes.py::merge_note(section_id, notes)` resolves each section's effective note (per-section + global, joined deterministically) and injects it into both the research query prompt and the block extraction prompt. The end-to-end contract is locked in by `tests/prompts/test_editor_note_passthrough.py`. So when an editor types "focus on the European angle" against a section, the research stage actually issues European-angle Tavily queries and the extraction stage writes against that intent.
 
 ### What I intentionally left out
 
 - **No real-time / post-publish updates.** The page reflects the evidence pool at generation time. A staleness watcher is sketched in §8 but not built.
 - **No video / interactive embeds.** Vanilla HTML keeps output portable, auditable, and shippable to anywhere static files render.
-- **No auth, accounts, persistence, deployment.** Per the brief.
-- **English only.** Multilingual extraction is a separate problem from event-type generalization.
 - **No editor-facing diff UI.** When a section is regenerated via `regen-section`, the editor re-reads it. A side-by-side diff is a future-week item.
 
 ---
 
 ## 2. System architecture
 
+### How the pipeline got this shape
+
+The first attempt was a straight feed-forward design: `ground → plan → research → extract → render`. Each stage took the previous stage's output and ran. No loop, no feedback, no human in the middle. It read well as an architecture diagram and produced pages that looked plausible from a distance.
+
+It didn't hold up. Two structural failures, both rooted in the same blind spot — the Planner is choosing which sections to fill *before* anyone has looked at the evidence pool:
+
+- **The Planner doesn't know what's actually findable.** It might ask for a "host-city reactions" section for an event with zero local-press coverage, or a "tariff dashboard" for a summit where no dashboard-worthy numbers exist yet. The pipeline charges ahead and produces a thin, citation-starved section that violates `is_minimum_viable`.
+- **There's no look-back.** After research fetches whatever it finds, nothing checks whether the fetched pool actually meets the plan's expectation. A bad pool flows forward into block_extract, which writes whatever it can, and the problem only becomes visible at the end of the run.
+
+The fix is two mechanisms layered onto the same pipeline, one per problem:
+
+- **A simple Evaluator** (`pipeline/research_eval.py`) closes the machine side. Inside each section's research loop, an LLM judge returns `satisfied: bool` + `gaps: list[str]`; `gaps` feeds the next query, `satisfied` exits early. Cheap — one LLM call per iteration, hard-capped — but it's the difference between propagating a bad pool and self-correcting against the plan.
+- **A more advanced HITL** closes the human side. The **Curation Panel** (`plan_review`) lets the editor amend the plan *before* research runs — drop sections that won't pay off, add ones the LLM missed, leave per-section notes that thread into research and extraction. `sections_review` does the symmetric thing after extract. The editor often knows what's findable when the Planner doesn't, and gets to act on that before any budget is spent.
+
+What started as a linear pipeline now has one machine-driven loop (per-section research↔eval) and two human-driven loops (`plan_review` and `sections_review`). The subsections below walk through that shape stage by stage.
+
 ### The pipeline
 
-The CLI (`src/generator/cli.py::generate`) runs six stages in order. Every stage is wrapped by `TraceRecorder.stage(...)` (`src/generator/pipeline/trace.py`), which captures model, tokens, cost, duration, retries, and each individual LLM call into the final trace artifact.
+The CLI (`src/generator/cli.py::generate`) runs the pipeline below. Every stage is wrapped by `TraceRecorder.stage(...)` (`src/generator/pipeline/trace.py`), which captures model, tokens, cost, duration, retries, and each individual LLM call into the final trace artifact. Four HITL gates sit between stages — each one a place where the editor can steer, comment, or kill the page.
 
 ```
 input sentence
    │
    ▼
-[1] ground            (LLM × 1 + Tavily × 1)  ──→ is_hot_event gate + EventFacts
+[1] ground             (LLM × 1 + Tavily × 1)   ──→ is_hot_event gate + EventFacts
+   │
+   ▼  ◀── HITL: ground_review  (accept / reformulate sentence / reject)
+   │
+[2] hero_image         (Brave image search, best-effort; silently skipped without key)
    │
    ▼
-[2] curation          (deterministic backbone)
-                      (LLM × 1 curation extras) ──→ SectionPlan[]
+[3] backbone planner   (deterministic, 4 always-on sections)
    │
    ▼
-[3] research          (LLM query gen × N + Tavily × ≤30 + LLM eval × N per section)
+[4] curation planner   (LLM × 1)                ──→ 0–4 curated extras
+   │
+   ▼  ◀── HITL: plan_review  (Curation Panel — loop)
+   │        │  drop curated · comment on any section · add a new section
+   │        │  ▼
+   │        └─ [4a] section_proposer (Generator, LLM × 1, on-demand)
+   │                                            ──→ extra SectionPlan
+   │     (loop until editor accepts or rejects; collects EditorNotes)
+   │
+   ▼
+[5] research           (per-section loop: LLM query gen + Tavily ≤30 + LLM eval)
+                       (editor notes for the section are merged into the query prompt)
                                                 ──→ evidence pool (frozen)
    │
    ▼
-[4] block_extract     (LLM × 1 per section)  ──→ RenderedSection[]
+[6] block_extract      (LLM × 1 per section; editor notes injected into the prompt)
+                                                ──→ RenderedSection[]
+   │
+   ▼  ◀── HITL: sections_review  (drop bad extractions before render)
+   │
+[7] render             (deterministic Jinja2)   ──→ HTML
    │
    ▼
-[5] render            (deterministic Jinja2) ──→ HTML
+[8] deliver            (deterministic file IO)  ──→ <slug>.{html, data.json, trace.json}
    │
-   ▼
-[6] deliver           (deterministic file IO + final_approval HITL)
-                                              ──→ <slug>.{html, data.json, trace.json}
+   ▼  ◀── HITL: final_approval  (browser preview, approve / reject)
 ```
 
 ### Where the LLM/deterministic boundary sits, and why
@@ -113,13 +161,17 @@ input sentence
 | Stage | LLM? | Why this side of the line |
 |---|---|---|
 | ground | **LLM** | The gate ("is this a hot event worth a page?") and the fact extraction both need to read the Tavily evidence. Putting them in *the same call* costs one round-trip instead of two and gives a single failure mode: either the LLM produces a valid `GroundOutput` or it doesn't. |
-| curation backbone | deterministic | The three backbone sections are universal. There is no judgment to delegate. |
-| curation extras | **LLM** | "Which extra sections would this specific event benefit from?" is exactly the kind of taste call the LLM is good at. Constrained to 0–4 sections, block kinds from a closed set, no content yet. |
-| research query/eval | **LLM** | Generating a useful Tavily query from a `SectionPlan` is fuzzy. Deciding whether the returned source pool is sufficient is fuzzy. Wrapping both in deterministic budgets keeps the loop bounded. |
+| hero_image | deterministic | One Brave image-search call, best-effort. No judgment to delegate; absent key → no hero. |
+| backbone planner | deterministic | The four backbone sections are universal. There is no judgment to delegate. |
+| curation planner | **LLM** | "Which extra sections would this specific event benefit from?" is exactly the kind of taste call the LLM is good at. Constrained to 0–4 sections, block kinds from a closed set, no content yet. |
+| plan_review (Curation Panel) | deterministic UI | The editor's structural edits. No LLM in the loop itself — but it can *call* the section proposer on demand. |
+| section_proposer (Generator) | **LLM** | Turns an editor's free-form description into a typed `SectionPlan`. Bounded structured output; post-hoc guards downgrade reserved block kinds and resolve id collisions. |
+| research query/eval | **LLM** | Generating a useful Tavily query from a `SectionPlan` is fuzzy. Deciding whether the returned source pool is sufficient is fuzzy. Wrapping both in deterministic budgets keeps the loop bounded. When the editor left a note for the section, it is merged into the query prompt. |
 | Tavily fetch | deterministic | HTTP. No judgment. |
-| block_extract | **LLM** | Per-section content writing from a frozen source pool. Citations enforced at the schema layer (§3). |
+| block_extract | **LLM** | Per-section content writing from a frozen source pool. Citations enforced at the schema layer (§3). Editor notes (if any) are injected into the prompt as an `EDITOR_NOTE:` directive. |
+| sections_review | deterministic UI | Editor drops extractions that came out badly. Survivors go to render; per-action `EditorAction` is recorded. |
 | render | deterministic | HTML must be auditable. The LLM never writes markup. |
-| deliver | deterministic | File I/O + a single HITL gate. |
+| deliver | deterministic | File I/O + the final_approval HITL gate. |
 
 The rule I followed: **LLMs do semantics; code does structure, cost, and I/O.** Everywhere it was tempting to give the LLM more agency (let it decide what to fetch next, let it write its own block, let it choose the layout), I asked whether the win was worth the loss of auditability. Mostly it wasn't.
 
@@ -131,30 +183,29 @@ The research stage has three hard caps (`src/generator/pipeline/research.py:35`)
 - `max_fetch_calls_per_section = 4`
 - `max_total_tavily = 30` (global)
 
-Sections run in parallel under a shared budget. When a section's pool is judged sufficient by the research-eval LLM call, the section exits early. When budgets are hit, the section exits with whatever it has and the downstream extractor decides whether the pool meets the section's acceptance criteria. **Partial evidence beats unbounded cost; trace records the gap.**
+Sections run in parallel under a shared budget. When a section's pool is judged sufficient by the research-eval LLM call (the Evaluator from the opening of §2), the section exits early. When budgets are hit, the section exits with whatever it has and the downstream extractor decides whether the pool meets the section's acceptance criteria. **Partial evidence beats unbounded cost; the trace records the gap the Evaluator emitted on the last iteration, so the failure mode is observable rather than silent.**
 
 ### Trace as a first-class artifact
 
-Every page produces a `<slug>.trace.json` alongside the HTML and data. The trace captures, per stage: model used, token counts, cost, duration, retry count, error string (if any), and a full list of individual LLM calls with their prompts and responses. For the evaluator's purposes, the trace is the answer to "what did this system actually do, and how much did it cost?" — opening any trace.json shows the eight-step pipeline execution with timings.
+Every page produces a `<slug>.trace.json` alongside the HTML and data. The trace captures, per stage: model used, token counts, cost, duration, retry count, error string (if any), and a full list of individual LLM calls with their prompts and responses. For the evaluator's purposes, the trace is the answer to "what did this system actually do, and how much did it cost?"
 
-Trace is also the mechanism that makes `--auto` mode honest. Every auto-decision is logged as an `EditorAction` with `reason: "auto_mode"`. The final `Trace.final_outcome` distinguishes `auto_approved` from `approved_published`, so an evaluator can tell at a glance whether a human actually saw the page.
 
-### HITL — what's wired vs. what's designed
+### HITL — the four wired touchpoints
 
-`EditorPrompter` (`src/generator/editor/prompt_cli.py`) currently exposes two touchpoints in the live pipeline:
+`EditorPrompter` (`src/generator/editor/prompt_cli.py`) exposes **four** active HITL touchpoints in the live pipeline. Each one records an `EditorAction` into the trace, regardless of outcome.
 
-- **`ground_review`** — between ground and curation. The editor sees the extracted `EventFacts`, can rewrite the sentence in `$EDITOR`, or can reject the page.
-- **`final_approval`** — after render, before delivery. The editor opens the HTML in a browser and approves or rejects.
+- **`ground_review`** — between ground and curation. The editor sees the extracted `EventFacts`, can rewrite the sentence in `$EDITOR` and re-run ground, can accept the page as-is, or can reject it (exit code 5).
+- **`plan_review`** — between the curation planner and research. This is the **Curation Panel** described in §1: a menu-driven loop where the editor can drop curated sections, comment on any section (backbone or curated), add a new section by calling the **Section Proposer** LLM, leave a global comment, accept, or reject. The loop continues until the editor commits to accept or reject; on accept it returns the surviving curated list and an `EditorNotes` object.
+- **`sections_review`** — between block_extract and render. After every section has been extracted, the editor can drop any rendered section whose output isn't worth shipping. Survivors go to render; the trace records each drop.
+- **`final_approval`** — after render, before delivery. The editor opens the HTML in a browser and approves or rejects the page.
 
-A third touchpoint — **per-section review** between block_extract and render — is designed in `EditorPrompter` but not yet called from the pipeline. The reason it's not wired: the CLI's current loop assumes the editor reviews the full page at the end, not section-by-section, because section-level review without a diff UI ends up being slower than just re-running `regen-section` after seeing the full page. I'd wire it once the diff UI exists (§8, P0).
+The remaining HITL gap is a side-by-side **diff UI** for re-extracted sections. `regen-section` re-runs block_extract for a single section against the frozen pool, but the editor reads the new section without a diff against the previous one. That's the P0 item in §8.
+
+`--auto` short-circuits all four gates. This is the "full autonomy" position on the Karpathy slider from §1; the default CLI invocation is the HITL position.
 
 ---
 
 ## 3. Data contract & schema
-
-### Why the schema matters
-
-The schema is doing two jobs at once. First, it gives the rendering layer a stable contract — templates consume typed `RenderBlock` objects, never raw LLM output. Second, and more importantly, **it is the trust boundary between the LLM and the editor.** If a section parsed, the editor knows: every fact-bearing field carries a citation, every citation points to a real source in the frozen evidence pool, and the structure matches what the template expects. The editor doesn't have to re-verify the LLM's internal reasoning; they verify the citations.
 
 ### Core types
 
@@ -175,26 +226,9 @@ EventPage
 └── editor_actions: list[EditorAction]
 ```
 
-### Why discriminated unions, not `dict[str, Any]`
-
-`RenderBlock` is a tagged union over `paragraph | timeline | chart | newsfeed | reactions | gallery | people | latest_news` (`src/generator/blocks/schema.py`). Each variant has its own typed fields — a `NewsCard` carries `url`, `publisher`, `tier`, `thumbnail_url`, `source_id`; a `TimelineEntry` carries `temporal_phase ∈ {past, present, future}`, `importance`, etc.
-
-The temptation was to keep everything as `dict[str, Any]` and let the LLM be expressive. I rejected that because: (a) templates would have to defensively check every field, and (b) the LLM would silently produce fields no template reads, with no error surface. With a discriminated union, an LLM output that doesn't match any variant's schema raises a Pydantic validation error and the stage retries. The model's expressiveness is bounded to the union members, and that bound is enforced mechanically.
-
 ### Citations are not optional
 
-Every fact-bearing field in every block variant carries either a scalar `source_id` (pointing into `EventPage.sources[]`) or a `citations: list[Citation]` array. Schema validation rejects orphan citations (source IDs not present in the pool) and rejects fact-bearing fields with no citation. This is invariant #1 in `schema.md`. The LLM is told this in the prompt, but the prompt is the *encouragement* — the schema is the *enforcement*. An LLM that decides to skip citations gets its output rejected and retried.
-
-### Failure path
-
-Inside `src/generator/llm/client.py`:
-
-1. Each LLM call requests structured output via OpenRouter's `response_format` JSON schema parameter.
-2. The response is parsed against the stage-specific Pydantic model.
-3. On parse failure, `tenacity` retries the call with an exponential backoff, up to a small bound. The retry prompt includes the validation error.
-4. On final failure, `LLMOutputError` is raised. The CLI maps it to exit code 4. The stage's trace entry records `outcome=error` with the error string.
-
-`LLMConfigError` maps to exit code 1; schema validation errors at higher layers map to 2; network/fetch errors to 3; "not a hot event / user rejected" to 5. The CLI exit code is itself part of the contract — a wrapper script can distinguish "bad input" from "LLM failure" from "transient network" without scraping logs.
+Every fact-bearing field in every block variant carries either a scalar `source_id` (pointing into `EventPage.sources[]`) or a `citations: list[Citation]` array. Schema validation rejects orphan citations (source IDs not present in the pool) and rejects fact-bearing fields with no citation.
 
 ---
 
@@ -215,21 +249,11 @@ A few decisions in prompt design that I think are non-obvious:
 - **Ground does gate-and-extract in one call.** The prompt asks the LLM to decide `is_hot_event` *and*, if true, to extract `EventFacts` grounded in the Tavily sources it was given. I considered splitting these into two calls and chose not to: both decisions need the same context (the input sentence and the same 8 Tavily results), and either both succeed together or neither is useful. One call, one failure mode.
 - **Curation receives the enumerated `BlockSpec` list, not free-form options.** The prompt hands the LLM the names and descriptions of every available block kind plus the backbone sections that are already taken. The model picks from this menu; it can't invent kinds, and it can't duplicate the backbone. Duplication and invention are both prevented at the prompt level *and* re-checked at the schema level (the LLM's output is a typed `SectionPlanOutput`).
 - **Per-block extraction prompts live with the block specs.** Each `BlockSpec` subclass under `src/generator/blocks/specs/` carries an `extraction_prompt_fragment` field that describes how to populate that block kind's schema from sources. `prompts/block_extract.py` assembles the final prompt by gluing the section's intent, the section's source pool, and the matching spec's fragment together. The principle: **prompt and schema are co-located.** Adding a new block kind means writing one file under `blocks/specs/` containing both — the spec doesn't ask you to update three other places.
+- **Editor notes are first-class prompt inputs.** Comments captured in `plan_review` (per-section + global) flow through `src/generator/editor/notes.py::merge_note(section_id, notes)` into two downstream prompts: the research query builder (`prompts/research_query.py`) and the block extractor (`prompts/block_extract.py`), where they appear as a single `EDITOR_NOTE:` directive scoped to that section. When the editor has no note for a section, the directive is omitted entirely — no boilerplate, no implicit instruction. The contract that both stages receive notes when present and skip them when absent is locked in by `tests/prompts/test_editor_note_passthrough.py`.
 
 ### Per-stage model routing
 
-Stage-specific models are configured via env vars (defaults in `src/generator/llm/client.py`):
-
-- `MODEL_GROUND` — ground (gate + extraction)
-- `MODEL_CURATION` — curation extras
-- `MODEL_RESEARCH_QUERY`, `MODEL_RESEARCH_EVAL` — research loop
-- `MODEL_BLOCK_EXTRACT` — per-section block writing
-
-This lets an operator route cheap-but-frequent work (research_query, research_eval) to a fast model and reserve a stronger model for the high-leverage calls (ground extraction, block writing). The trace records which model handled which call, so the cost/quality tradeoff is itself observable.
-
-### Retry & fallback semantics
-
-On schema-validation failure, `tenacity` retries with an updated prompt that includes the validation error message. On second/third failure, the stage records `outcome=fallback` (or `error`) and either drops the section or returns a minimal valid placeholder. No stage loops indefinitely; every stage has a hard cap. This matters because **the worst LLM failure mode isn't a wrong answer, it's a silent retry loop that burns money** — capping retries is non-negotiable.
+Each LLM stage has its own `MODEL_*` env var (`MODEL_GROUND`, `MODEL_CURATION`, `MODEL_RESEARCH_QUERY`, `MODEL_RESEARCH_EVAL`, `MODEL_BLOCK_EXTRACT`; defaults in `src/generator/llm/client.py`). An operator can route cheap-but-frequent work to a fast model and reserve a stronger one for high-leverage calls; the trace records which model handled which call, so the cost/quality tradeoff is itself observable.
 
 ---
 
@@ -242,41 +266,7 @@ On schema-validation failure, `tenacity` retries with an updated prompt that inc
 | **Tavily** | Fresh news search, 14-day window in ground; per-section queries in research | Structured results in one round-trip, news-leaning index, doesn't require HTML parsing. Single mocking story (`respx`) across the test suite. |
 | **Wikipedia** | Stable background | Long-form prose for entities and historical context. Free, no rate-limit drama at this scale. |
 | **Wikidata** | Entity card facts | Structured infobox data (dates, identifiers, locations). Cheap, deterministic. |
-| **Brave (optional)** | Image search for gallery sections | Only backend with usable image results behind an HTTP API. Optional because gallery is itself optional. |
-
-I deliberately did **not** use:
-
-- **Raw scraping.** Tavily already returns structured results; adding HTML parsing increases failure modes, breaks robotically when a site re-skins, and complicates testing.
-- **An agent tool-use loop** where the LLM decides what to fetch next at every step. The bounded research loop (query → fetch → eval, max 3 iterations per section, hard global cap of 30 Tavily calls) gives 90% of the benefit at 10% of the auditability cost. The LLM still controls *what queries to run* and *when to stop early*; it just doesn't control *whether* to stop.
-
-### Citations, end to end
-
-Sources land in `EventPage.sources[]` once, with stable `source_id`s. The research stage builds the pool; nothing adds to it after research completes. Each `RenderedSection` carries a `sources_used: list[SourceId]` and each fact-bearing field inside its `RenderBlock` carries a `source_id` or `citations[]`. At render time, citations become inline `<span class="citation">` elements that link out to the original publisher — see §6.
-
-This pattern means **the page is its own audit log.** Reading `data.json` next to the HTML, an evaluator can trace any sentence back to a real URL with no further tooling.
-
-### Freshness
-
-The 14-day Tavily window in ground (`src/generator/pipeline/ground.py:17`) is itself a freshness filter — evergreen queries usually return zero or only undated reference content, which is one of the signals ground uses to gate non-hot events out. Per-section research queries don't pin a time range (some sections need historical context — e.g., "background" for a recurring event), but `research_eval` is prompted to score sources partly on recency, and the trace records each source's `published_at` so editors can see what the pool actually looked like.
-
-### Conflicting sources
-
-The current posture is **don't reconcile, just attribute.** If two T1 sources disagree on a number, both can land in the pool and the block_extract stage cites whichever one it used. There is no LLM "decide which source is right" step. The reason: source-of-truth reconciliation is hard, easy to get wrong, and the editor is the right entity to make that call when it matters. The cheap version of reconciliation — present both views in a single "two-views" block — is sketched as a §8 P1 item.
-
-### Tier scoring
-
-`Source.publisher.tier ∈ {T0, T1, T2, T3}` (`schema.md`). T0 is primary/official (the event's own page, government, IR), T1 is independent tier-1 news (Reuters, AP, BBC, Bloomberg, NYT), T2 is Wikipedia/Wikidata, T3 is other web. Sections can prefer different mixes — `media_coverage` is biased toward T0/T1 (`backbone_planner.py:67`), while `background` can lean on T2. The tier is currently used as a sort key, not as a filter; a T3 source can still enter the pool and be cited if it's the only one that has the fact.
-
-### Cost & latency
-
-- **Latency floor**: ground (~2s) + curation (~5s) + research (often parallelized to 15–25s for 5–9 sections) + extract (per-section LLM call, parallelizable) + render (<100ms) + deliver (file I/O). A typical end-to-end run is 60–90 seconds wall-clock with structured outputs and standard models.
-- **Cost ceiling**: bounded by the global research budget (30 Tavily) and the per-stage LLM caps. The trace records per-call token usage; the total cost field reflects sum-of-LLM-calls cost. Currently the cost figure shows $0 in some traces because OpenRouter usage-stat parsing is not yet wired through — this is a known trace-completeness bug, not a free-LLM claim.
-
-### Things that fail at the sourcing layer
-
-- **No Tavily results.** Ground returns `is_hot_event=false` if the only thing Tavily returns is undated reference content. Per-section research with zero useful results leaves the section pool small; the section's `is_minimum_viable` gate at block_extract time decides whether the section survives.
-- **Tavily rate limit / network error.** `tenacity` retries with backoff once, then aborts the section (not the whole page). The pipeline continues with whatever sources made it through.
-- **AI-content farms.** A static domain blacklist is checked at fetch time. The list is small and reactive — it catches known offenders, not novel ones.
+| **Brave** | Image search for gallery sections | Only backend with usable image results behind an HTTP API. Optional because gallery is itself optional. |
 
 ---
 
@@ -293,19 +283,7 @@ The current posture is **don't reconcile, just attribute.** If two T1 sources di
 
 ### Layout philosophy
 
-The page is **two columns with a horizontal sticky chip nav.** Main column on the left holds the lead paragraph and the high-density blocks (newsfeed, charts, reactions). Sidebar on the right holds the timeline and reference cards. The sticky chip nav at the top lets the reader jump between sections without scrolling guessing.
-
-I considered the alternatives and rejected them:
-
-- **Hero-heavy magazine layout** (big image, single column, long-form below). Reads beautifully for one event type and worse for the other three. Eurovision wants a timeline + lineup grid; a hero photo of the venue would push everything important below the fold.
-- **Three-column dashboard.** Too dense, no reading rhythm, and the third column is always either fluff or noise.
-- **Single column responsive.** Loses the sidebar's value as a stable reference rail.
-
-The two-column-with-chip-nav is what I'd call **boring-on-purpose**: in an editorial product, predictability is a feature, not a missed opportunity. The reader's attention is on the facts, not the layout.
-
-### Why the sidebar holds the timeline
-
-A timeline is reference material — readers look at it intermittently while reading the main column. Putting it in the main column makes it compete with the lead paragraph; putting it in the sidebar makes it permanently glanceable. Combined with the rule that *only* the backbone can place in the sidebar (§1), the sidebar becomes a small, trustworthy zone: timeline at the top, optional reference blocks below.
+The page is **two columns with a horizontal sticky chip nav.** Main column on the left holds the lead paragraph and the high-density blocks (newsfeed, charts, reactions). Sidebar on the right holds the timeline and reference cards. The sticky chip nav at the top lets the reader jump between sections. Hero-magazine, three-column dashboard, and single-column responsive were all considered and rejected — each loses either legibility across event types or the sidebar's value as a stable reference rail. The two-column-with-chip-nav is **boring-on-purpose**: in an editorial product, predictability is a feature. The reader's attention is on the facts, not the layout.
 
 ### Inline citations
 
@@ -313,31 +291,9 @@ Citations are rendered as inline `<span class="citation">` elements rather than 
 
 Citations are visually low-key (small, muted) so they don't disrupt reading rhythm, but they're persistent. The deal with the reader is: *we'll always show you where this came from, and we won't make you click for it.*
 
-### Empty / loading / error states as product surface
+### Empty states as product surface
 
-A surprising amount of the UX is what I *don't* render:
-
-- **Gallery without images** → section absent. (Not "Images coming soon," not a placeholder grid.)
-- **Section can't meet `is_minimum_viable`** → section dropped from the page. The trace records the drop; the rendered page just doesn't have that section.
-- **Sources fewer than the section needs** → section dropped, same as above.
-
-The principle: **a missing section is preferable to a thin section.** A reader skimming a topic page should never see a stub that screams "this is a generated page with gaps." If the system can't fill the slot well, the slot doesn't exist.
-
-There is no loading state in the rendered output — the page is generated server-side and shipped as static HTML. The CLI itself shows progress as the pipeline runs, but the artifact is final on save.
-
-### Responsive behavior
-
-At narrow viewports, the sidebar collapses below the main column. The chip nav remains sticky. Block-level layouts (newsfeed grid, chart) reflow to single-column. None of this is novel; what matters is that no section *breaks* at small widths — every block kind has been spot-checked at phone-width.
-
-### Why these four example pages prove the point
-
-Opening the four pages side by side, the things to look at:
-
-- **Backbone is identical** — overview / timeline / media_coverage all show up everywhere, in the same place.
-- **Curation is genuinely different** — Eurovision gets `participating_countries`, `israel_controversy`, `venue_guide`, `where_to_watch`; FIFA gets `opening_ceremony_performers`, `tournament_fast_facts`, `host_cities_reactions`, `latest_world_cup_news`; the Trump–Xi page gets `agenda_issues`, `trade_tariff_dashboard`, `key_takeaways`. None of these are templated — they were proposed by the curation LLM call against the specific event's facts.
-- **Block kinds vary** — chart blocks appear where chart-able data exists (FIFA fast facts, summit tariff dashboard) and don't appear where it doesn't.
-
-That's the artifact-level evidence that the system *adapts* rather than *templates*.
+The principle: **a missing section is preferable to a thin section.** When a section can't meet `is_minimum_viable` or a gallery has no images, the section is absent from the page — no "coming soon" placeholders. A reader skimming a topic page should never see a stub that screams "this is a generated page with gaps." There is no loading state in the artifact either; the page is static HTML, final on save.
 
 ---
 
@@ -380,58 +336,24 @@ These are acknowledged in §8 as P1 items.
 - **Latency runaway** — same caps; the worst-case wall-clock for a single page is bounded by the LLM call timeout × max retries × stage count, which is a few minutes, not unbounded.
 - **Partial failure** — a single section failing extract is dropped from the page, not a hard error. The page ships with the sections that succeeded; the trace records what didn't.
 
-### Known limitations I'm choosing to ship with
-
-- **No post-publish staleness detection.** Once a page is delivered, the system stops paying attention. If a fact changes the next day, the page doesn't update. Auto-rerun on a schedule is a §8 P0 item.
-- **No per-section diff UI.** When the editor regenerates a section, they re-read it. For a one-week build this is acceptable; for a real product it isn't.
-- **`--auto` mode bypasses every HITL gate.** This is intentional and traceable (`final_outcome=auto_approved`), but it's not the production path. Auto mode exists for batch demos and trace generation, not for publishing.
-
 ---
 
 ## 8. Tradeoffs & what I'd do with another week
 
-Concrete and prioritized. Each item lists *why it's deferred* and the *rough shape* of the work — not aspirational.
+Each item: what's broken today, the rough shape of a fix, what it should produce, and what it buys the system overall.
 
 ### P0 — would do next
 
-**Per-section HITL with a diff UI.** `EditorPrompter` already has the per-section interface; the pipeline doesn't call it. Wiring it up is small; the work is the diff UI — given a previous `RenderedSection` and a new one from `regen-section`, show a side-by-side comparison of (a) the prose, (b) the cited sources, (c) the block-level data. Without the diff, per-section review is slower than re-reading the whole page; with it, the editor can audit a single regeneration in under a minute. Likely implementation: a small standalone HTML view served from the CLI rather than embedding it in the editor's terminal.
+**Per-section diff UI.** Today `sections_review` lets the editor drop bad extractions and `regen-section` lets them re-run one, but the new version arrives without anything to compare against — they have to re-read from scratch. A small standalone HTML diff view showing prose / citations / block data side-by-side would let the editor audit a regeneration in under a minute. The system gains a per-section confidence loop that doesn't require trusting the editor's working memory — and the rest of the HITL story, which is already strong, stops bottlenecking on this one weak gate.
 
-**Staleness watcher.** Re-run ground on a cadence (hourly or driven by an external trigger) for each published page. Compare the new `EventFacts` against the stored ones. If diff exceeds a threshold (a new entity appears, the `when` shifts, the `what` sentence changes materially), surface to the editor with a single "regenerate page" button. Implementation surface is small: ground already supports being called standalone; the diff is field-level on `EventFacts`; the trigger is a cron + a tiny watch table.
+**Updater service — pair the Generator with an Updater.** The current system is one-shot: it emits a page at time *t* and stops paying attention. A hot event keeps unfolding, and two things rot: **facts** (a new entity, a shifted date, a changed `what`) and **outbound links** (publishers re-slug, paywall, or delete). I checked NewsBreak while researching and even their live event pages have dead links inside a day; this isn't a v1 oversight, it's inherent to the genre. A paired **Updater** service running on a cadence — re-grounding for fact drift and probing every source URL for link rot — would surface stale pages to the editor with a single "regenerate" affordance. The system shifts from emitting static artifacts to maintaining tracked ones, which is what "published" should actually mean for a topic page.
 
 ### P1 — would do once P0 lands
 
-**Conflict reconciliation as a first-class block.** Today, if two sources disagree, both can end up cited and the editor decides. A better UX is a **two-views block** — render both perspectives side by side with their citations, framed as "Source A says X. Source B says Y." This needs a new `BlockSpec`, a new template, and a research-stage signal that flags conflict.
+**Conflict reconciliation as a first-class block.** When two sources disagree, the system today just cites whichever one block_extract picked — the disagreement is invisible to the reader. A dedicated "two-views" block kind would render both perspectives side by side with their citations. The page becomes honest about uncertainty instead of papering it over, and the editor doesn't have to manually catch the conflict at review time.
 
-**Adversarial source detection.** Two layers. First, domain reputation lookup at fetch time — query a public reputation database (or maintain one) and weight tier accordingly. Second, an LLM "does this look planted?" pass on suspicious sources before they enter the evidence pool. Both are imperfect; together they raise the floor.
+**Adversarial source defenses.** Today the only filter against bad sources is a static AI-content-farm domain blacklist; a single fabricated T0 source would still be treated as authoritative, and prompt-injection inside source text is unmitigated. Layered fixes — domain reputation lookups at fetch time, an LLM "does this look planted?" pass on suspicious sources, and pre-prompt sanitization of source content — would raise the floor on every page the system produces, especially as evaluator inputs get more adversarial.
 
-**Prompt-injection sanitization on source content.** Strip or escape control sequences and instruction-like phrases from source text before it lands in the block_extract prompt. This is defense in depth — structured outputs already make most injection attempts inert at the schema layer, but the layered defense is cheap.
+**Broader and more diverse news source pool.** Right now `media_coverage` and `latest_news` often feel thin — Tavily plus a few T0 publishers is enough to populate them but not enough to feel like a real newsdesk view. Adding a second news backend (Brave News / SerpAPI / curated RSS) and pushing `research_eval` to prefer publisher diversity over more results from the same outlet would give the page real multi-source breadth — the difference between aggregator and curated digest.
 
-### P2 — would do for v2, not v1.1
-
-**Multilingual extraction and rendering.** Ground, curation, research_eval, and block_extract prompts all currently assume English source content. The schema is language-agnostic; the prompts are not. Doing this right means per-language prompt variants and a language-detection signal at the ground stage. Out of scope for a one-week project.
-
-**Editor-side content overrides.** Today the editor can approve or reject a generated section. A real product would let the editor inline-edit a paragraph and persist that override against the page, with the override surviving regeneration. This is a moderate refactor of the schema (`EventPage.layout.overrides` field), the render path (overrides take precedence over generated content), and the editor UI (an actual UI, not just CLI prompts).
-
-**Trace cost-tracking completeness.** The trace currently records every LLM call but doesn't always populate `total_cost_usd` (OpenRouter's usage stats aren't always parsed through). Fixing this is plumbing, not design — but it matters for the "is this affordable per page?" answer that any real operator will need.
-
-### Tradeoffs I'm knowingly accepting in v1
-
-- **Deterministic backbone vs. fully adaptive layout.** I locked in a three-section backbone. If a future event type genuinely doesn't benefit from `timeline` or `media_coverage`, my backbone is the wrong shape for it. The cost of the lock-in is concreteness — every page has a known spine — and I think that's the right tradeoff at v1.
-- **One LLM call per curation step.** I could let curation be iterative (propose → research → re-propose) but I chose one-shot for cost and latency. The curation LLM sees `EventFacts` and the backbone; it doesn't see the research pool. This sometimes leads to curated sections that the research stage can't satisfy, which `is_minimum_viable` then drops. The waste is real but bounded.
-- **No re-fetch on regenerate.** `regen-section` re-runs block_extract against the frozen pool from the original run. If the world has moved on, regenerate doesn't catch it. The staleness watcher above is the answer; the current behaviour is a deliberate scope cut for predictability.
-- **Trace as the primary debugging surface.** I did not build a log dashboard. The trace.json file is the answer to "what happened on this run." For a take-home this is enough; for a team it would need a viewer.
-
----
-
-## Appendix — running the system
-
-See `README.md` for full setup. The short version:
-
-```bash
-uv sync
-cp .env.example .env  # then fill in OPENROUTER_API_KEY, TAVILY_API_KEY
-uv run generate run "OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT in May 2026."
-# Open output/<slug>.html
-```
-
-Each run produces three artifacts: `<slug>.html` (the page), `<slug>.data.json` (the typed `EventPage` payload), `<slug>.trace.json` (the per-stage execution record). The four example pages in `output/` were generated by exactly this command with the corresponding inputs.
+**More multimedia block kinds.** The current block registry is enough to ship a credible page but the visual variety stalls when an event has data that *wants* to be drawn. Adding richer infographics, line / area charts for time-series, dedicated bar / comparison variants, and a deterministic map renderer (LLM supplies coordinates and labels, never markup) — each as a new `BlockSpec` paired with a Jinja template — would let curation propose them, and pages would start to *look* like the event they cover instead of converging on prose-and-newsfeed for every archetype.
