@@ -179,7 +179,7 @@ The research stage has three hard caps (`src/generator/pipeline/research.py:35`)
 
 - `max_iterations_per_section = 3`
 - `max_fetch_calls_per_section = 4`
-- `max_total_tavily = 30` (global)
+- `max_total_tavily = 50` (global)
 
 Sections run in parallel under a shared budget. When a section's pool is judged sufficient by the research-eval LLM call (the Evaluator from the opening of §2), the section exits early. When budgets are hit, the section exits with whatever it has and the downstream extractor decides whether the pool meets the section's acceptance criteria. **Partial evidence beats unbounded cost; the trace records the gap the Evaluator emitted on the last iteration, so the failure mode is observable rather than silent.**
 
@@ -272,15 +272,6 @@ Each LLM stage has its own `MODEL_*` env var (`MODEL_GROUND`, `MODEL_CURATION`, 
 
 ## 6. Visual & UX
 
-> Screenshots from the four example pages live at `docs/assets/design/`. Each is a representative shot of the corresponding archetype. _(I'll insert the screenshots myself.)_
->
-> ```
-> ![GPT-5.5 — tech rollout](./assets/design/gpt55-instant.png)
-> ![Eurovision — live cultural](./assets/design/eurovision-2026.png)
-> ![FIFA World Cup — scheduled sports](./assets/design/fifa-2026.png)
-> ![Trump–Xi summit — geopolitical](./assets/design/trump-xi.png)
-> ```
-
 ### Layout philosophy
 
 The page is **two columns with a horizontal sticky chip nav.** Main column on the left holds the lead paragraph and the high-density blocks (newsfeed, charts, reactions). Sidebar on the right holds the timeline and reference cards. The sticky chip nav at the top lets the reader jump between sections. Hero-magazine, three-column dashboard, and single-column responsive were all considered and rejected — each loses either legibility across event types or the sidebar's value as a stable reference rail. The two-column-with-chip-nav is **boring-on-purpose**: in an editorial product, predictability is a feature. The reader's attention is on the facts, not the layout.
@@ -317,7 +308,7 @@ Ambiguity *within* a hot event (e.g., "the FIFA World Cup" — which one?) is ha
 
 ### When the input is off-topic or adversarial
 
-This is the **weakest part of the current system**. Defenses today:
+This is the **weakest part of the current system**:
 
 - The static AI-content-farm domain blacklist drops known bad sources at fetch time.
 - The "is hot event" gate filters out obviously off-topic input (evergreen queries, fictional events, the model itself sandbagging when it has no real evidence).
@@ -329,12 +320,6 @@ What I do **not** defend against:
 - Prompt injection inside source text. The block_extract prompt does not currently sanitize source content for injection attempts.
 
 These are acknowledged in §8 as P1 items.
-
-### When something runs away
-
-- **Cost runaway** — bounded by per-section budgets (3 iterations, 4 Tavily calls) + global Tavily cap (30) + tenacity max retry counts on every LLM call.
-- **Latency runaway** — same caps; the worst-case wall-clock for a single page is bounded by the LLM call timeout × max retries × stage count, which is a few minutes, not unbounded.
-- **Partial failure** — a single section failing extract is dropped from the page, not a hard error. The page ships with the sections that succeeded; the trace records what didn't.
 
 ---
 
