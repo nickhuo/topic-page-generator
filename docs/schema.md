@@ -1,18 +1,16 @@
 # Data Schemas
 
-> **Status (2026-05-15):** This document predates the editor-architecture refactor.
-> The current pipeline is documented in `CLAUDE.md` and detailed in
-> `docs/superpowers/plans/2026-05-15-editor-architecture-*.md`. Sections below
-> referring to the Module-driven pipeline, NeedPlanOutput, or extract.run are
-> historical context only.
-
-> Type definitions for the topic page generator. Written in TypeScript-style for readability; will be implemented in Python as Pydantic models. Every schema here is the **source of truth** — pipeline stages and templates conform to these types.
+> Source of truth for the runtime contract. Written in TypeScript-style for
+> readability; implemented in Python as Pydantic v2 models in
+> `src/generator/schema.py` (page + pipeline types) and
+> `src/generator/blocks/schema.py` (render blocks). If anything diverges,
+> **this document wins** and the code is wrong.
 
 ## Contents
 
 1. [Foundation: primitives, sources, citations](#1-foundation)
 2. [Page root: `EventPage`](#2-page-root)
-3. [Module base + 12 module kinds](#3-modules)
+3. [Sections and render blocks](#3-sections-and-render-blocks)
 4. [Pipeline stage outputs](#4-pipeline-stage-outputs)
 5. [Trace and editor action log](#5-trace-and-editor)
 6. [Layout configuration and aesthetic presets](#6-layout)
@@ -26,7 +24,6 @@
 ```typescript
 type ISO8601 = string;            // e.g. "2026-05-12T14:32:08Z"
 type SourceId = string;            // system-internal source identifier
-type ModuleId = string;            // unique within a page
 type PageId = string;
 type TraceId = string;
 ```
@@ -44,20 +41,12 @@ type Sentiment = "positive" | "neutral" | "negative";
 
 type Priority = "required" | "high" | "medium" | "low";
 
-type Slot = "hero" | "primary" | "aside" | "tail" | "footer";
-
-type NeedId =
-  | "what_happened"      // What is it / what happened
-  | "when_where"         // When and where
-  | "who_involved"       // Who is involved
-  | "current_state"      // What's the current state
-  | "why_matters"        // Why does it matter
-  | "world_reaction"     // What's the world saying
-  | "what_can_do"        // What can I do / engage with
-  | "what_next";         // What comes next
+type ConfidenceFlag =
+  | "single_source"                    // <2 unique publishers
+  | "low_tier_only"                    // no T0/T1/T2 sources
+  | "contested_fact"                   // conflicting sources
+  | "single_sentiment_perspective";    // reactions block lacks viewpoint mix
 ```
-
-The eight `NeedId` values are the closed set of reader information needs every event page must address. Every module declares which needs it serves; the page aggregates coverage and flags any uncovered need.
 
 ### `Source` — first-class entity
 
@@ -80,6 +69,12 @@ type Source = {
     can_paraphrase: boolean;         // true for T0 and T2 (reference); false for T1, T3
   };
   archive_url?: string;              // Wayback Machine link, optional
+
+  // Editor-architecture bookkeeping
+  serves_sections: string[];         // SectionPlan.section_id values this source backs
+  thumbnail_url?: string;            // enrichment: og:image / page thumb
+  summary?: string;                  // enrichment: short snippet for newsfeed cards
+  enriched_at?: ISO8601;
 };
 ```
 
@@ -93,6 +88,58 @@ type Citation = {
 };
 ```
 
+### `WikipediaCardData` — reference rail card
+
+Fetched once from the Wikipedia REST summary API at the ground stage when a
+confident `canonical_title` is available. Decorative — the renderer no-ops
+cleanly when absent.
+
+```typescript
+type WikipediaCardData = {
+  title: string;
+  summary_text: string;              // ≤600 chars
+  thumbnail_url?: string;
+  article_url: string;
+  retrieved_at: ISO8601;
+};
+```
+
+### `HeroImage` — page chrome background
+
+Fetched once at pipeline start (Brave Image Search). Decorative — pipeline must
+not fail if this is `null`.
+
+```typescript
+type HeroImage = {
+  image_url: string;
+  alt_text?: string;
+  source_url?: string;
+  publisher?: string;
+};
+```
+
+### `ConfidenceSignals` / `ModuleConfidence`
+
+Confidence is computed at render time from a section's `sources_used`. The
+shape is retained for trace + future surfacing:
+
+```typescript
+type ConfidenceSignals = {
+  source_count: number;
+  publisher_count: number;
+  highest_tier: SourceTier;
+  schema_passes: boolean;
+  cross_source_agreement: number;    // 0–1, fraction of claims with multi-source backing
+};
+
+type ModuleConfidence = {
+  overall: number;                   // 0.0 – 1.0
+  field_level: Record<string, number>;
+  signals: ConfidenceSignals;
+  flags: ConfidenceFlag[];
+};
+```
+
 ---
 
 ## 2. Page Root
@@ -102,27 +149,16 @@ type Citation = {
 ```typescript
 type EventPage = {
   page_id: PageId;
-  input_sentence: string;            // the original one-sentence input
+  input_sentence: string;            // original one-sentence input
   generated_at: ISO8601;
 
-  subject: {
-    title: string;                   // canonical page title from the ground stage
-    entities: string[];              // all actors involved, entities[0] is the primary
-    when?: ISO8601;                  // event datetime sourced from evidence
-    where?: string;                  // event location if stated by a source
-  };
-
-  modules: TypedModule[];            // discriminated union, see §3
-
-  layout: {
-    preset_id: AestheticPresetId;
-    overrides?: Partial<LayoutConfig>; // editor-set overrides
-  };
-
+  subject: EventSubject;
+  layout: EventLayout;
   sources: Source[];                 // every source referenced on this page
+  editorial_sections: RenderedSection[];  // ordered, ready for the renderer
 
-  needs_coverage: Record<NeedId, ModuleId[]>;  // which modules serve each need
-  uncovered_needs: NeedId[];                   // auto-computed; empty means full coverage
+  wikipedia_card?: WikipediaCardData;     // optional right-rail reference card
+  hero_image?: HeroImage;                 // optional chrome background
 
   meta: {
     last_updated: ISO8601;
@@ -133,319 +169,306 @@ type EventPage = {
 };
 ```
 
-The `needs_coverage` map is derived at render time from each module's `serves_needs[]` declaration. `uncovered_needs` is the set of `NeedId` values with empty arrays in `needs_coverage`. A page may publish with `uncovered_needs` non-empty (the editor decides), but the field is always rendered in the trace so the gap is visible.
+### `EventSubject`
+
+Page-level identity, derived from the ground stage's `EventFacts`. `entities[0]`
+is the primary entity (main subject); additional entries are co-actors
+(e.g. `["Donald Trump", "China"]` for "Trump visits China"). `when` and `where`
+are sourced from supporting evidence, never from LLM parametric memory.
+
+```typescript
+type EventSubject = {
+  title: string;                     // canonical page title from the ground stage
+  subtitle: string;                  // 1–240 chars
+  entities: string[];                // min 1; entities[0] is primary
+  when?: ISO8601;
+  where?: string;
+};
+```
+
+### `EventLayout`
+
+```typescript
+type EventLayout = {
+  preset_id: AestheticPresetId;
+  overrides?: LayoutConfig;          // editor / LLM overrides (full config; partial deltas TBD)
+};
+```
 
 ---
 
-## 3. Modules
+## 3. Sections and Render Blocks
 
-### `BaseModuleFields` — shared by every module
+The editor architecture replaces the old "12 typed modules" with a two-level
+contract:
+
+- **`SectionPlan`** — the editorial planner's spec: what section to render,
+  what block kind, what success looks like (`AcceptanceCriteria`).
+- **`RenderedSection`** — the extracted output: a `RenderBlock` plus citations,
+  attributed sources, and eval outcome.
+- **`RenderBlock`** — a discriminated union (by `kind`) defining the actual
+  payload the template consumes.
+
+### `BlockKind` enumeration
 
 ```typescript
-type BaseModuleFields = {
-  module_id: ModuleId;
-  serves_needs: NeedId[];            // which information needs this module addresses
-  citations: Citation[];             // every module owns its citations
-  confidence: ModuleConfidence;
-  slot: Slot;
-  artifact: string;                  // chosen artifact (e.g. "Timeline")
-  artifact_alternatives: string[];   // other allowed artifacts (editor swap)
-  inclusion_reason: Priority;
-};
-
-type ConfidenceFlag =
-  | "single_source"          // <2 unique publishers
-  | "low_tier_only"          // no T0/T1/T2 sources
-  | "contested_fact";        // conflicting sources
-
-type ModuleConfidence = {
-  overall: number;                   // 0.0 – 1.0
-  field_level: Record<string, number>;
-  signals: {
-    source_count: number;
-    publisher_count: number;
-    highest_tier: SourceTier;
-    schema_passes: boolean;
-    cross_source_agreement: number;  // 0–1, fraction of claims with multi-source backing
-  };
-  flags: ConfidenceFlag[];
-};
+type BlockKind =
+  | "paragraph"
+  | "timeline"        // sidebar-only — backbone planner emits exclusively
+  | "chart"
+  | "newsfeed"
+  | "reactions"
+  | "gallery"
+  | "latest_news"
+  | "people";
 ```
 
-### `TypedModule` — discriminated union
+### `BackboneSectionId` — the always-on backbone
+
+Four deterministic sections pinned by `backbone_planner.py`:
 
 ```typescript
-type TypedModule =
-  | HeroModule
-  | InfoboxModule
-  | ScheduleModule
-  | CountdownModule
-  | KPINumbersModule
-  | ComparisonModule
-  | ChangelogModule
-  | ReactionsModule
-  | MediaCoverageModule
-  | OfficialStatementsModule
-  | WhereToWatchModule
-  | BackgroundModule;
+type BackboneSectionId =
+  | "overview"
+  | "timeline"
+  | "media_coverage"
+  | "latest_news";
 ```
 
-### Default need-to-module mapping
+Curated sections (`kind: "curated"`) use free-form snake_case ids
+(e.g. `"people_relationships"`, `"kpi_dashboard"`).
 
-Each module's `serves_needs` is set by the module's contract at extraction time. The default mapping is below; per-event variation is allowed (e.g. a `KPINumbers` module for a casualty count also serves `current_state`).
-
-| Need             | Default served by                                                    |
-| ---------------- | -------------------------------------------------------------------- |
-| `what_happened`  | `Hero`, `Background`                                                 |
-| `when_where`     | `Infobox`, `Schedule`, `Countdown`                                   |
-| `who_involved`   | `Infobox`, `OfficialStatements`, `Comparison`                        |
-| `current_state`  | `KPINumbers`, `Schedule` (live items), `MediaCoverage` (most recent) |
-| `why_matters`    | `Background`, `Comparison`, `KPINumbers`                             |
-| `world_reaction` | `Reactions`, `MediaCoverage`                                         |
-| `what_can_do`    | `WhereToWatch`                                                       |
-| `what_next`      | `Countdown`, `Schedule` (future items)                               |
-
-`how_known` is treated specially: it is considered satisfied whenever a module's `citations` array is non-empty. Every typed module satisfies this by schema invariant, so `how_known` is never in `uncovered_needs` for a validly rendered page.
-
-### Module: `Hero`
+### `SectionKind` / `Placement`
 
 ```typescript
-type HeroModule = BaseModuleFields & {
-  kind: "hero";
-  data: {
-    title: string;                   // ≤80 chars
-    subtitle?: string;               // ≤120 chars
-    summary: string;                 // ≤140 chars, one sentence
-    image_url?: string;
-    image_alt: string;               // accessibility, required when image_url present
-    badge_label?: string;            // "Product Launch", "Live Now", "Imminent"
-  };
+type SectionKind = "backbone" | "curated";
+type Placement   = "main" | "sidebar";
+```
+
+### `SectionPlan`
+
+```typescript
+type SectionPlan = {
+  section_id: string;                // BackboneSectionId literal when kind="backbone"
+  kind: SectionKind;
+  title: string;
+  rank: number;                      // 1–20
+  block_kind: BlockKind;
+  intent: string;                    // short editorial intent statement
+  acceptance: AcceptanceCriteria;
+  placement: Placement;              // default "main"
+};
+
+type AcceptanceCriteria = {
+  description: string;
+  min_sources: number;               // default 1
+  min_publishers: number;            // default 1
+  required_facets: string[];         // free-form tags the research loop must hit
+  forbid_single_perspective: boolean; // default false
+};
+
+type SectionPlanOutput = {
+  sections: SectionPlan[];           // backbone + curation combined
 };
 ```
 
-### Module: `Infobox`
+### `RenderedSection`
 
 ```typescript
-type InfoboxModule = BaseModuleFields & {
-  kind: "infobox";
-  data: {
-    rows: Array<{
-      label: string;                 // "Host city", "Release date"
-      value: string | string[];
-      source_id: SourceId;
-    }>;                              // 5–9 rows recommended
-  };
+type RenderedSection = {
+  section_id: string;
+  block_kind: BlockKind;
+  block_data: RenderBlock;           // discriminated by `kind`; must match block_kind
+  citations: Citation[];
+  sources_used: Source[];
+  eval_passed: boolean;              // default true
+  eval_notes?: string;
+  placement: Placement;              // default "main"
 };
 ```
 
-### Module: `Schedule`
+Schema invariant: `block_data.kind === block_kind` (validated by
+`_block_kind_matches_data`).
+
+### `RenderBlock` — discriminated union
 
 ```typescript
-type ScheduleModule = BaseModuleFields & {
-  kind: "schedule";
-  data: {
-    items: Array<{
-      time_iso: ISO8601;
-      label: string;                 // "Semi-final 1"
-      location?: string;
-      duration_min?: number;
-      source_id: SourceId;
-    }>;
-    timezone: string;                // IANA tz, e.g. "Europe/Vienna"
-  };
+type RenderBlock =
+  | ParagraphBlockData
+  | TimelineBlockData
+  | ChartBlockData
+  | NewsfeedBlockData
+  | ReactionsBlock
+  | GalleryBlockData
+  | LatestNewsBlockData
+  | PeopleBlockData;
+```
+
+#### Shared block primitives
+
+```typescript
+type PullQuote = {
+  quote: string;
+  attribution?: string;
+  source_id?: SourceId;
+};
+
+type NewsCard = {
+  url: string;
+  title: string;
+  publisher: string;
+  tier: SourceTier;
+  published_at?: ISO8601;
+  thumbnail_url?: string;
+  summary?: string;
+  source_id?: SourceId;
+};
+
+type TimelineEntry = {
+  title: string;
+  time?: string;                     // free-form: ISO8601 / "Jun 11" / "Quarter Finals"
+  location?: string;
+  description?: string;
+  importance: "breaking" | "feature" | "minor" | "normal";  // default "normal"
+  temporal_phase: "past" | "present" | "future";            // default "past"
+  source_id?: SourceId;
+};
+
+type ChartSeries = { label: string; values: number[]; unit?: string };
+
+type ChartStat = {
+  value: string;
+  unit?: string;
+  label: string;
+  comparison?: string;
+  source_id?: SourceId;
+};
+
+type ComparisonRow   = { axis: string; cells: string[] };  // len == subjects.length
+type ComparisonTable = { subjects: string[]; rows: ComparisonRow[] };
+
+type QuoteCard = {
+  author: string;
+  author_role: string;
+  quote: string;
+  sentiment: Sentiment;
+  stakeholder_tier?: "stakeholder" | "adjacent" | "third_party";
+  author_image_url?: string;
+  source_id: SourceId;
+  // When article_url is present the whole card links there (replaces inline [N]).
+  article_title?: string;
+  article_url?: string;
+  publisher?: string;
+  publisher_logo_url?: string;
+};
+
+type PersonCard = {
+  name: string;                      // 1–80
+  role: string;                      // 1–120
+  bio:  string;                      // 1–260
+  image_url?: string;
+  image_source: "wikipedia" | "wikidata" | "brave" | "none";  // default "none"
+  image_credit_url?: string;
+  profile_url?: string;
+  source_ids: SourceId[];
+};
+
+type GalleryItem = {
+  image_url: string;
+  caption: string;                   // 1–240
+  alt_text?: string;                 // ≤160
+  source_url?: string;
 };
 ```
 
-### Module: `Countdown`
+#### Block variants
 
 ```typescript
-type CountdownModule = BaseModuleFields & {
-  kind: "countdown";
-  data: {
-    target_at: ISO8601;
-    label: string;                   // "Until kickoff at Estadio Azteca"
-    source_id: SourceId;
-  };
+type ParagraphBlockData = {
+  kind: "paragraph";
+  style: "prose" | "bullets";        // default "prose"
+  paragraphs_md: string[];           // min 1
+  // paragraph_sources[i] grounds paragraphs_md[i]; empty/shorter falls back to
+  // the block's `citations` aggregated into a per-paragraph cite-cluster.
+  paragraph_sources: SourceId[][];
+  pull_quotes: PullQuote[];
+  citations: Citation[];
 };
-```
 
-### Module: `KPINumbers`
-
-```typescript
-type KPINumbersModule = BaseModuleFields & {
-  kind: "kpi_numbers";
-  data: {
-    tiles: Array<{
-      value: string;                 // "52.5%", "37", "$1.2B"
-      unit?: string;
-      label: string;                 // "Fewer hallucinations"
-      comparison?: string;           // "vs GPT-5.3 Instant"
-      source_id: SourceId;
-    }>;                              // 1–4 tiles
-  };
+type TimelineBlockData = {
+  kind: "timeline";                  // sidebar-only, backbone-only
+  entries: TimelineEntry[];          // min 1
+  timezone?: string;
 };
-```
 
-### Module: `Comparison`
-
-```typescript
-type ComparisonModule = BaseModuleFields & {
-  kind: "comparison";
-  data: {
-    subjects: Array<{                // 2–3 entities being compared
-      name: string;                  // "GPT-5.5 Instant"
-      label?: string;                // "current"
-    }>;
-    axes: Array<{
-      label: string;                 // "Hallucination rate"
-      cells: Array<{
-        value: string;
-        source_id: SourceId;
-      }>;                            // length === subjects.length
-    }>;
-  };
+type ChartBlockData = {
+  kind: "chart";
+  chart_type: "bar" | "stat" | "compare_table";
+  series?: ChartSeries[];            // used when chart_type === "bar"
+  stats?: ChartStat[];               // used when chart_type === "stat"
+  table?: ComparisonTable;           // used when chart_type === "compare_table"
+  title?: string;
 };
-```
 
-### Module: `Changelog`
-
-```typescript
-type ChangelogModule = BaseModuleFields & {
-  kind: "changelog";
-  data: {
-    version_label: string;           // "GPT-5.5 Instant"
-    previous_version_label?: string; // "GPT-5.3 Instant"
-    entries: Array<{
-      label: string;                 // "Memory sources control"
-      description: string;           // ≤80 words
-      importance: "breaking" | "feature" | "minor";
-      source_id: SourceId;
-    }>;
-  };
+type NewsfeedBlockData = {
+  kind: "newsfeed";
+  cards: NewsCard[];                 // min 1
+  variant: "news" | "channels" | "quotes";  // default "news"
+  grouping: "by_perspective" | "by_subtopic" | "by_time" | "flat";  // default "flat"
 };
-```
 
-### Module: `Reactions`
-
-```typescript
-type ReactionsModule = BaseModuleFields & {
+type ReactionsBlock = {
   kind: "reactions";
-  data: {
-    items: Array<{
-      author: string;                // named individual
-      author_role: string;           // "Tech journalist", "Developer"
-      quote: string;                 // verbatim, ≤280 chars
-      sentiment: Sentiment;
-      source_id: SourceId;
-    }>;                              // 5–15 items
-    aggregate_sentiment?: {
-      positive_count: number;
-      neutral_count: number;
-      negative_count: number;
-    };
-  };
+  cards: QuoteCard[];                // max 4
+};
+
+type GalleryBlockData = {
+  kind: "gallery";
+  items: GalleryItem[];              // 1–12
+  citations: Citation[];
+};
+
+type LatestNewsBlockData = {
+  kind: "latest_news";               // vertical stack of landscape news cards
+  cards: NewsCard[];                 // 1–8
+};
+
+type PeopleBlockData = {
+  kind: "people";
+  cards: PersonCard[];               // 2–6
 };
 ```
 
-### Module: `MediaCoverage`
-
-```typescript
-type MediaCoverageModule = BaseModuleFields & {
-  kind: "media_coverage";
-  data: {
-    items: Array<{
-      headline: string;
-      publisher: string;
-      publisher_tier: SourceTier;
-      published_at: ISO8601;
-      url: string;
-      snippet: string;               // ≤30 words
-      perspective?: "favorable" | "critical" | "neutral";
-      sub_topic?: string;            // optional cluster label
-      source_id: SourceId;
-    }>;
-    grouping_strategy:
-      | "by_perspective"
-      | "by_subtopic"
-      | "by_time"
-      | "flat";
-  };
-};
-```
-
-### Module: `OfficialStatements`
-
-```typescript
-type OfficialStatementsModule = BaseModuleFields & {
-  kind: "official_statements";
-  data: {
-    items: Array<{
-      author: string;                // named individual
-      role: string;                  // "CEO"
-      organization: string;          // "OpenAI"
-      quote: string;                 // verbatim
-      made_at: ISO8601;
-      source_url: string;
-      source_id: SourceId;
-    }>;
-  };
-};
-```
-
-### Module: `WhereToWatch`
-
-```typescript
-type WhereToWatchModule = BaseModuleFields & {
-  kind: "where_to_watch";
-  data: {
-    channels: Array<{
-      type: "tv" | "streaming" | "in_person" | "radio" | "api" | "app";
-      name: string;
-      region?: string;               // ISO country code or region label
-      url?: string;
-      cost?: string;                 // "Free", "$25", "Subscribers only"
-      source_id: SourceId;
-    }>;
-  };
-};
-```
-
-### Module: `Background`
-
-```typescript
-type BackgroundModule = BaseModuleFields & {
-  kind: "background";
-  data: {
-    paragraphs: Array<{
-      text: string;                  // ≤200 words total across all paragraphs
-      citations: Citation[];
-    }>;                              // 1–2 paragraphs
-  };
-};
-```
+> **Timeline placement rule.** `timeline` blocks are emitted exclusively by the
+> backbone planner with `placement: "sidebar"`. The curation planner must
+> never propose a `timeline` section.
 
 ---
 
 ## 4. Pipeline Stage Outputs
 
-### `EventFacts` — facts derived from evidence
+### `EventFacts` — grounded facts
+
+Produced by the ground stage's LLM call over real Tavily evidence. Every field
+traces back to one or more `supporting_sources`; `when` must come from a
+source's `published_at` or in-body date, never from parametric memory.
 
 ```typescript
 type EventFacts = {
-  entities: string[];                // actors, in order of centrality
+  entities: string[];                // min 1, in order of centrality
   what: string;                      // one-sentence event description
-  when?: ISO8601;                    // sourced from a supporting source
-  where?: string;                    // sourced from a supporting source
-  why?: string;                      // optional motivation/context
-  supporting_sources: SourceId[];    // IDs of the evidence backing every fact
+  when?: ISO8601;
+  where?: string;
+  why?: string;
+  subtitle?: string;                 // ≤240 chars; renders under the page title
+  supporting_sources: SourceId[];
 };
 ```
 
 ### `GroundOutput` — Stage 1
 
-The ground stage merges the old triage + disambiguate steps. One Tavily
-search (using the raw input sentence) feeds one LLM call that both gates
-"is this an unfolding hot event?" and extracts `EventFacts`.
+Combines the gate ("is this an unfolding hot event?") with grounded fact
+extraction in a single LLM call.
 
 ```typescript
 type GroundOutput = {
@@ -458,46 +481,23 @@ type GroundOutput = {
 };
 ```
 
-### `PlanOutput` — Stage 3a (deterministic)
+When `is_hot_event=false` the CLI short-circuits and exits with code 5.
+
+### `ResearchEvalResult` — per-section research-loop judge
+
+Used inside the per-section research loop. When `satisfied=false`, `gaps` must
+be non-empty (enforced by validator) and `next_query_hint` is the LLM's best
+guess at a Tavily query that would fill the gap.
 
 ```typescript
-type PlanOutput = {
-  archetype_hint: string;
-  layout_preset_id: AestheticPresetId; // initial pick, may be revised at Stage 3b
-  composition: Array<{
-    module_kind: string;
-    artifact: string;
-    slot: Slot;
-    priority: Priority;
-    artifact_alternatives: string[];
-  }>;
-  source_strategy: {
-    preferred_tiers: SourceTier[];
-    time_range_days: number;
-    min_publishers: number;
-  };
+type ResearchEvalResult = {
+  satisfied: boolean;
+  gaps: string[];                    // non-empty when satisfied=false
+  next_query_hint?: string;
 };
 ```
 
-### `AestheticPlanOutput` — Stage 3b (LLM)
-
-```typescript
-type AestheticPlanOutput = {
-  preset_id: AestheticPresetId;
-  preset_confidence: number;         // 0–1
-  alternatives_considered: AestheticPresetId[];
-  aesthetic_overrides: {
-    palette?: PaletteId;
-    density?: Density;
-    typography_weight?: TypographyWeight;
-    hero_mood?: HeroMood;
-    copy_register?: CopyRegister;
-  };
-  reasoning: string;                 // short LLM rationale
-};
-```
-
-### `ConsistencyCheckOutput` — Stage 6
+### `ConsistencyCheckOutput` — cross-section consistency
 
 ```typescript
 type ConsistencyCheckOutput = {
@@ -516,7 +516,7 @@ type ConsistencyCheckOutput = {
 
 ## 5. Trace and Editor
 
-### `LLMCall` — one entry per individual LLM round-trip
+### `LLMCall` — one entry per LLM round-trip
 
 ```typescript
 type LLMCall = {
@@ -532,18 +532,17 @@ type LLMCall = {
 
 ```typescript
 type StageTrace = {
-  stage: string;                     // "triage", "extract:reactions"
+  stage: string;                     // "ground", "extract:reactions", ...
   started_at: ISO8601;
   duration_ms: number;
-  model?: string;                    // LLM model identifier if applicable
+  model?: string;
   tokens?: { input: number; output: number };
   cost_usd?: number;
   outcome: "success" | "fallback" | "skipped" | "error";
   retry_count: number;
   error?: string;
   output_ref?: string;               // hash or reference, not the full payload
-  llm_calls: LLMCall[];              // one entry per LLM round-trip in this stage
-                                     // (empty for deterministic stages)
+  llm_calls: LLMCall[];              // empty for deterministic stages
 };
 ```
 
@@ -554,22 +553,40 @@ type EditorAction = {
   action_at: ISO8601;
   actor: string;                     // "cli_user@local" or named editor
   action:
-    | "accept_module"
-    | "regenerate_module"
-    | "edit_module_field"
-    | "skip_module"
+    | "accept_section"
+    | "regenerate_section"
+    | "edit_section_field"
+    | "skip_section"
     | "override_archetype"
     | "override_preset"
     | "approve_page"
     | "reject_page"
-    | "save_draft";
+    | "save_draft"
+    | "comment_section"
+    | "add_section";
   target?: {
-    module_kind?: string;
+    section_id?: string;
     field_path?: string;
   };
   before?: unknown;                  // for edits
   after?: unknown;
-  reason?: string;                   // "single_source", or user-typed
+  reason?: string;                   // "single_source", "auto_mode", user-typed, ...
+};
+```
+
+In `--auto` mode every HITL prompt still records an `EditorAction` with
+`reason: "auto_mode"`.
+
+### `EditorNotes` — plan-review HITL commentary
+
+Collected at the `plan_review` HITL gate. Section-level comments feed the
+research-query and block-extract prompts for that section as hard editorial
+constraints; `global_comment` applies to every section.
+
+```typescript
+type EditorNotes = {
+  section_comments: Record<string, string>;  // section_id → free-form note
+  global_comment?: string;
 };
 ```
 
@@ -619,6 +636,7 @@ type PaletteId =
   | "festive_warm"
   | "minimal_tech"
   | "urgent_red"
+  | "urgent_light"
   | "muted_solemn"
   | "bold_sport"
   | "neutral_news";
@@ -671,13 +689,13 @@ type LayoutConfig = {
     sticky_first_item: boolean;
     max_items: number;
     max_height_pct_of_main: number;  // 0–1
-    whitelist: string[];             // module kinds permitted in aux slot
+    whitelist: string[];             // block kinds permitted in the sidebar
   };
 
   mobile: {
     breakpoint_px: number;           // e.g. 768
     aux_strategy: "inline_after_hero" | "sink_to_bottom" | "interleave";
-    aux_priority_in_mobile: string[]; // module kinds, ordered
+    aux_priority_in_mobile: string[]; // block kinds, ordered
   };
 
   design_tokens: {
@@ -688,22 +706,35 @@ type LayoutConfig = {
 
   signals: {
     live_pill: boolean;
-    countdown_in_hero: boolean;
     sticky_top_strip: "live" | "breaking" | null;
   };
 };
 ```
 
-### Preset library (~5 entries; named parameter sets, not types)
+### Preset library
 
-Defined at runtime in `src/layout/presets.py`. Each preset is a complete `LayoutConfig` instance. Editor or LLM can override any field per page.
+Defined at runtime as named parameter sets (each preset a complete
+`LayoutConfig`). Editor or LLM may override any field per page.
 
 ---
 
 ## Schema invariants (must always hold)
 
-1. **Every fact-bearing field has at least one citation.** Schema validation rejects any module whose typed data fields lack `source_id` or `citations`.
-2. **`module.confidence.signals.schema_passes` must be `true` to render.** Any module that fails schema validation is dropped to empty state, never partial-rendered.
-3. **Every `source_id` referenced in a citation must exist in `EventPage.sources[]`.** Orphan citations are validation errors.
-4. **`EventPage.modules[]` is the only source of page content.** Layout never reads outside this array.
-5. **Editor actions are append-only.** `EditorAction[]` is never edited or reordered after writing.
+1. **Every fact-bearing field has at least one citation.** Validation rejects
+   any block whose typed data fields lack `source_id` / `citations`.
+2. **`RenderedSection.block_data.kind` must equal `RenderedSection.block_kind`.**
+   Enforced by the `_block_kind_matches_data` model validator.
+3. **Every `source_id` referenced anywhere on the page must exist in
+   `EventPage.sources[]`.** Orphan citations are validation errors.
+4. **`EventPage.editorial_sections[]` is the only source of page content.**
+   Templates never read outside this array (chrome reads `subject`,
+   `wikipedia_card`, `hero_image` only).
+5. **`timeline` blocks are sidebar-only and backbone-only.** The curation
+   planner must not propose them.
+6. **Editor actions are append-only.** `EditorAction[]` is never edited or
+   reordered after writing.
+7. **`ResearchEvalResult.satisfied=false` requires non-empty `gaps`.** Enforced
+   by Pydantic validator — the LLM must articulate what is missing.
+8. **Grounded fields trace to evidence, not parametric memory.**
+   `EventFacts.when` / `where` come from a `supporting_sources` entry's
+   `published_at` or in-body date.

@@ -18,9 +18,9 @@
 
 ## 0. TL;DR
 
-**Product.** An editor-in-the-loop topic page generator for non-technical users. The system drafts a complete page from a single sentence; the editor steers it at four HITL gates (ground facts, section plan, extracted sections, final page) or runs the same pipeline in fully autonomous mode. The intent is to give the editor a *sliding control* over how much autonomy the system has — see §1 for the autonomy-slider framing and why this product ships only the bottom two notches.
+**Product.** An editor-in-the-loop topic page generator for non-technical users. The system drafts a complete page from a single sentence; the editor steers it at four HITL gates (ground facts, section plan, extracted sections, final page) or runs the same pipeline in fully autonomous mode. The intent is to give the editor a *sliding control* over how much autonomy the system has.
 
-**Pipeline.** LLMs are confined to the genuinely fuzzy tasks: gating, fact extraction, curation, on-demand section proposal, per-section block writing. Orchestration, source fetch, schema validation, rendering, and delivery are deterministic code. Every stage's output is a Pydantic-validated typed object; on validation failure the stage retries with the error fed back into the prompt, or falls through with a recorded outcome. See §2 for the stage-by-stage LLM/deterministic boundary.
+**Pipeline.** LLMs are confined to the genuinely fuzzy tasks: gating, fact extraction, curation, on-demand section proposal, per-section block writing. Orchestration, source fetch, schema validation, rendering, and delivery are deterministic code. Every stage's output is a Pydantic-validated typed object; on validation failure the stage retries with the error fed back into the prompt, or falls through with a recorded outcome.
 
 **Data contract.** Every fact-bearing field carries a citation pointing into a frozen evidence pool. Schema validation is the trust boundary between the LLM and the editor — if a section parsed, every claim in it is traceable to a real source. Full contract in [`schema.md`](./schema.md).
 
@@ -39,9 +39,13 @@ The point of running the system across these four is to show that the *same* gen
 
 ## 1. Product decisions
 
+### What is a topic page, as I'm defining it
+
+A hot-event topic page is a **fact-first aggregation surface** organized around the extended 5W1H frame: a single URL where a reader who just heard about an event can, within thirty seconds, see *what happened, who's involved, when, where, why it matters, what's next, and where to read more from real publishers*. The last two — *what's next* and *where to read more* — extend the journalism classic to cover what a feed-trained reader actually wants once the basics are settled. That frame is the editorial brief the generator is being asked to fill, and it's baked into the data model: `EventFacts` (`schema.py`) literally carries `entities`, `what`, `when`, `where`, `why` as required fields, populated by the ground stage before any page-shape decision is made.
+
 ### Who this is for, and the autonomy slider
 
-The implicit operator is an editor on deadline — non-technical, time-pressed, accountable for what ships. The framing I picked up from Karpathy is that any AI product should hand its user a *sliding control* over autonomy. Roughly four positions on that slider:
+The implicit operator is an editor on deadline — non-technical, time-pressed, accountable for what ships. The framing I picked up from Karpathy is that any AI product should hand its user [a *sliding control* over autonomy](https://www.youtube.com/watch?v=LCEmiRjPEtQ). Roughly four positions on that slider:
 
 1. **Autocomplete-style (ALM)** — the model helps with the next token.
 2. **Semi-autonomous (Semi-LM)** — the model drafts; the human re-writes liberally.
@@ -62,9 +66,6 @@ So I flipped the framing: instead of asking "what kinds of events exist?", ask "
 
 **Generalization comes from anchoring on the closed set of reader needs, not from chasing the open set of event types.** Everything that follows in §1 — the topic-page definition, the deterministic backbone, the visual neutrality of the chrome — is a consequence of that one move.
 
-### What is a topic page, as I'm defining it
-
-A hot-event topic page is a **fact-first aggregation surface** organized around the extended 5W1H frame: a single URL where a reader who just heard about an event can, within thirty seconds, see *what happened, who's involved, when, where, why it matters, what's next, and where to read more from real publishers*. The last two — *what's next* and *where to read more* — extend the journalism classic to cover what a feed-trained reader actually wants once the basics are settled. That frame is the editorial brief the generator is being asked to fill, and it's baked into the data model: `EventFacts` (`schema.py`) literally carries `entities`, `what`, `when`, `where`, `why` as required fields, populated by the ground stage before any page-shape decision is made.
 
 ### How the page shape is decided
 
