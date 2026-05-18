@@ -1,0 +1,1790 @@
+{
+  "page_id": "page_25ca1557",
+  "input_sentence": "OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT in May 2026",
+  "generated_at": "2026-05-18T17:51:59.935870+00:00",
+  "subject": {
+    "title": "OpenAI launches GPT-5.5 Instant as ChatGPT's default model",
+    "subtitle": "GPT-5.5 Instant replaces GPT-5.3 Instant as ChatGPT's default, bringing fewer hallucinations and new personalization features to all users.",
+    "entities": [
+      "GPT-5.5 Instant (OpenAI)",
+      "ChatGPT"
+    ],
+    "when": "2026-05-05T17:00:00Z",
+    "where": "San Francisco, California"
+  },
+  "layout": {
+    "preset_id": "product_focus",
+    "overrides": null
+  },
+  "sources": [
+    {
+      "id": "src_83bff641dea2",
+      "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/",
+      "publisher": {
+        "name": "Techcrunch",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT - TechCrunch",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 17:00:00 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT. On Monday, OpenAI released a new foundation model called GPT-5.5 Instant, which will replace GPT-5.3 Instant as the default ChatGPT model. OpenAI released the latest GPT-5.5 model last month with the company claiming improvements in areas like coding and knowledge work. GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give you more personalized answers. This feature will be available to Plus and Pro users on the web, with plans to roll it out to mobile soon. For developers, the GPT-5.5 model will be available through API as ‘chat-latest,’ with 5.3 available as an option for paid users for only three months. When OpenAI withdrew its GPT-4o model, there was significant backlash from users who related to the model’s “personality.” GPT-4o affirmed users’ choices frequently and that made them feel a connection to that particular model.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_fa84a4cdec3a",
+      "url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+      "publisher": {
+        "name": "Axios",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "ChatGPT gets more personal by default - Axios",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 17:06:25 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI makes default ChatGPT more personal. OpenAI is making the default ChatGPT more accurate and more personal — changes that could increase people's reliance on it, while also increasing its access to their lives. **Driving the news:** OpenAI updated ChatGPT's default model to respond with more accuracy, more personalization and fewer gratuitous emoji, the company said Tuesday. * GPT-5.5 Instant is rolling out to all ChatGPT users and to the API. **By the numbers:** OpenAI says GPT-5.5 Instant produced 52.5% fewer hallucinated claims than GPT-5.3 Instant on high-stakes prompts in areas like medicine, law and finance. **Zoom in:** The new model \"matches the scale of the task,\" the company said in a blog post Tuesday. **Between the lines:** Instant will also draw on more of a user's context in responses to prompts. * The company is also adding \"memory sources,\" a control that shows users some of the context ChatGPT used to personalize an answer, such as saved memories or past chats.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_addf16607d8a",
+      "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/",
+      "publisher": {
+        "name": "Cnet",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers - CNET",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 17:01:00 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "OpenAI says GPT-5.5 Instant will cut down on \"gratuitous emojis.\". According to OpenAI, GPT-5.5 Instant will provide clearer, more succinct and less overly-formatted answers to everyday queries. OpenAI is also leaning into improved personalization, saying GPT-5.5 Instant can use past chats, files and connected Gmail accounts to answer prompts tailored to you, your workflow and tone. The company is also rolling out new memory sources, giving you more control, context and visibility into what information ChatGPT used to create the personalized responses. You remain in control of what's in your memory: you can delete chats you no longer want to be cited, delete or change items in saved memories in settings or use temporary chats that don't use or update your memory.\". GPT-5.5 Instant is available Tuesday, replacing GPT-5.3 Instant as the default model in ChatGPT and in the API as \"chat-latest.\" OpenAI said GPT-5.3 Instant will remain available for three more months for paid users, and then will be retired.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_83953d373534",
+      "url": "https://www.businessinsider.com/inside-openai-exclusive-launch-party-chatgpt-planned-itself-2026-5",
+      "publisher": {
+        "name": "Businessinsider",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Inside OpenAI's quirky launch party that ChatGPT 5.5 planned itself - Business Insider",
+      "author": null,
+      "published_at": "Wed, 06 May 2026 05:58:29 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Here's what the scene was like at ChatGPT's exclusive launch party. * OpenAI let ChatGPT plan a launch party to celebrate the release of its latest model, 5.5. * ChatGPT wanted the event to be held on May 5 at 5:55 pm, with its human creators delivering a toast. OpenAI's invitation to GPT-5.5's launch party said the vibe would be intimate: a \"low-key\" gathering with CEO Sam Altman, drinks, swag, and a few hundred developers celebrating the company's latest AI model at its San Francisco headquarters. Instead, it became one of the hottest tickets in tech, with more than 8,000 people scrambling to get into a party that Altman says ChatGPT itself helped plan. see you in the @OpenAI HQ GPT-5.5 Party pic.twitter.com/8xGPUnIngQ. > At the OpenAI 5.5 party now. > Met a really cool person at an AI party😊 @openai @sama pic.twitter.com/ODouAKRYLm. Look out for an alert in your inbox the next time publishes a story! Look out for an alert in your inbox the next time a new story is published!",
+      "enriched_at": null
+    },
+    {
+      "id": "src_51b04c190cf3",
+      "url": "https://www.politico.com/news/2026/05/07/openai-chatgpt-cyber-ai-model-00910704",
+      "publisher": {
+        "name": "Politico",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "OpenAI rolls out advanced AI cyber model to challenge Anthropic’s Mythos - Politico",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 21:42:00 GMT",
+      "fetched_at": "2026-05-18T17:50:40.503322+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "timeline"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI rolls out advanced AI cyber model to challenge Anthropic’s Mythos - POLITICO. ## GLOBAL POLITICS & POLICY. # OpenAI rolls out advanced AI cyber model to challenge Anthropic’s Mythos. GPT-5.5-Cyber scales up the latest model released by OpenAI two weeks ago and will only be available initially to vetted cybersecurity professionals. Those with access to ChatGPT's AI model will be able to use it to find and patch cyber vulnerabilities and analyze malware. Those with access to the model will be able to use it to find and patch cyber vulnerabilities and analyze malware. Defenders granted access to the model will be “vetted and approved” for membership in OpenAI’s Trusted Access for Cyber program, and if approved, will be required to install advanced account security for ChatGPT by June 1. Rob Bair, head of cyber policy at Anthropic, said Thursday during a different panel at the AI+Expo that the controlled rollout of Mythos was intended to give network defenders a head start in finding vulnerabilities before hackers could.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_6977b388d0f0",
+      "url": "https://www.csoonline.com/article/4170029/openai-introduces-daybreak-cyber-platform-takes-on-anthropic-mythos.html",
+      "publisher": {
+        "name": "Csoonline",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "OpenAI introduces Daybreak cyber platform, takes on Anthropic Mythos - csoonline.com",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:50:52.803939+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "media_coverage"
+      ],
+      "thumbnail_url": "https://www.csoonline.com/wp-content/uploads/2026/05/4170029-0-36713300-1778591189-Daybreak_openai.jpg?quality=50&strip=all&w=1024",
+      "summary": "## OpenAI’s new cybersecurity platform aims to automate vulnerability detection, patch validation, and secure software development for enterprises and governments. OpenAI has unveiled Daybreak, its answer to Anthropic’s Claude Mythos, amid a growing market for frontier AI-powered cyber defense platforms. The company said Daybreak is focused on accelerating cyber defense operations and enabling organizations to secure software across the development lifecycle continuously. Announcing the initiative on X, Sam Altman, CEO at OpenAI, said, “OpenAI is launching Daybreak, our effort to accelerate cyber defense and continuously secure software. OpenAI is positioning Daybreak and GPT-5.5-Cyber as a controlled cyber-defense platform for vetted defenders, focused on operational workflows such as vulnerability detection, patch validation, malware analysis, and secure software development,” said Pareekh Jain, CEO at EIIRTrend & Pareekh Consulting. OpenAI is pursuing a scalable cyber defense platform strategy with Daybreak and is rolling out the initiative through three different model tiers: GPT-5.5 (default), GPT-5.5 with Trusted Access for Cyber, and GPT-5.5-Cyber.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_48b217f6a8d3",
+      "url": "https://opentools.ai/news/chatgpt-finance-dashboard-connects-12000-banks-openai-fintech-platform",
+      "publisher": {
+        "name": "Opentools",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "ChatGPT Finance Dashboard Connects 12,000 Banks as OpenAI Becomes a Fintech Platform - OpenTools",
+      "author": null,
+      "published_at": "Mon, 18 May 2026 08:42:23 GMT",
+      "fetched_at": "2026-05-18T17:51:23.469071+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# ChatGPT Finance Dashboard Connects 12,000 Banks as OpenAI Becomes a Fintech Platform. OpenAI launched a personal finance dashboard inside ChatGPT for Pro users, connecting to 12,000+ financial institutions via Plaid. The feature analyzes real transaction data with GPT‑5.5, turning ChatGPT from a chatbot into a fintech platform that could compete with Mint and Monarch. OpenAI rolled out a personal finance experience inside ChatGPT on May 15, 2026, letting Pro subscribers in the U.S. connect their bank accounts and credit cards to the AI chatbot. Has anything changed?\" or \"Help me build a plan to buy a house in my area in the next 5 years,\" as 1 highlighted from OpenAI's examples. The feature is powered by **GPT‑5.5**, with GPT‑5.5 Pro available for ChatGPT Pro subscribers. OpenAI worked with finance experts to create a benchmark for personal finance questions, and acquired the team behind personal finance startup Hiro in April 2026 to help build the product, OpenAI announced.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_c3f468ddba62",
+      "url": "https://www.cnbc.com/2026/05/07/openai-rolls-out-new-gpt-5point5-cyber-to-vetted-cybersecurity-teams.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut - CNBC",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 22:06:20 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut. * OpenAI said GPT-5.5-Cyber, a variation of its latest AI model, is rolling out in a limited preview capacity to vetted cybersecurity teams. * The model is trained to be more permissive on security-related tasks, OpenAI said in a blog post. OpenAI on Thursday announced that GPT-5.5-Cyber, a variation of its latest artificial intelligence model, is rolling out in a limited preview capacity to vetted cybersecurity teams, a month after rival Anthropic captivated investors and government officials with Claude Mythos Preview. The preview of GPT-5.5-Cyber is not intended to be a major step up in terms of cyber capability, but is instead trained to be more permissive on security-related tasks, OpenAI said in a blog post. In rolling out Mythos last month, Anthropic decided to limit access to a select group of companies as part of a new cybersecurity initiative called Project Glasswing. Federal agencies seek access to Mythos prompting Anthropic CEO meeting with White House.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_5a7abae603f5",
+      "url": "https://cyberscoop.com/ai-autonomous-cyber-capability-benchmarks-broken-gpt5-claude-mythos/",
+      "publisher": {
+        "name": "Cyberscoop",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Researchers say AI just broke every benchmark for autonomous cyber capability - CyberScoop",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 22:29:19 GMT",
+      "fetched_at": "2026-05-18T17:51:09.342265+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Two of the most advanced artificial intelligence models — Anthropic’s Claude Mythos Preview and OpenAI’s GPT-5.5 — have significantly surpassed the already-accelerating pace at which AI systems are completing autonomous cybersecurity tasks, according to separate findings published Wednesday by the United Kingdom’s AI Security Institute (AISI) and Palo Alto Networks. The AISI, which conducts pre-deployment evaluations of frontier AI models on behalf of the British government, said both Claude Mythos Preview and GPT-5.5 have substantially exceeded the doubling trend the institute had been tracking since late 2024. “Frontier AI’s autonomous cyber and software capability is advancing quickly: the length of cyber tasks that frontier models can complete autonomously has doubled on the order of months, not years,” the AISI wrote. The company said it began testing Claude Mythos in April as a launch partner for Anthropic’s Project Glasswing, and has since tested Claude Opus 4.7 and OpenAI’s GPT-5.5-Cyber as part of OpenAI‘s Trusted Access for Cyber program.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_cc645c3b82bb",
+      "url": "https://techcrunch.com/2026/05/07/openai-launches-new-voice-intelligence-features-in-its-api/",
+      "publisher": {
+        "name": "Techcrunch",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "OpenAI launches new voice intelligence features in its API - TechCrunch",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 22:24:50 GMT",
+      "fetched_at": "2026-05-18T17:50:55.262344+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "timeline"
+      ],
+      "thumbnail_url": null,
+      "summary": "Buy one Disrupt pass, and get the second at 50% off. # OpenAI launches new voice intelligence features in its API. OpenAI said Thursday that its API will now include a number of new voice intelligence features designed to help developers create apps that can talk, transcribe, and translate conversations with users. The company’s new GPT‑Realtime‑2 is another voice model, built to create a realistic vocal simulation that can converse with users. However, unlike its predecessor (GPT-Realtime-1.5) this one is built with GPT‑5‑class reasoning that OpenAI says was created to deal with more complicated requests from users. The company is also launching GPT‑Realtime‑Translate which, just as it sounds, is designed to provide real-time translation services that “keep pace” with the user, conversationally. “Together, the models we are launching move real-time audio from simple call-and-response toward voice interfaces that can actually do work: listen, reason, translate, transcribe, and take action as a conversation unfolds,” the company said. All of the new voice models are included in OpenAI’s Realtime API.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d27a1d538a5a",
+      "url": "https://techcrunch.com/2026/05/04/image-ai-models-now-drive-app-growth-beating-chatbot-upgrades/",
+      "publisher": {
+        "name": "Techcrunch",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Image AI models now drive app growth, beating chatbot upgrades - TechCrunch",
+      "author": null,
+      "published_at": "Mon, 04 May 2026 19:12:49 GMT",
+      "fetched_at": "2026-05-18T17:50:55.262344+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "timeline"
+      ],
+      "thumbnail_url": null,
+      "summary": "Image model releases are driving growth for AI mobile apps, generating 6.5 times more downloads than traditional model updates, according to a new report from app intelligence provider Appfigures. This marks a shift from earlier days, when the release of new models powering the conversational experiences drove more demand, alongside the new features like a voice chat interface. For instance, ChatGPT and Gemini each added tens of millions of new downloads after releasing their respective image models, Appfigures found. For Google’s Gemini, the release of its image model Nano Banana drove an additional 22+ million downloads in the 28 days following the introduction of the Gemini 2.5 Flash image model last August. Meanwhile, ChatGPT added more than 12 million incremental installs in the 28 days after the introduction of its GPT-4o image model in March of last year. Meta AI’s introduction of its AI video feed Vibes added an estimated 2.6 million incremental downloads in the 28 days after its September 2025 release.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_04dfe00f47d5",
+      "url": "https://www.axios.com/2026/05/07/openai-gpt-55-cybersecurity-model",
+      "publisher": {
+        "name": "Axios",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "OpenAI makes its rival to Anthropic's Mythos more widely available to cyber defenders - Axios",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 21:47:23 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "OpenAI is rolling out a more permissible version of GPT-5.5 — aka \"Spud\" — to vetted cyber defenders, the company said Thursday. **Why it matters**: Recent security testing suggests that GPT-5.5 model is nearly as good at finding and exploiting software bugs as Anthropic's Mythos Preview. **Driving the news:** OpenAI is opening a limited preview of GPT-5.5-Cyber to vetted cyber defenders who are \"responsible for securing critical infrastructure,\" per a press release. * A source familiar with GPT-5.5-Cyber's abilities told Axios that they were roughly on par with Mythos. * Cyber defenders who are vetted and approved for the highest tier of OpenAI's Trusted Access for Cyber program will receive a version of GPT-5.5 that has fewer guardrails than the publicly available model. **Zoom in:** The new GPT-5.5-Cyber model is specifically designed to help defenders write proofs of concept for the bugs they can find or run simulations to test their organization's security posture.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e6248372dc9c",
+      "url": "https://www.reuters.com/business/openai-provided-gpt-55-us-national-security-testing-executive-said-2026-05-05/",
+      "publisher": {
+        "name": "Reuters",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "OpenAI provided GPT-5.5 to US for national security testing, executive said - Reuters",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 18:34:33 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI provided GPT-5.5 to US for national security testing, executive said | Reuters. Exclusive news, data and analytics for financial market professionals Learn more about Refinitiv. ## Browse World. ## Browse Business. ## Browse Markets. ## Browse Sustainability. ## Browse Legal. # OpenAI provided GPT-5.5 to US for national security testing, executive said. REUTERS/Dado Ruvic/Illustration Purchase Licensing Rights, opens new tab. ​government ⁠early ​access to ​its GPT-5.5 ​model ​for national ‌security ⁠testing, said ​OpenAI ​executive ⁠Chris ​Lehane ​in ⁠a ⁠LinkedIn ​post. Get a daily digest of breaking business news straight to your inbox with the Reuters Business newsletter. Our Standards: The Thomson Reuters Trust Principles., opens new tab. ### Browse. *   Media Center, opens new tab. *   Reuters News Agency, opens new tab. *   Reuters and AI, opens new tab. *   Reuters Leadership, opens new tab. *   #### World-Check, opens new tab. *   Data Disclosure and Sources, opens new tab.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_15bdfa1f329f",
+      "url": "https://techcrunch.com/2026/05/15/openai-launches-chatgpt-for-personal-finance-will-let-you-connect-bank-accounts/",
+      "publisher": {
+        "name": "Techcrunch",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "OpenAI launches ChatGPT for personal finance, will let you connect bank accounts - TechCrunch",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 16:00:00 GMT",
+      "fetched_at": "2026-05-18T17:51:05.166026+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "media_coverage"
+      ],
+      "thumbnail_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024",
+      "summary": "# OpenAI launches ChatGPT for personal finance, will let you connect bank accounts. On Friday, OpenAI launched a new set of personal finance tools in preview for ChatGPT Pro subscribers in the U.S., letting them connect their accounts and ask questions ranging from spending analysis to future financial planning. OpenAI said that the Hiro team’s expertise in finance was useful in launching this product, but didn’t specify if the entire feature was built by them. OpenAI users can access the tool by selecting “Get started” in the “Finances” option in the sidebar, or typing “@Finances, connect my accounts” in a ChatGPT conversation. The company said it worked with finance experts to create a benchmark for the model to improve on personal finance questions. OpenAI said its personal finance tools will be available on ChatGPT on the web and iOS to Pro users.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_617ce2865ae1",
+      "url": "https://zamin.uz/en/technology/199713-openai-introduces-new-voice-ai-features-for-openai-api.html",
+      "publisher": {
+        "name": "Zamin",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "OpenAI API учун янги овозли интеллект функцияларини тақдим этди - Zamin.uz",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 22:23:45 GMT",
+      "fetched_at": "2026-05-18T17:51:00.276228+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI introduces new voice AI features for OpenAI API. OpenAI has launched new voice AI features for its API platform, helping developers build applications that interact with users, transcribe speech, and translate languages. The new GPT-Realtime-2 model offers realistic voice simulation, enabling natural conversations with users. Unlike the previous version, this model possesses GPT-5 level reasoning capabilities and is designed to process more complex requests. Additionally, the company introduced the GPT-Realtime-Translate feature. Furthermore, the GPT-Realtime-Whisper tool offers live speech-to-text transcription, recording interactions instantly. OpenAI representatives state that these new models transform voice interfaces from simple Q&A systems into tools capable of performing complex tasks—listening, analyzing, and acting. If harmful content rules are violated during a conversation, the system automatically terminates the interaction. The new voice models are included in the OpenAI Realtime API, with pricing based on usage time or token consumption. News » Technology » OpenAI introduces new voice AI features for OpenAI API. Samsung releases One UI 8.5 update for Galaxy S26.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_699bd3401e65",
+      "url": "https://www.csoonline.com/article/4172519/ai-cyberattackers-are-getting-better-faster.html",
+      "publisher": {
+        "name": "Csoonline",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "AI cyberattackers are getting better faster - csoonline.com",
+      "author": null,
+      "published_at": "Mon, 18 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:51:23.469071+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "## Move over, Moore’s law: The difficulty of the cybersecurity defenses AI models can crack is doubling every four months or so — and that time interval is shrinking. The ability of AI models to perform end-to-end, multi-stage penetration tests that match the capabilities of humans undertaking the same tasks has improved dramatically in recent months, according to new benchmarks published by the UK government’s AI Security Institute (AISI). By February this year, the performance improvements had accelerated, with the difficulty of the tasks AI models could complete doubling every 4.7 months, and since then the latest Claude Mythos Preview and GPT-5.5 models are showing even greater capability, AISI said. The time horizon benchmarks used by AISI first measure or estimate the time it would take a human expert to solve a variety of challenges as a proxy for their difficulty and then estimate the longest task (in human work hours) that AI models can complete with a success rate of 80%.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_813515efb99d",
+      "url": "https://cyberscoop.com/openai-daybreak-gpt-5-5-anthropic-mythos-cybersecurity/",
+      "publisher": {
+        "name": "Cyberscoop",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Daybreak is OpenAI’s answer to the AI arms race in cybersecurity - CyberScoop",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 14:30:10 GMT",
+      "fetched_at": "2026-05-18T17:50:50.683268+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Daybreak is OpenAI’s answer to the AI arms race in cybersecurity. OpenAI has unveiled Daybreak, a cybersecurity initiative that combines the company’s large language models with its Codex agentic framework to help organizations identify, patch, and validate software vulnerabilities across the development lifecycle. The platform is built around three model tiers: GPT-5.5 for general-purpose use, GPT-5.5 with Trusted Access for Cyber for verified defensive security workflows, and GPT-5.5-Cyber, a more permissive variant intended for specialized use cases such as authorized red-teaming and penetration testing. OpenAI has framed the access controls as a response to the dual-use nature of the underlying technology. Anthony Grieco, Cisco’s chief security and trust officer, described the technology as a “force multiplier for defenders,” noting that models like GPT-5.5 are changing the pace of security operations, from incident investigation to proactive exposure reduction. OpenAI’s stated intent is to expand access to Daybreak’s most capable models over time, working alongside industry and government partners as it deploys what it describes as “increasingly more cyber-capable models” through an iterative deployment approach.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_22fd177ce6e3",
+      "url": "https://www.businessinsider.com/openai-and-anthropic-kick-off-cybersecurity-frenzy-2026-5",
+      "publisher": {
+        "name": "Businessinsider",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "OpenAI and Anthropic kicked off a new arms race for cyber defense - Business Insider",
+      "author": null,
+      "published_at": "Mon, 18 May 2026 09:00:05 GMT",
+      "fetched_at": "2026-05-18T17:51:09.342265+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI and Anthropic are kicking off a mad cybersecurity dash. * Anthropic's Mythos and OpenAI's GPT-5.5 sparked major cybersecurity concerns worldwide. This spring, Anthropic's Mythos and OpenAI's GPT‑5.5 models sparked a wave of fear that attackers armed with advanced AI models could soon crack systems worldwide. More companies use outside code libraries than in eras prior, which could make it easier for hacks to spread if there are vulnerabilities in those packages of code. And last year, coding tools from OpenAI and Anthropic took off, helping developers churn out millions of lines of new code. Anthropic, which is also in the midst of a cybersecurity push, did not respond to a request for comment from Business Insider. Manoj Nair, who leads the emerging technologies and solutions office at the security startup Snyk, said that with Mythos and OpenAI's GPT-5.5 landing on top of other security issues, \"If you're a CISO today, you're living in what I call the 'AI fog'.\".",
+      "enriched_at": null
+    },
+    {
+      "id": "src_0f3596feba04",
+      "url": "https://letsdatascience.com/news/openai-and-anthropic-spark-cybersecurity-arms-race-300dcc66",
+      "publisher": {
+        "name": "Letsdatascience",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "OpenAI and Anthropic Spark Cybersecurity Arms Race - Let's Data Science",
+      "author": null,
+      "published_at": "Mon, 18 May 2026 10:00:21 GMT",
+      "fetched_at": "2026-05-18T17:50:50.683268+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "OpenAI unveiled **Daybreak**, a cybersecurity initiative that bundles GPT-5.5, a permissive GPT-5.5-Cyber variant, and Codex-based tooling for vetted defenders, according to CyberScoop and The Hacker News. CNBC reported that OpenAI told the EU it would grant access to GPT-5.5-Cyber while Anthropic has not yet provided the Commission preview access. CyberScoop and The Hacker News report Daybreak is built around three tiers: standard GPT-5.5, a vetted GPT-5.5 with Trusted Access for defensive workflows, and a more permissive GPT-5.5-Cyber for controlled red-teaming and penetration testing. Politico and CyberScoop report that Anthropic released **Mythos**, a Claude Mythos-based system for autonomous vulnerability discovery, and that Anthropic has kept access tightly restricted. CNBC reported that OpenAI agreed to grant the European Union access to GPT-5.5-Cyber while EU preview access to Mythos is still under discussion. Per The Hacker News and CyberScoop, Daybreak layers Codex-style agentic workflows on top of GPT-5.5 family models to support tasks such as dependency risk analysis, editable threat modelling, vulnerability testing in isolated environments, and patch validation.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_196d9551cae8",
+      "url": "https://www.geekwire.com/2026/microsofts-multi-agent-ai-system-tops-anthropics-mythos-on-cybersecurity-benchmark/",
+      "publisher": {
+        "name": "Geekwire",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Microsoft’s multi-agent AI system tops Anthropic’s Mythos on cybersecurity benchmark - GeekWire",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 00:16:34 GMT",
+      "fetched_at": "2026-05-18T17:51:09.342265+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Microsoft’s multi-agent AI system tops Anthropic’s Mythos on cybersecurity benchmark. A new AI-powered system from Microsoft surpassed a headline-grabbing rival from Anthropic on a leading cybersecurity benchmark, using more than 100 specialized AI agents working together across multiple AI models to find real-world software vulnerabilities. Microsoft’s system, codenamed MDASH, was introduced this week alongside the disclosure of 16 new vulnerabilities it found in different versions of Windows, including four “critical” remote code execution flaws fixed in this month’s Patch Tuesday release. By comparison, Anthropic’s Mythos, which raised concerns over its ability to find and exploit software vulnerabilities when it was previewed earlier this year, is a single AI model running inside an agent framework. OpenAI’s GPT-5.5 and others on the leaderboard are also single-model systems. MDASH scored 88.45% on the CyberGym benchmark, a test developed by UC Berkeley researchers that measures how well AI systems can reproduce real-world vulnerabilities across 1,507 tasks drawn from 188 open-source software projects. The scores on the CyberGym leaderboard are self-reported by the companies, including Anthropic’s Mythos result.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_0698c5e8a65d",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/928342/openai-daybreak-security-ai",
+      "publisher": {
+        "name": "Theverge",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "OpenAI just released its answer to Claude Mythos - The Verge",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 23:05:01 GMT",
+      "fetched_at": "2026-05-18T17:50:47.484978+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "OpenAI’s Daybreak combines GPT-5.5-Cyber and Codex Security. OpenAI is launching Daybreak, an AI initiative focused on detecting and patching vulnerabilities before attackers find them. Daybreak uses the Codex Security AI agent that launched in March to create a threat model based on an organization’s code and focus on possible attack paths, validate likely vulnerabilities, and then automate the detection of the higher risk ones. Its launch comes just over a month after rival Anthropic announced Claude Mythos, a security-focused AI model it claimed was too dangerous to publicly release and only shared privately as a part of its own initiative, dubbed Project Glasswing. Like Glasswing, Daybreak isn’t built on just one AI model — OpenAI says “Daybreak brings together the most capable OpenAI models, Codex, and our security partners.”. Daybreak also involves specialized cyber models, including GPT-5.5 with Trusted Access for Cyber and GPT-5.5-Cyber, which began rolling out last week. OpenAI also says it’s working with its “industry and government partners” while it prepares to “deploy increasingly more cyber-capable models.”.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_8d49faf357fa",
+      "url": "https://zamin.uz/en/technology/201466-openai-co-founder-greg-brockman-to-lead-product-strategy.html",
+      "publisher": {
+        "name": "Zamin",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "OpenAI асосчиларидан бири Грег Брокман маҳсулот стратегиясини бошқаради - Zamin.uz",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 15:58:51 GMT",
+      "fetched_at": "2026-05-18T17:51:20.494622+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "people_relationships"
+      ],
+      "thumbnail_url": null,
+      "summary": "# OpenAI co-founder Greg Brockman to lead product strategy. According to Wired, OpenAI co-founder and president Greg Brockman has taken over the company's product strategy. This change occurs while Fidji Simo, the company's AGI product lead, is on medical leave. In a memo to employees, Greg Brockman announced plans to integrate ChatGPT and the company's programming product, Codex, into a single system. According to him, the company is consolidating its efforts to focus maximally on future agentic AI technologies and to gain leadership in both consumer and enterprise segments. The company is temporarily pausing secondary initiatives, such as the Sora video generator and scientific projects, to focus its attention on improving the ChatGPT experience. OpenAI has set a goal to create an AI-based \"super app.\" Company representatives noted that Fidji Simo, currently on medical leave, had been working on these strategic changes together with Greg Brockman. News » Technology » OpenAI co-founder Greg Brockman to lead product strategy.",
+      "enriched_at": null
+    }
+  ],
+  "editorial_sections": [
+    {
+      "section_id": "overview",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "OpenAI has released GPT-5.5 Instant as the new default model for ChatGPT, replacing GPT-5.3 Instant. The update, which began rolling out to all ChatGPT users and API customers on May 5, 2026, brings significant improvements in accuracy and personalization. GPT-5.5 Instant can now access past conversations, files, and connected Gmail accounts to deliver more tailored responses while reducing unnecessary formatting like gratuitous emojis.",
+          "The new default model represents OpenAI's effort to make ChatGPT more useful and less intrusive in users' daily workflows. By leveraging personal context and communication history, GPT-5.5 Instant aims to provide clearer, more succinct answers that better match individual user needs and preferences. This rollout is part of a broader expansion of GPT-5.5 capabilities, which the company released last month with improvements in coding and knowledge work."
+        ],
+        "paragraph_sources": [
+          [
+            "src_83bff641dea2",
+            "src_fa84a4cdec3a",
+            "src_addf16607d8a"
+          ],
+          [
+            "src_fa84a4cdec3a",
+            "src_addf16607d8a"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give you more personalized answers.",
+            "attribution": null,
+            "source_id": "src_83bff641dea2"
+          },
+          {
+            "quote": "OpenAI updated ChatGPT's default model to respond with more accuracy, more personalization and fewer gratuitous emoji.",
+            "attribution": null,
+            "source_id": "src_fa84a4cdec3a"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_83bff641dea2",
+            "excerpt": null,
+            "claim_text": "GPT-5.5 Instant replaces GPT-5.3 Instant as the default ChatGPT model"
+          },
+          {
+            "source_id": "src_fa84a4cdec3a",
+            "excerpt": null,
+            "claim_text": "GPT-5.5 Instant is rolling out to all ChatGPT users and to the API"
+          },
+          {
+            "source_id": "src_addf16607d8a",
+            "excerpt": null,
+            "claim_text": "GPT-5.5 Instant can use past chats, files and connected Gmail accounts to answer prompts tailored to users"
+          },
+          {
+            "source_id": "src_addf16607d8a",
+            "excerpt": null,
+            "claim_text": "GPT-5.5 Instant provides clearer, more succinct and less overly-formatted answers"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_83bff641dea2",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        },
+        {
+          "source_id": "src_addf16607d8a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnet."
+        },
+        {
+          "source_id": "src_fa84a4cdec3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Axios."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_83bff641dea2",
+          "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT - TechCrunch",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:00:00 GMT",
+          "fetched_at": "2026-05-18T17:50:40.216122+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT. On Monday, OpenAI released a new foundation model called GPT-5.5 Instant, which will replace GPT-5.3 Instant as the default ChatGPT model. OpenAI released the latest GPT-5.5 model last month with the company claiming improvements in areas like coding and knowledge work. GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give you more personalized answers. This feature will be available to Plus and Pro users on the web, with plans to roll it out to mobile soon. For developers, the GPT-5.5 model will be available through API as ‘chat-latest,’ with 5.3 available as an option for paid users for only three months. When OpenAI withdrew its GPT-4o model, there was significant backlash from users who related to the model’s “personality.” GPT-4o affirmed users’ choices frequently and that made them feel a connection to that particular model.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_fa84a4cdec3a",
+          "url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+          "publisher": {
+            "name": "Axios",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "ChatGPT gets more personal by default - Axios",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:06:25 GMT",
+          "fetched_at": "2026-05-18T17:50:40.216122+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI makes default ChatGPT more personal. OpenAI is making the default ChatGPT more accurate and more personal — changes that could increase people's reliance on it, while also increasing its access to their lives. **Driving the news:** OpenAI updated ChatGPT's default model to respond with more accuracy, more personalization and fewer gratuitous emoji, the company said Tuesday. * GPT-5.5 Instant is rolling out to all ChatGPT users and to the API. **By the numbers:** OpenAI says GPT-5.5 Instant produced 52.5% fewer hallucinated claims than GPT-5.3 Instant on high-stakes prompts in areas like medicine, law and finance. **Zoom in:** The new model \"matches the scale of the task,\" the company said in a blog post Tuesday. **Between the lines:** Instant will also draw on more of a user's context in responses to prompts. * The company is also adding \"memory sources,\" a control that shows users some of the context ChatGPT used to personalize an answer, such as saved memories or past chats.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_addf16607d8a",
+          "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/",
+          "publisher": {
+            "name": "Cnet",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers - CNET",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:01:00 GMT",
+          "fetched_at": "2026-05-18T17:50:40.216122+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "OpenAI says GPT-5.5 Instant will cut down on \"gratuitous emojis.\". According to OpenAI, GPT-5.5 Instant will provide clearer, more succinct and less overly-formatted answers to everyday queries. OpenAI is also leaning into improved personalization, saying GPT-5.5 Instant can use past chats, files and connected Gmail accounts to answer prompts tailored to you, your workflow and tone. The company is also rolling out new memory sources, giving you more control, context and visibility into what information ChatGPT used to create the personalized responses. You remain in control of what's in your memory: you can delete chats you no longer want to be cited, delete or change items in saved memories in settings or use temporary chats that don't use or update your memory.\". GPT-5.5 Instant is available Tuesday, replacing GPT-5.3 Instant as the default model in ChatGPT and in the API as \"chat-latest.\" OpenAI said GPT-5.3 Instant will remain available for three more months for paid users, and then will be retired.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "timeline",
+      "block_kind": "timeline",
+      "block_data": {
+        "kind": "timeline",
+        "entries": [
+          {
+            "title": "OpenAI releases GPT-5.5 model with coding and knowledge improvements",
+            "time": "2026-04",
+            "location": null,
+            "description": "OpenAI released GPT-5.5 with improvements in coding and knowledge work capabilities.",
+            "importance": "feature",
+            "temporal_phase": "past",
+            "source_id": "src_83bff641dea2"
+          },
+          {
+            "title": "GPT-5.5 Instant becomes ChatGPT's default model",
+            "time": "2026-05-05",
+            "location": null,
+            "description": "OpenAI launches GPT-5.5 Instant as the new default ChatGPT model, replacing GPT-5.3 Instant with improved personalization and fewer gratuitous emojis.",
+            "importance": "breaking",
+            "temporal_phase": "present",
+            "source_id": "src_83bff641dea2"
+          },
+          {
+            "title": "OpenAI launches GPT-Realtime-2 voice intelligence features",
+            "time": "2026-05-07",
+            "location": null,
+            "description": "OpenAI releases new voice intelligence features in its API, including GPT-Realtime-2 for realistic vocal simulation and conversation capabilities.",
+            "importance": "feature",
+            "temporal_phase": "present",
+            "source_id": "src_cc645c3b82bb"
+          },
+          {
+            "title": "GPT-5.5-Cyber released for vetted cybersecurity professionals",
+            "time": "2026-05-07",
+            "location": null,
+            "description": "OpenAI rolls out GPT-5.5-Cyber to vetted cyber defenders for finding and patching vulnerabilities, competing with Anthropic's Mythos.",
+            "importance": "feature",
+            "temporal_phase": "present",
+            "source_id": "src_04dfe00f47d5"
+          },
+          {
+            "title": "ChatGPT Finance Dashboard connects 12,000+ banks for Pro users",
+            "time": "2026-05-15",
+            "location": null,
+            "description": "OpenAI launches personal finance dashboard inside ChatGPT, connecting to 12,000+ financial institutions via Plaid for Pro subscribers.",
+            "importance": "feature",
+            "temporal_phase": "present",
+            "source_id": "src_48b217f6a8d3"
+          }
+        ],
+        "timezone": "UTC"
+      },
+      "citations": [
+        {
+          "source_id": "src_04dfe00f47d5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Axios."
+        },
+        {
+          "source_id": "src_48b217f6a8d3",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Opentools."
+        },
+        {
+          "source_id": "src_83bff641dea2",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        },
+        {
+          "source_id": "src_cc645c3b82bb",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_83bff641dea2",
+          "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT - TechCrunch",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:00:00 GMT",
+          "fetched_at": "2026-05-18T17:50:40.503322+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT. On Monday, OpenAI released a new foundation model called GPT-5.5 Instant, which will replace GPT-5.3 Instant as the default ChatGPT model. OpenAI released the latest GPT-5.5 model last month with the company claiming improvements in areas like coding and knowledge work. GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give you more personalized answers. This feature will be available to Plus and Pro users on the web, with plans to roll it out to mobile soon. For developers, the GPT-5.5 model will be available through API as ‘chat-latest,’ with 5.3 available as an option for paid users for only three months. When OpenAI withdrew its GPT-4o model, there was significant backlash from users who related to the model’s “personality.” GPT-4o affirmed users’ choices frequently and that made them feel a connection to that particular model.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_48b217f6a8d3",
+          "url": "https://opentools.ai/news/chatgpt-finance-dashboard-connects-12000-banks-openai-fintech-platform",
+          "publisher": {
+            "name": "Opentools",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "ChatGPT Finance Dashboard Connects 12,000 Banks as OpenAI Becomes a Fintech Platform - OpenTools",
+          "author": null,
+          "published_at": "Mon, 18 May 2026 08:42:23 GMT",
+          "fetched_at": "2026-05-18T17:50:40.503322+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# ChatGPT Finance Dashboard Connects 12,000 Banks as OpenAI Becomes a Fintech Platform. OpenAI launched a personal finance dashboard inside ChatGPT for Pro users, connecting to 12,000+ financial institutions via Plaid. The feature analyzes real transaction data with GPT‑5.5, turning ChatGPT from a chatbot into a fintech platform that could compete with Mint and Monarch. OpenAI rolled out a personal finance experience inside ChatGPT on May 15, 2026, letting Pro subscribers in the U.S. connect their bank accounts and credit cards to the AI chatbot. Has anything changed?\" or \"Help me build a plan to buy a house in my area in the next 5 years,\" as 1 highlighted from OpenAI's examples. The feature is powered by **GPT‑5.5**, with GPT‑5.5 Pro available for ChatGPT Pro subscribers. OpenAI worked with finance experts to create a benchmark for personal finance questions, and acquired the team behind personal finance startup Hiro in April 2026 to help build the product, OpenAI announced.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_cc645c3b82bb",
+          "url": "https://techcrunch.com/2026/05/07/openai-launches-new-voice-intelligence-features-in-its-api/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI launches new voice intelligence features in its API - TechCrunch",
+          "author": null,
+          "published_at": "Thu, 07 May 2026 22:24:50 GMT",
+          "fetched_at": "2026-05-18T17:50:55.262344+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "Buy one Disrupt pass, and get the second at 50% off. # OpenAI launches new voice intelligence features in its API. OpenAI said Thursday that its API will now include a number of new voice intelligence features designed to help developers create apps that can talk, transcribe, and translate conversations with users. The company’s new GPT‑Realtime‑2 is another voice model, built to create a realistic vocal simulation that can converse with users. However, unlike its predecessor (GPT-Realtime-1.5) this one is built with GPT‑5‑class reasoning that OpenAI says was created to deal with more complicated requests from users. The company is also launching GPT‑Realtime‑Translate which, just as it sounds, is designed to provide real-time translation services that “keep pace” with the user, conversationally. “Together, the models we are launching move real-time audio from simple call-and-response toward voice interfaces that can actually do work: listen, reason, translate, transcribe, and take action as a conversation unfolds,” the company said. All of the new voice models are included in OpenAI’s Realtime API.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_04dfe00f47d5",
+          "url": "https://www.axios.com/2026/05/07/openai-gpt-55-cybersecurity-model",
+          "publisher": {
+            "name": "Axios",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI makes its rival to Anthropic's Mythos more widely available to cyber defenders - Axios",
+          "author": null,
+          "published_at": "Thu, 07 May 2026 21:47:23 GMT",
+          "fetched_at": "2026-05-18T17:50:55.262344+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "OpenAI is rolling out a more permissible version of GPT-5.5 — aka \"Spud\" — to vetted cyber defenders, the company said Thursday. **Why it matters**: Recent security testing suggests that GPT-5.5 model is nearly as good at finding and exploiting software bugs as Anthropic's Mythos Preview. **Driving the news:** OpenAI is opening a limited preview of GPT-5.5-Cyber to vetted cyber defenders who are \"responsible for securing critical infrastructure,\" per a press release. * A source familiar with GPT-5.5-Cyber's abilities told Axios that they were roughly on par with Mythos. * Cyber defenders who are vetted and approved for the highest tier of OpenAI's Trusted Access for Cyber program will receive a version of GPT-5.5 that has fewer guardrails than the publicly available model. **Zoom in:** The new GPT-5.5-Cyber model is specifically designed to help defenders write proofs of concept for the bugs they can find or run simulations to test their organization's security posture.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "sidebar"
+    },
+    {
+      "section_id": "media_coverage",
+      "block_kind": "newsfeed",
+      "block_data": {
+        "kind": "newsfeed",
+        "cards": [
+          {
+            "url": "https://techcrunch.com/2026/05/15/openai-launches-chatgpt-for-personal-finance-will-let-you-connect-bank-accounts/',",
+            "title": "OpenAI launches ChatGPT for personal finance, will let you connect bank accounts",
+            "publisher": "TechCrunch",
+            "tier": "T1",
+            "published_at": "2026-05-15T16:00:00Z",
+            "thumbnail_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024",
+            "summary": "OpenAI launched a new set of personal finance tools in preview for ChatGPT Pro subscribers in the U.S., letting them connect their accounts and ask questions ranging from spending analysis to future financial planning.",
+            "source_id": "src_15bdfa1f329f"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/05/07/openai-rolls-out-new-gpt-5point5-cyber-to-vetted-cybersecurity-teams.html",
+            "title": "OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut",
+            "publisher": "CNBC",
+            "tier": "T1",
+            "published_at": "2026-05-07T22:06:20Z",
+            "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108276814-1773254522162-gettyimages-2265991644-0d6a8221_0m2z4cha.jpeg?v=1776066514&w=1920&h=1080",
+            "summary": "OpenAI said GPT-5.5-Cyber, a variation of its latest AI model, is rolling out in a limited preview capacity to vetted cybersecurity teams. The model is trained to be more permissive on security-related tasks.",
+            "source_id": "src_c3f468ddba62"
+          },
+          {
+            "url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+            "title": "ChatGPT gets more personal by default",
+            "publisher": "Axios",
+            "tier": "T1",
+            "published_at": "2026-05-05T17:06:25Z",
+            "thumbnail_url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+            "summary": "OpenAI updated ChatGPT's default model to respond with more accuracy, more personalization and fewer gratuitous emoji. GPT-5.5 Instant is rolling out to all ChatGPT users and to the API.",
+            "source_id": "src_fa84a4cdec3a"
+          },
+          {
+            "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/',",
+            "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers",
+            "publisher": "CNET",
+            "tier": "T3",
+            "published_at": "2026-05-05T17:01:00Z",
+            "thumbnail_url": "https://www.cnet.com/a/img/resize/d7d8873eb09ecbec8a0bde48d4745f4b86abed90/hub/2026/04/14/674fe67b-1ea0-46e3-a2c3-debc44750862/gptgpt-4.jpg?auto=webp&fit=crop&height=675&width=1200",
+            "summary": "OpenAI says GPT-5.5 Instant will cut down on gratuitous emojis and provide clearer, more succinct answers. The model can use past chats, files and connected Gmail accounts to answer prompts tailored to users.",
+            "source_id": "src_addf16607d8a"
+          },
+          {
+            "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/',",
+            "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT",
+            "publisher": "TechCrunch",
+            "tier": "T1",
+            "published_at": "2026-05-05T17:00:00Z",
+            "thumbnail_url": "https://techcrunch.com/wp-content/uploads/2026/05/Memory-update.jpeg?resize=1200,845",
+            "summary": "OpenAI released GPT-5.5 Instant, which will replace GPT-5.3 Instant as the default ChatGPT model. GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give more personalized answers.",
+            "source_id": "src_83bff641dea2"
+          }
+        ],
+        "variant": "news",
+        "grouping": "by_time"
+      },
+      "citations": [
+        {
+          "source_id": "src_15bdfa1f329f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        },
+        {
+          "source_id": "src_83bff641dea2",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        },
+        {
+          "source_id": "src_addf16607d8a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnet."
+        },
+        {
+          "source_id": "src_c3f468ddba62",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_fa84a4cdec3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Axios."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_fa84a4cdec3a",
+          "url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+          "publisher": {
+            "name": "Axios",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "ChatGPT gets more personal by default - Axios",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:06:25 GMT",
+          "fetched_at": "2026-05-18T17:50:52.803939+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI makes default ChatGPT more personal. OpenAI is making the default ChatGPT more accurate and more personal — changes that could increase people's reliance on it, while also increasing its access to their lives. **Driving the news:** OpenAI updated ChatGPT's default model to respond with more accuracy, more personalization and fewer gratuitous emoji, the company said Tuesday. * GPT-5.5 Instant is rolling out to all ChatGPT users and to the API. **By the numbers:** OpenAI says GPT-5.5 Instant produced 52.5% fewer hallucinated claims than GPT-5.3 Instant on high-stakes prompts in areas like medicine, law and finance. **Zoom in:** The new model \"matches the scale of the task,\" the company said in a blog post Tuesday. **Between the lines:** Instant will also draw on more of a user's context in responses to prompts. * The company is also adding \"memory sources,\" a control that shows users some of the context ChatGPT used to personalize an answer, such as saved memories or past chats.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_83bff641dea2",
+          "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT - TechCrunch",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:00:00 GMT",
+          "fetched_at": "2026-05-18T17:50:52.803939+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://techcrunch.com/wp-content/uploads/2026/05/Memory-update.jpeg?resize=1200,845",
+          "summary": "# OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT. On Monday, OpenAI released a new foundation model called GPT-5.5 Instant, which will replace GPT-5.3 Instant as the default ChatGPT model. OpenAI released the latest GPT-5.5 model last month with the company claiming improvements in areas like coding and knowledge work. GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give you more personalized answers. This feature will be available to Plus and Pro users on the web, with plans to roll it out to mobile soon. For developers, the GPT-5.5 model will be available through API as ‘chat-latest,’ with 5.3 available as an option for paid users for only three months. When OpenAI withdrew its GPT-4o model, there was significant backlash from users who related to the model’s “personality.” GPT-4o affirmed users’ choices frequently and that made them feel a connection to that particular model.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_addf16607d8a",
+          "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/",
+          "publisher": {
+            "name": "Cnet",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers - CNET",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:01:00 GMT",
+          "fetched_at": "2026-05-18T17:50:52.803939+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://www.cnet.com/a/img/resize/d7d8873eb09ecbec8a0bde48d4745f4b86abed90/hub/2026/04/14/674fe67b-1ea0-46e3-a2c3-debc44750862/gptgpt-4.jpg?auto=webp&fit=crop&height=675&width=1200",
+          "summary": "OpenAI says GPT-5.5 Instant will cut down on \"gratuitous emojis.\". According to OpenAI, GPT-5.5 Instant will provide clearer, more succinct and less overly-formatted answers to everyday queries. OpenAI is also leaning into improved personalization, saying GPT-5.5 Instant can use past chats, files and connected Gmail accounts to answer prompts tailored to you, your workflow and tone. The company is also rolling out new memory sources, giving you more control, context and visibility into what information ChatGPT used to create the personalized responses. You remain in control of what's in your memory: you can delete chats you no longer want to be cited, delete or change items in saved memories in settings or use temporary chats that don't use or update your memory.\". GPT-5.5 Instant is available Tuesday, replacing GPT-5.3 Instant as the default model in ChatGPT and in the API as \"chat-latest.\" OpenAI said GPT-5.3 Instant will remain available for three more months for paid users, and then will be retired.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_c3f468ddba62",
+          "url": "https://www.cnbc.com/2026/05/07/openai-rolls-out-new-gpt-5point5-cyber-to-vetted-cybersecurity-teams.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut - CNBC",
+          "author": null,
+          "published_at": "Thu, 07 May 2026 22:06:20 GMT",
+          "fetched_at": "2026-05-18T17:50:52.803939+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108276814-1773254522162-gettyimages-2265991644-0d6a8221_0m2z4cha.jpeg?v=1776066514&w=1920&h=1080",
+          "summary": "# OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut. * OpenAI said GPT-5.5-Cyber, a variation of its latest AI model, is rolling out in a limited preview capacity to vetted cybersecurity teams. * The model is trained to be more permissive on security-related tasks, OpenAI said in a blog post. OpenAI on Thursday announced that GPT-5.5-Cyber, a variation of its latest artificial intelligence model, is rolling out in a limited preview capacity to vetted cybersecurity teams, a month after rival Anthropic captivated investors and government officials with Claude Mythos Preview. The preview of GPT-5.5-Cyber is not intended to be a major step up in terms of cyber capability, but is instead trained to be more permissive on security-related tasks, OpenAI said in a blog post. In rolling out Mythos last month, Anthropic decided to limit access to a select group of companies as part of a new cybersecurity initiative called Project Glasswing. Federal agencies seek access to Mythos prompting Anthropic CEO meeting with White House.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_15bdfa1f329f",
+          "url": "https://techcrunch.com/2026/05/15/openai-launches-chatgpt-for-personal-finance-will-let-you-connect-bank-accounts/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI launches ChatGPT for personal finance, will let you connect bank accounts - TechCrunch",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 16:00:00 GMT",
+          "fetched_at": "2026-05-18T17:51:05.166026+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2195918462.jpg?w=1024",
+          "summary": "# OpenAI launches ChatGPT for personal finance, will let you connect bank accounts. On Friday, OpenAI launched a new set of personal finance tools in preview for ChatGPT Pro subscribers in the U.S., letting them connect their accounts and ask questions ranging from spending analysis to future financial planning. OpenAI said that the Hiro team’s expertise in finance was useful in launching this product, but didn’t specify if the entire feature was built by them. OpenAI users can access the tool by selecting “Get started” in the “Finances” option in the sidebar, or typing “@Finances, connect my accounts” in a ChatGPT conversation. The company said it worked with finance experts to create a benchmark for the model to improve on personal finance questions. OpenAI said its personal finance tools will be available on ChatGPT on the web and iOS to Pro users.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "latest_news",
+      "block_kind": "latest_news",
+      "block_data": {
+        "kind": "latest_news",
+        "cards": [
+          {
+            "url": "https://opentools.ai/news/chatgpt-finance-dashboard-connects-12000-banks-openai-fintech-platform",
+            "title": "ChatGPT Finance Dashboard Connects 12,000 Banks as OpenAI Becomes a Fintech Platform",
+            "publisher": "OpenTools",
+            "tier": "T3",
+            "published_at": "2026-05-18T08:42:23Z",
+            "thumbnail_url": "https://imagedelivery.net/FCiXvK7dG4mSm_W_033WNA/2a30cbbc-e966-438e-a9f5-9e5c52385d00/contentbanner",
+            "summary": "OpenAI launched a personal finance dashboard inside ChatGPT for Pro users, connecting to 12,000+ financial institutions via Plaid and analyzing transaction data with GPT-5.5.",
+            "source_id": "src_48b217f6a8d3"
+          },
+          {
+            "url": "https://zamin.uz/en/technology/199713-openai-introduces-new-voice-ai-features-for-openai-api.html",
+            "title": "OpenAI introduces new voice AI features for OpenAI API",
+            "publisher": "Zamin.uz",
+            "tier": "T3",
+            "published_at": "2026-05-07T22:23:45Z",
+            "thumbnail_url": "https://zamin.uz/uploads/posts/2026-05/zamin_openai-api-uchun-yangi-ovozli-intellekt-funksiyalarini-taqdi_20260508_033007_89e1442d.webp",
+            "summary": "OpenAI launched new voice AI features for its API platform, including the GPT-Realtime-2 model with GPT-5 level reasoning capabilities for realistic voice simulation and natural conversations.",
+            "source_id": "src_617ce2865ae1"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/05/07/openai-rolls-out-new-gpt-5point5-cyber-to-vetted-cybersecurity-teams.html",
+            "title": "OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut",
+            "publisher": "CNBC",
+            "tier": "T1",
+            "published_at": "2026-05-07T22:06:20Z",
+            "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108276814-1773254522162-gettyimages-2265991644-0d6a8221_0m2z4cha.jpeg?v=1776066514&w=1920&h=1080",
+            "summary": "OpenAI announced GPT-5.5-Cyber, a variation of its latest AI model trained to be more permissive on security-related tasks, rolling out in limited preview to vetted cybersecurity teams.",
+            "source_id": "src_c3f468ddba62"
+          },
+          {
+            "url": "https://www.axios.com/2026/05/07/openai-gpt-55-cybersecurity-model",
+            "title": "OpenAI makes its rival to Anthropic's Mythos more widely available to cyber defenders",
+            "publisher": "Axios",
+            "tier": "T1",
+            "published_at": "2026-05-07T21:47:23Z",
+            "thumbnail_url": null,
+            "summary": "OpenAI is opening a limited preview of GPT-5.5-Cyber to vetted cyber defenders responsible for securing critical infrastructure, with testing suggesting it rivals Anthropic's Mythos.",
+            "source_id": "src_04dfe00f47d5"
+          },
+          {
+            "url": "https://www.businessinsider.com/inside-openai-exclusive-launch-party-chatgpt-planned-itself-2026-5",
+            "title": "Inside OpenAI's quirky launch party that ChatGPT 5.5 planned itself",
+            "publisher": "Business Insider",
+            "tier": "T3",
+            "published_at": "2026-05-06T05:58:29Z",
+            "thumbnail_url": "https://i.insider.com/69fad46ff9e4752b6d60138d?width=1200&format=jpeg",
+            "summary": "OpenAI held a launch party for GPT-5.5 that the model itself helped plan, scheduled for May 5 at 5:55 pm with CEO Sam Altman and developers in attendance.",
+            "source_id": "src_83953d373534"
+          },
+          {
+            "url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+            "title": "ChatGPT gets more personal by default",
+            "publisher": "Axios",
+            "tier": "T1",
+            "published_at": "2026-05-05T17:06:25Z",
+            "thumbnail_url": null,
+            "summary": "OpenAI updated ChatGPT's default model to GPT-5.5 Instant with improved accuracy, personalization, and fewer gratuitous emojis, rolling out to all users and the API.",
+            "source_id": "src_fa84a4cdec3a"
+          },
+          {
+            "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/',",
+            "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers",
+            "publisher": "CNET",
+            "tier": "T3",
+            "published_at": "2026-05-05T17:01:00Z",
+            "thumbnail_url": null,
+            "summary": "OpenAI says GPT-5.5 Instant will provide clearer, more succinct answers with fewer gratuitous emojis and improved personalization using past chats, files, and Gmail.",
+            "source_id": "src_addf16607d8a"
+          },
+          {
+            "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/',,",
+            "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT",
+            "publisher": "TechCrunch",
+            "tier": "T1",
+            "published_at": "2026-05-05T17:00:00Z",
+            "thumbnail_url": "https://techcrunch.com/wp-content/uploads/2026/05/Memory-update.jpeg?resize=1200,845",
+            "summary": "OpenAI released GPT-5.5 Instant as the new default ChatGPT model, replacing GPT-5.3 Instant with improvements in coding and knowledge work, plus personalized answers using search, files, and Gmail.",
+            "source_id": "src_83bff641dea2"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_04dfe00f47d5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Axios."
+        },
+        {
+          "source_id": "src_48b217f6a8d3",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Opentools."
+        },
+        {
+          "source_id": "src_617ce2865ae1",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Zamin."
+        },
+        {
+          "source_id": "src_83953d373534",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Businessinsider."
+        },
+        {
+          "source_id": "src_83bff641dea2",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        },
+        {
+          "source_id": "src_addf16607d8a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnet."
+        },
+        {
+          "source_id": "src_c3f468ddba62",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_fa84a4cdec3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Axios."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_83bff641dea2",
+          "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT - TechCrunch",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:00:00 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT. On Monday, OpenAI released a new foundation model called GPT-5.5 Instant, which will replace GPT-5.3 Instant as the default ChatGPT model. OpenAI released the latest GPT-5.5 model last month with the company claiming improvements in areas like coding and knowledge work. GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give you more personalized answers. This feature will be available to Plus and Pro users on the web, with plans to roll it out to mobile soon. For developers, the GPT-5.5 model will be available through API as ‘chat-latest,’ with 5.3 available as an option for paid users for only three months. When OpenAI withdrew its GPT-4o model, there was significant backlash from users who related to the model’s “personality.” GPT-4o affirmed users’ choices frequently and that made them feel a connection to that particular model.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_addf16607d8a",
+          "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/",
+          "publisher": {
+            "name": "Cnet",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers - CNET",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:01:00 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "OpenAI says GPT-5.5 Instant will cut down on \"gratuitous emojis.\". According to OpenAI, GPT-5.5 Instant will provide clearer, more succinct and less overly-formatted answers to everyday queries. OpenAI is also leaning into improved personalization, saying GPT-5.5 Instant can use past chats, files and connected Gmail accounts to answer prompts tailored to you, your workflow and tone. The company is also rolling out new memory sources, giving you more control, context and visibility into what information ChatGPT used to create the personalized responses. You remain in control of what's in your memory: you can delete chats you no longer want to be cited, delete or change items in saved memories in settings or use temporary chats that don't use or update your memory.\". GPT-5.5 Instant is available Tuesday, replacing GPT-5.3 Instant as the default model in ChatGPT and in the API as \"chat-latest.\" OpenAI said GPT-5.3 Instant will remain available for three more months for paid users, and then will be retired.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_fa84a4cdec3a",
+          "url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+          "publisher": {
+            "name": "Axios",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "ChatGPT gets more personal by default - Axios",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:06:25 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI makes default ChatGPT more personal. OpenAI is making the default ChatGPT more accurate and more personal — changes that could increase people's reliance on it, while also increasing its access to their lives. **Driving the news:** OpenAI updated ChatGPT's default model to respond with more accuracy, more personalization and fewer gratuitous emoji, the company said Tuesday. * GPT-5.5 Instant is rolling out to all ChatGPT users and to the API. **By the numbers:** OpenAI says GPT-5.5 Instant produced 52.5% fewer hallucinated claims than GPT-5.3 Instant on high-stakes prompts in areas like medicine, law and finance. **Zoom in:** The new model \"matches the scale of the task,\" the company said in a blog post Tuesday. **Between the lines:** Instant will also draw on more of a user's context in responses to prompts. * The company is also adding \"memory sources,\" a control that shows users some of the context ChatGPT used to personalize an answer, such as saved memories or past chats.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_83953d373534",
+          "url": "https://www.businessinsider.com/inside-openai-exclusive-launch-party-chatgpt-planned-itself-2026-5",
+          "publisher": {
+            "name": "Businessinsider",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Inside OpenAI's quirky launch party that ChatGPT 5.5 planned itself - Business Insider",
+          "author": null,
+          "published_at": "Wed, 06 May 2026 05:58:29 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Here's what the scene was like at ChatGPT's exclusive launch party. * OpenAI let ChatGPT plan a launch party to celebrate the release of its latest model, 5.5. * ChatGPT wanted the event to be held on May 5 at 5:55 pm, with its human creators delivering a toast. OpenAI's invitation to GPT-5.5's launch party said the vibe would be intimate: a \"low-key\" gathering with CEO Sam Altman, drinks, swag, and a few hundred developers celebrating the company's latest AI model at its San Francisco headquarters. Instead, it became one of the hottest tickets in tech, with more than 8,000 people scrambling to get into a party that Altman says ChatGPT itself helped plan. see you in the @OpenAI HQ GPT-5.5 Party pic.twitter.com/8xGPUnIngQ. > At the OpenAI 5.5 party now. > Met a really cool person at an AI party😊 @openai @sama pic.twitter.com/ODouAKRYLm. Look out for an alert in your inbox the next time publishes a story! Look out for an alert in your inbox the next time a new story is published!",
+          "enriched_at": null
+        },
+        {
+          "id": "src_04dfe00f47d5",
+          "url": "https://www.axios.com/2026/05/07/openai-gpt-55-cybersecurity-model",
+          "publisher": {
+            "name": "Axios",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI makes its rival to Anthropic's Mythos more widely available to cyber defenders - Axios",
+          "author": null,
+          "published_at": "Thu, 07 May 2026 21:47:23 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "OpenAI is rolling out a more permissible version of GPT-5.5 — aka \"Spud\" — to vetted cyber defenders, the company said Thursday. **Why it matters**: Recent security testing suggests that GPT-5.5 model is nearly as good at finding and exploiting software bugs as Anthropic's Mythos Preview. **Driving the news:** OpenAI is opening a limited preview of GPT-5.5-Cyber to vetted cyber defenders who are \"responsible for securing critical infrastructure,\" per a press release. * A source familiar with GPT-5.5-Cyber's abilities told Axios that they were roughly on par with Mythos. * Cyber defenders who are vetted and approved for the highest tier of OpenAI's Trusted Access for Cyber program will receive a version of GPT-5.5 that has fewer guardrails than the publicly available model. **Zoom in:** The new GPT-5.5-Cyber model is specifically designed to help defenders write proofs of concept for the bugs they can find or run simulations to test their organization's security posture.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_48b217f6a8d3",
+          "url": "https://opentools.ai/news/chatgpt-finance-dashboard-connects-12000-banks-openai-fintech-platform",
+          "publisher": {
+            "name": "Opentools",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "ChatGPT Finance Dashboard Connects 12,000 Banks as OpenAI Becomes a Fintech Platform - OpenTools",
+          "author": null,
+          "published_at": "Mon, 18 May 2026 08:42:23 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# ChatGPT Finance Dashboard Connects 12,000 Banks as OpenAI Becomes a Fintech Platform. OpenAI launched a personal finance dashboard inside ChatGPT for Pro users, connecting to 12,000+ financial institutions via Plaid. The feature analyzes real transaction data with GPT‑5.5, turning ChatGPT from a chatbot into a fintech platform that could compete with Mint and Monarch. OpenAI rolled out a personal finance experience inside ChatGPT on May 15, 2026, letting Pro subscribers in the U.S. connect their bank accounts and credit cards to the AI chatbot. Has anything changed?\" or \"Help me build a plan to buy a house in my area in the next 5 years,\" as 1 highlighted from OpenAI's examples. The feature is powered by **GPT‑5.5**, with GPT‑5.5 Pro available for ChatGPT Pro subscribers. OpenAI worked with finance experts to create a benchmark for personal finance questions, and acquired the team behind personal finance startup Hiro in April 2026 to help build the product, OpenAI announced.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_c3f468ddba62",
+          "url": "https://www.cnbc.com/2026/05/07/openai-rolls-out-new-gpt-5point5-cyber-to-vetted-cybersecurity-teams.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut - CNBC",
+          "author": null,
+          "published_at": "Thu, 07 May 2026 22:06:20 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI rolls out new model for cybersecurity teams a month after Anthropic's Mythos debut. * OpenAI said GPT-5.5-Cyber, a variation of its latest AI model, is rolling out in a limited preview capacity to vetted cybersecurity teams. * The model is trained to be more permissive on security-related tasks, OpenAI said in a blog post. OpenAI on Thursday announced that GPT-5.5-Cyber, a variation of its latest artificial intelligence model, is rolling out in a limited preview capacity to vetted cybersecurity teams, a month after rival Anthropic captivated investors and government officials with Claude Mythos Preview. The preview of GPT-5.5-Cyber is not intended to be a major step up in terms of cyber capability, but is instead trained to be more permissive on security-related tasks, OpenAI said in a blog post. In rolling out Mythos last month, Anthropic decided to limit access to a select group of companies as part of a new cybersecurity initiative called Project Glasswing. Federal agencies seek access to Mythos prompting Anthropic CEO meeting with White House.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_617ce2865ae1",
+          "url": "https://zamin.uz/en/technology/199713-openai-introduces-new-voice-ai-features-for-openai-api.html",
+          "publisher": {
+            "name": "Zamin",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "OpenAI API учун янги овозли интеллект функцияларини тақдим этди - Zamin.uz",
+          "author": null,
+          "published_at": "Thu, 07 May 2026 22:23:45 GMT",
+          "fetched_at": "2026-05-18T17:50:50.043252+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI introduces new voice AI features for OpenAI API. OpenAI has launched new voice AI features for its API platform, helping developers build applications that interact with users, transcribe speech, and translate languages. The new GPT-Realtime-2 model offers realistic voice simulation, enabling natural conversations with users. Unlike the previous version, this model possesses GPT-5 level reasoning capabilities and is designed to process more complex requests. Additionally, the company introduced the GPT-Realtime-Translate feature. Furthermore, the GPT-Realtime-Whisper tool offers live speech-to-text transcription, recording interactions instantly. OpenAI representatives state that these new models transform voice interfaces from simple Q&A systems into tools capable of performing complex tasks—listening, analyzing, and acting. If harmful content rules are violated during a conversation, the system automatically terminates the interaction. The new voice models are included in the OpenAI Realtime API, with pricing based on usage time or token consumption. News » Technology » OpenAI introduces new voice AI features for OpenAI API. Samsung releases One UI 8.5 update for Galaxy S26.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "kpi_dashboard",
+      "block_kind": "chart",
+      "block_data": {
+        "kind": "chart",
+        "chart_type": "stat",
+        "series": null,
+        "stats": [
+          {
+            "value": "More accurate",
+            "unit": null,
+            "label": "Accuracy Improvement",
+            "comparison": "vs GPT-5.3 Instant",
+            "source_id": "src_fa84a4cdec3a"
+          },
+          {
+            "value": "Fewer gratuitous emojis",
+            "unit": null,
+            "label": "Response Quality",
+            "comparison": "Clearer, more succinct answers",
+            "source_id": "src_addf16607d8a"
+          },
+          {
+            "value": "Enhanced personalization",
+            "unit": null,
+            "label": "New Capability",
+            "comparison": "Uses past chats, files, and Gmail for tailored responses",
+            "source_id": "src_83bff641dea2"
+          }
+        ],
+        "table": null,
+        "title": "GPT-5.5 Instant Key Improvements"
+      },
+      "citations": [
+        {
+          "source_id": "src_83bff641dea2",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        },
+        {
+          "source_id": "src_addf16607d8a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnet."
+        },
+        {
+          "source_id": "src_fa84a4cdec3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Axios."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_83bff641dea2",
+          "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT - TechCrunch",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:00:00 GMT",
+          "fetched_at": "2026-05-18T17:50:54.094322+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "kpi_dashboard"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI releases GPT-5.5 Instant, a new default model for ChatGPT. On Monday, OpenAI released a new foundation model called GPT-5.5 Instant, which will replace GPT-5.3 Instant as the default ChatGPT model. OpenAI released the latest GPT-5.5 model last month with the company claiming improvements in areas like coding and knowledge work. GPT-5.5 Instant can use its search tool to refer back to past conversations, files, and Gmail to give you more personalized answers. This feature will be available to Plus and Pro users on the web, with plans to roll it out to mobile soon. For developers, the GPT-5.5 model will be available through API as ‘chat-latest,’ with 5.3 available as an option for paid users for only three months. When OpenAI withdrew its GPT-4o model, there was significant backlash from users who related to the model’s “personality.” GPT-4o affirmed users’ choices frequently and that made them feel a connection to that particular model.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_addf16607d8a",
+          "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/",
+          "publisher": {
+            "name": "Cnet",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers - CNET",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:01:00 GMT",
+          "fetched_at": "2026-05-18T17:50:54.094322+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "kpi_dashboard"
+          ],
+          "thumbnail_url": null,
+          "summary": "OpenAI says GPT-5.5 Instant will cut down on \"gratuitous emojis.\". According to OpenAI, GPT-5.5 Instant will provide clearer, more succinct and less overly-formatted answers to everyday queries. OpenAI is also leaning into improved personalization, saying GPT-5.5 Instant can use past chats, files and connected Gmail accounts to answer prompts tailored to you, your workflow and tone. The company is also rolling out new memory sources, giving you more control, context and visibility into what information ChatGPT used to create the personalized responses. You remain in control of what's in your memory: you can delete chats you no longer want to be cited, delete or change items in saved memories in settings or use temporary chats that don't use or update your memory.\". GPT-5.5 Instant is available Tuesday, replacing GPT-5.3 Instant as the default model in ChatGPT and in the API as \"chat-latest.\" OpenAI said GPT-5.3 Instant will remain available for three more months for paid users, and then will be retired.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_fa84a4cdec3a",
+          "url": "https://www.axios.com/2026/05/05/openai-chatgpt-update-default-model",
+          "publisher": {
+            "name": "Axios",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "ChatGPT gets more personal by default - Axios",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:06:25 GMT",
+          "fetched_at": "2026-05-18T17:50:54.094322+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "kpi_dashboard"
+          ],
+          "thumbnail_url": null,
+          "summary": "# OpenAI makes default ChatGPT more personal. OpenAI is making the default ChatGPT more accurate and more personal — changes that could increase people's reliance on it, while also increasing its access to their lives. **Driving the news:** OpenAI updated ChatGPT's default model to respond with more accuracy, more personalization and fewer gratuitous emoji, the company said Tuesday. * GPT-5.5 Instant is rolling out to all ChatGPT users and to the API. **By the numbers:** OpenAI says GPT-5.5 Instant produced 52.5% fewer hallucinated claims than GPT-5.3 Instant on high-stakes prompts in areas like medicine, law and finance. **Zoom in:** The new model \"matches the scale of the task,\" the company said in a blog post Tuesday. **Between the lines:** Instant will also draw on more of a user's context in responses to prompts. * The company is also adding \"memory sources,\" a control that shows users some of the context ChatGPT used to personalize an answer, such as saved memories or past chats.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "reactions",
+      "block_kind": "reactions",
+      "block_data": {
+        "kind": "reactions",
+        "cards": [
+          {
+            "author": "UK AI Security Institute",
+            "author_role": "Government AI Research Organization",
+            "quote": "AI models have significantly surpassed the already-accelerating pace at which AI systems are completing autonomous cybersecurity tasks",
+            "sentiment": "negative",
+            "stakeholder_tier": "third_party",
+            "author_image_url": null,
+            "source_id": "src_5a7abae603f5",
+            "article_title": "Researchers say AI just broke every benchmark for autonomous cyber capability",
+            "article_url": "https://cyberscoop.com/ai-autonomous-cyber-capability-benchmarks-broken-gpt5-claude-mythos/',",
+            "publisher": "CyberScoop",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "OpenAI",
+            "author_role": "AI Company Executive",
+            "quote": "GPT-5.5 Instant will provide clearer, more succinct and less overly-formatted answers to everyday queries",
+            "sentiment": "positive",
+            "stakeholder_tier": "stakeholder",
+            "author_image_url": null,
+            "source_id": "src_addf16607d8a",
+            "article_title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers - CNET",
+            "article_url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/',",
+            "publisher": "Cnet",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "Security Analysts",
+            "author_role": "Cybersecurity Researchers",
+            "quote": "Recent security testing suggests that GPT-5.5 model is nearly as good at finding and exploiting software bugs as Anthropic's Mythos Preview",
+            "sentiment": "negative",
+            "stakeholder_tier": "adjacent",
+            "author_image_url": null,
+            "source_id": "src_04dfe00f47d5",
+            "article_title": "OpenAI makes its rival to Anthropic's Mythos more widely available to cyber defenders",
+            "article_url": "https://www.axios.com/2026/05/07/openai-gpt-55-cybersecurity-model",
+            "publisher": "Axios",
+            "publisher_logo_url": null
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_04dfe00f47d5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Axios."
+        },
+        {
+          "source_id": "src_5a7abae603f5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cyberscoop."
+        },
+        {
+          "source_id": "src_addf16607d8a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnet."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_addf16607d8a",
+          "url": "https://www.cnet.com/tech/services-and-software/chatgpts-latest-model-gpt-5-5-instant/",
+          "publisher": {
+            "name": "Cnet",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "ChatGPT's Latest Model Will Supposedly Give Less Annoying Answers - CNET",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:01:00 GMT",
+          "fetched_at": "2026-05-18T17:50:50.683268+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "OpenAI says GPT-5.5 Instant will cut down on \"gratuitous emojis.\". According to OpenAI, GPT-5.5 Instant will provide clearer, more succinct and less overly-formatted answers to everyday queries. OpenAI is also leaning into improved personalization, saying GPT-5.5 Instant can use past chats, files and connected Gmail accounts to answer prompts tailored to you, your workflow and tone. The company is also rolling out new memory sources, giving you more control, context and visibility into what information ChatGPT used to create the personalized responses. You remain in control of what's in your memory: you can delete chats you no longer want to be cited, delete or change items in saved memories in settings or use temporary chats that don't use or update your memory.\". GPT-5.5 Instant is available Tuesday, replacing GPT-5.3 Instant as the default model in ChatGPT and in the API as \"chat-latest.\" OpenAI said GPT-5.3 Instant will remain available for three more months for paid users, and then will be retired.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_04dfe00f47d5",
+          "url": "https://www.axios.com/2026/05/07/openai-gpt-55-cybersecurity-model",
+          "publisher": {
+            "name": "Axios",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "OpenAI makes its rival to Anthropic's Mythos more widely available to cyber defenders - Axios",
+          "author": null,
+          "published_at": "Thu, 07 May 2026 21:47:23 GMT",
+          "fetched_at": "2026-05-18T17:50:50.683268+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "OpenAI is rolling out a more permissible version of GPT-5.5 — aka \"Spud\" — to vetted cyber defenders, the company said Thursday. **Why it matters**: Recent security testing suggests that GPT-5.5 model is nearly as good at finding and exploiting software bugs as Anthropic's Mythos Preview. **Driving the news:** OpenAI is opening a limited preview of GPT-5.5-Cyber to vetted cyber defenders who are \"responsible for securing critical infrastructure,\" per a press release. * A source familiar with GPT-5.5-Cyber's abilities told Axios that they were roughly on par with Mythos. * Cyber defenders who are vetted and approved for the highest tier of OpenAI's Trusted Access for Cyber program will receive a version of GPT-5.5 that has fewer guardrails than the publicly available model. **Zoom in:** The new GPT-5.5-Cyber model is specifically designed to help defenders write proofs of concept for the bugs they can find or run simulations to test their organization's security posture.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_5a7abae603f5",
+          "url": "https://cyberscoop.com/ai-autonomous-cyber-capability-benchmarks-broken-gpt5-claude-mythos/",
+          "publisher": {
+            "name": "Cyberscoop",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Researchers say AI just broke every benchmark for autonomous cyber capability - CyberScoop",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 22:29:19 GMT",
+          "fetched_at": "2026-05-18T17:51:09.342265+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "Two of the most advanced artificial intelligence models — Anthropic’s Claude Mythos Preview and OpenAI’s GPT-5.5 — have significantly surpassed the already-accelerating pace at which AI systems are completing autonomous cybersecurity tasks, according to separate findings published Wednesday by the United Kingdom’s AI Security Institute (AISI) and Palo Alto Networks. The AISI, which conducts pre-deployment evaluations of frontier AI models on behalf of the British government, said both Claude Mythos Preview and GPT-5.5 have substantially exceeded the doubling trend the institute had been tracking since late 2024. “Frontier AI’s autonomous cyber and software capability is advancing quickly: the length of cyber tasks that frontier models can complete autonomously has doubled on the order of months, not years,” the AISI wrote. The company said it began testing Claude Mythos in April as a launch partner for Anthropic’s Project Glasswing, and has since tested Claude Opus 4.7 and OpenAI’s GPT-5.5-Cyber as part of OpenAI‘s Trusted Access for Cyber program.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "people_relationships",
+      "block_kind": "people",
+      "block_data": {
+        "kind": "people",
+        "cards": [
+          {
+            "name": "Sam Altman",
+            "role": "CEO, OpenAI",
+            "bio": "As OpenAI's CEO, Altman led the company's decision to launch GPT-5.5 Instant as ChatGPT's new default model, marking a significant product milestone in the company's AI development strategy.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Sam_Altman_TechCrunch_SF_2019_Day_2_Oct_3_%28cropped_3%29.jpg/330px-Sam_Altman_TechCrunch_SF_2019_Day_2_Oct_3_%28cropped_3%29.jpg",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Sam_Altman",
+            "source_ids": [
+              "src_83953d373534"
+            ]
+          },
+          {
+            "name": "Greg Brockman",
+            "role": "President and Co-founder, OpenAI",
+            "bio": "As OpenAI's president overseeing product strategy, Brockman is responsible for integrating ChatGPT and Codex into a unified system, directly shaping the strategic direction of the GPT-5.5 Instant release.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Disrupt_SF_TechCrunch_Disrupt_San_Francisco_2019_-_Day_2_%2848838200316%29_%28cropped%29.jpg/330px-Disrupt_SF_TechCrunch_Disrupt_San_Francisco_2019_-_Day_2_%2848838200316%29_%28cropped%29.jpg",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Greg_Brockman",
+            "source_ids": [
+              "src_8d49faf357fa"
+            ]
+          }
+        ]
+      },
+      "citations": [],
+      "sources_used": [],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    }
+  ],
+  "wikipedia_card": null,
+  "hero_image": {
+    "image_url": "https://images.storyboard18.com/storyboard18/2026/03/PRESIZE-TB-2026-03-05T132611.305-2026-03-55352bf525363e39f41fc2406937653e-1019x573.png",
+    "alt_text": "OpenAI launches GPT-5.5 Instant as default ChatGPT model with improved accuracy",
+    "source_url": "https://www.storyboard18.com/digital/openai-launches-gpt-5-5-instant-as-default-chatgpt-model-with-improved-accuracy-ws-l-97261.htm",
+    "publisher": "storyboard18.com"
+  },
+  "meta": {
+    "last_updated": "2026-05-18T17:51:59.935838+00:00",
+    "editor_approved": true,
+    "editor_id": "cli_user@local",
+    "pipeline_trace_id": "trace_bf9b7462c242"
+  }
+}

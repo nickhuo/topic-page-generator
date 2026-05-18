@@ -1,0 +1,2942 @@
+{
+  "page_id": "page_990ebd8b",
+  "input_sentence": "Trump China summit",
+  "generated_at": "2026-05-18T17:21:06.880277+00:00",
+  "subject": {
+    "title": "Trump–Xi Summit in Beijing, May 2026",
+    "subtitle": "Trump concluded a two-day summit with Xi Jinping in Beijing focused on trade deals, technology, the Iran war, and Taiwan — his second state visit to China and the first U.S. presidential trip to the country in nearly a decade.",
+    "entities": [
+      "Donald Trump",
+      "Xi Jinping",
+      "United States",
+      "China"
+    ],
+    "when": "2026-05-14",
+    "where": "Beijing, China"
+  },
+  "layout": {
+    "preset_id": "product_focus",
+    "overrides": null
+  },
+  "sources": [
+    {
+      "id": "src_d60179b6b4d6",
+      "url": "https://www.wikidata.org/wiki/Q22686",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Donald Trump",
+      "author": null,
+      "published_at": "2026-05-18T17:19:20.695844+00:00",
+      "fetched_at": "2026-05-18T17:19:20.695853+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg/960px-Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    },
+    {
+      "id": "src_44eb76680a3a",
+      "url": "https://www.cnbc.com/2026/05/14/trump-xi-summit-beijing-takeaway-taiwan-trade-iran-war-strategic-relations-.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Five takeaways from the Trump-Xi summit in Beijing - CNBC",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 07:21:20 GMT",
+      "fetched_at": "2026-05-18T17:19:57.825825+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_figures"
+      ],
+      "thumbnail_url": null,
+      "summary": "* China's Xi and Trump agreed to build a \"constructive, strategically stable relationship.\". * \"China's door to opening up will only open wider,\" Xi said. U.S. President Donald Trump and Chinese President Xi Jinping attend a bilateral meeting at the Great Hall of the People on May 14, 2026 in Beijing, China. The U.S. and China agreed to forge more cooperative ties at their summit in Beijing on Thursday, in a high-stakes meeting full of friendly gestures between two countries that have been battling for years on issues ranging from intellectual property and human rights to technology and trade. Xi and U.S. President Donald Trump agreed to develop a \"constructive China-U.S. relationship of strategic stability,\" according to Beijing's official English readout of the summit. Beijing welcomes deeper commercial engagement from the U.S., he said, and \"China's door to opening up will only open wider.\".",
+      "enriched_at": null
+    },
+    {
+      "id": "src_859e7415037a",
+      "url": "https://www.aljazeera.com/economy/2026/5/13/trump-and-xi-to-meet-in-beijing-the-key-issues-shaping-the-china-summit",
+      "publisher": {
+        "name": "Aljazeera",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump and Xi to meet in Beijing: The key issues shaping the China summit - Al Jazeera",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 07:16:59 GMT",
+      "fetched_at": "2026-05-18T17:19:36.453875+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "overview"
+      ],
+      "thumbnail_url": "https://www.aljazeera.com/wp-content/uploads/2026/05/ap_6a05a2a91a5f2-1778754217.jpg?resize=730%2C410&quality=80",
+      "summary": "# Trump and Xi to meet in Beijing: The key issues shaping the China summit. *Trump and Xi meet as trade, Taiwan and the Iran war dominate a high-stakes US-China summit.*. United States President Donald Trump has arrived in Beijing ahead of a high-stakes summit with Chinese President Xi Jinping, after weeks of unsuccessful US efforts to persuade China to help bring Iran back to negotiations and ease tensions around the Strait of Hormuz. The leaders of the world’s two largest economies are due to meet on Thursday and Friday during Trump’s first visit to China since 2017, with talks expected to focus on trade, Taiwan, artificial intelligence and the war involving Iran. On Tuesday, Trump said he would have “a long talk” about Iran with Xi but the main focus would be trade. The Trump-Xi summit is a high-level meeting between Trump and Xi Jinping taking place in Beijing as the world’s two largest economies face growing tensions over trade, technology, Taiwan and the Iran war.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e87673b74ce5",
+      "url": "https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit - CNBC",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 02:31:54 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit. * Trump and Xi opened a two-day summit in Beijing focused on trade and security. * Xi asked whether the U.S. and China could avoid the \"Thucydides Trap,\" which refers to how tensions historically between a rising and ruling power have often resulted in a war. U.S. President Donald Trump (R) is greeted by Chinese President Xi Jinping at the Great Hall of the People on May 14, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump met his Chinese counterpart Xi Jinping in Beijing on Thursday morning, kickstarting a high-stakes summit that is expected to cover trade, tariffs, Taiwan and Iran, and runs through Friday. Speaking just ahead of Trump, Xi noted the global attention on the meeting, and said a major question for the two countries was whether they could avoid the \"Thucydides Trap,\" according to an official English translation of his Chinese remarks broadcast by CCTV.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_2f14b43978ca",
+      "url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost - CNBC",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 01:12:30 GMT",
+      "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# CNBC Daily Open: Trump-Xi summit delivers Wall Street boost. * Xi tells U.S. CEOs including Musk and Cook that China will “open wider.”. U.S. President Donald Trump speaks at a state banquet with Chinese President Xi Jinping (not pictured) at the Great Hall of the People in Beijing, China, May 14, 2026. *Wall Street was riding high as the first day of the U.S.-China summit raised hopes for a positive relationship reset and agreements from both sides.*. Day one of the high-stakes summit in Beijing saw Chinese President Xi Jinping and Trump agreeing to develop a \"constructive China-U.S. relationship of strategic stability.\". The summit is set to end today, and Trump has reportedly invited ⁠Xi ​Jinping to ​the White House ​for ​a visit on ‌Sept. As President Donald Trump meets Chinese President Xi Jinping this week, lawmakers in both parties are warning the White House not to use the U.S. auto market as a bargaining chip in any deal with Beijing.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_a22a5c2cc5ad",
+      "url": "https://apnews.com/live/trump-administration-updates-05-14-2026",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Live updates: Xi and Trump wrap up bilateral meeting after 2 hours of talks - AP News",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 07:54:00 GMT",
+      "fetched_at": "2026-05-18T17:19:36.809279+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "media_coverage"
+      ],
+      "thumbnail_url": "https://dims.apnews.com/dims4/default/3c5456a/2147483647/strip/true/crop/3161x2106+0+0/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Fd7%2Fc6%2F1c1bd21d4f0087bf113e167aa3db%2Fap26134405224437.jpg",
+      "summary": "President Donald Trump meets with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. ## Trump signals he wants to do business with Xi. President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump arrives for a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. China’s President Xi Jinping arrives to welcome President Donald Trump at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. Elon Musk departs after a welcome ceremony with President Donald Trump and China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ce7be2fdd55b",
+      "url": "https://www.foxnews.com/politics/trump-pushes-xi-trade-after-supreme-court-ruling-dents-key-china-pressure-tool",
+      "publisher": {
+        "name": "Foxnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump pushes Xi on trade after Supreme Court ruling dents key China pressure tool - Fox News",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 17:00:36 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. * #### US and China discuss Taiwan, Iran and trade relations. * #### Experts weigh in on Taiwan, Iran tensions amid US-China summit. Trade has emerged as a central focus of President Donald Trump’s high-stakes meetings with Chinese President Xi Jinping this week, following a Supreme Court setback over Trump’s tariff agenda earlier this year. President Donald Trump and Chinese President Xi Jinping greet other officials at the Great Hall of the People in Beijing, China, on May 14, 2026. U.S. President Donald Trump and Chinese President Xi Jinping attend a welcome ceremony at the Great Hall of the People on May 14, 2026 in Beijing, China. US President Donald Trump (R) shakes hands with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026. China's President Xi Jinping (R) and US President Donald Trump visit the Temple of Heaven on May 14, 2026 in Beijing, China.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_70f437d9aa7a",
+      "url": "https://www.foxnews.com/politics/trump-leaves-china-breakthroughs-unfinished-business-xis-biggest-fights",
+      "publisher": {
+        "name": "Foxnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump leaves China with breakthroughs — and unfinished business on Xi’s biggest fights - Fox News",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 18:17:09 GMT",
+      "fetched_at": "2026-05-18T17:19:35.090474+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "timeline"
+      ],
+      "thumbnail_url": null,
+      "summary": "* #### Trump says he's not looking for any favors from China's Xi on reopening Strait of Hormuz. President Donald Trump returned from his high-stakes summit in China with President Xi Jinping touting trade progress and warmer ties, but several of the biggest pressure points in the U.S.-China relationship — from trade and Taiwan, to AI and human rights — appeared to end without firm public breakthroughs. President Donald Trump speaks during a bilateral meeting with Chinese President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026. President Donald Trump and China's President Xi Jinping greet children during a welcome ceremony at the Great Hall of the People in Beijing on May 14, 2026. President Donald Trump meets with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_58db438fceca",
+      "url": "https://www.cnbc.com/amp/2026/05/15/trump-wraps-up-two-day-china-trip-invites-xi-for-a-september-visit.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump wraps up two-day China trip; invites Xi for a September visit - CNBC",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 05:20:19 GMT",
+      "fetched_at": "2026-05-18T17:19:35.090474+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "timeline"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Trump wraps up two-day China trip; invites Xi for a September visit. U.S. President Donald Trump and Chinese President Xi Jinping meet on the sidelines of a visit to Zhongnanhai Garden on May 15, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump has invited Chinese President Xi Jinping to visit the White House on September 24, indicating that trade talks will extend beyond this week's two-day summit in Beijing. Following the two presidents' meeting earlier that day, Xi said the U.S. and China agreed to \"strategic stability\" as a framework for the next three years, according to state media. The main question for the outcome of the summit will be \"which of the deals the president would like to strike are ripe enough\" to see through, said Ryan Fedasiuk, fellow at the American Enterprise Institute. China has yet to confirm that Xi will accept the invitation to visit. Oil prices jump after Trump says China agreed to buy U.S. crude following Xi talks.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_14000650a1f9",
+      "url": "https://nypost.com/2026/05/13/us-news/trump-greets-xi-in-beijing-to-kick-off-historic-china-summit/",
+      "publisher": {
+        "name": "Nypost",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump greets Xi in Beijing to kick off historic China summit with grand welcome ceremony - New York Post",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 02:08:48 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "BEIJING — President Trump shook hands with Chinese leader Xi Jinping Wednesday to kick off a historic summit between the world’s two most powerful heads of state. U.S. President Donald Trump shakes hands with Chinese President Xi Jinping upon arrival at the Great Hall of the People in Beijing, China, May 14, 2026. President Donald Trump walks with Chinese President Xi Jinping during a welcome ceremony at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump and China's President Xi Jinping greet children during a welcome ceremony at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. Children holding Chinese and U.S. flags rehearse before the welcome ceremony for U.S. President Donald Trump by Chinese President Xi Jinping at the Great Hall of the People in Beijing, Thursday, May 14, 2026. U.S. President Donald Trump inspects an honour guard during a welcome ceremony with Chinese President Xi Jinping at the Great Hall of the People in Beijing, China, May 14, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_2b52027f4d6f",
+      "url": "https://www.cnbc.com/2026/05/13/trump-china-xi-beijing-meeting-ceos.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump arrives in Beijing with CEOs ahead of Xi meetings - CNBC",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 12:44:50 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Trump arrives in Beijing with CEOs ahead of Xi meetings. U.S. President Donald Trump participates in an arrival ceremony at Beijing Capital International Airport during his visit to the country, in Beijing, China, May 13, 2026. U.S. President Donald Trump has landed in Beijing for a highly anticipated presidential summit with his Chinese counterpart, Xi Jinping. The president was greeted on the tarmac by a brass band and flag wavers, who performed as he descended the steps of Air Force One. On Thursday, Trump is scheduled to participate in a welcome ceremony and hold a bilateral meeting with Xi, before touring the historic Temple of Heaven and attending a state banquet. In a Truth Social post on Monday, Trump said he expected \"great things\" to come out of the summit. Sen. Steve Daines, R-Mont., who just travelled to China with a congressional delegation, said Wednesday on CNBC's \"Squawk Box\" that it is \"in both leaders' interest to keep the relationship stable, and to de-escalate, not decouple.\".",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ef74fe55ce3a",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-11/china-confirms-x-trump-summit-that-was-delayed-by-iran-war",
+      "publisher": {
+        "name": "Bloomberg",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "China Confirms Xi-Trump Summit That Was Delayed by Iran War - Bloomberg.com",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 01:16:58 GMT",
+      "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "latest_news"
+      ],
+      "thumbnail_url": null,
+      "summary": "# China Confirms Xi-Trump Summit That Was Delayed by Iran War. Provide news feedback or report an error. Send a tip to our reporters. ## **Takeaways** by Bloomberg AI. Beijing officially announced the date of Donald Trump’s state visit this week, publicly green-lighting the first US presidential trip to China in nearly a decade despite tensions over the Iran war. Trump, who last visited China in 2017, will meet Xi Jinping in a much-anticipated summit that’s already been rescheduled once due to the war. The White House had said the summit will be held May 14-15. Before it's here, it's on the Bloomberg Terminal.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_6b32d9fa5831",
+      "url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+      "publisher": {
+        "name": "Org",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump-Xi : Summit in Beijing - Asia Media Centre",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 04:08:11 GMT",
+      "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Trump-Xi : Summit in Beijing. \"Xi Warns Trump That Taiwan Issue Could Lead to 'Conflict' at Bilateral Talks in Beijing\"** *Euronews — May 14, 2026*  Euronews — editorially independent, EU-licensed, and widely read in the UK — covers Xi's stark warning that mishandling Taiwan risks \"clashes and even conflicts,\" while noting the absence of any deal on the pending $10 billion U.S. arms sale to Taiwan. \"Xi Jinping Warns Donald Trump on Taiwan at Beijing Summit\"** *RNZ — May 14, 2026*  RNZ (which relies on AFP as it has no correspondent of its own in Asia) includes Taipei's pointed response to Xi's warnings — calling China the \"sole risk\" to regional peace — and flags Trump's pre-summit statement that he intended to raise U.S. arms sales to Taiwan directly with Xi, a significant departure from Washington's established position. \"Xi Warns Trump That US and China Will 'Clash' If Taiwan Is Handled 'Improperly'\"** *ABC News — May 14, 2026*  Trump brought the top U.S. CEOs to impress Xi, while Xi's warning that mishandling Taiwan could lead the two nations to \"come into conflict\" dominated the first day of talks.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d6ea4ac1e2fd",
+      "url": "https://www.nytimes.com/2026/05/13/business/economy/china-trump-xi-beijing-summit.html",
+      "publisher": {
+        "name": "Nytimes",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "What to Watch at the High-Stakes U.S.-China Summit - The New York Times",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 19:01:41 GMT",
+      "fetched_at": "2026-05-18T17:19:57.825825+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_figures"
+      ],
+      "thumbnail_url": null,
+      "summary": "# What to Watch at Trump and Xi’s U.S.-China Summit - The New York Times. Here’s what to know about the biggest sources of tension in U.S.-China relations before the first summit in Beijing in nine years between the nations’ leaders. The summit between the leaders of the United States and China in Beijing this week represents a pivotal moment for a global economy that has been upended by war and trade tension over the past year. President Trump and China’s top leader, Xi Jinping, will have a full agenda to cover, as the world’s two largest economies look for ways to cooperate on geopolitical matters and tamp down differences over tariffs, export controls, Taiwan, sanctions and purchases of American farm products. Mr. Xi will most likely be seeking more tariff relief from the United States, a softening of American sanctions targeting Chinese buyers of Iranian oil and a retreat from the U.S. policy of supporting Taiwan’s independence.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ba883aac8081",
+      "url": "https://www.cnn.com/2026/05/13/world/video/trump-china-visit-leahy-intv-ctw-fst-051309a-seg-1-cnni-world?cid=external-feeds_iluminar_google",
+      "publisher": {
+        "name": "Cnn",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump lands in China for high-stakes meeting with Xi - CNN",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 14:43:53 GMT",
+      "fetched_at": "2026-05-18T17:19:36.809279+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "media_coverage"
+      ],
+      "thumbnail_url": null,
+      "summary": "Your effort and contribution in providing this feedback is much appreciated. Your CNN account Sign in to your CNN account. + All There Is with Anderson Cooper. + The Assignment with Audie Cornish. + Terms of Service with Clare Duffy. # Trump lands in China for high-stakes meeting with Xi. Published 10:43 AM EDT, Wed May 13, 2026. Trump lands in China for high-stakes meeting with Xi. FT's Beijing Bureau chief Joe Leahy outlines what Beijing is seeking from the meeting of the U.S. and Chinese leaders, and what the summit means for the war in Iran. Trump lands in China for high-stakes meeting with Xi. China rolls out red carpet treatment as Trump arrives for high-stakes visit. Trump reveals Iran plan in talks with Xi. The shadowy network of Chinese oil refineries funding Iran. CNN gets rare look inside Venezuela with Maduro imprisoned in US. Captain of hantavirus-hit cruise ship thanks crew and passengers. Snail slime for your face?",
+      "enriched_at": null
+    },
+    {
+      "id": "src_c4d50639d89f",
+      "url": "https://www.washingtonpost.com/national/2026/05/14/china-trump-xi-summit-beijing/fdddd82c-5004-11f1-97e7-22c6c29ff0d8_story.html",
+      "publisher": {
+        "name": "Washingtonpost",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "The Latest: US-China summit ends with Xi and Trump claiming progress but differences remain - The Washington Post",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 02:22:59 GMT",
+      "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "latest_news"
+      ],
+      "thumbnail_url": null,
+      "summary": "# The Latest: US-China summit ends with Xi and Trump claiming progress but differences remain. U.S. President Donald Trump departed Beijing following a final day meeting with Chinese President Xi Jinping. U.S. President Donald Trump, right, gestures as he speaks next to Chinese President Xi Jinping during a visit to the Zhongnanhai Garden in Beijing, China, Friday, May 15, 2026. (Evan Vucci/Pool Photo via AP). U.S. President Donald Trump departed Beijing on Friday following a final meeting with Chinese President Xi Jinping . The leaders said they made progress in stabilizing U.S.-China relations, but deep differences remained after two days of meetings and meals.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_527281967047",
+      "url": "https://www.washingtonpost.com/business/2026/05/12/trump-xi-china-trip-arrival/f9f86c74-4e5e-11f1-97e7-22c6c29ff0d8_story.html",
+      "publisher": {
+        "name": "Washingtonpost",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump set to meet with Xi in Beijing as war and inflation weigh on his presidency - The Washington Post",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 00:02:05 GMT",
+      "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "latest_news"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Trump set to meet with Xi in Beijing as war and inflation weigh on his presidency. President Donald Trump is set to land in Beijing on Wednesday for a state visit with Chinese leader Xi Jinping. President Donald Trump waves from the stairs of Air Force One as he boards upon his arrival at Joint Base Andrews, Md., Tuesday, May 12, 2026, for a trip to China to meet President Xi Jinping. By Aamer Madhani, Will Weissert and Josh Boak | AP. BEIJING — President Donald Trump is set to arrive in Beijing on Wednesday for a state visit with Chinese leader Xi Jinping at a restless moment for a world worried about war, trade and artificial intelligence.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e3e6c103bf3c",
+      "url": "https://nypost.com/2026/05/13/us-news/trump-gets-red-carpet-welcome-after-he-lands-in-beijing-for-closely-watched-summit-with-xi-jinping/",
+      "publisher": {
+        "name": "Nypost",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump gets red-carpet welcome after he lands in Beijing for closely watched summit with Xi Jinping - New York Post",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 12:19:16 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "Trump arrives in China after revealing his 'first request' at Xi Jinping summit. # Trump gets red-carpet welcome after he lands in Beijing for closely watched summit with Xi Jinping. BEIJING — President Trump touched down in China’s capital Wednesday evening ahead of a crucial summit with Xi Jinping, after promising to call on the Asian power to “open up” to American business. The president was given a red-carpet welcome at Beijing Capital International Airport by US Ambasasdor to China David Perdue; Xi’s vice president, Han Zheng; China’s Ambassador to Washington Xie Feng; and Executive Vice Minister of Foreign Affairs Ma Zhaoxu. A red carpet and a posse of people were there to greet President Trump. President Trump is all smiles as he's greeted in Beijing ahead of his high-stakes summit with Xi Jinping. Chinese residents take a photo of Air Force One as it lands in Beijing on Wednesday, May 13, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_cb653bddec22",
+      "url": "https://www.axios.com/2026/05/15/trump-xi-china-summit",
+      "publisher": {
+        "name": "Axios",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump tries to defy gravity with Beijing friendship summit - Axios",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 05:00:08 GMT",
+      "fetched_at": "2026-05-18T17:19:57.825825+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_figures"
+      ],
+      "thumbnail_url": null,
+      "summary": "President Trump's summit with Xi Jinping was staged as a reunion between old friends, concluding Friday with a private tour of Zhongnanhai, the Chinese Communist Party's leadership compound. * Trump spent the trip pitching closer ties with China after a decade of decoupling that he, more than any other American president, helped set in motion. **Driving the news:** As Trump and Xi entered a working lunch Friday, the summit had already produced a package of modest deliverables, building on the trade truce the two leaders struck last fall. * U.S. Trade Representative Jamieson Greer said the U.S. expects China to commit to at least $10 billion in annual U.S. agricultural purchases over the next three years, on top of existing soybean commitments. \"But at the same time,\" Trump added, \"they buy a lot of their oil there, and they'd like to keep doing that.\". * At Zhongnanhai on Friday, Trump said he and Xi had discussed Iran.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d2b8ea6bd0fe",
+      "url": "https://www.politico.com/news/2026/05/17/china-agrees-to-add-billions-annually-of-us-farm-purchases-white-house-says-00925648",
+      "publisher": {
+        "name": "Politico",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "China agrees to billions in additional US farm purchases, White House says - Politico",
+      "author": null,
+      "published_at": "Sun, 17 May 2026 21:15:00 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "The announcement is among the few concrete deliverables from President Donald Trump’s summit with Chinese leader Xi Jinping last week. China's President Xi Jinping and President Donald Trump visit the Temple of Heaven on May 14, 2026, in Beijing. China will purchase at least $17 billion in U.S. agricultural products annually through 2028, in addition to soybean commitments already agreed to, the White House said in a fact sheet released Sunday. The announcement followed President Donald Trump’s visit to Beijing last week for talks with Chinese President Xi Jinping and was among the few concrete deliverables from a summit Trump had pitched in March as a “monumental event.”. Both countries have also agreed to establish a board of trade to manage commerce in non-sensitive sectors and the board of investment, according to the Sunday fact sheet, which the White House says will provide a “government-to-government forum” to discuss investment-related issues.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_b9c89cc341af",
+      "url": "https://www.reuters.com/world/china/china-signals-tariff-cuts-advances-farm-market-access-after-trump-xi-summit-2026-05-16/",
+      "publisher": {
+        "name": "Reuters",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "China signals tariff cuts, advances in farm market access after Trump-Xi summit - Reuters",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 15:30:12 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "# China signals tariff cuts, advances in farm market access after Trump-Xi summit | Reuters. ## Browse World. Item 1 of 2 U.S. President Donald Trump speaks with Chinese President Xi Jinping while leaving after a visit to the Zhongnanhai Garden in Beijing, China, May 15, 2026. **[1/2]**U.S. President Donald Trump speaks with Chinese President Xi Jinping while leaving after a visit to the Zhongnanhai Garden in Beijing, China, May 15, 2026. BEIJING, May 16 (Reuters) - China and the United States have agreed to expand agricultural trade through tariff reductions ​and tackle non-tariff barriers and market access issues, China's commerce ministry said on ‌Saturday after this week's summit in Beijing, opens new tab). China's farm imports from the U.S. still face an additional 10% levy after last ​year's rounds of tit-for-tat tariffs sharply curtailed trade, which fell 65.7% year-on-year to $8.4 billion ​in 2025, according to U.S. Department of Agriculture data, opens new tab. *   About Reuters, opens new tab.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ff201da29f83",
+      "url": "https://www.washingtonpost.com/national-security/2026/05/07/trump-xi-us-china-summit-iran/",
+      "publisher": {
+        "name": "Washingtonpost",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump and Xi set to meet under shadow of Iran negotiations - The Washington Post",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 09:00:48 GMT",
+      "fetched_at": "2026-05-18T17:19:59.732819+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_outcomes"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Trump and Xi set to meet under shadow of Iran negotiations. The president, seeking a lavish welcome in Beijing, delayed the summit to focus on the emerging Iran conflict. Two months later, the war still looms large. Make us preferred on Google. President Donald Trump and Chinese President Xi Jinping at the Asia-Pacific Economic Cooperation summit in Busan, South Korea, on Oct. 30, 2025. President Donald Trump is moving ahead with plans for a grand meeting with Chinese leader Xi Jinping next week, but uncertainty over the White House strategy for ending the Iran conflict along with tensions over Beijing’s support for Tehran suggest the two-month postponement of the summit did little to strengthen Washington’s hand.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_546c1635b481",
+      "url": "https://www.foxnews.com/politics/intense-standoff-erupts-between-secret-service-chinese-officials-during-trump-xi-event-report",
+      "publisher": {
+        "name": "Foxnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "‘Intense standoff’ erupts between Secret Service, Chinese officials during Trump-Xi event: report - Fox News",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 17:18:59 GMT",
+      "fetched_at": "2026-05-18T17:19:59.732819+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_outcomes"
+      ],
+      "thumbnail_url": null,
+      "summary": "* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. #### Inside the high-stakes meeting between President Trump and President Xi. Fox News senior White House correspondent Peter Doocy has the latest from Beijing on 'Fox News @ Night.'. Chinese security officials allegedly blocked an armed U.S. Secret Service agent from entering an event on Thursday during President Donald Trump's visit to the country, according to media members on the ground. A Secret Service agent was reportedly blocked from entering Trump and Chinese President Xi Jinping's visit to Beijing’s Temple of Heaven with their weapon on Thursday, according to reporters. President Donald Trump and Chinese President Xi Jinping attend a bilateral meeting at the Great Hall of the People in Beijing on May 14, 2026, to discuss the Iran conflict, trade imbalances, the Taiwan situation, and to establish new bilateral boards for economic and AI oversight.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_9f426a52a1ec",
+      "url": "https://www.washingtonpost.com/world/2026/05/11/china-us-trump-xi-summit/2f5f56d6-4d9f-11f1-97e7-22c6c29ff0d8_story.html",
+      "publisher": {
+        "name": "Washingtonpost",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "What to know about Trump-Xi summit with trade, Taiwan and Iran on the agenda - The Washington Post",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 01:09:13 GMT",
+      "fetched_at": "2026-05-18T17:19:59.732819+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_outcomes"
+      ],
+      "thumbnail_url": null,
+      "summary": "# What to know about Trump-Xi summit with trade, Taiwan and Iran on the agenda. Presidents Xi Jinping and Donald Trump are preparing for a summit, with both China and the U.S. emphasizing stable ties. BEIJING — As Presidents Xi Jinping and Donald Trump prepare for a highly anticipated summit, both China and the United States say their ties have been broadly stable in recent months — and they are planning on keeping it that way. Few expect major breakthroughs to the long-running frictions between China and the U.S., which range from competition in technology to the thorny question of Taiwan, whose main ally is the U.S. Ending the war with Iran is likely to be added to the agenda, with Beijing being one of the unofficial mediators in the conflict. “On both sides there is a consensus that U.S.-China stability is important,” said Henrietta Levin, senior fellow for the Freeman Chair in China Studies at the Center for Strategic and International Studies in Washington.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_1e303900dbb9",
+      "url": "https://www.foxnews.com/politics/white-house-readout-trump-xi-meeting-omits-taiwan-china-centers-issue-warning",
+      "publisher": {
+        "name": "Foxnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "White House readout on Trump, Xi meeting omits Taiwan, as China centers on that issue with warning - Fox News",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 17:51:17 GMT",
+      "fetched_at": "2026-05-18T17:19:59.732819+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_outcomes"
+      ],
+      "thumbnail_url": null,
+      "summary": "* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. ## The White House says U.S. and China 'agreed that Iran can never have a nuclear weapon' after Trump and Xi meeting. The White House said the U.S. and China agreed that the Iran cannot obtain a nuclear weapon. China's President Xi Jinping (R) and U.S. President Donald Trump visit the Temple of Heaven on May 14, 2026 in Beijing, China. U.S. President Donald Trump (R) shakes hands with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026. President Xi also made clear China’s opposition to the militarization of the Strait and any effort to charge a toll for its use, and he expressed interest in purchasing more American oil to reduce China’s dependence on the Strait in the future. Safeguarding peace and stability across the Taiwan Strait is the biggest common denominator between China and the U.S.,\" China's Ministry of Foreign Affairs said in a statement.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_11e7bd960e74",
+      "url": "https://www.foxnews.com/politics/trumps-upbeat-china-message-collides-deepening-beijing-rivalry",
+      "publisher": {
+        "name": "Foxnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump’s upbeat China message collides with deepening Beijing rivalry - Fox News",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 03:39:47 GMT",
+      "fetched_at": "2026-05-18T17:19:59.732819+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_outcomes"
+      ],
+      "thumbnail_url": null,
+      "summary": "* #### This is how China's influence could impact the Iran war. * #### President Trump and Chinese President Xi tour Temple of Heaven in China. * #### Inside the high-stakes meeting between President Trump and President Xi. President Donald Trump and Chinese President Xi Jinping begin their talks in Beijing. President Donald Trump opened his high-stakes meeting with Chinese President Xi Jinping by predicting a \"fantastic future together\" — striking an unusually warm tone as his administration pursues new trade and investment deals with Beijing. \"In fact, the longest relationship of our two countries that any president and president has had,\" Trump said at the start of the bilateral meeting Thursday local time. President Donald Trump and Chinese President Xi Jinping attend a bilateral meeting at the Great Hall of the People in Beijing on May 14, 2026, to discuss the Iran conflict, trade imbalances, the Taiwan situation, and to establish new bilateral boards for economic and AI oversight.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_776d5503b2f4",
+      "url": "https://www.foxnews.com/politics/behind-summit-smiles-xi-gives-blunt-warning-trump-clashes-conflicts",
+      "publisher": {
+        "name": "Foxnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Behind summit smiles, Xi gives blunt warning to Trump of 'clashes' and 'conflicts' - Fox News",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 19:10:39 GMT",
+      "fetched_at": "2026-05-18T17:19:59.732819+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_outcomes"
+      ],
+      "thumbnail_url": null,
+      "summary": "* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. * #### Trump: Xi says China won't give Iran military equipment. * #### US and China discuss Taiwan, Iran and trade relations. * #### Experts weigh in on Taiwan, Iran tensions amid US-China summit. During the U.S.-China Summit, experts discuss U.S. arms sales to Taiwan and President Xi's veiled threats. Chinese President Xi Jinping issued a stark warning to President Donald Trump that Taiwan could trigger \"clashes and even conflicts\" between the world’s two superpowers, injecting a note of potential confrontation into an otherwise upbeat summit in Beijing. \"President Xi stressed to President Trump that the Taiwan question is the most important issue in China-U.S. relations. US President Donald Trump (R) shakes hands with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_3721669cf4b9",
+      "url": "https://www.cnbc.com/2026/05/08/iran-focus-at-trump-xi-summit-may-delay-progress-on-tariffs-rare-earths.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Iran focus at Trump-Xi summit may delay progress on tariffs, rare earths - CNBC",
+      "author": null,
+      "published_at": "Fri, 08 May 2026 00:56:49 GMT",
+      "fetched_at": "2026-05-18T17:19:37.225918+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_figures"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Iran focus at Trump-Xi summit may delay progress on tariffs, rare earths. * Iran war may dominate the first U.S. presidential visit to China since 2017. * U.S. business delegation may be smaller than those other countries have brought to China recently, according to a source familiar with the matter. * The timing of the next meeting -- Chinese President Xi Jinping's visit to the U.S. Pictured here is the last time a sitting U.S. president made a state visit to China. BEIJING — The Iran war is likely to take center stage in the summit between U.S. President Donald Trump and China's Xi Jinping, leaving less scope to resolve issues like tariffs and rare earth supplies. But the expected images of Trump and Xi together may still send a signal within China that it's more acceptable again to engage with U.S. businesses, said Michael Hart, president of the Beijing-based American Chamber of Commerce of China.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_86547c508f01",
+      "url": "https://www.nytimes.com/2026/05/15/briefing/at-the-trump-xi-summit.html",
+      "publisher": {
+        "name": "Nytimes",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "At the Summit - The New York Times",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 10:48:46 GMT",
+      "fetched_at": "2026-05-18T17:19:37.225918+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_figures"
+      ],
+      "thumbnail_url": null,
+      "summary": "# At the Summit - The New York Times. https://www.nytimes.com/2026/05/15/briefing/at-the-trump-xi-summit.html. # At the Summit. We wrap up President Trump’s visit to China. Image 1: An annotated photo of who is in the U.S. delegation with Trump and Xi Jinping in China. I’m the host of The Morning. I’ve been marveling at this ☝️ amazing photograph of the U.S. delegation standing outside the Great Hall of the People, as President Trump and President Xi Jinping started their summit meetings in Beijing yesterday. It provides a pretty good sense of what was on the agenda, at least for the Americans. In the next rows were the titans of industry, many with business in and with China. During the summit, Trump announced China had made a big order of jets from the company. But if Trump wanted trade out of the summit, Xi’s agenda was focused on Taiwan. At a dinner served at ornate, gold-plated settings (read about the menu), Xi said that China and America can both be made great again, together.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_4db5eec42ced",
+      "url": "https://www.reuters.com/world/china/trump-plans-bring-smaller-ceo-delegation-beijing-summit-sources-say-2026-05-08/",
+      "publisher": {
+        "name": "Reuters",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump plans to bring a smaller CEO delegation to Beijing summit, sources say - Reuters",
+      "author": null,
+      "published_at": "Fri, 08 May 2026 03:55:34 GMT",
+      "fetched_at": "2026-05-18T17:19:37.225918+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_figures"
+      ],
+      "thumbnail_url": "https://www.reuters.com/resizer/v2/FF5NLVIMKBNPHMCNGYJIAOBOME.jpg?auth=cecfb9e82de4477e0fe54944cdf22fa00a4982aadf43a276a7be9770d2ca9c09&width=1920&quality=80",
+      "summary": "# Trump plans to bring a smaller CEO delegation to Beijing summit, sources say | Reuters. # Trump plans to bring a smaller CEO delegation to Beijing summit, sources say. Item 1 of 2 A large screen shows news footage of Chinese and U.S. flags during the bilateral meeting between Chinese President Xi Jinping and U.S. President Donald Trump on the sidelines of the Asia-Pacific Economic Cooperation (APEC) summit in South Korea's Busan, outside a shopping mall in Beijing, China October 30, 2025. **[1/2]**A large screen shows news footage of Chinese and U.S. flags during the bilateral meeting between Chinese President Xi Jinping and U.S. President Donald Trump on the sidelines of the Asia-Pacific Economic Cooperation (APEC) summit in South Korea's Busan, outside a shopping mall in Beijing, China... BEIJING/WASHINGTON, May 8 (Reuters) - The White House has invited a scaled-back CEO delegation to accompany President Donald Trump ​to Beijing next week, five sources briefed on preparations said, reflecting divisions in the administration on economic policy toward China and ‌limited expectations for the summit.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_9c317a43e292",
+      "url": "https://www.politico.com/news/2026/05/14/trump-invites-xi-to-washington-in-september-00920423",
+      "publisher": {
+        "name": "Politico",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump invites Xi to Washington in September - Politico",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 11:52:00 GMT",
+      "fetched_at": "2026-05-18T17:19:57.825825+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_figures"
+      ],
+      "thumbnail_url": null,
+      "summary": "It would mark the third meeting between the two leaders since Trump returned to office. President Donald Trump reviews an honor guard with Chinese President Xi Jinping during a welcome ceremony at the Great Hall of the People on May 14, 2026 in Beijing, China. BEIJING, China — President Donald Trump invited China’s leader Xi Jinping and his wife, Peng Liyuan, for a White House visit on Sept. “We look forward to it,” Trump said during remarks at a banquet in Beijing. Chinese officials said that Xi “stressed to President Trump that the Taiwan question is the most important issue in China-U.S. relations” while a White House official conspicuously didn’t mention Taiwan in a statement to the media. The September meeting would be the third meeting between the two leaders in Trump’s second term. Xi last visited the U.S. in November 2023, meeting with former President Joe Biden on the sidelines of the APEC summit in San Francisco.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_638560c1321e",
+      "url": "https://www.latimes.com/politics/story/2026-05-13/trump-marvels-at-chinese-power-as-summit-kicks-off",
+      "publisher": {
+        "name": "Latimes",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump marvels at Chinese display of power as summit kicks off - Los Angeles Times",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 03:51:41 GMT",
+      "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Trump’s meetings with his Chinese counterpart, Xi Jinping, began at the Great Hall of the People moments after a welcome ceremony that seemed to impress the president, featuring a Chinese military honor guard and a greeting from excited schoolchildren. Trump reflected on the stakes of his visit at the top of the meeting, telling Xi that the ceremony was an honor “like few I’ve seen before.”. ### Trump-Xi summit in Beijing: What’s at stake. Both men struck a conciliatory tone, despite the agenda for the summit featuring some of the thorniest issues facing the two superpowers today, including the U.S. war in Iran, trade relations and the future of Taiwan. Trump is expected to ask Xi for help reopening the Strait of Hormuz, a vital commercial waterway disrupted by Iran since the start of the war, and for the extension of a truce in the trade war he started at the beginning of his second term.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_f2fc1332fda7",
+      "url": "https://www.forbes.com/sites/siladityaray/2026/05/14/trump-praises-great-leader-xi-as-summit-meeting-begins-in-beijing-live-updates/",
+      "publisher": {
+        "name": "Forbes",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump Praises ‘Great Leader’ Xi As Summit Meeting Begins In Beijing (Live Updates) - Forbes",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "President Donald Trump and his Chinese counterpart Xi Jinping held a two-hour long summit meeting in Beijing on Thursday, which began with Trump heaping praise on Xi and calling “great leader,” while the Chinese president called for greater cooperation between the two sides and cautioned against mishandling the Taiwan issue. Ahead of the meeting, Trump was greeted by Xi at Beijing’s Great Hall of the People after receiving a guard of honor from the Chinese military, a 21-gun salute and a group of children waving the two countries' flags and flower bouquets. Xi delivered the opening remarks after the two leaders sat down for the summit, noting that the world is in the midst of “turbulence and transformation,” and that the two countries must work together to “meet challenges and bring greater stability to the world.”. In his opening remarks, Xi asked if China and the U.S. will be able to overcome the “Thucydides Trap” and establish a new model for ties between two great powers.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_de1a26bf0057",
+      "url": "https://www.forbes.com/sites/siladityaray/2026/05/14/trump-xi-summit-ends-after-two-hours-taiwan-and-trade-tensions-discussed--live-updates/",
+      "publisher": {
+        "name": "Forbes",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump-Xi Summit Ends After Two Hours—Taiwan And Trade Tensions Discussed (Live Updates) - Forbes",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "President Donald Trump and his Chinese counterpart Xi Jinping held a two-hour long summit meeting in Beijing on Thursday, which began with Trump heaping praise on Xi and calling “great leader,” while the Chinese president called for greater cooperation between the two sides and cautioned against mishandling the Taiwan issue. Ahead of the meeting, Trump was greeted by Xi at Beijing’s Great Hall of the People after receiving a guard of honor from the Chinese military, a 21-gun salute and a group of children waving the two countries' flags and flower bouquets. Xi delivered the opening remarks after the two leaders sat down for the summit, noting that the world is in the midst of “turbulence and transformation,” and that the two countries must work together to “meet challenges and bring greater stability to the world.”. In his opening remarks, Xi asked if China and the U.S. will be able to overcome the “Thucydides Trap” and establish a new model for ties between two great powers.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e9a31178d0e0",
+      "url": "https://www.cnbc.com/2026/05/16/china-signals-tariff-cuts-advances-in-farm-market-access-after-trump-xi-summit.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "China signals tariff cuts, advances in farm market access after Trump-Xi summit - CNBC",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 17:43:18 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "# China signals tariff cuts, advances in farm market access after Trump-Xi summit. U.S. President Donald Trump arrives for a state banquet hosted by Chinese President Xi Jinping at the Great Hall of the People on May 14, 2026 in Beijing, China. BEIJING, May 16 (Reuters) - China and the United States have agreed to expand agricultural trade through tariff reductions and tackle non-tariff barriers ⁠and market access issues, China's commerce ministry said on Saturday after this week's summit in Beijing. China's farm imports from the U.S. still face an additional 10% levy after last year's rounds of tit-for-tat ⁠tariffs ‌sharply curtailed trade, which fell 65.7% year-on-year to $8.4 ⁠billion in 2025, according to U.S. Department of Agriculture data. The commerce ministry said both sides aim to promote two-way trade, including in agricultural products, through measures such as reciprocal tariff reductions across ‌a range of goods. \"Tariff reductions on agricultural products would mark a normalization of China-U.S. farm trade, allowing commercial buyers to re-enter the market,\" said Johnny Xiang, founder ⁠of Beijing-based AgRadar Consulting.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ec9c12263902",
+      "url": "https://www.nytimes.com/2026/05/14/world/asia/trump-china-us-trade.html",
+      "publisher": {
+        "name": "Nytimes",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "China Starting to Fulfill ‘Promises,’ U.S. Trade Representative Says - The New York Times",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 03:42:13 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "Subscribe for €0.50/weekLog in. Asia Pacific|China Starting to Fulfill ‘Promises,’ U.S. Trade Representative Says. # China Starting to Fulfill ‘Promises,’ U.S. Trade Representative Says. As President Trump and China’s leader, Xi Jinping, meet, the United States said China has promised to expand its purchases of farm goods and airplanes. Jamieson Greer, the U.S. trade representative, said he expected China to agree to purchase more than $10 billion in U.S. agricultural products, as President Trump prepares to wrap up a high-level summit in Beijing. Mr. Greer confirmed that the United States and China would establish a “Board of Trade” to oversee a tariff reduction on about $30 billion in goods. Asked whether the Trump administration would raise tariffs on China in the future, Mr. Greer said that the two sides had agreed that “there is going to be a certain level of tariff,” though he declined to say what that was.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_001a14adf3c9",
+      "url": "https://www.cnbc.com/video/2026/05/11/china-enters-trump-xi-talks-with-strong-sense-of-self-confidence.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Ex-U.S. trade official: China enters Trump-Xi talks with ‘strong sense of self confidence' - CNBC",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 06:54:01 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "Monday - Friday, 10:00 - 11:00 SIN/HK | 0400 - 05:00 CET. # Ex-U.S. trade official: China enters Trump-Xi talks with ‘strong sense of self confidence'. Frank Lavin, former Undersecretary for International Trade during the Bush administration, says China is approaching the Trump-Xi talks with confidence in its economic model and little sense that it needs to make concessions. He says the summit may produce business announcements and a joint statement, though concrete breakthroughs could be limited.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_f949f55b6de0",
+      "url": "https://fortune.com/2026/05/17/us-china-purchase-17-billion-agricultural-goods-trump-xi-jinping-summit/",
+      "publisher": {
+        "name": "Fortune",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "U.S. says China to buy $17 billion of agricultural goods annually - Fortune",
+      "author": null,
+      "published_at": "Sun, 17 May 2026 18:24:00 GMT",
+      "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "May 17, 2026, 2:24 PM ET. China has agreed to purchase at least $17 billion of agriculture products from the US annually through 2028, the White House said in a fact sheet detailing President Donald Trump’s two-day summit in China. A day earlier, the Chinese Ministry of Commerce released its own readout of the meeting, which said the US and China will adopt a series of measures, including mutually cutting levies on certain products. Trump’s two-day visit to Beijing was the first visit to China by a US president in nearly a decade, and both leaders struck a positive tone on US-China relations. In the fact sheet, the White House also said that both “leaders agreed Iran cannot have a nuclear weapon, called to reopen the Strait of Hormuz, and agreed that no country or organization can be allowed to charge tolls.”. FORTUNE is a trademark of Fortune Media IP Limited, registered in the U.S. and other countries.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_9995c0747a3c",
+      "url": "https://www.reuters.com/business/autos-transportation/trump-xi-weigh-tariff-cuts-30-billion-imports-managed-trade-push-2026-05-13/",
+      "publisher": {
+        "name": "Reuters",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push - Reuters",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 12:03:12 GMT",
+      "fetched_at": "2026-05-18T17:19:55.291813+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": "https://www.reuters.com/resizer/v2/KPRJYJG77RJINDI354EV4IOINM.jpg?auth=b0fc66501b98da10a085a66d1e471a69c89978426168a5f2a9cbadb77e64e4bc&width=1920&quality=80",
+      "summary": "# Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push | Reuters. ## Browse World. ## Browse Business. # Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push. Image 1: Beijing ahead of U.S. President Donald Trump's visit to China. U.S. and China’s national flags flutter next to the portrait of late Chinese Chairman Mao Zedong, ahead of U.S. President Donald Trump's visit to China, in Beijing, China, May 13, 2026. WASHINGTON, May 13 (Reuters) - The U.S. and China are expected to inch toward a managed trade mechanism for non-sensitive goods this week, with each side possibly identifying some $30 billion worth of goods on ​which they could reduce tariffs and sell to each other without crossing national security red lines. The U.S. maintains tariffs of 7.5% on a raft of Chinese consumer products imposed in 2019 at the height of Trump's first-term trade war with China.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_a37c3a0fc5f2",
+      "url": "https://www.agriculture.com/partners-trump-xi-to-weigh-tariff-cuts-on-usd30-billion-of-imports-in-managed-trade-push-11973602",
+      "publisher": {
+        "name": "Agriculture",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump, Xi to Weigh Tariff Cuts on $30 Billion of Imports in Managed Trade Push - Successful Farming",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 12:13:31 GMT",
+      "fetched_at": "2026-05-18T17:19:55.291813+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Trump, Xi to Weigh Tariff Cuts on $30 Billion of Imports in Managed Trade Push. WASHINGTON, May 13 (Reuters) - The U.S. and China are expected to inch toward a managed trade mechanism for non-sensitive goods this week, with each side possibly identifying some $30 billion worth of goods on which they could reduce tariffs and sell to each other without crossing national security red lines. The so-called \"Board of Trade\" was first broached by U.S. Trade Representative Jamieson Greer in March as a key \"deliverable\" agreement for this week's high-stakes summit between U.S. President Donald Trump and Chinese President Xi Jinping. U.S.-China two-way goods trade shrank by 29% to $415 billion from $582 billion in 2024, with the U.S. trade deficit falling nearly 32% to $202 billion in 2025, its lowest in two decades, according to U.S. Census Bureau data. The U.S. Trade Representative's office and the U.S. Treasury declined to comment further on the proposed mechanism ahead of the Beijing summit.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_5f3bcc397a4e",
+      "url": "https://www.oilandgas360.com/trump-xi-to-weigh-tariff-cuts-on-30-billion-of-imports-in-managed-trade-push/",
+      "publisher": {
+        "name": "Oilandgas360",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push - Oil & Gas 360",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 17:30:04 GMT",
+      "fetched_at": "2026-05-18T17:19:55.291813+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "trade_tariff_scorecard"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push. (BOE Report) – The U.S. and China are expected to inch toward a managed trade mechanism for non-sensitive goods this week, with each side possibly identifying some $30 billion worth of goods on which they could reduce tariffs and sell to each other without crossing national security red lines. The so-called “Board of Trade” was first broached by U.S. Trade Representative Jamieson Greer in March as a key “deliverable” agreement for this week’s high-stakes summit between U.S. President Donald Trump and Chinese President Xi Jinping. U.S.-China two-way goods trade shrank by 29% to $415 billion from $582 billion in 2024, with the U.S. trade deficit falling nearly 32% to $202 billion in 2025, its lowest in two decades, according to U.S. Census Bureau data. China maintains a general extra 10% tariff on all U.S. imports, matching the current 10% U.S. temporary tariff on Chinese goods.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_8efea66eb477",
+      "url": "https://apnews.com/photo-gallery/photos-trump-china-talks-with-xi-jinping-187285f51c36431b9f3aff58a8161205",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Photos of Trump in China for talks with Xi Jinping - AP News",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 17:26:20 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. Military members yell as President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump arrives for a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. China’s President Xi Jinping arrives to welcome President Donald Trump at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump meets with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. Elon Musk departs after a welcome ceremony with President Donald Trump and China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_4d430e24565a",
+      "url": "https://nypost.com/2026/05/14/us-news/trump-china-grand-ceremony-with-xi-jinping-striking-difference-from-previous-2017-trip/",
+      "publisher": {
+        "name": "Nypost",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Striking difference between Trump-Xi summit in 2026 and 2017: expert - New York Post",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 06:34:58 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "President Trump’s welcome at the grand ceremony in Beijing with Chinese President Xi Jinping on Thursday followed the same pomp and protocol as his 2017 trip — but the event seemed “significantly more jovial” than his previous visit, according to an expert. Similar to the 2017 visit, Trump was greeted by Xi at the steps of the Great Hall of the People Thursday afternoon in front of a large ceremonial military parade and a gaggle of children. Chinese President Xi Jinping greets President Donald Trump at the Great Hall of the People in Beijing on May 14, 2026. Trump and Xi pose for photos during a welcome ceremony at the Great Hall of the People on May 14, 2026. President Donald Trump and first lady Melania Trump are greeted by Chinese President Xi Jinping at the start of a state dinner at the Great Hall of the People on Nov. 9, 2017. President Donald Trump participates in a welcome ceremony with Chinese President Xi Jinping in Beijing, China, on May 14, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_237669454b30",
+      "url": "https://www.cnn.com/2026/05/14/world/gallery/in-pictures-us-president-trump-visits-china",
+      "publisher": {
+        "name": "Cnn",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "In Pictures: US President Trump visits China - CNN",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 11:58:05 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "US President Donald Trump shakes hands with China's President Xi Jinping at the Great Hall of the People in Beijing, China, on Thursday, May 14. Kenny Holston/AFP/Getty Images. US President Donald Trump is visiting Chinese leader Xi Jinping for an historic summit in Beijing. Trump sits as Xi speaks at a state banquet at the Great Hall of the People in Beijing. Trump and Xi Jinping attend a bilateral meeting at the Great Hall of the People. Trump is greeted by school children at the Great Hall of the People. Trump and China's Xi stand for their countries' national anthems during a welcome ceremony at the Great Hall of the People. Brendan Smialowski/AFP/Getty Images. Trump is greeted by Xi Jinping at the Great Hall of the People. Trump and Xi inspect a guard of honour during a welcome ceremony at the Great Hall of the People.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_dd34dc86f03d",
+      "url": "https://apnews.com/photo-gallery/china-daily-life-trump-visit-photos-e8275322d98e700c01e79b990613b0eb",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Photos of daily life in China ahead of Trump’s visit - AP News",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 02:27:55 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "+ Trump downplays differences with China's Xi over Iran as he heads to Beijing for high-stakes summit. Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. + The Iran war is hitting home as gasoline prices fuel inflation surge of 3.8% in the US. BEIJING (AP) — As U.S. President Donald Trump is set to arrive in Beijing for a much-anticipated visit, daily life in the Chinese capital daily life is continuing as usual for most. People take a rest underneath trees at a viewing platform of a public park as they wait to catch a glimpse of the arrival of U.S. Air Force Boeing C-17 Globemaster III transport aircraft to the Beijing International Capital Airport ahead of U.S. President Donald Trump’s visit, in Beijing, Monday, May 11, 2026. A view of a man fishing as a resident swims along the Liangmahe river, in Beijing, Tuesday, May 12, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_f3d699cbe013",
+      "url": "https://www.cnbc.com/2026/05/16/a-state-banquet-selfies-and-a-noodle-run-trumps-beijing-visit.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "A state banquet, selfies with Musk and Huang's noodle run: The spectacle of Trump's Beijing visit - CNBC",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 11:36:25 GMT",
+      "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "summit_gallery"
+      ],
+      "thumbnail_url": null,
+      "summary": "# A state banquet, selfies with Musk and Huang's noodle run: The spectacle of Trump's Beijing visit. BEIJING, CHINA - MAY 14: U.S. President Donald Trump and Chinese President Xi Jinping attend a welcome ceremony at the Great Hall of the People on May 14, 2026 in Beijing, China. As the leaders of the world's two most powerful economies rekindled personal ties in Beijing on Thursday and Friday, with a cavalcade of American business leaders accompanying U.S. President Donald Trump, the Chinese capital turned into something of a spectacle. The visit — the first by a sitting U.S. president to China in nearly a decade — was full of friendly overtures, closely orchestrated pageantry, business dealmaking, and headline-grabbing sideshows that captivated audiences on both sides of the Pacific.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d60179b6b4d6",
+      "url": "https://www.wikidata.org/wiki/Q22686",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Donald Trump",
+      "author": null,
+      "published_at": "2026-05-18T17:19:20.695844+00:00",
+      "fetched_at": "2026-05-18T17:19:20.695853+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg/960px-Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    }
+  ],
+  "editorial_sections": [
+    {
+      "section_id": "overview",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "U.S. President Donald Trump and Chinese President Xi Jinping held a high-stakes two-day summit in Beijing on May 14–15, 2026, aimed at resetting relations between the world's two largest economies. The leaders agreed to build a \"constructive, strategically stable relationship\" and discussed major issues including trade, Taiwan, artificial intelligence, and the Iran conflict. Xi emphasized that \"China's door to opening up will only open wider,\" signaling Beijing's willingness to expand economic cooperation.",
+          "The summit generated optimism on Wall Street and produced tangible outcomes, including Trump's invitation to Xi for a September visit to the White House. However, several critical pressure points—including trade disputes, Taiwan tensions, and human rights concerns—remained unresolved, leaving significant unfinished business for future negotiations between the two powers."
+        ],
+        "paragraph_sources": [
+          [
+            "src_44eb76680a3a",
+            "src_e87673b74ce5",
+            "src_2f14b43978ca"
+          ],
+          [
+            "src_58db438fceca",
+            "src_70f437d9aa7a"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "China's door to opening up will only open wider.",
+            "attribution": "Chinese President Xi Jinping",
+            "source_id": "src_44eb76680a3a"
+          },
+          {
+            "quote": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap'",
+            "attribution": "At the Beijing summit",
+            "source_id": "src_e87673b74ce5"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_44eb76680a3a",
+            "excerpt": null,
+            "claim_text": "China and the U.S. agreed to build a constructive, strategically stable relationship"
+          },
+          {
+            "source_id": "src_e87673b74ce5",
+            "excerpt": null,
+            "claim_text": "Trump and Xi opened a two-day summit in Beijing focused on trade and security"
+          },
+          {
+            "source_id": "src_2f14b43978ca",
+            "excerpt": null,
+            "claim_text": "Xi told U.S. CEOs that China will open wider"
+          },
+          {
+            "source_id": "src_58db438fceca",
+            "excerpt": null,
+            "claim_text": "Trump invited Xi Jinping to visit the White House on September 24"
+          },
+          {
+            "source_id": "src_70f437d9aa7a",
+            "excerpt": null,
+            "claim_text": "Trade, Taiwan, AI and human rights appeared to end without firm public breakthroughs"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_2f14b43978ca",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_44eb76680a3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_58db438fceca",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_70f437d9aa7a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxnews."
+        },
+        {
+          "source_id": "src_e87673b74ce5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_44eb76680a3a",
+          "url": "https://www.cnbc.com/2026/05/14/trump-xi-summit-beijing-takeaway-taiwan-trade-iran-war-strategic-relations-.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Five takeaways from the Trump-Xi summit in Beijing - CNBC",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 07:21:20 GMT",
+          "fetched_at": "2026-05-18T17:19:36.453875+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "* China's Xi and Trump agreed to build a \"constructive, strategically stable relationship.\". * \"China's door to opening up will only open wider,\" Xi said. U.S. President Donald Trump and Chinese President Xi Jinping attend a bilateral meeting at the Great Hall of the People on May 14, 2026 in Beijing, China. The U.S. and China agreed to forge more cooperative ties at their summit in Beijing on Thursday, in a high-stakes meeting full of friendly gestures between two countries that have been battling for years on issues ranging from intellectual property and human rights to technology and trade. Xi and U.S. President Donald Trump agreed to develop a \"constructive China-U.S. relationship of strategic stability,\" according to Beijing's official English readout of the summit. Beijing welcomes deeper commercial engagement from the U.S., he said, and \"China's door to opening up will only open wider.\".",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e87673b74ce5",
+          "url": "https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit - CNBC",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 02:31:54 GMT",
+          "fetched_at": "2026-05-18T17:19:36.453875+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit. * Trump and Xi opened a two-day summit in Beijing focused on trade and security. * Xi asked whether the U.S. and China could avoid the \"Thucydides Trap,\" which refers to how tensions historically between a rising and ruling power have often resulted in a war. U.S. President Donald Trump (R) is greeted by Chinese President Xi Jinping at the Great Hall of the People on May 14, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump met his Chinese counterpart Xi Jinping in Beijing on Thursday morning, kickstarting a high-stakes summit that is expected to cover trade, tariffs, Taiwan and Iran, and runs through Friday. Speaking just ahead of Trump, Xi noted the global attention on the meeting, and said a major question for the two countries was whether they could avoid the \"Thucydides Trap,\" according to an official English translation of his Chinese remarks broadcast by CCTV.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_2f14b43978ca",
+          "url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost - CNBC",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 01:12:30 GMT",
+          "fetched_at": "2026-05-18T17:19:36.453875+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# CNBC Daily Open: Trump-Xi summit delivers Wall Street boost. * Xi tells U.S. CEOs including Musk and Cook that China will “open wider.”. U.S. President Donald Trump speaks at a state banquet with Chinese President Xi Jinping (not pictured) at the Great Hall of the People in Beijing, China, May 14, 2026. *Wall Street was riding high as the first day of the U.S.-China summit raised hopes for a positive relationship reset and agreements from both sides.*. Day one of the high-stakes summit in Beijing saw Chinese President Xi Jinping and Trump agreeing to develop a \"constructive China-U.S. relationship of strategic stability.\". The summit is set to end today, and Trump has reportedly invited ⁠Xi ​Jinping to ​the White House ​for ​a visit on ‌Sept. As President Donald Trump meets Chinese President Xi Jinping this week, lawmakers in both parties are warning the White House not to use the U.S. auto market as a bargaining chip in any deal with Beijing.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_70f437d9aa7a",
+          "url": "https://www.foxnews.com/politics/trump-leaves-china-breakthroughs-unfinished-business-xis-biggest-fights",
+          "publisher": {
+            "name": "Foxnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump leaves China with breakthroughs — and unfinished business on Xi’s biggest fights - Fox News",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 18:17:09 GMT",
+          "fetched_at": "2026-05-18T17:19:36.453875+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "* #### Trump says he's not looking for any favors from China's Xi on reopening Strait of Hormuz. President Donald Trump returned from his high-stakes summit in China with President Xi Jinping touting trade progress and warmer ties, but several of the biggest pressure points in the U.S.-China relationship — from trade and Taiwan, to AI and human rights — appeared to end without firm public breakthroughs. President Donald Trump speaks during a bilateral meeting with Chinese President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026. President Donald Trump and China's President Xi Jinping greet children during a welcome ceremony at the Great Hall of the People in Beijing on May 14, 2026. President Donald Trump meets with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_58db438fceca",
+          "url": "https://www.cnbc.com/amp/2026/05/15/trump-wraps-up-two-day-china-trip-invites-xi-for-a-september-visit.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Trump wraps up two-day China trip; invites Xi for a September visit - CNBC",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 05:20:19 GMT",
+          "fetched_at": "2026-05-18T17:19:36.453875+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump wraps up two-day China trip; invites Xi for a September visit. U.S. President Donald Trump and Chinese President Xi Jinping meet on the sidelines of a visit to Zhongnanhai Garden on May 15, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump has invited Chinese President Xi Jinping to visit the White House on September 24, indicating that trade talks will extend beyond this week's two-day summit in Beijing. Following the two presidents' meeting earlier that day, Xi said the U.S. and China agreed to \"strategic stability\" as a framework for the next three years, according to state media. The main question for the outcome of the summit will be \"which of the deals the president would like to strike are ripe enough\" to see through, said Ryan Fedasiuk, fellow at the American Enterprise Institute. China has yet to confirm that Xi will accept the invitation to visit. Oil prices jump after Trump says China agreed to buy U.S. crude following Xi talks.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "timeline",
+      "block_kind": "timeline",
+      "block_data": {
+        "kind": "timeline",
+        "entries": [
+          {
+            "title": "Trump's previous China visit",
+            "time": "2017",
+            "location": "China",
+            "description": "Trump last visited China in 2017, nearly a decade before the 2026 summit.",
+            "importance": "minor",
+            "temporal_phase": "past",
+            "source_id": "src_ef74fe55ce3a"
+          },
+          {
+            "title": "Summit delayed by Iran war tensions",
+            "time": "May 2026",
+            "location": null,
+            "description": "Xi-Trump summit was rescheduled due to Iran war tensions before being officially confirmed.",
+            "importance": "normal",
+            "temporal_phase": "past",
+            "source_id": "src_ef74fe55ce3a"
+          },
+          {
+            "title": "Trump arrives in Beijing with CEOs",
+            "time": "2026-05-13",
+            "location": "Beijing Capital International Airport",
+            "description": "Trump lands in Beijing greeted by brass band and flag wavers, accompanied by U.S. CEOs.",
+            "importance": "feature",
+            "temporal_phase": "past",
+            "source_id": "src_2b52027f4d6f"
+          },
+          {
+            "title": "Trump and Xi hold bilateral meeting at Great Hall of the People",
+            "time": "2026-05-14",
+            "location": "Great Hall of the People, Beijing",
+            "description": "Two-hour bilateral meeting between Trump and Xi focused on trade, Taiwan, Iran, and avoiding the 'Thucydides Trap.'",
+            "importance": "breaking",
+            "temporal_phase": "present",
+            "source_id": "src_a22a5c2cc5ad"
+          },
+          {
+            "title": "Trump wraps up summit with trade progress",
+            "time": "2026-05-15",
+            "location": "Zhongnanhai Garden, Beijing",
+            "description": "Summit concludes with Trump touting trade progress and warmer ties, though major issues remain unresolved.",
+            "importance": "feature",
+            "temporal_phase": "present",
+            "source_id": "src_70f437d9aa7a"
+          },
+          {
+            "title": "Xi invited to visit White House",
+            "time": "2026-09-24",
+            "location": "White House, Washington D.C.",
+            "description": "Trump invites Xi Jinping to visit the White House in September, signaling trade talks will continue.",
+            "importance": "normal",
+            "temporal_phase": "future",
+            "source_id": "src_58db438fceca"
+          }
+        ],
+        "timezone": "Asia/Shanghai"
+      },
+      "citations": [
+        {
+          "source_id": "src_2b52027f4d6f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_58db438fceca",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_70f437d9aa7a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxnews."
+        },
+        {
+          "source_id": "src_a22a5c2cc5ad",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_ef74fe55ce3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Bloomberg."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_a22a5c2cc5ad",
+          "url": "https://apnews.com/live/trump-administration-updates-05-14-2026",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Live updates: Xi and Trump wrap up bilateral meeting after 2 hours of talks - AP News",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 07:54:00 GMT",
+          "fetched_at": "2026-05-18T17:19:35.090474+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "President Donald Trump meets with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. ## Trump signals he wants to do business with Xi. President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump arrives for a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. China’s President Xi Jinping arrives to welcome President Donald Trump at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. Elon Musk departs after a welcome ceremony with President Donald Trump and China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_2b52027f4d6f",
+          "url": "https://www.cnbc.com/2026/05/13/trump-china-xi-beijing-meeting-ceos.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Trump arrives in Beijing with CEOs ahead of Xi meetings - CNBC",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 12:44:50 GMT",
+          "fetched_at": "2026-05-18T17:19:35.090474+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump arrives in Beijing with CEOs ahead of Xi meetings. U.S. President Donald Trump participates in an arrival ceremony at Beijing Capital International Airport during his visit to the country, in Beijing, China, May 13, 2026. U.S. President Donald Trump has landed in Beijing for a highly anticipated presidential summit with his Chinese counterpart, Xi Jinping. The president was greeted on the tarmac by a brass band and flag wavers, who performed as he descended the steps of Air Force One. On Thursday, Trump is scheduled to participate in a welcome ceremony and hold a bilateral meeting with Xi, before touring the historic Temple of Heaven and attending a state banquet. In a Truth Social post on Monday, Trump said he expected \"great things\" to come out of the summit. Sen. Steve Daines, R-Mont., who just travelled to China with a congressional delegation, said Wednesday on CNBC's \"Squawk Box\" that it is \"in both leaders' interest to keep the relationship stable, and to de-escalate, not decouple.\".",
+          "enriched_at": null
+        },
+        {
+          "id": "src_58db438fceca",
+          "url": "https://www.cnbc.com/amp/2026/05/15/trump-wraps-up-two-day-china-trip-invites-xi-for-a-september-visit.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Trump wraps up two-day China trip; invites Xi for a September visit - CNBC",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 05:20:19 GMT",
+          "fetched_at": "2026-05-18T17:19:35.090474+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump wraps up two-day China trip; invites Xi for a September visit. U.S. President Donald Trump and Chinese President Xi Jinping meet on the sidelines of a visit to Zhongnanhai Garden on May 15, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump has invited Chinese President Xi Jinping to visit the White House on September 24, indicating that trade talks will extend beyond this week's two-day summit in Beijing. Following the two presidents' meeting earlier that day, Xi said the U.S. and China agreed to \"strategic stability\" as a framework for the next three years, according to state media. The main question for the outcome of the summit will be \"which of the deals the president would like to strike are ripe enough\" to see through, said Ryan Fedasiuk, fellow at the American Enterprise Institute. China has yet to confirm that Xi will accept the invitation to visit. Oil prices jump after Trump says China agreed to buy U.S. crude following Xi talks.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_ef74fe55ce3a",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-11/china-confirms-x-trump-summit-that-was-delayed-by-iran-war",
+          "publisher": {
+            "name": "Bloomberg",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "China Confirms Xi-Trump Summit That Was Delayed by Iran War - Bloomberg.com",
+          "author": null,
+          "published_at": "Mon, 11 May 2026 01:16:58 GMT",
+          "fetched_at": "2026-05-18T17:19:35.090474+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# China Confirms Xi-Trump Summit That Was Delayed by Iran War. Provide news feedback or report an error. Send a tip to our reporters. ## **Takeaways** by Bloomberg AI. Beijing officially announced the date of Donald Trump’s state visit this week, publicly green-lighting the first US presidential trip to China in nearly a decade despite tensions over the Iran war. Trump, who last visited China in 2017, will meet Xi Jinping in a much-anticipated summit that’s already been rescheduled once due to the war. The White House had said the summit will be held May 14-15. Before it's here, it's on the Bloomberg Terminal.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_70f437d9aa7a",
+          "url": "https://www.foxnews.com/politics/trump-leaves-china-breakthroughs-unfinished-business-xis-biggest-fights",
+          "publisher": {
+            "name": "Foxnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump leaves China with breakthroughs — and unfinished business on Xi’s biggest fights - Fox News",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 18:17:09 GMT",
+          "fetched_at": "2026-05-18T17:19:35.090474+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "* #### Trump says he's not looking for any favors from China's Xi on reopening Strait of Hormuz. President Donald Trump returned from his high-stakes summit in China with President Xi Jinping touting trade progress and warmer ties, but several of the biggest pressure points in the U.S.-China relationship — from trade and Taiwan, to AI and human rights — appeared to end without firm public breakthroughs. President Donald Trump speaks during a bilateral meeting with Chinese President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026. President Donald Trump and China's President Xi Jinping greet children during a welcome ceremony at the Great Hall of the People in Beijing on May 14, 2026. President Donald Trump meets with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "sidebar"
+    },
+    {
+      "section_id": "media_coverage",
+      "block_kind": "newsfeed",
+      "block_data": {
+        "kind": "newsfeed",
+        "cards": [
+          {
+            "url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+            "title": "Trump-Xi: Summit in Beijing",
+            "publisher": "Asia Media Centre",
+            "tier": "T3",
+            "published_at": "2026-05-15T04:08:11Z",
+            "thumbnail_url": "https://www.datocms-assets.com/126788/1778813199-welcome_ceremony_of_trump_by_xi_jinping-3-20260514.jpg?auto=format&fit=max&w=1200",
+            "summary": "Xi Warns Trump That Taiwan Issue Could Lead to 'Conflict' at Bilateral Talks in Beijing. Xi's stark warning that mishandling Taiwan risks \"clashes and even conflicts,\" while noting the absence of any deal on the pending $10 billion U.S. arms sale to Taiwan.",
+            "source_id": "src_6b32d9fa5831"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+            "title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost",
+            "publisher": "CNBC",
+            "tier": "T1",
+            "published_at": "2026-05-15T01:12:30Z",
+            "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108306978-17787681692026-05-14t103216z_389362417_rc2y8laqnuvb_rtrmadp_0_china-usa.jpeg?v=1778768190&w=1920&h=1080",
+            "summary": "Xi tells U.S. CEOs including Musk and Cook that China will \"open wider.\" Wall Street was riding high as the first day of the U.S.-China summit raised hopes for a positive relationship reset and agreements from both sides.",
+            "source_id": "src_2f14b43978ca"
+          },
+          {
+            "url": "https://www.foxnews.com/politics/trump-pushes-xi-trade-after-supreme-court-ruling-dents-key-china-pressure-tool",
+            "title": "Trump pushes Xi on trade after Supreme Court ruling dents key China pressure tool",
+            "publisher": "Fox News",
+            "tier": "T3",
+            "published_at": "2026-05-14T17:00:36Z",
+            "thumbnail_url": "https://static.foxnews.com/foxnews.com/content/uploads/2026/05/donald-trump-xi-jinping-2026.jpeg",
+            "summary": "Trade has emerged as a central focus of President Donald Trump's high-stakes meetings with Chinese President Xi Jinping this week. US and China discuss Taiwan, Iran and trade relations.",
+            "source_id": "src_ce7be2fdd55b"
+          },
+          {
+            "url": "https://apnews.com/live/trump-administration-updates-05-14-2026",
+            "title": "Live updates: Xi and Trump wrap up bilateral meeting after 2 hours of talks",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-14T07:54:00Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/3c5456a/2147483647/strip/true/crop/3161x2106+0+0/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2Fd7%2Fc6%2F1c1bd21d4f0087bf113e167aa3db%2Fap26134405224437.jpg",
+            "summary": "President Donald Trump meets with China's President Xi Jinping at the Great Hall of the People. Trump signals he wants to do business with Xi.",
+            "source_id": "src_a22a5c2cc5ad"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html",
+            "title": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit",
+            "publisher": "CNBC",
+            "tier": "T1",
+            "published_at": "2026-05-14T02:31:54Z",
+            "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108306883-1778770220615-108306883-1778759349633-gettyimages-2275560543-CHINA-US-DIPLOMACY.jpg?v=1778770231&w=1920&h=1080",
+            "summary": "Trump and Xi opened a two-day summit in Beijing focused on trade and security. Xi asked whether the U.S. and China could avoid the \"Thucydides Trap,\" which refers to how tensions historically between a rising and ruling power have often resulted in a war.",
+            "source_id": "src_e87673b74ce5"
+          }
+        ],
+        "variant": "news",
+        "grouping": "flat"
+      },
+      "citations": [
+        {
+          "source_id": "src_2f14b43978ca",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_6b32d9fa5831",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Org."
+        },
+        {
+          "source_id": "src_a22a5c2cc5ad",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_ce7be2fdd55b",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxnews."
+        },
+        {
+          "source_id": "src_e87673b74ce5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_6b32d9fa5831",
+          "url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+          "publisher": {
+            "name": "Org",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump-Xi : Summit in Beijing - Asia Media Centre",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 04:08:11 GMT",
+          "fetched_at": "2026-05-18T17:19:36.809279+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://www.datocms-assets.com/126788/1778813199-welcome_ceremony_of_trump_by_xi_jinping-3-20260514.jpg?auto=format&fit=max&w=1200",
+          "summary": "# Trump-Xi : Summit in Beijing. \"Xi Warns Trump That Taiwan Issue Could Lead to 'Conflict' at Bilateral Talks in Beijing\"** *Euronews — May 14, 2026*  Euronews — editorially independent, EU-licensed, and widely read in the UK — covers Xi's stark warning that mishandling Taiwan risks \"clashes and even conflicts,\" while noting the absence of any deal on the pending $10 billion U.S. arms sale to Taiwan. \"Xi Jinping Warns Donald Trump on Taiwan at Beijing Summit\"** *RNZ — May 14, 2026*  RNZ (which relies on AFP as it has no correspondent of its own in Asia) includes Taipei's pointed response to Xi's warnings — calling China the \"sole risk\" to regional peace — and flags Trump's pre-summit statement that he intended to raise U.S. arms sales to Taiwan directly with Xi, a significant departure from Washington's established position. \"Xi Warns Trump That US and China Will 'Clash' If Taiwan Is Handled 'Improperly'\"** *ABC News — May 14, 2026*  Trump brought the top U.S. CEOs to impress Xi, while Xi's warning that mishandling Taiwan could lead the two nations to \"come into conflict\" dominated the first day of talks.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e87673b74ce5",
+          "url": "https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit - CNBC",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 02:31:54 GMT",
+          "fetched_at": "2026-05-18T17:19:36.809279+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108306883-1778770220615-108306883-1778759349633-gettyimages-2275560543-CHINA-US-DIPLOMACY.jpg?v=1778770231&w=1920&h=1080",
+          "summary": "# Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit. * Trump and Xi opened a two-day summit in Beijing focused on trade and security. * Xi asked whether the U.S. and China could avoid the \"Thucydides Trap,\" which refers to how tensions historically between a rising and ruling power have often resulted in a war. U.S. President Donald Trump (R) is greeted by Chinese President Xi Jinping at the Great Hall of the People on May 14, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump met his Chinese counterpart Xi Jinping in Beijing on Thursday morning, kickstarting a high-stakes summit that is expected to cover trade, tariffs, Taiwan and Iran, and runs through Friday. Speaking just ahead of Trump, Xi noted the global attention on the meeting, and said a major question for the two countries was whether they could avoid the \"Thucydides Trap,\" according to an official English translation of his Chinese remarks broadcast by CCTV.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_2f14b43978ca",
+          "url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost - CNBC",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 01:12:30 GMT",
+          "fetched_at": "2026-05-18T17:19:36.809279+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108306978-17787681692026-05-14t103216z_389362417_rc2y8laqnuvb_rtrmadp_0_china-usa.jpeg?v=1778768190&w=1920&h=1080",
+          "summary": "# CNBC Daily Open: Trump-Xi summit delivers Wall Street boost. * Xi tells U.S. CEOs including Musk and Cook that China will “open wider.”. U.S. President Donald Trump speaks at a state banquet with Chinese President Xi Jinping (not pictured) at the Great Hall of the People in Beijing, China, May 14, 2026. *Wall Street was riding high as the first day of the U.S.-China summit raised hopes for a positive relationship reset and agreements from both sides.*. Day one of the high-stakes summit in Beijing saw Chinese President Xi Jinping and Trump agreeing to develop a \"constructive China-U.S. relationship of strategic stability.\". The summit is set to end today, and Trump has reportedly invited ⁠Xi ​Jinping to ​the White House ​for ​a visit on ‌Sept. As President Donald Trump meets Chinese President Xi Jinping this week, lawmakers in both parties are warning the White House not to use the U.S. auto market as a bargaining chip in any deal with Beijing.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_a22a5c2cc5ad",
+          "url": "https://apnews.com/live/trump-administration-updates-05-14-2026",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Live updates: Xi and Trump wrap up bilateral meeting after 2 hours of talks - AP News",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 07:54:00 GMT",
+          "fetched_at": "2026-05-18T17:19:36.809279+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://dims.apnews.com/dims4/default/3c5456a/2147483647/strip/true/crop/3161x2106+0+0/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Fd7%2Fc6%2F1c1bd21d4f0087bf113e167aa3db%2Fap26134405224437.jpg",
+          "summary": "President Donald Trump meets with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. ## Trump signals he wants to do business with Xi. President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump participates in a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump arrives for a welcome ceremony with China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. China’s President Xi Jinping arrives to welcome President Donald Trump at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. Elon Musk departs after a welcome ceremony with President Donald Trump and China’s President Xi Jinping at the Great Hall of the People, Thursday, May 14, 2026, in Beijing.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_ce7be2fdd55b",
+          "url": "https://www.foxnews.com/politics/trump-pushes-xi-trade-after-supreme-court-ruling-dents-key-china-pressure-tool",
+          "publisher": {
+            "name": "Foxnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump pushes Xi on trade after Supreme Court ruling dents key China pressure tool - Fox News",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 17:00:36 GMT",
+          "fetched_at": "2026-05-18T17:19:36.809279+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://static.foxnews.com/foxnews.com/content/uploads/2026/05/donald-trump-xi-jinping-2026.jpeg",
+          "summary": "* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. * #### US and China discuss Taiwan, Iran and trade relations. * #### Experts weigh in on Taiwan, Iran tensions amid US-China summit. Trade has emerged as a central focus of President Donald Trump’s high-stakes meetings with Chinese President Xi Jinping this week, following a Supreme Court setback over Trump’s tariff agenda earlier this year. President Donald Trump and Chinese President Xi Jinping greet other officials at the Great Hall of the People in Beijing, China, on May 14, 2026. U.S. President Donald Trump and Chinese President Xi Jinping attend a welcome ceremony at the Great Hall of the People on May 14, 2026 in Beijing, China. US President Donald Trump (R) shakes hands with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026. China's President Xi Jinping (R) and US President Donald Trump visit the Temple of Heaven on May 14, 2026 in Beijing, China.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "latest_news",
+      "block_kind": "latest_news",
+      "block_data": {
+        "kind": "latest_news",
+        "cards": [
+          {
+            "url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+            "title": "Trump-Xi: Summit in Beijing",
+            "publisher": "Asia Media Centre",
+            "tier": "T3",
+            "published_at": "2026-05-15T04:08:11Z",
+            "thumbnail_url": "https://www.datocms-assets.com/126788/1778813199-welcome_ceremony_of_trump_by_xi_jinping-3-20260514.jpg?auto=format&fit=max&w=1200",
+            "summary": "Xi warns Trump that Taiwan issue could lead to conflict at bilateral talks in Beijing.",
+            "source_id": "src_6b32d9fa5831"
+          },
+          {
+            "url": "https://www.washingtonpost.com/national/2026/05/14/china-trump-xi-summit-beijing/fdddd82c-5004-11f1-97e7-22c6c29ff0d8_story.html",
+            "title": "The Latest: US-China summit ends with Xi and Trump claiming progress but differences remain",
+            "publisher": "The Washington Post",
+            "tier": "T1",
+            "published_at": "2026-05-15T02:22:59Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_c4d50639d89f"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+            "title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost",
+            "publisher": "CNBC",
+            "tier": "T1",
+            "published_at": "2026-05-15T01:12:30Z",
+            "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108306978-17787681692026-05-14t103216z_389362417_rc2y8laqnuvb_rtrmadp_0_china-usa.jpeg?v=1778768190&w=1920&h=1080",
+            "summary": "Xi tells U.S. CEOs including Musk and Cook that China will open wider as Wall Street rises on hopes for a positive relationship reset.",
+            "source_id": "src_2f14b43978ca"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html",
+            "title": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit",
+            "publisher": "CNBC",
+            "tier": "T1",
+            "published_at": "2026-05-14T02:31:54Z",
+            "thumbnail_url": "https://image.cnbcfm.com/api/v1/image/108306883-1778770220615-108306883-1778759349633-gettyimages-2275560543-CHINA-US-DIPLOMACY.jpg?v=1778770231&w=1920&h=1080",
+            "summary": "Trump and Xi opened a two-day summit in Beijing focused on trade and security, with Xi asking whether the two powers could avoid the Thucydides Trap.",
+            "source_id": "src_e87673b74ce5"
+          },
+          {
+            "url": "https://nypost.com/2026/05/13/us-news/trump-greets-xi-in-beijing-to-kick-off-historic-china-summit/','",
+            "title": "Trump greets Xi in Beijing to kick off historic China summit with grand welcome ceremony",
+            "publisher": "New York Post",
+            "tier": "T3",
+            "published_at": "2026-05-14T02:08:48Z",
+            "thumbnail_url": null,
+            "summary": "President Trump shook hands with Chinese leader Xi Jinping to kick off a historic summit between the world's two most powerful heads of state.",
+            "source_id": "src_14000650a1f9"
+          },
+          {
+            "url": "https://nypost.com/2026/05/13/us-news/trump-gets-red-carpet-welcome-after-he-lands-in-beijing-for-closely-watched-summit-with-xi-jinping/','",
+            "title": "Trump gets red-carpet welcome after he lands in Beijing for closely watched summit with Xi Jinping",
+            "publisher": "New York Post",
+            "tier": "T3",
+            "published_at": "2026-05-13T12:19:16Z",
+            "thumbnail_url": null,
+            "summary": "President Trump touched down in China's capital and was given a red-carpet welcome at Beijing Capital International Airport ahead of the crucial summit with Xi Jinping.",
+            "source_id": "src_e3e6c103bf3c"
+          },
+          {
+            "url": "https://www.washingtonpost.com/business/2026/05/12/trump-xi-china-trip-arrival/f9f86c74-4e5e-11f1-97e7-22c6c29ff0d8_story.html",
+            "title": "Trump set to meet with Xi in Beijing as war and inflation weigh on his presidency",
+            "publisher": "The Washington Post",
+            "tier": "T1",
+            "published_at": "2026-05-13T00:02:05Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_527281967047"
+          },
+          {
+            "url": "https://www.bloomberg.com/news/articles/2026-05-11/china-confirms-x-trump-summit-that-was-delayed-by-iran-war",
+            "title": "China Confirms Xi-Trump Summit That Was Delayed by Iran War",
+            "publisher": "Bloomberg",
+            "tier": "T1",
+            "published_at": "2026-05-11T01:16:58Z",
+            "thumbnail_url": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iYmZfnFYPumM/v1/1200x840.jpg",
+            "summary": "Beijing officially announced the date of Donald Trump's state visit, publicly green-lighting the first US presidential trip to China in nearly a decade.",
+            "source_id": "src_ef74fe55ce3a"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_14000650a1f9",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Nypost."
+        },
+        {
+          "source_id": "src_2f14b43978ca",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_527281967047",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Washingtonpost."
+        },
+        {
+          "source_id": "src_6b32d9fa5831",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Org."
+        },
+        {
+          "source_id": "src_c4d50639d89f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Washingtonpost."
+        },
+        {
+          "source_id": "src_e3e6c103bf3c",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Nypost."
+        },
+        {
+          "source_id": "src_e87673b74ce5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_ef74fe55ce3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Bloomberg."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_14000650a1f9",
+          "url": "https://nypost.com/2026/05/13/us-news/trump-greets-xi-in-beijing-to-kick-off-historic-china-summit/",
+          "publisher": {
+            "name": "Nypost",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump greets Xi in Beijing to kick off historic China summit with grand welcome ceremony - New York Post",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 02:08:48 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "BEIJING — President Trump shook hands with Chinese leader Xi Jinping Wednesday to kick off a historic summit between the world’s two most powerful heads of state. U.S. President Donald Trump shakes hands with Chinese President Xi Jinping upon arrival at the Great Hall of the People in Beijing, China, May 14, 2026. President Donald Trump walks with Chinese President Xi Jinping during a welcome ceremony at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. President Donald Trump and China's President Xi Jinping greet children during a welcome ceremony at the Great Hall of the People, Thursday, May 14, 2026, in Beijing. Children holding Chinese and U.S. flags rehearse before the welcome ceremony for U.S. President Donald Trump by Chinese President Xi Jinping at the Great Hall of the People in Beijing, Thursday, May 14, 2026. U.S. President Donald Trump inspects an honour guard during a welcome ceremony with Chinese President Xi Jinping at the Great Hall of the People in Beijing, China, May 14, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_2f14b43978ca",
+          "url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost - CNBC",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 01:12:30 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# CNBC Daily Open: Trump-Xi summit delivers Wall Street boost. * Xi tells U.S. CEOs including Musk and Cook that China will “open wider.”. U.S. President Donald Trump speaks at a state banquet with Chinese President Xi Jinping (not pictured) at the Great Hall of the People in Beijing, China, May 14, 2026. *Wall Street was riding high as the first day of the U.S.-China summit raised hopes for a positive relationship reset and agreements from both sides.*. Day one of the high-stakes summit in Beijing saw Chinese President Xi Jinping and Trump agreeing to develop a \"constructive China-U.S. relationship of strategic stability.\". The summit is set to end today, and Trump has reportedly invited ⁠Xi ​Jinping to ​the White House ​for ​a visit on ‌Sept. As President Donald Trump meets Chinese President Xi Jinping this week, lawmakers in both parties are warning the White House not to use the U.S. auto market as a bargaining chip in any deal with Beijing.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_6b32d9fa5831",
+          "url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+          "publisher": {
+            "name": "Org",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump-Xi : Summit in Beijing - Asia Media Centre",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 04:08:11 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump-Xi : Summit in Beijing. \"Xi Warns Trump That Taiwan Issue Could Lead to 'Conflict' at Bilateral Talks in Beijing\"** *Euronews — May 14, 2026*  Euronews — editorially independent, EU-licensed, and widely read in the UK — covers Xi's stark warning that mishandling Taiwan risks \"clashes and even conflicts,\" while noting the absence of any deal on the pending $10 billion U.S. arms sale to Taiwan. \"Xi Jinping Warns Donald Trump on Taiwan at Beijing Summit\"** *RNZ — May 14, 2026*  RNZ (which relies on AFP as it has no correspondent of its own in Asia) includes Taipei's pointed response to Xi's warnings — calling China the \"sole risk\" to regional peace — and flags Trump's pre-summit statement that he intended to raise U.S. arms sales to Taiwan directly with Xi, a significant departure from Washington's established position. \"Xi Warns Trump That US and China Will 'Clash' If Taiwan Is Handled 'Improperly'\"** *ABC News — May 14, 2026*  Trump brought the top U.S. CEOs to impress Xi, while Xi's warning that mishandling Taiwan could lead the two nations to \"come into conflict\" dominated the first day of talks.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_c4d50639d89f",
+          "url": "https://www.washingtonpost.com/national/2026/05/14/china-trump-xi-summit-beijing/fdddd82c-5004-11f1-97e7-22c6c29ff0d8_story.html",
+          "publisher": {
+            "name": "Washingtonpost",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "The Latest: US-China summit ends with Xi and Trump claiming progress but differences remain - The Washington Post",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 02:22:59 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# The Latest: US-China summit ends with Xi and Trump claiming progress but differences remain. U.S. President Donald Trump departed Beijing following a final day meeting with Chinese President Xi Jinping. U.S. President Donald Trump, right, gestures as he speaks next to Chinese President Xi Jinping during a visit to the Zhongnanhai Garden in Beijing, China, Friday, May 15, 2026. (Evan Vucci/Pool Photo via AP). U.S. President Donald Trump departed Beijing on Friday following a final meeting with Chinese President Xi Jinping . The leaders said they made progress in stabilizing U.S.-China relations, but deep differences remained after two days of meetings and meals.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_527281967047",
+          "url": "https://www.washingtonpost.com/business/2026/05/12/trump-xi-china-trip-arrival/f9f86c74-4e5e-11f1-97e7-22c6c29ff0d8_story.html",
+          "publisher": {
+            "name": "Washingtonpost",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Trump set to meet with Xi in Beijing as war and inflation weigh on his presidency - The Washington Post",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 00:02:05 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump set to meet with Xi in Beijing as war and inflation weigh on his presidency. President Donald Trump is set to land in Beijing on Wednesday for a state visit with Chinese leader Xi Jinping. President Donald Trump waves from the stairs of Air Force One as he boards upon his arrival at Joint Base Andrews, Md., Tuesday, May 12, 2026, for a trip to China to meet President Xi Jinping. By Aamer Madhani, Will Weissert and Josh Boak | AP. BEIJING — President Donald Trump is set to arrive in Beijing on Wednesday for a state visit with Chinese leader Xi Jinping at a restless moment for a world worried about war, trade and artificial intelligence.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e87673b74ce5",
+          "url": "https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit - CNBC",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 02:31:54 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit. * Trump and Xi opened a two-day summit in Beijing focused on trade and security. * Xi asked whether the U.S. and China could avoid the \"Thucydides Trap,\" which refers to how tensions historically between a rising and ruling power have often resulted in a war. U.S. President Donald Trump (R) is greeted by Chinese President Xi Jinping at the Great Hall of the People on May 14, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump met his Chinese counterpart Xi Jinping in Beijing on Thursday morning, kickstarting a high-stakes summit that is expected to cover trade, tariffs, Taiwan and Iran, and runs through Friday. Speaking just ahead of Trump, Xi noted the global attention on the meeting, and said a major question for the two countries was whether they could avoid the \"Thucydides Trap,\" according to an official English translation of his Chinese remarks broadcast by CCTV.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_ef74fe55ce3a",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-11/china-confirms-x-trump-summit-that-was-delayed-by-iran-war",
+          "publisher": {
+            "name": "Bloomberg",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "China Confirms Xi-Trump Summit That Was Delayed by Iran War - Bloomberg.com",
+          "author": null,
+          "published_at": "Mon, 11 May 2026 01:16:58 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# China Confirms Xi-Trump Summit That Was Delayed by Iran War. Provide news feedback or report an error. Send a tip to our reporters. ## **Takeaways** by Bloomberg AI. Beijing officially announced the date of Donald Trump’s state visit this week, publicly green-lighting the first US presidential trip to China in nearly a decade despite tensions over the Iran war. Trump, who last visited China in 2017, will meet Xi Jinping in a much-anticipated summit that’s already been rescheduled once due to the war. The White House had said the summit will be held May 14-15. Before it's here, it's on the Bloomberg Terminal.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e3e6c103bf3c",
+          "url": "https://nypost.com/2026/05/13/us-news/trump-gets-red-carpet-welcome-after-he-lands-in-beijing-for-closely-watched-summit-with-xi-jinping/",
+          "publisher": {
+            "name": "Nypost",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump gets red-carpet welcome after he lands in Beijing for closely watched summit with Xi Jinping - New York Post",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 12:19:16 GMT",
+          "fetched_at": "2026-05-18T17:19:36.200927+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Trump arrives in China after revealing his 'first request' at Xi Jinping summit. # Trump gets red-carpet welcome after he lands in Beijing for closely watched summit with Xi Jinping. BEIJING — President Trump touched down in China’s capital Wednesday evening ahead of a crucial summit with Xi Jinping, after promising to call on the Asian power to “open up” to American business. The president was given a red-carpet welcome at Beijing Capital International Airport by US Ambasasdor to China David Perdue; Xi’s vice president, Han Zheng; China’s Ambassador to Washington Xie Feng; and Executive Vice Minister of Foreign Affairs Ma Zhaoxu. A red carpet and a posse of people were there to greet President Trump. President Trump is all smiles as he's greeted in Beijing ahead of his high-stakes summit with Xi Jinping. Chinese residents take a photo of Air Force One as it lands in Beijing on Wednesday, May 13, 2026.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "key_outcomes",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "Trump and Xi agreed to build a \"constructive, strategically stable relationship\" and pledged to avoid the \"Thucydides Trap\"—the historical pattern of conflict between rising and ruling powers. Xi committed that \"China's door to opening up will only open wider,\" signaling economic engagement. The summit produced modest but concrete trade deliverables, including China's commitment to purchase at least $17 billion in additional U.S. agricultural products annually through 2028, alongside tariff reduction discussions and advances in farm market access.",
+          "Taiwan remained a flashpoint despite the friendly atmosphere. Xi issued a stark warning that mishandling the Taiwan issue could lead to \"clashes and even conflicts,\" while the White House readout notably omitted Taiwan discussions. Critically, no agreement emerged on the pending $10 billion U.S. arms sale to Taiwan, leaving this contentious issue unresolved and underscoring the limits of the summit's warming rhetoric.",
+          "On Iran, both sides found common ground, with the White House announcing that Trump and Xi \"agreed that Iran can never have a nuclear weapon.\" Trump stated that Xi confirmed China would not provide military equipment to Iran. However, broader security cooperation remained limited, and Iran's role in ongoing regional tensions continued to complicate the bilateral relationship despite this narrow agreement."
+        ],
+        "paragraph_sources": [
+          [
+            "src_44eb76680a3a",
+            "src_cb653bddec22",
+            "src_d2b8ea6bd0fe",
+            "src_b9c89cc341af"
+          ],
+          [
+            "src_6b32d9fa5831",
+            "src_776d5503b2f4",
+            "src_1e303900dbb9"
+          ],
+          [
+            "src_1e303900dbb9",
+            "src_776d5503b2f4",
+            "src_ff201da29f83"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "China's door to opening up will only open wider",
+            "attribution": "Chinese President Xi Jinping",
+            "source_id": "src_44eb76680a3a"
+          },
+          {
+            "quote": "Taiwan issue could lead to 'clashes and even conflicts'",
+            "attribution": "Chinese President Xi Jinping",
+            "source_id": "src_6b32d9fa5831"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_44eb76680a3a",
+            "excerpt": null,
+            "claim_text": "Trump and Xi agreed to build a constructive, strategically stable relationship"
+          },
+          {
+            "source_id": "src_e87673b74ce5",
+            "excerpt": null,
+            "claim_text": "Xi asked whether the U.S. and China could avoid the Thucydides Trap"
+          },
+          {
+            "source_id": "src_d2b8ea6bd0fe",
+            "excerpt": null,
+            "claim_text": "China will purchase at least $17 billion in U.S. agricultural products annually through 2028"
+          },
+          {
+            "source_id": "src_b9c89cc341af",
+            "excerpt": null,
+            "claim_text": "China signaled tariff cuts and advances in farm market access after the summit"
+          },
+          {
+            "source_id": "src_6b32d9fa5831",
+            "excerpt": null,
+            "claim_text": "Xi warned that mishandling Taiwan risks clashes and even conflicts"
+          },
+          {
+            "source_id": "src_6b32d9fa5831",
+            "excerpt": null,
+            "claim_text": "No deal emerged on the pending $10 billion U.S. arms sale to Taiwan"
+          },
+          {
+            "source_id": "src_1e303900dbb9",
+            "excerpt": null,
+            "claim_text": "The U.S. and China agreed that Iran can never have a nuclear weapon"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_1e303900dbb9",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxnews."
+        },
+        {
+          "source_id": "src_44eb76680a3a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_6b32d9fa5831",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Org."
+        },
+        {
+          "source_id": "src_b9c89cc341af",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Reuters."
+        },
+        {
+          "source_id": "src_d2b8ea6bd0fe",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Politico."
+        },
+        {
+          "source_id": "src_e87673b74ce5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_44eb76680a3a",
+          "url": "https://www.cnbc.com/2026/05/14/trump-xi-summit-beijing-takeaway-taiwan-trade-iran-war-strategic-relations-.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Five takeaways from the Trump-Xi summit in Beijing - CNBC",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 07:21:20 GMT",
+          "fetched_at": "2026-05-18T17:19:37.090006+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "key_outcomes"
+          ],
+          "thumbnail_url": null,
+          "summary": "* China's Xi and Trump agreed to build a \"constructive, strategically stable relationship.\". * \"China's door to opening up will only open wider,\" Xi said. U.S. President Donald Trump and Chinese President Xi Jinping attend a bilateral meeting at the Great Hall of the People on May 14, 2026 in Beijing, China. The U.S. and China agreed to forge more cooperative ties at their summit in Beijing on Thursday, in a high-stakes meeting full of friendly gestures between two countries that have been battling for years on issues ranging from intellectual property and human rights to technology and trade. Xi and U.S. President Donald Trump agreed to develop a \"constructive China-U.S. relationship of strategic stability,\" according to Beijing's official English readout of the summit. Beijing welcomes deeper commercial engagement from the U.S., he said, and \"China's door to opening up will only open wider.\".",
+          "enriched_at": null
+        },
+        {
+          "id": "src_d2b8ea6bd0fe",
+          "url": "https://www.politico.com/news/2026/05/17/china-agrees-to-add-billions-annually-of-us-farm-purchases-white-house-says-00925648",
+          "publisher": {
+            "name": "Politico",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "China agrees to billions in additional US farm purchases, White House says - Politico",
+          "author": null,
+          "published_at": "Sun, 17 May 2026 21:15:00 GMT",
+          "fetched_at": "2026-05-18T17:19:37.090006+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "key_outcomes"
+          ],
+          "thumbnail_url": null,
+          "summary": "The announcement is among the few concrete deliverables from President Donald Trump’s summit with Chinese leader Xi Jinping last week. China's President Xi Jinping and President Donald Trump visit the Temple of Heaven on May 14, 2026, in Beijing. China will purchase at least $17 billion in U.S. agricultural products annually through 2028, in addition to soybean commitments already agreed to, the White House said in a fact sheet released Sunday. The announcement followed President Donald Trump’s visit to Beijing last week for talks with Chinese President Xi Jinping and was among the few concrete deliverables from a summit Trump had pitched in March as a “monumental event.”. Both countries have also agreed to establish a board of trade to manage commerce in non-sensitive sectors and the board of investment, according to the Sunday fact sheet, which the White House says will provide a “government-to-government forum” to discuss investment-related issues.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_6b32d9fa5831",
+          "url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+          "publisher": {
+            "name": "Org",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump-Xi : Summit in Beijing - Asia Media Centre",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 04:08:11 GMT",
+          "fetched_at": "2026-05-18T17:19:37.090006+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "key_outcomes"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump-Xi : Summit in Beijing. \"Xi Warns Trump That Taiwan Issue Could Lead to 'Conflict' at Bilateral Talks in Beijing\"** *Euronews — May 14, 2026*  Euronews — editorially independent, EU-licensed, and widely read in the UK — covers Xi's stark warning that mishandling Taiwan risks \"clashes and even conflicts,\" while noting the absence of any deal on the pending $10 billion U.S. arms sale to Taiwan. \"Xi Jinping Warns Donald Trump on Taiwan at Beijing Summit\"** *RNZ — May 14, 2026*  RNZ (which relies on AFP as it has no correspondent of its own in Asia) includes Taipei's pointed response to Xi's warnings — calling China the \"sole risk\" to regional peace — and flags Trump's pre-summit statement that he intended to raise U.S. arms sales to Taiwan directly with Xi, a significant departure from Washington's established position. \"Xi Warns Trump That US and China Will 'Clash' If Taiwan Is Handled 'Improperly'\"** *ABC News — May 14, 2026*  Trump brought the top U.S. CEOs to impress Xi, while Xi's warning that mishandling Taiwan could lead the two nations to \"come into conflict\" dominated the first day of talks.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e87673b74ce5",
+          "url": "https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit - CNBC",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 02:31:54 GMT",
+          "fetched_at": "2026-05-18T17:19:37.090006+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "key_outcomes"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Xi asks Trump if U.S. and China can avoid 'Thucydides Trap' at high-stakes summit. * Trump and Xi opened a two-day summit in Beijing focused on trade and security. * Xi asked whether the U.S. and China could avoid the \"Thucydides Trap,\" which refers to how tensions historically between a rising and ruling power have often resulted in a war. U.S. President Donald Trump (R) is greeted by Chinese President Xi Jinping at the Great Hall of the People on May 14, 2026 in Beijing, China. BEIJING — U.S. President Donald Trump met his Chinese counterpart Xi Jinping in Beijing on Thursday morning, kickstarting a high-stakes summit that is expected to cover trade, tariffs, Taiwan and Iran, and runs through Friday. Speaking just ahead of Trump, Xi noted the global attention on the meeting, and said a major question for the two countries was whether they could avoid the \"Thucydides Trap,\" according to an official English translation of his Chinese remarks broadcast by CCTV.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_b9c89cc341af",
+          "url": "https://www.reuters.com/world/china/china-signals-tariff-cuts-advances-farm-market-access-after-trump-xi-summit-2026-05-16/",
+          "publisher": {
+            "name": "Reuters",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "China signals tariff cuts, advances in farm market access after Trump-Xi summit - Reuters",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 15:30:12 GMT",
+          "fetched_at": "2026-05-18T17:19:37.090006+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "key_outcomes"
+          ],
+          "thumbnail_url": null,
+          "summary": "# China signals tariff cuts, advances in farm market access after Trump-Xi summit | Reuters. ## Browse World. Item 1 of 2 U.S. President Donald Trump speaks with Chinese President Xi Jinping while leaving after a visit to the Zhongnanhai Garden in Beijing, China, May 15, 2026. **[1/2]**U.S. President Donald Trump speaks with Chinese President Xi Jinping while leaving after a visit to the Zhongnanhai Garden in Beijing, China, May 15, 2026. BEIJING, May 16 (Reuters) - China and the United States have agreed to expand agricultural trade through tariff reductions ​and tackle non-tariff barriers and market access issues, China's commerce ministry said on ‌Saturday after this week's summit in Beijing, opens new tab). China's farm imports from the U.S. still face an additional 10% levy after last ​year's rounds of tit-for-tat tariffs sharply curtailed trade, which fell 65.7% year-on-year to $8.4 billion ​in 2025, according to U.S. Department of Agriculture data, opens new tab. *   About Reuters, opens new tab.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_1e303900dbb9",
+          "url": "https://www.foxnews.com/politics/white-house-readout-trump-xi-meeting-omits-taiwan-china-centers-issue-warning",
+          "publisher": {
+            "name": "Foxnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "White House readout on Trump, Xi meeting omits Taiwan, as China centers on that issue with warning - Fox News",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 17:51:17 GMT",
+          "fetched_at": "2026-05-18T17:19:59.732819+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "key_outcomes"
+          ],
+          "thumbnail_url": null,
+          "summary": "* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. ## The White House says U.S. and China 'agreed that Iran can never have a nuclear weapon' after Trump and Xi meeting. The White House said the U.S. and China agreed that the Iran cannot obtain a nuclear weapon. China's President Xi Jinping (R) and U.S. President Donald Trump visit the Temple of Heaven on May 14, 2026 in Beijing, China. U.S. President Donald Trump (R) shakes hands with China's President Xi Jinping at the Great Hall of the People in Beijing on May 14, 2026. President Xi also made clear China’s opposition to the militarization of the Strait and any effort to charge a toll for its use, and he expressed interest in purchasing more American oil to reduce China’s dependence on the Strait in the future. Safeguarding peace and stability across the Taiwan Strait is the biggest common denominator between China and the U.S.,\" China's Ministry of Foreign Affairs said in a statement.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "key_figures",
+      "block_kind": "people",
+      "block_data": {
+        "kind": "people",
+        "cards": [
+          {
+            "name": "Donald Trump",
+            "role": "President of the United States",
+            "bio": "Trump led the U.S. delegation to Beijing for the first presidential summit with China in nine years, seeking to reset U.S.-China relations and address trade, Taiwan, and security tensions.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg/330px-Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Donald_Trump",
+            "source_ids": [
+              "src_14000650a1f9",
+              "src_d6ea4ac1e2fd",
+              "src_cb653bddec22"
+            ]
+          },
+          {
+            "name": "Xi Jinping",
+            "role": "President of the People's Republic of China",
+            "bio": "Xi hosted Trump in Beijing and warned that mishandling the Taiwan issue could lead to conflict, while signaling China's willingness to open its economy wider to American business.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg/330px-Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Xi_Jinping",
+            "source_ids": [
+              "src_6b32d9fa5831",
+              "src_14000650a1f9",
+              "src_2f14b43978ca",
+              "src_e87673b74ce5"
+            ]
+          }
+        ]
+      },
+      "citations": [],
+      "sources_used": [],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "reactions",
+      "block_kind": "reactions",
+      "block_data": {
+        "kind": "reactions",
+        "cards": [
+          {
+            "author": "Donald Trump",
+            "author_role": "U.S. President",
+            "quote": "This ceremony is an honor like few I've seen before.",
+            "sentiment": "positive",
+            "stakeholder_tier": "stakeholder",
+            "author_image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg/330px-Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg",
+            "source_id": "src_638560c1321e",
+            "article_title": "Trump marvels at Chinese display of power as summit kicks off",
+            "article_url": "https://www.latimes.com/politics/story/2026-05-13/trump-marvels-at-chinese-power-as-summit-kicks-off",
+            "publisher": "Los Angeles Times",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "Xi Jinping",
+            "author_role": "Chinese President",
+            "quote": "Mishandling the Taiwan issue could lead to clashes and even conflicts.",
+            "sentiment": "negative",
+            "stakeholder_tier": "stakeholder",
+            "author_image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg/330px-Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg",
+            "source_id": "src_6b32d9fa5831",
+            "article_title": "Trump-Xi : Summit in Beijing",
+            "article_url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+            "publisher": "Asia Media Centre",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "Xi Jinping",
+            "author_role": "Chinese President",
+            "quote": "China will open wider to American business and greater cooperation.",
+            "sentiment": "positive",
+            "stakeholder_tier": "stakeholder",
+            "author_image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg/330px-Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg",
+            "source_id": "src_2f14b43978ca",
+            "article_title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost",
+            "article_url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+            "publisher": "CNBC",
+            "publisher_logo_url": null
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_2f14b43978ca",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_638560c1321e",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Latimes."
+        },
+        {
+          "source_id": "src_6b32d9fa5831",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Org."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_6b32d9fa5831",
+          "url": "https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing",
+          "publisher": {
+            "name": "Org",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump-Xi : Summit in Beijing - Asia Media Centre",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 04:08:11 GMT",
+          "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump-Xi : Summit in Beijing. \"Xi Warns Trump That Taiwan Issue Could Lead to 'Conflict' at Bilateral Talks in Beijing\"** *Euronews — May 14, 2026*  Euronews — editorially independent, EU-licensed, and widely read in the UK — covers Xi's stark warning that mishandling Taiwan risks \"clashes and even conflicts,\" while noting the absence of any deal on the pending $10 billion U.S. arms sale to Taiwan. \"Xi Jinping Warns Donald Trump on Taiwan at Beijing Summit\"** *RNZ — May 14, 2026*  RNZ (which relies on AFP as it has no correspondent of its own in Asia) includes Taipei's pointed response to Xi's warnings — calling China the \"sole risk\" to regional peace — and flags Trump's pre-summit statement that he intended to raise U.S. arms sales to Taiwan directly with Xi, a significant departure from Washington's established position. \"Xi Warns Trump That US and China Will 'Clash' If Taiwan Is Handled 'Improperly'\"** *ABC News — May 14, 2026*  Trump brought the top U.S. CEOs to impress Xi, while Xi's warning that mishandling Taiwan could lead the two nations to \"come into conflict\" dominated the first day of talks.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_638560c1321e",
+          "url": "https://www.latimes.com/politics/story/2026-05-13/trump-marvels-at-chinese-power-as-summit-kicks-off",
+          "publisher": {
+            "name": "Latimes",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Trump marvels at Chinese display of power as summit kicks off - Los Angeles Times",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 03:51:41 GMT",
+          "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "Trump’s meetings with his Chinese counterpart, Xi Jinping, began at the Great Hall of the People moments after a welcome ceremony that seemed to impress the president, featuring a Chinese military honor guard and a greeting from excited schoolchildren. Trump reflected on the stakes of his visit at the top of the meeting, telling Xi that the ceremony was an honor “like few I’ve seen before.”. ### Trump-Xi summit in Beijing: What’s at stake. Both men struck a conciliatory tone, despite the agenda for the summit featuring some of the thorniest issues facing the two superpowers today, including the U.S. war in Iran, trade relations and the future of Taiwan. Trump is expected to ask Xi for help reopening the Strait of Hormuz, a vital commercial waterway disrupted by Iran since the start of the war, and for the extension of a truce in the trade war he started at the beginning of his second term.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_2f14b43978ca",
+          "url": "https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "CNBC Daily Open: Trump-Xi summit delivers Wall Street boost - CNBC",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 01:12:30 GMT",
+          "fetched_at": "2026-05-18T17:19:36.880866+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "# CNBC Daily Open: Trump-Xi summit delivers Wall Street boost. * Xi tells U.S. CEOs including Musk and Cook that China will “open wider.”. U.S. President Donald Trump speaks at a state banquet with Chinese President Xi Jinping (not pictured) at the Great Hall of the People in Beijing, China, May 14, 2026. *Wall Street was riding high as the first day of the U.S.-China summit raised hopes for a positive relationship reset and agreements from both sides.*. Day one of the high-stakes summit in Beijing saw Chinese President Xi Jinping and Trump agreeing to develop a \"constructive China-U.S. relationship of strategic stability.\". The summit is set to end today, and Trump has reportedly invited ⁠Xi ​Jinping to ​the White House ​for ​a visit on ‌Sept. As President Donald Trump meets Chinese President Xi Jinping this week, lawmakers in both parties are warning the White House not to use the U.S. auto market as a bargaining chip in any deal with Beijing.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "trade_tariff_scorecard",
+      "block_kind": "chart",
+      "block_data": {
+        "kind": "chart",
+        "chart_type": "stat",
+        "series": null,
+        "stats": [
+          {
+            "value": "$17 billion",
+            "unit": null,
+            "label": "Annual U.S. Agricultural Purchases by China (through 2028)",
+            "comparison": null,
+            "source_id": "src_d2b8ea6bd0fe"
+          },
+          {
+            "value": "$30 billion",
+            "unit": null,
+            "label": "Potential Tariff Reduction Scope on Bilateral Imports",
+            "comparison": null,
+            "source_id": "src_9995c0747a3c"
+          },
+          {
+            "value": "Mutual cuts",
+            "unit": null,
+            "label": "Tariff Adjustment Direction Agreed",
+            "comparison": null,
+            "source_id": "src_f949f55b6de0"
+          }
+        ],
+        "table": null,
+        "title": "U.S.–China Trade & Tariff Scorecard: Trump-Xi Summit Outcomes"
+      },
+      "citations": [
+        {
+          "source_id": "src_9995c0747a3c",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Reuters."
+        },
+        {
+          "source_id": "src_d2b8ea6bd0fe",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Politico."
+        },
+        {
+          "source_id": "src_f949f55b6de0",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Fortune."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_d2b8ea6bd0fe",
+          "url": "https://www.politico.com/news/2026/05/17/china-agrees-to-add-billions-annually-of-us-farm-purchases-white-house-says-00925648",
+          "publisher": {
+            "name": "Politico",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "China agrees to billions in additional US farm purchases, White House says - Politico",
+          "author": null,
+          "published_at": "Sun, 17 May 2026 21:15:00 GMT",
+          "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "trade_tariff_scorecard"
+          ],
+          "thumbnail_url": null,
+          "summary": "The announcement is among the few concrete deliverables from President Donald Trump’s summit with Chinese leader Xi Jinping last week. China's President Xi Jinping and President Donald Trump visit the Temple of Heaven on May 14, 2026, in Beijing. China will purchase at least $17 billion in U.S. agricultural products annually through 2028, in addition to soybean commitments already agreed to, the White House said in a fact sheet released Sunday. The announcement followed President Donald Trump’s visit to Beijing last week for talks with Chinese President Xi Jinping and was among the few concrete deliverables from a summit Trump had pitched in March as a “monumental event.”. Both countries have also agreed to establish a board of trade to manage commerce in non-sensitive sectors and the board of investment, according to the Sunday fact sheet, which the White House says will provide a “government-to-government forum” to discuss investment-related issues.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_f949f55b6de0",
+          "url": "https://fortune.com/2026/05/17/us-china-purchase-17-billion-agricultural-goods-trump-xi-jinping-summit/",
+          "publisher": {
+            "name": "Fortune",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "U.S. says China to buy $17 billion of agricultural goods annually - Fortune",
+          "author": null,
+          "published_at": "Sun, 17 May 2026 18:24:00 GMT",
+          "fetched_at": "2026-05-18T17:19:35.958967+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "trade_tariff_scorecard"
+          ],
+          "thumbnail_url": null,
+          "summary": "May 17, 2026, 2:24 PM ET. China has agreed to purchase at least $17 billion of agriculture products from the US annually through 2028, the White House said in a fact sheet detailing President Donald Trump’s two-day summit in China. A day earlier, the Chinese Ministry of Commerce released its own readout of the meeting, which said the US and China will adopt a series of measures, including mutually cutting levies on certain products. Trump’s two-day visit to Beijing was the first visit to China by a US president in nearly a decade, and both leaders struck a positive tone on US-China relations. In the fact sheet, the White House also said that both “leaders agreed Iran cannot have a nuclear weapon, called to reopen the Strait of Hormuz, and agreed that no country or organization can be allowed to charge tolls.”. FORTUNE is a trademark of Fortune Media IP Limited, registered in the U.S. and other countries.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_9995c0747a3c",
+          "url": "https://www.reuters.com/business/autos-transportation/trump-xi-weigh-tariff-cuts-30-billion-imports-managed-trade-push-2026-05-13/",
+          "publisher": {
+            "name": "Reuters",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push - Reuters",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 12:03:12 GMT",
+          "fetched_at": "2026-05-18T17:19:55.291813+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "trade_tariff_scorecard"
+          ],
+          "thumbnail_url": "https://www.reuters.com/resizer/v2/KPRJYJG77RJINDI354EV4IOINM.jpg?auth=b0fc66501b98da10a085a66d1e471a69c89978426168a5f2a9cbadb77e64e4bc&width=1920&quality=80",
+          "summary": "# Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push | Reuters. ## Browse World. ## Browse Business. # Trump, Xi to weigh tariff cuts on $30 billion of imports in managed trade push. Image 1: Beijing ahead of U.S. President Donald Trump's visit to China. U.S. and China’s national flags flutter next to the portrait of late Chinese Chairman Mao Zedong, ahead of U.S. President Donald Trump's visit to China, in Beijing, China, May 13, 2026. WASHINGTON, May 13 (Reuters) - The U.S. and China are expected to inch toward a managed trade mechanism for non-sensitive goods this week, with each side possibly identifying some $30 billion worth of goods on ​which they could reduce tariffs and sell to each other without crossing national security red lines. The U.S. maintains tariffs of 7.5% on a raft of Chinese consumer products imposed in 2019 at the height of Trump's first-term trade war with China.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "summit_gallery",
+      "block_kind": "gallery",
+      "block_data": {
+        "kind": "gallery",
+        "items": [
+          {
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Welcome_ceremony_of_Trump_by_Xi_Jinping_(3)-20260514.jpg",
+            "caption": "Trump and Xi Jinping participate in a grand welcome ceremony at the Great Hall of the People, featuring military personnel and ceremonial protocol.",
+            "alt_text": "Trump and Xi at welcome ceremony with military honor guard",
+            "source_url": "https://en.wikipedia.org/wiki/2026_state_visit_by_Donald_Trump_to_China"
+          },
+          {
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Xi-Trump_meeting_at_the_American_side_(1)-20260514.jpg",
+            "caption": "Trump and Xi Jinping hold bilateral talks during their summit meeting in Beijing.",
+            "alt_text": "Trump and Xi Jinping in bilateral meeting discussion",
+            "source_url": "https://en.wikipedia.org/wiki/2026_state_visit_by_Donald_Trump_to_China"
+          },
+          {
+            "image_url": "https://ichef.bbci.co.uk/news/480/cpsprodpb/1ecb/live/07bb7020-4f92-11f1-8b8c-6d33e1d5abb6.jpg.webp",
+            "caption": "Xi Jinping and Trump arrive together at the state banquet held at the Great Hall of the People on May 14, 2026.",
+            "alt_text": "Xi and Trump arriving at state banquet ceremony",
+            "source_url": "https://www.bbc.com/news/articles/cdxp0g4q3q2o"
+          },
+          {
+            "image_url": "https://www.usatoday.com/gcdn/authoring/authoring-images/2026/05/13/USAT/90059418007-trump-china-2026-summit-09.jpg?width=660&height=435&fit=crop&format=pjpg&auto=webp",
+            "caption": "Trump is escorted by China's Vice President Han Zheng upon his arrival at Beijing Capital Airport on May 13, marking the start of the summit.",
+            "alt_text": "Trump greeted by Han Zheng at Beijing airport arrival",
+            "source_url": "https://www.usatoday.com/picture-gallery/news/politics/2026/05/13/trump-china-summit-trade-iran-taiwan-photos/90059052007/index.html"
+          },
+          {
+            "image_url": "https://media-cldnry.s-nbcnews.com/image/upload/c_fill,g_auto,w_1800,h_1200/rockcms/2026-05/260515-trump-china-mn-0845-fc2e83.jpg",
+            "caption": "President Trump boards Air Force One as he departs Beijing on May 15, concluding the high-stakes summit with Xi Jinping.",
+            "alt_text": "Trump boarding Air Force One departing Beijing",
+            "source_url": "https://www.nbcnews.com/politics/trump-administration/live-blog/trump-xi-jinping-summit-china-live-updates-rcna344530"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_237669454b30",
+            "excerpt": null,
+            "claim_text": "Trump and Xi Jinping held bilateral meetings and attended state banquets at the Great Hall of the People"
+          },
+          {
+            "source_id": "src_2b52027f4d6f",
+            "excerpt": null,
+            "claim_text": "Trump arrived at Beijing Capital International Airport and was greeted with ceremonial welcome"
+          },
+          {
+            "source_id": "src_4d430e24565a",
+            "excerpt": null,
+            "claim_text": "Trump was greeted by Xi at the Great Hall of the People with a grand ceremonial military parade"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_237669454b30",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnn."
+        },
+        {
+          "source_id": "src_2b52027f4d6f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_4d430e24565a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Nypost."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_4d430e24565a",
+          "url": "https://nypost.com/2026/05/14/us-news/trump-china-grand-ceremony-with-xi-jinping-striking-difference-from-previous-2017-trip/",
+          "publisher": {
+            "name": "Nypost",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Striking difference between Trump-Xi summit in 2026 and 2017: expert - New York Post",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 06:34:58 GMT",
+          "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "summit_gallery"
+          ],
+          "thumbnail_url": null,
+          "summary": "President Trump’s welcome at the grand ceremony in Beijing with Chinese President Xi Jinping on Thursday followed the same pomp and protocol as his 2017 trip — but the event seemed “significantly more jovial” than his previous visit, according to an expert. Similar to the 2017 visit, Trump was greeted by Xi at the steps of the Great Hall of the People Thursday afternoon in front of a large ceremonial military parade and a gaggle of children. Chinese President Xi Jinping greets President Donald Trump at the Great Hall of the People in Beijing on May 14, 2026. Trump and Xi pose for photos during a welcome ceremony at the Great Hall of the People on May 14, 2026. President Donald Trump and first lady Melania Trump are greeted by Chinese President Xi Jinping at the start of a state dinner at the Great Hall of the People on Nov. 9, 2017. President Donald Trump participates in a welcome ceremony with Chinese President Xi Jinping in Beijing, China, on May 14, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_237669454b30",
+          "url": "https://www.cnn.com/2026/05/14/world/gallery/in-pictures-us-president-trump-visits-china",
+          "publisher": {
+            "name": "Cnn",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "In Pictures: US President Trump visits China - CNN",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 11:58:05 GMT",
+          "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "summit_gallery"
+          ],
+          "thumbnail_url": null,
+          "summary": "US President Donald Trump shakes hands with China's President Xi Jinping at the Great Hall of the People in Beijing, China, on Thursday, May 14. Kenny Holston/AFP/Getty Images. US President Donald Trump is visiting Chinese leader Xi Jinping for an historic summit in Beijing. Trump sits as Xi speaks at a state banquet at the Great Hall of the People in Beijing. Trump and Xi Jinping attend a bilateral meeting at the Great Hall of the People. Trump is greeted by school children at the Great Hall of the People. Trump and China's Xi stand for their countries' national anthems during a welcome ceremony at the Great Hall of the People. Brendan Smialowski/AFP/Getty Images. Trump is greeted by Xi Jinping at the Great Hall of the People. Trump and Xi inspect a guard of honour during a welcome ceremony at the Great Hall of the People.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_2b52027f4d6f",
+          "url": "https://www.cnbc.com/2026/05/13/trump-china-xi-beijing-meeting-ceos.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Trump arrives in Beijing with CEOs ahead of Xi meetings - CNBC",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 12:44:50 GMT",
+          "fetched_at": "2026-05-18T17:19:51.658595+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "summit_gallery"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Trump arrives in Beijing with CEOs ahead of Xi meetings. U.S. President Donald Trump participates in an arrival ceremony at Beijing Capital International Airport during his visit to the country, in Beijing, China, May 13, 2026. U.S. President Donald Trump has landed in Beijing for a highly anticipated presidential summit with his Chinese counterpart, Xi Jinping. The president was greeted on the tarmac by a brass band and flag wavers, who performed as he descended the steps of Air Force One. On Thursday, Trump is scheduled to participate in a welcome ceremony and hold a bilateral meeting with Xi, before touring the historic Temple of Heaven and attending a state banquet. In a Truth Social post on Monday, Trump said he expected \"great things\" to come out of the summit. Sen. Steve Daines, R-Mont., who just travelled to China with a congressional delegation, said Wednesday on CNBC's \"Squawk Box\" that it is \"in both leaders' interest to keep the relationship stable, and to de-escalate, not decouple.\".",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    }
+  ],
+  "wikipedia_card": null,
+  "hero_image": {
+    "image_url": "https://www.usatoday.com/gcdn/authoring/authoring-images/2026/05/13/USAT/90059425007-trump-china-2026-summit-08.jpg?width=660&height=454&fit=crop&format=pjpg&auto=webp",
+    "alt_text": "Vice President of China Han Zheng escorts U.S. President Donald Trump as he arrives at Beijing Capital International Airport on May 13, 2026 in Beijing, China.",
+    "source_url": "https://www.usatoday.com/picture-gallery/news/politics/2026/05/13/trump-china-summit-trade-iran-taiwan-photos/90059052007/",
+    "publisher": "usatoday.com"
+  },
+  "meta": {
+    "last_updated": "2026-05-18T17:21:06.880187+00:00",
+    "editor_approved": true,
+    "editor_id": "cli_user@local",
+    "pipeline_trace_id": "trace_44164b29253d"
+  }
+}

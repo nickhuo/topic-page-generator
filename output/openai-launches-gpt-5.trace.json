@@ -1,0 +1,165 @@
+{
+  "trace_id": "trace_bf9b7462c242",
+  "page_id": "page_25ca1557",
+  "input_sentence": "OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT in May 2026",
+  "started_at": "2026-05-18T17:50:05.237182+00:00",
+  "ended_at": "2026-05-18T17:52:38.458268+00:00",
+  "total_duration_ms": 153221,
+  "total_cost_usd": 0.0,
+  "pipeline_trace": [
+    {
+      "stage": "ground",
+      "started_at": "2026-05-18T17:50:05.237709+00:00",
+      "duration_ms": 13305,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 5105,
+          "output_tokens": 352,
+          "cost_usd": 0.020595,
+          "duration_ms": 6986
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 5262,
+          "output_tokens": 303,
+          "cost_usd": 0.020331,
+          "duration_ms": 6101
+        }
+      ]
+    },
+    {
+      "stage": "hero_image",
+      "started_at": "2026-05-18T17:50:22.521660+00:00",
+      "duration_ms": 765,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "curation",
+      "started_at": "2026-05-18T17:50:23.302939+00:00",
+      "duration_ms": 9347,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2971,
+          "output_tokens": 454,
+          "cost_usd": 0.015723,
+          "duration_ms": 9330
+        }
+      ]
+    },
+    {
+      "stage": "research",
+      "started_at": "2026-05-18T17:50:38.605348+00:00",
+      "duration_ms": 50487,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "block_extract",
+      "started_at": "2026-05-18T17:51:29.099308+00:00",
+      "duration_ms": 24009,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "render",
+      "started_at": "2026-05-18T17:51:59.935851+00:00",
+      "duration_ms": 53,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    }
+  ],
+  "editor_actions": [
+    {
+      "action_at": "2026-05-18T17:50:22+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "ground",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:50:38+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "plan",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:51:59+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "sections",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:52:38+00:00",
+      "actor": "editor:cli",
+      "action": "approve_page",
+      "target": null,
+      "before": null,
+      "after": null,
+      "reason": "manual_approve"
+    }
+  ],
+  "final_outcome": "approved_published",
+  "approval": {
+    "actor": "cli_user@local",
+    "approved_at": "2026-05-18T17:52:38.458268+00:00",
+    "auto_mode": false
+  }
+}

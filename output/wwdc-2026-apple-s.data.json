@@ -1,0 +1,2264 @@
+{
+  "page_id": "page_99c6cfb4",
+  "input_sentence": "WWDC 2026",
+  "generated_at": "2026-05-18T17:43:09.693601+00:00",
+  "subject": {
+    "title": "WWDC 2026: Apple's iOS 27, Siri Overhaul, and AI Updates",
+    "subtitle": "Apple's annual developer conference opens June 8, with major previews expected for iOS 27, macOS 27, and a completely rebuilt Siri featuring Google Gemini integration across Apple devices.",
+    "entities": [
+      "Apple",
+      "WWDC 2026"
+    ],
+    "when": "2026-06-08",
+    "where": null
+  },
+  "layout": {
+    "preset_id": "product_focus",
+    "overrides": null
+  },
+  "sources": [
+    {
+      "id": "src_73b0cb263eee",
+      "url": "https://www.wikidata.org/wiki/Q312",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Apple Inc.",
+      "author": null,
+      "published_at": "2026-05-18T17:40:55.946809+00:00",
+      "fetched_at": "2026-05-18T17:40:55.946822+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Apple_park_cupertino_2019.jpg/1280px-Apple_park_cupertino_2019.jpg?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    },
+    {
+      "id": "src_56ca66fdfe46",
+      "url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/",
+      "publisher": {
+        "name": "Eweek",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 18:57:36 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More. Apple’s next WWDC could be a make-or-break moment for Siri. Apple is expected to preview iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, but the biggest attention will likely fall on its long-delayed AI plans. WWDC 2026 may show whether Siri can become a serious AI assistant across the company’s devices, or whether Apple is still playing catch-up. The biggest spotlight is on iOS 27, which is expected to define Apple’s software direction for the next generation of iPhones. Across multiple reports, iOS 27 is expected to introduce a much more capable Siri, with Apple reportedly preparing a long-delayed Siri 2.0 experience. The upgrade is shaping up to feel closer to a chatbot than the voice assistant users have known for years, with a new look and more natural interactions. Across the ecosystem, Apple is expected to align iOS, iPadOS, and macOS more closely, especially in AI features and app behavior.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_8dca85ace75d",
+      "url": "https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "iOS 27: Seven new features are being announced next month - 9to5Mac",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 15:17:54 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Here are seven new iPhone features rumored to be coming in iOS 27. ## #1: New Siri with standalone app, chatbot features, more. Siri is expected to be a major focus of iOS 27, with a total AI overhaul coming for Apple’s assistant. If Apple can deliver everything that’s been rumored, the new Siri will be a huge improvement that marks a new chapter in the company’s AI story. Apple’s Photos app is reportedly gaining three new AI-powered editing tools in iOS 27: Extend, Enhance, and Reframe. But visual intelligence is reportedly expanding with new capabilities in iOS 27, and being baked into the Camera app. *Bloomberg* reports that a new ‘Create a Pass’ feature is coming, enabling you to store even more of the important tickets and passes in your life in Apple Wallet. Apple Health has a variety of upgrades coming in iOS 27, including new features that were previously tied to a planned subscription service.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_182879a39dbe",
+      "url": "https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/",
+      "publisher": {
+        "name": "Macrumors",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App - MacRumors",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 20:38:00 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App. Apple is introducing an overhauled version of Siri in iOS 27, evolving the personal assistant into a more capable chatbot and AI agent able to compete with ChatGPT, Claude, and Gemini. With ‌Siri‌'s transition, Apple will be making multiple Siri-related design changes in ‌iOS 27‌, according to a new report from *Bloomberg*. ‌Siri‌ will largely live in the Dynamic Island in ‌iOS 27‌, but there will also be a dedicated ‌Siri‌ app for the first time. When ‌Siri‌ is activated with the ‌Siri‌ wake word or through the iPhone's side button, a pill-shaped animation will be displayed in the ‌Dynamic Island‌. Swiping down from the top center of the display in any app will activate a system-wide search interface, with a \"Search or Ask\" bar in the ‌Dynamic Island‌ for typing or speaking questions.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_040b83453d75",
+      "url": "https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/",
+      "publisher": {
+        "name": "Gigazine",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Apple's new Siri app is expected to include an automatic chat deletion feature. - GIGAZINE",
+      "author": null,
+      "published_at": "Mon, 18 May 2026 01:57:00 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Apple's new Siri app is expected to include an automatic chat deletion feature. According to Bloomberg reporter Mark Gurman, who is familiar with Apple's internal affairs, Apple's **Siri app** , expected to launch in the fall of 2026, will include 'privacy features unmatched in the chatbot market.'. **iOS 27: Siri App to Have Auto-Deleting Chats; Siri May Be a 'Beta'; Genmoji - Bloomberg**. One example of this AI experience is the standalone Siri app, which is expected to be included in iOS 27. Until now, Siri has been a simple chatbot function built into Apple Intelligence on iOS, but it has been reported that in iOS 27 it will become a standalone app as an AI agent capable of handling tasks from multiple apps. This Siri app is expected to function as a repository for saving past conversations with Siri and operate as a chatbot similar to OpenAI's ChatGPT or Anthropic's Claude.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e08a0efaf022",
+      "url": "https://9to5mac.com/2026/05/05/ios-27-will-let-you-choose-between-gemini-claude-and-more-for-ai-features-report/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "iOS 27 will let you choose between Gemini, Claude, and more for AI features: report - 9to5Mac",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 17:49:01 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS 27 will let you choose between Gemini, Claude, and more for AI features: report. iOS 27 will give users a new way to integrate with third-party AI platforms, according to a new report. This will let iPhone users choose from multiple third-party models from companies like Google and Anthropic, including the ability to set custom voices in Siri depending on which external model is responding. In test versions of iOS 27, Apple explains that Extensions “allow you to access generative AI capabilities from installed apps on demand, through Apple Intelligence features such as Siri, Writing Tools, Image Playground and more.”. > Users will be able to select from multiple third-party AI models for tasks like generating and editing text and images, according to people with knowledge of the matter. This is in addition to Apple’s deal with Google to use Gemini to power native Siri and Apple Intelligence features.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_4c726dd19bfb",
+      "url": "https://www.macrumors.com/2026/05/05/ios-27-third-party-chatbots-apple-intelligence/",
+      "publisher": {
+        "name": "Macrumors",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence - MacRumors",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 18:04:51 GMT",
+      "fetched_at": "2026-05-18T17:41:10.567914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "siri_ai_deep_dive"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence. iOS 27, iPadOS 27, and macOS 27 will let users set third-party AI services as the default for Apple Intelligence features like Writing Tools and Image Playground, reports *Bloomberg*. Apple has signed a deal with Google and plans to use a Gemini-based model for ‌Apple Intelligence‌ and Siri features in ‌iOS 27‌, but users will also be able to choose their favorite AI service as an alternative. Apple has already partnered with OpenAI to make ChatGPT available in lieu of Apple's built-in options for ‌Siri‌, Writing Tools, and ‌Image Playground‌ on iOS 26, but in Apple's upcoming software updates, other third-party chatbots like Claude and Gemini will also be available. Users can choose any AI provider that adds support for Apple's new ‌iOS 27‌, iPadOS 27, and ‌macOS 27‌ \"Extensions\" feature.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_7b1bc004401f",
+      "url": "https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report - 9to5Mac",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 20:45:36 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report. With just a few weeks left until WWDC, *Bloomberg* has shared multiple details on what Apple has in store for the revamped, Google Gemini-powered Siri on iOS 27. That includes reports saying this year’s WWDC artwork is based on Siri’s new animation, that Siri would also appear in the Dynamic Island with options to “Search or Ask” when activated from the power button or via the wake word, and that Apple is finally planning a standalone Siri app with a chatbot-like conversational interface, complete with uploads, history, and pins. According to Gurman, iOS 27 will feature a new gesture that will allow users to invoke a system-wide “Search or Ask” feature, with an option to tap a microphone icon to activate voice mode. Finally, the report notes that users will be able to move from a standard Siri interaction into this chatbot-like conversation mode by swiping down on the transparent results card that appears after invoking the assistant:.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_7287a41d76bc",
+      "url": "https://techcrunch.com/2026/05/05/apple-plans-to-make-ios-27-a-choose-your-own-adventure-of-ai-models/",
+      "publisher": {
+        "name": "Techcrunch",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Apple plans to make iOS 27 a Choose Your Own Adventure of AI models - TechCrunch",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 20:56:41 GMT",
+      "fetched_at": "2026-05-18T17:41:12.446693+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "media_coverage"
+      ],
+      "thumbnail_url": "https://techcrunch.com/wp-content/uploads/2026/03/ai-apps-GettyImages-2214375253.jpg?resize=1200,800",
+      "summary": "When iOS 27 is released later this year, iPhone users will reportedly have a lot of choice when it comes to which AI models they want to use on-device. A new report from Bloomberg says that Apple plans to give users their pick of a number of third-party large language models that will be capable of powering various functions within the iPhone’s operating system. The new feature, dubbed “Extensions” internally, will allow users to “access generative AI capabilities from installed apps on demand, through Apple Intelligence features such as Siri, Writing Tools, Image Playground and more,” reads a message reportedly shown in test versions of the software. Since it is currently the model available to users, one implication is that it will remain a choice. The company is widely perceived to be “behind” on AI, as it is not launching as many new AI services as some of its peers.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_80996ff59b65",
+      "url": "https://www.macrumors.com/2026/05/10/two-macos-27-changes-rumored/",
+      "publisher": {
+        "name": "Macrumors",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "macOS 27: Two More Changes Leaked Ahead of WWDC Next Month - MacRumors",
+      "author": null,
+      "published_at": "Sun, 10 May 2026 16:45:48 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# macOS 27: Two More Changes Leaked Ahead of WWDC Next Month. macOS 27 will have a \"slight redesign\" compared to macOS Tahoe, along with an option to automatically group tabs in Safari, according to *Bloomberg*'s Mark Gurman. In his *Power On* newsletter today, Gurman said the design changes will help to address some of the criticism surrounding macOS Tahoe's new Liquid Glass interface. This feature, previously revealed by *MacRumors*, is expected to be available across macOS 27, iOS 27, and iPadOS 27. \"I'm told that in test versions of iOS 27, the center-top button that users can tap to move between their tab groups has a new option called 'Organize Tabs,'\" he said. **Related Reading:** Apple to Unveil macOS 27 Next Month With These New Features. Apple's WWDC 2026 graphic provides \"a glimpse of the revamped Siri interface coming in iOS 27,\" according to Bloomberg's Mark Gurman. In his Power On newsletter today, Gurman said iOS 27 will include a new Siri interface in the Dynamic Island.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_9633d4ccb6fb",
+      "url": "https://9to5mac.com/2026/05/11/visionos-27-will-bring-these-new-vision-pro-upgrades-report/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "visionOS 27 will bring these new Vision Pro upgrades: report - 9to5Mac",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 13:37:22 GMT",
+      "fetched_at": "2026-05-18T17:41:24.889866+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "kpi_dashboard"
+      ],
+      "thumbnail_url": null,
+      "summary": "# visionOS 27 will bring these new Vision Pro upgrades: report. Apple’s next major software versions are being unveiled at WWDC 2026 on June 8, including the new Vision Pro update, visionOS 27. Here’s what to expect from visionOS 27, per *Bloomberg*. ## Here’s what to expect from visionOS 27. > This year’s visionOS 27 update will be light on new features compared with visionOS 26 and instead focus on performance, bug fixes and parity with the other “27” operating systems. That means adding the new AI editing tools, Siri features and other enhancements that will be part of iOS 27, iPadOS 27 and macOS 27. So to summarize, Vision Pro owners can expect the following in visionOS 27:. 3. Other new features that match what iOS 27 and more offer. And I’d expect that with Mike Rockwell now leading Siri’s overhaul, his previous major focus—the Vision Pro—won’t be neglected. ### visionOS 27.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_8c1c170f51f8",
+      "url": "https://www.cnet.com/tech/mobile/watchos-27-set-to-get-slimmed-down-watch-ultra-face/",
+      "publisher": {
+        "name": "Cnet",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "WatchOS 27 Set to Get Slimmed-Down Watch Ultra Face, Report Says - CNET",
+      "author": null,
+      "published_at": "Mon, 04 May 2026 23:46:00 GMT",
+      "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# WatchOS 27 Set to Get Slimmed-Down Watch Ultra Face, Report Says. A new watch face could be a better fit than the standard Apple Watch look. The next version of WatchOS is set to get a stripped-down version of the Watch Ultra's signature watch face, alongside multiple others, according to a report by Bloomberg's Mark Gurman\"). With WWDC 2026 just around the corner, most eyes are on iOS 27, which is set to include the Google Gemini-powered Siri to strengthen Apple's AI efforts, but rumors on the latest from WatchOS have been minimal. According to Gurman's newsletter Power On, Apple has several new watch faces in the works for the next version of WatchOS, but the most familiar of them is also the most notable. Simplifying this specific watch face could be an attempt to make it more approachable for the standard Apple Watch lineup, while providing glanceable information with the three complication options.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_08a422029801",
+      "url": "https://www.forbes.com/sites/kateoflahertyuk/2026/05/14/ios-27-here-are-the-key-new-iphone-privacy-features-coming-soon/",
+      "publisher": {
+        "name": "Forbes",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "iOS 27—Here Are The Key New iPhone Privacy Features Coming Soon - Forbes",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "latest_news"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS 27—Here Are The Key New iPhone Privacy Features Coming Soon. Like all its predecessors, iOS 27 will include new features that boost iPhone privacy and security. As part of the iOS 27 Siri overhaul, there will be a separate Siri app and a new chatbot-style interface, according to reports. Meanwhile, iOS 27 will allow Apple users to choose between multiple AI models, including those from Google and Anthropic — a capability it is calling Extensions, writes 9to5Mac. If and when this does happen, it is likely that the privacy policies of the third party providers will apply — as it did when Apple partnered with ChatGPT maker OpenAI. Apple Intelligence features will be a key part of iOS 27, with deep Siri integration across apps and a move towards Visual Intelligence, since the iPhone maker is working on wearable devices to enhance this feature, according to Apple-focused site MacRumors. Apple will continue to push its privacy message for AI — data is processed on the device as much as possible, rather than in the cloud.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_c4df0f985f78",
+      "url": "https://9to5mac.com/2026/05/13/ios-27s-new-design-leak-sounds-a-lot-like-what-ive-been-wanting-most/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "iOS 27’s new design leak sounds a lot like what I’ve been wanting most - 9to5Mac",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 19:25:52 GMT",
+      "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "latest_news"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS 27’s new design leak sounds a lot like what I’ve been wanting most. Yesterday Mark Gurman at *Bloomberg* published an extensive report covering design changes for iOS 27 overall, with lots of specifics on the new Siri and upgraded Camera app. One of my favorite details could be good news for the Liquid Glass change I’ve been wanting most. ## Apple is redesigning iOS 27’s Liquid Glass tab bars, potentially solving my biggest complaint. The latest is from *Bloomberg’s* Mark Gurman, who reported yesterday about a variety of design updates in iOS 27. Regarding tab bars in apps he writes, “Apple is tweaking the tab bar across the bottom of several apps to combine the search tab with the rest of an app’s tabs.”. That’s because tab bars in iOS 26 are my biggest complaint about the Liquid Glass design. In iOS 26, Apple made tab bars at the bottom of apps more transparent, and split search into a standalone button.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_9e12f8b5d20e",
+      "url": "https://arstechnica.com/gadgets/2026/05/ios-macos-and-ipados-26-5-updates-arrive-with-encrypted-rcs-messaging-and-more/",
+      "publisher": {
+        "name": "Arstechnica",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "iOS, macOS, and iPadOS 26.5 updates arrive with encrypted RCS messaging and more - Ars Technica",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 17:20:39 GMT",
+      "fetched_at": "2026-05-18T17:41:24.889866+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "kpi_dashboard"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS, macOS, and iPadOS 26.5 updates arrive with encrypted RCS messaging and more. Encrypted RCS messaging has a “beta” label in this release, and Apple says it’s limited to a subset of supported cellular carriers. Other additions in the 26.5 releases are new Pride-themed wallpapers and some of the initial work needed to support ads in the Apple Maps app. These are likely to be the last major updates we get for these versions of the operating system before the next-generation versions are unveiled at Apple’s Worldwide Developers Conference next month. It’s hard to say what to expect from the 27 releases, except that we’re still waiting on an updated AI-backed version of Siri that was first mentioned as part of the iOS 18 cycle in 2024, was very strongly implied to be part of the iOS 26 cycle last year, and still has not been demoed in any Apple presentations or in any software betas. Andrew is a Senior Technology Reporter at Ars Technica, with a focus on consumer tech including computer hardware and in-depth reviews of operating systems like Windows and macOS.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_7e3f16ab12f9",
+      "url": "https://9to5mac.com/2026/05/06/apple-may-have-just-made-one-of-the-most-important-new-siri-announcements/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Apple may have just made one of the most important new Siri announcements - 9to5Mac",
+      "author": null,
+      "published_at": "Wed, 06 May 2026 11:19:59 GMT",
+      "fetched_at": "2026-05-18T17:41:44.269148+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Apple may have just made one of the most important new Siri announcements. Apple’s painfully slow launch of the new Siri has become such a long-running saga, it seems to have all the makings of a movie – though probably not one we will see launch on Apple TV. The announcement at the start of this year that it will be powered by Google’s Gemini models finally gave us reason for optimism, and the latest Apple AI news could be an equally important development …. The first piece of good news came at the beginning of this year, when Apple confirmed reports that it was teaming up with Google to use Gemini AI models to power future Siri features. The Cupertino company may or may not eventually seek to power all of its AI features using in-house models, but either way we don’t have to wait for that to happen.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_fb58d72832af",
+      "url": "https://techcrunch.com/2026/05/17/apples-siri-revamp-could-include-auto-deleting-chats/",
+      "publisher": {
+        "name": "Techcrunch",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Apple’s Siri revamp could include auto-deleting chats - TechCrunch",
+      "author": null,
+      "published_at": "Sun, 17 May 2026 20:15:00 GMT",
+      "fetched_at": "2026-05-18T17:41:44.269148+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Privacy will be a major theme when Apple unveils a new version of Siri at the Worldwide Developers Conference in June, according to Bloomberg’s Mark Gurman. The Siri relaunch is widely seen as Apple’s big chance to reestablish its relevance in artificial intelligence. As part of that effort, company executives will argue that they’re taking a more privacy-friendly approach than most other AI companies, Gurman said. Apple will reportedly launch the first standalone Siri app, powered by Google Gemini and offering users a chatbot experience reminiscent of ChatGPT. For example, Gurman said Siri could include a feature similar to the Messages app, allowing users to automatically delete conversations after 30 days or one year — or to keep them indefinitely. Gurman also suggested that Apple might be emphasizing privacy as a way to excuse Siri’s shortcomings compared to competing products — and that this emphasis might obscure the fact that Google is handling some the security. AI, Apple, Apps, gemini, siri.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_7370419885d7",
+      "url": "https://www.latimes.com/business/story/2026-05-14/google-unveils-new-android-ai-features-ahead-of-apples-siri-revamp",
+      "publisher": {
+        "name": "Latimes",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Google unveils new Android AI features ahead of Apple’s Siri revamp - Los Angeles Times",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 14:48:25 GMT",
+      "fetched_at": "2026-05-18T17:41:10.567914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "siri_ai_deep_dive"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Google unveils new Android AI features ahead of Apple’s Siri revamp. Alphabet Inc.’s Google announced a slew of upcoming features for its Android 17 operating system, showcasing its progress in artificial intelligence weeks before Apple Inc. is set to announce major upgrades to its own iOS platform and AI offerings. The Android updates, announced Tuesday in addition to a new “Googlebook” laptop platform, include advanced capabilities for the company’s Gemini AI assistant, redesigned emoji and improvements that should appease creators who frequently post videos to Meta Platforms Inc.’s Instagram. Google said the new features will roll out in waves. “I think the consumer is trying to figure out how they should feel about AI, and I want to make sure that everything we do in our experiences in Android is done with a purpose,” Samat said. Google is taking at least one cue from Apple: It’s rebranding the new suite of consumer-facing Gemini features on premium smartphones as Gemini Intelligence, similar to Apple Intelligence.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_359bab2c0ff5",
+      "url": "https://www.cnbc.com/2026/05/12/google-races-put-gemini-at-center-of-android-before-apples-ai-reboot.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Google races to put Gemini at the center of Android before Apple’s AI reboot - CNBC",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 19:22:28 GMT",
+      "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Google races to put Gemini at the center of Android before Apple’s AI reboot. Google is using its latest Android rollout to make Gemini less of a chatbot and more of an operating layer across the phone, browser, car and laptop, just weeks before Apple is expected to show its own Gemini-powered Apple Intelligence reboot at WWDC. Ahead of its Google I/O developer conference next week, the company previewed a number of Android updates, including AI-powered app automation, a smarter version of Chrome on Android, new tools for creators, a redesigned Android Auto experience, and a sweeping set of new security features. Alphabet is counting on Gemini to help Google compete directly with OpenAI and Anthropic in the market for artificial intelligence models and services, while also serving as the AI backbone across its expansive portfolio of products, including Android. Meanwhile, Gemini is powering part of Apple's new AI strategy, giving Google a role in the iPhone maker's reset even as it races to prove its own version of personal AI on the phone is further along.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_79a6b08cf876",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-05-17/ios-27-siri-app-to-have-auto-deleting-chats-siri-may-be-a-beta-genmoji-mp9udydr",
+      "publisher": {
+        "name": "Bloomberg",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Apple’s New ChatGPT-Like Siri App Will Have Auto-Deleting Chats - Bloomberg.com",
+      "author": null,
+      "published_at": "Sun, 17 May 2026 14:00:01 GMT",
+      "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# iOS 27: Siri App to Have Auto-Deleting Chats; Siri May Be a ‘Beta’; Genmoji - Bloomberg. Bloomberg the Company & Its Products The Company & its ProductsBloomberg Terminal Demo RequestBloomberg Anywhere Remote Login Bloomberg Anywhere LoginBloomberg Customer Support Customer Support. Connecting decision makers to a dynamic network of information, people and ideas, Bloomberg quickly and accurately delivers business and financial information, news and insight around the world. *   Manage Products and Account Information. # Apple’s New ChatGPT-Like Siri App Will Have Auto-Deleting Chats. Image 1: Apple’s Siri. Apple’s Siri app in iOS 27 will include privacy features unique to the chatbot market. Also: The new digital assistant may launch as a beta test even after being delayed for two years, and the company is planning a Genmoji upgrade in its new operating system. Get exclusive insights and in-depth analysis with our Tech Newsletter Bundle for $11.99/month. Image 2: Laptop with image of a bloomberg Tech Newsletter Bundle page opened in a browser layed behind a smartphone with a newsletter article.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_b91cde730839",
+      "url": "https://9to5mac.com/2026/05/13/apple-wants-apps-to-integrate-with-siri-in-ios-27-but-one-fear-holds-some-back-report/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Apple wants apps to integrate with Siri in iOS 27, but one fear holds some back: report - 9to5Mac",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 18:30:17 GMT",
+      "fetched_at": "2026-05-18T17:41:44.269148+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "But the report also highlights Apple’s efforts to court developers to support its new Siri in iOS 27. In China, for example, Apple has been encouraging app developers to integrate with the new Siri…However, some of those developers are hesitant to do so because they’re concerned it could lead to Apple imposing fees on their apps, said people familiar with the talks. > Apple has told some of the developers it won’t charge a commission in the early stages of the partnership, but it also told them it hasn’t ruled out introducing one later…Among the Chinese developers Apple is courting to integrate their apps with the new Siri are Baidu, Alibaba and Tencent, according to employees at those companies. It’s not surprising that Apple is working with developers in advance of WWDC to get their buy-in with Siri’s new capabilities. However, it’s interesting that Apple reportedly told some prominent developers it “hasn’t ruled out” introducing a commission on Siri integration in the future.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_3c437ce8394f",
+      "url": "https://techcrunch.com/2026/05/06/apple-to-pay-250m-to-settle-lawsuit-over-siris-delayed-ai-features/",
+      "publisher": {
+        "name": "Techcrunch",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Apple to pay $250M to settle lawsuit over Siri’s delayed AI features - TechCrunch",
+      "author": null,
+      "published_at": "Wed, 06 May 2026 15:12:49 GMT",
+      "fetched_at": "2026-05-18T17:41:44.269148+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Apple to pay $250M to settle lawsuit over Siri’s delayed AI features. Apple has agreed to pay $250 million to settle a class-action lawsuit over how it marketed its AI features ahead of the launch of the iPhone 16. The lawsuit alleged that Apple exaggerated the breadth of features Apple Intelligence would bring, which included a significantly upgraded version of its assistant, Siri. In particular, the plaintiffs allege that Apple overstated both the readiness and functionality of these features, particularly the promised improvements to Siri, which have yet to fully materialize. As a result, the complaint claims, people who bought the iPhone 15 or iPhone 16 believed they were paying for cutting-edge AI tools that were not actually available at the time of purchase. The lawsuit framed this as false advertising, and says Apple’s marketing influenced buying decisions based on features that were incomplete or delayed. The settlement arrives ahead of Apple’s annual developer conference on June 8, when the company is expected to preview a version of its AI-enhanced Siri.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_4c720442741a",
+      "url": "https://zamin.uz/en/technology/201652-apple-prepares-new-privacy-enhancing-features-for-siri.html",
+      "publisher": {
+        "name": "Zamin",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Apple Siri учун махфийликни кучайтирувчи янги функцияларни тайёрламоқда - Zamin.uz",
+      "author": null,
+      "published_at": "Sun, 17 May 2026 20:20:11 GMT",
+      "fetched_at": "2026-05-18T17:41:44.269148+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Apple prepares new privacy-enhancing features for Siri. According to Bloomberg journalist Mark Gurman, Apple will unveil an updated version of Siri at the Worldwide Developers Conference in June. This update is a crucial step for the company to strengthen its position in the field of artificial intelligence. The new Siri is expected to be introduced as a standalone app powered by Google Gemini technology. This will allow users to interact with chatbots like ChatGPT, but unlike its competitors, Apple is prioritizing privacy. The company plans to limit the retention period for user data. Specifically, a feature similar to the Messages app may appear in Siri, allowing users to automatically delete their conversations after 30 days or one year. Experts believe that by prioritizing privacy, Apple may be attempting to mask Siri's shortcomings compared to other AI systems. A 'twin' of the amino acid essential for life has been discovered in space. News » Technology » Apple prepares new privacy-enhancing features for Siri.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_499573621e3c",
+      "url": "https://www.cnbc.com/video/2026/05/11/why-one-analyst-believes-apple-has-a-clear-path-to-surge-ahead-in-the-ai-arms-race.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Why one analyst believes Apple has a clear path to surge ahead in the AI arms race - CNBC",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 10:58:47 GMT",
+      "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Why one analyst believes Apple has a clear path to surge ahead in the AI arms race. Arete Research founder & senior analyst Richard Kramer discusses his call that Apple is sitting on an unrealized $50 billion of AI compute capacity that could push the stock to new heights. The American consumer is unbelievably resilient, says Affirm CEO. Strategy CEO on selling bitcoin: When it's better than issuing equity to pay dividends, we'll do it. Underlying jobs market is still very weak despite strong report, says KPMG's Diane Swonk. Intel shares surge 15% on report of preliminary Apple chip deal. Lime files for IPO after years-long road to public markets.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_1938fa1284b9",
+      "url": "https://www.cnbc.com/video/2026/05/08/dan-ives-on-apple-ai-chapter-is-finally-underway.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Dan Ives on Apple: AI chapter is finally underway - CNBC",
+      "author": null,
+      "published_at": "Fri, 08 May 2026 19:50:39 GMT",
+      "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Dan Ives on Apple: AI chapter is finally underway. Dan Ives, Wedbush Securities, joins 'Closing Bell' to discuss Ives' investing views on Apple. Strategy CEO on selling bitcoin: When it's better than issuing equity to pay dividends, we'll do it. Underlying jobs market is still very weak despite strong report, says KPMG's Diane Swonk. Intel shares surge 15% on report of preliminary Apple chip deal. Lime files for IPO after years-long road to public markets. Expect a more protracted inflation challenge through rest of year, says Citigroup CEO Jane Fraser.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_1f4563e76e4d",
+      "url": "https://9to5mac.com/2026/05/07/john-ternus-on-ai-said-exactly-what-i-wanted-to-hear/",
+      "publisher": {
+        "name": "9to5mac",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "John Ternus on AI said exactly what I wanted to hear - 9to5Mac",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 14:40:06 GMT",
+      "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# John Ternus on AI said exactly what I wanted to hear. Apple’s incoming CEO John Ternus, in a recent interview, shared how he and Apple think about approaching AI. And ahead of what’s rumored to be a big AI release with iOS 27, he said exactly what I was hoping to hear. ## John Ternus explains how Apple thinks about AI. The interview came just ahead of Apple’s announcement that Ternus will be the company’s next CEO. Its timing, and the wide-ranging nature of the interview, makes it a great temperature check for how Ternus is thinking about a variety of issues heading into the CEO role. We always think about, “How can we leverage technology to ship amazing products and features and experiences for our users?” So that’s how we think about AI. And as Apple’s executives put it in that interview, we’re very much in the “early innings” of the technology.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_81a9674fad7d",
+      "url": "https://www.cnbc.com/video/2026/05/11/why-were-going-to-see-more-warnings-around-ai-because-the-developers-are-closest-to-the-problems.html",
+      "publisher": {
+        "name": "Cnbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Why we're going to see more warnings around AI, because the developers are closest to the problems - CNBC",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 11:11:01 GMT",
+      "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Why we're going to see more warnings around AI, because the developers are closest to the problems. Eyeé discusses whether Paul Tudor Jones is right in warning the U.S. is too late to the game on regulating AI technology. The American consumer is unbelievably resilient, says Affirm CEO. Strategy CEO on selling bitcoin: When it's better than issuing equity to pay dividends, we'll do it. Underlying jobs market is still very weak despite strong report, says KPMG's Diane Swonk. Intel shares surge 15% on report of preliminary Apple chip deal. Lime files for IPO after years-long road to public markets.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_86251017cd01",
+      "url": "https://adage.com/technology/ai/aa-ad-of-the-week-local-bagel-shop-faces-backlash/",
+      "publisher": {
+        "name": "Adage",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "AI ad of the week: Local bagel shop faces the ire of a skeptical public - Ad Age",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 09:00:00 GMT",
+      "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Your Shortcut to Smarter Insights. # AI ad of the week: Local bagel shop faces the ire of a skeptical public. May 15, 2026 05:00 AM EDT. ## Featured Stories. Behind Droga5’s diaspora—and why it’s not a ‘coincidence’. The industry's hottest boutiques share a common root. Ad Age explores why so many of them lead back to Droga5. Gerry Graf joins Joan Creative as global chief creative officer. TV upfronts 2026—day 3 takeaways and buyer reactions to Warner Bros. The world’s most valuable brands—which AI tools made gains in 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_73b0cb263eee",
+      "url": "https://www.wikidata.org/wiki/Q312",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Apple Inc.",
+      "author": null,
+      "published_at": "2026-05-18T17:40:55.946809+00:00",
+      "fetched_at": "2026-05-18T17:40:55.946822+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Apple_park_cupertino_2019.jpg/1280px-Apple_park_cupertino_2019.jpg?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    }
+  ],
+  "editorial_sections": [
+    {
+      "section_id": "overview",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "Apple is hosting WWDC 2026 to unveil iOS 27 and major updates across its operating systems, with a particular focus on overhauling Siri into a competitive AI assistant. The event marks a critical moment for Apple's artificial intelligence strategy, as the company aims to demonstrate whether Siri can evolve into a capable chatbot and AI agent comparable to ChatGPT, Claude, and Gemini. iOS 27 will introduce a completely rebuilt Siri featuring a chat interface, dedicated app, and integration with the Dynamic Island for easier access.",
+          "Beyond Siri, iOS 27 will give users unprecedented control over their AI experience by allowing them to choose third-party AI models from Google, Anthropic, and others as defaults for Apple Intelligence features. The new Siri app will emphasize privacy with automatic chat deletion and security features unmatched in the chatbot market. These announcements represent Apple's comprehensive response to the rapidly evolving AI landscape and its commitment to providing users with flexible, privacy-conscious AI tools across its ecosystem."
+        ],
+        "paragraph_sources": [
+          [
+            "src_56ca66fdfe46",
+            "src_182879a39dbe",
+            "src_8dca85ace75d"
+          ],
+          [
+            "src_e08a0efaf022",
+            "src_4c726dd19bfb",
+            "src_040b83453d75"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "WWDC 2026 may show whether Siri can become a serious AI assistant across the company's devices, or whether Apple is still playing catch-up.",
+            "attribution": "eWeek",
+            "source_id": "src_56ca66fdfe46"
+          },
+          {
+            "quote": "Apple's new Siri app is expected to include privacy features unmatched in the chatbot market.",
+            "attribution": "GIGAZINE",
+            "source_id": "src_040b83453d75"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_56ca66fdfe46",
+            "excerpt": null,
+            "claim_text": "WWDC 2026 could be a make-or-break moment for Siri with focus on AI plans"
+          },
+          {
+            "source_id": "src_8dca85ace75d",
+            "excerpt": null,
+            "claim_text": "Siri is expected to be a major focus of iOS 27 with a total AI overhaul"
+          },
+          {
+            "source_id": "src_182879a39dbe",
+            "excerpt": null,
+            "claim_text": "iOS 27 is getting a major Siri redesign with chat interface and dedicated app"
+          },
+          {
+            "source_id": "src_182879a39dbe",
+            "excerpt": null,
+            "claim_text": "Siri is evolving into a more capable chatbot and AI agent able to compete with ChatGPT, Claude, and Gemini"
+          },
+          {
+            "source_id": "src_e08a0efaf022",
+            "excerpt": null,
+            "claim_text": "iOS 27 will let users choose between Gemini, Claude, and more for AI features"
+          },
+          {
+            "source_id": "src_4c726dd19bfb",
+            "excerpt": null,
+            "claim_text": "iOS 27 will let users set third-party AI services as default for Apple Intelligence features"
+          },
+          {
+            "source_id": "src_040b83453d75",
+            "excerpt": null,
+            "claim_text": "Apple's new Siri app will include privacy features unmatched in the chatbot market"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_040b83453d75",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Gigazine."
+        },
+        {
+          "source_id": "src_182879a39dbe",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_4c726dd19bfb",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_56ca66fdfe46",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Eweek."
+        },
+        {
+          "source_id": "src_8dca85ace75d",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        },
+        {
+          "source_id": "src_e08a0efaf022",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_56ca66fdfe46",
+          "url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/",
+          "publisher": {
+            "name": "Eweek",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 18:57:36 GMT",
+          "fetched_at": "2026-05-18T17:41:11.865627+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More. Apple’s next WWDC could be a make-or-break moment for Siri. Apple is expected to preview iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, but the biggest attention will likely fall on its long-delayed AI plans. WWDC 2026 may show whether Siri can become a serious AI assistant across the company’s devices, or whether Apple is still playing catch-up. The biggest spotlight is on iOS 27, which is expected to define Apple’s software direction for the next generation of iPhones. Across multiple reports, iOS 27 is expected to introduce a much more capable Siri, with Apple reportedly preparing a long-delayed Siri 2.0 experience. The upgrade is shaping up to feel closer to a chatbot than the voice assistant users have known for years, with a new look and more natural interactions. Across the ecosystem, Apple is expected to align iOS, iPadOS, and macOS more closely, especially in AI features and app behavior.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_8dca85ace75d",
+          "url": "https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27: Seven new features are being announced next month - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 15:17:54 GMT",
+          "fetched_at": "2026-05-18T17:41:11.865627+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "Here are seven new iPhone features rumored to be coming in iOS 27. ## #1: New Siri with standalone app, chatbot features, more. Siri is expected to be a major focus of iOS 27, with a total AI overhaul coming for Apple’s assistant. If Apple can deliver everything that’s been rumored, the new Siri will be a huge improvement that marks a new chapter in the company’s AI story. Apple’s Photos app is reportedly gaining three new AI-powered editing tools in iOS 27: Extend, Enhance, and Reframe. But visual intelligence is reportedly expanding with new capabilities in iOS 27, and being baked into the Camera app. *Bloomberg* reports that a new ‘Create a Pass’ feature is coming, enabling you to store even more of the important tickets and passes in your life in Apple Wallet. Apple Health has a variety of upgrades coming in iOS 27, including new features that were previously tied to a planned subscription service.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_182879a39dbe",
+          "url": "https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App - MacRumors",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 20:38:00 GMT",
+          "fetched_at": "2026-05-18T17:41:11.865627+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App. Apple is introducing an overhauled version of Siri in iOS 27, evolving the personal assistant into a more capable chatbot and AI agent able to compete with ChatGPT, Claude, and Gemini. With ‌Siri‌'s transition, Apple will be making multiple Siri-related design changes in ‌iOS 27‌, according to a new report from *Bloomberg*. ‌Siri‌ will largely live in the Dynamic Island in ‌iOS 27‌, but there will also be a dedicated ‌Siri‌ app for the first time. When ‌Siri‌ is activated with the ‌Siri‌ wake word or through the iPhone's side button, a pill-shaped animation will be displayed in the ‌Dynamic Island‌. Swiping down from the top center of the display in any app will activate a system-wide search interface, with a \"Search or Ask\" bar in the ‌Dynamic Island‌ for typing or speaking questions.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_040b83453d75",
+          "url": "https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/",
+          "publisher": {
+            "name": "Gigazine",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Apple's new Siri app is expected to include an automatic chat deletion feature. - GIGAZINE",
+          "author": null,
+          "published_at": "Mon, 18 May 2026 01:57:00 GMT",
+          "fetched_at": "2026-05-18T17:41:11.865627+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Apple's new Siri app is expected to include an automatic chat deletion feature. According to Bloomberg reporter Mark Gurman, who is familiar with Apple's internal affairs, Apple's **Siri app** , expected to launch in the fall of 2026, will include 'privacy features unmatched in the chatbot market.'. **iOS 27: Siri App to Have Auto-Deleting Chats; Siri May Be a 'Beta'; Genmoji - Bloomberg**. One example of this AI experience is the standalone Siri app, which is expected to be included in iOS 27. Until now, Siri has been a simple chatbot function built into Apple Intelligence on iOS, but it has been reported that in iOS 27 it will become a standalone app as an AI agent capable of handling tasks from multiple apps. This Siri app is expected to function as a repository for saving past conversations with Siri and operate as a chatbot similar to OpenAI's ChatGPT or Anthropic's Claude.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e08a0efaf022",
+          "url": "https://9to5mac.com/2026/05/05/ios-27-will-let-you-choose-between-gemini-claude-and-more-for-ai-features-report/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 will let you choose between Gemini, Claude, and more for AI features: report - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:49:01 GMT",
+          "fetched_at": "2026-05-18T17:41:11.865627+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 will let you choose between Gemini, Claude, and more for AI features: report. iOS 27 will give users a new way to integrate with third-party AI platforms, according to a new report. This will let iPhone users choose from multiple third-party models from companies like Google and Anthropic, including the ability to set custom voices in Siri depending on which external model is responding. In test versions of iOS 27, Apple explains that Extensions “allow you to access generative AI capabilities from installed apps on demand, through Apple Intelligence features such as Siri, Writing Tools, Image Playground and more.”. > Users will be able to select from multiple third-party AI models for tasks like generating and editing text and images, according to people with knowledge of the matter. This is in addition to Apple’s deal with Google to use Gemini to power native Siri and Apple Intelligence features.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_4c726dd19bfb",
+          "url": "https://www.macrumors.com/2026/05/05/ios-27-third-party-chatbots-apple-intelligence/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence - MacRumors",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 18:04:51 GMT",
+          "fetched_at": "2026-05-18T17:41:11.865627+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence. iOS 27, iPadOS 27, and macOS 27 will let users set third-party AI services as the default for Apple Intelligence features like Writing Tools and Image Playground, reports *Bloomberg*. Apple has signed a deal with Google and plans to use a Gemini-based model for ‌Apple Intelligence‌ and Siri features in ‌iOS 27‌, but users will also be able to choose their favorite AI service as an alternative. Apple has already partnered with OpenAI to make ChatGPT available in lieu of Apple's built-in options for ‌Siri‌, Writing Tools, and ‌Image Playground‌ on iOS 26, but in Apple's upcoming software updates, other third-party chatbots like Claude and Gemini will also be available. Users can choose any AI provider that adds support for Apple's new ‌iOS 27‌, iPadOS 27, and ‌macOS 27‌ \"Extensions\" feature.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "timeline",
+      "block_kind": "timeline",
+      "block_data": {
+        "kind": "timeline",
+        "entries": [
+          {
+            "title": "WWDC 2025 and prior: Siri limitations become apparent",
+            "time": "2025",
+            "location": null,
+            "description": "Apple's Siri assistant lags behind competitors like ChatGPT, Claude, and Gemini, prompting major overhaul plans.",
+            "importance": "normal",
+            "temporal_phase": "past",
+            "source_id": "src_182879a39dbe"
+          },
+          {
+            "title": "WWDC 2026 keynote: Apple unveils iOS 27 and Siri overhaul",
+            "time": "2026-06-08",
+            "location": null,
+            "description": "Apple previews iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, with major focus on Google Gemini-powered Siri redesign.",
+            "importance": "breaking",
+            "temporal_phase": "present",
+            "source_id": "src_56ca66fdfe46"
+          },
+          {
+            "title": "iOS 27 Siri features announced: chat interface and Dynamic Island integration",
+            "time": "2026-06-08",
+            "location": null,
+            "description": "New Siri includes standalone app, chatbot features, Dynamic Island integration, and system-wide search gesture for competing with major AI assistants.",
+            "importance": "feature",
+            "temporal_phase": "present",
+            "source_id": "src_182879a39dbe"
+          },
+          {
+            "title": "macOS 27 and visionOS 27 updates previewed",
+            "time": "2026-06-08",
+            "location": null,
+            "description": "macOS 27 features slight redesign addressing Liquid Glass criticism; visionOS 27 focuses on performance and bug fixes.",
+            "importance": "normal",
+            "temporal_phase": "present",
+            "source_id": "src_80996ff59b65"
+          },
+          {
+            "title": "Standalone Siri app launches with privacy features",
+            "time": "2026-09",
+            "location": null,
+            "description": "Dedicated Siri app releases in fall 2026 with auto-deleting chats and privacy features unmatched in chatbot market.",
+            "importance": "feature",
+            "temporal_phase": "future",
+            "source_id": "src_040b83453d75"
+          }
+        ],
+        "timezone": null
+      },
+      "citations": [
+        {
+          "source_id": "src_040b83453d75",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Gigazine."
+        },
+        {
+          "source_id": "src_182879a39dbe",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_56ca66fdfe46",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Eweek."
+        },
+        {
+          "source_id": "src_80996ff59b65",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_56ca66fdfe46",
+          "url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/",
+          "publisher": {
+            "name": "Eweek",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 18:57:36 GMT",
+          "fetched_at": "2026-05-18T17:41:11.251954+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More. Apple’s next WWDC could be a make-or-break moment for Siri. Apple is expected to preview iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, but the biggest attention will likely fall on its long-delayed AI plans. WWDC 2026 may show whether Siri can become a serious AI assistant across the company’s devices, or whether Apple is still playing catch-up. The biggest spotlight is on iOS 27, which is expected to define Apple’s software direction for the next generation of iPhones. Across multiple reports, iOS 27 is expected to introduce a much more capable Siri, with Apple reportedly preparing a long-delayed Siri 2.0 experience. The upgrade is shaping up to feel closer to a chatbot than the voice assistant users have known for years, with a new look and more natural interactions. Across the ecosystem, Apple is expected to align iOS, iPadOS, and macOS more closely, especially in AI features and app behavior.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_80996ff59b65",
+          "url": "https://www.macrumors.com/2026/05/10/two-macos-27-changes-rumored/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "macOS 27: Two More Changes Leaked Ahead of WWDC Next Month - MacRumors",
+          "author": null,
+          "published_at": "Sun, 10 May 2026 16:45:48 GMT",
+          "fetched_at": "2026-05-18T17:41:11.251954+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# macOS 27: Two More Changes Leaked Ahead of WWDC Next Month. macOS 27 will have a \"slight redesign\" compared to macOS Tahoe, along with an option to automatically group tabs in Safari, according to *Bloomberg*'s Mark Gurman. In his *Power On* newsletter today, Gurman said the design changes will help to address some of the criticism surrounding macOS Tahoe's new Liquid Glass interface. This feature, previously revealed by *MacRumors*, is expected to be available across macOS 27, iOS 27, and iPadOS 27. \"I'm told that in test versions of iOS 27, the center-top button that users can tap to move between their tab groups has a new option called 'Organize Tabs,'\" he said. **Related Reading:** Apple to Unveil macOS 27 Next Month With These New Features. Apple's WWDC 2026 graphic provides \"a glimpse of the revamped Siri interface coming in iOS 27,\" according to Bloomberg's Mark Gurman. In his Power On newsletter today, Gurman said iOS 27 will include a new Siri interface in the Dynamic Island.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_182879a39dbe",
+          "url": "https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App - MacRumors",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 20:38:00 GMT",
+          "fetched_at": "2026-05-18T17:41:11.251954+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App. Apple is introducing an overhauled version of Siri in iOS 27, evolving the personal assistant into a more capable chatbot and AI agent able to compete with ChatGPT, Claude, and Gemini. With ‌Siri‌'s transition, Apple will be making multiple Siri-related design changes in ‌iOS 27‌, according to a new report from *Bloomberg*. ‌Siri‌ will largely live in the Dynamic Island in ‌iOS 27‌, but there will also be a dedicated ‌Siri‌ app for the first time. When ‌Siri‌ is activated with the ‌Siri‌ wake word or through the iPhone's side button, a pill-shaped animation will be displayed in the ‌Dynamic Island‌. Swiping down from the top center of the display in any app will activate a system-wide search interface, with a \"Search or Ask\" bar in the ‌Dynamic Island‌ for typing or speaking questions.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_040b83453d75",
+          "url": "https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/",
+          "publisher": {
+            "name": "Gigazine",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Apple's new Siri app is expected to include an automatic chat deletion feature. - GIGAZINE",
+          "author": null,
+          "published_at": "Mon, 18 May 2026 01:57:00 GMT",
+          "fetched_at": "2026-05-18T17:41:11.251954+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Apple's new Siri app is expected to include an automatic chat deletion feature. According to Bloomberg reporter Mark Gurman, who is familiar with Apple's internal affairs, Apple's **Siri app** , expected to launch in the fall of 2026, will include 'privacy features unmatched in the chatbot market.'. **iOS 27: Siri App to Have Auto-Deleting Chats; Siri May Be a 'Beta'; Genmoji - Bloomberg**. One example of this AI experience is the standalone Siri app, which is expected to be included in iOS 27. Until now, Siri has been a simple chatbot function built into Apple Intelligence on iOS, but it has been reported that in iOS 27 it will become a standalone app as an AI agent capable of handling tasks from multiple apps. This Siri app is expected to function as a repository for saving past conversations with Siri and operate as a chatbot similar to OpenAI's ChatGPT or Anthropic's Claude.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "sidebar"
+    },
+    {
+      "section_id": "media_coverage",
+      "block_kind": "newsfeed",
+      "block_data": {
+        "kind": "newsfeed",
+        "cards": [
+          {
+            "url": "https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/','title':'iOS27:Sevennewfeaturesarebeingannounceednextmonth','publisher':'9to5Mac','tier':'T3','published_at':'2026-05-05T15:17:54Z','thumbnail_url':'https:i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2025/11/ios-27.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1%27,%27summary%27:%27Sevennewiphone-featuresrumoredtobecominginiOS27.SiriisexpectedtobeamajorfocusofiOS27,withatotalAIoverhaulcomingforApple%27sassistant.Apple%27sPhotosappgainingthreenewAI-poweredditingtools.%27,%27source_id%27:%27src_8dca85ace75d%27,",
+            "title": "WWDC2026Preview:AppleReadiesSiriOverhaul,AIUpdates,andMore-eWeek",
+            "publisher": "Eweek",
+            "tier": "T3",
+            "published_at": "2026-05-15T18:57:36Z",
+            "thumbnail_url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/','summary':'Apple'snextWWDCcouldbeamake-or-breakmomentforSiri.AppleisexpectedtopreviewiOS27,iPadOS27,macOS27,watchOS27,tvOS27,andvisionOS27,butthebiggestattentionwillikelyfallonitslongdelayedAIplans.','source_id':'src_56ca66fdfe46',",
+            "summary": "Apple'snewSiriappisexpectedtoincludeanautomaticchatdeletionfeature.AccordingtoBloombergReporterMarkGurman,Apple'sSiriapp,expectedtolaunchinthefallof2026,willinclude'privacyfeaturesunmatchedinthechatbotmarket.'",
+            "source_id": "src_040b83453d75"
+          },
+          {
+            "url": "https://www.forbes.com/sites/kateoflahertyuk/2026/05/14/ios-27-here-are-the-key-new-iphone-privacy-features-coming-soon/','title':'iOS27-Here-Are-The-Key-New-iPhone-Privacy-Features-Coming-Soon','publisher':'Forbes','tier':'T3','published_at':'2026-05-14T00:00:00Z','thumbnail_url':'https:imageio.forbes.com/specials-images/imageserve/69d4c26acba3334111144058/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds%27,%27summary%27:%27iOS27willincludenewfeaturesthatboostiphoneprivacyandsecurity.AspartoftheIOS27Sirioverhaul,therewillbeaseperateSiriappandanewchatbot-styleinterface.MeanwhileIOS27willallowAppleuserstochoosebetweenmultipleAImodels,includingthosefromGoogleandAnthropic.%27,%27source_id%27:%27src_08a422029801%27,",
+            "title": "iOS27GettingMajorSiriRedesignWithChatInterfaceandDedicatedApp",
+            "publisher": "MacRumors",
+            "tier": "T3",
+            "published_at": "2026-05-12T20:38:00Z",
+            "thumbnail_url": "https://images.macrumors.com/t/wccLNgtu2uBa78hkDFTa4mENJus=/2500x/article-new/2025/08/Finder-Siri-Feature.jpg",
+            "summary": "AppleisintroducinganoverhauledversionofSiriiniOS27,evolvingtthepersonalassistantintomorecapablechatbotandAIagentabletocompetewithChatGPT,Claude,andGemini.",
+            "source_id": "src_182879a39dbe"
+          },
+          {
+            "url": "https://techcrunch.com/2026/05/05/apple-plans-to-make-ios-27-a-choose-your-own-adventure-of-ai-models/','title':'AppleplanstomaekiOS27aChooseYourOwnAdventureofAImodels','publisher':'TechCrunch','tier':'T1','published_at':'2026-05-05T20:56:41Z','thumbnail_url':'https:techcrunch.com/wp-content/uploads/2026/03/ai-apps-GettyImages-2214375253.jpg?resize=1200,800%27,%27summary%27:%27WheniOS27isreleasedlaterthisyear,iPhoneusersreportedlyhavealoofchoicewhencomestwhichAImodeltheywanttouseon-device.Appleplanstogiveuserschoiceofthird-partylargelanguagemodels.%27,%27source_id%27:%27src_7287a41d76bc%27,",
+            "title": "iOS27willletyouchoosebetweenGemini,Claude,andmoreforAIfeatures:report",
+            "publisher": "9to5Mac",
+            "tier": "T3",
+            "published_at": "2026-05-05T17:49:01Z",
+            "thumbnail_url": "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2025/11/ios-27.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+            "summary": "iOS27willgiveusersanewwaytointegratewithth ird-partyAIplatforms,allowingiPhoneuserstochoosefromultiplethird-partymodelsfromcompanieslikeGoogleandAnthropic,includingtheabilitytosetcustomvoicesinSiridependingonwhichexternalmodelisresponding.",
+            "source_id": "src_e08a0efaf022"
+          }
+        ],
+        "variant": "news",
+        "grouping": "flat"
+      },
+      "citations": [
+        {
+          "source_id": "src_040b83453d75",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Gigazine."
+        },
+        {
+          "source_id": "src_182879a39dbe",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_e08a0efaf022",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_e08a0efaf022",
+          "url": "https://9to5mac.com/2026/05/05/ios-27-will-let-you-choose-between-gemini-claude-and-more-for-ai-features-report/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 will let you choose between Gemini, Claude, and more for AI features: report - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:49:01 GMT",
+          "fetched_at": "2026-05-18T17:41:12.446693+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2025/11/ios-27.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+          "summary": "# iOS 27 will let you choose between Gemini, Claude, and more for AI features: report. iOS 27 will give users a new way to integrate with third-party AI platforms, according to a new report. This will let iPhone users choose from multiple third-party models from companies like Google and Anthropic, including the ability to set custom voices in Siri depending on which external model is responding. In test versions of iOS 27, Apple explains that Extensions “allow you to access generative AI capabilities from installed apps on demand, through Apple Intelligence features such as Siri, Writing Tools, Image Playground and more.”. > Users will be able to select from multiple third-party AI models for tasks like generating and editing text and images, according to people with knowledge of the matter. This is in addition to Apple’s deal with Google to use Gemini to power native Siri and Apple Intelligence features.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_182879a39dbe",
+          "url": "https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App - MacRumors",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 20:38:00 GMT",
+          "fetched_at": "2026-05-18T17:41:12.446693+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://images.macrumors.com/t/wccLNgtu2uBa78hkDFTa4mENJus=/2500x/article-new/2025/08/Finder-Siri-Feature.jpg",
+          "summary": "# iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App. Apple is introducing an overhauled version of Siri in iOS 27, evolving the personal assistant into a more capable chatbot and AI agent able to compete with ChatGPT, Claude, and Gemini. With ‌Siri‌'s transition, Apple will be making multiple Siri-related design changes in ‌iOS 27‌, according to a new report from *Bloomberg*. ‌Siri‌ will largely live in the Dynamic Island in ‌iOS 27‌, but there will also be a dedicated ‌Siri‌ app for the first time. When ‌Siri‌ is activated with the ‌Siri‌ wake word or through the iPhone's side button, a pill-shaped animation will be displayed in the ‌Dynamic Island‌. Swiping down from the top center of the display in any app will activate a system-wide search interface, with a \"Search or Ask\" bar in the ‌Dynamic Island‌ for typing or speaking questions.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_040b83453d75",
+          "url": "https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/",
+          "publisher": {
+            "name": "Gigazine",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Apple's new Siri app is expected to include an automatic chat deletion feature. - GIGAZINE",
+          "author": null,
+          "published_at": "Mon, 18 May 2026 01:57:00 GMT",
+          "fetched_at": "2026-05-18T17:41:12.446693+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://i.gzn.jp/img/2026/05/18/siri-app-privacy-ios-27/00_m.jpg",
+          "summary": "# Apple's new Siri app is expected to include an automatic chat deletion feature. According to Bloomberg reporter Mark Gurman, who is familiar with Apple's internal affairs, Apple's **Siri app** , expected to launch in the fall of 2026, will include 'privacy features unmatched in the chatbot market.'. **iOS 27: Siri App to Have Auto-Deleting Chats; Siri May Be a 'Beta'; Genmoji - Bloomberg**. One example of this AI experience is the standalone Siri app, which is expected to be included in iOS 27. Until now, Siri has been a simple chatbot function built into Apple Intelligence on iOS, but it has been reported that in iOS 27 it will become a standalone app as an AI agent capable of handling tasks from multiple apps. This Siri app is expected to function as a repository for saving past conversations with Siri and operate as a chatbot similar to OpenAI's ChatGPT or Anthropic's Claude.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "latest_news",
+      "block_kind": "latest_news",
+      "block_data": {
+        "kind": "latest_news",
+        "cards": [
+          {
+            "url": "https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/published_at",
+            "title": "Apple's new Siri app is expected to include an automatic chat deletion feature",
+            "publisher": "GIGAZINE",
+            "tier": "T3",
+            "published_at": "2026-05-18T01:57:00Z",
+            "thumbnail_url": "https://i.gzn.jp/img/2026/05/18/siri-app-privacy-ios-27/00_m.jpg",
+            "summary": "Apple's new Siri app launching in fall 2026 will include privacy features unmatched in the chatbot market, including automatic chat deletion.",
+            "source_id": "src_040b83453d75"
+          },
+          {
+            "url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/published_at",
+            "title": "WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More",
+            "publisher": "eWeek",
+            "tier": "T3",
+            "published_at": "2026-05-15T18:57:36Z",
+            "thumbnail_url": null,
+            "summary": "Apple's WWDC 2026 will showcase iOS 27 and other OS updates with major focus on Siri's AI transformation and whether it can compete with modern AI assistants.",
+            "source_id": "src_56ca66fdfe46"
+          },
+          {
+            "url": "https://www.forbes.com/sites/kateoflahertyuk/2026/05/14/ios-27-here-are-the-key-new-iphone-privacy-features-coming-soon/published_at",
+            "title": "iOS 27—Here Are The Key New iPhone Privacy Features Coming Soon",
+            "publisher": "Forbes",
+            "tier": "T3",
+            "published_at": "2026-05-14T00:00:00Z",
+            "thumbnail_url": null,
+            "summary": "iOS 27 will include new privacy and security features, a separate Siri app with chatbot interface, and support for multiple AI models from Google and Anthropic.",
+            "source_id": "src_08a422029801"
+          },
+          {
+            "url": "https://9to5mac.com/2026/05/13/ios-27s-new-design-leak-sounds-a-lot-like-what-ive-been-wanting-most/published_at",
+            "title": "iOS 27's new design leak sounds a lot like what I've been wanting most",
+            "publisher": "9to5Mac",
+            "tier": "T3",
+            "published_at": "2026-05-13T19:25:52Z",
+            "thumbnail_url": null,
+            "summary": "iOS 27 will feature redesigned Liquid Glass tab bars and other design changes based on Bloomberg's latest report.",
+            "source_id": "src_c4df0f985f78"
+          },
+          {
+            "url": "https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/published_at",
+            "title": "iOS 27's 'completely rebuilt' Siri will include a new system-wide search gesture: report",
+            "publisher": "9to5Mac",
+            "tier": "T3",
+            "published_at": "2026-05-12T20:45:36Z",
+            "thumbnail_url": null,
+            "summary": "iOS 27's rebuilt Siri will feature a new system-wide search gesture and appear in the Dynamic Island with options to search or ask when activated.",
+            "source_id": "src_7b1bc004401f"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/published_at",
+            "title": "iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App",
+            "publisher": "MacRumors",
+            "tier": "T3",
+            "published_at": "2026-05-12T20:38:00Z",
+            "thumbnail_url": null,
+            "summary": "Apple is introducing an overhauled Siri in iOS 27 with a chat interface and dedicated app to compete with ChatGPT, Claude, and Gemini.",
+            "source_id": "src_182879a39dbe"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/10/two-macos-27-changes-rumored/published_at",
+            "title": "macOS 27: Two More Changes Leaked Ahead of WWDC Next Month",
+            "publisher": "MacRumors",
+            "tier": "T3",
+            "published_at": "2026-05-10T16:45:48Z",
+            "thumbnail_url": null,
+            "summary": "macOS 27 will feature a slight redesign compared to macOS Tahoe and automatic tab grouping in Safari.",
+            "source_id": "src_80996ff59b65"
+          },
+          {
+            "url": "https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/published_at",
+            "title": "iOS 27: Seven new features are being announced next month",
+            "publisher": "9to5Mac",
+            "tier": "T3",
+            "published_at": "2026-05-05T15:17:54Z",
+            "thumbnail_url": null,
+            "summary": "iOS 27 will feature a new Siri with standalone app and chatbot capabilities, plus AI-powered editing tools for the Photos app.",
+            "source_id": "src_8dca85ace75d"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_040b83453d75",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Gigazine."
+        },
+        {
+          "source_id": "src_08a422029801",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Forbes."
+        },
+        {
+          "source_id": "src_182879a39dbe",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_56ca66fdfe46",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Eweek."
+        },
+        {
+          "source_id": "src_7b1bc004401f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        },
+        {
+          "source_id": "src_80996ff59b65",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_8dca85ace75d",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        },
+        {
+          "source_id": "src_c4df0f985f78",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_182879a39dbe",
+          "url": "https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App - MacRumors",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 20:38:00 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App. Apple is introducing an overhauled version of Siri in iOS 27, evolving the personal assistant into a more capable chatbot and AI agent able to compete with ChatGPT, Claude, and Gemini. With ‌Siri‌'s transition, Apple will be making multiple Siri-related design changes in ‌iOS 27‌, according to a new report from *Bloomberg*. ‌Siri‌ will largely live in the Dynamic Island in ‌iOS 27‌, but there will also be a dedicated ‌Siri‌ app for the first time. When ‌Siri‌ is activated with the ‌Siri‌ wake word or through the iPhone's side button, a pill-shaped animation will be displayed in the ‌Dynamic Island‌. Swiping down from the top center of the display in any app will activate a system-wide search interface, with a \"Search or Ask\" bar in the ‌Dynamic Island‌ for typing or speaking questions.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_7b1bc004401f",
+          "url": "https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 20:45:36 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report. With just a few weeks left until WWDC, *Bloomberg* has shared multiple details on what Apple has in store for the revamped, Google Gemini-powered Siri on iOS 27. That includes reports saying this year’s WWDC artwork is based on Siri’s new animation, that Siri would also appear in the Dynamic Island with options to “Search or Ask” when activated from the power button or via the wake word, and that Apple is finally planning a standalone Siri app with a chatbot-like conversational interface, complete with uploads, history, and pins. According to Gurman, iOS 27 will feature a new gesture that will allow users to invoke a system-wide “Search or Ask” feature, with an option to tap a microphone icon to activate voice mode. Finally, the report notes that users will be able to move from a standard Siri interaction into this chatbot-like conversation mode by swiping down on the transparent results card that appears after invoking the assistant:.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_56ca66fdfe46",
+          "url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/",
+          "publisher": {
+            "name": "Eweek",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 18:57:36 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More. Apple’s next WWDC could be a make-or-break moment for Siri. Apple is expected to preview iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, but the biggest attention will likely fall on its long-delayed AI plans. WWDC 2026 may show whether Siri can become a serious AI assistant across the company’s devices, or whether Apple is still playing catch-up. The biggest spotlight is on iOS 27, which is expected to define Apple’s software direction for the next generation of iPhones. Across multiple reports, iOS 27 is expected to introduce a much more capable Siri, with Apple reportedly preparing a long-delayed Siri 2.0 experience. The upgrade is shaping up to feel closer to a chatbot than the voice assistant users have known for years, with a new look and more natural interactions. Across the ecosystem, Apple is expected to align iOS, iPadOS, and macOS more closely, especially in AI features and app behavior.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_040b83453d75",
+          "url": "https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/",
+          "publisher": {
+            "name": "Gigazine",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Apple's new Siri app is expected to include an automatic chat deletion feature. - GIGAZINE",
+          "author": null,
+          "published_at": "Mon, 18 May 2026 01:57:00 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Apple's new Siri app is expected to include an automatic chat deletion feature. According to Bloomberg reporter Mark Gurman, who is familiar with Apple's internal affairs, Apple's **Siri app** , expected to launch in the fall of 2026, will include 'privacy features unmatched in the chatbot market.'. **iOS 27: Siri App to Have Auto-Deleting Chats; Siri May Be a 'Beta'; Genmoji - Bloomberg**. One example of this AI experience is the standalone Siri app, which is expected to be included in iOS 27. Until now, Siri has been a simple chatbot function built into Apple Intelligence on iOS, but it has been reported that in iOS 27 it will become a standalone app as an AI agent capable of handling tasks from multiple apps. This Siri app is expected to function as a repository for saving past conversations with Siri and operate as a chatbot similar to OpenAI's ChatGPT or Anthropic's Claude.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_8dca85ace75d",
+          "url": "https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27: Seven new features are being announced next month - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 15:17:54 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Here are seven new iPhone features rumored to be coming in iOS 27. ## #1: New Siri with standalone app, chatbot features, more. Siri is expected to be a major focus of iOS 27, with a total AI overhaul coming for Apple’s assistant. If Apple can deliver everything that’s been rumored, the new Siri will be a huge improvement that marks a new chapter in the company’s AI story. Apple’s Photos app is reportedly gaining three new AI-powered editing tools in iOS 27: Extend, Enhance, and Reframe. But visual intelligence is reportedly expanding with new capabilities in iOS 27, and being baked into the Camera app. *Bloomberg* reports that a new ‘Create a Pass’ feature is coming, enabling you to store even more of the important tickets and passes in your life in Apple Wallet. Apple Health has a variety of upgrades coming in iOS 27, including new features that were previously tied to a planned subscription service.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_80996ff59b65",
+          "url": "https://www.macrumors.com/2026/05/10/two-macos-27-changes-rumored/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "macOS 27: Two More Changes Leaked Ahead of WWDC Next Month - MacRumors",
+          "author": null,
+          "published_at": "Sun, 10 May 2026 16:45:48 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# macOS 27: Two More Changes Leaked Ahead of WWDC Next Month. macOS 27 will have a \"slight redesign\" compared to macOS Tahoe, along with an option to automatically group tabs in Safari, according to *Bloomberg*'s Mark Gurman. In his *Power On* newsletter today, Gurman said the design changes will help to address some of the criticism surrounding macOS Tahoe's new Liquid Glass interface. This feature, previously revealed by *MacRumors*, is expected to be available across macOS 27, iOS 27, and iPadOS 27. \"I'm told that in test versions of iOS 27, the center-top button that users can tap to move between their tab groups has a new option called 'Organize Tabs,'\" he said. **Related Reading:** Apple to Unveil macOS 27 Next Month With These New Features. Apple's WWDC 2026 graphic provides \"a glimpse of the revamped Siri interface coming in iOS 27,\" according to Bloomberg's Mark Gurman. In his Power On newsletter today, Gurman said iOS 27 will include a new Siri interface in the Dynamic Island.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_c4df0f985f78",
+          "url": "https://9to5mac.com/2026/05/13/ios-27s-new-design-leak-sounds-a-lot-like-what-ive-been-wanting-most/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27’s new design leak sounds a lot like what I’ve been wanting most - 9to5Mac",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 19:25:52 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27’s new design leak sounds a lot like what I’ve been wanting most. Yesterday Mark Gurman at *Bloomberg* published an extensive report covering design changes for iOS 27 overall, with lots of specifics on the new Siri and upgraded Camera app. One of my favorite details could be good news for the Liquid Glass change I’ve been wanting most. ## Apple is redesigning iOS 27’s Liquid Glass tab bars, potentially solving my biggest complaint. The latest is from *Bloomberg’s* Mark Gurman, who reported yesterday about a variety of design updates in iOS 27. Regarding tab bars in apps he writes, “Apple is tweaking the tab bar across the bottom of several apps to combine the search tab with the rest of an app’s tabs.”. That’s because tab bars in iOS 26 are my biggest complaint about the Liquid Glass design. In iOS 26, Apple made tab bars at the bottom of apps more transparent, and split search into a standalone button.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_08a422029801",
+          "url": "https://www.forbes.com/sites/kateoflahertyuk/2026/05/14/ios-27-here-are-the-key-new-iphone-privacy-features-coming-soon/",
+          "publisher": {
+            "name": "Forbes",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27—Here Are The Key New iPhone Privacy Features Coming Soon - Forbes",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 00:00:00 GMT",
+          "fetched_at": "2026-05-18T17:41:11.578266+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27—Here Are The Key New iPhone Privacy Features Coming Soon. Like all its predecessors, iOS 27 will include new features that boost iPhone privacy and security. As part of the iOS 27 Siri overhaul, there will be a separate Siri app and a new chatbot-style interface, according to reports. Meanwhile, iOS 27 will allow Apple users to choose between multiple AI models, including those from Google and Anthropic — a capability it is calling Extensions, writes 9to5Mac. If and when this does happen, it is likely that the privacy policies of the third party providers will apply — as it did when Apple partnered with ChatGPT maker OpenAI. Apple Intelligence features will be a key part of iOS 27, with deep Siri integration across apps and a move towards Visual Intelligence, since the iPhone maker is working on wearable devices to enhance this feature, according to Apple-focused site MacRumors. Apple will continue to push its privacy message for AI — data is processed on the device as much as possible, rather than in the cloud.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "kpi_dashboard",
+      "block_kind": "chart",
+      "block_data": {
+        "kind": "chart",
+        "chart_type": "stat",
+        "series": null,
+        "stats": [
+          {
+            "value": "iOS 27",
+            "unit": null,
+            "label": "Completely rebuilt Siri with Google Gemini integration and new system-wide search gesture",
+            "comparison": null,
+            "source_id": "src_7b1bc004401f"
+          },
+          {
+            "value": "macOS 27",
+            "unit": null,
+            "label": "Slight redesign addressing Liquid Glass criticism, plus automatic tab grouping in Safari",
+            "comparison": null,
+            "source_id": "src_80996ff59b65"
+          },
+          {
+            "value": "visionOS 27",
+            "unit": null,
+            "label": "Focus on performance, bug fixes, and parity with other OS 27 versions",
+            "comparison": null,
+            "source_id": "src_9633d4ccb6fb"
+          },
+          {
+            "value": "Apple Intelligence",
+            "unit": null,
+            "label": "Users can choose Claude or Gemini as default AI service instead of ChatGPT",
+            "comparison": null,
+            "source_id": "src_4c726dd19bfb"
+          }
+        ],
+        "table": null,
+        "title": "WWDC 2026: Key Expected Announcements"
+      },
+      "citations": [
+        {
+          "source_id": "src_4c726dd19bfb",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_7b1bc004401f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        },
+        {
+          "source_id": "src_80996ff59b65",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_9633d4ccb6fb",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_7b1bc004401f",
+          "url": "https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 20:45:36 GMT",
+          "fetched_at": "2026-05-18T17:41:24.889866+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "kpi_dashboard"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report. With just a few weeks left until WWDC, *Bloomberg* has shared multiple details on what Apple has in store for the revamped, Google Gemini-powered Siri on iOS 27. That includes reports saying this year’s WWDC artwork is based on Siri’s new animation, that Siri would also appear in the Dynamic Island with options to “Search or Ask” when activated from the power button or via the wake word, and that Apple is finally planning a standalone Siri app with a chatbot-like conversational interface, complete with uploads, history, and pins. According to Gurman, iOS 27 will feature a new gesture that will allow users to invoke a system-wide “Search or Ask” feature, with an option to tap a microphone icon to activate voice mode. Finally, the report notes that users will be able to move from a standard Siri interaction into this chatbot-like conversation mode by swiping down on the transparent results card that appears after invoking the assistant:.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_80996ff59b65",
+          "url": "https://www.macrumors.com/2026/05/10/two-macos-27-changes-rumored/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "macOS 27: Two More Changes Leaked Ahead of WWDC Next Month - MacRumors",
+          "author": null,
+          "published_at": "Sun, 10 May 2026 16:45:48 GMT",
+          "fetched_at": "2026-05-18T17:41:24.889866+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "kpi_dashboard"
+          ],
+          "thumbnail_url": null,
+          "summary": "# macOS 27: Two More Changes Leaked Ahead of WWDC Next Month. macOS 27 will have a \"slight redesign\" compared to macOS Tahoe, along with an option to automatically group tabs in Safari, according to *Bloomberg*'s Mark Gurman. In his *Power On* newsletter today, Gurman said the design changes will help to address some of the criticism surrounding macOS Tahoe's new Liquid Glass interface. This feature, previously revealed by *MacRumors*, is expected to be available across macOS 27, iOS 27, and iPadOS 27. \"I'm told that in test versions of iOS 27, the center-top button that users can tap to move between their tab groups has a new option called 'Organize Tabs,'\" he said. **Related Reading:** Apple to Unveil macOS 27 Next Month With These New Features. Apple's WWDC 2026 graphic provides \"a glimpse of the revamped Siri interface coming in iOS 27,\" according to Bloomberg's Mark Gurman. In his Power On newsletter today, Gurman said iOS 27 will include a new Siri interface in the Dynamic Island.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_4c726dd19bfb",
+          "url": "https://www.macrumors.com/2026/05/05/ios-27-third-party-chatbots-apple-intelligence/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence - MacRumors",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 18:04:51 GMT",
+          "fetched_at": "2026-05-18T17:41:24.889866+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "kpi_dashboard"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence. iOS 27, iPadOS 27, and macOS 27 will let users set third-party AI services as the default for Apple Intelligence features like Writing Tools and Image Playground, reports *Bloomberg*. Apple has signed a deal with Google and plans to use a Gemini-based model for ‌Apple Intelligence‌ and Siri features in ‌iOS 27‌, but users will also be able to choose their favorite AI service as an alternative. Apple has already partnered with OpenAI to make ChatGPT available in lieu of Apple's built-in options for ‌Siri‌, Writing Tools, and ‌Image Playground‌ on iOS 26, but in Apple's upcoming software updates, other third-party chatbots like Claude and Gemini will also be available. Users can choose any AI provider that adds support for Apple's new ‌iOS 27‌, iPadOS 27, and ‌macOS 27‌ \"Extensions\" feature.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_9633d4ccb6fb",
+          "url": "https://9to5mac.com/2026/05/11/visionos-27-will-bring-these-new-vision-pro-upgrades-report/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "visionOS 27 will bring these new Vision Pro upgrades: report - 9to5Mac",
+          "author": null,
+          "published_at": "Mon, 11 May 2026 13:37:22 GMT",
+          "fetched_at": "2026-05-18T17:41:24.889866+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "kpi_dashboard"
+          ],
+          "thumbnail_url": null,
+          "summary": "# visionOS 27 will bring these new Vision Pro upgrades: report. Apple’s next major software versions are being unveiled at WWDC 2026 on June 8, including the new Vision Pro update, visionOS 27. Here’s what to expect from visionOS 27, per *Bloomberg*. ## Here’s what to expect from visionOS 27. > This year’s visionOS 27 update will be light on new features compared with visionOS 26 and instead focus on performance, bug fixes and parity with the other “27” operating systems. That means adding the new AI editing tools, Siri features and other enhancements that will be part of iOS 27, iPadOS 27 and macOS 27. So to summarize, Vision Pro owners can expect the following in visionOS 27:. 3. Other new features that match what iOS 27 and more offer. And I’d expect that with Mike Rockwell now leading Siri’s overhaul, his previous major focus—the Vision Pro—won’t be neglected. ### visionOS 27.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "siri_ai_deep_dive",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "Apple's decision to power Siri with Google's Gemini models represents a significant strategic shift, marking the company's acknowledgment that building competitive AI capabilities in-house required external partnership. The Gemini-powered Siri rebuild, expected to debut at WWDC 2026, aims to transform Siri from a limited voice assistant into a capable AI system that can handle complex tasks across Apple's ecosystem. This partnership signals Apple's commitment to catching up in the AI race while maintaining its privacy-first positioning.",
+          "The rebuilt Siri will introduce substantial technical improvements over its predecessor. iOS 27 will feature a completely redesigned Siri with new system-wide search gestures and Dynamic Island integration, allowing users to activate Siri via the power button or wake word. Beyond the core Gemini integration, Apple is implementing a flexible architecture that lets users choose alternative AI models—including Claude from Anthropic—for specific Apple Intelligence features like Writing Tools and Image Playground, giving users control over which AI service powers their experience.",
+          "Privacy emerges as Apple's competitive differentiator in this AI overhaul. According to reports from Bloomberg's Mark Gurman, Apple executives plan to emphasize a privacy-friendly approach compared to competitors, with features like auto-deleting chats built into the new Siri app. This privacy-centric strategy positions Apple's Gemini integration as fundamentally different from how Google deploys its own AI, allowing Apple to argue it's taking a more user-protective stance while still leveraging cutting-edge AI capabilities."
+        ],
+        "paragraph_sources": [
+          [
+            "src_7e3f16ab12f9",
+            "src_7b1bc004401f",
+            "src_359bab2c0ff5"
+          ],
+          [
+            "src_7b1bc004401f",
+            "src_e08a0efaf022",
+            "src_4c726dd19bfb"
+          ],
+          [
+            "src_fb58d72832af",
+            "src_56ca66fdfe46"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "The announcement at the start of this year that it will be powered by Google's Gemini models finally gave us reason for optimism",
+            "attribution": "9to5Mac",
+            "source_id": "src_7e3f16ab12f9"
+          },
+          {
+            "quote": "Privacy will be a major theme when Apple unveils a new version of Siri at the Worldwide Developers Conference in June",
+            "attribution": "Bloomberg's Mark Gurman, via TechCrunch",
+            "source_id": "src_fb58d72832af"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_7e3f16ab12f9",
+            "excerpt": null,
+            "claim_text": "Apple announced that Siri will be powered by Google's Gemini models"
+          },
+          {
+            "source_id": "src_7b1bc004401f",
+            "excerpt": null,
+            "claim_text": "iOS 27 features a completely rebuilt Siri powered by Google Gemini"
+          },
+          {
+            "source_id": "src_7b1bc004401f",
+            "excerpt": null,
+            "claim_text": "Siri will appear in the Dynamic Island with options to search or ask when activated from the power button or via wake word"
+          },
+          {
+            "source_id": "src_e08a0efaf022",
+            "excerpt": null,
+            "claim_text": "iOS 27 will let users choose between Gemini, Claude, and other AI models for Apple Intelligence features"
+          },
+          {
+            "source_id": "src_4c726dd19bfb",
+            "excerpt": null,
+            "claim_text": "Users can set third-party AI services as the default for Apple Intelligence features like Writing Tools and Image Playground"
+          },
+          {
+            "source_id": "src_fb58d72832af",
+            "excerpt": null,
+            "claim_text": "Privacy will be a major theme in Apple's Siri relaunch at WWDC"
+          },
+          {
+            "source_id": "src_fb58d72832af",
+            "excerpt": null,
+            "claim_text": "Apple will launch the first standalone Siri app with auto-deleting chats"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_4c726dd19bfb",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Macrumors."
+        },
+        {
+          "source_id": "src_7b1bc004401f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        },
+        {
+          "source_id": "src_7e3f16ab12f9",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        },
+        {
+          "source_id": "src_e08a0efaf022",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from 9to5mac."
+        },
+        {
+          "source_id": "src_fb58d72832af",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_7e3f16ab12f9",
+          "url": "https://9to5mac.com/2026/05/06/apple-may-have-just-made-one-of-the-most-important-new-siri-announcements/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Apple may have just made one of the most important new Siri announcements - 9to5Mac",
+          "author": null,
+          "published_at": "Wed, 06 May 2026 11:19:59 GMT",
+          "fetched_at": "2026-05-18T17:41:10.567914+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "siri_ai_deep_dive"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Apple may have just made one of the most important new Siri announcements. Apple’s painfully slow launch of the new Siri has become such a long-running saga, it seems to have all the makings of a movie – though probably not one we will see launch on Apple TV. The announcement at the start of this year that it will be powered by Google’s Gemini models finally gave us reason for optimism, and the latest Apple AI news could be an equally important development …. The first piece of good news came at the beginning of this year, when Apple confirmed reports that it was teaming up with Google to use Gemini AI models to power future Siri features. The Cupertino company may or may not eventually seek to power all of its AI features using in-house models, but either way we don’t have to wait for that to happen.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_fb58d72832af",
+          "url": "https://techcrunch.com/2026/05/17/apples-siri-revamp-could-include-auto-deleting-chats/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Apple’s Siri revamp could include auto-deleting chats - TechCrunch",
+          "author": null,
+          "published_at": "Sun, 17 May 2026 20:15:00 GMT",
+          "fetched_at": "2026-05-18T17:41:10.567914+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "siri_ai_deep_dive"
+          ],
+          "thumbnail_url": null,
+          "summary": "Privacy will be a major theme when Apple unveils a new version of Siri at the Worldwide Developers Conference in June, according to Bloomberg’s Mark Gurman. The Siri relaunch is widely seen as Apple’s big chance to reestablish its relevance in artificial intelligence. As part of that effort, company executives will argue that they’re taking a more privacy-friendly approach than most other AI companies, Gurman said. Apple will reportedly launch the first standalone Siri app, powered by Google Gemini and offering users a chatbot experience reminiscent of ChatGPT. For example, Gurman said Siri could include a feature similar to the Messages app, allowing users to automatically delete conversations after 30 days or one year — or to keep them indefinitely. Gurman also suggested that Apple might be emphasizing privacy as a way to excuse Siri’s shortcomings compared to competing products — and that this emphasis might obscure the fact that Google is handling some the security. AI, Apple, Apps, gemini, siri.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_7b1bc004401f",
+          "url": "https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 20:45:36 GMT",
+          "fetched_at": "2026-05-18T17:41:10.567914+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "siri_ai_deep_dive"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report. With just a few weeks left until WWDC, *Bloomberg* has shared multiple details on what Apple has in store for the revamped, Google Gemini-powered Siri on iOS 27. That includes reports saying this year’s WWDC artwork is based on Siri’s new animation, that Siri would also appear in the Dynamic Island with options to “Search or Ask” when activated from the power button or via the wake word, and that Apple is finally planning a standalone Siri app with a chatbot-like conversational interface, complete with uploads, history, and pins. According to Gurman, iOS 27 will feature a new gesture that will allow users to invoke a system-wide “Search or Ask” feature, with an option to tap a microphone icon to activate voice mode. Finally, the report notes that users will be able to move from a standard Siri interaction into this chatbot-like conversation mode by swiping down on the transparent results card that appears after invoking the assistant:.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e08a0efaf022",
+          "url": "https://9to5mac.com/2026/05/05/ios-27-will-let-you-choose-between-gemini-claude-and-more-for-ai-features-report/",
+          "publisher": {
+            "name": "9to5mac",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 will let you choose between Gemini, Claude, and more for AI features: report - 9to5Mac",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 17:49:01 GMT",
+          "fetched_at": "2026-05-18T17:41:10.567914+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "siri_ai_deep_dive"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 will let you choose between Gemini, Claude, and more for AI features: report. iOS 27 will give users a new way to integrate with third-party AI platforms, according to a new report. This will let iPhone users choose from multiple third-party models from companies like Google and Anthropic, including the ability to set custom voices in Siri depending on which external model is responding. In test versions of iOS 27, Apple explains that Extensions “allow you to access generative AI capabilities from installed apps on demand, through Apple Intelligence features such as Siri, Writing Tools, Image Playground and more.”. > Users will be able to select from multiple third-party AI models for tasks like generating and editing text and images, according to people with knowledge of the matter. This is in addition to Apple’s deal with Google to use Gemini to power native Siri and Apple Intelligence features.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_4c726dd19bfb",
+          "url": "https://www.macrumors.com/2026/05/05/ios-27-third-party-chatbots-apple-intelligence/",
+          "publisher": {
+            "name": "Macrumors",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence - MacRumors",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 18:04:51 GMT",
+          "fetched_at": "2026-05-18T17:41:10.567914+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "siri_ai_deep_dive"
+          ],
+          "thumbnail_url": null,
+          "summary": "# iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence. iOS 27, iPadOS 27, and macOS 27 will let users set third-party AI services as the default for Apple Intelligence features like Writing Tools and Image Playground, reports *Bloomberg*. Apple has signed a deal with Google and plans to use a Gemini-based model for ‌Apple Intelligence‌ and Siri features in ‌iOS 27‌, but users will also be able to choose their favorite AI service as an alternative. Apple has already partnered with OpenAI to make ChatGPT available in lieu of Apple's built-in options for ‌Siri‌, Writing Tools, and ‌Image Playground‌ on iOS 26, but in Apple's upcoming software updates, other third-party chatbots like Claude and Gemini will also be available. Users can choose any AI provider that adds support for Apple's new ‌iOS 27‌, iPadOS 27, and ‌macOS 27‌ \"Extensions\" feature.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "reactions",
+      "block_kind": "reactions",
+      "block_data": {
+        "kind": "reactions",
+        "cards": [
+          {
+            "author": "Richard Kramer",
+            "author_role": "Founder & Senior Analyst, Arete Research",
+            "quote": "Apple is sitting on an unrealized $50 billion of AI compute capacity that could push the stock to new heights.",
+            "sentiment": "positive",
+            "stakeholder_tier": "third_party",
+            "author_image_url": null,
+            "source_id": "src_499573621e3c",
+            "article_title": "Why one analyst believes Apple has a clear path to surge ahead in the AI arms race",
+            "article_url": "https://www.cnbc.com/video/2026/05/11/why-one-analyst-believes-apple-has-a-clear-path-to-surge-ahead-in-the-ai-arms-race.html",
+            "publisher": "CNBC",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "Dan Ives",
+            "author_role": "Analyst, Wedbush Securities",
+            "quote": "Apple: AI chapter is finally underway.",
+            "sentiment": "positive",
+            "stakeholder_tier": "third_party",
+            "author_image_url": null,
+            "source_id": "src_1938fa1284b9",
+            "article_title": "Dan Ives on Apple: AI chapter is finally underway",
+            "article_url": "https://www.cnbc.com/video/2026/05/08/dan-ives-on-apple-ai-chapter-is-finally-underway.html",
+            "publisher": "CNBC",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "Eweek",
+            "author_role": "Technology News Publisher",
+            "quote": "WWDC 2026 may show whether Siri can become a serious AI assistant across the company's devices, or whether Apple is still playing catch-up.",
+            "sentiment": "neutral",
+            "stakeholder_tier": "third_party",
+            "author_image_url": null,
+            "source_id": "src_56ca66fdfe46",
+            "article_title": "WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek",
+            "article_url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/publisher",
+            "publisher": "Eweek",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "TechCrunch",
+            "author_role": "Technology News Publisher",
+            "quote": "Apple has agreed to pay $250 million to settle a class-action lawsuit over how it marketed its AI features ahead of the launch of the iPhone 16.",
+            "sentiment": "negative",
+            "stakeholder_tier": "third_party",
+            "author_image_url": null,
+            "source_id": "src_3c437ce8394f",
+            "article_title": "Apple to pay $250M to settle lawsuit over Siri's delayed AI features",
+            "article_url": "https://techcrunch.com/2026/05/06/apple-to-pay-250m-to-settle-lawsuit-over-siris-delayed-ai-features/publisher",
+            "publisher": "TechCrunch",
+            "publisher_logo_url": null
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_1938fa1284b9",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_3c437ce8394f",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Techcrunch."
+        },
+        {
+          "source_id": "src_499573621e3c",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnbc."
+        },
+        {
+          "source_id": "src_56ca66fdfe46",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Eweek."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_56ca66fdfe46",
+          "url": "https://www.eweek.com/news/apple-wwdc-2026-ai-preview/",
+          "publisher": {
+            "name": "Eweek",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 18:57:36 GMT",
+          "fetched_at": "2026-05-18T17:41:25.343413+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "# WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More. Apple’s next WWDC could be a make-or-break moment for Siri. Apple is expected to preview iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, but the biggest attention will likely fall on its long-delayed AI plans. WWDC 2026 may show whether Siri can become a serious AI assistant across the company’s devices, or whether Apple is still playing catch-up. The biggest spotlight is on iOS 27, which is expected to define Apple’s software direction for the next generation of iPhones. Across multiple reports, iOS 27 is expected to introduce a much more capable Siri, with Apple reportedly preparing a long-delayed Siri 2.0 experience. The upgrade is shaping up to feel closer to a chatbot than the voice assistant users have known for years, with a new look and more natural interactions. Across the ecosystem, Apple is expected to align iOS, iPadOS, and macOS more closely, especially in AI features and app behavior.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_3c437ce8394f",
+          "url": "https://techcrunch.com/2026/05/06/apple-to-pay-250m-to-settle-lawsuit-over-siris-delayed-ai-features/",
+          "publisher": {
+            "name": "Techcrunch",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Apple to pay $250M to settle lawsuit over Siri’s delayed AI features - TechCrunch",
+          "author": null,
+          "published_at": "Wed, 06 May 2026 15:12:49 GMT",
+          "fetched_at": "2026-05-18T17:41:44.269148+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Apple to pay $250M to settle lawsuit over Siri’s delayed AI features. Apple has agreed to pay $250 million to settle a class-action lawsuit over how it marketed its AI features ahead of the launch of the iPhone 16. The lawsuit alleged that Apple exaggerated the breadth of features Apple Intelligence would bring, which included a significantly upgraded version of its assistant, Siri. In particular, the plaintiffs allege that Apple overstated both the readiness and functionality of these features, particularly the promised improvements to Siri, which have yet to fully materialize. As a result, the complaint claims, people who bought the iPhone 15 or iPhone 16 believed they were paying for cutting-edge AI tools that were not actually available at the time of purchase. The lawsuit framed this as false advertising, and says Apple’s marketing influenced buying decisions based on features that were incomplete or delayed. The settlement arrives ahead of Apple’s annual developer conference on June 8, when the company is expected to preview a version of its AI-enhanced Siri.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_499573621e3c",
+          "url": "https://www.cnbc.com/video/2026/05/11/why-one-analyst-believes-apple-has-a-clear-path-to-surge-ahead-in-the-ai-arms-race.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Why one analyst believes Apple has a clear path to surge ahead in the AI arms race - CNBC",
+          "author": null,
+          "published_at": "Mon, 11 May 2026 10:58:47 GMT",
+          "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Why one analyst believes Apple has a clear path to surge ahead in the AI arms race. Arete Research founder & senior analyst Richard Kramer discusses his call that Apple is sitting on an unrealized $50 billion of AI compute capacity that could push the stock to new heights. The American consumer is unbelievably resilient, says Affirm CEO. Strategy CEO on selling bitcoin: When it's better than issuing equity to pay dividends, we'll do it. Underlying jobs market is still very weak despite strong report, says KPMG's Diane Swonk. Intel shares surge 15% on report of preliminary Apple chip deal. Lime files for IPO after years-long road to public markets.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_1938fa1284b9",
+          "url": "https://www.cnbc.com/video/2026/05/08/dan-ives-on-apple-ai-chapter-is-finally-underway.html",
+          "publisher": {
+            "name": "Cnbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Dan Ives on Apple: AI chapter is finally underway - CNBC",
+          "author": null,
+          "published_at": "Fri, 08 May 2026 19:50:39 GMT",
+          "fetched_at": "2026-05-18T17:42:06.363142+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Dan Ives on Apple: AI chapter is finally underway. Dan Ives, Wedbush Securities, joins 'Closing Bell' to discuss Ives' investing views on Apple. Strategy CEO on selling bitcoin: When it's better than issuing equity to pay dividends, we'll do it. Underlying jobs market is still very weak despite strong report, says KPMG's Diane Swonk. Intel shares surge 15% on report of preliminary Apple chip deal. Lime files for IPO after years-long road to public markets. Expect a more protracted inflation challenge through rest of year, says Citigroup CEO Jane Fraser.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    }
+  ],
+  "wikipedia_card": null,
+  "hero_image": {
+    "image_url": "https://sundayguardianlive.com/wp-content/uploads/2026/04/apple-wwdc-2026-check-full-schedule-siri-redesign-ios-27-updates-macos-27-next-gen-ai-features-more-set-to-be-revealed.jpg",
+    "alt_text": "Apple, WWDC 2026, WWDC Event 2026, Siri, Siri Redesign, New Siri Interface, WWDC 2026 Dynamic Island Integration, iOS 27, WWDC 2026 New Features, Apple Undo Redo",
+    "source_url": "https://sundayguardianlive.com/tech-news/apple-wwdc-2026-check-full-schedule-siri-redesign-ios-27-updates-macos-27-next-gen-ai-features-more-set-to-be-revealed-185407/",
+    "publisher": "sundayguardianlive.com"
+  },
+  "meta": {
+    "last_updated": "2026-05-18T17:43:09.693559+00:00",
+    "editor_approved": true,
+    "editor_id": "cli_user@local",
+    "pipeline_trace_id": "trace_833714c6878a"
+  }
+}

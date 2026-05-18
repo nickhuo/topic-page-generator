@@ -1,0 +1,165 @@
+{
+  "trace_id": "trace_083dea6dc292",
+  "page_id": "page_909d164f",
+  "input_sentence": "The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026.",
+  "started_at": "2026-05-18T16:59:25.216659+00:00",
+  "ended_at": "2026-05-18T17:05:37.123954+00:00",
+  "total_duration_ms": 371907,
+  "total_cost_usd": 0.0,
+  "pipeline_trace": [
+    {
+      "stage": "ground",
+      "started_at": "2026-05-18T16:59:25.217123+00:00",
+      "duration_ms": 44375,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 5141,
+          "output_tokens": 390,
+          "cost_usd": 0.021273,
+          "duration_ms": 8014
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 5297,
+          "output_tokens": 297,
+          "cost_usd": 0.020346,
+          "duration_ms": 6840
+        }
+      ]
+    },
+    {
+      "stage": "hero_image",
+      "started_at": "2026-05-18T17:01:02.790354+00:00",
+      "duration_ms": 1761,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "curation",
+      "started_at": "2026-05-18T17:01:04.570125+00:00",
+      "duration_ms": 11300,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2952,
+          "output_tokens": 558,
+          "cost_usd": 0.017226,
+          "duration_ms": 11283
+        }
+      ]
+    },
+    {
+      "stage": "research",
+      "started_at": "2026-05-18T17:02:15.436233+00:00",
+      "duration_ms": 94549,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "block_extract",
+      "started_at": "2026-05-18T17:03:49.991318+00:00",
+      "duration_ms": 20820,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "render",
+      "started_at": "2026-05-18T17:05:09.157186+00:00",
+      "duration_ms": 46,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    }
+  ],
+  "editor_actions": [
+    {
+      "action_at": "2026-05-18T17:01:02+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "ground",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:02:14+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "plan",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:05:09+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "sections",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:05:37+00:00",
+      "actor": "editor:cli",
+      "action": "approve_page",
+      "target": null,
+      "before": null,
+      "after": null,
+      "reason": "manual_approve"
+    }
+  ],
+  "final_outcome": "approved_published",
+  "approval": {
+    "actor": "cli_user@local",
+    "approved_at": "2026-05-18T17:05:37.123954+00:00",
+    "auto_mode": false
+  }
+}

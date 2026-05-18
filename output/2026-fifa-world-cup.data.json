@@ -1,0 +1,2088 @@
+{
+  "page_id": "page_909d164f",
+  "input_sentence": "The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026.",
+  "generated_at": "2026-05-18T17:05:09.157211+00:00",
+  "subject": {
+    "title": "2026 FIFA World Cup Opening Match: Mexico vs South Africa",
+    "subtitle": "Mexico faces South Africa in the first game of the 48-team tournament at Estadio Azteca on June 11, with the final set for July 19 at New York New Jersey Stadium.",
+    "entities": [
+      "Mexico",
+      "South Africa",
+      "FIFA World Cup 2026",
+      "Estadio Azteca"
+    ],
+    "when": "2026-06-11T21:00:00Z",
+    "where": "Estadio Azteca, Mexico City, Mexico"
+  },
+  "layout": {
+    "preset_id": "product_focus",
+    "overrides": null
+  },
+  "sources": [
+    {
+      "id": "src_225aae733766",
+      "url": "https://www.wikidata.org/wiki/Q96",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Mexico",
+      "author": null,
+      "published_at": "2026-05-18T17:02:14.920838+00:00",
+      "fetched_at": "2026-05-18T17:02:14.920862+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Ciudad.de.Mexico.City.Distrito.Federal.DF.Paseo.Reforma.Skyline.jpg/1280px-Ciudad.de.Mexico.City.Distrito.Federal.DF.Paseo.Reforma.Skyline.jpg?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    },
+    {
+      "id": "src_5c36f3706385",
+      "url": "https://www.billboard.com/music/latin/mana-j-balvin-and-more-to-open-fifa-world-cup-2026-mexico-1236243397/",
+      "publisher": {
+        "name": "Billboard",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico - Billboard",
+      "author": null,
+      "published_at": "Sat, 09 May 2026 04:07:50 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico. Belinda, Los Ángeles Azules, Lila Downs, Danny Ocean and Tyla are also part of the lineup. Maná, Alejandro Fernández, J Balvin, Los Ángeles Azules and Belinda will be part of the lineup gracing the opening ceremony of the FIFA World Cup 2026 at the Mexico City Stadium (Estadio Banorte) on June 11, the FIFA announced on Friday (May 8) on its social media channels. “The FIFA World Cup is a moment the world shares, and that begins with how we open it,” reads the post, which was also shared by FIFA President Gianni Infantino. Mexico will face South Africa in the opening match of the FIFA World Cup 2026, in a stadium that will go down in history as the first to host three FIFA World Cups.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_4cf4a95a660c",
+      "url": "https://sports.yahoo.com/soccer/article/2026-world-cup-schedule-qualified-teams-groups-match-dates-fixtures-how-to-watch-050724214.html",
+      "publisher": {
+        "name": "Yahoo",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "2026 World Cup schedule: Qualified teams, groups, match dates, fixtures, how to watch - Yahoo Sports",
+      "author": null,
+      "published_at": "Sat, 09 May 2026 13:55:42 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "The 2026 World Cup will run from June 11 - July 19 in the United States, Canada and Mexico. The 2026 World Cup qualifying playoffs are over and we now know the full 48-team field for this summer’s tournament in the United States, Canada and Mexico. It will begin its tournament June 12 at SoFi Stadium in Inglewood, California against Paraguay. Canada is in Group B and will open against Bosnia and Herzegovina on June 12 at BMO Field in Toronto. Mexico gets the honor of hosting the opening match of the World Cup on June 11 against South Africa at Estadio Azteca in Mexico City. ## Qualified teams for the 2026 World Cup. **Thursday, June 11, 3 p.m. South Africa, Estadio Azteca (Mexico City). **Wednesday, June 24, 9 p.m. Mexico, Estadio Azteca (Mexico City). **Thursday, June 18, 3 p.m. Bosnia and Herzegovina**,** SoFi Stadium (Inglewood, California). **Friday, June 12, 9 p.m. Paraguay, SoFi Stadium (Inglewood, California).",
+      "enriched_at": null
+    },
+    {
+      "id": "src_21a1e8e687bd",
+      "url": "https://www.bbc.com/sport/football/articles/cpvpr90vn01o",
+      "publisher": {
+        "name": "Bbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "World Cup 2026: Katy Perry & Michael Buble among performers at three opening ceremonies - BBC",
+      "author": null,
+      "published_at": "Sat, 09 May 2026 17:30:16 GMT",
+      "fetched_at": "2026-05-18T17:02:47.759602+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "**Katy Perry, Michael Buble and Alanis Morissette are among the artists who will perform at three World Cup opening ceremonies this summer.**. Colombian reggaeton star J Balvin and South African singer-songwriter Tyla will perform at the first ceremony on Thursday, 11 June at Estadio Azteca in Mexico City, before Mexico and South Africa play the first of the tournament's 104 games. And in the USA, pop star Perry and rapper Future will perform before the USA take on Paraguay at SoFi Stadium in Los Angeles on 12 June. \"The Fifa World Cup is a moment the world shares, and that begins with how we open it,\" said Fifa president Gianni Infantino. \"Starting with Mexico City and continuing the next days with Toronto and Los Angeles, these ceremonies will bring together music, culture and football in a way that reflects both the individuality of each nation and the unity that defines this tournament.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_a0c64ec9422d",
+      "url": "https://amp.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams - FOX Sports",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 04:01:21 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by three countries — the United States, Mexico and Canada — with 48 teams competing across 16 host cities. Spread across three countries, the tournament will culminate with the final on July 19 at New York New Jersey Stadium in East Rutherford, New Jersey. The opening match on June 11 between Mexico and South Africa (3 p.m. ET) will stream for free on Tubi, as well as the USA's opening match against Paraguay on June 12 (9 p.m. ET). For the first time ever, there will be three countries hosting the World Cup — the U.S., Canada and Mexico. The 2026 World Cup final will be played at New York New Jersey Stadium in East Rutherford, New Jersey. ## What Is The USA's Schedule For The 2026 World Cup?",
+      "enriched_at": null
+    },
+    {
+      "id": "src_99380141a458",
+      "url": "https://www.cnn.com/2026/05/05/americas/mexico-world-cup-ticket-prices-intl-latam",
+      "publisher": {
+        "name": "Cnn",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Mexico’s ‘out of reach’ World Cup tickets cause discontent among fans - CNN",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 16:39:51 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Mexico City's Estadio Banorte will host the opening game of the World Cup next month. Mexico will make history this summer as the first country to host three World Cups, but the excitement over that record is not reflected among Mexican fans. The 70-year-old says the high cost of tickets for the 13 matches on Mexican soil, combined with the difficulty of getting a ticket and the limited number of games assigned to Mexico as the third host country, has dampened his excitement as a fan. Of the 104 matches in this year’s World Cup, four will be played in Monterrey, four in Guadalajara, and five at the newly renovated Banorte Stadium in Mexico City, including the opening match between Mexico and South Africa. When FIFA released a second round of tickets in April, prices for the first game in Mexico, on June 11, ranged from $3,000 to $10,000.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e43b9047aff6",
+      "url": "https://bleacherreport.com/articles/25427703-shakira-bts-madonna-headline-2026-world-cup-final-halftime-show",
+      "publisher": {
+        "name": "Bleacherreport",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show - Bleacher Report",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 11:46:40 GMT",
+      "fetched_at": "2026-05-18T17:03:03.602420+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show. FIFA is combining eras and genres for its first-ever halftime show at a World Cup final. Coldplay lead vocalist Chris Martin, who helped curate the event, announced that Shakira, BTS and Madonna will take the stage:. Shakira collaborated with Burna Boy to produce \"Dai Dai\" for the official album of the 2026 World Cup. She also performed the official song of the 2010 World Cup, \"Waka Waka (This Time for Africa),\" and featured in the opening ceremony that year. While commonplace at major American sporting events, halftime shows aren't the norm at world football spectacles such as the World Cup. FIFA experimented with the concept at the 2025 Club World Cup, where J Balvin, Doja Cat, Tems and Coldplay all performed. The 2026 World Cup will kick off June 11, with Mexico taking on South Africa in the opening match at Estadio Azteca in Mexico City.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_cc29751f40d1",
+      "url": "https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams - FOX Sports",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 13:42:00 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. # 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by three countries — the United States, Mexico and Canada — with 48 teams competing across 16 host cities. ## 2026 FIFA World Cup: How To Watch. Spread across three countries, the tournament will culminate with the final on July 19 at New York New Jersey Stadium in East Rutherford, New Jersey. The opening match on June 11 between Mexico and South Africa (3 p.m. ET) will stream for free on Tubi, as well as the USA's opening match against Paraguay on June 12 (9 p.m. ET). For the first time ever, there will be three countries hosting the World Cup — the U.S., Canada and Mexico. ## What Is The USA's Schedule For The 2026 World Cup?",
+      "enriched_at": null
+    },
+    {
+      "id": "src_f51381cdda71",
+      "url": "https://www.billboard.com/music/music-news/world-cup-2026-opening-ceremonies-1236243169/",
+      "publisher": {
+        "name": "Billboard",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Katy Perry, Future & LISA to Perform at World Cup Opening Ceremonies - Billboard",
+      "author": null,
+      "published_at": "Fri, 08 May 2026 20:58:45 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Katy Perry, Future, LISA, J Balvin, Alanis Morissette & Tyla to Perform at 2026 FIFA World Cup Opening Ceremonies: Report. The 2026 FIFA World Cup has recruited a star-studded lineup for its opening ceremonies. According to *The New York Times’* *The Athletic*, Katy Perry, Future, Tyla, LISA and Anitta are slated to perform at the opening ceremonies set for the U.S., Canada and Mexico. Moving over to Toronto, where Canada is slated to take on Bosnia & Herzegovina on June 12, Michael Bublé will perform alongside Alessia Cara and Alanis Morissette. When Mexico opens the 2026 FIFA World Cup on June 11 against South Africa, fans in Azteca Stadium will be greeted by a pregame performance from rock band Maná as well as Tyla and Los Ángeles Azules. FIFA has yet to announce talent slated to grace the stage for the 2026 FIFA World Cup Final Halftime Show on July 19 at MetLife Stadium in New Jersey. *Billboard* has reached out to reps for Future, LISA, Katy Perry, Michael Bublé and FIFA.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_c99ec0f8779a",
+      "url": "https://www.sportingnews.com/in/football/news/broadcast-fifa-world-cup-2026-india-live-stream-tv-channel-schedule-football/95e098325a06b9ceb3370841",
+      "publisher": {
+        "name": "Sportingnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Who will broadcast FIFA World Cup 2026 in India? Live stream, TV channel and full schedule for football World Cup - sportingnews.com",
+      "author": null,
+      "published_at": "Mon, 18 May 2026 08:37:12 GMT",
+      "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "latest_news"
+      ],
+      "thumbnail_url": null,
+      "summary": "Live stream, TV channel and full schedule for football World Cup. Add The Sporting News on Google. The FIFA World Cup 2026 kicks off on June 11, and while the rest of the world is gearing up for the biggest sporting event on the planet, fans in India are still waiting to find out where they can watch it. That is a significant ask for a market where most matches will air in the middle of the night or in the early hours of the morning according to Indian Standard Time, which has made sponsors and advertisers reluctant to commit. | 1 | A | Mexico vs South Africa | Friday, June 12, 2026 | 12:30 AM | Mexico City Stadium, Mexico City |. | 2 | A | South Korea vs Czech Republic | Friday, June 12, 2026 | 07:30 AM | Akron Stadium, Guadalajara |. | 3 | B | Canada vs Bosnia and Herzegovina | Saturday, June 13, 2026 | 12:30 AM | BMO Field, Toronto |.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_61709c7aaa23",
+      "url": "https://www.cnn.com/2026/05/11/sport/5-things-world-cup-month-to-go",
+      "publisher": {
+        "name": "Cnn",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "5 things to know about the World Cup with a month to go before kickoff - CNN",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 09:00:51 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# There’s one month until World Cup 2026 kicks off. The official match ball of the 2026 FIFA World Cup is displayed in Mexico City on April 23. It’s now just one month until the first game of this summer’s FIFA World Cup kicks off, and there is plenty to talk about already. From diplomatic tensions to ticket pricing and travel costs, the tournament has been creating headlines before a ball has even been kicked, and that level of interest is only set to increase as we get closer to the opening game between Mexico and South Africa on June 11. To help you make sense of everything that’s been happening both on and off the pitch, CNN Sports takes a look at the five things you need to know. And as a matter of fact, even though some people are saying that the ticket prices we have are high, they still end up on the resale market at an even higher price, more than double of our price.”.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_39a3fc61fc75",
+      "url": "https://www.aljazeera.com/sports/2026/5/7/whats-the-full-match-schedule-groups-and-format-for-world-cup-2026",
+      "publisher": {
+        "name": "Aljazeera",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "What’s the full match schedule, groups and format for World Cup 2026? - Al Jazeera",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 05:42:55 GMT",
+      "fetched_at": "2026-05-18T17:02:29.020548+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "# What’s the full match schedule, groups and format for World Cup 2026? *All the teams, groups, key dates and kickoff times for the FIFA World Cup in Canada, Mexico and the United States.*. The 23rd edition of the FIFA World Cup — the biggest ever — will see 48 nations compete for the prize in a 39-day tournament in Canada, Mexico, and the United States. ## What are the groups and teams for the FIFA World Cup 2026? The tournament will open on June 11 at 3pm (21:00 GMT) at the Mexico City Stadium in Mexico. The MetLife Stadium, which will be called the New York New Jersey Stadium during the tournament, will host the final on July 19 at 3pm (20:00 GMT). Therefore, the MetLife Stadium in New Jersey has been rebranded as the New York New Jersey Stadium, and the SoFi Stadium in Los Angeles has been renamed the Los Angeles Stadium for the tournament.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_5739f4c0073a",
+      "url": "https://www.foxsports.com/stories/soccer/fox-sports-cosm-team-up-bring-40-games-fifa-world-cup-2026-cosm-venues",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "FOX Sports, Cosm Team Up to Bring 40 Matches of FIFA World Cup 2026 to Cosm Venues - FOX Sports",
+      "author": null,
+      "published_at": "Fri, 08 May 2026 21:25:22 GMT",
+      "fetched_at": "2026-05-18T17:03:23.800593+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. FIFA Men's World Cup. # FOX Sports, Cosm Team Up to Bring 40 Matches of FIFA World Cup 2026 to Cosm Venues. Can't make it to a FIFA World Cup 2026 match? FOX Sports and Cosm have teamed up to bring select live matches to Cosm venues throughout the tournament. To kick off their coverage, Cosm will broadcast 11 group stage matches, including all three of the United States’ group stage matches against Paraguay, Türkiye and Australia and the tournament’s opening match of Mexico vs. Following the group stages, Cosm will transition into the majority of the knockout stages, and will close out their coverage with all Round of 16, quarterfinals, semifinals matches and the FIFA World Cup 2026 Final, live from East Rutherford, NJ. For the largest World Cup to date, spanning across 37 days, 104 matches and 48 qualified teams, Cosm and FOX Sports have come together to deliver what could be a historic tournament.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_0e3d96068d89",
+      "url": "https://www.foxsports.com/stories/soccer/usa-world-cup-26-roster-prediction",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "The 26: Projecting the USA's World Cup Roster And Starters For Opening Match - FOX Sports",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 14:18:00 GMT",
+      "fetched_at": "2026-05-18T17:02:51.769914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_players"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. # The 26: Projecting the USA's World Cup Roster And Starters For Opening Match. As much as modern World Cup squads are typically constructed using a forensic examination of data points collected over a four-year cycle combined with the gut feelings of experienced national team coaches and their staffs, the United States’ roster for the 2026 FIFA World Cup was always going to be different. For much of his tenure, he has been, for various reasons, without whom many would consider some of America’s most essential players, including forward Christian Pulisic, midfielder Weston McKennie, midfielder Tyler Adams, and wing back Antonee \"Jedi\" Robinson. Out of necessity, Pochettino scoured the fringes of the U.S. player pool, unearthing and/or handing opportunities to the likes of winger Max Arfsten, midfielder Sebastian Berhalter, right back Alex Freeman and goalkeeper Matt Freese. Here's my latest USA roster projection for the 2026 FIFA World Cup:.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ceaac430b8ad",
+      "url": "https://www.skysports.com/football/news/11095/13543070/world-cup-2026-squad-lists-england-scotland-brazil-usa-spain-france-germany-netherlands-argentina-portugal-and-more",
+      "publisher": {
+        "name": "Skysports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "World Cup 2026 squad lists: England, Scotland, Brazil, USA, Spain, France, Germany, Netherlands, Argentina, Portugal and more - Sky Sports",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 09:37:46 GMT",
+      "fetched_at": "2026-05-18T17:02:29.725298+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# World Cup 2026 squad lists: England, Scotland, Brazil, USA, Spain, France, Germany, Netherlands, Argentina, Portugal and more. Teams must submit World Cup squads by June 2; Injured players can be replaced from the provisional squad before a team's first match; Mexico host South Africa in June 11 opener; 104-game tournament ends at MetLife Stadium in New Jersey on Sunday July 19. Countries have begun naming their squads for the 2026 World Cup ahead of this summer's tournament, with England and Scotland set to follow. Only players named in these squads will be eligible to take part although they can be replaced by a player from the provisional squad in the event of a serious injury or illness, no later than 24 hours before their team's first match at the World Cup. **Forwards:** Alexis Vega (Toluca), Armando González (Chivas), César Huerta (Anderlecht), Germán Berterame (Inter Miami), Guillermo Martínez (Pumas), Julián Quiñones (Al-Qadisiyah), Raúl Jiménez (Fulham), Roberto Alvarado (Chivas), Santiago Giménez (Milan).",
+      "enriched_at": null
+    },
+    {
+      "id": "src_aa5eaafdbcf2",
+      "url": "https://amp.foxsports.com/stories/soccer/javier-aguirre-excludes-chucky-lozano-from-mexicos-world-cup-roster",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Hirving 'Chucky' Lozano Excluded From Mexico's Preliminary World Cup Roster - FOX Sports",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 02:15:04 GMT",
+      "fetched_at": "2026-05-18T17:02:51.769914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_players"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Hirving 'Chucky' Lozano Excluded From Mexico's Preliminary World Cup Roster. Mexico national team manager Javier Aguirre has revealed his 55-man preliminary roster for the 2026 World Cup, with San Diego FC winger Hirving \"Chucky\" Lozano arguably being the most notable omission from the list. Headlined by Fulham’s Raul Jimenez, Fenerbahçe’s Edson Alvarez, and veteran goalkeeper Guillermo Ochoa, who is attempting to appear in his sixth World Cup, Mexico’s roster will be narrowed down to 26 players by June 1, the official FIFA deadline. His final appearance for the club came as a substitute during San Diego's 3-1 playoff loss to the Vancouver Whitecaps. Continuing the trend of naturalized players and dual-nationals in the squad, the roster features Monterrey's Germán Berterame, Al-Qadsiah’s Julián Quiñones, and Club América’s Álvaro Fidalgo. This led to the Mexican Football Federation releasing a statement and calling for a press conference on May 6 to deliver an ultimatum.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_cddbde1aecee",
+      "url": "https://www.bbc.com/sport/football/articles/cvgzww4zzv7o",
+      "publisher": {
+        "name": "Bbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "World Cup 2026: Mexico Football Federation threatens to drop players over training camp row - BBC",
+      "author": null,
+      "published_at": "Wed, 06 May 2026 21:37:01 GMT",
+      "fetched_at": "2026-05-18T17:02:51.769914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_players"
+      ],
+      "thumbnail_url": null,
+      "summary": "**The Mexican Football Federation has told domestic players from Liga MX they will be dropped from the country's World Cup squad if they fail to report for a training camp and stay with their clubs instead.**. The camp, starting Wednesday, 6 May, is taking place outside Fifa's designated international window and clashes with Liga MX play-offs in the top flight of Mexican football and Concacaf Champions Cup matches. Last week, the federation (FMF) announced the 20 Liga MX players selected by coach Javier Aguirre to take part in the camp in Mexico City, with 12 players guaranteed a spot in the World Cup squad. On Wednesday, Chivas said: \"We respect our players' desire to represent Mexico at the 2026 World Cup, and we will in no way be a factor that hinders that possibility, therefore they will report to the training camp on time and in the proper manner.\".",
+      "enriched_at": null
+    },
+    {
+      "id": "src_5f00458d0cb1",
+      "url": "https://www.sportingnews.com/us/soccer/news/mexico-world-cup-roster-announcement-date-time-squad-el-tri/5d1d26f8bc3eb0655ce48d04",
+      "publisher": {
+        "name": "Sportingnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "When is Mexico World Cup roster announcement? Date, time of Javier Aguirre's El Tri squad reveal for 2026 - sportingnews.com",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 11:12:27 GMT",
+      "fetched_at": "2026-05-18T17:02:51.769914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_players"
+      ],
+      "thumbnail_url": null,
+      "summary": "# When is Mexico World Cup roster announcement? Add The Sporting News on Google. As co-hosts of the 2026 FIFA World Cup, Mexico are heading into this summer's tournament with hopes of a return to prominence on the global stage. El Tri have struggled to retain their regular spot as the dominant CONCACAF nation and a regular thorn in the side for World Cup title hopefuls. **2026 WORLD CUP HQ:** Latest World Cup news | Full World Cup schedule | Buy World Cup tickets. ## When is Mexico World Cup squad announcement? Mexico head coach Javier Aguirre will announce his official 2026 FIFA World Cup squad on **Wednesday, May 27**. As per FIFA regulations, competing teams at the World Cup were required to submit a provisional roster of players by May 11, and their final, whittled-down list no later than May 30. **MORE:** Mexico boss Javier Aguirre sets World Cup ultimatum for players in pre-tournament camp. ## How many players are in Mexico's World Cup squad? ## Can Mexico replace players in their World Cup squad?",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d2901a459bb5",
+      "url": "https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-full-rosters-release-dates",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "2026 FIFA World Cup: Full Rosters, Release Dates For All 48 Teams - FOX Sports",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 22:40:29 GMT",
+      "fetched_at": "2026-05-18T17:02:51.769914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_players"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. **Goalkeepers:** Emiliano Martínez (Aston Villa), Gerónimo Rulli (Olympique de Marseille), Juan Musso (Atlético de Madrid), Walter Benítez (Crystal Palace FC), Facundo Cambeses (Racing Club), Santiago Beltrán (River Plate). **Defenders:** Agustín Giay (Palmeiras), Gonzalo Montiel (River Plate), Nahuel Molina (Atlético de Madrid), Nicolás Capaldo (Hamburger SV), Kevin Mac Allister (Union Saint Gilloise), Lucas Martínez Quarta (River Plate), Marcos Senesi (Bournemouth), Lisandro Martínez (Manchester United), Nicolás Otamendi (SL Benfica), Germán Pezzella (River Plate), Leonardo Balerdi (Olympique de Marseille), Cristian Romero (Tottenham Hotspur), Lautaro Di Lollo (Boca Juniors), Zaid Romero (Getafe CF), Facundo Medina (Olympique de Marseille), Marcos Acuña (River Plate), Nicolás Tagliafico (Olympique Lyonnais), Gabriel Rojas (Racing Club). **Forwards:** Lionel Messi (Inter Miami), Nicolás Paz (Como 1907), Franco Mastantuono (Real Madrid), Thiago Almada (Atlético de Madrid), Tomás Aranda (Boca Juniors), Nicolás González (Atlético de Madrid), Alejandro Garnacho (Chelsea), Giuliano Simeone (Atlético de Madrid), Matías Soulé (AS Roma), Claudio Echeverri (Girona FC), Gianluca Prestianni (SL Benfica), Santiago Castro (Bologna FC), Lautaro Martínez (Internazionale), José Manuel López (Palmeiras), Julián Álvarez (Atlético de Madrid), Mateo Pellegrino (Parma Calcio).",
+      "enriched_at": null
+    },
+    {
+      "id": "src_3068892cda04",
+      "url": "https://www.telecomasia.net/blog/2026-fifa-world-cup-squads-all-official-26-man-squad-announce-so-far/",
+      "publisher": {
+        "name": "Telecomasia",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "2026 FIFA World Cup Squads: All Official 26-Man Squad Announce So Far - Telecom Asia Sport",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 08:21:49 GMT",
+      "fetched_at": "2026-05-18T17:02:51.769914+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "key_players"
+      ],
+      "thumbnail_url": null,
+      "summary": "# 2026 FIFA World Cup Squads: All Official 26-Man Squad Announce So Far. With the 2026 FIFA World Cup drawing closer, national teams have started unveiling their final 26-man squads for the tournament. Claim World Cup Bonuses on 1xBet. 2026 FIFA World Cup Squads. ## Full List of Official 2026 World Cup Squads. ## Official Bosnia and Herzegovina 26-Man Squad. Former Manchester City striker Edin Džeko will be one of the key players to watch in Bosnia & Herzegovina’s squad heading into the 2026 FIFA World Cup. The veteran forward is on course to join the exclusive list of players aged 40 or older to feature at the World Cup, further adding to his remarkable international career. Belgium captain Kevin De Bruyne remains one of the standout names to watch ahead of the 2026 FIFA World Cup. The experienced midfielder made his international debut for Belgium in 2010 and has since gone on to earn 117 caps and score 36 goals for the Red Devils.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_3d59c123069a",
+      "url": "https://www.greenwichtime.com/sports/article/mexico-city-braces-for-world-cup-eager-to-22258957.php",
+      "publisher": {
+        "name": "Greenwichtime",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Mexico City braces for World Cup, eager to showcase food and culture amid crowds and congestion - Greenwich Time",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 15:04:27 GMT",
+      "fetched_at": "2026-05-18T17:02:47.759602+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Mexico City braces for World Cup, eager to showcase food and culture amid crowds and congestion. MEXICO CITY (AP) — Mexico City, the most populous city in North America, is a vibrant, bustling metropolis that blends rich history with modern culture. Whether you are marveling at ancient ruins or enjoying contemporary art, there is a palpable energy in the air and it will be present during the World Cup this summer. With a metropolitan area of some 23.1 million people, traffic congestion is quite intense during rush hours, especially in the area near Azteca stadium. The city has pollution issues that could also be a problem for fans with respiratory conditions. Zócalo: One of the largest city squares in the world at some 14 acres (5.5 hectares), it is surrounded by the Metropolitan Cathedral and the National Palace. It’s a hub of activity and a great place to soak in the city’s history. The fastest way to get to the World Cup stadium is public transportation.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_89e21f23d92d",
+      "url": "https://www.sfchronicle.com/sports/49ers/article/49ers-learned-opponent-mexico-city-game-vikings-22256182.php",
+      "publisher": {
+        "name": "Sfchronicle",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "49ers will host Vikings in November at renovated stadium in Mexico City - San Francisco Chronicle",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 13:01:34 GMT",
+      "fetched_at": "2026-05-18T17:02:47.759602+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "# 49ers will host Vikings in November at renovated stadium in Mexico City. The Vikings will be part of the Mexico leg of the San Francisco 49ers’ 2026 around-the-world tour. The NFL announced Wednesday morning that the 49ers will host Minnesota on Nov. 22 on NBC’s “Sunday Night Football” at Estadio Banorte in Mexico City. The meeting in Mexico is part of the 49ers’ historic regular-season travel schedule that will begin with a Week 1 date with the Rams in Melbourne, Australia, on Sept. The 49ers will become the first NFL team to play in two foreign countries in the same season and will log more than 38,000 airplane miles, an NFL record. The league hasn’t held a game in Mexico City since the 49ers beat the Cardinals 38-10 on Nov. 21, 2022, at what was then called Estadio Azteca. The stadium’s name was changed in 2025 due to a 12-year sponsorship deal with Banorte, a Mexican bank, which funded upgrades to Latin America’s largest stadium before it hosts World Cup matches this summer.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_9b798744fc6d",
+      "url": "https://www.nytimes.com/athletic/7262899/2026/05/08/mexico-world-cup-school-year-heat/",
+      "publisher": {
+        "name": "Nytimes",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Mexico ends school year six weeks early for World Cup, ‘extraordinary heat wave’ - The Athletic - The New York Times",
+      "author": null,
+      "published_at": "Fri, 08 May 2026 07:49:06 GMT",
+      "fetched_at": "2026-05-18T17:02:47.759602+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Mexico ends school year six weeks early for World Cup, ‘extraordinary heat wave’. The Mexican school year had been due to run across the whole World Cup, only save the final.Azael Rodriguez / Getty Images. The Mexican government has agreed to end the school year around six weeks early due to their co-hosting of the World Cup and the “extraordinary heat wave” forecast. Schools were scheduled to break up around July 15, but an official release on Thursday confirmed the Ministry of Public Education (SEP) and the education ministries had agreed to bring the date forward to June 5, six days before the tournament’s first match. The start of the next school year was also announced to fall on August 31, after two weeks of “strengthening learning”. The men’s World Cup in the United States, Canada and Mexico is scheduled to start on June 11 with Mexico facing South Africa in the capital’s Estadio Azteca.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_381df4e111eb",
+      "url": "https://www.nytimes.com/athletic/7275619/2026/05/13/nfl-international-games-2026-season-schedule/",
+      "publisher": {
+        "name": "Nytimes",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "NFL 2026 international schedule: 49ers-Vikings in Mexico City, Lions-Patriots in Munich - The New York Times",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 16:02:35 GMT",
+      "fetched_at": "2026-05-18T17:02:47.759602+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "# NFL 2026 international schedule: 49ers-Vikings in Mexico City, Lions-Patriots in Munich. The 49ers, who also play a game in Melbourne, Australia to open the season, are playing their third-ever regular-season game in Mexico City.Manuel Velasquez / Getty Images. After a three-year hiatus, the NFL is returning to Mexico City in 2026 when the San Francisco 49ers and Minnesota Vikings face off Nov. 22 at Estadio Banorte (formerly Estadio Azteca). The game will mark the last of nine international games the NFL will play in the 2026 regular season, which also includes an intriguing Week 10 showdown in Munich between the Detroit Lions and New England Patriots. The international slate also includes the league’s first trips to Melbourne, Australia, Rio de Janeiro and Paris, three games in London and a second straight year in Madrid. | 11 | Vikings  49ers | Sunday, Nov. 22 8:20 p.m. The NFL’s history with international regular-season games dates to 2005, when the Arizona Cardinals beat the 49ers at Estadio Azteca in Mexico City.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_618fc09227ef",
+      "url": "https://www.forbes.com/sites/clementelisi/2026/05/09/magic-madness-and-maradona-the-enduring-legend-of-mexico-86/",
+      "publisher": {
+        "name": "Forbes",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Magic, Madness And Maradona: The Enduring Legend Of Mexico ’86 - Forbes",
+      "author": null,
+      "published_at": "Sat, 09 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:03:08.079886+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Magic, Madness And Maradona: The Enduring Legend Of Mexico ’86. Looking back four decades later, the 1986 World Cup in Mexico still stands as one of the most iconic tournaments in soccer history. At the center of it all was Diego Maradona, whose performances in Mexico have become the benchmark for individual excellence at a World Cup. That World Cup remains inseparable from Maradona’s genius — not just because Argentina won the tournament, but because he dominated it in a way few players ever have. The quarterfinal between Brazil and France, in particular, is often cited as one of the greatest matches ever played, illustrating the tournament’s high technical level and emotional intensity. It’s this tapestry of approaches that made Mexico '86 richer and more entertaining. Four decades later, the 1986 World Cup endures not just because of nostalgia, but because it represents a kind of ideal. In that sense, 1986 is more than just a great World Cup — it is a reference point.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_a3388c806da5",
+      "url": "https://deadline.com/2026/05/the-match-trailer-exclusive-cannes-film-festival-1236900434/",
+      "publisher": {
+        "name": "Deadline",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Watch Trailer For 'The Match,' About England Vs. Argentina World Cup - Deadline",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 08:00:00 GMT",
+      "fetched_at": "2026-05-18T17:03:08.079886+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "# It Wasn’t A Match, It Was ‘The Match’: Cannes Premieres Thrilling Film On World Cup’s Greatest Contest, England Vs. Argentina 1986. But for sheer drama and importance, it will be hard if not impossible for any single World Cup match to equal one played 40 years ago. In 1986, England and Argentina squared off in the quarterfinals of the World Cup in what has gone down as the most iconic contest in tournament history. That riveting encounter, which featured two of the most memorable goals ever scored in a World Cup, is reexamined in *The Match*, premiering later today at the Cannes Film Festival. That quarterfinal of 1986 unfolded with two of football’s biggest stars on the pitch – Gary Lineker for England and Diego Maradona for Argentina. But the significance of the match wasn’t so much about the players as the historical context – only a few years before, Britain had gone to war with Argentina over the Falkland Islands (known as Las Malvinas to Argentinians).",
+      "enriched_at": null
+    },
+    {
+      "id": "src_b3ee1d2d697a",
+      "url": "https://variety.com/2026/tv/global/disney-mexico-tv-azteca-deal-masterchef-24-7-1236740642/",
+      "publisher": {
+        "name": "Variety",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Disney+ Mexico Expands TV Azteca Deal, Including Rights to Livestream 24-Hour Reality Show ‘MasterChef 24/7’ - Variety",
+      "author": null,
+      "published_at": "Thu, 07 May 2026 18:35:00 GMT",
+      "fetched_at": "2026-05-18T17:03:44.509465+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "stadium_spotlight"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Disney+ Mexico Expands TV Azteca Deal, Including Rights to Livestream 24-Hour Reality Show ‘MasterChef 24/7’. Disney+ is expanding its content offering in Mexico through a new agreement with TV Azteca. Under the new deal, the upcoming season of “MasterChef México 24/7” will be available on the Disney+ platform starting May 17 alongside TV Azteca’s airings of two-hour primetime episodes. Additional TV Azteca content that will be available on Disney+ beginning in May includes telenovelas “Mirada de Mujer,” “Cuando seas mía” and “La Loba,” as well as all seasons of “Doctora Lucía” and “Lotería del Crimen.” More reality shows from TV Azteca also will be coming to Disney+ in the future. The integration of new formats, such as reality shows from Azteca’s network, reflects this evolution and the need to offer stories that unfold live and are highly engaging, thereby strengthening our value proposition,” Henri Ringel, senior VP of acquisitions and content sales, the Walt Disney Company Latin America, said in a statement.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_f5d84e0e2fe2",
+      "url": "https://sports.yahoo.com/articles/world-cup-wall-chart-downloadable-110433832.html",
+      "publisher": {
+        "name": "Yahoo",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "World Cup 2026 wall chart, downloadable as a PDF - Yahoo Sports",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 00:15:43 GMT",
+      "fetched_at": "2026-05-18T17:02:29.020548+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "Yahoo Soccer is powered by OneFootball, the ultimate destination for news, live matches, scores, highlights, and more. # World Cup 2026 wall chart, downloadable as a PDF. The World Cup is fast approaching with an expanded 48 teams competing for glory. England will head to the tournament under the leadership of Thomas Tuchel and are expected to reach the knockout stages as a bare minimum. *Telegraph Sport*’s clearly designed wall chart not only displays the entire tournament schedule, but also allows you to track the progress of each team as they advance through their pool and the knockout stages. And with this summer’s expanded tournament including the eight best third-place teams progressing, a tool for tracking how everything is playing out is needed more than ever. You can also engage your friends, family and colleagues with our World Cup 2026 sweepstake. ## Play our World Cup predictor. Play our interactive World Cup predictor where you can explore how the tournament will unfold.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ebe9a84b89c4",
+      "url": "https://www.foxsports.com/stories/soccer/2026-world-cup-odds-from-which-group-will-winner-emerge",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "2026 World Cup Odds: From Which Group Will Winner Emerge? - FOX Sports",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 16:09:21 GMT",
+      "fetched_at": "2026-05-18T17:02:29.020548+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. FIFA Men's World Cup. # 2026 World Cup Odds: From Which Group Will Winner Emerge? You aren't limited to simply betting on the outright World Cup winner. You can actually bet on which group will win it all. Let's check out the odds for the winning group at DraftKings Sportsbook as of May 13. Read more about* *Sports Betting on FOX Sports**.*. **2026 World Cup winning group**. Group L: +500 (bet $10 to win $60 total). 3. ### 2026 World Cup Power Rankings: Every Team Ranked From 48 to 1### 2026 World Cup Schedule: All Games, Dates, Matchups and How To Watch### 2026 World Cup Odds: France, Spain Favored; England Third. Get more from the FIFA Men's World Cup Follow your favorites to get information about games, news and more. ### 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_ce404e8dc152",
+      "url": "https://www.foxsports.com/stories/soccer/ghana-world-cup-2026-schedule-locations-dates-times",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Ghana World Cup 2026 Schedule: Locations, Dates, Times - FOX Sports",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 15:13:00 GMT",
+      "fetched_at": "2026-05-18T17:02:29.020548+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. FIFA Men's World Cup. André Ayew and Ghana now know their path to glory in the 2026 FIFA World Cup final after learning their group stage opponents, which stadiums they will play at, and the times for the games. ## What is Ghana's Group and Who are the Opponents? ### Group L: England, Croatia, Ghana, and Panama | 2026 FIFA World Cup Draw. Group L is set for the 2026 FIFA World Cup, featuring England, Croatia, Ghana, and Panama. ## What is Ghana's World Cup Schedule? * June 23, 2026: Watch England vs Ghana - Gillette Stadium (4:00 p.m. ET / 1:00 p.m. PT). 1. ### The 26: Projecting the USA's World Cup Roster And Starters For Opening Match### 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams### 6 First-Time World Cup Players Poised To Break Out In 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_c43e7d25b826",
+      "url": "https://www.foxsports.com/stories/soccer/spain-world-cup-2026-schedule-locations-dates-times",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Spain World Cup 2026 Schedule: Locations, Dates, Times - FOX Sports",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 15:15:00 GMT",
+      "fetched_at": "2026-05-18T17:02:29.020548+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. FIFA Men's World Cup. Lamine Yamal and Spain now know their path to glory in the 2026 FIFA World Cup final after learning their group stage opponents, which stadiums they will play at, and the times for the games. ## What is Spain's Group and Who are the Opponents? ### Group H: Spain, Cape Verde, Saudi Arabia and Uruguay | 2026 FIFA World Cup Draw. ## What is Spain's World Cup Schedule? * June 15, 2026: Watch Spain vs Cape Verde - Mercedes-Benz Stadium (12:00 p.m. ET / 9:00 a.m. PT). * June 21, 2026: Watch Spain vs Saudi Arabia - Mercedes-Benz Stadium (12:00 p.m. ET / 9:00 a.m. PT). 1. ### The 26: Projecting the USA's World Cup Roster And Starters For Opening Match### 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams### 6 First-Time World Cup Players Poised To Break Out In 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e36195f38a58",
+      "url": "https://sports.yahoo.com/fantasy/article/how-to-play-2026-soccer-pick-em-with-fox-one-your-101-guide-for-the-fifa-world-cup-135850899.html",
+      "publisher": {
+        "name": "Yahoo",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "How to play 2026 Soccer Pick ‘Em with FOX One: Your 101 guide for the FIFA World Cup - Yahoo Sports",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 13:58:50 GMT",
+      "fetched_at": "2026-05-18T17:02:29.020548+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "# How to play 2026 Soccer Pick 'Em with FOX One: Your 101 guide for the FIFA World Cup. The biggest soccer tournament in the world starts on June 11, and you can put your knowledge of the beautiful game to the test with Yahoo’s all-new 2026 Soccer Pick ‘Em with FOX One! Whether you're a soccer die-hard, a casual fan or someone who's never watched a game, there's a strong chance you've heard of the FIFA World Cup. If you're in one of the latter camps and want to get in on the excitement, we have you covered with our soccer pick ‘em 101. After round-robin group play, the top two teams in each group advance to the Round of 32, as do the eight best third-place teams. 3. Make your selection for each of the questions in the game. * All questions for the Round of 16 will be available on July 1.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_a352cbc4ee23",
+      "url": "https://www.foxsports.com/stories/soccer/2026-world-cups-odds-total-goals-scored-expected-skyrocket",
+      "publisher": {
+        "name": "Foxsports",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "2026 World Cups Odds: Total Goals Scored Expected to Skyrocket - FOX Sports",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 18:30:40 GMT",
+      "fetched_at": "2026-05-18T17:02:48.568579+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "FIFA Men's World Cup. FIFA Men's World Cup. FIFA Men's World Cup. # 2026 World Cups Odds: Total Goals Scored Expected to Skyrocket. The 2026 World Cup will feature a large uptick in games played now that there are 48 teams in the fold as opposed to 32. Let's check out the odds for total goals scored at DraftKings Sportsbook as of May 11. **World Cup total goals scored**. If 64 matches were played in 2022 in Qatar, and 172 goals were scored, that's about 3.583 goals per match. With 104 matches taking place in 2026, if that same goals-per-match rate keeps up, that's about 373 goals scored. 2. ### 2026 World Cup Odds: France, Spain Favored; England Third### FOX Sports, FOX One, Indeed Launch Search to Find 'Chief World Cup Watcher'### 2026 World Cup Power Rankings: Every Team Ranked From 48 to 1. Get more from the FIFA Men's World Cup Follow your favorites to get information about games, news and more.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_0f2d942aaa5e",
+      "url": "https://www.nbcnewyork.com/world-cup/usmnt-reveal-roster-date-tv-stream/6500686/",
+      "publisher": {
+        "name": "Nbcnewyork",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "When will USMNT reveal FIFA World Cup roster? Here's what to know - NBC New York",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 23:26:46 GMT",
+      "fetched_at": "2026-05-18T17:02:48.568579+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "# When will USMNT reveal FIFA World Cup roster? ## Mauricio Pochettino will reveal his U.S. squad at a live event. The hype for the 2026 FIFA World Cup is building. The U.S. men's national team will host a special live event for its reveal, as head coach Mauricio Pochettino attempts to take the team on a memorable run on home soil. Here's everything to know for the USMNT's World Cup roster reveal:. ### 2026 FIFA World Cup. 2026 World Cup  Mar 3. ### Everything to know about the 2026 FIFA World Cup: Teams, how to watch and more. ### How will the 48-team 2026 FIFA World Cup work? ## When will the USMNT reveal its World Cup roster? ## Where is the USMNT World Cup roster reveal? ## How many players will be on the USMNT's World Cup roster? ## How to watch the USMNT World Cup roster reveal on TV, online.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_5f1b6b6ece0b",
+      "url": "https://www.si.com/soccer/tunisia-2026-world-cup-preview",
+      "publisher": {
+        "name": "Si",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Tunisia 2026 World Cup Preview: Overlooked But Won’t Go Down Without a Fight - Sports Illustrated",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 08:00:04 GMT",
+      "fetched_at": "2026-05-18T17:03:23.800593+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "tournament_format"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Tunisia 2026 World Cup Preview: Overlooked But Won’t Go Down Without a Fight. *Tunisia will have a fight on its hands in a group containing Sweden, Japan and the Netherlands.*. Of all the African nations to have competed at five or more World Cups—2026 marks Tunisia’s seventh global appearance—the Eagles of Carthage are the only one never to progress beyond the group stage. It will play twice in Mexico first—against Sweden and Japan—before heading up to Kansas City to take on the Netherlands. The new format opens the knockout phase up to more teams, but with its lack of star power and coming in as the lowest-ranked team in Group F, Tunisia has a real battle on its hands. ## The Road to the World Cup. Appointed shortly after Tunisia’s disappointing round of 16 exit at the Africa Cup of Nations in January, Sabri Lamouchi is an experienced manager; however, this is his first international job in 12 years.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_7f64d7c3b682",
+      "url": "https://www.foxnews.com/sports/usmnt-captain-tyler-adams-ready-patriotic-mood-playing-home-soil-2026-fifa-world-cup",
+      "publisher": {
+        "name": "Foxnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "USMNT captain Tyler Adams ready to be in 'patriotic mood' playing on home soil for 2026 FIFA World Cup - Fox News",
+      "author": null,
+      "published_at": "Wed, 13 May 2026 15:09:06 GMT",
+      "fetched_at": "2026-05-18T17:03:03.602420+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "#### US men's soccer star Tyler Adams previews upcoming FIFA World Cup. U.S. men's national soccer team star Tyler Adams talks to Fox News Digital about the upcoming FIFA World Cup. NEWYou can now listen to Fox News articles! However, playing a World Cup in your home country is something entirely different, and the United States men’s national team will get to experience that one month from now when they kick off the 2026 FIFA World Cup at SoFi Stadium in Los Angeles. \"I think when we’re pulling up to a game and you see the Stars and Stripes and the red, white and blue — just gets you in that patriotic mood,\" Adams told Fox News Digital in a recent interview, while also highlighting his work with Scotts ahead of the World Cup. Of course, every player wants to soak in the moment of playing in a World Cup, whether it’s their first or last time on the pitch for the tournament.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_225aae733766",
+      "url": "https://www.wikidata.org/wiki/Q96",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Mexico",
+      "author": null,
+      "published_at": "2026-05-18T17:02:14.920838+00:00",
+      "fetched_at": "2026-05-18T17:02:14.920862+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Ciudad.de.Mexico.City.Distrito.Federal.DF.Paseo.Reforma.Skyline.jpg/1280px-Ciudad.de.Mexico.City.Distrito.Federal.DF.Paseo.Reforma.Skyline.jpg?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    }
+  ],
+  "editorial_sections": [
+    {
+      "section_id": "overview",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "Mexico will host the opening match of the 2026 FIFA World Cup on June 11 at Estadio Azteca in Mexico City, facing South Africa in the tournament's first of 104 games. This historic moment marks the beginning of the first World Cup hosted across three nations—the United States, Canada, and Mexico—featuring an expanded 48-team format. The opening ceremony will feature performances by Colombian reggaeton star J Balvin and South African singer-songwriter Tyla, setting the stage for this unprecedented global football spectacle.",
+          "Mexico's hosting of the opening match carries special significance as the country becomes the first nation to host three FIFA World Cups. The tournament runs from June 11 through July 19, with matches spread across 16 host cities in the three countries. For Mexican fans, this represents a moment of national pride, though ticket accessibility and pricing have raised concerns among supporters eager to witness their country's historic role in football's biggest competition."
+        ],
+        "paragraph_sources": [
+          [
+            "src_21a1e8e687bd",
+            "src_a0c64ec9422d",
+            "src_5c36f3706385"
+          ],
+          [
+            "src_99380141a458",
+            "src_a0c64ec9422d"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "Colombian reggaeton star J Balvin and South African singer-songwriter Tyla will perform at the first ceremony on Thursday, 11 June at Estadio Azteca in Mexico City, before Mexico and South Africa play the first of the tournament's 104 games.",
+            "attribution": null,
+            "source_id": "src_21a1e8e687bd"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_21a1e8e687bd",
+            "excerpt": null,
+            "claim_text": "Mexico will host the opening match on June 11 at Estadio Azteca in Mexico City against South Africa"
+          },
+          {
+            "source_id": "src_a0c64ec9422d",
+            "excerpt": null,
+            "claim_text": "The 2026 FIFA World Cup will be the first tournament hosted by three countries—the United States, Mexico and Canada—with 48 teams competing"
+          },
+          {
+            "source_id": "src_5c36f3706385",
+            "excerpt": null,
+            "claim_text": "J Balvin will perform at the opening ceremony on June 11"
+          },
+          {
+            "source_id": "src_21a1e8e687bd",
+            "excerpt": null,
+            "claim_text": "Tyla will perform at the opening ceremony"
+          },
+          {
+            "source_id": "src_99380141a458",
+            "excerpt": null,
+            "claim_text": "Mexico will make history this summer as the first country to host three World Cups"
+          },
+          {
+            "source_id": "src_a0c64ec9422d",
+            "excerpt": null,
+            "claim_text": "The tournament will culminate with the final on July 19"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_21a1e8e687bd",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Bbc."
+        },
+        {
+          "source_id": "src_5c36f3706385",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Billboard."
+        },
+        {
+          "source_id": "src_99380141a458",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnn."
+        },
+        {
+          "source_id": "src_a0c64ec9422d",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxsports."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_5c36f3706385",
+          "url": "https://www.billboard.com/music/latin/mana-j-balvin-and-more-to-open-fifa-world-cup-2026-mexico-1236243397/",
+          "publisher": {
+            "name": "Billboard",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico - Billboard",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 04:07:50 GMT",
+          "fetched_at": "2026-05-18T17:02:31.075573+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico. Belinda, Los Ángeles Azules, Lila Downs, Danny Ocean and Tyla are also part of the lineup. Maná, Alejandro Fernández, J Balvin, Los Ángeles Azules and Belinda will be part of the lineup gracing the opening ceremony of the FIFA World Cup 2026 at the Mexico City Stadium (Estadio Banorte) on June 11, the FIFA announced on Friday (May 8) on its social media channels. “The FIFA World Cup is a moment the world shares, and that begins with how we open it,” reads the post, which was also shared by FIFA President Gianni Infantino. Mexico will face South Africa in the opening match of the FIFA World Cup 2026, in a stadium that will go down in history as the first to host three FIFA World Cups.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_21a1e8e687bd",
+          "url": "https://www.bbc.com/sport/football/articles/cpvpr90vn01o",
+          "publisher": {
+            "name": "Bbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "World Cup 2026: Katy Perry & Michael Buble among performers at three opening ceremonies - BBC",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 17:30:16 GMT",
+          "fetched_at": "2026-05-18T17:02:31.075573+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "**Katy Perry, Michael Buble and Alanis Morissette are among the artists who will perform at three World Cup opening ceremonies this summer.**. Colombian reggaeton star J Balvin and South African singer-songwriter Tyla will perform at the first ceremony on Thursday, 11 June at Estadio Azteca in Mexico City, before Mexico and South Africa play the first of the tournament's 104 games. And in the USA, pop star Perry and rapper Future will perform before the USA take on Paraguay at SoFi Stadium in Los Angeles on 12 June. \"The Fifa World Cup is a moment the world shares, and that begins with how we open it,\" said Fifa president Gianni Infantino. \"Starting with Mexico City and continuing the next days with Toronto and Los Angeles, these ceremonies will bring together music, culture and football in a way that reflects both the individuality of each nation and the unity that defines this tournament.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_a0c64ec9422d",
+          "url": "https://amp.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+          "publisher": {
+            "name": "Foxsports",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams - FOX Sports",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:01:21 GMT",
+          "fetched_at": "2026-05-18T17:02:31.075573+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by three countries — the United States, Mexico and Canada — with 48 teams competing across 16 host cities. Spread across three countries, the tournament will culminate with the final on July 19 at New York New Jersey Stadium in East Rutherford, New Jersey. The opening match on June 11 between Mexico and South Africa (3 p.m. ET) will stream for free on Tubi, as well as the USA's opening match against Paraguay on June 12 (9 p.m. ET). For the first time ever, there will be three countries hosting the World Cup — the U.S., Canada and Mexico. The 2026 World Cup final will be played at New York New Jersey Stadium in East Rutherford, New Jersey. ## What Is The USA's Schedule For The 2026 World Cup?",
+          "enriched_at": null
+        },
+        {
+          "id": "src_99380141a458",
+          "url": "https://www.cnn.com/2026/05/05/americas/mexico-world-cup-ticket-prices-intl-latam",
+          "publisher": {
+            "name": "Cnn",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Mexico’s ‘out of reach’ World Cup tickets cause discontent among fans - CNN",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 16:39:51 GMT",
+          "fetched_at": "2026-05-18T17:02:31.075573+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "Mexico City's Estadio Banorte will host the opening game of the World Cup next month. Mexico will make history this summer as the first country to host three World Cups, but the excitement over that record is not reflected among Mexican fans. The 70-year-old says the high cost of tickets for the 13 matches on Mexican soil, combined with the difficulty of getting a ticket and the limited number of games assigned to Mexico as the third host country, has dampened his excitement as a fan. Of the 104 matches in this year’s World Cup, four will be played in Monterrey, four in Guadalajara, and five at the newly renovated Banorte Stadium in Mexico City, including the opening match between Mexico and South Africa. When FIFA released a second round of tickets in April, prices for the first game in Mexico, on June 11, ranged from $3,000 to $10,000.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "timeline",
+      "block_kind": "timeline",
+      "block_data": {
+        "kind": "timeline",
+        "entries": [
+          {
+            "title": "2026 FIFA World Cup qualification playoffs conclude",
+            "time": "2026-05-09",
+            "location": null,
+            "description": "All 48 teams for the tournament are confirmed after qualifying playoffs end.",
+            "importance": "normal",
+            "temporal_phase": "past",
+            "source_id": "src_4cf4a95a660c"
+          },
+          {
+            "title": "Opening ceremony and Mexico vs South Africa match at Estadio Banorte",
+            "time": "2026-06-11T21:00:00Z",
+            "location": "Mexico City Stadium (Estadio Banorte), Mexico City, Mexico",
+            "description": "2026 FIFA World Cup opens with ceremony featuring Maná, J Balvin, Alejandro Fernández and others, followed by opening match.",
+            "importance": "breaking",
+            "temporal_phase": "present",
+            "source_id": "src_5c36f3706385"
+          },
+          {
+            "title": "Tournament continues across three nations",
+            "time": "2026-06-12",
+            "location": "United States, Canada, Mexico",
+            "description": "Group stage matches begin across 16 host cities in the first World Cup hosted by three countries.",
+            "importance": "normal",
+            "temporal_phase": "future",
+            "source_id": "src_a0c64ec9422d"
+          },
+          {
+            "title": "World Cup final with halftime show",
+            "time": "2026-07-19",
+            "location": "New York New Jersey Stadium, East Rutherford, New Jersey",
+            "description": "Tournament culminates with final match and halftime performance by Shakira, BTS, and Madonna.",
+            "importance": "feature",
+            "temporal_phase": "future",
+            "source_id": "src_e43b9047aff6"
+          }
+        ],
+        "timezone": "America/Mexico_City"
+      },
+      "citations": [
+        {
+          "source_id": "src_4cf4a95a660c",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Yahoo."
+        },
+        {
+          "source_id": "src_5c36f3706385",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Billboard."
+        },
+        {
+          "source_id": "src_a0c64ec9422d",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxsports."
+        },
+        {
+          "source_id": "src_e43b9047aff6",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Bleacherreport."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_4cf4a95a660c",
+          "url": "https://sports.yahoo.com/soccer/article/2026-world-cup-schedule-qualified-teams-groups-match-dates-fixtures-how-to-watch-050724214.html",
+          "publisher": {
+            "name": "Yahoo",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "2026 World Cup schedule: Qualified teams, groups, match dates, fixtures, how to watch - Yahoo Sports",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 13:55:42 GMT",
+          "fetched_at": "2026-05-18T17:02:29.081796+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "The 2026 World Cup will run from June 11 - July 19 in the United States, Canada and Mexico. The 2026 World Cup qualifying playoffs are over and we now know the full 48-team field for this summer’s tournament in the United States, Canada and Mexico. It will begin its tournament June 12 at SoFi Stadium in Inglewood, California against Paraguay. Canada is in Group B and will open against Bosnia and Herzegovina on June 12 at BMO Field in Toronto. Mexico gets the honor of hosting the opening match of the World Cup on June 11 against South Africa at Estadio Azteca in Mexico City. ## Qualified teams for the 2026 World Cup. **Thursday, June 11, 3 p.m. South Africa, Estadio Azteca (Mexico City). **Wednesday, June 24, 9 p.m. Mexico, Estadio Azteca (Mexico City). **Thursday, June 18, 3 p.m. Bosnia and Herzegovina**,** SoFi Stadium (Inglewood, California). **Friday, June 12, 9 p.m. Paraguay, SoFi Stadium (Inglewood, California).",
+          "enriched_at": null
+        },
+        {
+          "id": "src_a0c64ec9422d",
+          "url": "https://amp.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+          "publisher": {
+            "name": "Foxsports",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams - FOX Sports",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:01:21 GMT",
+          "fetched_at": "2026-05-18T17:02:29.081796+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by three countries — the United States, Mexico and Canada — with 48 teams competing across 16 host cities. Spread across three countries, the tournament will culminate with the final on July 19 at New York New Jersey Stadium in East Rutherford, New Jersey. The opening match on June 11 between Mexico and South Africa (3 p.m. ET) will stream for free on Tubi, as well as the USA's opening match against Paraguay on June 12 (9 p.m. ET). For the first time ever, there will be three countries hosting the World Cup — the U.S., Canada and Mexico. The 2026 World Cup final will be played at New York New Jersey Stadium in East Rutherford, New Jersey. ## What Is The USA's Schedule For The 2026 World Cup?",
+          "enriched_at": null
+        },
+        {
+          "id": "src_5c36f3706385",
+          "url": "https://www.billboard.com/music/latin/mana-j-balvin-and-more-to-open-fifa-world-cup-2026-mexico-1236243397/",
+          "publisher": {
+            "name": "Billboard",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico - Billboard",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 04:07:50 GMT",
+          "fetched_at": "2026-05-18T17:02:29.081796+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico. Belinda, Los Ángeles Azules, Lila Downs, Danny Ocean and Tyla are also part of the lineup. Maná, Alejandro Fernández, J Balvin, Los Ángeles Azules and Belinda will be part of the lineup gracing the opening ceremony of the FIFA World Cup 2026 at the Mexico City Stadium (Estadio Banorte) on June 11, the FIFA announced on Friday (May 8) on its social media channels. “The FIFA World Cup is a moment the world shares, and that begins with how we open it,” reads the post, which was also shared by FIFA President Gianni Infantino. Mexico will face South Africa in the opening match of the FIFA World Cup 2026, in a stadium that will go down in history as the first to host three FIFA World Cups.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e43b9047aff6",
+          "url": "https://bleacherreport.com/articles/25427703-shakira-bts-madonna-headline-2026-world-cup-final-halftime-show",
+          "publisher": {
+            "name": "Bleacherreport",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show - Bleacher Report",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 11:46:40 GMT",
+          "fetched_at": "2026-05-18T17:02:29.081796+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show. FIFA is combining eras and genres for its first-ever halftime show at a World Cup final. Coldplay lead vocalist Chris Martin, who helped curate the event, announced that Shakira, BTS and Madonna will take the stage:. Shakira collaborated with Burna Boy to produce \"Dai Dai\" for the official album of the 2026 World Cup. She also performed the official song of the 2010 World Cup, \"Waka Waka (This Time for Africa),\" and featured in the opening ceremony that year. While commonplace at major American sporting events, halftime shows aren't the norm at world football spectacles such as the World Cup. FIFA experimented with the concept at the 2025 Club World Cup, where J Balvin, Doja Cat, Tems and Coldplay all performed. The 2026 World Cup will kick off June 11, with Mexico taking on South Africa in the opening match at Estadio Azteca in Mexico City.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "sidebar"
+    },
+    {
+      "section_id": "media_coverage",
+      "block_kind": "newsfeed",
+      "block_data": {
+        "kind": "newsfeed",
+        "cards": [
+          {
+            "url": "https://www.foxsports.com/stories/soccer/usa-world-cup-26-roster-prediction",
+            "title": "The 26: Projecting the USA's World Cup Roster And Starters For Opening Match",
+            "publisher": "FOX Sports",
+            "tier": "T3",
+            "published_at": "2026-05-14T14:18:00Z",
+            "thumbnail_url": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/01/1408/814/the26.jpg?ve=1&tl=1",
+            "summary": "As much as modern World Cup squads are typically constructed using a forensic examination of data points collected over a four-year cycle combined with the gut feelings of experienced national team coaches and their staffs, the United States' roster for the 2026 FIFA World Cup was always going to be different.",
+            "source_id": "src_0e3d96068d89"
+          },
+          {
+            "url": "https://bleacherreport.com/articles/25427703-shakira-bts-madonna-headline-2026-world-cup-final-halftime-show",
+            "title": "Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show",
+            "publisher": "Bleacher Report",
+            "tier": "T3",
+            "published_at": "2026-05-14T11:46:40Z",
+            "thumbnail_url": "https://gsp-image-cdn.wmsports.io/cms/prod/bleacher-report/getty_images/2026-05/2161853219_large_cropped.jpg?w=3800&h=2000",
+            "summary": "FIFA is combining eras and genres for its first-ever halftime show at a World Cup final. Coldplay lead vocalist Chris Martin, who helped curate the event, announced that Shakira, BTS and Madonna will take the stage.",
+            "source_id": "src_e43b9047aff6"
+          },
+          {
+            "url": "https://sports.yahoo.com/soccer/article/2026-world-cup-schedule-qualified-teams-groups-match-dates-fixtures-how-to-watch-050724214.html",
+            "title": "2026 World Cup schedule: Qualified teams, groups, match dates, fixtures, how to watch",
+            "publisher": "Yahoo",
+            "tier": "T3",
+            "published_at": "2026-05-09T13:55:42Z",
+            "thumbnail_url": "https://s.yimg.com/ny/api/res/1.2/mOcz2gNX9OrIRNFjX77AEw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https%3A%2F%2Fd29szjachogqwa.cloudfront.net%2Fimages%2F2026-03%2Fe6374f74-2374-495a-8adf-11f9095b52fc",
+            "summary": "The 2026 World Cup will run from June 11 - July 19 in the United States, Canada and Mexico. The 2026 World Cup qualifying playoffs are over and we now know the full 48-team field for this summer's tournament in the United States, Canada and Mexico. It will begin its tournament June 12 at SoFi Stadium in Inglewood, California against Paraguay.",
+            "source_id": "src_4cf4a95a660c"
+          }
+        ],
+        "variant": "news",
+        "grouping": "flat"
+      },
+      "citations": [
+        {
+          "source_id": "src_0e3d96068d89",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxsports."
+        },
+        {
+          "source_id": "src_4cf4a95a660c",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Yahoo."
+        },
+        {
+          "source_id": "src_e43b9047aff6",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Bleacherreport."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_4cf4a95a660c",
+          "url": "https://sports.yahoo.com/soccer/article/2026-world-cup-schedule-qualified-teams-groups-match-dates-fixtures-how-to-watch-050724214.html",
+          "publisher": {
+            "name": "Yahoo",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "2026 World Cup schedule: Qualified teams, groups, match dates, fixtures, how to watch - Yahoo Sports",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 13:55:42 GMT",
+          "fetched_at": "2026-05-18T17:02:30.910365+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://s.yimg.com/ny/api/res/1.2/mOcz2gNX9OrIRNFjX77AEw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://d29szjachogqwa.cloudfront.net/images/2026-03/e6374f74-2374-495a-8adf-11f9095b52fc",
+          "summary": "The 2026 World Cup will run from June 11 - July 19 in the United States, Canada and Mexico. The 2026 World Cup qualifying playoffs are over and we now know the full 48-team field for this summer’s tournament in the United States, Canada and Mexico. It will begin its tournament June 12 at SoFi Stadium in Inglewood, California against Paraguay. Canada is in Group B and will open against Bosnia and Herzegovina on June 12 at BMO Field in Toronto. Mexico gets the honor of hosting the opening match of the World Cup on June 11 against South Africa at Estadio Azteca in Mexico City. ## Qualified teams for the 2026 World Cup. **Thursday, June 11, 3 p.m. South Africa, Estadio Azteca (Mexico City). **Wednesday, June 24, 9 p.m. Mexico, Estadio Azteca (Mexico City). **Thursday, June 18, 3 p.m. Bosnia and Herzegovina**,** SoFi Stadium (Inglewood, California). **Friday, June 12, 9 p.m. Paraguay, SoFi Stadium (Inglewood, California).",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e43b9047aff6",
+          "url": "https://bleacherreport.com/articles/25427703-shakira-bts-madonna-headline-2026-world-cup-final-halftime-show",
+          "publisher": {
+            "name": "Bleacherreport",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show - Bleacher Report",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 11:46:40 GMT",
+          "fetched_at": "2026-05-18T17:02:30.910365+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://gsp-image-cdn.wmsports.io/cms/prod/bleacher-report/getty_images/2026-05/2161853219_large_cropped.jpg?w=3800&h=2000",
+          "summary": "# Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show. FIFA is combining eras and genres for its first-ever halftime show at a World Cup final. Coldplay lead vocalist Chris Martin, who helped curate the event, announced that Shakira, BTS and Madonna will take the stage:. Shakira collaborated with Burna Boy to produce \"Dai Dai\" for the official album of the 2026 World Cup. She also performed the official song of the 2010 World Cup, \"Waka Waka (This Time for Africa),\" and featured in the opening ceremony that year. While commonplace at major American sporting events, halftime shows aren't the norm at world football spectacles such as the World Cup. FIFA experimented with the concept at the 2025 Club World Cup, where J Balvin, Doja Cat, Tems and Coldplay all performed. The 2026 World Cup will kick off June 11, with Mexico taking on South Africa in the opening match at Estadio Azteca in Mexico City.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_0e3d96068d89",
+          "url": "https://www.foxsports.com/stories/soccer/usa-world-cup-26-roster-prediction",
+          "publisher": {
+            "name": "Foxsports",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "The 26: Projecting the USA's World Cup Roster And Starters For Opening Match - FOX Sports",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 14:18:00 GMT",
+          "fetched_at": "2026-05-18T17:03:13.985110+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/01/1408/814/the26.jpg?ve=1&tl=1",
+          "summary": "FIFA Men's World Cup. FIFA Men's World Cup. # The 26: Projecting the USA's World Cup Roster And Starters For Opening Match. As much as modern World Cup squads are typically constructed using a forensic examination of data points collected over a four-year cycle combined with the gut feelings of experienced national team coaches and their staffs, the United States’ roster for the 2026 FIFA World Cup was always going to be different. For much of his tenure, he has been, for various reasons, without whom many would consider some of America’s most essential players, including forward Christian Pulisic, midfielder Weston McKennie, midfielder Tyler Adams, and wing back Antonee \"Jedi\" Robinson. Out of necessity, Pochettino scoured the fringes of the U.S. player pool, unearthing and/or handing opportunities to the likes of winger Max Arfsten, midfielder Sebastian Berhalter, right back Alex Freeman and goalkeeper Matt Freese. Here's my latest USA roster projection for the 2026 FIFA World Cup:.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "latest_news",
+      "block_kind": "latest_news",
+      "block_data": {
+        "kind": "latest_news",
+        "cards": [
+          {
+            "url": "https://www.sportingnews.com/in/football/news/broadcast-fifa-world-cup-2026-india-live-stream-tv-channel-schedule-football/95e098325a06b9ceb3370841",
+            "title": "Who will broadcast FIFA World Cup 2026 in India? Live stream, TV channel and full schedule for football World Cup",
+            "publisher": "Sporting News",
+            "tier": "T3",
+            "published_at": "2026-05-18T08:37:12Z",
+            "thumbnail_url": "https://library.sportingnews.com/styles/crop_style_16_9_desktop_webp/s3/2025-12/Mercedes%20Benz%20Stadium%20Atlanta%20Copa%20del%20Mundo%20FIFA%20World%20Cup%20Stew%20Milne%20FIFA%20via%20Getty%20Images%20%281%29.jpg.webp?itok=HZHEkwKE",
+            "summary": null,
+            "source_id": "src_c99ec0f8779a"
+          },
+          {
+            "url": "https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+            "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams",
+            "publisher": "FOX Sports",
+            "tier": "T3",
+            "published_at": "2026-05-13T13:42:00Z",
+            "thumbnail_url": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/05/1408/814/artboard-130.jpg?ve=1&tl=1",
+            "summary": null,
+            "source_id": "src_cc29751f40d1"
+          },
+          {
+            "url": "https://amp.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+            "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams",
+            "publisher": "FOX Sports",
+            "tier": "T3",
+            "published_at": "2026-05-12T04:01:21Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_a0c64ec9422d"
+          },
+          {
+            "url": "https://www.cnn.com/2026/05/11/sport/5-things-world-cup-month-to-go",
+            "title": "5 things to know about the World Cup with a month to go before kickoff",
+            "publisher": "CNN",
+            "tier": "T1",
+            "published_at": "2026-05-11T09:00:51Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_61709c7aaa23"
+          },
+          {
+            "url": "https://sports.yahoo.com/soccer/article/2026-world-cup-schedule-qualified-teams-groups-match-dates-fixtures-how-to-watch-050724214.html",
+            "title": "2026 World Cup schedule: Qualified teams, groups, match dates, fixtures, how to watch",
+            "publisher": "Yahoo Sports",
+            "tier": "T3",
+            "published_at": "2026-05-09T13:55:42Z",
+            "thumbnail_url": "https://s.yimg.com/ny/api/res/1.2/mOcz2gNX9OrIRNFjX77AEw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://d29szjachogqwa.cloudfront.net/images/2026-03/e6374f74-2374-495a-8adf-11f9095b52fc",
+            "summary": null,
+            "source_id": "src_4cf4a95a660c"
+          },
+          {
+            "url": "https://www.billboard.com/music/latin/mana-j-balvin-and-more-to-open-fifa-world-cup-2026-mexico-1236243397/',=",
+            "title": "Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico",
+            "publisher": "Billboard",
+            "tier": "T3",
+            "published_at": "2026-05-09T04:07:50Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_5c36f3706385"
+          },
+          {
+            "url": "https://www.billboard.com/music/music-news/world-cup-2026-opening-ceremonies-1236243169/',=",
+            "title": "Katy Perry, Future & LISA to Perform at World Cup Opening Ceremonies",
+            "publisher": "Billboard",
+            "tier": "T3",
+            "published_at": "2026-05-08T20:58:45Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_f51381cdda71"
+          },
+          {
+            "url": "https://www.cnn.com/2026/05/05/americas/mexico-world-cup-ticket-prices-intl-latam",
+            "title": "Mexico's 'out of reach' World Cup tickets cause discontent among fans",
+            "publisher": "CNN",
+            "tier": "T1",
+            "published_at": "2026-05-05T16:39:51Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_99380141a458"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_4cf4a95a660c",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Yahoo."
+        },
+        {
+          "source_id": "src_5c36f3706385",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Billboard."
+        },
+        {
+          "source_id": "src_61709c7aaa23",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnn."
+        },
+        {
+          "source_id": "src_99380141a458",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnn."
+        },
+        {
+          "source_id": "src_a0c64ec9422d",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxsports."
+        },
+        {
+          "source_id": "src_c99ec0f8779a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Sportingnews."
+        },
+        {
+          "source_id": "src_cc29751f40d1",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Foxsports."
+        },
+        {
+          "source_id": "src_f51381cdda71",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Billboard."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_5c36f3706385",
+          "url": "https://www.billboard.com/music/latin/mana-j-balvin-and-more-to-open-fifa-world-cup-2026-mexico-1236243397/",
+          "publisher": {
+            "name": "Billboard",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico - Billboard",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 04:07:50 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Maná, Alejandro Fernández, J Balvin & More to Open the FIFA World Cup 2026 in Mexico. Belinda, Los Ángeles Azules, Lila Downs, Danny Ocean and Tyla are also part of the lineup. Maná, Alejandro Fernández, J Balvin, Los Ángeles Azules and Belinda will be part of the lineup gracing the opening ceremony of the FIFA World Cup 2026 at the Mexico City Stadium (Estadio Banorte) on June 11, the FIFA announced on Friday (May 8) on its social media channels. “The FIFA World Cup is a moment the world shares, and that begins with how we open it,” reads the post, which was also shared by FIFA President Gianni Infantino. Mexico will face South Africa in the opening match of the FIFA World Cup 2026, in a stadium that will go down in history as the first to host three FIFA World Cups.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_a0c64ec9422d",
+          "url": "https://amp.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+          "publisher": {
+            "name": "Foxsports",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams - FOX Sports",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:01:21 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by three countries — the United States, Mexico and Canada — with 48 teams competing across 16 host cities. Spread across three countries, the tournament will culminate with the final on July 19 at New York New Jersey Stadium in East Rutherford, New Jersey. The opening match on June 11 between Mexico and South Africa (3 p.m. ET) will stream for free on Tubi, as well as the USA's opening match against Paraguay on June 12 (9 p.m. ET). For the first time ever, there will be three countries hosting the World Cup — the U.S., Canada and Mexico. The 2026 World Cup final will be played at New York New Jersey Stadium in East Rutherford, New Jersey. ## What Is The USA's Schedule For The 2026 World Cup?",
+          "enriched_at": null
+        },
+        {
+          "id": "src_4cf4a95a660c",
+          "url": "https://sports.yahoo.com/soccer/article/2026-world-cup-schedule-qualified-teams-groups-match-dates-fixtures-how-to-watch-050724214.html",
+          "publisher": {
+            "name": "Yahoo",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "2026 World Cup schedule: Qualified teams, groups, match dates, fixtures, how to watch - Yahoo Sports",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 13:55:42 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "The 2026 World Cup will run from June 11 - July 19 in the United States, Canada and Mexico. The 2026 World Cup qualifying playoffs are over and we now know the full 48-team field for this summer’s tournament in the United States, Canada and Mexico. It will begin its tournament June 12 at SoFi Stadium in Inglewood, California against Paraguay. Canada is in Group B and will open against Bosnia and Herzegovina on June 12 at BMO Field in Toronto. Mexico gets the honor of hosting the opening match of the World Cup on June 11 against South Africa at Estadio Azteca in Mexico City. ## Qualified teams for the 2026 World Cup. **Thursday, June 11, 3 p.m. South Africa, Estadio Azteca (Mexico City). **Wednesday, June 24, 9 p.m. Mexico, Estadio Azteca (Mexico City). **Thursday, June 18, 3 p.m. Bosnia and Herzegovina**,** SoFi Stadium (Inglewood, California). **Friday, June 12, 9 p.m. Paraguay, SoFi Stadium (Inglewood, California).",
+          "enriched_at": null
+        },
+        {
+          "id": "src_cc29751f40d1",
+          "url": "https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams",
+          "publisher": {
+            "name": "Foxsports",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams - FOX Sports",
+          "author": null,
+          "published_at": "Wed, 13 May 2026 13:42:00 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "FIFA Men's World Cup. FIFA Men's World Cup. # 2026 FIFA World Cup: What To Know, USA's Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by three countries — the United States, Mexico and Canada — with 48 teams competing across 16 host cities. ## 2026 FIFA World Cup: How To Watch. Spread across three countries, the tournament will culminate with the final on July 19 at New York New Jersey Stadium in East Rutherford, New Jersey. The opening match on June 11 between Mexico and South Africa (3 p.m. ET) will stream for free on Tubi, as well as the USA's opening match against Paraguay on June 12 (9 p.m. ET). For the first time ever, there will be three countries hosting the World Cup — the U.S., Canada and Mexico. ## What Is The USA's Schedule For The 2026 World Cup?",
+          "enriched_at": null
+        },
+        {
+          "id": "src_99380141a458",
+          "url": "https://www.cnn.com/2026/05/05/americas/mexico-world-cup-ticket-prices-intl-latam",
+          "publisher": {
+            "name": "Cnn",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Mexico’s ‘out of reach’ World Cup tickets cause discontent among fans - CNN",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 16:39:51 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Mexico City's Estadio Banorte will host the opening game of the World Cup next month. Mexico will make history this summer as the first country to host three World Cups, but the excitement over that record is not reflected among Mexican fans. The 70-year-old says the high cost of tickets for the 13 matches on Mexican soil, combined with the difficulty of getting a ticket and the limited number of games assigned to Mexico as the third host country, has dampened his excitement as a fan. Of the 104 matches in this year’s World Cup, four will be played in Monterrey, four in Guadalajara, and five at the newly renovated Banorte Stadium in Mexico City, including the opening match between Mexico and South Africa. When FIFA released a second round of tickets in April, prices for the first game in Mexico, on June 11, ranged from $3,000 to $10,000.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_c99ec0f8779a",
+          "url": "https://www.sportingnews.com/in/football/news/broadcast-fifa-world-cup-2026-india-live-stream-tv-channel-schedule-football/95e098325a06b9ceb3370841",
+          "publisher": {
+            "name": "Sportingnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Who will broadcast FIFA World Cup 2026 in India? Live stream, TV channel and full schedule for football World Cup - sportingnews.com",
+          "author": null,
+          "published_at": "Mon, 18 May 2026 08:37:12 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Live stream, TV channel and full schedule for football World Cup. Add The Sporting News on Google. The FIFA World Cup 2026 kicks off on June 11, and while the rest of the world is gearing up for the biggest sporting event on the planet, fans in India are still waiting to find out where they can watch it. That is a significant ask for a market where most matches will air in the middle of the night or in the early hours of the morning according to Indian Standard Time, which has made sponsors and advertisers reluctant to commit. | 1 | A | Mexico vs South Africa | Friday, June 12, 2026 | 12:30 AM | Mexico City Stadium, Mexico City |. | 2 | A | South Korea vs Czech Republic | Friday, June 12, 2026 | 07:30 AM | Akron Stadium, Guadalajara |. | 3 | B | Canada vs Bosnia and Herzegovina | Saturday, June 13, 2026 | 12:30 AM | BMO Field, Toronto |.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_61709c7aaa23",
+          "url": "https://www.cnn.com/2026/05/11/sport/5-things-world-cup-month-to-go",
+          "publisher": {
+            "name": "Cnn",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "5 things to know about the World Cup with a month to go before kickoff - CNN",
+          "author": null,
+          "published_at": "Mon, 11 May 2026 09:00:51 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# There’s one month until World Cup 2026 kicks off. The official match ball of the 2026 FIFA World Cup is displayed in Mexico City on April 23. It’s now just one month until the first game of this summer’s FIFA World Cup kicks off, and there is plenty to talk about already. From diplomatic tensions to ticket pricing and travel costs, the tournament has been creating headlines before a ball has even been kicked, and that level of interest is only set to increase as we get closer to the opening game between Mexico and South Africa on June 11. To help you make sense of everything that’s been happening both on and off the pitch, CNN Sports takes a look at the five things you need to know. And as a matter of fact, even though some people are saying that the ticket prices we have are high, they still end up on the resale market at an even higher price, more than double of our price.”.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_f51381cdda71",
+          "url": "https://www.billboard.com/music/music-news/world-cup-2026-opening-ceremonies-1236243169/",
+          "publisher": {
+            "name": "Billboard",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Katy Perry, Future & LISA to Perform at World Cup Opening Ceremonies - Billboard",
+          "author": null,
+          "published_at": "Fri, 08 May 2026 20:58:45 GMT",
+          "fetched_at": "2026-05-18T17:02:31.129996+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Katy Perry, Future, LISA, J Balvin, Alanis Morissette & Tyla to Perform at 2026 FIFA World Cup Opening Ceremonies: Report. The 2026 FIFA World Cup has recruited a star-studded lineup for its opening ceremonies. According to *The New York Times’* *The Athletic*, Katy Perry, Future, Tyla, LISA and Anitta are slated to perform at the opening ceremonies set for the U.S., Canada and Mexico. Moving over to Toronto, where Canada is slated to take on Bosnia & Herzegovina on June 12, Michael Bublé will perform alongside Alessia Cara and Alanis Morissette. When Mexico opens the 2026 FIFA World Cup on June 11 against South Africa, fans in Azteca Stadium will be greeted by a pregame performance from rock band Maná as well as Tyla and Los Ángeles Azules. FIFA has yet to announce talent slated to grace the stage for the 2026 FIFA World Cup Final Halftime Show on July 19 at MetLife Stadium in New Jersey. *Billboard* has reached out to reps for Future, LISA, Katy Perry, Michael Bublé and FIFA.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "key_players",
+      "block_kind": "people",
+      "block_data": {
+        "kind": "people",
+        "cards": [
+          {
+            "name": "Javier Aguirre",
+            "role": "Mexico National Team Manager",
+            "bio": "Mexico's head coach who selected the preliminary 55-man roster for the 2026 World Cup and will lead El Tri in the opening match against South Africa.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Javier_Aguirre.png/330px-Javier_Aguirre.png",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Javier_Aguirre",
+            "source_ids": [
+              "src_aa5eaafdbcf2"
+            ]
+          },
+          {
+            "name": "Raul Jimenez",
+            "role": "Mexico Forward (Fulham)",
+            "bio": "Fulham striker headlining Mexico's attacking options for the World Cup opener as one of the team's key offensive weapons.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Ra%C3%BAl_Jim%C3%A9nez_04032026_%281%29.jpg/330px-Ra%C3%BAl_Jim%C3%A9nez_04032026_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Ra%C3%BAl_Jim%C3%A9nez",
+            "source_ids": [
+              "src_aa5eaafdbcf2"
+            ]
+          },
+          {
+            "name": "Edson Alvarez",
+            "role": "Mexico Midfielder (Fenerbahçe)",
+            "bio": "Fenerbahçe midfielder selected as a core player in Mexico's midfield for the 2026 World Cup campaign.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Edson_%C3%81lvarez.png/330px-Edson_%C3%81lvarez.png",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Edson_%C3%81lvarez",
+            "source_ids": [
+              "src_aa5eaafdbcf2"
+            ]
+          },
+          {
+            "name": "Guillermo Ochoa",
+            "role": "Mexico Goalkeeper",
+            "bio": "Veteran goalkeeper attempting to appear in his sixth World Cup, providing experience and leadership in goal for Mexico's opening match.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mex-Kor_%281%29_%28cropped%29.jpg/330px-Mex-Kor_%281%29_%28cropped%29.jpg",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Guillermo_Ochoa",
+            "source_ids": [
+              "src_aa5eaafdbcf2"
+            ]
+          }
+        ]
+      },
+      "citations": [],
+      "sources_used": [],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "stadium_spotlight",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "Estadio Azteca in Mexico City will host the opening match of the 2026 FIFA World Cup on June 11, marking a historic moment for the venue and the nation. Mexico becomes the first country to host three World Cups, and this stadium carries legendary significance from the 1986 tournament, when Diego Maradona's iconic performances helped define one of soccer's greatest competitions. The opening ceremony will feature performances by J Balvin, Tyla, and other international artists, setting the stage for Mexico versus South Africa in the tournament's first of 104 matches.",
+          "With a metropolitan area of 23.1 million people, Mexico City brings vibrant energy and rich cultural heritage to the World Cup. The stadium's role in hosting this opening fixture underscores its enduring importance as one of the world's most storied soccer venues, cementing its place in World Cup history alongside the unforgettable moments of decades past."
+        ],
+        "paragraph_sources": [
+          [
+            "src_21a1e8e687bd",
+            "src_618fc09227ef",
+            "src_99380141a458"
+          ],
+          [
+            "src_3d59c123069a",
+            "src_99380141a458"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "Colombian reggaeton star J Balvin and South African singer-songwriter Tyla will perform at the first ceremony on Thursday, 11 June at Estadio Azteca in Mexico City, before Mexico and South Africa play the first of the tournament's 104 games.",
+            "attribution": "BBC Sport",
+            "source_id": "src_21a1e8e687bd"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_21a1e8e687bd",
+            "excerpt": null,
+            "claim_text": "J Balvin and Tyla will perform at the opening ceremony on June 11 at Estadio Azteca before Mexico and South Africa play the first match"
+          },
+          {
+            "source_id": "src_618fc09227ef",
+            "excerpt": null,
+            "claim_text": "The 1986 World Cup in Mexico is one of the most iconic tournaments in soccer history, centered on Diego Maradona's legendary performances"
+          },
+          {
+            "source_id": "src_99380141a458",
+            "excerpt": null,
+            "claim_text": "Mexico will make history as the first country to host three World Cups"
+          },
+          {
+            "source_id": "src_3d59c123069a",
+            "excerpt": null,
+            "claim_text": "Mexico City has a metropolitan area of 23.1 million people and blends rich history with modern culture"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_21a1e8e687bd",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Bbc."
+        },
+        {
+          "source_id": "src_3d59c123069a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Greenwichtime."
+        },
+        {
+          "source_id": "src_618fc09227ef",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Forbes."
+        },
+        {
+          "source_id": "src_99380141a458",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Cnn."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_3d59c123069a",
+          "url": "https://www.greenwichtime.com/sports/article/mexico-city-braces-for-world-cup-eager-to-22258957.php",
+          "publisher": {
+            "name": "Greenwichtime",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Mexico City braces for World Cup, eager to showcase food and culture amid crowds and congestion - Greenwich Time",
+          "author": null,
+          "published_at": "Thu, 14 May 2026 15:04:27 GMT",
+          "fetched_at": "2026-05-18T17:02:47.759602+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "stadium_spotlight"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Mexico City braces for World Cup, eager to showcase food and culture amid crowds and congestion. MEXICO CITY (AP) — Mexico City, the most populous city in North America, is a vibrant, bustling metropolis that blends rich history with modern culture. Whether you are marveling at ancient ruins or enjoying contemporary art, there is a palpable energy in the air and it will be present during the World Cup this summer. With a metropolitan area of some 23.1 million people, traffic congestion is quite intense during rush hours, especially in the area near Azteca stadium. The city has pollution issues that could also be a problem for fans with respiratory conditions. Zócalo: One of the largest city squares in the world at some 14 acres (5.5 hectares), it is surrounded by the Metropolitan Cathedral and the National Palace. It’s a hub of activity and a great place to soak in the city’s history. The fastest way to get to the World Cup stadium is public transportation.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_21a1e8e687bd",
+          "url": "https://www.bbc.com/sport/football/articles/cpvpr90vn01o",
+          "publisher": {
+            "name": "Bbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "World Cup 2026: Katy Perry & Michael Buble among performers at three opening ceremonies - BBC",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 17:30:16 GMT",
+          "fetched_at": "2026-05-18T17:02:47.759602+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "stadium_spotlight"
+          ],
+          "thumbnail_url": null,
+          "summary": "**Katy Perry, Michael Buble and Alanis Morissette are among the artists who will perform at three World Cup opening ceremonies this summer.**. Colombian reggaeton star J Balvin and South African singer-songwriter Tyla will perform at the first ceremony on Thursday, 11 June at Estadio Azteca in Mexico City, before Mexico and South Africa play the first of the tournament's 104 games. And in the USA, pop star Perry and rapper Future will perform before the USA take on Paraguay at SoFi Stadium in Los Angeles on 12 June. \"The Fifa World Cup is a moment the world shares, and that begins with how we open it,\" said Fifa president Gianni Infantino. \"Starting with Mexico City and continuing the next days with Toronto and Los Angeles, these ceremonies will bring together music, culture and football in a way that reflects both the individuality of each nation and the unity that defines this tournament.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_618fc09227ef",
+          "url": "https://www.forbes.com/sites/clementelisi/2026/05/09/magic-madness-and-maradona-the-enduring-legend-of-mexico-86/",
+          "publisher": {
+            "name": "Forbes",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Magic, Madness And Maradona: The Enduring Legend Of Mexico ’86 - Forbes",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 00:00:00 GMT",
+          "fetched_at": "2026-05-18T17:03:08.079886+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "stadium_spotlight"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Magic, Madness And Maradona: The Enduring Legend Of Mexico ’86. Looking back four decades later, the 1986 World Cup in Mexico still stands as one of the most iconic tournaments in soccer history. At the center of it all was Diego Maradona, whose performances in Mexico have become the benchmark for individual excellence at a World Cup. That World Cup remains inseparable from Maradona’s genius — not just because Argentina won the tournament, but because he dominated it in a way few players ever have. The quarterfinal between Brazil and France, in particular, is often cited as one of the greatest matches ever played, illustrating the tournament’s high technical level and emotional intensity. It’s this tapestry of approaches that made Mexico '86 richer and more entertaining. Four decades later, the 1986 World Cup endures not just because of nostalgia, but because it represents a kind of ideal. In that sense, 1986 is more than just a great World Cup — it is a reference point.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_99380141a458",
+          "url": "https://www.cnn.com/2026/05/05/americas/mexico-world-cup-ticket-prices-intl-latam",
+          "publisher": {
+            "name": "Cnn",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Mexico’s ‘out of reach’ World Cup tickets cause discontent among fans - CNN",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 16:39:51 GMT",
+          "fetched_at": "2026-05-18T17:03:44.509465+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "stadium_spotlight"
+          ],
+          "thumbnail_url": null,
+          "summary": "Mexico City's Estadio Banorte will host the opening game of the World Cup next month. Mexico will make history this summer as the first country to host three World Cups, but the excitement over that record is not reflected among Mexican fans. The 70-year-old says the high cost of tickets for the 13 matches on Mexican soil, combined with the difficulty of getting a ticket and the limited number of games assigned to Mexico as the third host country, has dampened his excitement as a fan. Of the 104 matches in this year’s World Cup, four will be played in Monterrey, four in Guadalajara, and five at the newly renovated Banorte Stadium in Mexico City, including the opening match between Mexico and South Africa. When FIFA released a second round of tickets in April, prices for the first game in Mexico, on June 11, ranged from $3,000 to $10,000.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "tournament_format",
+      "block_kind": "chart",
+      "block_data": {
+        "kind": "chart",
+        "chart_type": "compare_table",
+        "series": null,
+        "stats": null,
+        "table": {
+          "subjects": [
+            "2026 Format",
+            "2022 Format"
+          ],
+          "rows": [
+            {
+              "axis": "Total Teams",
+              "cells": [
+                "48",
+                "32"
+              ]
+            },
+            {
+              "axis": "Number of Groups",
+              "cells": [
+                "12",
+                "8"
+              ]
+            },
+            {
+              "axis": "Teams per Group",
+              "cells": [
+                "4",
+                "4"
+              ]
+            },
+            {
+              "axis": "Total Matches",
+              "cells": [
+                "80",
+                "64"
+              ]
+            }
+          ]
+        },
+        "title": "2026 World Cup: Expanded 48-Team Format vs. Previous Tournament Structure"
+      },
+      "citations": [],
+      "sources_used": [],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    }
+  ],
+  "wikipedia_card": null,
+  "hero_image": {
+    "image_url": "https://preview.redd.it/fifa-the-opening-match-of-the-2026-fifa-world-cup-mexico-vs-v0-51y88yzbnf5g1.jpeg?width=640&crop=smart&auto=webp&s=dd7874b2de438340d8328dbb51308e344187a9f7",
+    "alt_text": "r/soccer - [FIFA] The opening match of the 2026 FIFA World Cup: Mexico vs. South Africa",
+    "source_url": "https://www.reddit.com/r/soccer/comments/1pf3fxk/fifa_the_opening_match_of_the_2026_fifa_world_cup/",
+    "publisher": "reddit.com"
+  },
+  "meta": {
+    "last_updated": "2026-05-18T17:05:09.157174+00:00",
+    "editor_approved": true,
+    "editor_id": "cli_user@local",
+    "pipeline_trace_id": "trace_083dea6dc292"
+  }
+}

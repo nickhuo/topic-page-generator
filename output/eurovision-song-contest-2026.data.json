@@ -1,0 +1,2245 @@
+{
+  "page_id": "page_c453b53c",
+  "input_sentence": "Eurovision 2026 is being held in Vienna from May 12 to May 16.",
+  "generated_at": "2026-05-18T17:47:49.291773+00:00",
+  "subject": {
+    "title": "Eurovision Song Contest 2026 in Vienna",
+    "subtitle": "The 70th Eurovision Song Contest runs from 12–16 May 2026 in Vienna, Austria, featuring 30 competing countries, two semi-finals, and a Grand Final on Saturday 16 May surrounded by pop performances, geopolitical tensions, and protests.",
+    "entities": [
+      "Eurovision Song Contest 2026",
+      "Vienna, Austria"
+    ],
+    "when": "2026-05-12",
+    "where": "Vienna, Austria"
+  },
+  "layout": {
+    "preset_id": "product_focus",
+    "overrides": null
+  },
+  "sources": [
+    {
+      "id": "src_cee761ef288f",
+      "url": "https://www.wikidata.org/wiki/Q125933843",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Eurovision Song Contest 2026",
+      "author": null,
+      "published_at": "2026-05-18T17:45:28.681356+00:00",
+      "fetched_at": "2026-05-18T17:45:28.681383+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Eurovision_2026_heart_-_Austria.svg/1280px-Eurovision_2026_heart_-_Austria.svg.png?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    },
+    {
+      "id": "src_3635615573bf",
+      "url": "https://www.theguardian.com/tv-and-radio/2026/may/12/vienna-boycotts-blackouts-buildup-eurovision-song-contest-2026-israel",
+      "publisher": {
+        "name": "Theguardian",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Woe Vienna? Boycotts and blackouts mar buildup as Eurovision 2026 begins - The Guardian",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 04:00:13 GMT",
+      "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Usually joyous song contest ‘a little bit sad’ this year, says one expert, with rows over Israel and costs to the fore. But as Vienna gears up to host this year’s Eurovision song contest, which starts on Tuesday and culminates in Saturday’s grand final, euphoria will be hard to come by outside the power ballads performed onstage. It is an unprecedented moment in the contest’s seven-decade history and could have long-term consequences for a spectacle under pressure to justify its costs in a time of cuts to public broadcasters. The 2025 grand final in the Swiss city of Basel was watched by a record 166 million people across the globe, but last year’s 3 million year-on-year growth in viewing figures is likely to be annulled by the fact that this year’s contest is subject to a media blackout in some of the countries engaged in a boycott over Israel’s inclusion.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_c8e8b47c364b",
+      "url": "https://www.washingtonpost.com/world/2026/05/16/eurovision-song-contest-grand-final/11736960-50dc-11f1-97e7-22c6c29ff0d8_story.html",
+      "publisher": {
+        "name": "Washingtonpost",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests - The Washington Post",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 04:02:34 GMT",
+      "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# The Eurovision Song Contest reaches its grand final in Vienna with pop and protests. The Eurovision Song Contest final arrives Saturday with tight security and rainy weather failing to dampen fans’ enthusiasm. Aliona Moon sings “Viva Moldova” during her featured performance with Satoshi from Moldova during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. CORRECTS PERFORMERS NAME TO ALIONA MOON FROM SATOSHI. VIENNA — The final of the Eurovision Song Contest arrives Saturday, with tight security and rainy weather failing to dent the enthusiasm of fans, or the opposition of critics who think Israel shouldn’t be invited to the party.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_37123326d2d8",
+      "url": "https://www.bozemandailychronicle.com/ap_news/entertainment/the-10-best-performances-at-the-2026-eurovision-song-contest/article_19712804-bdef-5df6-a97e-05effc5e3c86.html",
+      "publisher": {
+        "name": "Bozemandailychronicle",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "The 10 best performances at the 2026 Eurovision Song Contest - Bozeman Daily Chronicle",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 22:03:39 GMT",
+      "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Linda Lampenius and Pete Parkkonen from Finland perform the song \"Liekinheitin\" during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song \"Bangaranga\" during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Delta Goodrem from Australia performs the song \"Eclipse\" during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Satoshi from Moldova performs the song \"Viva, Moldova!\" during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Lavina from Serbia performs the song \"Kraj Mene\" during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. NEW YORK (AP) — The 2026 Eurovision Song Contest final brought acts from 25 countries to the Wiener Stadthalle arena in Vienna on Saturday night in a spirited battle for the continent’s pop crown.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_a8228ccc2dc7",
+      "url": "https://apnews.com/article/eurovision-song-contest-grand-final-9798646a3ba5d4b21321b19decaf607c",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests - AP News",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 04:01:40 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": "https://dims.apnews.com/dims4/default/ca81439/2147483647/strip/true/crop/3466x2309+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F15%2Ffc%2F4b07c4719b94af3f6202f555f417%2F7aff9094aafc41eeab65ce2823c1f344",
+      "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Aliona Moon sings “Viva Moldova” during her featured performance with Satoshi from Moldova during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Akylas from Greece performs the song “Ferto” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Satoshi from Moldova performs the song “Viva, Moldova!” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Delta Goodrem from Australia performs the song “Eclipse” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_522c4067a006",
+      "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz - AP News",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 17:28:54 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": "https://dims.apnews.com/dims4/default/2798f21/2147483647/strip/true/crop/3657x2437+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Faa%2F31%2F85d0921f47d1995c96ea209061d3%2Fap26136843175820.jpg",
+      "summary": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions.\" name=\"twitter:description\"> Live updates: Eurovision Grand Final 2026 results, songs, protests explained | AP News. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. The winner of the 70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Aidan from Malta performs the song “Bella” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_97b7cc74f47a",
+      "url": "https://www.sportingnews.com/uk/betting/news/when-eurovision-2026-key-dates-full-schedule-betting-favourites/ee83a49e1e9629eb05740955",
+      "publisher": {
+        "name": "Sportingnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "When is Eurovision 2026? Odds, Key Dates, Full Schedule and Early Betting Favourites - sportingnews.com",
+      "author": null,
+      "published_at": "Mon, 11 May 2026 08:26:01 GMT",
+      "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "venue_and_host_city"
+      ],
+      "thumbnail_url": null,
+      "summary": "Add The Sporting News on Google. We've nearly arrived at the 70th edition of the **Eurovision Song Contest**, whichtakes place in Vienna, Austria from 12-16 May with 30 countries aiming to win the Grand Final. ## Eurovision 2026 Dates: When is the Grand Final and Semi-Finals? Of the 30 semi-finalists, 20 progress to the Eurovision Grand Final on Saturday 16 May. They will be joined for the showpiece event by host nation Austria and the \"Big Four\" of France, Germany, Italy and the United Kingdom (Big Five minus Spain), who automatically qualify for the Grand Final. | First Semi-Final | 8 p.m., Tuesday, May 12, 2026 |. | Second Semi-Final | 8 p.m., Thursday, May 14, 2026 |. | Grand Final | 8 p.m., Saturday, May 16, 2026 |. There is so much more to Eurovision than simply the live Semi-Finals and Grand Final with a full week of activities and pageantry across the Austrian capital.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_1ce99bf93188",
+      "url": "https://apnews.com/article/eurovision-song-contest-2026-best-performances-d30fecb01ea8200f07f78d21a9d453b8",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "The 10 best performances at the 2026 Eurovision Song Contest - AP News",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 22:03:39 GMT",
+      "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "venue_and_host_city"
+      ],
+      "thumbnail_url": null,
+      "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Linda Lampenius and Pete Parkkonen from Finland perform the song “Liekinheitin” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Delta Goodrem from Australia performs the song “Eclipse” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Satoshi from Moldova performs the song “Viva, Moldova!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. NEW YORK (AP) — The 2026 Eurovision Song Contest final brought acts from 25 countries to the Wiener Stadthalle arena in Vienna on Saturday night in a spirited battle for the continent’s pop crown.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d170cb7cb2b2",
+      "url": "https://www.eurovision.com/stories/vienna-2026-all-you-need-to-know-about-the-grand-final/",
+      "publisher": {
+        "name": "Eurovision",
+        "tier": "T0",
+        "logo_url": null
+      },
+      "title": "Vienna 2026: All you need to know about the Grand Final - eurovision.com",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 13:32:00 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": "https://storage.googleapis.com/eurovision-com.appspot.com/renditions/public/cms/260514_alma-bengtsson_ebu_21910jpg/260514_Alma-Bengtsson_EBU_21910-focal_point%3D1331x586-focal_size%3D189x189-format%3Djpeg-width%3D1200.jpeg",
+      "summary": "Vienna 2026: All you need to know about the Grand Final. Eurodex Listen & Stream Watch on YouTube Official Podcast Junior Eurovision Song Contest Eurovision Song Contest Asia. Your guide to Saturday night's exciting conclusion of the 70th Eurovision Song Contest. On the night, you'll be able to watch our lineup of 25 songs competing in the Eurovision Song Contest 2026 Grand Final. Non-participating nations can watch the Live Show on the official Eurovision Song Contest YouTube channel. In the US, you can watch via our friends at Peacock, but you can also stream the show live on our YouTube channel for the first time in nearly a decade. 35 countries participated in the 70th Eurovision Song Contest, but after a First Semi-Final on Tuesday 12 May and a Second Semi-Final on Thursday 14 May, we now have a 25-song Grand Final, the Running Order for which was decided in the early hours following Thursday night's Second Semi-Final.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_017d669aa5a5",
+      "url": "https://apnews.com/article/eurovision-song-contest-semifinal-israel-4ddc9d6c352bb53b0b9dbab240de0a94",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Eurovision song competition starts with the first semifinal after boycott over Israel - AP News",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 04:13:10 GMT",
+      "fetched_at": "2026-05-18T17:45:49.146063+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "competing_countries"
+      ],
+      "thumbnail_url": null,
+      "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Artist Senhit from San Marino and British pop star Boy George react to fans on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Artist Noam Bettan from Israel walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Tamara Zivkovic, of Montenegro, walks on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Sarah Engels from Germany walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_b3bdb6f9dadf",
+      "url": "https://www.eurovision.com/stories/running-order-eurovision-2026-grand-final-vienna/",
+      "publisher": {
+        "name": "Eurovision",
+        "tier": "T0",
+        "logo_url": null
+      },
+      "title": "The Running Order of the Eurovision 2026 Grand Final - eurovision.com",
+      "author": null,
+      "published_at": "Fri, 15 May 2026 00:08:00 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": "https://storage.googleapis.com/eurovision-com.appspot.com/renditions/public/cms/260513_alma-bengtsson_ebu_20179jpg/260513_Alma-Bengtsson_EBU_20179-format%3Djpeg-width%3D1200.jpeg",
+      "summary": "The Running Order of the Eurovision 2026 Grand Final. Eurodex Listen & Stream Watch on YouTube Official Podcast Junior Eurovision Song Contest Eurovision Song Contest Asia. The stage is set for the Grand Final of Vienna 2026. We can now present the Running Order for the Grand Final of the 70th Eurovision Song Contest, taking place in the Austrian capital of Vienna on Saturday 16 May. Broadcaster ORF brought us two Semi-Finals earlier in the week, which gave us 20 qualifiers joining our Big 4 countries and reigning Contest champs Austria. Now, we're all set for the Vienna 2026 Grand Final, the Running Order for which was decided in the early hours following Thursday night's Second Semi-Final. ### **Eurovision Song Contest 2026 – Grand Final Running Order**. ## Eurovision 2026: The Second Semi-Final Qualifiers. ## Get to Know the Second Semi-Finalists of Vienna 2026. ## Eurovision 2026: The First Semi-Final Qualifiers. ## Get to Know the First Semi-Finalists of Vienna 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_478204474cab",
+      "url": "https://apnews.com/photo-gallery/eurovision-reaches-dazzling-grand-final-photos-d36494efe2124b07b700696d6bb356fb",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Eurovision reaches its dazzling grand final, in photos - AP News",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 22:06:09 GMT",
+      "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "venue_and_host_city"
+      ],
+      "thumbnail_url": null,
+      "summary": "Dara from Bulgaria arrives on stage for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” and celebrate onstage after winning the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Sunday, May 17, 2026. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Leleka from Ukraine performs the song “Ridnym” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_e3b37bb52ea5",
+      "url": "https://www.npr.org/2026/05/16/nx-s1-5824325/eurovision-final-vienna",
+      "publisher": {
+        "name": "Npr",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "The Eurovision Song Contest reaches its grand final with pop and protests - NPR",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "latest_news"
+      ],
+      "thumbnail_url": null,
+      "summary": "**The Eurovision Song Contest reaches its grand final** **The final of the Eurovision Contest arrives Saturday, with tight security and rainy weather failing to dent the enthusiasm of fans, or the opposition of critics who think Israel shouldn't be invited.**. # The Eurovision Song Contest reaches its grand final with pop and protests. Delta Goodrem from Australia performs the song \"Eclipse\" during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. VIENNA — The final of the Eurovision Song Contest arrives Saturday, with tight security and rainy weather failing to dent the enthusiasm of fans, or the opposition of critics who think Israel shouldn't be invited to the party. After a week's buildup, acts from 25 countries will take to the stage at the Wiener Stadthalle arena in Vienna to battle for the continent's pop crown.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_556ba87f9083",
+      "url": "https://www.timesofisrael.com/liveblog_entry/israels-noam-bettan-finishes-second-to-bulgaria-in-eurovision-song-contest/",
+      "publisher": {
+        "name": "Timesofisrael",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Israel’s Noam Bettan finishes second to Bulgaria in Eurovision Song Contest - The Times of Israel",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 23:05:36 GMT",
+      "fetched_at": "2026-05-18T17:45:46.781801+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "media_coverage"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Israel's Noam Bettan finishes second to Bulgaria in Eurovision Song Contest | The Times of Israel. *       *   About The Times of Israel. *   Advertise on The Times of Israel. Image 10: Noam Bettan from Israel performs the song \"Michelle\" during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Noam Bettan from Israel performs the song \"Michelle\" during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Israel’s Noam Bettan finishes in second place at the Eurovision Song Contest grand final in Vienna, Austria, as Bulgaria’s Dara takes the overall top prize. Israel’s and Bulgaria’s entrants await the final vote in the Eurovision Song Content, early on May 17, 2026. **As a member of the Times of Israel Community,****you'll also enjoy:**. That’s why we started the Times of Israel - to provide discerning readers like you with must-read coverage of Israel and the Jewish world. The Times of Israel Community.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_79710fb7c29e",
+      "url": "https://www.reuters.com/business/media-telecom/bulgaria-wins-eurovision-song-contest-ahead-israel-2026-05-16/",
+      "publisher": {
+        "name": "Reuters",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Bulgaria wins Eurovision Song Contest ahead of Israel - Reuters",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 23:08:34 GMT",
+      "fetched_at": "2026-05-18T17:45:46.781801+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "media_coverage"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Bulgaria wins Eurovision Song Contest ahead of Israel | Reuters. ## Browse World. *   Israel and Hamas at War. ## Browse Business. # Bulgaria wins Eurovision Song Contest ahead of Israel. Image 2: Grand Final of the 2026 Eurovision Song Contest, in Vienna. DARA, representing Bulgaria, performs \"Bangaranga\" during the Grand Final of the 2026 Eurovision Song Contest in Vienna, Austria, May 16, 2026. VIENNA, May 16 (Reuters) - Bulgaria won ​the Eurovision ‌Song Contest for ​the ​first time on Saturday ⁠at ​a final ​marked by five countries' boycott ​over ​Gaza. The Reuters Iran Briefing newsletter keeps you informed with the latest developments and analysis of the Iran war. *   2 hours agoWorld categoryEurovision Song Contest final gets under way in Gaza's shadow Image 3: Grand Final of the 2026 Eurovision Song Contest, in Vienna. *   About Reuters, opens new tab. *   Media Center, opens new tab. *   Reuters News Agency, opens new tab. *   #### World-Check, opens new tab.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_2de86b115283",
+      "url": "https://apnews.com/photo-gallery/eurovision-spectacle-celebration-photos-34d196b2aa754dd1bccf5cefdfd79637",
+      "publisher": {
+        "name": "Apnews",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Eurovision spectacle and celebration in photos - AP News",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 23:41:46 GMT",
+      "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "venue_and_host_city"
+      ],
+      "thumbnail_url": null,
+      "summary": "Leleka from Ukraine performs the song “Ridnym” during the second semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Thursday, May 14, 2026. Felicia from Sweden performs the song “My System” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Essyla from Belgium performs the song “Dancing on the Ice” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Lelek from Croatia performs the song “Andromeda” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Aliona Moon performs the song “Viva, Moldova!” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Alicja from Poland performs the song “Pray” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Bzikebi from Georgia performs during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_fc55e33ad263",
+      "url": "https://www.greenwichtime.com/entertainment/article/the-10-best-performances-at-the-2026-eurovision-22262614.php",
+      "publisher": {
+        "name": "Greenwichtime",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "The 10 best performances at the 2026 Eurovision Song Contest - Greenwich Time",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 22:03:39 GMT",
+      "fetched_at": "2026-05-18T17:45:30.332991+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "competing_countries"
+      ],
+      "thumbnail_url": null,
+      "summary": "# The 10 best performances at the 2026 Eurovision Song Contest. NEW YORK (AP) — The 2026 Eurovision Song Contest final brought acts from 25 countries to the Wiener Stadthalle arena in Vienna on Saturday night in a spirited battle for the continent’s pop crown. If you're a dedicated follower of Eurovision or simply curious to learn more about the contest's best bangers, we've got you covered. Here's a list of the 10 best songs from the final, presented in no particular order. And it’s not just in her spoken-word interludes or that her delivery of “All I need is your love” is eerily reminiscent of Gaga’s “I Want Your Love.” But the track’s heaviness transforms it — and its performance is undeniable. If Cyprus’ Antigoni looks familiar to you, it’s likely because she was previously a bombshell on “Love Island UK.” She might’ve come and went on the super popular dating show, but her joyous “Jalla” is here to stay in 2026.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_de840e68aa5c",
+      "url": "https://www.chicagotribune.com/2026/05/16/eurovision-2026/",
+      "publisher": {
+        "name": "Chicagotribune",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests - Chicago Tribune",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 20:37:49 GMT",
+      "fetched_at": "2026-05-18T17:45:30.332991+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "competing_countries"
+      ],
+      "thumbnail_url": null,
+      "summary": "World News |   The Eurovision Song Contest reaches its grand…. # The Eurovision Song Contest reaches its grand final in Vienna with pop and protests. VIENNA — The Eurovision Song Contest reached its sequin-drenched final on Saturday, with tight security and rainy weather failing to dent the enthusiasm of fans, or the opposition of critics who think Israel shouldn’t be invited to the party. After a week’s buildup, acts from 25 countries are taking to the stage at the Wiener Stadthalle arena in Vienna to battle for the continent’s pop crown. Millions of viewers around the world will cast judgment on a fiery Finnish violinist, a Moldovan folk rapper, a Serbian metal band and many more at Eurovision’s 70th anniversary event. The contest has been clouded for a third year by calls for Israel to be excluded over its conflicts in Gaza and elsewhere, with five longtime participants — Spain, the Netherlands, Ireland, Iceland and Slovenia — boycotting in protest.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_509f408e4b7c",
+      "url": "https://www.washingtonpost.com/world/2026/05/14/eurovision-song-contest-second-semifinal-results/598af200-4fe1-11f1-97e7-22c6c29ff0d8_story.html",
+      "publisher": {
+        "name": "Washingtonpost",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "The Eurovision final lineup is confirmed after 5 more countries are sent packing - The Washington Post",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 22:07:51 GMT",
+      "fetched_at": "2026-05-18T17:45:49.146063+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "competing_countries"
+      ],
+      "thumbnail_url": null,
+      "summary": "# The Eurovision final lineup is confirmed after 5 more countries are sent packing. The Eurovision Song Contest final lineup is set after Thursday’s second semifinal. Soren Torpegaard Lund from Denmark who performed the song “For Vi Gar Hjem” reacts as votes are announced during the second semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Thursday, May 14, 2026. VIENNA — The lineup for the final of the Eurovision Song Contest has been decided, with five more countries sent home after the second semifinal on Thursday. Fifteen countries battled for 10 of the 25 spots in Saturday’s finale of the pan-continental pop competition , with the results decided by votes from national juries and viewers around the world.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_0a6dbd03ef84",
+      "url": "https://www.washingtonpost.com/world/2026/05/12/eurovision-song-contest-semifinal-israel/6dd2bed4-4db9-11f1-97e7-22c6c29ff0d8_story.html",
+      "publisher": {
+        "name": "Washingtonpost",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Eurovision song competition starts with the first semifinal after boycott over Israel - The Washington Post",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 04:17:03 GMT",
+      "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "venue_and_host_city"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Eurovision song competition starts with the first semifinal after boycott over Israel. The Eurovision Song Contest is starting in Vienna with tensions simmering over Israel’s participation. VIENNA — Competition starts Tuesday at the Eurovision Song Contest , with divisions over Israel’s participation hanging over the 70th birthday of the over-the-top pop music extravaganza . Host city Vienna has been bedecked in hearts and the contest’s “United by Music” motto for a week in which singers and bands from 35 countries will compete onstage for the continent’s musical crown. But five countries — Spain, Ireland, the Netherlands, Slovenia and Iceland — are boycotting to protest Israel's inclusion .",
+      "enriched_at": null
+    },
+    {
+      "id": "src_375191e7a0ef",
+      "url": "https://www.bbc.com/news/articles/cqxp4959nwro",
+      "publisher": {
+        "name": "Bbc",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "Eurovision 2026 is here - but will the Israel boycott spoil the show? - BBC",
+      "author": null,
+      "published_at": "Sat, 09 May 2026 23:03:37 GMT",
+      "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "venue_and_host_city"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Another year, another controversy for Eurovision - but fans are sticking by it. **The 2026 Eurovision Song Contest officially lands in Vienna on Sunday, with a \"turquoise carpet\" parade featuring competitors from all 35 nations.**. It's the show's 70th anniversary, but the celebrations have been overshadowed by a ferocious row over Israel's participation. Israel's presence has sparked controversy since its government began a massive military offensive in Gaza in October 2023. At a meeting last November, several countries tried to force a vote on Israel's presence at the contest. \"For some people, the Eurovision Song Contest is far more than just a bunch of songs,\" he noted. \"To see every single show sell out so quickly is a powerful reminder of what the Eurovision Song Contest represents - joy, togetherness and shared experience at a time when that feels more important than ever,\" said Eurovision's director, Martin Green.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_4217723cc6f9",
+      "url": "https://www.aljazeera.com/news/2026/5/12/why-is-israel-allowed-to-take-part-in-the-eurovision-song-contest",
+      "publisher": {
+        "name": "Aljazeera",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Why is Israel allowed to take part in the Eurovision song contest? - Al Jazeera",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 07:05:29 GMT",
+      "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "venue_and_host_city"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Why is Israel allowed to take part in the Eurovision song contest? *Five countries are boycotting the 70th edition of Eurovision on May 16 in protest over Israel’s genocidal war on Gaza.*. The televised final round of the music contest is scheduled to take place on May 16 in Austria’s capital, Vienna, this year and will mark Eurovision’s 70th anniversary. But five countries – the Republic of Ireland, the Netherlands, Slovenia, Spain and Iceland – are boycotting this year’s contest due to Israel’s participation. The Eurovision Song Contest, which began in 1956, is an annual event organised by the European Broadcasting Union (EBU). Ahead of the 2026 Eurovision Song Contest semifinals, in which Israel will participate, Amnesty International’s Secretary-General Agnes Callamard said: “The failure of the European Broadcasting Union (EBU) to suspend Israel from Eurovision, as it did with Russia, is an act of cowardice and an illustration of blatant double standards when it comes to Israel.”.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_93e67046fabd",
+      "url": "https://www.rte.ie/entertainment/2026/0516/1573720-vienna-abuzz-for-eurovision-final/",
+      "publisher": {
+        "name": "Rte",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Australia, Finland among Eurovision highlights - RTE.ie",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 18:18:30 GMT",
+      "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "The 2026 Eurovision Song Contest Grand Final is continuing in Vienna, where a fiery Finnish duo and an acclaimed Australian star are among the favourites to win the glittering crown. The show opened with reigning Eurovision winner JJ returning to the stage for an opening act titled *The Queen of the Night*, before this year's finalists were introduced to the crowd. Germany, Israel, Belgium, Albania, Greece and Ukraine were next in the running order, before one of the night's main contenders, Australia's Delta Goodrem, took to the stage in eighth place with *Eclipse* . \"It's going to come down to Finland and Australia,\" Fabien Randanne, a journalist at French news outlet *20 Minutes* and a specialist on the contest, told AFP. Israel's Noam Bettan is also an outside bet with *Michelle*, while 22-year-old Romanian singer Alexandra Căpitănescu’s heavy metal song *Choke Me* caused a minor furore in the Eurovision build-up over the oft-repeated lines \"I want you to choke me.\".",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d9e1e0d8f061",
+      "url": "https://www.hollywoodreporter.com/music/music-features/inside-eurovision-song-contest-israel-finland-advance-boycotts-1236594237/",
+      "publisher": {
+        "name": "Hollywoodreporter",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Welcome to Eurovision. The World’s Silliest Song Contest Has Never Been So Serious - The Hollywood Reporter",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 23:37:02 GMT",
+      "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "Subscribe for full access to The Hollywood Reporter. Eurovision‘s theme, “United by Music,” has rarely sounded more ironic as Vienna gears up to host the kitschy song contest. It’s in a neighborhood with paltry access to parks, and now the green space around the Stadthalle is being sequestered as well, depriving residents of 30,000 square meters of parkland in the name of European unity. As a new resident of Vienna, I was curious about how the city would balance silly bonhomie and serious security concerns at this year’s Eurovision, especially as Israel advances to the finals. Instead of Eurovision, Slovenia is set to air a documentary titled “Voices of Palestine.” It’s an act of protest that recalls the time Israel was on its way to winning with the song “A-Ba-Ni-Bi” in 1978 and Jordanian television cut the broadcast and replaced it with pictures of flowers.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_60e3b3456e2d",
+      "url": "https://www.ynetnews.com/culture/article/b11ohndcbe",
+      "publisher": {
+        "name": "Ynetnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Israel’s Eurovision director ahead of semifinal: 'We focus on the support, not the noise' - ynetnews",
+      "author": null,
+      "published_at": "Tue, 05 May 2026 09:57:09 GMT",
+      "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "reactions"
+      ],
+      "thumbnail_url": null,
+      "summary": "# Israel’s Eurovision director ahead of semifinal: 'We focus on the support, not the noise'. ## A week before Noam Bettan takes the Eurovision stage in Vienna with 'Michelle,' Israel’s delegation director said after the first rehearsal that criticism is 'background noise we don’t want to address'. A week before the first semifinal of the Eurovision Song Contest 2026, in which Noam Bettan will take the stage in Vienna to represent Israel with the song “Michelle,” Israeli delegation director Yoav Tzafir spoke with ynet’s studio about Bettan’s first rehearsal, the reactions the delegation received and preparations for the performance. “The first rehearsal on stage is exciting every year, because you work on a number and you don’t know how it will turn out,” Tzafir said. “Especially Noam, who may not be new to the music and stage business but is new to Eurovision — you never know how it will come out, but he handled it like a king.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_d14e693bd12d",
+      "url": "https://www.sportingnews.com/us/tsn/news/watch-eurovision-2026-us-time-channel-stream-song-contest/6cba99fb02b98663ee0b68f9",
+      "publisher": {
+        "name": "Sportingnews",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Where to watch Eurovision 2026 in the U.S.: Time, channel, live stream for annual song contest semifinals and final - sportingnews.com",
+      "author": null,
+      "published_at": "Tue, 12 May 2026 04:30:01 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": "https://library.sportingnews.com/styles/crop_style_16_9_desktop_webp/s3/2026-05/Eurovision%20FTR%20051126.jpg.webp?itok=cJ8COzYN",
+      "summary": "If you purchase a product or register for an account through one of the links on our site, we may receive compensation. # Where to watch Eurovision 2026 in the U.S.: Time, channel, live stream for annual song contest semifinals and final. Europe's most iconic song competition is back for its landmark 70th edition — that's right, Eurovision comes to Vienna this week. Thirty-five countries will be represented in this year's competition, taking place in Vienna for the third time. Here's everything you need to know about Eurovision 2026, including TV channel and streaming options for the global song contest. ## Where to watch Eurovision 2026 in the U.S. Eurovision 2026 will not be broadcast on national television in the States. Instead, fans can tune in on Peacock or YouTube, which will be live streaming both the semifinal and final rounds. ## What time is Eurovision 2026? Semifinal #1 hits screens on Tuesday, May 12, while semifinal #2 will come on Thursday, May 14.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_6f8ecfee4890",
+      "url": "https://www.businessinsider.com/guides/streaming/where-to-watch-eurovision-song-contest-grand-final-2026",
+      "publisher": {
+        "name": "Businessinsider",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Looking to stream the Eurovision Grand Final for free? Here's where to watch the 70th Song Contest - Business Insider",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 16:00:01 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": "https://i.insider.com/6a078b0cecd7cc1332bb0549?width=1200&format=jpeg",
+      "summary": "# Where to watch Eurovision Grand Final: Free live streams, order, venue. The 70th Eurovision Song Contest wraps up today, and it all comes down to the Grand Final. We've gathered all the details on where to watch Eurovision below, including free and global streaming options. This includes the five automatically-advancing regions: the United Kingdom, France, Germany, Italy, and the host, Austria. Keep reading to learn how to tune into the Eurovision Grand Final from anywhere. ## Where to watch Eurovision for free. The competition is available to live stream for free in most regions. The United States will continue with its usual paid Peacock option, but this year, Eurovision will also be available for free on YouTube in the US. There's a good chance you'll be able to access Eurovision no matter what, but if you find yourself traveling through a region where you can't access any watch options, it might be time to try out a VPN.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_4bc4a248b04b",
+      "url": "https://www.forbes.com/sites/katharinakotrba/2026/05/14/best-schnitzel-live-music-and--nightlife-in-vienna-according-to-eurovision-star-cosm/",
+      "publisher": {
+        "name": "Forbes",
+        "tier": "T3",
+        "logo_url": null
+      },
+      "title": "Best Schnitzel, Live Music And Nightlife In Vienna By Eurovision Star Cosmó - Forbes",
+      "author": null,
+      "published_at": "Thu, 14 May 2026 00:00:00 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": "https://imageio.forbes.com/specials-images/imageserve/6a059b14ee41d0c47996b6e2/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds",
+      "summary": "# Best Schnitzel, Live Music And Nightlife In Vienna According To Eurovision Star Cosmó. Austria’s Eurovision 2026 contestant Cosmó on where to go in Vienna: the best schnitzel at Figlmüller, afternoons in the Burggarten and a live music bar in Döbling. Local knowledge on where to go in Vienna, from parks to the best schnitzel restaurants and fun nightlife spots can make all the difference. To get a true insider's perspective, I asked Austria's Eurovision Song Contest contestant Cosmó about his favorite things and places across the city. Here’s Cosmó’s guide on where to go, what to eat and what to do in Vienna. * **Food**: Try schnitzel at Figlmüller, one of Vienna's most famous restaurants. * **Nightlife**: Find the best of Vienna nightlife at U4, The LOFT, or Charlie P's. One of the most authentic things to do in Vienna is to eat and drink at a traditional Austrian tavern.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_3a71e0d4542b",
+      "url": "https://www.reuters.com/lifestyle/all-you-need-know-about-eurovision-song-contest-final-2026-05-16/",
+      "publisher": {
+        "name": "Reuters",
+        "tier": "T1",
+        "logo_url": null
+      },
+      "title": "All you need to know about the Eurovision Song Contest final - Reuters",
+      "author": null,
+      "published_at": "Sat, 16 May 2026 06:06:51 GMT",
+      "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 30,
+        "can_paraphrase": false
+      },
+      "archive_url": null,
+      "serves_sections": [
+        "where_to_watch"
+      ],
+      "thumbnail_url": null,
+      "summary": "# All you need to know about the Eurovision Song Contest final | Reuters. ## Browse World. # All you need to know about the Eurovision Song Contest final. Image 2: The dress rehearsal 2 of the Grand Final of the 2026 Eurovision Song Contest, in Vienna. Item 1 of 5 Linda Lampenius x Pete Parkkonen, representing Finland, perform \"Liekinheitin\" during the dress rehearsal 2 of the Grand Final of the 2026 Eurovision Song Contest, in Vienna, Austria, May 15, 2026. **[1/5]**Linda Lampenius x Pete Parkkonen, representing Finland, perform \"Liekinheitin\" during the dress rehearsal 2 of the Grand Final of the 2026 Eurovision Song Contest, in Vienna, Austria, May 15, 2026. VIENNA, May 16 (Reuters) - Austria hosts the final of the Eurovision Song Contest in Vienna on Saturday, which this year has been marked by the boycott of five countries protesting the participation of Israel. *   About Reuters, opens new tab.",
+      "enriched_at": null
+    },
+    {
+      "id": "src_cee761ef288f",
+      "url": "https://www.wikidata.org/wiki/Q125933843",
+      "publisher": {
+        "name": "Wikidata",
+        "tier": "T2",
+        "logo_url": null
+      },
+      "title": "Eurovision Song Contest 2026",
+      "author": null,
+      "published_at": "2026-05-18T17:45:28.681356+00:00",
+      "fetched_at": "2026-05-18T17:45:28.681383+00:00",
+      "language": "en",
+      "rights": {
+        "max_excerpt_words": 10000,
+        "can_paraphrase": true
+      },
+      "archive_url": null,
+      "serves_sections": [],
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Eurovision_2026_heart_-_Austria.svg/1280px-Eurovision_2026_heart_-_Austria.svg.png?utm_source=www.wikidata.org&utm_campaign=index&utm_content=thumbnail",
+      "summary": null,
+      "enriched_at": null
+    }
+  ],
+  "editorial_sections": [
+    {
+      "section_id": "overview",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "Vienna is hosting the 70th Eurovision Song Contest, with the grand final taking place on Saturday, May 16, 2026. The competition features 30 countries competing across semi-finals and the main event, with 25 songs performing in the grand final. This year's contest arrives amid unprecedented challenges, including boycotts and geopolitical tensions that have cast a shadow over what is typically a joyful celebration of music and spectacle.",
+          "The 2026 Eurovision Song Contest showcases the contest's enduring appeal despite contemporary pressures. Tight security and rainy weather have not dampened fans' enthusiasm as performers from across Europe and beyond deliver the hallmark blend of serious artistry, extravagant production, and cultural exchange that defines the event. The Vienna edition represents a critical moment for the contest as it navigates evolving global sensitivities while maintaining its seven-decade tradition."
+        ],
+        "paragraph_sources": [
+          [
+            "src_3635615573bf",
+            "src_97b7cc74f47a",
+            "src_d170cb7cb2b2"
+          ],
+          [
+            "src_c8e8b47c364b",
+            "src_522c4067a006",
+            "src_3635615573bf"
+          ]
+        ],
+        "pull_quotes": [],
+        "citations": [
+          {
+            "source_id": "src_97b7cc74f47a",
+            "excerpt": null,
+            "claim_text": "70th Eurovision Song Contest takes place in Vienna, Austria from 12-16 May with 30 countries competing"
+          },
+          {
+            "source_id": "src_d170cb7cb2b2",
+            "excerpt": null,
+            "claim_text": "25 songs competing in the Eurovision Song Contest 2026 Grand Final"
+          },
+          {
+            "source_id": "src_3635615573bf",
+            "excerpt": null,
+            "claim_text": "Unprecedented moment in the contest's seven-decade history with rows over Israel and costs"
+          },
+          {
+            "source_id": "src_c8e8b47c364b",
+            "excerpt": null,
+            "claim_text": "Eurovision Song Contest final arrives Saturday with tight security and rainy weather"
+          },
+          {
+            "source_id": "src_522c4067a006",
+            "excerpt": null,
+            "claim_text": "70th Eurovision Song Contest surrounded by protests and glitz"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_3635615573bf",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Theguardian."
+        },
+        {
+          "source_id": "src_522c4067a006",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_97b7cc74f47a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Sportingnews."
+        },
+        {
+          "source_id": "src_c8e8b47c364b",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Washingtonpost."
+        },
+        {
+          "source_id": "src_d170cb7cb2b2",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Eurovision."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_3635615573bf",
+          "url": "https://www.theguardian.com/tv-and-radio/2026/may/12/vienna-boycotts-blackouts-buildup-eurovision-song-contest-2026-israel",
+          "publisher": {
+            "name": "Theguardian",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Woe Vienna? Boycotts and blackouts mar buildup as Eurovision 2026 begins - The Guardian",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:00:13 GMT",
+          "fetched_at": "2026-05-18T17:45:30.344714+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "Usually joyous song contest ‘a little bit sad’ this year, says one expert, with rows over Israel and costs to the fore. But as Vienna gears up to host this year’s Eurovision song contest, which starts on Tuesday and culminates in Saturday’s grand final, euphoria will be hard to come by outside the power ballads performed onstage. It is an unprecedented moment in the contest’s seven-decade history and could have long-term consequences for a spectacle under pressure to justify its costs in a time of cuts to public broadcasters. The 2025 grand final in the Swiss city of Basel was watched by a record 166 million people across the globe, but last year’s 3 million year-on-year growth in viewing figures is likely to be annulled by the fact that this year’s contest is subject to a media blackout in some of the countries engaged in a boycott over Israel’s inclusion.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_c8e8b47c364b",
+          "url": "https://www.washingtonpost.com/world/2026/05/16/eurovision-song-contest-grand-final/11736960-50dc-11f1-97e7-22c6c29ff0d8_story.html",
+          "publisher": {
+            "name": "Washingtonpost",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests - The Washington Post",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 04:02:34 GMT",
+          "fetched_at": "2026-05-18T17:45:30.344714+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "# The Eurovision Song Contest reaches its grand final in Vienna with pop and protests. The Eurovision Song Contest final arrives Saturday with tight security and rainy weather failing to dampen fans’ enthusiasm. Aliona Moon sings “Viva Moldova” during her featured performance with Satoshi from Moldova during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. CORRECTS PERFORMERS NAME TO ALIONA MOON FROM SATOSHI. VIENNA — The final of the Eurovision Song Contest arrives Saturday, with tight security and rainy weather failing to dent the enthusiasm of fans, or the opposition of critics who think Israel shouldn’t be invited to the party.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_522c4067a006",
+          "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 17:28:54 GMT",
+          "fetched_at": "2026-05-18T17:45:30.344714+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions.\" name=\"twitter:description\"> Live updates: Eurovision Grand Final 2026 results, songs, protests explained | AP News. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. The winner of the 70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Aidan from Malta performs the song “Bella” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_97b7cc74f47a",
+          "url": "https://www.sportingnews.com/uk/betting/news/when-eurovision-2026-key-dates-full-schedule-betting-favourites/ee83a49e1e9629eb05740955",
+          "publisher": {
+            "name": "Sportingnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "When is Eurovision 2026? Odds, Key Dates, Full Schedule and Early Betting Favourites - sportingnews.com",
+          "author": null,
+          "published_at": "Mon, 11 May 2026 08:26:01 GMT",
+          "fetched_at": "2026-05-18T17:45:30.344714+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "Add The Sporting News on Google. We've nearly arrived at the 70th edition of the **Eurovision Song Contest**, whichtakes place in Vienna, Austria from 12-16 May with 30 countries aiming to win the Grand Final. ## Eurovision 2026 Dates: When is the Grand Final and Semi-Finals? Of the 30 semi-finalists, 20 progress to the Eurovision Grand Final on Saturday 16 May. They will be joined for the showpiece event by host nation Austria and the \"Big Four\" of France, Germany, Italy and the United Kingdom (Big Five minus Spain), who automatically qualify for the Grand Final. | First Semi-Final | 8 p.m., Tuesday, May 12, 2026 |. | Second Semi-Final | 8 p.m., Thursday, May 14, 2026 |. | Grand Final | 8 p.m., Saturday, May 16, 2026 |. There is so much more to Eurovision than simply the live Semi-Finals and Grand Final with a full week of activities and pageantry across the Austrian capital.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_d170cb7cb2b2",
+          "url": "https://www.eurovision.com/stories/vienna-2026-all-you-need-to-know-about-the-grand-final/",
+          "publisher": {
+            "name": "Eurovision",
+            "tier": "T0",
+            "logo_url": null
+          },
+          "title": "Vienna 2026: All you need to know about the Grand Final - eurovision.com",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 13:32:00 GMT",
+          "fetched_at": "2026-05-18T17:45:30.344714+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 10000,
+            "can_paraphrase": true
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "overview"
+          ],
+          "thumbnail_url": null,
+          "summary": "Vienna 2026: All you need to know about the Grand Final. Eurodex Listen & Stream Watch on YouTube Official Podcast Junior Eurovision Song Contest Eurovision Song Contest Asia. Your guide to Saturday night's exciting conclusion of the 70th Eurovision Song Contest. On the night, you'll be able to watch our lineup of 25 songs competing in the Eurovision Song Contest 2026 Grand Final. Non-participating nations can watch the Live Show on the official Eurovision Song Contest YouTube channel. In the US, you can watch via our friends at Peacock, but you can also stream the show live on our YouTube channel for the first time in nearly a decade. 35 countries participated in the 70th Eurovision Song Contest, but after a First Semi-Final on Tuesday 12 May and a Second Semi-Final on Thursday 14 May, we now have a 25-song Grand Final, the Running Order for which was decided in the early hours following Thursday night's Second Semi-Final.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "timeline",
+      "block_kind": "timeline",
+      "block_data": {
+        "kind": "timeline",
+        "entries": [
+          {
+            "title": "Eurovision Song Contest 2026 announced for Vienna",
+            "time": null,
+            "location": "Vienna, Austria",
+            "description": "The 70th Eurovision Song Contest is set to take place in Vienna, Austria, hosting 30 participating countries.",
+            "importance": "feature",
+            "temporal_phase": "past",
+            "source_id": "src_97b7cc74f47a"
+          },
+          {
+            "title": "Official Eurovision week begins with turquoise carpet ceremony",
+            "time": "2026-05-10",
+            "location": "Vienna, Austria",
+            "description": "Artists including representatives from Israel and San Marino walk the signature turquoise carpet at Vienna town hall, marking the official start of Eurovision week.",
+            "importance": "normal",
+            "temporal_phase": "past",
+            "source_id": "src_017d669aa5a5"
+          },
+          {
+            "title": "First Semi-Final takes place amid boycott controversy",
+            "time": "2026-05-12",
+            "location": "Vienna, Austria",
+            "description": "The first semi-final begins the competition after boycott tensions over Israel's participation. 20 countries advance to the Grand Final.",
+            "importance": "feature",
+            "temporal_phase": "past",
+            "source_id": "src_017d669aa5a5"
+          },
+          {
+            "title": "Grand Final of Eurovision 2026 held in Vienna",
+            "time": "2026-05-16",
+            "location": "Vienna, Austria",
+            "description": "The 70th Eurovision Song Contest Grand Final takes place with 25 songs competing. Bulgaria's Dara wins with 'Bangaranga'.",
+            "importance": "breaking",
+            "temporal_phase": "present",
+            "source_id": "src_1ce99bf93188"
+          },
+          {
+            "title": "Bulgaria wins Eurovision 2026",
+            "time": "2026-05-17",
+            "location": "Vienna, Austria",
+            "description": "Dara from Bulgaria is crowned winner of the 70th Eurovision Song Contest, celebrating on stage after the Grand Final.",
+            "importance": "breaking",
+            "temporal_phase": "present",
+            "source_id": "src_478204474cab"
+          }
+        ],
+        "timezone": "Europe/Vienna"
+      },
+      "citations": [
+        {
+          "source_id": "src_017d669aa5a5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_1ce99bf93188",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_478204474cab",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_97b7cc74f47a",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Sportingnews."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_97b7cc74f47a",
+          "url": "https://www.sportingnews.com/uk/betting/news/when-eurovision-2026-key-dates-full-schedule-betting-favourites/ee83a49e1e9629eb05740955",
+          "publisher": {
+            "name": "Sportingnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "When is Eurovision 2026? Odds, Key Dates, Full Schedule and Early Betting Favourites - sportingnews.com",
+          "author": null,
+          "published_at": "Mon, 11 May 2026 08:26:01 GMT",
+          "fetched_at": "2026-05-18T17:45:30.296400+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "Add The Sporting News on Google. We've nearly arrived at the 70th edition of the **Eurovision Song Contest**, whichtakes place in Vienna, Austria from 12-16 May with 30 countries aiming to win the Grand Final. ## Eurovision 2026 Dates: When is the Grand Final and Semi-Finals? Of the 30 semi-finalists, 20 progress to the Eurovision Grand Final on Saturday 16 May. They will be joined for the showpiece event by host nation Austria and the \"Big Four\" of France, Germany, Italy and the United Kingdom (Big Five minus Spain), who automatically qualify for the Grand Final. | First Semi-Final | 8 p.m., Tuesday, May 12, 2026 |. | Second Semi-Final | 8 p.m., Thursday, May 14, 2026 |. | Grand Final | 8 p.m., Saturday, May 16, 2026 |. There is so much more to Eurovision than simply the live Semi-Finals and Grand Final with a full week of activities and pageantry across the Austrian capital.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_1ce99bf93188",
+          "url": "https://apnews.com/article/eurovision-song-contest-2026-best-performances-d30fecb01ea8200f07f78d21a9d453b8",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "The 10 best performances at the 2026 Eurovision Song Contest - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 22:03:39 GMT",
+          "fetched_at": "2026-05-18T17:45:30.296400+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Linda Lampenius and Pete Parkkonen from Finland perform the song “Liekinheitin” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Delta Goodrem from Australia performs the song “Eclipse” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Satoshi from Moldova performs the song “Viva, Moldova!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. NEW YORK (AP) — The 2026 Eurovision Song Contest final brought acts from 25 countries to the Wiener Stadthalle arena in Vienna on Saturday night in a spirited battle for the continent’s pop crown.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_017d669aa5a5",
+          "url": "https://apnews.com/article/eurovision-song-contest-semifinal-israel-4ddc9d6c352bb53b0b9dbab240de0a94",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision song competition starts with the first semifinal after boycott over Israel - AP News",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:13:10 GMT",
+          "fetched_at": "2026-05-18T17:45:30.296400+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Artist Senhit from San Marino and British pop star Boy George react to fans on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Artist Noam Bettan from Israel walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Tamara Zivkovic, of Montenegro, walks on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Sarah Engels from Germany walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_478204474cab",
+          "url": "https://apnews.com/photo-gallery/eurovision-reaches-dazzling-grand-final-photos-d36494efe2124b07b700696d6bb356fb",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision reaches its dazzling grand final, in photos - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 22:06:09 GMT",
+          "fetched_at": "2026-05-18T17:45:30.296400+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "timeline"
+          ],
+          "thumbnail_url": null,
+          "summary": "Dara from Bulgaria arrives on stage for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” and celebrate onstage after winning the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Sunday, May 17, 2026. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Leleka from Ukraine performs the song “Ridnym” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "sidebar"
+    },
+    {
+      "section_id": "media_coverage",
+      "block_kind": "newsfeed",
+      "block_data": {
+        "kind": "newsfeed",
+        "cards": [
+          {
+            "url": "https://www.reuters.com/business/media-telecom/bulgaria-wins-eurovision-song-contest-ahead-israel-2026-05-16/published",
+            "title": "Bulgaria wins Eurovision Song Contest ahead of Israel",
+            "publisher": "Reuters",
+            "tier": "T1",
+            "published_at": "2026-05-16T23:08:34Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/2798f21/2147483647/strip/true/crop/3657x2437+0+1/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2Faa%2F31%2F85d0921f47d1995c96ea209061d3%2Fap26136843175820.jpg",
+            "summary": "Bulgaria won the Eurovision Song Contest ahead of Israel in the Grand Final held in Vienna, Austria on May 16, 2026.",
+            "source_id": "src_79710fb7c29e"
+          },
+          {
+            "url": "https://apnews.com/article/eurovision-song-contest-2026-best-performances-d30fecb01ea8200f07f78d21a9d453b8",
+            "title": "The 10 best performances at the 2026 Eurovision Song Contest",
+            "publisher": "Apnews",
+            "tier": "T1",
+            "published_at": "2026-05-16T22:03:39Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/8538adf/2147483647/strip/true/crop/2915x1942+0+1/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2F73%2Fdb%2F4a2c333c160af4ffa9f8c432d9f6%2Fac999823e6ed4bada25f727d9fbb5e28",
+            "summary": "A curated selection of the 10 best performances from the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria on Saturday, May 16, 2026.",
+            "source_id": "src_1ce99bf93188"
+          },
+          {
+            "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+            "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz",
+            "publisher": "Apnews",
+            "tier": "T1",
+            "published_at": "2026-05-16T17:28:54Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/2798f21/2147483647/strip/true/crop/3657x2437+0+1/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2Faa%2F31%2F85d0921f47d1995c96ea209061d3%2Fap26136843175820.jpg",
+            "summary": "Live coverage of the 70th Eurovision Song Contest Grand Final in Vienna, featuring performances, results, and coverage of surrounding protests and geopolitical tensions.",
+            "source_id": "src_522c4067a006"
+          },
+          {
+            "url": "https://apnews.com/article/eurovision-song-contest-grand-final-9798646a3ba5d4b21321b19decaf607c",
+            "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests",
+            "publisher": "Apnews",
+            "tier": "T1",
+            "published_at": "2026-05-16T04:01:40Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/ca81439/2147483647/strip/true/crop/3466x2309+0+1/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2F15%2Ffc%2F4b07c4719b94af3f6202f555f417%2F7aff9094aafc41eeab65ce2823c1f344",
+            "summary": "The Eurovision Song Contest reaches its grand final in Vienna with tight security and rainy weather, featuring pop performances and ongoing protests regarding Israel's participation.",
+            "source_id": "src_a8228ccc2dc7"
+          },
+          {
+            "url": "https://apnews.com/article/eurovision-song-contest-semifinal-israel-4ddc9d6c352bb53b0b9dbab240de0a94",
+            "title": "Eurovision song competition starts with the first semifinal after boycott over Israel",
+            "publisher": "Apnews",
+            "tier": "T1",
+            "published_at": "2026-05-12T04:13:10Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/1570e84/2147483647/strip/true/crop/6228x4150+0+1/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2F75%2Fea%2Fa4f1e82961e78a4fe3b139a9ee86%2Ff68ace477362431e8e1dc74e6752d61e",
+            "summary": "The Eurovision Song Contest begins with the first semifinal in Vienna following boycott discussions related to Israel's participation in the competition.",
+            "source_id": "src_017d669aa5a5"
+          }
+        ],
+        "variant": "news",
+        "grouping": "by_time"
+      },
+      "citations": [
+        {
+          "source_id": "src_017d669aa5a5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_1ce99bf93188",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_522c4067a006",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_79710fb7c29e",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Reuters."
+        },
+        {
+          "source_id": "src_a8228ccc2dc7",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_a8228ccc2dc7",
+          "url": "https://apnews.com/article/eurovision-song-contest-grand-final-9798646a3ba5d4b21321b19decaf607c",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 04:01:40 GMT",
+          "fetched_at": "2026-05-18T17:45:46.781801+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://dims.apnews.com/dims4/default/ca81439/2147483647/strip/true/crop/3466x2309+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F15%2Ffc%2F4b07c4719b94af3f6202f555f417%2F7aff9094aafc41eeab65ce2823c1f344",
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Aliona Moon sings “Viva Moldova” during her featured performance with Satoshi from Moldova during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Akylas from Greece performs the song “Ferto” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Satoshi from Moldova performs the song “Viva, Moldova!” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Delta Goodrem from Australia performs the song “Eclipse” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_1ce99bf93188",
+          "url": "https://apnews.com/article/eurovision-song-contest-2026-best-performances-d30fecb01ea8200f07f78d21a9d453b8",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "The 10 best performances at the 2026 Eurovision Song Contest - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 22:03:39 GMT",
+          "fetched_at": "2026-05-18T17:45:46.781801+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://dims.apnews.com/dims4/default/8538adf/2147483647/strip/true/crop/2915x1942+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F73%2Fdb%2F4a2c333c160af4ffa9f8c432d9f6%2Fac999823e6ed4bada25f727d9fbb5e28",
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Linda Lampenius and Pete Parkkonen from Finland perform the song “Liekinheitin” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Delta Goodrem from Australia performs the song “Eclipse” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Satoshi from Moldova performs the song “Viva, Moldova!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. NEW YORK (AP) — The 2026 Eurovision Song Contest final brought acts from 25 countries to the Wiener Stadthalle arena in Vienna on Saturday night in a spirited battle for the continent’s pop crown.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_522c4067a006",
+          "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 17:28:54 GMT",
+          "fetched_at": "2026-05-18T17:45:46.781801+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://dims.apnews.com/dims4/default/2798f21/2147483647/strip/true/crop/3657x2437+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Faa%2F31%2F85d0921f47d1995c96ea209061d3%2Fap26136843175820.jpg",
+          "summary": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions.\" name=\"twitter:description\"> Live updates: Eurovision Grand Final 2026 results, songs, protests explained | AP News. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. The winner of the 70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Aidan from Malta performs the song “Bella” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_79710fb7c29e",
+          "url": "https://www.reuters.com/business/media-telecom/bulgaria-wins-eurovision-song-contest-ahead-israel-2026-05-16/",
+          "publisher": {
+            "name": "Reuters",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Bulgaria wins Eurovision Song Contest ahead of Israel - Reuters",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 23:08:34 GMT",
+          "fetched_at": "2026-05-18T17:45:46.781801+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Bulgaria wins Eurovision Song Contest ahead of Israel | Reuters. ## Browse World. *   Israel and Hamas at War. ## Browse Business. # Bulgaria wins Eurovision Song Contest ahead of Israel. Image 2: Grand Final of the 2026 Eurovision Song Contest, in Vienna. DARA, representing Bulgaria, performs \"Bangaranga\" during the Grand Final of the 2026 Eurovision Song Contest in Vienna, Austria, May 16, 2026. VIENNA, May 16 (Reuters) - Bulgaria won ​the Eurovision ‌Song Contest for ​the ​first time on Saturday ⁠at ​a final ​marked by five countries' boycott ​over ​Gaza. The Reuters Iran Briefing newsletter keeps you informed with the latest developments and analysis of the Iran war. *   2 hours agoWorld categoryEurovision Song Contest final gets under way in Gaza's shadow Image 3: Grand Final of the 2026 Eurovision Song Contest, in Vienna. *   About Reuters, opens new tab. *   Media Center, opens new tab. *   Reuters News Agency, opens new tab. *   #### World-Check, opens new tab.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_017d669aa5a5",
+          "url": "https://apnews.com/article/eurovision-song-contest-semifinal-israel-4ddc9d6c352bb53b0b9dbab240de0a94",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision song competition starts with the first semifinal after boycott over Israel - AP News",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:13:10 GMT",
+          "fetched_at": "2026-05-18T17:45:46.781801+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "media_coverage"
+          ],
+          "thumbnail_url": "https://dims.apnews.com/dims4/default/1570e84/2147483647/strip/true/crop/6228x4150+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F75%2Fea%2Fa4f1e82961e78a4fe3b139a9ee86%2Ff68ace477362431e8e1dc74e6752d61e",
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Artist Senhit from San Marino and British pop star Boy George react to fans on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Artist Noam Bettan from Israel walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Tamara Zivkovic, of Montenegro, walks on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Sarah Engels from Germany walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "latest_news",
+      "block_kind": "latest_news",
+      "block_data": {
+        "kind": "latest_news",
+        "cards": [
+          {
+            "url": "https://apnews.com/photo-gallery/eurovision-reaches-dazzling-grand-final-photos-d36494efe2124b07b700696d6bb356fb",
+            "title": "Eurovision reaches its dazzling grand final, in photos",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-16T22:06:09Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/16a1792/2147483647/strip/true/crop/2403x1601+0+0/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Ff3%2F57%2F5259148beced756fd293757ffc96%2F8a475e7a00734fb6b599a4f252740b59",
+            "summary": null,
+            "source_id": "src_478204474cab"
+          },
+          {
+            "url": "https://apnews.com/article/eurovision-song-contest-2026-best-performances-d30fecb01ea8200f07f78d21a9d453b8",
+            "title": "The 10 best performances at the 2026 Eurovision Song Contest",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-16T22:03:39Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/8538adf/2147483647/strip/true/crop/2915x1942+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F73%2Fdb%2F4a2c333c160af4ffa9f8c432d9f6%2Fac999823e6ed4bada25f727d9fbb5e28",
+            "summary": null,
+            "source_id": "src_1ce99bf93188"
+          },
+          {
+            "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+            "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-16T17:28:54Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/2798f21/2147483647/strip/true/crop/3657x2437+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Faa%2F31%2F85d0921f47d1995c96ea209061d3%2Fap26136843175820.jpg",
+            "summary": null,
+            "source_id": "src_522c4067a006"
+          },
+          {
+            "url": "https://apnews.com/article/eurovision-song-contest-grand-final-9798646a3ba5d4b21321b19decaf607c",
+            "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-16T04:01:40Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/ca81439/2147483647/strip/true/crop/3466x2309+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F15%2Ffc%2F4b07c4719b94af3f6202f555f417%2F7aff9094aafc41eeab65ce2823c1f344",
+            "summary": null,
+            "source_id": "src_a8228ccc2dc7"
+          },
+          {
+            "url": "https://www.npr.org/2026/05/16/nx-s1-5824325/eurovision-final-vienna",
+            "title": "The Eurovision Song Contest reaches its grand final with pop and protests",
+            "publisher": "NPR",
+            "tier": "T3",
+            "published_at": "2026-05-16T00:00:00Z",
+            "thumbnail_url": null,
+            "summary": null,
+            "source_id": "src_e3b37bb52ea5"
+          },
+          {
+            "url": "https://apnews.com/photo-gallery/eurovision-spectacle-celebration-photos-34d196b2aa754dd1bccf5cefdfd79637",
+            "title": "Eurovision spectacle and celebration in photos",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-12T23:41:46Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/3676e1d/2147483647/strip/true/crop/5904x3934+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F26%2F32%2F8a604ecfffaddd0f1d9bbce63738%2F12d8d387360440a0b28f35675a37f721",
+            "summary": null,
+            "source_id": "src_2de86b115283"
+          },
+          {
+            "url": "https://apnews.com/article/eurovision-song-contest-semifinal-israel-4ddc9d6c352bb53b0b9dbab240de0a94",
+            "title": "Eurovision song competition starts with the first semifinal after boycott over Israel",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-12T04:13:10Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/1570e84/2147483647/strip/true/crop/6228x4150+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F75%2Fea%2Fa4f1e82961e78a4fe3b139a9ee86%2Ff68ace477362431e8e1dc74e6752d61e",
+            "summary": null,
+            "source_id": "src_017d669aa5a5"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_017d669aa5a5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_1ce99bf93188",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_2de86b115283",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_478204474cab",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_522c4067a006",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_a8228ccc2dc7",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_e3b37bb52ea5",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Npr."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_a8228ccc2dc7",
+          "url": "https://apnews.com/article/eurovision-song-contest-grand-final-9798646a3ba5d4b21321b19decaf607c",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "The Eurovision Song Contest reaches its grand final in Vienna with pop and protests - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 04:01:40 GMT",
+          "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Aliona Moon sings “Viva Moldova” during her featured performance with Satoshi from Moldova during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Akylas from Greece performs the song “Ferto” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Satoshi from Moldova performs the song “Viva, Moldova!” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. Delta Goodrem from Australia performs the song “Eclipse” during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_1ce99bf93188",
+          "url": "https://apnews.com/article/eurovision-song-contest-2026-best-performances-d30fecb01ea8200f07f78d21a9d453b8",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "The 10 best performances at the 2026 Eurovision Song Contest - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 22:03:39 GMT",
+          "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Linda Lampenius and Pete Parkkonen from Finland perform the song “Liekinheitin” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Delta Goodrem from Australia performs the song “Eclipse” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Satoshi from Moldova performs the song “Viva, Moldova!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. NEW YORK (AP) — The 2026 Eurovision Song Contest final brought acts from 25 countries to the Wiener Stadthalle arena in Vienna on Saturday night in a spirited battle for the continent’s pop crown.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_478204474cab",
+          "url": "https://apnews.com/photo-gallery/eurovision-reaches-dazzling-grand-final-photos-d36494efe2124b07b700696d6bb356fb",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision reaches its dazzling grand final, in photos - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 22:06:09 GMT",
+          "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Dara from Bulgaria arrives on stage for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” and celebrate onstage after winning the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Sunday, May 17, 2026. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Leleka from Ukraine performs the song “Ridnym” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_2de86b115283",
+          "url": "https://apnews.com/photo-gallery/eurovision-spectacle-celebration-photos-34d196b2aa754dd1bccf5cefdfd79637",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision spectacle and celebration in photos - AP News",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 23:41:46 GMT",
+          "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Leleka from Ukraine performs the song “Ridnym” during the second semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Thursday, May 14, 2026. Felicia from Sweden performs the song “My System” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Essyla from Belgium performs the song “Dancing on the Ice” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Lelek from Croatia performs the song “Andromeda” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Aliona Moon performs the song “Viva, Moldova!” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Alicja from Poland performs the song “Pray” during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026. Bzikebi from Georgia performs during the first semifinal of the 70th Eurovision Song Contest in Vienna, Austria, Tuesday, May 12, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_522c4067a006",
+          "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 17:28:54 GMT",
+          "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions.\" name=\"twitter:description\"> Live updates: Eurovision Grand Final 2026 results, songs, protests explained | AP News. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. The winner of the 70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Aidan from Malta performs the song “Bella” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_e3b37bb52ea5",
+          "url": "https://www.npr.org/2026/05/16/nx-s1-5824325/eurovision-final-vienna",
+          "publisher": {
+            "name": "Npr",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "The Eurovision Song Contest reaches its grand final with pop and protests - NPR",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 00:00:00 GMT",
+          "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "**The Eurovision Song Contest reaches its grand final** **The final of the Eurovision Contest arrives Saturday, with tight security and rainy weather failing to dent the enthusiasm of fans, or the opposition of critics who think Israel shouldn't be invited.**. # The Eurovision Song Contest reaches its grand final with pop and protests. Delta Goodrem from Australia performs the song \"Eclipse\" during the dress rehearsal for the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Friday, May 15, 2026. VIENNA — The final of the Eurovision Song Contest arrives Saturday, with tight security and rainy weather failing to dent the enthusiasm of fans, or the opposition of critics who think Israel shouldn't be invited to the party. After a week's buildup, acts from 25 countries will take to the stage at the Wiener Stadthalle arena in Vienna to battle for the continent's pop crown.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_017d669aa5a5",
+          "url": "https://apnews.com/article/eurovision-song-contest-semifinal-israel-4ddc9d6c352bb53b0b9dbab240de0a94",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision song competition starts with the first semifinal after boycott over Israel - AP News",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:13:10 GMT",
+          "fetched_at": "2026-05-18T17:45:41.585744+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "latest_news"
+          ],
+          "thumbnail_url": null,
+          "summary": "Test Your News I.Q. 2026 Elections Election Results Election calendar White House Congress Supreme Court The latest AP-NORC polls Ground Game. Artist Senhit from San Marino and British pop star Boy George react to fans on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Artist Noam Bettan from Israel walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Tamara Zivkovic, of Montenegro, walks on the signature turquoise carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026. Sarah Engels from Germany walks on the Turquoise Carpet during the official start of the Eurovision Song Contest week at the town hall in Vienna, Austria, Sunday, May 10, 2026.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "competing_countries",
+      "block_kind": "people",
+      "block_data": {
+        "kind": "people",
+        "cards": [
+          {
+            "name": "Dara",
+            "role": "Bulgaria - Eurovision 2026 Grand Final Winner",
+            "bio": "Bulgarian performer who won the 70th Eurovision Song Contest Grand Final in Vienna with the song \"Bangaranga\" on May 16-17, 2026.",
+            "image_url": "https://d3jbu7vaxvlagf.cloudfront.net/small/v2/category_media/festival_img_16679920148231.jpg",
+            "image_source": "brave",
+            "image_credit_url": null,
+            "profile_url": "https://brands.live/template/dara-singh-portrait-234629",
+            "source_ids": [
+              "src_478204474cab",
+              "src_1ce99bf93188"
+            ]
+          },
+          {
+            "name": "Linda Lampenius and Pete Parkkonen",
+            "role": "Finland - Eurovision 2026 Competitors",
+            "bio": "Finnish duo who performed \"Liekinheitin\" during the Grand Final of the 70th Eurovision Song Contest in Vienna on May 16, 2026.",
+            "image_url": "https://img.20mn.fr/Ha3kRTalS_2lvChVcEYl6Sk/1444x920_linda-lampenius-et-pete-parkkonen-qui-incarnent-liekinheitin-pour-la-finlande-au-70e-concours-eurovision-de-la-chanson-regardent-la-camera-apres-un-entretien-avec-the-associated-press-a-vienne-en-autriche-le-jeudi-14-mai-2026-ap-photo-martin-meissner-mme102-26134465212997-2605141722",
+            "image_source": "brave",
+            "image_credit_url": null,
+            "profile_url": "https://www.20minutes.fr/arts-stars/culture/eurovision/4223797-20260517-linda-lampenius-pete-parkkonen-grand-favoris-eurovision-fini-seulement-6e-place",
+            "source_ids": [
+              "src_1ce99bf93188",
+              "src_37123326d2d8"
+            ]
+          },
+          {
+            "name": "Delta Goodrem",
+            "role": "Australia - Eurovision 2026 Competitor",
+            "bio": "Australian performer who competed in the Grand Final of the 70th Eurovision Song Contest with the song \"Eclipse\" in Vienna on May 16, 2026.",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/20260510_Delta_Goodrem_NZ92259.jpg/330px-20260510_Delta_Goodrem_NZ92259.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+            "image_source": "wikipedia",
+            "image_credit_url": null,
+            "profile_url": "https://en.wikipedia.org/wiki/Delta_Goodrem",
+            "source_ids": [
+              "src_37123326d2d8"
+            ]
+          },
+          {
+            "name": "Lelek",
+            "role": "Croatia - Eurovision 2026 Competitor",
+            "bio": "Croatian artist who performed \"Andromeda\" during the Grand Final of the 70th Eurovision Song Contest in Vienna on May 16, 2026.",
+            "image_url": "https://us.123rf.com/450wm/franz12/franz122006/franz12200600001/148155418-portrait-of-a-girl-on-a-sunset-background.jpg?ver=6",
+            "image_source": "brave",
+            "image_credit_url": null,
+            "profile_url": "https://123rf.com/stock-photo/leylek.html",
+            "source_ids": [
+              "src_522c4067a006"
+            ]
+          },
+          {
+            "name": "Leleka",
+            "role": "Ukraine - Eurovision 2026 Competitor",
+            "bio": "Ukrainian performer who competed in the second semifinal of the 70th Eurovision Song Contest with the song \"Ridnym\" in Vienna on May 14, 2026.",
+            "image_url": "https://ukjazznews.b-cdn.net/wp-content/uploads/2022/05/Leleka_Jazzahead-2022_Elmar-Petzold_JPEG-sRGB_0005-res.jpg",
+            "image_source": "brave",
+            "image_credit_url": null,
+            "profile_url": "https://ukjazznews.com/ukrainian-singer-viktoria-leleka/",
+            "source_ids": [
+              "src_2de86b115283"
+            ]
+          }
+        ]
+      },
+      "citations": [],
+      "sources_used": [],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "venue_and_host_city",
+      "block_kind": "paragraph",
+      "block_data": {
+        "kind": "paragraph",
+        "style": "prose",
+        "paragraphs_md": [
+          "Vienna, Austria's capital, is hosting the 70th Eurovision Song Contest in May 2026, marking a milestone anniversary for the over-the-top pop music extravaganza. The city has been decorated with hearts and the contest's \"United by Music\" motto to welcome competitors from 35 nations. The grand final took place on May 16, 2026, with semi-finals held earlier in the week, showcasing performances from countries across Europe and beyond."
+        ],
+        "paragraph_sources": [
+          [
+            "src_0a6dbd03ef84",
+            "src_375191e7a0ef",
+            "src_478204474cab"
+          ]
+        ],
+        "pull_quotes": [
+          {
+            "quote": "Host city Vienna has been bedecked in hearts and the contest's \"United by Music\" motto",
+            "attribution": "Washington Post",
+            "source_id": "src_0a6dbd03ef84"
+          },
+          {
+            "quote": "It's the show's 70th anniversary",
+            "attribution": "BBC",
+            "source_id": "src_375191e7a0ef"
+          }
+        ],
+        "citations": [
+          {
+            "source_id": "src_0a6dbd03ef84",
+            "excerpt": null,
+            "claim_text": "Vienna is hosting the 70th Eurovision Song Contest"
+          },
+          {
+            "source_id": "src_375191e7a0ef",
+            "excerpt": null,
+            "claim_text": "The 2026 Eurovision Song Contest is the show's 70th anniversary"
+          },
+          {
+            "source_id": "src_375191e7a0ef",
+            "excerpt": null,
+            "claim_text": "35 nations are competing at Eurovision 2026"
+          },
+          {
+            "source_id": "src_0a6dbd03ef84",
+            "excerpt": null,
+            "claim_text": "Vienna has been decorated with hearts and the \"United by Music\" motto"
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_0a6dbd03ef84",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Washingtonpost."
+        },
+        {
+          "source_id": "src_375191e7a0ef",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Bbc."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_0a6dbd03ef84",
+          "url": "https://www.washingtonpost.com/world/2026/05/12/eurovision-song-contest-semifinal-israel/6dd2bed4-4db9-11f1-97e7-22c6c29ff0d8_story.html",
+          "publisher": {
+            "name": "Washingtonpost",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision song competition starts with the first semifinal after boycott over Israel - The Washington Post",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:17:03 GMT",
+          "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "venue_and_host_city"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Eurovision song competition starts with the first semifinal after boycott over Israel. The Eurovision Song Contest is starting in Vienna with tensions simmering over Israel’s participation. VIENNA — Competition starts Tuesday at the Eurovision Song Contest , with divisions over Israel’s participation hanging over the 70th birthday of the over-the-top pop music extravaganza . Host city Vienna has been bedecked in hearts and the contest’s “United by Music” motto for a week in which singers and bands from 35 countries will compete onstage for the continent’s musical crown. But five countries — Spain, Ireland, the Netherlands, Slovenia and Iceland — are boycotting to protest Israel's inclusion .",
+          "enriched_at": null
+        },
+        {
+          "id": "src_375191e7a0ef",
+          "url": "https://www.bbc.com/news/articles/cqxp4959nwro",
+          "publisher": {
+            "name": "Bbc",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision 2026 is here - but will the Israel boycott spoil the show? - BBC",
+          "author": null,
+          "published_at": "Sat, 09 May 2026 23:03:37 GMT",
+          "fetched_at": "2026-05-18T17:45:45.049157+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "venue_and_host_city"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Another year, another controversy for Eurovision - but fans are sticking by it. **The 2026 Eurovision Song Contest officially lands in Vienna on Sunday, with a \"turquoise carpet\" parade featuring competitors from all 35 nations.**. It's the show's 70th anniversary, but the celebrations have been overshadowed by a ferocious row over Israel's participation. Israel's presence has sparked controversy since its government began a massive military offensive in Gaza in October 2023. At a meeting last November, several countries tried to force a vote on Israel's presence at the contest. \"For some people, the Eurovision Song Contest is far more than just a bunch of songs,\" he noted. \"To see every single show sell out so quickly is a powerful reminder of what the Eurovision Song Contest represents - joy, togetherness and shared experience at a time when that feels more important than ever,\" said Eurovision's director, Martin Green.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "reactions",
+      "block_kind": "reactions",
+      "block_data": {
+        "kind": "reactions",
+        "cards": [
+          {
+            "author": "Eurovision expert (quoted in The Guardian)",
+            "author_role": "Music Critic",
+            "quote": "Usually joyous song contest 'a little bit sad' this year",
+            "sentiment": "negative",
+            "stakeholder_tier": "third_party",
+            "author_image_url": null,
+            "source_id": "src_3635615573bf",
+            "article_title": "Woe Vienna? Boycotts and blackouts mar buildup as Eurovision 2026 begins",
+            "article_url": "https://www.theguardian.com/tv-and-radio/2026/may/12/vienna-boycotts-blackouts-buildup-eurovision-song-contest-2026-israel",
+            "publisher": "The Guardian",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "Israel's Eurovision delegation director",
+            "author_role": "Delegation Director",
+            "quote": "We focus on the support, not the noise",
+            "sentiment": "positive",
+            "stakeholder_tier": "stakeholder",
+            "author_image_url": null,
+            "source_id": "src_60e3b3456e2d",
+            "article_title": "Israel's Eurovision director ahead of semifinal: 'We focus on the support, not the noise'",
+            "article_url": "https://www.ynetnews.com/culture/article/b11ohndcbe",
+            "publisher": "Ynetnews",
+            "publisher_logo_url": null
+          },
+          {
+            "author": "AP News",
+            "author_role": "News Organization",
+            "quote": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance",
+            "sentiment": "positive",
+            "stakeholder_tier": "third_party",
+            "author_image_url": null,
+            "source_id": "src_522c4067a006",
+            "article_title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz",
+            "article_url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+            "publisher": "AP News",
+            "publisher_logo_url": null
+          }
+        ]
+      },
+      "citations": [
+        {
+          "source_id": "src_3635615573bf",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Theguardian."
+        },
+        {
+          "source_id": "src_522c4067a006",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_60e3b3456e2d",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Ynetnews."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_3635615573bf",
+          "url": "https://www.theguardian.com/tv-and-radio/2026/may/12/vienna-boycotts-blackouts-buildup-eurovision-song-contest-2026-israel",
+          "publisher": {
+            "name": "Theguardian",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Woe Vienna? Boycotts and blackouts mar buildup as Eurovision 2026 begins - The Guardian",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:00:13 GMT",
+          "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "Usually joyous song contest ‘a little bit sad’ this year, says one expert, with rows over Israel and costs to the fore. But as Vienna gears up to host this year’s Eurovision song contest, which starts on Tuesday and culminates in Saturday’s grand final, euphoria will be hard to come by outside the power ballads performed onstage. It is an unprecedented moment in the contest’s seven-decade history and could have long-term consequences for a spectacle under pressure to justify its costs in a time of cuts to public broadcasters. The 2025 grand final in the Swiss city of Basel was watched by a record 166 million people across the globe, but last year’s 3 million year-on-year growth in viewing figures is likely to be annulled by the fact that this year’s contest is subject to a media blackout in some of the countries engaged in a boycott over Israel’s inclusion.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_522c4067a006",
+          "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 17:28:54 GMT",
+          "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions.\" name=\"twitter:description\"> Live updates: Eurovision Grand Final 2026 results, songs, protests explained | AP News. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. The winner of the 70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Aidan from Malta performs the song “Bella” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_60e3b3456e2d",
+          "url": "https://www.ynetnews.com/culture/article/b11ohndcbe",
+          "publisher": {
+            "name": "Ynetnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Israel’s Eurovision director ahead of semifinal: 'We focus on the support, not the noise' - ynetnews",
+          "author": null,
+          "published_at": "Tue, 05 May 2026 09:57:09 GMT",
+          "fetched_at": "2026-05-18T17:45:44.519192+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "reactions"
+          ],
+          "thumbnail_url": null,
+          "summary": "# Israel’s Eurovision director ahead of semifinal: 'We focus on the support, not the noise'. ## A week before Noam Bettan takes the Eurovision stage in Vienna with 'Michelle,' Israel’s delegation director said after the first rehearsal that criticism is 'background noise we don’t want to address'. A week before the first semifinal of the Eurovision Song Contest 2026, in which Noam Bettan will take the stage in Vienna to represent Israel with the song “Michelle,” Israeli delegation director Yoav Tzafir spoke with ynet’s studio about Bettan’s first rehearsal, the reactions the delegation received and preparations for the performance. “The first rehearsal on stage is exciting every year, because you work on a number and you don’t know how it will turn out,” Tzafir said. “Especially Noam, who may not be new to the music and stage business but is new to Eurovision — you never know how it will come out, but he handled it like a king.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    },
+    {
+      "section_id": "where_to_watch",
+      "block_kind": "newsfeed",
+      "block_data": {
+        "kind": "newsfeed",
+        "cards": [
+          {
+            "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+            "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz",
+            "publisher": "AP News",
+            "tier": "T1",
+            "published_at": "2026-05-16T17:28:54Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/2798f21/2147483647/strip/true/crop/3657x2437+0+1/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2Faa%2F31%2F85d0921f47d1995c96ea209061d3%2Fap26136843175820.jpg",
+            "summary": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions.",
+            "source_id": "src_522c4067a006"
+          },
+          {
+            "url": "https://www.businessinsider.com/guides/streaming/where-to-watch-eurovision-song-contest-grand-final-2026",
+            "title": "Looking to stream the Eurovision Grand Final for free? Here's where to watch the 70th Song Contest",
+            "publisher": "Business Insider",
+            "tier": "T3",
+            "published_at": "2026-05-16T16:00:01Z",
+            "thumbnail_url": "https://i.insider.com/6a078b0cecd7cc1332bb0549?width=1200&format=jpeg",
+            "summary": "Where to watch Eurovision Grand Final: Free live streams, order, venue. The 70th Eurovision Song Contest wraps up today, and it all comes down to the Grand Final. We've gathered all the details on where to watch Eurovision below, including free and global streaming options.",
+            "source_id": "src_6f8ecfee4890"
+          },
+          {
+            "url": "https://www.reuters.com/lifestyle/all-you-need-know-about-eurovision-song-contest-final-2026-05-16/',",
+            "title": "All you need to know about the Eurovision Song Contest final",
+            "publisher": "Reuters",
+            "tier": "T1",
+            "published_at": "2026-05-16T06:06:51Z",
+            "thumbnail_url": "https://dims.apnews.com/dims4/default/ca81439/2147483647/strip/true/crop/3466x2309+0+1/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2F15%2Ffc%2F4b07c4719b94af3f6202f555f417%2F7aff9094aafc41eeab65ce2823c1f344",
+            "summary": null,
+            "source_id": "src_3a71e0d4542b"
+          },
+          {
+            "url": "https://www.eurovision.com/stories/vienna-2026-all-you-need-to-know-about-the-grand-final/',",
+            "title": "Vienna 2026: All you need to know about the Grand Final",
+            "publisher": "Eurovision",
+            "tier": "T0",
+            "published_at": "2026-05-15T13:32:00Z",
+            "thumbnail_url": "https://storage.googleapis.com/eurovision-com.appspot.com/renditions/public/cms/260514_alma-bengtsson_ebu_21910jpg/260514_Alma-Bengtsson_EBU_21910-focal_point%3D1331x586-focal_size%3D189x189-format%3Djpeg-width%3D1200.jpeg",
+            "summary": "Your guide to Saturday night's exciting conclusion of the 70th Eurovision Song Contest. On the night, you'll be able to watch our lineup of 25 songs competing in the Eurovision Song Contest 2026 Grand Final. Non-participating nations can watch the Live Show on the official Eurovision Song Contest YouTube.",
+            "source_id": "src_d170cb7cb2b2"
+          },
+          {
+            "url": "https://www.sportingnews.com/us/tsn/news/watch-eurovision-2026-us-time-channel-stream-song-contest/6cba99fb02b98663ee0b68f9",
+            "title": "Where to watch Eurovision 2026 in the U.S.: Time, channel, live stream for annual song contest semifinals and final",
+            "publisher": "Sporting News",
+            "tier": "T3",
+            "published_at": "2026-05-12T04:30:01Z",
+            "thumbnail_url": "https://library.sportingnews.com/styles/crop_style_16_9_desktop_webp/s3/2026-05/Eurovision%20FTR%20051126.jpg.webp?itok=cJ8COzYN",
+            "summary": "Europe's most iconic song competition is back for its landmark 70th edition — that's right, Eurovision comes to Vienna this week. Thirty-five countries will be represented in this year's competition, taking place in Vienna for the third time.",
+            "source_id": "src_d14e693bd12d"
+          }
+        ],
+        "variant": "channels",
+        "grouping": "flat"
+      },
+      "citations": [
+        {
+          "source_id": "src_3a71e0d4542b",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Reuters."
+        },
+        {
+          "source_id": "src_522c4067a006",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Apnews."
+        },
+        {
+          "source_id": "src_6f8ecfee4890",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Businessinsider."
+        },
+        {
+          "source_id": "src_d14e693bd12d",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Sportingnews."
+        },
+        {
+          "source_id": "src_d170cb7cb2b2",
+          "excerpt": null,
+          "claim_text": "Supporting evidence from Eurovision."
+        }
+      ],
+      "sources_used": [
+        {
+          "id": "src_d14e693bd12d",
+          "url": "https://www.sportingnews.com/us/tsn/news/watch-eurovision-2026-us-time-channel-stream-song-contest/6cba99fb02b98663ee0b68f9",
+          "publisher": {
+            "name": "Sportingnews",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Where to watch Eurovision 2026 in the U.S.: Time, channel, live stream for annual song contest semifinals and final - sportingnews.com",
+          "author": null,
+          "published_at": "Tue, 12 May 2026 04:30:01 GMT",
+          "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "where_to_watch"
+          ],
+          "thumbnail_url": "https://library.sportingnews.com/styles/crop_style_16_9_desktop_webp/s3/2026-05/Eurovision%20FTR%20051126.jpg.webp?itok=cJ8COzYN",
+          "summary": "If you purchase a product or register for an account through one of the links on our site, we may receive compensation. # Where to watch Eurovision 2026 in the U.S.: Time, channel, live stream for annual song contest semifinals and final. Europe's most iconic song competition is back for its landmark 70th edition — that's right, Eurovision comes to Vienna this week. Thirty-five countries will be represented in this year's competition, taking place in Vienna for the third time. Here's everything you need to know about Eurovision 2026, including TV channel and streaming options for the global song contest. ## Where to watch Eurovision 2026 in the U.S. Eurovision 2026 will not be broadcast on national television in the States. Instead, fans can tune in on Peacock or YouTube, which will be live streaming both the semifinal and final rounds. ## What time is Eurovision 2026? Semifinal #1 hits screens on Tuesday, May 12, while semifinal #2 will come on Thursday, May 14.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_d170cb7cb2b2",
+          "url": "https://www.eurovision.com/stories/vienna-2026-all-you-need-to-know-about-the-grand-final/",
+          "publisher": {
+            "name": "Eurovision",
+            "tier": "T0",
+            "logo_url": null
+          },
+          "title": "Vienna 2026: All you need to know about the Grand Final - eurovision.com",
+          "author": null,
+          "published_at": "Fri, 15 May 2026 13:32:00 GMT",
+          "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 10000,
+            "can_paraphrase": true
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "where_to_watch"
+          ],
+          "thumbnail_url": "https://storage.googleapis.com/eurovision-com.appspot.com/renditions/public/cms/260514_alma-bengtsson_ebu_21910jpg/260514_Alma-Bengtsson_EBU_21910-focal_point%3D1331x586-focal_size%3D189x189-format%3Djpeg-width%3D1200.jpeg",
+          "summary": "Vienna 2026: All you need to know about the Grand Final. Eurodex Listen & Stream Watch on YouTube Official Podcast Junior Eurovision Song Contest Eurovision Song Contest Asia. Your guide to Saturday night's exciting conclusion of the 70th Eurovision Song Contest. On the night, you'll be able to watch our lineup of 25 songs competing in the Eurovision Song Contest 2026 Grand Final. Non-participating nations can watch the Live Show on the official Eurovision Song Contest YouTube channel. In the US, you can watch via our friends at Peacock, but you can also stream the show live on our YouTube channel for the first time in nearly a decade. 35 countries participated in the 70th Eurovision Song Contest, but after a First Semi-Final on Tuesday 12 May and a Second Semi-Final on Thursday 14 May, we now have a 25-song Grand Final, the Running Order for which was decided in the early hours following Thursday night's Second Semi-Final.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_6f8ecfee4890",
+          "url": "https://www.businessinsider.com/guides/streaming/where-to-watch-eurovision-song-contest-grand-final-2026",
+          "publisher": {
+            "name": "Businessinsider",
+            "tier": "T3",
+            "logo_url": null
+          },
+          "title": "Looking to stream the Eurovision Grand Final for free? Here's where to watch the 70th Song Contest - Business Insider",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 16:00:01 GMT",
+          "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "where_to_watch"
+          ],
+          "thumbnail_url": "https://i.insider.com/6a078b0cecd7cc1332bb0549?width=1200&format=jpeg",
+          "summary": "# Where to watch Eurovision Grand Final: Free live streams, order, venue. The 70th Eurovision Song Contest wraps up today, and it all comes down to the Grand Final. We've gathered all the details on where to watch Eurovision below, including free and global streaming options. This includes the five automatically-advancing regions: the United Kingdom, France, Germany, Italy, and the host, Austria. Keep reading to learn how to tune into the Eurovision Grand Final from anywhere. ## Where to watch Eurovision for free. The competition is available to live stream for free in most regions. The United States will continue with its usual paid Peacock option, but this year, Eurovision will also be available for free on YouTube in the US. There's a good chance you'll be able to access Eurovision no matter what, but if you find yourself traveling through a region where you can't access any watch options, it might be time to try out a VPN.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_522c4067a006",
+          "url": "https://apnews.com/live/eurovision-song-contest-2026-vienna",
+          "publisher": {
+            "name": "Apnews",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "Eurovision 2026 live updates: Finale kicks off for song contest surrounded by protests and glitz - AP News",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 17:28:54 GMT",
+          "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "where_to_watch"
+          ],
+          "thumbnail_url": "https://dims.apnews.com/dims4/default/2798f21/2147483647/strip/true/crop/3657x2437+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Faa%2F31%2F85d0921f47d1995c96ea209061d3%2Fap26136843175820.jpg",
+          "summary": "70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions.\" name=\"twitter:description\"> Live updates: Eurovision Grand Final 2026 results, songs, protests explained | AP News. Lelek from Croatia performs the song “Andromeda” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. The winner of the 70th Eurovision Song Contest will be crowned Saturday in a show sure to provide all of the hallmarks of Eurovision: serious wackiness, over-the-top extravagance and notes of geopolitical tensions. Monroe from France performs the song “Regarde!” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Dara from Bulgaria performs the song “Bangaranga” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026. Aidan from Malta performs the song “Bella” during the Grand Final of the 70th Eurovision Song Contest in Vienna, Austria, Saturday, May 16, 2026.",
+          "enriched_at": null
+        },
+        {
+          "id": "src_3a71e0d4542b",
+          "url": "https://www.reuters.com/lifestyle/all-you-need-know-about-eurovision-song-contest-final-2026-05-16/",
+          "publisher": {
+            "name": "Reuters",
+            "tier": "T1",
+            "logo_url": null
+          },
+          "title": "All you need to know about the Eurovision Song Contest final - Reuters",
+          "author": null,
+          "published_at": "Sat, 16 May 2026 06:06:51 GMT",
+          "fetched_at": "2026-05-18T17:45:30.376073+00:00",
+          "language": "en",
+          "rights": {
+            "max_excerpt_words": 30,
+            "can_paraphrase": false
+          },
+          "archive_url": null,
+          "serves_sections": [
+            "where_to_watch"
+          ],
+          "thumbnail_url": null,
+          "summary": "# All you need to know about the Eurovision Song Contest final | Reuters. ## Browse World. # All you need to know about the Eurovision Song Contest final. Image 2: The dress rehearsal 2 of the Grand Final of the 2026 Eurovision Song Contest, in Vienna. Item 1 of 5 Linda Lampenius x Pete Parkkonen, representing Finland, perform \"Liekinheitin\" during the dress rehearsal 2 of the Grand Final of the 2026 Eurovision Song Contest, in Vienna, Austria, May 15, 2026. **[1/5]**Linda Lampenius x Pete Parkkonen, representing Finland, perform \"Liekinheitin\" during the dress rehearsal 2 of the Grand Final of the 2026 Eurovision Song Contest, in Vienna, Austria, May 15, 2026. VIENNA, May 16 (Reuters) - Austria hosts the final of the Eurovision Song Contest in Vienna on Saturday, which this year has been marked by the boycott of five countries protesting the participation of Israel. *   About Reuters, opens new tab.",
+          "enriched_at": null
+        }
+      ],
+      "eval_passed": true,
+      "eval_notes": null,
+      "placement": "main"
+    }
+  ],
+  "wikipedia_card": null,
+  "hero_image": {
+    "image_url": "https://ichef.bbci.co.uk/images/ic/400xn/p0nfh7rn.jpg",
+    "alt_text": "Key art for the Eurovision Song Contest 2026 in Vienna. A blue, purple and red heart sits beside text reading: Eurovision Song Contest Vienna 2026",
+    "source_url": "https://www.bbc.co.uk/mediacentre/articles/2026/eurovision-song-contest-vienna-austria",
+    "publisher": "bbc.co.uk"
+  },
+  "meta": {
+    "last_updated": "2026-05-18T17:47:49.291717+00:00",
+    "editor_approved": true,
+    "editor_id": "cli_user@local",
+    "pipeline_trace_id": "trace_5650ca219223"
+  }
+}

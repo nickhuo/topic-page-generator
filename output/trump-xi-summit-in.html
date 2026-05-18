@@ -1,0 +1,2554 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trump–Xi Summit in Beijing, May 2026 — Topic Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>:root {
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-ink-muted: #5a5a5a;
+  --color-accent: #2563eb;
+  --color-accent-ink: #ffffff;
+  --color-divider: #e5e5e5;
+  --font-weight-body: 400;
+  --font-weight-heading: 600;
+}</style>
+  <style>/* =========================================================================
+   Topic Page — Design System v2
+   
+   Palette variables are injected by the pipeline as --color-* tokens.
+   This file maps them to the design system's --ink/--muted/--rule aliases
+   and defines all component styles.
+   ========================================================================= */
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+/* ── Design tokens ── */
+:root {
+  /* Map pipeline palette tokens → design aliases */
+  --ink:     var(--color-ink, #0f172a);
+  --ink-2:   var(--color-ink-muted, #334155);
+  --muted:   #64748b;
+  --faint:   #94a3b8;
+  --rule:    var(--color-divider, #e2e8f0);
+  --bg:      var(--color-bg, #ffffff);
+  --surface: var(--color-surface, #f8fafc);
+  --link:    #1d4ed8;
+
+  /* Typography */
+  --serif:   'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing */
+  --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px;
+  --sp-4: 16px; --sp-5: 24px;  --sp-6: 32px;
+  --sp-7: 48px; --sp-8: 64px;  --sp-9: 96px;
+
+  /* Layout */
+  --content-max: 1200px;
+  --content-pad: 56px;
+  --sidebar-w:   320px;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute; top: -100px; left: 0; z-index: 200;
+  background: var(--ink); color: var(--bg);
+  padding: var(--sp-2) var(--sp-4); font-size: 13px;
+}
+.skip-link:focus { top: 0; }
+
+/* =========================================================================
+   HERO
+   ========================================================================= */
+.page-chrome { /* wraps hero */ }
+
+.hero { position: relative; height: 600px; overflow: hidden; }
+.hero__img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 30%;
+  display: block;
+}
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(10,14,30,.94) 0%,
+    rgba(10,14,30,.65) 42%,
+    rgba(10,14,30,.18) 100%);
+}
+.hero__body  { position: absolute; bottom: 0; left: 0; right: 0; color: #fff; }
+.hero__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--content-pad) var(--sp-7);
+}
+
+.hero__meta   { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-5); }
+.hero__badge  {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700;
+  background: rgba(255,255,255,.15); color: #fff;
+  padding: 3px 10px; border-radius: 2px;
+  border: 1px solid rgba(255,255,255,.25);
+}
+.hero__time   { font-size: 12px; color: rgba(255,255,255,.45); }
+
+.hero__title  {
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 2.8vw, 2.6rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -.02em; text-wrap: pretty;
+  margin-bottom: var(--sp-3); max-width: 820px;
+}
+.hero__subtitle {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem; line-height: 1.5;
+  color: rgba(255,255,255,.65);
+  margin-bottom: var(--sp-5); max-width: 680px;
+}
+
+/* Key bullets inside hero */
+.hero__bullets {
+  list-style: none;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px var(--sp-7);
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding-top: var(--sp-5); max-width: 820px;
+}
+.hero__bullet {
+  font-size: 13px; color: rgba(255,255,255,.82);
+  line-height: 1.48; display: flex; gap: 9px; align-items: baseline;
+}
+.hero__bullet::before {
+  content: "";
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,.4); flex-shrink: 0; margin-top: 6px;
+}
+
+/* Hero when no image */
+.hero--no-image {
+  height: auto;
+  background: var(--ink);
+  padding: var(--sp-7) 0 var(--sp-5);
+}
+.hero--no-image .hero__overlay { display: none; }
+.hero--no-image .hero__body    { position: static; }
+
+/* =========================================================================
+   STICKY NAV (horizontal, replaces left TOC)
+   ========================================================================= */
+.nav {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav__inner {
+  max-width: var(--content-max); margin: 0 auto;
+  padding: 0 var(--content-pad);
+  display: flex; overflow-x: auto; scrollbar-width: none;
+}
+.nav__inner::-webkit-scrollbar { display: none; }
+.nav__item { flex-shrink: 0; }
+.nav__item a {
+  display: block; padding: 13px 16px;
+  font-size: 12.5px; font-weight: 600; color: var(--muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  white-space: nowrap; transition: color .14s, border-color .14s;
+}
+.nav__item a:hover { color: var(--ink); }
+.nav__item.is-active a { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* =========================================================================
+   PAGE GRID (2-col: main + sidebar)
+   ========================================================================= */
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) var(--sidebar-w);
+  gap: var(--sp-8);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--sp-7) var(--content-pad) var(--sp-9);
+}
+@media (max-width: 900px) {
+  .page-grid { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-5); }
+  .page-reference {
+    order: -1;
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  :root { --content-pad: 20px; }
+}
+
+/* ── Main content ── */
+.page-main { min-width: 0; }
+
+/* =========================================================================
+   SECTIONS
+   ========================================================================= */
+.need-section { margin-bottom: var(--sp-8); scroll-margin-top: 54px; }
+
+.need-section__eyebrow { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-3); }
+
+/* Unified chip — single style, no color variants */
+.need-section__chip {
+  display: inline-block; padding: 2px 9px; border-radius: 3px;
+  font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  background: #f1f5f9; color: #475569;
+}
+
+.need-section__title {
+  font-family: var(--serif); font-size: 1.45rem; font-weight: 700;
+  color: var(--ink); line-height: 1.2; margin-bottom: var(--sp-5);
+}
+.need-section__blocks > * + * { margin-top: var(--sp-6); }
+
+/* =========================================================================
+   CITATIONS (inline, numbered)
+   ========================================================================= */
+.cite-num {
+  display: inline; font-size: 10px; font-family: var(--sans);
+  color: var(--link); vertical-align: super; margin-left: 1px;
+}
+.cite-num a { color: inherit; text-decoration: none; }
+.cite-num a:hover { text-decoration: underline; }
+
+/* =========================================================================
+   CITE CLUSTER (stacked publisher favicons + hover popover)
+   ========================================================================= */
+.cite-cluster {
+  display: inline-flex; align-items: center;
+  vertical-align: middle; margin-left: 6px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+.cite-cluster__logos {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+}
+.cite-logo {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  background: var(--surface);
+  object-fit: cover;
+  margin-left: -7px;
+  transition: transform .28s cubic-bezier(.16,1,.3,1),
+              box-shadow .2s ease-out;
+}
+.cite-logo:first-child { margin-left: 0; }
+.cite-cluster__logos .cite-logo:nth-child(1) { z-index: 3; }
+.cite-cluster__logos .cite-logo:nth-child(2) { z-index: 2; }
+.cite-cluster__logos .cite-logo:nth-child(3) { z-index: 1; }
+/* Gently fan the stacked logos on hover so the cluster feels alive */
+.cite-cluster:hover .cite-cluster__logos .cite-logo:nth-child(2) { transform: translateX(2px); }
+.cite-cluster:hover .cite-cluster__logos .cite-logo:nth-child(3) { transform: translateX(4px); }
+.cite-cluster:hover .cite-logo { box-shadow: 0 1px 3px rgba(15,23,42,.08); }
+
+.cite-cluster__count {
+  font-size: 11px; font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color .18s ease-out;
+}
+.cite-cluster:hover .cite-cluster__count,
+.cite-cluster:focus-visible .cite-cluster__count {
+  color: var(--ink);
+}
+
+/* Popover — fades + lifts in on hover/focus */
+.cite-popover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 50;
+  width: 440px; max-width: calc(100vw - 32px);
+  padding: var(--sp-4);
+  background: var(--bg);
+  border: 1px solid color-mix(in oklab, var(--rule) 75%, transparent);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 2px rgba(15,23,42,.04),
+    0 8px 24px rgba(15,23,42,.10),
+    0 24px 56px -12px rgba(15,23,42,.18);
+  font-size: 12.5px; line-height: 1.45;
+  color: var(--ink);
+  text-align: left;
+  cursor: default;
+
+  /* Animation baseline */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px) scale(.985);
+  transform-origin: bottom left;
+  transition:
+    opacity .18s ease-out,
+    transform .26s cubic-bezier(.16,1,.3,1),
+    visibility 0s linear .22s;
+  will-change: opacity, transform;
+}
+.cite-cluster:hover .cite-popover,
+.cite-cluster:focus-within .cite-popover,
+.cite-cluster:focus-visible .cite-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity .22s ease-out,
+    transform .3s cubic-bezier(.16,1,.3,1),
+    visibility 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cite-popover,
+  .cite-cluster:hover .cite-popover,
+  .cite-cluster:focus-within .cite-popover {
+    transition: opacity .12s linear, visibility 0s;
+    transform: none;
+  }
+  .cite-cluster:hover .cite-cluster__logos .cite-logo { transform: none; }
+}
+/* Hover bridge so cursor can cross the gap into the popover */
+.cite-cluster::after {
+  content: ""; position: absolute;
+  bottom: 100%; left: 0; right: 0; height: 10px;
+}
+.cite-popover__title {
+  display: block;
+  font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--faint);
+  margin-bottom: var(--sp-3);
+}
+.cite-popover__list {
+  display: flex; flex-direction: column;
+  max-height: 380px; overflow-y: auto;
+  margin: 0 calc(var(--sp-2) * -1);
+  padding: 0 var(--sp-2);
+  scrollbar-width: thin;
+}
+.cite-popover__card {
+  display: grid; grid-template-columns: 56px 1fr;
+  gap: var(--sp-3); align-items: start;
+  text-decoration: none; color: inherit;
+  padding: 10px var(--sp-2);
+  border-radius: 8px;
+  position: relative;
+  transition: background-color .18s ease-out,
+              transform .2s cubic-bezier(.16,1,.3,1);
+}
+.cite-popover__card + .cite-popover__card::before {
+  content: ""; position: absolute;
+  top: 0; left: var(--sp-2); right: var(--sp-2);
+  height: 1px;
+  background: color-mix(in oklab, var(--rule) 55%, transparent);
+}
+.cite-popover__card:hover {
+  background: color-mix(in oklab, var(--surface) 75%, transparent);
+}
+.cite-popover__card:hover::before,
+.cite-popover__card:hover + .cite-popover__card::before { background: transparent; }
+
+.cite-popover__thumb {
+  width: 56px; height: 56px;
+  border-radius: 8px; overflow: hidden;
+  object-fit: cover; display: block;
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--rule) 70%, transparent);
+}
+/* Fallback when an article has no OG image: tint the tile and showcase
+   the publisher's own logo at a larger, intentional size. */
+.cite-popover__thumb--placeholder {
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(120% 120% at 28% 20%,
+      color-mix(in oklab, var(--ink) 7%, var(--bg)) 0%,
+      var(--surface) 65%);
+}
+.cite-popover__thumb--placeholder img {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  opacity: .92;
+  filter: drop-shadow(0 1px 2px rgba(15,23,42,.08));
+}
+.cite-popover__body { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.cite-popover__publisher {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-2);
+}
+.cite-popover__favicon { border-radius: 50%; }
+.cite-popover__headline {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 14px; line-height: 1.35;
+  color: var(--ink);
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+  transition: color .15s ease-out;
+}
+.cite-popover__card:hover .cite-popover__headline {
+  color: var(--link);
+}
+.cite-popover__summary {
+  font-size: 11.5px; color: var(--muted); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* Sidebar context: cluster sits inline at smaller scale */
+.ref-prose .cite-cluster { margin-left: 4px; }
+.ref-prose .cite-logo { width: 16px; height: 16px; margin-left: -5px; }
+.ref-prose .cite-popover { width: 280px; }
+
+/* =========================================================================
+   BLOCK: paragraph
+   ========================================================================= */
+.block--paragraph p {
+  font-size: 15.5px; line-height: 1.8; color: var(--ink-2);
+  margin-bottom: var(--sp-4); text-wrap: pretty; max-width: 680px;
+}
+/* =========================================================================
+   BLOCK: newsfeed (horizontal scroll-snap carousel, ≤5 image cards)
+   ========================================================================= */
+.block--newsfeed {
+  /* container — full content width, allows scroller to bleed if needed */
+  margin: 0;
+}
+.newsfeed-scroller {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--sp-4) * 1.5) / 2.5);
+  gap: var(--sp-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0;
+  padding-bottom: var(--sp-3);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.newsfeed-scroller::-webkit-scrollbar { height: 6px; }
+.newsfeed-scroller::-webkit-scrollbar-thumb {
+  background: var(--rule); border-radius: 3px;
+}
+.news-card {
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--rule); border-radius: 8px;
+  overflow: hidden; background: var(--bg);
+  min-width: 0;
+}
+.block--newsfeed { position: relative; }
+.newsfeed-nav {
+  position: absolute; top: calc(50% - var(--sp-3)); transform: translateY(-50%);
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--rule); background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: opacity .2s ease, background .18s ease;
+  z-index: 2; padding: 0;
+}
+.newsfeed-nav:hover { background: var(--surface); }
+.newsfeed-nav[disabled] { opacity: 0; pointer-events: none; }
+.newsfeed-nav--prev { left: -8px; }
+.newsfeed-nav--next { right: -8px; }
+.newsfeed-nav svg { width: 18px; height: 18px; }
+
+.news-card__media {
+  width: 100%; aspect-ratio: 16 / 9;
+  overflow: hidden; margin: 0;
+  background: var(--surface);
+}
+.news-card__media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.news-card__body    {
+  min-width: 0; padding: var(--sp-4);
+  flex: 1 1 auto;
+  display: flex; flex-direction: column;
+}
+.news-card__outlet  {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 800; color: var(--ink);
+  text-transform: uppercase; letter-spacing: .09em; margin-bottom: 6px;
+}
+.news-card__title   { font-family: var(--serif); font-size: 1rem; font-weight: 600; line-height: 1.3; margin-bottom: 5px; }
+.news-card__title a { color: var(--ink); text-decoration: none; }
+.news-card__title a:hover { color: var(--link); }
+.news-card__summary {
+  font-size: 12.5px; color: var(--muted); line-height: 1.52; margin-bottom: 5px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.news-card__meta {
+  font-size: 11px; color: var(--faint); display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap;
+  margin-top: auto; padding-top: var(--sp-3);
+}
+.news-card__pub { font-weight: 700; color: var(--ink-2); }
+
+/* Quote-only variant (no thumbnail) */
+.block--newsfeed--quotes .news-card { grid-template-columns: 1fr; }
+.block--newsfeed--quotes .news-card__media { display: none; }
+.block--newsfeed--quotes .news-card__title { font-style: italic; }
+
+/* =========================================================================
+   BLOCK: reactions → Opinions cards
+   Each card is a link to the original article. Tabs switch sentiment groups.
+   ========================================================================= */
+.opinions { display: grid; gap: 14px; }
+.opinions__tabs {
+  display: flex; gap: 22px;
+  border-bottom: 1px solid var(--rule);
+}
+.opinions__tab {
+  background: none; border: 0;
+  padding: 10px 0 12px;
+  font: 600 13px/1 var(--sans); color: var(--muted);
+  cursor: pointer; border-bottom: 2px solid transparent;
+  letter-spacing: .01em; user-select: none; white-space: nowrap;
+}
+.opinions__tab:hover { color: var(--ink-2); }
+.opinions__tab.is-active { color: var(--ink); border-color: var(--ink); }
+
+.opinions__panel {
+  display: none; list-style: none; padding: 0; margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.opinions__panel.is-active { display: grid; }
+
+.opinion-card {
+  display: grid; gap: 12px;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--rule); border-radius: 10px;
+  background: var(--bg); color: inherit; text-decoration: none;
+  min-width: 0; overflow: hidden;
+}
+.opinion-card:hover { border-color: #cbd5e1; }
+
+.opinion-card__quote {
+  font: italic 500 .9375rem/1.55 var(--serif);
+  color: var(--ink); margin: 0;
+  position: relative; padding-left: 16px;
+  min-width: 0; overflow-wrap: anywhere; word-break: break-word;
+}
+.opinion-card__quote::before {
+  content: "\201C";
+  position: absolute; left: -1px; top: -8px;
+  font: 700 1.75rem/1 var(--serif);
+  color: var(--faint);
+}
+
+.opinion-card__attr { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.opinion-card__avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%; overflow: hidden;
+  background: linear-gradient(180deg, #f1f5f9, #e2e8f0);
+  display: grid; place-items: center;
+  font: 600 12px/1 var(--sans); color: var(--muted);
+  flex: 0 0 auto;
+}
+.opinion-card__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.opinion-card__who { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.opinion-card__who strong { font: 600 13px/1.2 var(--sans); color: var(--ink); }
+.opinion-card__role {
+  font: 500 11.5px/1.3 var(--sans); color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.opinion-card__article {
+  display: flex; align-items: center; gap: 8px;
+  padding-top: 11px; border-top: 1px dashed var(--rule);
+  font: 500 11.5px/1.35 var(--sans);
+  color: var(--muted); min-width: 0;
+}
+.opinion-card__pub-logo { width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto; }
+.opinion-card__pub { font-weight: 600; color: var(--ink-2); flex: 0 0 auto; }
+.opinion-card__article-divider { color: var(--faint); flex: 0 0 auto; }
+.opinion-card__article-title {
+  color: var(--muted); flex: 1; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.opinion-card__arrow { color: var(--faint); flex: 0 0 auto; }
+.opinion-card:hover .opinion-card__arrow { color: var(--link); }
+
+/* =========================================================================
+   BLOCK: latest_news → vertical stack of landscape cards
+   ========================================================================= */
+.latest-news__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.ln-card {
+  border: 1px solid var(--rule); border-radius: 10px;
+  background: var(--bg);
+}
+.ln-card:hover { border-color: #cbd5e1; }
+.ln-card__link {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 18px;
+  padding: 12px;
+  color: inherit; text-decoration: none;
+  align-items: stretch;
+}
+.ln-card__link--no-media {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.ln-card__media {
+  margin: 0; aspect-ratio: 16/10;
+  overflow: hidden; border-radius: 6px;
+  background: var(--surface);
+}
+.ln-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ln-card__body {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 4px 4px 4px 0; min-width: 0;
+}
+.ln-card__pub {
+  display: flex; align-items: center; gap: 8px;
+  font: 600 11px/1 var(--sans); color: var(--muted);
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.ln-card__logo { width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto; }
+.ln-card__pub time {
+  margin-left: auto; text-transform: none; letter-spacing: 0;
+  font-weight: 500; color: var(--faint);
+}
+.ln-card__title {
+  font: 600 1.0625rem/1.35 var(--serif);
+  color: var(--ink); margin: 2px 0 2px;
+  letter-spacing: -0.005em;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ln-card__summary {
+  font: 400 .875rem/1.55 var(--sans);
+  color: var(--ink-2); margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* "Load more" — collapsed cards stay in DOM but hidden until JS reveals. */
+.ln-card--collapsed { display: none; }
+.latest-news__more {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 14px auto 0; padding: 9px 16px;
+  background: none; border: 1px solid var(--rule); border-radius: 6px;
+  font: 600 12px/1 var(--sans); color: var(--muted);
+  letter-spacing: .04em; text-transform: uppercase;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.latest-news__more:hover,
+.latest-news__more:focus-visible {
+  color: var(--ink); border-color: var(--ink-2);
+  background: color-mix(in oklab, var(--ink) 4%, transparent);
+  outline: none;
+}
+.latest-news__more[hidden] { display: none; }
+.latest-news__more-chev {
+  width: 7px; height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.block--latest-news { display: flex; flex-direction: column; align-items: stretch; }
+
+/* =========================================================================
+   BLOCK: people → "Who is involved" portrait cards (3 per row)
+   ========================================================================= */
+.people__grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.person-card {
+  display: grid; grid-template-rows: auto 1fr;
+  border: 1px solid var(--rule); border-radius: 10px;
+  overflow: hidden; background: var(--bg);
+}
+.person-card:hover { border-color: #cbd5e1; }
+.person-card__media {
+  position: relative; aspect-ratio: 16/9;
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  overflow: hidden;
+}
+.person-card__media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 22%;
+  display: block;
+}
+.person-card__initials {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font: 600 2rem/1 var(--serif); color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.person-card__body { padding: 12px 14px 14px; }
+.person-card__name { font: 600 1rem/1.3 var(--serif); margin: 0 0 2px; color: var(--ink); }
+.person-card__name a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.person-card__name a:hover { border-color: var(--rule); }
+.person-card__role {
+  font: 500 11px/1.35 var(--sans); color: var(--muted);
+  margin: 0 0 8px; text-transform: uppercase; letter-spacing: .05em;
+}
+.person-card__bio { font: 400 .8125rem/1.55 var(--sans); color: var(--ink-2); margin: 0; }
+.person-card__credit {
+  display: inline-block; margin-top: 10px;
+  font: 500 10.5px/1 var(--sans); color: var(--faint); text-decoration: none;
+}
+.person-card__credit:hover { color: var(--muted); }
+
+/* No-image fallback: collapse the placeholder media row entirely.
+   Card becomes a clean text-only block, name + role + bio. */
+.person-card--no-image .person-card__media { display: none; }
+.person-card--no-image { grid-template-rows: 1fr; }
+
+/* =========================================================================
+   BLOCK: chart
+   ========================================================================= */
+.chart__title {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--muted); margin-bottom: var(--sp-4);
+}
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--sp-5); }
+.stat__value { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; line-height: 1; color: var(--ink); }
+.stat__unit  { font-size: 1rem; font-weight: 400; color: var(--muted); }
+.stat__label {
+  font-size: 11px; color: var(--muted); margin-top: var(--sp-2);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.stat__cmp { font-size: 12px; color: var(--muted); margin-top: var(--sp-1); }
+
+.compare-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.compare-table th, .compare-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.45; }
+.compare-table thead th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); border-bottom: 2px solid var(--ink); }
+.compare-table tbody th { color: var(--muted); font-weight: 600; font-size: 13px; }
+.compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: none; }
+
+.bar-chart { display: flex; flex-direction: column; gap: var(--sp-3); }
+.bar-chart__series { display: grid; grid-template-columns: 120px 1fr; gap: var(--sp-3); align-items: center; }
+.bar-chart__label  { font-size: 13px; color: var(--ink-2); }
+.bar-chart__bars   { display: flex; gap: 2px; height: 14px; }
+.bar-chart__bar    { display: block; background: var(--ink); width: var(--bar, 0%); border-radius: 2px; }
+
+/* =========================================================================
+   REFERENCE SIDEBAR
+   ========================================================================= */
+.page-reference {
+  display: flex; flex-direction: column; gap: var(--sp-5);
+  position: sticky; top: 54px; align-self: start;
+  max-height: calc(100vh - 70px); overflow-y: auto; scrollbar-width: none;
+}
+.page-reference::-webkit-scrollbar { display: none; }
+
+/* Sidebar card shell — open editorial style, no boxing */
+.ref-card {
+  background: transparent;
+  padding: 0;
+  position: relative;
+}
+.ref-card + .ref-card {
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--rule);
+}
+.ref-card__title {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-2);
+  margin-bottom: var(--sp-4);
+}
+
+/* Timeline in sidebar
+   Geometry: rail centered at x = 13.5px (5px breathing room left of present halo).
+*/
+.ref-timeline {
+  list-style: none; position: relative;
+  padding-left: 28px;
+  margin: 0;
+}
+.ref-timeline::before {
+  content: ""; position: absolute;
+  left: 13px; top: 6px; bottom: 6px;
+  width: 1px; background: var(--rule);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+}
+.ref-timeline__item {
+  position: relative;
+  padding: 0 0 var(--sp-4) 0;
+  margin: 0;
+}
+.ref-timeline__item:last-child { padding-bottom: 0; }
+
+/* Default marker — width 9, centered on rail */
+.ref-timeline__item::before {
+  content: ""; position: absolute;
+  left: -19px; top: 2px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--ink-2);
+  transition: transform .25s ease, box-shadow .3s ease;
+}
+
+/* PAST — small filled dot */
+.ref-timeline__item--past::before {
+  width: 7px; height: 7px; left: -18px; top: 4px;
+  background: var(--faint); border: none;
+}
+.ref-timeline__item--past .ref-timeline__date  { color: var(--faint); }
+.ref-timeline__item--past .ref-timeline__label { color: var(--ink-2); font-weight: 500; }
+.ref-timeline__item--past .ref-timeline__label a { color: var(--ink-2); }
+.ref-timeline__item--past .ref-timeline__loc   { color: var(--faint); }
+
+/* PRESENT / CURRENT — filled ink with soft halo */
+.ref-timeline__item--present::before,
+.ref-timeline__item--current::before {
+  width: 11px; height: 11px; left: -20px; top: 1px;
+  background: var(--ink); border: none;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--ink) 14%, transparent);
+}
+.ref-timeline__item--present .ref-timeline__date,
+.ref-timeline__item--current .ref-timeline__date { color: var(--ink); font-weight: 700; }
+.ref-timeline__item--present .ref-timeline__label,
+.ref-timeline__item--current .ref-timeline__label { color: var(--ink); font-weight: 700; }
+
+/* FUTURE — clean open ring (not dashed) */
+.ref-timeline__item--future::before {
+  background: var(--bg); border: 1.5px solid var(--ink-2);
+}
+.ref-timeline__item--future .ref-timeline__date  { color: var(--ink-2); }
+.ref-timeline__item--future .ref-timeline__label { color: var(--ink); font-weight: 600; }
+
+.ref-timeline__date {
+  font-size: 10.5px; color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  display: block; margin-bottom: 3px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+.ref-timeline__label {
+  font-size: 13px; font-weight: 600;
+  color: var(--ink); line-height: 1.4;
+  text-wrap: pretty;
+}
+.ref-timeline__label a {
+  color: inherit; text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px; background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size .2s ease;
+}
+.ref-timeline__label a:hover,
+.ref-timeline__label a:focus-visible { background-size: 100% 1px; outline: none; }
+.ref-timeline__loc {
+  font-size: 11.5px; color: var(--muted);
+  margin-top: 3px; line-height: 1.4;
+}
+
+/* Wikipedia / Background card */
+.ref-wiki__thumb {
+  display: block; width: 100%; max-height: 140px;
+  object-fit: cover; border-radius: 6px; margin-bottom: var(--sp-3);
+}
+.ref-wiki__summary { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin-bottom: var(--sp-3); }
+.ref-wiki__link { font-size: 12px; color: var(--link); text-decoration: none; font-weight: 600; }
+.ref-wiki__link:hover { text-decoration: underline; }
+.ref-wiki__attr { margin-top: var(--sp-2); font-size: 11px; color: var(--faint); }
+.ref-wiki__attr a { color: inherit; text-decoration: underline; }
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.page-footer {
+  border-top: 1px solid var(--rule);
+  padding: var(--sp-5) 0;
+}
+.page-footer__inner {
+  max-width: var(--content-max); margin: 0 auto;
+  padding: 0 var(--content-pad);
+}
+.page-footer__meta { font-size: 12px; color: var(--faint); }
+
+/* =========================================================================
+   SIDEBAR PROSE (Background paragraph block in sidebar)
+   ========================================================================= */
+.ref-prose p {
+  font-size: 13px; line-height: 1.55; color: var(--ink-2);
+  margin-bottom: var(--sp-3);
+}
+.ref-prose p:last-child { margin-bottom: 0; }
+
+/* =========================================================================
+   GALLERY (photo grid block)
+   ========================================================================= */
+.block--gallery { /* outer hook — no styles needed; spacing comes from
+                     .need-section__blocks > * + * rhythm */ }
+
+.gallery-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-4);
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-item { list-style: none; }
+
+.gallery-item figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.gallery-item figure > img,
+.gallery-item .gallery-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--rule) 70%, transparent);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+
+/* Hover lift on the image itself — figure isn't overflow-clipped, so the
+   1px transform stays inside the border without jitter. */
+.gallery-item:hover figure > img {
+  transform: scale(1.015);
+}
+
+.gallery-item figcaption {
+  margin-top: var(--sp-2);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gallery-source {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s ease-out;
+}
+.gallery-source::before {
+  content: "·";
+  margin-right: 6px;
+  color: var(--faint);
+  font-weight: 400;
+}
+.gallery-source:hover { color: var(--link); }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item figure > img { transition: none; }
+  .gallery-item:hover figure > img { transform: none; }
+}
+
+/* =========================================================================
+   MOBILE
+   ========================================================================= */
+@media (max-width: 640px) {
+  .hero         { height: 480px; }
+  .hero__title  { font-size: 1.75rem; }
+  .hero__bullets { grid-template-columns: 1fr; }
+  .newsfeed-scroller {
+    grid-auto-columns: calc(100% - var(--sp-5));
+  }
+  .ln-card__link { grid-template-columns: 104px 1fr; gap: 12px; padding: 10px; }
+  .ln-card__link--no-media { grid-template-columns: 1fr; gap: 0; }
+  .ln-card__media { aspect-ratio: 1/1; }
+  .ln-card__title { font-size: 0.9375rem; }
+  .ln-card__summary { -webkit-line-clamp: 3; }
+  .people__grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Trump\u2013Xi Summit in Beijing, May 2026","description":"Trump China summit","startDate":"2026-05-14","location":"Beijing, China"}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="page-chrome">
+    
+      <section class="hero" aria-label="Page lede">
+  
+    <img class="hero__img"
+         src="https://www.usatoday.com/gcdn/authoring/authoring-images/2026/05/13/USAT/90059425007-trump-china-2026-summit-08.jpg?width=660&amp;height=454&amp;fit=crop&amp;format=pjpg&amp;auto=webp"
+         alt="Vice President of China Han Zheng escorts U.S. President Donald Trump as he arrives at Beijing Capital International Airport on May 13, 2026 in Beijing, China."
+         loading="eager">
+  
+  <div class="hero__overlay"></div>
+  <div class="hero__body">
+    <div class="hero__inner">
+      <div class="hero__meta">
+        
+          <span class="hero__badge">2026-05-14 · Beijing, China</span>
+        
+        <time class="hero__time" datetime="2026-05-18T17:21:06.880187+00:00">
+          Updated 2026-05-18
+        </time>
+      </div>
+
+      <h1 class="hero__title">Trump–Xi Summit in Beijing, May 2026</h1>
+
+      
+        <p class="hero__subtitle">Trump concluded a two-day summit with Xi Jinping in Beijing focused on trade deals, technology, the Iran war, and Taiwan — his second state visit to China and the first U.S. presidential trip to the country in nearly a decade.</p>
+      
+    </div>
+  </div>
+</section>
+    
+  </header>
+
+  
+    <nav class="nav" aria-label="Page sections">
+  <div class="nav__inner">
+    
+      <div class="nav__item" data-section="overview">
+        <a href="#section-overview">Overview</a>
+      </div>
+    
+      <div class="nav__item" data-section="media_coverage">
+        <a href="#section-media_coverage">Media Coverage</a>
+      </div>
+    
+      <div class="nav__item" data-section="latest_news">
+        <a href="#section-latest_news">Latest News</a>
+      </div>
+    
+      <div class="nav__item" data-section="key_outcomes">
+        <a href="#section-key_outcomes">Key Outcomes</a>
+      </div>
+    
+      <div class="nav__item" data-section="key_figures">
+        <a href="#section-key_figures">Key Figures</a>
+      </div>
+    
+      <div class="nav__item" data-section="reactions">
+        <a href="#section-reactions">Reactions</a>
+      </div>
+    
+      <div class="nav__item" data-section="summit_gallery">
+        <a href="#section-summit_gallery">Summit Gallery</a>
+      </div>
+    
+  </div>
+</nav>
+  
+
+  <div class="page-grid">
+    <main id="main" class="page-main">
+      
+        
+        <section id="section-overview"
+         class="need-section"
+         data-need="overview"
+         data-screen-label="01 Overview">
+  
+
+  <h2 class="need-section__title">Overview</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+<div class="block block--paragraph">
+  
+    
+    
+    <p>
+      U.S. President Donald Trump and Chinese President Xi Jinping held a high-stakes two-day summit in Beijing on May 14–15, 2026, aimed at resetting relations between the world&#39;s two largest economies. The leaders agreed to build a &#34;constructive, strategically stable relationship&#34; and discussed major issues including trade, Taiwan, artificial intelligence, and the Iran conflict. Xi emphasized that &#34;China&#39;s door to opening up will only open wider,&#34; signaling Beijing&#39;s willingness to expand economic cooperation.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="3 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">3 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (3)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://www.cnbc.com/2026/05/14/trump-xi-summit-beijing-takeaway-taiwan-trade-iran-war-strategic-relations-.html" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" width="14" height="14">
+              Cnbc
+            </span>
+            <span class="cite-popover__headline">Five takeaways from the Trump-Xi summit in Beijing - CNBC</span>
+            
+              <span class="cite-popover__summary">* China&#39;s Xi and Trump agreed to build a &#34;constructive, strategically stable relationship.&#34;. * &#34;China&#39;s door to opening up will only open wider,&#34; Xi said. U.S. President Donald Trump and Chinese President Xi Jinping attend a bilateral meeti</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" width="14" height="14">
+              Cnbc
+            </span>
+            <span class="cite-popover__headline">Xi asks Trump if U.S. and China can avoid &#39;Thucydides Trap&#39; at high-stakes summit - CNBC</span>
+            
+              <span class="cite-popover__summary"># Xi asks Trump if U.S. and China can avoid &#39;Thucydides Trap&#39; at high-stakes summit. * Trump and Xi opened a two-day summit in Beijing focused on trade and security. * Xi asked whether the U.S. and China could avoid the &#34;Thucydides Trap,&#34; w</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" width="14" height="14">
+              Cnbc
+            </span>
+            <span class="cite-popover__headline">CNBC Daily Open: Trump-Xi summit delivers Wall Street boost - CNBC</span>
+            
+              <span class="cite-popover__summary"># CNBC Daily Open: Trump-Xi summit delivers Wall Street boost. * Xi tells U.S. CEOs including Musk and Cook that China will “open wider.”. U.S. President Donald Trump speaks at a state banquet with Chinese President Xi Jinping (not pictured</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+    
+    
+    <p>
+      The summit generated optimism on Wall Street and produced tangible outcomes, including Trump&#39;s invitation to Xi for a September visit to the White House. However, several critical pressure points—including trade disputes, Taiwan tensions, and human rights concerns—remained unresolved, leaving significant unfinished business for future negotiations between the two powers.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="2 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">2 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (2)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://www.cnbc.com/amp/2026/05/15/trump-wraps-up-two-day-china-trip-invites-xi-for-a-september-visit.html" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" width="14" height="14">
+              Cnbc
+            </span>
+            <span class="cite-popover__headline">Trump wraps up two-day China trip; invites Xi for a September visit - CNBC</span>
+            
+              <span class="cite-popover__summary"># Trump wraps up two-day China trip; invites Xi for a September visit. U.S. President Donald Trump and Chinese President Xi Jinping meet on the sidelines of a visit to Zhongnanhai Garden on May 15, 2026 in Beijing, China. BEIJING — U.S. Pre</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.foxnews.com/politics/trump-leaves-china-breakthroughs-unfinished-business-xis-biggest-fights" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" width="14" height="14">
+              Foxnews
+            </span>
+            <span class="cite-popover__headline">Trump leaves China with breakthroughs — and unfinished business on Xi’s biggest fights - Fox News</span>
+            
+              <span class="cite-popover__summary">* #### Trump says he&#39;s not looking for any favors from China&#39;s Xi on reopening Strait of Hormuz. President Donald Trump returned from his high-stakes summit in China with President Xi Jinping touting trade progress and warmer ties, but seve</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+</div>
+      
+    
+      <div class="block block--chart block--chart-stat">
+  <h3 class="chart__title">U.S.–China Trade &amp; Tariff Scorecard: Trump-Xi Summit Outcomes</h3>
+
+  
+    <div class="stat-row">
+      
+        <div class="stat">
+          <div class="stat__value">$17 billion</div>
+          <div class="stat__label">Annual U.S. Agricultural Purchases by China (through 2028)</div>
+          
+        </div>
+      
+        <div class="stat">
+          <div class="stat__value">$30 billion</div>
+          <div class="stat__label">Potential Tariff Reduction Scope on Bilateral Imports</div>
+          
+        </div>
+      
+        <div class="stat">
+          <div class="stat__value">Mutual cuts</div>
+          <div class="stat__label">Tariff Adjustment Direction Agreed</div>
+          
+        </div>
+      
+    </div>
+
+  
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-media_coverage"
+         class="need-section"
+         data-need="media_coverage"
+         data-screen-label="02 Media Coverage">
+  
+
+  <h2 class="need-section__title">Media Coverage</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      <div class="block block--newsfeed block--newsfeed--news">
+  <ul class="newsfeed-scroller" role="list">
+    
+      
+        <li class="news-card">
+          <figure class="news-card__media">
+            <img src="https://www.datocms-assets.com/126788/1778813199-welcome_ceremony_of_trump_by_xi_jinping-3-20260514.jpg?auto=format&amp;fit=max&amp;w=1200" alt="" loading="lazy">
+          </figure>
+
+          <div class="news-card__body">
+            <p class="news-card__outlet">Asia Media Centre</p>
+            <h3 class="news-card__title">
+              <a href="https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing" rel="noopener noreferrer">Trump-Xi: Summit in Beijing</a>
+            </h3>
+            
+              <p class="news-card__summary">Xi Warns Trump That Taiwan Issue Could Lead to &#39;Conflict&#39; at Bilateral Talks in Beijing. Xi&#39;s stark warning that mishandling Taiwan risks &#34;clashes and even conflicts,&#34; while noting the absence of any deal on the pending $10 billion U.S. arms sale to Taiwan.</p>
+            
+            <p class="news-card__meta">
+              
+                <time class="news-card__date">2026-05-15</time>
+              
+            </p>
+          </div>
+        </li>
+      
+    
+      
+        <li class="news-card">
+          <figure class="news-card__media">
+            <img src="https://image.cnbcfm.com/api/v1/image/108306978-17787681692026-05-14t103216z_389362417_rc2y8laqnuvb_rtrmadp_0_china-usa.jpeg?v=1778768190&amp;w=1920&amp;h=1080" alt="" loading="lazy">
+          </figure>
+
+          <div class="news-card__body">
+            <p class="news-card__outlet">CNBC</p>
+            <h3 class="news-card__title">
+              <a href="https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html" rel="noopener noreferrer">CNBC Daily Open: Trump-Xi summit delivers Wall Street boost</a>
+            </h3>
+            
+              <p class="news-card__summary">Xi tells U.S. CEOs including Musk and Cook that China will &#34;open wider.&#34; Wall Street was riding high as the first day of the U.S.-China summit raised hopes for a positive relationship reset and agreements from both sides.</p>
+            
+            <p class="news-card__meta">
+              
+                <time class="news-card__date">2026-05-15</time>
+              
+            </p>
+          </div>
+        </li>
+      
+    
+      
+        <li class="news-card">
+          <figure class="news-card__media">
+            <img src="https://static.foxnews.com/foxnews.com/content/uploads/2026/05/donald-trump-xi-jinping-2026.jpeg" alt="" loading="lazy">
+          </figure>
+
+          <div class="news-card__body">
+            <p class="news-card__outlet">Fox News</p>
+            <h3 class="news-card__title">
+              <a href="https://www.foxnews.com/politics/trump-pushes-xi-trade-after-supreme-court-ruling-dents-key-china-pressure-tool" rel="noopener noreferrer">Trump pushes Xi on trade after Supreme Court ruling dents key China pressure tool</a>
+            </h3>
+            
+              <p class="news-card__summary">Trade has emerged as a central focus of President Donald Trump&#39;s high-stakes meetings with Chinese President Xi Jinping this week. US and China discuss Taiwan, Iran and trade relations.</p>
+            
+            <p class="news-card__meta">
+              
+                <time class="news-card__date">2026-05-14</time>
+              
+            </p>
+          </div>
+        </li>
+      
+    
+      
+        <li class="news-card">
+          <figure class="news-card__media">
+            <img src="https://dims.apnews.com/dims4/default/3c5456a/2147483647/strip/true/crop/3161x2106+0+0/resize/980x653!/quality/90/url=https%3A%2F%2Fassets.apnews.com%2Fd7%2Fc6%2F1c1bd21d4f0087bf113e167aa3db%2Fap26134405224437.jpg" alt="" loading="lazy">
+          </figure>
+
+          <div class="news-card__body">
+            <p class="news-card__outlet">AP News</p>
+            <h3 class="news-card__title">
+              <a href="https://apnews.com/live/trump-administration-updates-05-14-2026" rel="noopener noreferrer">Live updates: Xi and Trump wrap up bilateral meeting after 2 hours of talks</a>
+            </h3>
+            
+              <p class="news-card__summary">President Donald Trump meets with China&#39;s President Xi Jinping at the Great Hall of the People. Trump signals he wants to do business with Xi.</p>
+            
+            <p class="news-card__meta">
+              
+                <time class="news-card__date">2026-05-14</time>
+              
+            </p>
+          </div>
+        </li>
+      
+    
+      
+        <li class="news-card">
+          <figure class="news-card__media">
+            <img src="https://image.cnbcfm.com/api/v1/image/108306883-1778770220615-108306883-1778759349633-gettyimages-2275560543-CHINA-US-DIPLOMACY.jpg?v=1778770231&amp;w=1920&amp;h=1080" alt="" loading="lazy">
+          </figure>
+
+          <div class="news-card__body">
+            <p class="news-card__outlet">CNBC</p>
+            <h3 class="news-card__title">
+              <a href="https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html" rel="noopener noreferrer">Xi asks Trump if U.S. and China can avoid &#39;Thucydides Trap&#39; at high-stakes summit</a>
+            </h3>
+            
+              <p class="news-card__summary">Trump and Xi opened a two-day summit in Beijing focused on trade and security. Xi asked whether the U.S. and China could avoid the &#34;Thucydides Trap,&#34; which refers to how tensions historically between a rising and ruling power have often resulted in a war.</p>
+            
+            <p class="news-card__meta">
+              
+                <time class="news-card__date">2026-05-14</time>
+              
+            </p>
+          </div>
+        </li>
+      
+    
+  </ul>
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-latest_news"
+         class="need-section"
+         data-need="latest_news"
+         data-screen-label="03 Latest News">
+  
+
+  <h2 class="need-section__title">Latest News</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+
+
+
+
+<div class="block block--latest-news"
+     data-initial-visible="5"
+     data-step="5"
+     data-total="8">
+  <ol class="latest-news__list">
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://www.datocms-assets.com/126788/1778813199-welcome_ceremony_of_trump_by_xi_jinping-3-20260514.jpg?auto=format&amp;fit=max&amp;w=1200" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.asiamediacentre.org.nz&sz=64"
+                   alt="">
+              <span>Asia Media Centre</span>
+              
+                <time datetime="2026-05-15T04:08:11Z">2026-05-15</time>
+              
+            </header>
+            <h3 class="ln-card__title">Trump-Xi: Summit in Beijing</h3>
+            
+              <p class="ln-card__summary">Xi warns Trump that Taiwan issue could lead to conflict at bilateral talks in Beijing.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link ln-card__link--no-media" href="https://www.washingtonpost.com/national/2026/05/14/china-trump-xi-summit-beijing/fdddd82c-5004-11f1-97e7-22c6c29ff0d8_story.html" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.washingtonpost.com&sz=64"
+                   alt="">
+              <span>The Washington Post</span>
+              
+                <time datetime="2026-05-15T02:22:59Z">2026-05-15</time>
+              
+            </header>
+            <h3 class="ln-card__title">The Latest: US-China summit ends with Xi and Trump claiming progress but differences remain</h3>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://image.cnbcfm.com/api/v1/image/108306978-17787681692026-05-14t103216z_389362417_rc2y8laqnuvb_rtrmadp_0_china-usa.jpeg?v=1778768190&amp;w=1920&amp;h=1080" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.cnbc.com&sz=64"
+                   alt="">
+              <span>CNBC</span>
+              
+                <time datetime="2026-05-15T01:12:30Z">2026-05-15</time>
+              
+            </header>
+            <h3 class="ln-card__title">CNBC Daily Open: Trump-Xi summit delivers Wall Street boost</h3>
+            
+              <p class="ln-card__summary">Xi tells U.S. CEOs including Musk and Cook that China will open wider as Wall Street rises on hopes for a positive relationship reset.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://www.cnbc.com/2026/05/14/trump-xi-beijing-summit-trade-taiwan-ai-iran-rare-earths-tariffs.html" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://image.cnbcfm.com/api/v1/image/108306883-1778770220615-108306883-1778759349633-gettyimages-2275560543-CHINA-US-DIPLOMACY.jpg?v=1778770231&amp;w=1920&amp;h=1080" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.cnbc.com&sz=64"
+                   alt="">
+              <span>CNBC</span>
+              
+                <time datetime="2026-05-14T02:31:54Z">2026-05-14</time>
+              
+            </header>
+            <h3 class="ln-card__title">Xi asks Trump if U.S. and China can avoid &#39;Thucydides Trap&#39; at high-stakes summit</h3>
+            
+              <p class="ln-card__summary">Trump and Xi opened a two-day summit in Beijing focused on trade and security, with Xi asking whether the two powers could avoid the Thucydides Trap.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link ln-card__link--no-media" href="https://nypost.com/2026/05/13/us-news/trump-greets-xi-in-beijing-to-kick-off-historic-china-summit/&#39;,&#39;" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=nypost.com&sz=64"
+                   alt="">
+              <span>New York Post</span>
+              
+                <time datetime="2026-05-14T02:08:48Z">2026-05-14</time>
+              
+            </header>
+            <h3 class="ln-card__title">Trump greets Xi in Beijing to kick off historic China summit with grand welcome ceremony</h3>
+            
+              <p class="ln-card__summary">President Trump shook hands with Chinese leader Xi Jinping to kick off a historic summit between the world&#39;s two most powerful heads of state.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link ln-card__link--no-media" href="https://nypost.com/2026/05/13/us-news/trump-gets-red-carpet-welcome-after-he-lands-in-beijing-for-closely-watched-summit-with-xi-jinping/&#39;,&#39;" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=nypost.com&sz=64"
+                   alt="">
+              <span>New York Post</span>
+              
+                <time datetime="2026-05-13T12:19:16Z">2026-05-13</time>
+              
+            </header>
+            <h3 class="ln-card__title">Trump gets red-carpet welcome after he lands in Beijing for closely watched summit with Xi Jinping</h3>
+            
+              <p class="ln-card__summary">President Trump touched down in China&#39;s capital and was given a red-carpet welcome at Beijing Capital International Airport ahead of the crucial summit with Xi Jinping.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link ln-card__link--no-media" href="https://www.washingtonpost.com/business/2026/05/12/trump-xi-china-trip-arrival/f9f86c74-4e5e-11f1-97e7-22c6c29ff0d8_story.html" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.washingtonpost.com&sz=64"
+                   alt="">
+              <span>The Washington Post</span>
+              
+                <time datetime="2026-05-13T00:02:05Z">2026-05-13</time>
+              
+            </header>
+            <h3 class="ln-card__title">Trump set to meet with Xi in Beijing as war and inflation weigh on his presidency</h3>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link" href="https://www.bloomberg.com/news/articles/2026-05-11/china-confirms-x-trump-summit-that-was-delayed-by-iran-war" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iYmZfnFYPumM/v1/1200x840.jpg" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.bloomberg.com&sz=64"
+                   alt="">
+              <span>Bloomberg</span>
+              
+                <time datetime="2026-05-11T01:16:58Z">2026-05-11</time>
+              
+            </header>
+            <h3 class="ln-card__title">China Confirms Xi-Trump Summit That Was Delayed by Iran War</h3>
+            
+              <p class="ln-card__summary">Beijing officially announced the date of Donald Trump&#39;s state visit, publicly green-lighting the first US presidential trip to China in nearly a decade.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+  </ol>
+  
+    <button type="button"
+            class="latest-news__more"
+            data-remaining="3">
+      <span class="latest-news__more-label">Load 3 more</span>
+      <span class="latest-news__more-chev" aria-hidden="true"></span>
+    </button>
+  
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-key_outcomes"
+         class="need-section"
+         data-need="key_outcomes"
+         data-screen-label="04 Key Outcomes">
+  
+
+  <h2 class="need-section__title">Key Outcomes</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+<div class="block block--paragraph">
+  
+    
+    
+    <p>
+      Trump and Xi agreed to build a &#34;constructive, strategically stable relationship&#34; and pledged to avoid the &#34;Thucydides Trap&#34;—the historical pattern of conflict between rising and ruling powers. Xi committed that &#34;China&#39;s door to opening up will only open wider,&#34; signaling economic engagement. The summit produced modest but concrete trade deliverables, including China&#39;s commitment to purchase at least $17 billion in additional U.S. agricultural products annually through 2028, alongside tariff reduction discussions and advances in farm market access.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="4 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.axios.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.politico.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">+1 more</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (4)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://www.cnbc.com/2026/05/14/trump-xi-summit-beijing-takeaway-taiwan-trade-iran-war-strategic-relations-.html" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" width="14" height="14">
+              Cnbc
+            </span>
+            <span class="cite-popover__headline">Five takeaways from the Trump-Xi summit in Beijing - CNBC</span>
+            
+              <span class="cite-popover__summary">* China&#39;s Xi and Trump agreed to build a &#34;constructive, strategically stable relationship.&#34;. * &#34;China&#39;s door to opening up will only open wider,&#34; Xi said. U.S. President Donald Trump and Chinese President Xi Jinping attend a bilateral meeti</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.axios.com/2026/05/15/trump-xi-china-summit" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.axios.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.axios.com&amp;sz=64" alt="" width="14" height="14">
+              Axios
+            </span>
+            <span class="cite-popover__headline">Trump tries to defy gravity with Beijing friendship summit - Axios</span>
+            
+              <span class="cite-popover__summary">President Trump&#39;s summit with Xi Jinping was staged as a reunion between old friends, concluding Friday with a private tour of Zhongnanhai, the Chinese Communist Party&#39;s leadership compound. * Trump spent the trip pitching closer ties with </span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.politico.com/news/2026/05/17/china-agrees-to-add-billions-annually-of-us-farm-purchases-white-house-says-00925648" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.politico.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.politico.com&amp;sz=64" alt="" width="14" height="14">
+              Politico
+            </span>
+            <span class="cite-popover__headline">China agrees to billions in additional US farm purchases, White House says - Politico</span>
+            
+              <span class="cite-popover__summary">The announcement is among the few concrete deliverables from President Donald Trump’s summit with Chinese leader Xi Jinping last week. China&#39;s President Xi Jinping and President Donald Trump visit the Temple of Heaven on May 14, 2026, in Be</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.reuters.com/world/china/china-signals-tariff-cuts-advances-farm-market-access-after-trump-xi-summit-2026-05-16/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.reuters.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.reuters.com&amp;sz=64" alt="" width="14" height="14">
+              Reuters
+            </span>
+            <span class="cite-popover__headline">China signals tariff cuts, advances in farm market access after Trump-Xi summit - Reuters</span>
+            
+              <span class="cite-popover__summary"># China signals tariff cuts, advances in farm market access after Trump-Xi summit | Reuters. ## Browse World. Item 1 of 2 U.S. President Donald Trump speaks with Chinese President Xi Jinping while leaving after a visit to the Zhongnanhai Ga</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+    
+    
+    <p>
+      Taiwan remained a flashpoint despite the friendly atmosphere. Xi issued a stark warning that mishandling the Taiwan issue could lead to &#34;clashes and even conflicts,&#34; while the White House readout notably omitted Taiwan discussions. Critically, no agreement emerged on the pending $10 billion U.S. arms sale to Taiwan, leaving this contentious issue unresolved and underscoring the limits of the summit&#39;s warming rhetoric.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="3 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.asiamediacentre.org.nz&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">3 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (3)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.asiamediacentre.org.nz&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.asiamediacentre.org.nz&amp;sz=64" alt="" width="14" height="14">
+              Org
+            </span>
+            <span class="cite-popover__headline">Trump-Xi : Summit in Beijing - Asia Media Centre</span>
+            
+              <span class="cite-popover__summary"># Trump-Xi : Summit in Beijing. &#34;Xi Warns Trump That Taiwan Issue Could Lead to &#39;Conflict&#39; at Bilateral Talks in Beijing&#34;** *Euronews — May 14, 2026*  Euronews — editorially independent, EU-licensed, and widely read in the UK — covers Xi&#39;s </span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.foxnews.com/politics/behind-summit-smiles-xi-gives-blunt-warning-trump-clashes-conflicts" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" width="14" height="14">
+              Foxnews
+            </span>
+            <span class="cite-popover__headline">Behind summit smiles, Xi gives blunt warning to Trump of &#39;clashes&#39; and &#39;conflicts&#39; - Fox News</span>
+            
+              <span class="cite-popover__summary">* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. * #### Trump: Xi says China won&#39;t give Iran military equipment. * #### US and China discuss Taiwan, Iran and trade relations. * #### Experts weigh in on Taiwa</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.foxnews.com/politics/white-house-readout-trump-xi-meeting-omits-taiwan-china-centers-issue-warning" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" width="14" height="14">
+              Foxnews
+            </span>
+            <span class="cite-popover__headline">White House readout on Trump, Xi meeting omits Taiwan, as China centers on that issue with warning - Fox News</span>
+            
+              <span class="cite-popover__summary">* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. ## The White House says U.S. and China &#39;agreed that Iran can never have a nuclear weapon&#39; after Trump and Xi meeting. The White House said the U.S. and China </span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+    
+    
+    <p>
+      On Iran, both sides found common ground, with the White House announcing that Trump and Xi &#34;agreed that Iran can never have a nuclear weapon.&#34; Trump stated that Xi confirmed China would not provide military equipment to Iran. However, broader security cooperation remained limited, and Iran&#39;s role in ongoing regional tensions continued to complicate the bilateral relationship despite this narrow agreement.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="3 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.washingtonpost.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">3 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (3)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://www.foxnews.com/politics/white-house-readout-trump-xi-meeting-omits-taiwan-china-centers-issue-warning" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" width="14" height="14">
+              Foxnews
+            </span>
+            <span class="cite-popover__headline">White House readout on Trump, Xi meeting omits Taiwan, as China centers on that issue with warning - Fox News</span>
+            
+              <span class="cite-popover__summary">* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. ## The White House says U.S. and China &#39;agreed that Iran can never have a nuclear weapon&#39; after Trump and Xi meeting. The White House said the U.S. and China </span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.foxnews.com/politics/behind-summit-smiles-xi-gives-blunt-warning-trump-clashes-conflicts" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" width="14" height="14">
+              Foxnews
+            </span>
+            <span class="cite-popover__headline">Behind summit smiles, Xi gives blunt warning to Trump of &#39;clashes&#39; and &#39;conflicts&#39; - Fox News</span>
+            
+              <span class="cite-popover__summary">* #### China’s Iran ties complicate Trump-Xi summit as tensions test US leverage. * #### Trump: Xi says China won&#39;t give Iran military equipment. * #### US and China discuss Taiwan, Iran and trade relations. * #### Experts weigh in on Taiwa</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.washingtonpost.com/national-security/2026/05/07/trump-xi-us-china-summit-iran/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.washingtonpost.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.washingtonpost.com&amp;sz=64" alt="" width="14" height="14">
+              Washingtonpost
+            </span>
+            <span class="cite-popover__headline">Trump and Xi set to meet under shadow of Iran negotiations - The Washington Post</span>
+            
+              <span class="cite-popover__summary"># Trump and Xi set to meet under shadow of Iran negotiations. The president, seeking a lavish welcome in Beijing, delayed the summit to focus on the emerging Iran conflict. Two months later, the war still looms large. Make us preferred on G</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-key_figures"
+         class="need-section"
+         data-need="key_figures"
+         data-screen-label="05 Key Figures">
+  
+
+  <h2 class="need-section__title">Key Figures</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+<div class="block block--people">
+  <ul class="people__grid">
+    
+      <li class="person-card">
+        <div class="person-card__media">
+          
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg/330px-Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg" alt="Donald Trump" loading="lazy">
+          
+        </div>
+        <div class="person-card__body">
+          <h3 class="person-card__name">
+            
+              <a href="https://en.wikipedia.org/wiki/Donald_Trump" target="_blank" rel="noopener noreferrer">Donald Trump</a>
+            
+          </h3>
+          <p class="person-card__role">President of the United States</p>
+          <p class="person-card__bio">Trump led the U.S. delegation to Beijing for the first presidential summit with China in nine years, seeking to reset U.S.-China relations and address trade, Taiwan, and security tensions.</p>
+          
+        </div>
+      </li>
+    
+      <li class="person-card">
+        <div class="person-card__media">
+          
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg/330px-Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg" alt="Xi Jinping" loading="lazy">
+          
+        </div>
+        <div class="person-card__body">
+          <h3 class="person-card__name">
+            
+              <a href="https://en.wikipedia.org/wiki/Xi_Jinping" target="_blank" rel="noopener noreferrer">Xi Jinping</a>
+            
+          </h3>
+          <p class="person-card__role">President of the People&#39;s Republic of China</p>
+          <p class="person-card__bio">Xi hosted Trump in Beijing and warned that mishandling the Taiwan issue could lead to conflict, while signaling China&#39;s willingness to open its economy wider to American business.</p>
+          
+        </div>
+      </li>
+    
+  </ul>
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-reactions"
+         class="need-section"
+         data-need="reactions"
+         data-screen-label="06 Reactions">
+  
+
+  <h2 class="need-section__title">Reactions</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="block block--opinions">
+  <section class="opinions" aria-label="Opinions">
+    <div class="opinions__tabs" role="tablist">
+      
+        <button class="opinions__tab is-active"
+                data-tier="positive" role="tab">Optimistic</button>
+      
+      
+        <button class="opinions__tab"
+                data-tier="negative" role="tab">Critical</button>
+      
+      
+    </div>
+
+    
+      <ul class="opinions__panel is-active" data-tier="positive">
+        <li>
+  
+  
+  <a class="opinion-card"
+     href="https://www.latimes.com/politics/story/2026-05-13/trump-marvels-at-chinese-power-as-summit-kicks-off" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">This ceremony is an honor like few I&#39;ve seen before.</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg/330px-Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%28cropped%29%282%29.jpg" alt="">
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>Donald Trump</strong>
+        
+          <span class="opinion-card__role">U.S. President</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=www.latimes.com&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">Los Angeles Times</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">Trump marvels at Chinese display of power as summit kicks off</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li><li>
+  
+  
+  <a class="opinion-card"
+     href="https://www.cnbc.com/2026/05/15/dow-sp500-record-trump-xi-trade-us-china-.html" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">China will open wider to American business and greater cooperation.</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg/330px-Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg" alt="">
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>Xi Jinping</strong>
+        
+          <span class="opinion-card__role">Chinese President</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=www.cnbc.com&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">CNBC</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">CNBC Daily Open: Trump-Xi summit delivers Wall Street boost</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li>
+      </ul>
+    
+    
+      <ul class="opinions__panel" data-tier="negative">
+        <li>
+  
+  
+  <a class="opinion-card"
+     href="https://www.asiamediacentre.org.nz/trump-xi-summit-in-beijing" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">Mishandling the Taiwan issue could lead to clashes and even conflicts.</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg/330px-Xi_Jinping_meets_Keir_Starmer_Jan_2026_%28cropped_2%29.jpg" alt="">
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>Xi Jinping</strong>
+        
+          <span class="opinion-card__role">Chinese President</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=www.asiamediacentre.org.nz&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">Asia Media Centre</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">Trump-Xi : Summit in Beijing</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li>
+      </ul>
+    
+    
+  </section>
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-summit_gallery"
+         class="need-section"
+         data-need="summit_gallery"
+         data-screen-label="07 Summit Gallery">
+  
+
+  <h2 class="need-section__title">Summit Gallery</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      <div class="block block--gallery">
+  <ul class="gallery-grid">
+    
+      <li class="gallery-item">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Welcome_ceremony_of_Trump_by_Xi_Jinping_(3)-20260514.jpg"
+               alt="Trump and Xi at welcome ceremony with military honor guard"
+               loading="lazy" />
+          <figcaption>
+            Trump and Xi Jinping participate in a grand welcome ceremony at the Great Hall of the People, featuring military personnel and ceremonial protocol.
+            
+              <a class="gallery-source" href="https://en.wikipedia.org/wiki/2026_state_visit_by_Donald_Trump_to_China" rel="noopener noreferrer" target="_blank">source</a>
+            
+          </figcaption>
+        </figure>
+      </li>
+    
+      <li class="gallery-item">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Xi-Trump_meeting_at_the_American_side_(1)-20260514.jpg"
+               alt="Trump and Xi Jinping in bilateral meeting discussion"
+               loading="lazy" />
+          <figcaption>
+            Trump and Xi Jinping hold bilateral talks during their summit meeting in Beijing.
+            
+              <a class="gallery-source" href="https://en.wikipedia.org/wiki/2026_state_visit_by_Donald_Trump_to_China" rel="noopener noreferrer" target="_blank">source</a>
+            
+          </figcaption>
+        </figure>
+      </li>
+    
+      <li class="gallery-item">
+        <figure>
+          <img src="https://ichef.bbci.co.uk/news/480/cpsprodpb/1ecb/live/07bb7020-4f92-11f1-8b8c-6d33e1d5abb6.jpg.webp"
+               alt="Xi and Trump arriving at state banquet ceremony"
+               loading="lazy" />
+          <figcaption>
+            Xi Jinping and Trump arrive together at the state banquet held at the Great Hall of the People on May 14, 2026.
+            
+              <a class="gallery-source" href="https://www.bbc.com/news/articles/cdxp0g4q3q2o" rel="noopener noreferrer" target="_blank">source</a>
+            
+          </figcaption>
+        </figure>
+      </li>
+    
+      <li class="gallery-item">
+        <figure>
+          <img src="https://www.usatoday.com/gcdn/authoring/authoring-images/2026/05/13/USAT/90059418007-trump-china-2026-summit-09.jpg?width=660&amp;height=435&amp;fit=crop&amp;format=pjpg&amp;auto=webp"
+               alt="Trump greeted by Han Zheng at Beijing airport arrival"
+               loading="lazy" />
+          <figcaption>
+            Trump is escorted by China&#39;s Vice President Han Zheng upon his arrival at Beijing Capital Airport on May 13, marking the start of the summit.
+            
+              <a class="gallery-source" href="https://www.usatoday.com/picture-gallery/news/politics/2026/05/13/trump-china-summit-trade-iran-taiwan-photos/90059052007/index.html" rel="noopener noreferrer" target="_blank">source</a>
+            
+          </figcaption>
+        </figure>
+      </li>
+    
+      <li class="gallery-item">
+        <figure>
+          <img src="https://media-cldnry.s-nbcnews.com/image/upload/c_fill,g_auto,w_1800,h_1200/rockcms/2026-05/260515-trump-china-mn-0845-fc2e83.jpg"
+               alt="Trump boarding Air Force One departing Beijing"
+               loading="lazy" />
+          <figcaption>
+            President Trump boards Air Force One as he departs Beijing on May 15, concluding the high-stakes summit with Xi Jinping.
+            
+              <a class="gallery-source" href="https://www.nbcnews.com/politics/trump-administration/live-blog/trump-xi-jinping-summit-china-live-updates-rcna344530" rel="noopener noreferrer" target="_blank">source</a>
+            
+          </figcaption>
+        </figure>
+      </li>
+    
+  </ul>
+</div>
+      
+    
+  </div>
+</section>
+      
+    </main>
+
+    <aside class="page-reference" aria-label="Reference">
+  
+    
+    <section id="section-timeline"
+         class="ref-card ref-card--timeline"
+         data-section="timeline">
+  <p class="ref-card__title">Timeline</p>
+  <div class="ref-card__body">
+    
+      
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+<ol class="ref-timeline">
+  
+    
+      <li class="ref-timeline__item ref-timeline__item--past">
+        
+          <time class="ref-timeline__date">2017</time>
+        
+        <div class="ref-timeline__label">
+          
+            <a href="#src-12">Trump&#39;s previous China visit</a>
+          
+        </div>
+        
+          <div class="ref-timeline__loc">China</div>
+        
+      </li>
+    
+      <li class="ref-timeline__item ref-timeline__item--past">
+        
+          <time class="ref-timeline__date">May 2026</time>
+        
+        <div class="ref-timeline__label">
+          
+            <a href="#src-12">Summit delayed by Iran war tensions</a>
+          
+        </div>
+        
+      </li>
+    
+      <li class="ref-timeline__item ref-timeline__item--past">
+        
+          <time class="ref-timeline__date">2026-05-13</time>
+        
+        <div class="ref-timeline__label">
+          
+            <a href="#src-11">Trump arrives in Beijing with CEOs</a>
+          
+        </div>
+        
+          <div class="ref-timeline__loc">Beijing Capital International Airport</div>
+        
+      </li>
+    
+  
+    
+      <li class="ref-timeline__item ref-timeline__item--present ref-timeline__item--breaking">
+        
+          <time class="ref-timeline__date">2026-05-14</time>
+        
+        <div class="ref-timeline__label">
+          
+            <a href="#src-6">Trump and Xi hold bilateral meeting at Great Hall of the People</a>
+          
+        </div>
+        
+          <div class="ref-timeline__loc">Great Hall of the People, Beijing</div>
+        
+      </li>
+    
+      <li class="ref-timeline__item ref-timeline__item--present">
+        
+          <time class="ref-timeline__date">2026-05-15</time>
+        
+        <div class="ref-timeline__label">
+          
+            <a href="#src-8">Trump wraps up summit with trade progress</a>
+          
+        </div>
+        
+          <div class="ref-timeline__loc">Zhongnanhai Garden, Beijing</div>
+        
+      </li>
+    
+  
+    
+      <li class="ref-timeline__item ref-timeline__item--future">
+        
+          <time class="ref-timeline__date">2026-09-24</time>
+        
+        <div class="ref-timeline__label">
+          
+            <a href="#src-9">Xi invited to visit White House</a>
+          
+        </div>
+        
+          <div class="ref-timeline__loc">White House, Washington D.C.</div>
+        
+      </li>
+    
+  
+</ol>
+      
+    
+  </div>
+</section>
+  
+  
+</aside>
+  </div>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <p class="page-footer__meta">Last updated 2026-05-18</p>
+    </div>
+  </footer>
+
+  <script>(() => {
+  /* ── Horizontal nav scroll spy ── */
+  const navItems = document.querySelectorAll('.nav__item[data-section]');
+  const sections = [...document.querySelectorAll('.need-section[data-need]')];
+
+  if (navItems.length && sections.length && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navItems.forEach(i => i.classList.remove('is-active'));
+          const active = document.querySelector(`.nav__item[data-section="${e.target.dataset.need}"]`);
+          if (active) active.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+
+    sections.forEach(s => obs.observe(s));
+  }
+
+  /* ── Newsfeed prev/next buttons ── */
+  const NF_ARROW_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+  const NF_ARROW_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+  document.querySelectorAll('.block--newsfeed').forEach(block => {
+    const scroller = block.querySelector('.newsfeed-scroller');
+    if (!scroller) return;
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'newsfeed-nav newsfeed-nav--prev';
+    prev.setAttribute('aria-label', 'Previous');
+    prev.innerHTML = NF_ARROW_L;
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'newsfeed-nav newsfeed-nav--next';
+    next.setAttribute('aria-label', 'Next');
+    next.innerHTML = NF_ARROW_R;
+
+    block.appendChild(prev);
+    block.appendChild(next);
+
+    const pageStep = () => {
+      const card = scroller.querySelector('.news-card');
+      const cardW = card ? card.getBoundingClientRect().width : scroller.clientWidth * 0.8;
+      const cs = getComputedStyle(scroller);
+      const gap = parseFloat(cs.columnGap || cs.gap) || 0;
+      return cardW + gap;
+    };
+
+    const updateState = () => {
+      const max = scroller.scrollWidth - scroller.clientWidth - 1;
+      prev.disabled = scroller.scrollLeft <= 0;
+      next.disabled = scroller.scrollLeft >= max;
+    };
+
+    prev.addEventListener('click', () => scroller.scrollBy({ left: -pageStep(), behavior: 'smooth' }));
+    next.addEventListener('click', () => scroller.scrollBy({ left:  pageStep(), behavior: 'smooth' }));
+    scroller.addEventListener('scroll', updateState, { passive: true });
+    window.addEventListener('resize', updateState);
+    updateState();
+  });
+
+  /* ── Latest news "Load more" ── */
+  document.querySelectorAll('.block--latest-news').forEach(block => {
+    const btn = block.querySelector('.latest-news__more');
+    if (!btn) return;
+    const step = parseInt(block.dataset.step, 10) || 5;
+    btn.addEventListener('click', () => {
+      const collapsed = block.querySelectorAll('.ln-card--collapsed');
+      const reveal = Array.from(collapsed).slice(0, step);
+      reveal.forEach(c => c.classList.remove('ln-card--collapsed'));
+      const remaining = collapsed.length - reveal.length;
+      if (remaining <= 0) {
+        btn.hidden = true;
+      } else {
+        btn.dataset.remaining = String(remaining);
+        const label = btn.querySelector('.latest-news__more-label');
+        if (label) label.textContent = `Load ${Math.min(step, remaining)} more`;
+      }
+    });
+  });
+
+  /* ── Opinions tabs ── */
+  document.querySelectorAll('.opinions').forEach(root => {
+    const tabs   = root.querySelectorAll('.opinions__tab');
+    const panels = root.querySelectorAll('.opinions__panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tier = tab.dataset.tier;
+        tabs.forEach(t => t.classList.toggle('is-active', t === tab));
+        panels.forEach(p => p.classList.toggle('is-active', p.dataset.tier === tier));
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

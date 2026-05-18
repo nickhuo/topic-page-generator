@@ -1,0 +1,170 @@
+{
+  "trace_id": "trace_833714c6878a",
+  "page_id": "page_99c6cfb4",
+  "input_sentence": "WWDC 2026",
+  "started_at": "2026-05-18T17:38:01.380042+00:00",
+  "ended_at": "2026-05-18T17:44:10.233370+00:00",
+  "total_duration_ms": 368853,
+  "total_cost_usd": 0.0,
+  "pipeline_trace": [
+    {
+      "stage": "ground",
+      "started_at": "2026-05-18T17:38:01.380338+00:00",
+      "duration_ms": 21119,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 5082,
+          "output_tokens": 322,
+          "cost_usd": 0.020076,
+          "duration_ms": 6993
+        }
+      ]
+    },
+    {
+      "stage": "hero_image",
+      "started_at": "2026-05-18T17:39:18.681671+00:00",
+      "duration_ms": 708,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "curation",
+      "started_at": "2026-05-18T17:39:19.410237+00:00",
+      "duration_ms": 12943,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2983,
+          "output_tokens": 676,
+          "cost_usd": 0.019089,
+          "duration_ms": 12927
+        }
+      ]
+    },
+    {
+      "stage": "research",
+      "started_at": "2026-05-18T17:40:56.391256+00:00",
+      "duration_ms": 76809,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "block_extract",
+      "started_at": "2026-05-18T17:42:13.210081+00:00",
+      "duration_ms": 50168,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    },
+    {
+      "stage": "render",
+      "started_at": "2026-05-18T17:43:09.693570+00:00",
+      "duration_ms": 49,
+      "model": null,
+      "tokens": null,
+      "cost_usd": null,
+      "outcome": "success",
+      "retry_count": 0,
+      "error": null,
+      "output_ref": null,
+      "llm_calls": []
+    }
+  ],
+  "editor_actions": [
+    {
+      "action_at": "2026-05-18T17:39:18+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "ground",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:40:49+00:00",
+      "actor": "editor:cli",
+      "action": "skip_section",
+      "target": {
+        "section_id": "people_relationships",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_drop_in_plan_review"
+    },
+    {
+      "action_at": "2026-05-18T17:40:55+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "plan",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:43:09+00:00",
+      "actor": "editor:cli",
+      "action": "accept_section",
+      "target": {
+        "section_id": "sections",
+        "field_path": null
+      },
+      "before": null,
+      "after": null,
+      "reason": "manual_accept"
+    },
+    {
+      "action_at": "2026-05-18T17:44:10+00:00",
+      "actor": "editor:cli",
+      "action": "approve_page",
+      "target": null,
+      "before": null,
+      "after": null,
+      "reason": "manual_approve"
+    }
+  ],
+  "final_outcome": "approved_published",
+  "approval": {
+    "actor": "cli_user@local",
+    "approved_at": "2026-05-18T17:44:10.233370+00:00",
+    "auto_mode": false
+  }
+}

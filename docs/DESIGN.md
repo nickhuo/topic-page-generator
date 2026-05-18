@@ -24,16 +24,17 @@
 
 **Data contract.** Every fact-bearing field carries a citation pointing into a frozen evidence pool. Schema validation is the trust boundary between the LLM and the editor — if a section parsed, every claim in it is traceable to a real source. Full contract in [`schema.md`](./schema.md).
 
-**Four example pages, four different event archetypes:**
+**Five example pages, five different event archetypes:**
 
 | Page | Archetype | Input |
 |---|---|---|
-| [`gpt55-instant.html`](../output/gpt55-instant.html) | Tech / product rollout | "OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT in May 2026." |
+| [`openai-launches-gpt-5.html`](../output/openai-launches-gpt-5.html) | Tech / product rollout | "OpenAI rolled out GPT-5.5 Instant as the default model in ChatGPT in May 2026" |
 | [`eurovision-song-contest-2026.html`](../output/eurovision-song-contest-2026.html) | Live cultural event | "Eurovision 2026 is being held in Vienna from May 12 to May 16." |
 | [`2026-fifa-world-cup.html`](../output/2026-fifa-world-cup.html) | Scheduled sports tournament | "The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026." |
-| [`trump-xi-beijing-summit.html`](../output/trump-xi-beijing-summit.html) | Geopolitical / diplomatic event | "Trump and Xi will meet in Beijing for a bilateral summit in late May 2026." |
+| [`trump-xi-summit-in.html`](../output/trump-xi-summit-in.html) | Geopolitical / diplomatic event | "Trump China summit" |
+| [`wwdc-2026-apple-s.html`](../output/wwdc-2026-apple-s.html) | Developer conference / keynote | "WWDC 2026" |
 
-The point of running the system across these four is to show that the *same* generator produces pages whose shape genuinely differs by event type (see §1 and §6).
+The point of running the system across these five is to show that the *same* generator produces pages whose shape genuinely differs by event type (see §1 and §6). The shorter inputs (`"Trump China summit"`, `"WWDC 2026"`) also exercise the ground stage's ability to enrich a sparse prompt into a full `EventFacts` before the page is planned.
 
 ---
 

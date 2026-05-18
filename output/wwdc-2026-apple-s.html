@@ -1,0 +1,2498 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WWDC 2026: Apple&#39;s iOS 27, Siri Overhaul, and AI Updates — Topic Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>:root {
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-ink-muted: #5a5a5a;
+  --color-accent: #2563eb;
+  --color-accent-ink: #ffffff;
+  --color-divider: #e5e5e5;
+  --font-weight-body: 400;
+  --font-weight-heading: 600;
+}</style>
+  <style>/* =========================================================================
+   Topic Page — Design System v2
+   
+   Palette variables are injected by the pipeline as --color-* tokens.
+   This file maps them to the design system's --ink/--muted/--rule aliases
+   and defines all component styles.
+   ========================================================================= */
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+/* ── Design tokens ── */
+:root {
+  /* Map pipeline palette tokens → design aliases */
+  --ink:     var(--color-ink, #0f172a);
+  --ink-2:   var(--color-ink-muted, #334155);
+  --muted:   #64748b;
+  --faint:   #94a3b8;
+  --rule:    var(--color-divider, #e2e8f0);
+  --bg:      var(--color-bg, #ffffff);
+  --surface: var(--color-surface, #f8fafc);
+  --link:    #1d4ed8;
+
+  /* Typography */
+  --serif:   'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing */
+  --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px;
+  --sp-4: 16px; --sp-5: 24px;  --sp-6: 32px;
+  --sp-7: 48px; --sp-8: 64px;  --sp-9: 96px;
+
+  /* Layout */
+  --content-max: 1200px;
+  --content-pad: 56px;
+  --sidebar-w:   320px;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute; top: -100px; left: 0; z-index: 200;
+  background: var(--ink); color: var(--bg);
+  padding: var(--sp-2) var(--sp-4); font-size: 13px;
+}
+.skip-link:focus { top: 0; }
+
+/* =========================================================================
+   HERO
+   ========================================================================= */
+.page-chrome { /* wraps hero */ }
+
+.hero { position: relative; height: 600px; overflow: hidden; }
+.hero__img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 30%;
+  display: block;
+}
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(10,14,30,.94) 0%,
+    rgba(10,14,30,.65) 42%,
+    rgba(10,14,30,.18) 100%);
+}
+.hero__body  { position: absolute; bottom: 0; left: 0; right: 0; color: #fff; }
+.hero__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--content-pad) var(--sp-7);
+}
+
+.hero__meta   { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-5); }
+.hero__badge  {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700;
+  background: rgba(255,255,255,.15); color: #fff;
+  padding: 3px 10px; border-radius: 2px;
+  border: 1px solid rgba(255,255,255,.25);
+}
+.hero__time   { font-size: 12px; color: rgba(255,255,255,.45); }
+
+.hero__title  {
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 2.8vw, 2.6rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -.02em; text-wrap: pretty;
+  margin-bottom: var(--sp-3); max-width: 820px;
+}
+.hero__subtitle {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem; line-height: 1.5;
+  color: rgba(255,255,255,.65);
+  margin-bottom: var(--sp-5); max-width: 680px;
+}
+
+/* Key bullets inside hero */
+.hero__bullets {
+  list-style: none;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px var(--sp-7);
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding-top: var(--sp-5); max-width: 820px;
+}
+.hero__bullet {
+  font-size: 13px; color: rgba(255,255,255,.82);
+  line-height: 1.48; display: flex; gap: 9px; align-items: baseline;
+}
+.hero__bullet::before {
+  content: "";
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,.4); flex-shrink: 0; margin-top: 6px;
+}
+
+/* Hero when no image */
+.hero--no-image {
+  height: auto;
+  background: var(--ink);
+  padding: var(--sp-7) 0 var(--sp-5);
+}
+.hero--no-image .hero__overlay { display: none; }
+.hero--no-image .hero__body    { position: static; }
+
+/* =========================================================================
+   STICKY NAV (horizontal, replaces left TOC)
+   ========================================================================= */
+.nav {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav__inner {
+  max-width: var(--content-max); margin: 0 auto;
+  padding: 0 var(--content-pad);
+  display: flex; overflow-x: auto; scrollbar-width: none;
+}
+.nav__inner::-webkit-scrollbar { display: none; }
+.nav__item { flex-shrink: 0; }
+.nav__item a {
+  display: block; padding: 13px 16px;
+  font-size: 12.5px; font-weight: 600; color: var(--muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  white-space: nowrap; transition: color .14s, border-color .14s;
+}
+.nav__item a:hover { color: var(--ink); }
+.nav__item.is-active a { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* =========================================================================
+   PAGE GRID (2-col: main + sidebar)
+   ========================================================================= */
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) var(--sidebar-w);
+  gap: var(--sp-8);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--sp-7) var(--content-pad) var(--sp-9);
+}
+@media (max-width: 900px) {
+  .page-grid { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-5); }
+  .page-reference {
+    order: -1;
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  :root { --content-pad: 20px; }
+}
+
+/* ── Main content ── */
+.page-main { min-width: 0; }
+
+/* =========================================================================
+   SECTIONS
+   ========================================================================= */
+.need-section { margin-bottom: var(--sp-8); scroll-margin-top: 54px; }
+
+.need-section__eyebrow { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-3); }
+
+/* Unified chip — single style, no color variants */
+.need-section__chip {
+  display: inline-block; padding: 2px 9px; border-radius: 3px;
+  font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  background: #f1f5f9; color: #475569;
+}
+
+.need-section__title {
+  font-family: var(--serif); font-size: 1.45rem; font-weight: 700;
+  color: var(--ink); line-height: 1.2; margin-bottom: var(--sp-5);
+}
+.need-section__blocks > * + * { margin-top: var(--sp-6); }
+
+/* =========================================================================
+   CITATIONS (inline, numbered)
+   ========================================================================= */
+.cite-num {
+  display: inline; font-size: 10px; font-family: var(--sans);
+  color: var(--link); vertical-align: super; margin-left: 1px;
+}
+.cite-num a { color: inherit; text-decoration: none; }
+.cite-num a:hover { text-decoration: underline; }
+
+/* =========================================================================
+   CITE CLUSTER (stacked publisher favicons + hover popover)
+   ========================================================================= */
+.cite-cluster {
+  display: inline-flex; align-items: center;
+  vertical-align: middle; margin-left: 6px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+.cite-cluster__logos {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+}
+.cite-logo {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  background: var(--surface);
+  object-fit: cover;
+  margin-left: -7px;
+  transition: transform .28s cubic-bezier(.16,1,.3,1),
+              box-shadow .2s ease-out;
+}
+.cite-logo:first-child { margin-left: 0; }
+.cite-cluster__logos .cite-logo:nth-child(1) { z-index: 3; }
+.cite-cluster__logos .cite-logo:nth-child(2) { z-index: 2; }
+.cite-cluster__logos .cite-logo:nth-child(3) { z-index: 1; }
+/* Gently fan the stacked logos on hover so the cluster feels alive */
+.cite-cluster:hover .cite-cluster__logos .cite-logo:nth-child(2) { transform: translateX(2px); }
+.cite-cluster:hover .cite-cluster__logos .cite-logo:nth-child(3) { transform: translateX(4px); }
+.cite-cluster:hover .cite-logo { box-shadow: 0 1px 3px rgba(15,23,42,.08); }
+
+.cite-cluster__count {
+  font-size: 11px; font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color .18s ease-out;
+}
+.cite-cluster:hover .cite-cluster__count,
+.cite-cluster:focus-visible .cite-cluster__count {
+  color: var(--ink);
+}
+
+/* Popover — fades + lifts in on hover/focus */
+.cite-popover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 50;
+  width: 440px; max-width: calc(100vw - 32px);
+  padding: var(--sp-4);
+  background: var(--bg);
+  border: 1px solid color-mix(in oklab, var(--rule) 75%, transparent);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 2px rgba(15,23,42,.04),
+    0 8px 24px rgba(15,23,42,.10),
+    0 24px 56px -12px rgba(15,23,42,.18);
+  font-size: 12.5px; line-height: 1.45;
+  color: var(--ink);
+  text-align: left;
+  cursor: default;
+
+  /* Animation baseline */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px) scale(.985);
+  transform-origin: bottom left;
+  transition:
+    opacity .18s ease-out,
+    transform .26s cubic-bezier(.16,1,.3,1),
+    visibility 0s linear .22s;
+  will-change: opacity, transform;
+}
+.cite-cluster:hover .cite-popover,
+.cite-cluster:focus-within .cite-popover,
+.cite-cluster:focus-visible .cite-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity .22s ease-out,
+    transform .3s cubic-bezier(.16,1,.3,1),
+    visibility 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cite-popover,
+  .cite-cluster:hover .cite-popover,
+  .cite-cluster:focus-within .cite-popover {
+    transition: opacity .12s linear, visibility 0s;
+    transform: none;
+  }
+  .cite-cluster:hover .cite-cluster__logos .cite-logo { transform: none; }
+}
+/* Hover bridge so cursor can cross the gap into the popover */
+.cite-cluster::after {
+  content: ""; position: absolute;
+  bottom: 100%; left: 0; right: 0; height: 10px;
+}
+.cite-popover__title {
+  display: block;
+  font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--faint);
+  margin-bottom: var(--sp-3);
+}
+.cite-popover__list {
+  display: flex; flex-direction: column;
+  max-height: 380px; overflow-y: auto;
+  margin: 0 calc(var(--sp-2) * -1);
+  padding: 0 var(--sp-2);
+  scrollbar-width: thin;
+}
+.cite-popover__card {
+  display: grid; grid-template-columns: 56px 1fr;
+  gap: var(--sp-3); align-items: start;
+  text-decoration: none; color: inherit;
+  padding: 10px var(--sp-2);
+  border-radius: 8px;
+  position: relative;
+  transition: background-color .18s ease-out,
+              transform .2s cubic-bezier(.16,1,.3,1);
+}
+.cite-popover__card + .cite-popover__card::before {
+  content: ""; position: absolute;
+  top: 0; left: var(--sp-2); right: var(--sp-2);
+  height: 1px;
+  background: color-mix(in oklab, var(--rule) 55%, transparent);
+}
+.cite-popover__card:hover {
+  background: color-mix(in oklab, var(--surface) 75%, transparent);
+}
+.cite-popover__card:hover::before,
+.cite-popover__card:hover + .cite-popover__card::before { background: transparent; }
+
+.cite-popover__thumb {
+  width: 56px; height: 56px;
+  border-radius: 8px; overflow: hidden;
+  object-fit: cover; display: block;
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--rule) 70%, transparent);
+}
+/* Fallback when an article has no OG image: tint the tile and showcase
+   the publisher's own logo at a larger, intentional size. */
+.cite-popover__thumb--placeholder {
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(120% 120% at 28% 20%,
+      color-mix(in oklab, var(--ink) 7%, var(--bg)) 0%,
+      var(--surface) 65%);
+}
+.cite-popover__thumb--placeholder img {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  opacity: .92;
+  filter: drop-shadow(0 1px 2px rgba(15,23,42,.08));
+}
+.cite-popover__body { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.cite-popover__publisher {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-2);
+}
+.cite-popover__favicon { border-radius: 50%; }
+.cite-popover__headline {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 14px; line-height: 1.35;
+  color: var(--ink);
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+  transition: color .15s ease-out;
+}
+.cite-popover__card:hover .cite-popover__headline {
+  color: var(--link);
+}
+.cite-popover__summary {
+  font-size: 11.5px; color: var(--muted); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* Sidebar context: cluster sits inline at smaller scale */
+.ref-prose .cite-cluster { margin-left: 4px; }
+.ref-prose .cite-logo { width: 16px; height: 16px; margin-left: -5px; }
+.ref-prose .cite-popover { width: 280px; }
+
+/* =========================================================================
+   BLOCK: paragraph
+   ========================================================================= */
+.block--paragraph p {
+  font-size: 15.5px; line-height: 1.8; color: var(--ink-2);
+  margin-bottom: var(--sp-4); text-wrap: pretty; max-width: 680px;
+}
+/* =========================================================================
+   BLOCK: newsfeed (horizontal scroll-snap carousel, ≤5 image cards)
+   ========================================================================= */
+.block--newsfeed {
+  /* container — full content width, allows scroller to bleed if needed */
+  margin: 0;
+}
+.newsfeed-scroller {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--sp-4) * 1.5) / 2.5);
+  gap: var(--sp-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0;
+  padding-bottom: var(--sp-3);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.newsfeed-scroller::-webkit-scrollbar { height: 6px; }
+.newsfeed-scroller::-webkit-scrollbar-thumb {
+  background: var(--rule); border-radius: 3px;
+}
+.news-card {
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--rule); border-radius: 8px;
+  overflow: hidden; background: var(--bg);
+  min-width: 0;
+}
+.block--newsfeed { position: relative; }
+.newsfeed-nav {
+  position: absolute; top: calc(50% - var(--sp-3)); transform: translateY(-50%);
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--rule); background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: opacity .2s ease, background .18s ease;
+  z-index: 2; padding: 0;
+}
+.newsfeed-nav:hover { background: var(--surface); }
+.newsfeed-nav[disabled] { opacity: 0; pointer-events: none; }
+.newsfeed-nav--prev { left: -8px; }
+.newsfeed-nav--next { right: -8px; }
+.newsfeed-nav svg { width: 18px; height: 18px; }
+
+.news-card__media {
+  position: relative;
+  width: 100%; aspect-ratio: 16 / 9;
+  overflow: hidden; margin: 0;
+  background: var(--surface);
+  container-type: inline-size;
+}
+.news-card__media .news-card__photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  z-index: 2;
+}
+
+/* Fallback shown when no thumbnail, or when the photo errors out
+   (onerror toggles .news-card__media--fallback on the figure). */
+.news-card__fallback {
+  position: absolute; inset: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: end;
+  justify-items: start;
+  padding: var(--sp-4) var(--sp-5);
+  background:
+    radial-gradient(
+      120% 90% at 88% 14%,
+      color-mix(in oklab, var(--ink) 6%, var(--surface)) 0%,
+      var(--surface) 58%,
+      color-mix(in oklab, var(--ink) 2%, var(--surface)) 100%
+    );
+  overflow: hidden;
+}
+.news-card__fallback::before {
+  /* Soft engraved hatch — purely decorative, very low contrast. */
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -38deg,
+    transparent 0 14px,
+    color-mix(in oklab, var(--ink) 5%, transparent) 14px 15px
+  );
+  opacity: .55;
+  pointer-events: none;
+}
+.news-card__fallback::after {
+  /* Hairline rule that separates the monogram from the wordmark line. */
+  content: "";
+  position: absolute;
+  left: var(--sp-5); right: var(--sp-5);
+  bottom: calc(var(--sp-4) + 22px);
+  height: 1px;
+  background: color-mix(in oklab, var(--ink) 14%, transparent);
+}
+.news-card__fallback-mark {
+  position: absolute;
+  top: -10%;
+  right: -4%;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(120px, 32cqi, 220px);
+  line-height: 1;
+  color: color-mix(in oklab, var(--ink) 8%, transparent);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+.news-card__fallback-logo {
+  position: relative;
+  width: 44px; height: 44px;
+  padding: 8px;
+  background: var(--bg);
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--ink) 10%, transparent),
+    0 6px 16px -10px color-mix(in oklab, var(--ink) 40%, transparent);
+  object-fit: contain;
+  align-self: end;
+  grid-row: 1;
+}
+.news-card__fallback-name {
+  position: relative;
+  grid-row: 2;
+  margin-top: var(--sp-3);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* When a thumbnail loads, the photo sits above and hides the fallback.
+   When in fallback state, hide any leftover img element. */
+.news-card__media--fallback .news-card__photo { display: none; }
+
+.news-card__body    {
+  min-width: 0; padding: var(--sp-4);
+  flex: 1 1 auto;
+  display: flex; flex-direction: column;
+}
+.news-card__outlet  {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 800; color: var(--ink);
+  text-transform: uppercase; letter-spacing: .09em; margin-bottom: 6px;
+}
+.news-card__title   { font-family: var(--serif); font-size: 1rem; font-weight: 600; line-height: 1.3; margin-bottom: 5px; }
+.news-card__title a { color: var(--ink); text-decoration: none; }
+.news-card__title a:hover { color: var(--link); }
+.news-card__summary {
+  font-size: 12.5px; color: var(--muted); line-height: 1.52; margin-bottom: 5px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.news-card__meta {
+  font-size: 11px; color: var(--faint); display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap;
+  margin-top: auto; padding-top: var(--sp-3);
+}
+.news-card__pub { font-weight: 700; color: var(--ink-2); }
+
+/* Quote-only variant (no thumbnail) */
+.block--newsfeed--quotes .news-card { grid-template-columns: 1fr; }
+.block--newsfeed--quotes .news-card__media { display: none; }
+.block--newsfeed--quotes .news-card__title { font-style: italic; }
+
+/* =========================================================================
+   BLOCK: reactions → Opinions cards
+   Each card is a link to the original article. Tabs switch sentiment groups.
+   ========================================================================= */
+.opinions { display: grid; gap: 14px; }
+.opinions__tabs {
+  display: flex; gap: 22px;
+  border-bottom: 1px solid var(--rule);
+}
+.opinions__tab {
+  background: none; border: 0;
+  padding: 10px 0 12px;
+  font: 600 13px/1 var(--sans); color: var(--muted);
+  cursor: pointer; border-bottom: 2px solid transparent;
+  letter-spacing: .01em; user-select: none; white-space: nowrap;
+}
+.opinions__tab:hover { color: var(--ink-2); }
+.opinions__tab.is-active { color: var(--ink); border-color: var(--ink); }
+
+.opinions__panel {
+  display: none; list-style: none; padding: 0; margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.opinions__panel.is-active { display: grid; }
+
+.opinion-card {
+  display: grid; gap: 12px;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--rule); border-radius: 10px;
+  background: var(--bg); color: inherit; text-decoration: none;
+  min-width: 0; overflow: hidden;
+}
+.opinion-card:hover { border-color: #cbd5e1; }
+
+.opinion-card__quote {
+  font: italic 500 .9375rem/1.55 var(--serif);
+  color: var(--ink); margin: 0;
+  position: relative; padding-left: 16px;
+  min-width: 0; overflow-wrap: anywhere; word-break: break-word;
+}
+.opinion-card__quote::before {
+  content: "\201C";
+  position: absolute; left: -1px; top: -8px;
+  font: 700 1.75rem/1 var(--serif);
+  color: var(--faint);
+}
+
+.opinion-card__attr { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.opinion-card__avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%; overflow: hidden;
+  background: linear-gradient(180deg, #f1f5f9, #e2e8f0);
+  display: grid; place-items: center;
+  font: 600 12px/1 var(--sans); color: var(--muted);
+  flex: 0 0 auto;
+}
+.opinion-card__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.opinion-card__who { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.opinion-card__who strong { font: 600 13px/1.2 var(--sans); color: var(--ink); }
+.opinion-card__role {
+  font: 500 11.5px/1.3 var(--sans); color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.opinion-card__article {
+  display: flex; align-items: center; gap: 8px;
+  padding-top: 11px; border-top: 1px dashed var(--rule);
+  font: 500 11.5px/1.35 var(--sans);
+  color: var(--muted); min-width: 0;
+}
+.opinion-card__pub-logo { width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto; }
+.opinion-card__pub { font-weight: 600; color: var(--ink-2); flex: 0 0 auto; }
+.opinion-card__article-divider { color: var(--faint); flex: 0 0 auto; }
+.opinion-card__article-title {
+  color: var(--muted); flex: 1; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.opinion-card__arrow { color: var(--faint); flex: 0 0 auto; }
+.opinion-card:hover .opinion-card__arrow { color: var(--link); }
+
+/* =========================================================================
+   BLOCK: latest_news → vertical stack of landscape cards
+   ========================================================================= */
+.latest-news__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.ln-card {
+  border: 1px solid var(--rule); border-radius: 10px;
+  background: var(--bg);
+}
+.ln-card:hover { border-color: #cbd5e1; }
+.ln-card__link {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 18px;
+  padding: 12px;
+  color: inherit; text-decoration: none;
+  align-items: stretch;
+}
+.ln-card__link--no-media {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.ln-card__media {
+  margin: 0; aspect-ratio: 16/10;
+  overflow: hidden; border-radius: 6px;
+  background: var(--surface);
+}
+.ln-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ln-card__body {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 4px 4px 4px 0; min-width: 0;
+}
+.ln-card__pub {
+  display: flex; align-items: center; gap: 8px;
+  font: 600 11px/1 var(--sans); color: var(--muted);
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.ln-card__logo { width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto; }
+.ln-card__pub time {
+  margin-left: auto; text-transform: none; letter-spacing: 0;
+  font-weight: 500; color: var(--faint);
+}
+.ln-card__title {
+  font: 600 1.0625rem/1.35 var(--serif);
+  color: var(--ink); margin: 2px 0 2px;
+  letter-spacing: -0.005em;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ln-card__summary {
+  font: 400 .875rem/1.55 var(--sans);
+  color: var(--ink-2); margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* "Load more" — collapsed cards stay in DOM but hidden until JS reveals. */
+.ln-card--collapsed { display: none; }
+.latest-news__more {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 14px auto 0; padding: 9px 16px;
+  background: none; border: 1px solid var(--rule); border-radius: 6px;
+  font: 600 12px/1 var(--sans); color: var(--muted);
+  letter-spacing: .04em; text-transform: uppercase;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.latest-news__more:hover,
+.latest-news__more:focus-visible {
+  color: var(--ink); border-color: var(--ink-2);
+  background: color-mix(in oklab, var(--ink) 4%, transparent);
+  outline: none;
+}
+.latest-news__more[hidden] { display: none; }
+.latest-news__more-chev {
+  width: 7px; height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.block--latest-news { display: flex; flex-direction: column; align-items: stretch; }
+
+/* =========================================================================
+   BLOCK: people → "Who is involved" portrait cards (3 per row)
+   ========================================================================= */
+.people__grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.person-card {
+  display: grid; grid-template-rows: auto 1fr;
+  border: 1px solid var(--rule); border-radius: 10px;
+  overflow: hidden; background: var(--bg);
+}
+.person-card:hover { border-color: #cbd5e1; }
+.person-card__media {
+  position: relative; aspect-ratio: 16/9;
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  overflow: hidden;
+}
+.person-card__media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 22%;
+  display: block;
+}
+.person-card__initials {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font: 600 2rem/1 var(--serif); color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.person-card__body { padding: 12px 14px 14px; }
+.person-card__name { font: 600 1rem/1.3 var(--serif); margin: 0 0 2px; color: var(--ink); }
+.person-card__name a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.person-card__name a:hover { border-color: var(--rule); }
+.person-card__role {
+  font: 500 11px/1.35 var(--sans); color: var(--muted);
+  margin: 0 0 8px; text-transform: uppercase; letter-spacing: .05em;
+}
+.person-card__bio { font: 400 .8125rem/1.55 var(--sans); color: var(--ink-2); margin: 0; }
+.person-card__credit {
+  display: inline-block; margin-top: 10px;
+  font: 500 10.5px/1 var(--sans); color: var(--faint); text-decoration: none;
+}
+.person-card__credit:hover { color: var(--muted); }
+
+/* No-image fallback: collapse the placeholder media row entirely.
+   Card becomes a clean text-only block, name + role + bio. */
+.person-card--no-image .person-card__media { display: none; }
+.person-card--no-image { grid-template-rows: 1fr; }
+
+/* =========================================================================
+   BLOCK: chart
+   ========================================================================= */
+.chart__title {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--muted); margin-bottom: var(--sp-4);
+}
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--sp-5); }
+.stat__value { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; line-height: 1; color: var(--ink); }
+.stat__unit  { font-size: 1rem; font-weight: 400; color: var(--muted); }
+.stat__label {
+  font-size: 11px; color: var(--muted); margin-top: var(--sp-2);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.stat__cmp { font-size: 12px; color: var(--muted); margin-top: var(--sp-1); }
+
+.compare-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.compare-table th, .compare-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.45; }
+.compare-table thead th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); border-bottom: 2px solid var(--ink); }
+.compare-table tbody th { color: var(--muted); font-weight: 600; font-size: 13px; }
+.compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: none; }
+
+.bar-chart { display: flex; flex-direction: column; gap: var(--sp-3); }
+.bar-chart__series { display: grid; grid-template-columns: 120px 1fr; gap: var(--sp-3); align-items: center; }
+.bar-chart__label  { font-size: 13px; color: var(--ink-2); }
+.bar-chart__bars   { display: flex; gap: 2px; height: 14px; }
+.bar-chart__bar    { display: block; background: var(--ink); width: var(--bar, 0%); border-radius: 2px; }
+
+/* =========================================================================
+   REFERENCE SIDEBAR
+   ========================================================================= */
+.page-reference {
+  display: flex; flex-direction: column; gap: var(--sp-5);
+  position: sticky; top: 54px; align-self: start;
+  max-height: calc(100vh - 70px); overflow-y: auto; scrollbar-width: none;
+}
+.page-reference::-webkit-scrollbar { display: none; }
+
+/* Sidebar card shell — open editorial style, no boxing */
+.ref-card {
+  background: transparent;
+  padding: 0;
+  position: relative;
+}
+.ref-card + .ref-card {
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--rule);
+}
+.ref-card__title {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-2);
+  margin-bottom: var(--sp-4);
+}
+
+/* Timeline in sidebar
+   Geometry: rail centered at x = 13.5px (5px breathing room left of present halo).
+*/
+.ref-timeline {
+  list-style: none; position: relative;
+  padding-left: 28px;
+  margin: 0;
+}
+.ref-timeline::before {
+  content: ""; position: absolute;
+  left: 13px; top: 6px; bottom: 6px;
+  width: 1px; background: var(--rule);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+}
+.ref-timeline__item {
+  position: relative;
+  padding: 0 0 var(--sp-4) 0;
+  margin: 0;
+}
+.ref-timeline__item:last-child { padding-bottom: 0; }
+
+/* Default marker — width 9, centered on rail */
+.ref-timeline__item::before {
+  content: ""; position: absolute;
+  left: -19px; top: 2px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--ink-2);
+  transition: transform .25s ease, box-shadow .3s ease;
+}
+
+/* PAST — small filled dot */
+.ref-timeline__item--past::before {
+  width: 7px; height: 7px; left: -18px; top: 4px;
+  background: var(--faint); border: none;
+}
+.ref-timeline__item--past .ref-timeline__date  { color: var(--faint); }
+.ref-timeline__item--past .ref-timeline__label { color: var(--ink-2); font-weight: 500; }
+.ref-timeline__item--past .ref-timeline__label a { color: var(--ink-2); }
+.ref-timeline__item--past .ref-timeline__loc   { color: var(--faint); }
+
+/* PRESENT / CURRENT — filled ink with soft halo */
+.ref-timeline__item--present::before,
+.ref-timeline__item--current::before {
+  width: 11px; height: 11px; left: -20px; top: 1px;
+  background: var(--ink); border: none;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--ink) 14%, transparent);
+}
+.ref-timeline__item--present .ref-timeline__date,
+.ref-timeline__item--current .ref-timeline__date { color: var(--ink); font-weight: 700; }
+.ref-timeline__item--present .ref-timeline__label,
+.ref-timeline__item--current .ref-timeline__label { color: var(--ink); font-weight: 700; }
+
+/* FUTURE — clean open ring (not dashed) */
+.ref-timeline__item--future::before {
+  background: var(--bg); border: 1.5px solid var(--ink-2);
+}
+.ref-timeline__item--future .ref-timeline__date  { color: var(--ink-2); }
+.ref-timeline__item--future .ref-timeline__label { color: var(--ink); font-weight: 600; }
+
+.ref-timeline__date {
+  font-size: 10.5px; color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  display: block; margin-bottom: 3px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+.ref-timeline__label {
+  font-size: 13px; font-weight: 600;
+  color: var(--ink); line-height: 1.4;
+  text-wrap: pretty;
+}
+.ref-timeline__label a {
+  color: inherit; text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px; background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size .2s ease;
+}
+.ref-timeline__label a:hover,
+.ref-timeline__label a:focus-visible { background-size: 100% 1px; outline: none; }
+.ref-timeline__loc {
+  font-size: 11.5px; color: var(--muted);
+  margin-top: 3px; line-height: 1.4;
+}
+
+/* Wikipedia / Background card */
+.ref-wiki__thumb {
+  display: block; width: 100%; max-height: 140px;
+  object-fit: cover; border-radius: 6px; margin-bottom: var(--sp-3);
+}
+.ref-wiki__summary { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin-bottom: var(--sp-3); }
+.ref-wiki__link { font-size: 12px; color: var(--link); text-decoration: none; font-weight: 600; }
+.ref-wiki__link:hover { text-decoration: underline; }
+.ref-wiki__attr { margin-top: var(--sp-2); font-size: 11px; color: var(--faint); }
+.ref-wiki__attr a { color: inherit; text-decoration: underline; }
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.page-footer {
+  border-top: 1px solid var(--rule);
+  padding: var(--sp-5) 0;
+}
+.page-footer__inner {
+  max-width: var(--content-max); margin: 0 auto;
+  padding: 0 var(--content-pad);
+}
+.page-footer__meta { font-size: 12px; color: var(--faint); }
+
+/* =========================================================================
+   SIDEBAR PROSE (Background paragraph block in sidebar)
+   ========================================================================= */
+.ref-prose p {
+  font-size: 13px; line-height: 1.55; color: var(--ink-2);
+  margin-bottom: var(--sp-3);
+}
+.ref-prose p:last-child { margin-bottom: 0; }
+
+/* =========================================================================
+   GALLERY (photo grid block)
+   ========================================================================= */
+.block--gallery { /* outer hook — no styles needed; spacing comes from
+                     .need-section__blocks > * + * rhythm */ }
+
+.gallery-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-4);
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-item { list-style: none; }
+
+.gallery-item figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.gallery-item figure > img,
+.gallery-item .gallery-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--rule) 70%, transparent);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+
+/* Hover lift on the image itself — figure isn't overflow-clipped, so the
+   1px transform stays inside the border without jitter. */
+.gallery-item:hover figure > img {
+  transform: scale(1.015);
+}
+
+.gallery-item figcaption {
+  margin-top: var(--sp-2);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gallery-source {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s ease-out;
+}
+.gallery-source::before {
+  content: "·";
+  margin-right: 6px;
+  color: var(--faint);
+  font-weight: 400;
+}
+.gallery-source:hover { color: var(--link); }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item figure > img { transition: none; }
+  .gallery-item:hover figure > img { transform: none; }
+}
+
+/* =========================================================================
+   MOBILE
+   ========================================================================= */
+@media (max-width: 640px) {
+  .hero         { height: 480px; }
+  .hero__title  { font-size: 1.75rem; }
+  .hero__bullets { grid-template-columns: 1fr; }
+  .newsfeed-scroller {
+    grid-auto-columns: calc(100% - var(--sp-5));
+  }
+  .ln-card__link { grid-template-columns: 104px 1fr; gap: 12px; padding: 10px; }
+  .ln-card__link--no-media { grid-template-columns: 1fr; gap: 0; }
+  .ln-card__media { aspect-ratio: 1/1; }
+  .ln-card__title { font-size: 0.9375rem; }
+  .ln-card__summary { -webkit-line-clamp: 3; }
+  .people__grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"WWDC 2026: Apple's iOS 27, Siri Overhaul, and AI Updates","description":"WWDC 2026","startDate":"2026-06-08"}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="page-chrome">
+    
+      <section class="hero" aria-label="Page lede">
+  
+    <img class="hero__img"
+         src="https://sundayguardianlive.com/wp-content/uploads/2026/04/apple-wwdc-2026-check-full-schedule-siri-redesign-ios-27-updates-macos-27-next-gen-ai-features-more-set-to-be-revealed.jpg"
+         alt="Apple, WWDC 2026, WWDC Event 2026, Siri, Siri Redesign, New Siri Interface, WWDC 2026 Dynamic Island Integration, iOS 27, WWDC 2026 New Features, Apple Undo Redo"
+         loading="eager">
+  
+  <div class="hero__overlay"></div>
+  <div class="hero__body">
+    <div class="hero__inner">
+      <div class="hero__meta">
+        
+          <span class="hero__badge">2026-06-08</span>
+        
+        <time class="hero__time" datetime="2026-05-18T17:43:09.693559+00:00">
+          Updated 2026-05-18
+        </time>
+      </div>
+
+      <h1 class="hero__title">WWDC 2026: Apple&#39;s iOS 27, Siri Overhaul, and AI Updates</h1>
+
+      
+        <p class="hero__subtitle">Apple&#39;s annual developer conference opens June 8, with major previews expected for iOS 27, macOS 27, and a completely rebuilt Siri featuring Google Gemini integration across Apple devices.</p>
+      
+    </div>
+  </div>
+</section>
+    
+  </header>
+
+  
+    <nav class="nav" aria-label="Page sections">
+  <div class="nav__inner">
+    
+      <div class="nav__item" data-section="overview">
+        <a href="#section-overview">Overview</a>
+      </div>
+    
+      <div class="nav__item" data-section="media_coverage">
+        <a href="#section-media_coverage">Media Coverage</a>
+      </div>
+    
+      <div class="nav__item" data-section="latest_news">
+        <a href="#section-latest_news">Latest News</a>
+      </div>
+    
+      <div class="nav__item" data-section="siri_ai_deep_dive">
+        <a href="#section-siri_ai_deep_dive">Siri Ai Deep Dive</a>
+      </div>
+    
+      <div class="nav__item" data-section="reactions">
+        <a href="#section-reactions">Reactions</a>
+      </div>
+    
+  </div>
+</nav>
+  
+
+  <div class="page-grid">
+    <main id="main" class="page-main">
+      
+        
+        <section id="section-overview"
+         class="need-section"
+         data-need="overview"
+         data-screen-label="01 Overview">
+  
+
+  <h2 class="need-section__title">Overview</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+<div class="block block--paragraph">
+  
+    
+    
+    <p>
+      Apple is hosting WWDC 2026 to unveil iOS 27 and major updates across its operating systems, with a particular focus on overhauling Siri into a competitive AI assistant. The event marks a critical moment for Apple&#39;s artificial intelligence strategy, as the company aims to demonstrate whether Siri can evolve into a capable chatbot and AI agent comparable to ChatGPT, Claude, and Gemini. iOS 27 will introduce a completely rebuilt Siri featuring a chat interface, dedicated app, and integration with the Dynamic Island for easier access.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="3 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.eweek.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">3 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (3)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://www.eweek.com/news/apple-wwdc-2026-ai-preview/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.eweek.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.eweek.com&amp;sz=64" alt="" width="14" height="14">
+              Eweek
+            </span>
+            <span class="cite-popover__headline">WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek</span>
+            
+              <span class="cite-popover__summary"># WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More. Apple’s next WWDC could be a make-or-break moment for Siri. Apple is expected to preview iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, but the bigg</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64" alt="" width="14" height="14">
+              Macrumors
+            </span>
+            <span class="cite-popover__headline">iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App - MacRumors</span>
+            
+              <span class="cite-popover__summary"># iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App. Apple is introducing an overhauled version of Siri in iOS 27, evolving the personal assistant into a more capable chatbot and AI agent able to compete with ChatGPT,</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" width="14" height="14">
+              9to5mac
+            </span>
+            <span class="cite-popover__headline">iOS 27: Seven new features are being announced next month - 9to5Mac</span>
+            
+              <span class="cite-popover__summary">Here are seven new iPhone features rumored to be coming in iOS 27. ## #1: New Siri with standalone app, chatbot features, more. Siri is expected to be a major focus of iOS 27, with a total AI overhaul coming for Apple’s assistant. If Apple </span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+    
+    
+    <p>
+      Beyond Siri, iOS 27 will give users unprecedented control over their AI experience by allowing them to choose third-party AI models from Google, Anthropic, and others as defaults for Apple Intelligence features. The new Siri app will emphasize privacy with automatic chat deletion and security features unmatched in the chatbot market. These announcements represent Apple&#39;s comprehensive response to the rapidly evolving AI landscape and its commitment to providing users with flexible, privacy-conscious AI tools across its ecosystem.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="3 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=gigazine.net&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">3 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (3)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://9to5mac.com/2026/05/05/ios-27-will-let-you-choose-between-gemini-claude-and-more-for-ai-features-report/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" width="14" height="14">
+              9to5mac
+            </span>
+            <span class="cite-popover__headline">iOS 27 will let you choose between Gemini, Claude, and more for AI features: report - 9to5Mac</span>
+            
+              <span class="cite-popover__summary"># iOS 27 will let you choose between Gemini, Claude, and more for AI features: report. iOS 27 will give users a new way to integrate with third-party AI platforms, according to a new report. This will let iPhone users choose from multiple t</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.macrumors.com/2026/05/05/ios-27-third-party-chatbots-apple-intelligence/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64" alt="" width="14" height="14">
+              Macrumors
+            </span>
+            <span class="cite-popover__headline">iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence - MacRumors</span>
+            
+              <span class="cite-popover__summary"># iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence. iOS 27, iPadOS 27, and macOS 27 will let users set third-party AI services as the default for Apple Intelligence features like Writing Tools and Image Pl</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=gigazine.net&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=gigazine.net&amp;sz=64" alt="" width="14" height="14">
+              Gigazine
+            </span>
+            <span class="cite-popover__headline">Apple&#39;s new Siri app is expected to include an automatic chat deletion feature. - GIGAZINE</span>
+            
+              <span class="cite-popover__summary"># Apple&#39;s new Siri app is expected to include an automatic chat deletion feature. According to Bloomberg reporter Mark Gurman, who is familiar with Apple&#39;s internal affairs, Apple&#39;s **Siri app** , expected to launch in the fall of 2026, wil</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+</div>
+      
+    
+      <div class="block block--chart block--chart-stat">
+  <h3 class="chart__title">WWDC 2026: Key Expected Announcements</h3>
+
+  
+    <div class="stat-row">
+      
+        <div class="stat">
+          <div class="stat__value">iOS 27</div>
+          <div class="stat__label">Completely rebuilt Siri with Google Gemini integration and new system-wide search gesture</div>
+          
+        </div>
+      
+        <div class="stat">
+          <div class="stat__value">macOS 27</div>
+          <div class="stat__label">Slight redesign addressing Liquid Glass criticism, plus automatic tab grouping in Safari</div>
+          
+        </div>
+      
+        <div class="stat">
+          <div class="stat__value">visionOS 27</div>
+          <div class="stat__label">Focus on performance, bug fixes, and parity with other OS 27 versions</div>
+          
+        </div>
+      
+        <div class="stat">
+          <div class="stat__value">Apple Intelligence</div>
+          <div class="stat__label">Users can choose Claude or Gemini as default AI service instead of ChatGPT</div>
+          
+        </div>
+      
+    </div>
+
+  
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-media_coverage"
+         class="need-section"
+         data-need="media_coverage"
+         data-screen-label="02 Media Coverage">
+  
+
+  <h2 class="need-section__title">Media Coverage</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      <div class="block block--newsfeed block--newsfeed--news">
+  <ul class="newsfeed-scroller" role="list">
+    
+      
+      
+      <li class="news-card">
+        <figure class="news-card__media">
+          <div class="news-card__fallback" aria-hidden="true">
+            <span class="news-card__fallback-mark">E</span>
+            <img class="news-card__fallback-logo"
+                 src="https://www.google.com/s2/favicons?domain=9to5mac.com&sz=128"
+                 alt=""
+                 loading="lazy">
+            <span class="news-card__fallback-name">Eweek</span>
+          </div>
+          
+            <img class="news-card__photo"
+                 src="https://www.eweek.com/news/apple-wwdc-2026-ai-preview/&#39;,&#39;summary&#39;:&#39;Apple&#39;snextWWDCcouldbeamake-or-breakmomentforSiri.AppleisexpectedtopreviewiOS27,iPadOS27,macOS27,watchOS27,tvOS27,andvisionOS27,butthebiggestattentionwillikelyfallonitslongdelayedAIplans.&#39;,&#39;source_id&#39;:&#39;src_56ca66fdfe46&#39;,"
+                 alt=""
+                 loading="lazy"
+                 onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
+          
+        </figure>
+
+        <div class="news-card__body">
+          <p class="news-card__outlet">Eweek</p>
+          <h3 class="news-card__title">
+            <a href="https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/&#39;,&#39;title&#39;:&#39;iOS27:Sevennewfeaturesarebeingannounceednextmonth&#39;,&#39;publisher&#39;:&#39;9to5Mac&#39;,&#39;tier&#39;:&#39;T3&#39;,&#39;published_at&#39;:&#39;2026-05-05T15:17:54Z&#39;,&#39;thumbnail_url&#39;:&#39;https:i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2025/11/ios-27.jpg?resize=1200%2C628&amp;quality=82&amp;strip=all&amp;ssl=1%27,%27summary%27:%27Sevennewiphone-featuresrumoredtobecominginiOS27.SiriisexpectedtobeamajorfocusofiOS27,withatotalAIoverhaulcomingforApple%27sassistant.Apple%27sPhotosappgainingthreenewAI-poweredditingtools.%27,%27source_id%27:%27src_8dca85ace75d%27," rel="noopener noreferrer">WWDC2026Preview:AppleReadiesSiriOverhaul,AIUpdates,andMore-eWeek</a>
+          </h3>
+          
+            <p class="news-card__summary">Apple&#39;snewSiriappisexpectedtoincludeanautomaticchatdeletionfeature.AccordingtoBloombergReporterMarkGurman,Apple&#39;sSiriapp,expectedtolaunchinthefallof2026,willinclude&#39;privacyfeaturesunmatchedinthechatbotmarket.&#39;</p>
+          
+          <p class="news-card__meta">
+            
+              <time class="news-card__date">2026-05-15</time>
+            
+          </p>
+        </div>
+      </li>
+    
+      
+      
+      <li class="news-card">
+        <figure class="news-card__media">
+          <div class="news-card__fallback" aria-hidden="true">
+            <span class="news-card__fallback-mark">M</span>
+            <img class="news-card__fallback-logo"
+                 src="https://www.google.com/s2/favicons?domain=www.forbes.com&sz=128"
+                 alt=""
+                 loading="lazy">
+            <span class="news-card__fallback-name">MacRumors</span>
+          </div>
+          
+            <img class="news-card__photo"
+                 src="https://images.macrumors.com/t/wccLNgtu2uBa78hkDFTa4mENJus=/2500x/article-new/2025/08/Finder-Siri-Feature.jpg"
+                 alt=""
+                 loading="lazy"
+                 onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
+          
+        </figure>
+
+        <div class="news-card__body">
+          <p class="news-card__outlet">MacRumors</p>
+          <h3 class="news-card__title">
+            <a href="https://www.forbes.com/sites/kateoflahertyuk/2026/05/14/ios-27-here-are-the-key-new-iphone-privacy-features-coming-soon/&#39;,&#39;title&#39;:&#39;iOS27-Here-Are-The-Key-New-iPhone-Privacy-Features-Coming-Soon&#39;,&#39;publisher&#39;:&#39;Forbes&#39;,&#39;tier&#39;:&#39;T3&#39;,&#39;published_at&#39;:&#39;2026-05-14T00:00:00Z&#39;,&#39;thumbnail_url&#39;:&#39;https:imageio.forbes.com/specials-images/imageserve/69d4c26acba3334111144058/0x0.jpg?format=jpg&amp;height=900&amp;width=1600&amp;fit=bounds%27,%27summary%27:%27iOS27willincludenewfeaturesthatboostiphoneprivacyandsecurity.AspartoftheIOS27Sirioverhaul,therewillbeaseperateSiriappandanewchatbot-styleinterface.MeanwhileIOS27willallowAppleuserstochoosebetweenmultipleAImodels,includingthosefromGoogleandAnthropic.%27,%27source_id%27:%27src_08a422029801%27," rel="noopener noreferrer">iOS27GettingMajorSiriRedesignWithChatInterfaceandDedicatedApp</a>
+          </h3>
+          
+            <p class="news-card__summary">AppleisintroducinganoverhauledversionofSiriiniOS27,evolvingtthepersonalassistantintomorecapablechatbotandAIagentabletocompetewithChatGPT,Claude,andGemini.</p>
+          
+          <p class="news-card__meta">
+            
+              <time class="news-card__date">2026-05-12</time>
+            
+          </p>
+        </div>
+      </li>
+    
+      
+      
+      <li class="news-card">
+        <figure class="news-card__media">
+          <div class="news-card__fallback" aria-hidden="true">
+            <span class="news-card__fallback-mark">9</span>
+            <img class="news-card__fallback-logo"
+                 src="https://www.google.com/s2/favicons?domain=techcrunch.com&sz=128"
+                 alt=""
+                 loading="lazy">
+            <span class="news-card__fallback-name">9to5Mac</span>
+          </div>
+          
+            <img class="news-card__photo"
+                 src="https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2025/11/ios-27.jpg?resize=1200%2C628&amp;quality=82&amp;strip=all&amp;ssl=1"
+                 alt=""
+                 loading="lazy"
+                 onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
+          
+        </figure>
+
+        <div class="news-card__body">
+          <p class="news-card__outlet">9to5Mac</p>
+          <h3 class="news-card__title">
+            <a href="https://techcrunch.com/2026/05/05/apple-plans-to-make-ios-27-a-choose-your-own-adventure-of-ai-models/&#39;,&#39;title&#39;:&#39;AppleplanstomaekiOS27aChooseYourOwnAdventureofAImodels&#39;,&#39;publisher&#39;:&#39;TechCrunch&#39;,&#39;tier&#39;:&#39;T1&#39;,&#39;published_at&#39;:&#39;2026-05-05T20:56:41Z&#39;,&#39;thumbnail_url&#39;:&#39;https:techcrunch.com/wp-content/uploads/2026/03/ai-apps-GettyImages-2214375253.jpg?resize=1200,800%27,%27summary%27:%27WheniOS27isreleasedlaterthisyear,iPhoneusersreportedlyhavealoofchoicewhencomestwhichAImodeltheywanttouseon-device.Appleplanstogiveuserschoiceofthird-partylargelanguagemodels.%27,%27source_id%27:%27src_7287a41d76bc%27," rel="noopener noreferrer">iOS27willletyouchoosebetweenGemini,Claude,andmoreforAIfeatures:report</a>
+          </h3>
+          
+            <p class="news-card__summary">iOS27willgiveusersanewwaytointegratewithth ird-partyAIplatforms,allowingiPhoneuserstochoosefromultiplethird-partymodelsfromcompanieslikeGoogleandAnthropic,includingtheabilitytosetcustomvoicesinSiridependingonwhichexternalmodelisresponding.</p>
+          
+          <p class="news-card__meta">
+            
+              <time class="news-card__date">2026-05-05</time>
+            
+          </p>
+        </div>
+      </li>
+    
+  </ul>
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-latest_news"
+         class="need-section"
+         data-need="latest_news"
+         data-screen-label="03 Latest News">
+  
+
+  <h2 class="need-section__title">Latest News</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+
+
+
+
+<div class="block block--latest-news"
+     data-initial-visible="5"
+     data-step="5"
+     data-total="8">
+  <ol class="latest-news__list">
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://gigazine.net/gsc_news/en/20260518-siri-app-privacy-ios-27/published_at" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://i.gzn.jp/img/2026/05/18/siri-app-privacy-ios-27/00_m.jpg" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=gigazine.net&sz=64"
+                   alt="">
+              <span>GIGAZINE</span>
+              
+                <time datetime="2026-05-18T01:57:00Z">2026-05-18</time>
+              
+            </header>
+            <h3 class="ln-card__title">Apple&#39;s new Siri app is expected to include an automatic chat deletion feature</h3>
+            
+              <p class="ln-card__summary">Apple&#39;s new Siri app launching in fall 2026 will include privacy features unmatched in the chatbot market, including automatic chat deletion.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link ln-card__link--no-media" href="https://www.eweek.com/news/apple-wwdc-2026-ai-preview/published_at" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.eweek.com&sz=64"
+                   alt="">
+              <span>eWeek</span>
+              
+                <time datetime="2026-05-15T18:57:36Z">2026-05-15</time>
+              
+            </header>
+            <h3 class="ln-card__title">WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More</h3>
+            
+              <p class="ln-card__summary">Apple&#39;s WWDC 2026 will showcase iOS 27 and other OS updates with major focus on Siri&#39;s AI transformation and whether it can compete with modern AI assistants.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link ln-card__link--no-media" href="https://www.forbes.com/sites/kateoflahertyuk/2026/05/14/ios-27-here-are-the-key-new-iphone-privacy-features-coming-soon/published_at" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.forbes.com&sz=64"
+                   alt="">
+              <span>Forbes</span>
+              
+                <time datetime="2026-05-14T00:00:00Z">2026-05-14</time>
+              
+            </header>
+            <h3 class="ln-card__title">iOS 27—Here Are The Key New iPhone Privacy Features Coming Soon</h3>
+            
+              <p class="ln-card__summary">iOS 27 will include new privacy and security features, a separate Siri app with chatbot interface, and support for multiple AI models from Google and Anthropic.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link ln-card__link--no-media" href="https://9to5mac.com/2026/05/13/ios-27s-new-design-leak-sounds-a-lot-like-what-ive-been-wanting-most/published_at" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=9to5mac.com&sz=64"
+                   alt="">
+              <span>9to5Mac</span>
+              
+                <time datetime="2026-05-13T19:25:52Z">2026-05-13</time>
+              
+            </header>
+            <h3 class="ln-card__title">iOS 27&#39;s new design leak sounds a lot like what I&#39;ve been wanting most</h3>
+            
+              <p class="ln-card__summary">iOS 27 will feature redesigned Liquid Glass tab bars and other design changes based on Bloomberg&#39;s latest report.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link ln-card__link--no-media" href="https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/published_at" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=9to5mac.com&sz=64"
+                   alt="">
+              <span>9to5Mac</span>
+              
+                <time datetime="2026-05-12T20:45:36Z">2026-05-12</time>
+              
+            </header>
+            <h3 class="ln-card__title">iOS 27&#39;s &#39;completely rebuilt&#39; Siri will include a new system-wide search gesture: report</h3>
+            
+              <p class="ln-card__summary">iOS 27&#39;s rebuilt Siri will feature a new system-wide search gesture and appear in the Dynamic Island with options to search or ask when activated.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link ln-card__link--no-media" href="https://www.macrumors.com/2026/05/12/ios-27-siri-redesign/published_at" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.macrumors.com&sz=64"
+                   alt="">
+              <span>MacRumors</span>
+              
+                <time datetime="2026-05-12T20:38:00Z">2026-05-12</time>
+              
+            </header>
+            <h3 class="ln-card__title">iOS 27 Getting Major Siri Redesign With Chat Interface and Dedicated App</h3>
+            
+              <p class="ln-card__summary">Apple is introducing an overhauled Siri in iOS 27 with a chat interface and dedicated app to compete with ChatGPT, Claude, and Gemini.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link ln-card__link--no-media" href="https://www.macrumors.com/2026/05/10/two-macos-27-changes-rumored/published_at" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.macrumors.com&sz=64"
+                   alt="">
+              <span>MacRumors</span>
+              
+                <time datetime="2026-05-10T16:45:48Z">2026-05-10</time>
+              
+            </header>
+            <h3 class="ln-card__title">macOS 27: Two More Changes Leaked Ahead of WWDC Next Month</h3>
+            
+              <p class="ln-card__summary">macOS 27 will feature a slight redesign compared to macOS Tahoe and automatic tab grouping in Safari.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link ln-card__link--no-media" href="https://9to5mac.com/2026/05/05/ios-27-seven-new-features-are-being-announced-next-month/published_at" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=9to5mac.com&sz=64"
+                   alt="">
+              <span>9to5Mac</span>
+              
+                <time datetime="2026-05-05T15:17:54Z">2026-05-05</time>
+              
+            </header>
+            <h3 class="ln-card__title">iOS 27: Seven new features are being announced next month</h3>
+            
+              <p class="ln-card__summary">iOS 27 will feature a new Siri with standalone app and chatbot capabilities, plus AI-powered editing tools for the Photos app.</p>
+            
+          </div>
+        </a>
+      </li>
+    
+  </ol>
+  
+    <button type="button"
+            class="latest-news__more"
+            data-remaining="3">
+      <span class="latest-news__more-label">Load 3 more</span>
+      <span class="latest-news__more-chev" aria-hidden="true"></span>
+    </button>
+  
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-siri_ai_deep_dive"
+         class="need-section"
+         data-need="siri_ai_deep_dive"
+         data-screen-label="04 Siri Ai Deep Dive">
+  
+
+  <h2 class="need-section__title">Siri Ai Deep Dive</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+<div class="block block--paragraph">
+  
+    
+    
+    <p>
+      Apple&#39;s decision to power Siri with Google&#39;s Gemini models represents a significant strategic shift, marking the company&#39;s acknowledgment that building competitive AI capabilities in-house required external partnership. The Gemini-powered Siri rebuild, expected to debut at WWDC 2026, aims to transform Siri from a limited voice assistant into a capable AI system that can handle complex tasks across Apple&#39;s ecosystem. This partnership signals Apple&#39;s commitment to catching up in the AI race while maintaining its privacy-first positioning.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="3 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">3 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (3)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://9to5mac.com/2026/05/06/apple-may-have-just-made-one-of-the-most-important-new-siri-announcements/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" width="14" height="14">
+              9to5mac
+            </span>
+            <span class="cite-popover__headline">Apple may have just made one of the most important new Siri announcements - 9to5Mac</span>
+            
+              <span class="cite-popover__summary"># Apple may have just made one of the most important new Siri announcements. Apple’s painfully slow launch of the new Siri has become such a long-running saga, it seems to have all the makings of a movie – though probably not one we will se</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" width="14" height="14">
+              9to5mac
+            </span>
+            <span class="cite-popover__headline">iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report - 9to5Mac</span>
+            
+              <span class="cite-popover__summary"># iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report. With just a few weeks left until WWDC, *Bloomberg* has shared multiple details on what Apple has in store for the revamped, Google Gemini-powered Si</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.cnbc.com/2026/05/12/google-races-put-gemini-at-center-of-android-before-apples-ai-reboot.html" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnbc.com&amp;sz=64" alt="" width="14" height="14">
+              Cnbc
+            </span>
+            <span class="cite-popover__headline">Google races to put Gemini at the center of Android before Apple’s AI reboot - CNBC</span>
+            
+              <span class="cite-popover__summary"># Google races to put Gemini at the center of Android before Apple’s AI reboot. Google is using its latest Android rollout to make Gemini less of a chatbot and more of an operating layer across the phone, browser, car and laptop, just weeks</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+    
+    
+    <p>
+      The rebuilt Siri will introduce substantial technical improvements over its predecessor. iOS 27 will feature a completely redesigned Siri with new system-wide search gestures and Dynamic Island integration, allowing users to activate Siri via the power button or wake word. Beyond the core Gemini integration, Apple is implementing a flexible architecture that lets users choose alternative AI models—including Claude from Anthropic—for specific Apple Intelligence features like Writing Tools and Image Playground, giving users control over which AI service powers their experience.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="3 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">3 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (3)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://9to5mac.com/2026/05/12/ios-27s-completely-rebuilt-siri-will-include-a-new-system-wide-search-gesture-report/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" width="14" height="14">
+              9to5mac
+            </span>
+            <span class="cite-popover__headline">iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report - 9to5Mac</span>
+            
+              <span class="cite-popover__summary"># iOS 27’s ‘completely rebuilt’ Siri will include a new system-wide search gesture: report. With just a few weeks left until WWDC, *Bloomberg* has shared multiple details on what Apple has in store for the revamped, Google Gemini-powered Si</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://9to5mac.com/2026/05/05/ios-27-will-let-you-choose-between-gemini-claude-and-more-for-ai-features-report/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=9to5mac.com&amp;sz=64" alt="" width="14" height="14">
+              9to5mac
+            </span>
+            <span class="cite-popover__headline">iOS 27 will let you choose between Gemini, Claude, and more for AI features: report - 9to5Mac</span>
+            
+              <span class="cite-popover__summary"># iOS 27 will let you choose between Gemini, Claude, and more for AI features: report. iOS 27 will give users a new way to integrate with third-party AI platforms, according to a new report. This will let iPhone users choose from multiple t</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.macrumors.com/2026/05/05/ios-27-third-party-chatbots-apple-intelligence/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.macrumors.com&amp;sz=64" alt="" width="14" height="14">
+              Macrumors
+            </span>
+            <span class="cite-popover__headline">iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence - MacRumors</span>
+            
+              <span class="cite-popover__summary"># iOS 27 Will Let You Pick Claude or Gemini Instead of ChatGPT for Apple Intelligence. iOS 27, iPadOS 27, and macOS 27 will let users set third-party AI services as the default for Apple Intelligence features like Writing Tools and Image Pl</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+    
+    
+    <p>
+      Privacy emerges as Apple&#39;s competitive differentiator in this AI overhaul. According to reports from Bloomberg&#39;s Mark Gurman, Apple executives plan to emphasize a privacy-friendly approach compared to competitors, with features like auto-deleting chats built into the new Siri app. This privacy-centric strategy positions Apple&#39;s Gemini integration as fundamentally different from how Google deploys its own AI, allowing Apple to argue it&#39;s taking a more user-protective stance while still leveraging cutting-edge AI capabilities.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="2 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=techcrunch.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.eweek.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">2 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (2)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="https://techcrunch.com/2026/05/17/apples-siri-revamp-could-include-auto-deleting-chats/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=techcrunch.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=techcrunch.com&amp;sz=64" alt="" width="14" height="14">
+              Techcrunch
+            </span>
+            <span class="cite-popover__headline">Apple’s Siri revamp could include auto-deleting chats - TechCrunch</span>
+            
+              <span class="cite-popover__summary">Privacy will be a major theme when Apple unveils a new version of Siri at the Worldwide Developers Conference in June, according to Bloomberg’s Mark Gurman. The Siri relaunch is widely seen as Apple’s big chance to reestablish its relevance</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.eweek.com/news/apple-wwdc-2026-ai-preview/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.eweek.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.eweek.com&amp;sz=64" alt="" width="14" height="14">
+              Eweek
+            </span>
+            <span class="cite-popover__headline">WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek</span>
+            
+              <span class="cite-popover__summary"># WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More. Apple’s next WWDC could be a make-or-break moment for Siri. Apple is expected to preview iOS 27, iPadOS 27, macOS 27, watchOS 27, tvOS 27, and visionOS 27, but the bigg</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+</div>
+      
+    
+  </div>
+</section>
+      
+        
+        <section id="section-reactions"
+         class="need-section"
+         data-need="reactions"
+         data-screen-label="05 Reactions">
+  
+
+  <h2 class="need-section__title">Reactions</h2>
+
+  
+
+  <div class="need-section__blocks">
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="block block--opinions">
+  <section class="opinions" aria-label="Opinions">
+    <div class="opinions__tabs" role="tablist">
+      
+        <button class="opinions__tab is-active"
+                data-tier="positive" role="tab">Optimistic</button>
+      
+      
+        <button class="opinions__tab"
+                data-tier="negative" role="tab">Critical</button>
+      
+      
+        <button class="opinions__tab"
+                data-tier="neutral" role="tab">Analytical</button>
+      
+    </div>
+
+    
+      <ul class="opinions__panel is-active" data-tier="positive">
+        <li>
+  
+  
+  <a class="opinion-card"
+     href="https://www.cnbc.com/video/2026/05/11/why-one-analyst-believes-apple-has-a-clear-path-to-surge-ahead-in-the-ai-arms-race.html" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">Apple is sitting on an unrealized $50 billion of AI compute capacity that could push the stock to new heights.</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          
+          
+            
+          
+          <span>RK</span>
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>Richard Kramer</strong>
+        
+          <span class="opinion-card__role">Founder &amp; Senior Analyst, Arete Research</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=www.cnbc.com&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">CNBC</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">Why one analyst believes Apple has a clear path to surge ahead in the AI arms race</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li><li>
+  
+  
+  <a class="opinion-card"
+     href="https://www.cnbc.com/video/2026/05/08/dan-ives-on-apple-ai-chapter-is-finally-underway.html" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">Apple: AI chapter is finally underway.</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          
+          
+            
+          
+          <span>DI</span>
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>Dan Ives</strong>
+        
+          <span class="opinion-card__role">Analyst, Wedbush Securities</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=www.cnbc.com&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">CNBC</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">Dan Ives on Apple: AI chapter is finally underway</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li>
+      </ul>
+    
+    
+      <ul class="opinions__panel" data-tier="negative">
+        <li>
+  
+  
+  <a class="opinion-card"
+     href="https://techcrunch.com/2026/05/06/apple-to-pay-250m-to-settle-lawsuit-over-siris-delayed-ai-features/publisher" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">Apple has agreed to pay $250 million to settle a class-action lawsuit over how it marketed its AI features ahead of the launch of the iPhone 16.</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          
+          
+            
+          
+          <span>TE</span>
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>TechCrunch</strong>
+        
+          <span class="opinion-card__role">Technology News Publisher</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=techcrunch.com&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">TechCrunch</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">Apple to pay $250M to settle lawsuit over Siri&#39;s delayed AI features</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li>
+      </ul>
+    
+    
+      <ul class="opinions__panel" data-tier="neutral">
+        <li>
+  
+  
+  <a class="opinion-card"
+     href="https://www.eweek.com/news/apple-wwdc-2026-ai-preview/publisher" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">WWDC 2026 may show whether Siri can become a serious AI assistant across the company&#39;s devices, or whether Apple is still playing catch-up.</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          
+          
+            
+          
+          <span>EW</span>
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>Eweek</strong>
+        
+          <span class="opinion-card__role">Technology News Publisher</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=www.eweek.com&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">Eweek</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">WWDC 2026 Preview: Apple Readies Siri Overhaul, AI Updates, and More - eWeek</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li>
+      </ul>
+    
+  </section>
+</div>
+      
+    
+  </div>
+</section>
+      
+    </main>
+
+    <aside class="page-reference" aria-label="Reference">
+  
+    
+    <section id="section-timeline"
+         class="ref-card ref-card--timeline"
+         data-section="timeline">
+  <p class="ref-card__title">Timeline</p>
+  <div class="ref-card__body">
+    
+      
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+<ol class="ref-timeline">
+  
+    
+    <li class="ref-timeline__item ref-timeline__item--past">
+      
+        <time class="ref-timeline__date">2025</time>
+      
+      <div class="ref-timeline__label">
+        
+          <a href="#src-4">WWDC 2025 and prior: Siri limitations become apparent</a>
+        
+      </div>
+      
+    </li>
+  
+    
+    <li class="ref-timeline__item ref-timeline__item--past ref-timeline__item--breaking">
+      
+        <time class="ref-timeline__date">2026-06-08</time>
+      
+      <div class="ref-timeline__label">
+        
+          <a href="#src-2">WWDC 2026 keynote: Apple unveils iOS 27 and Siri overhaul</a>
+        
+      </div>
+      
+    </li>
+  
+    
+    <li class="ref-timeline__item ref-timeline__item--past">
+      
+        <time class="ref-timeline__date">2026-06-08</time>
+      
+      <div class="ref-timeline__label">
+        
+          <a href="#src-4">iOS 27 Siri features announced: chat interface and Dynamic Island integration</a>
+        
+      </div>
+      
+    </li>
+  
+    
+    <li class="ref-timeline__item ref-timeline__item--past">
+      
+        <time class="ref-timeline__date">2026-06-08</time>
+      
+      <div class="ref-timeline__label">
+        
+          <a href="#src-10">macOS 27 and visionOS 27 updates previewed</a>
+        
+      </div>
+      
+    </li>
+  
+    
+    <li class="ref-timeline__item ref-timeline__item--past">
+      
+        <time class="ref-timeline__date">2026-09</time>
+      
+      <div class="ref-timeline__label">
+        
+          <a href="#src-5">Standalone Siri app launches with privacy features</a>
+        
+      </div>
+      
+    </li>
+  
+</ol>
+      
+    
+  </div>
+</section>
+  
+  
+</aside>
+  </div>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <p class="page-footer__meta">Last updated 2026-05-18</p>
+    </div>
+  </footer>
+
+  <script>(() => {
+  /* ── Horizontal nav scroll spy ── */
+  const navItems = document.querySelectorAll('.nav__item[data-section]');
+  const sections = [...document.querySelectorAll('.need-section[data-need]')];
+
+  if (navItems.length && sections.length && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navItems.forEach(i => i.classList.remove('is-active'));
+          const active = document.querySelector(`.nav__item[data-section="${e.target.dataset.need}"]`);
+          if (active) active.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+
+    sections.forEach(s => obs.observe(s));
+  }
+
+  /* ── Newsfeed prev/next buttons ── */
+  const NF_ARROW_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+  const NF_ARROW_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+  document.querySelectorAll('.block--newsfeed').forEach(block => {
+    const scroller = block.querySelector('.newsfeed-scroller');
+    if (!scroller) return;
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'newsfeed-nav newsfeed-nav--prev';
+    prev.setAttribute('aria-label', 'Previous');
+    prev.innerHTML = NF_ARROW_L;
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'newsfeed-nav newsfeed-nav--next';
+    next.setAttribute('aria-label', 'Next');
+    next.innerHTML = NF_ARROW_R;
+
+    block.appendChild(prev);
+    block.appendChild(next);
+
+    const pageStep = () => {
+      const card = scroller.querySelector('.news-card');
+      const cardW = card ? card.getBoundingClientRect().width : scroller.clientWidth * 0.8;
+      const cs = getComputedStyle(scroller);
+      const gap = parseFloat(cs.columnGap || cs.gap) || 0;
+      return cardW + gap;
+    };
+
+    const updateState = () => {
+      const max = scroller.scrollWidth - scroller.clientWidth - 1;
+      prev.disabled = scroller.scrollLeft <= 0;
+      next.disabled = scroller.scrollLeft >= max;
+    };
+
+    prev.addEventListener('click', () => scroller.scrollBy({ left: -pageStep(), behavior: 'smooth' }));
+    next.addEventListener('click', () => scroller.scrollBy({ left:  pageStep(), behavior: 'smooth' }));
+    scroller.addEventListener('scroll', updateState, { passive: true });
+    window.addEventListener('resize', updateState);
+    updateState();
+  });
+
+  /* ── Latest news "Load more" ── */
+  document.querySelectorAll('.block--latest-news').forEach(block => {
+    const btn = block.querySelector('.latest-news__more');
+    if (!btn) return;
+    const step = parseInt(block.dataset.step, 10) || 5;
+    btn.addEventListener('click', () => {
+      const collapsed = block.querySelectorAll('.ln-card--collapsed');
+      const reveal = Array.from(collapsed).slice(0, step);
+      reveal.forEach(c => c.classList.remove('ln-card--collapsed'));
+      const remaining = collapsed.length - reveal.length;
+      if (remaining <= 0) {
+        btn.hidden = true;
+      } else {
+        btn.dataset.remaining = String(remaining);
+        const label = btn.querySelector('.latest-news__more-label');
+        if (label) label.textContent = `Load ${Math.min(step, remaining)} more`;
+      }
+    });
+  });
+
+  /* ── Opinions tabs ── */
+  document.querySelectorAll('.opinions').forEach(root => {
+    const tabs   = root.querySelectorAll('.opinions__tab');
+    const panels = root.querySelectorAll('.opinions__panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tier = tab.dataset.tier;
+        tabs.forEach(t => t.classList.toggle('is-active', t === tab));
+        panels.forEach(p => p.classList.toggle('is-active', p.dataset.tier === tier));
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
