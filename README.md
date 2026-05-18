@@ -16,9 +16,10 @@ Required env:
 ```
 OPENROUTER_API_KEY=...
 TAVILY_API_KEY=...
+BRAVE_API_KEY=...
 ```
 
-Optional: `BRAVE_API_KEY` (gallery sections are silently skipped without it), and per-stage model overrides — `MODEL_GROUND`, `MODEL_CURATION`, `MODEL_RESEARCH_QUERY`, `MODEL_RESEARCH_EVAL`, `MODEL_BLOCK_EXTRACT`. Defaults live in `src/generator/llm/client.py`.
+Optional: Per-stage model overrides — `MODEL_GROUND`, `MODEL_CURATION`, `MODEL_RESEARCH_QUERY`, `MODEL_RESEARCH_EVAL`, `MODEL_BLOCK_EXTRACT`. Defaults live in `src/generator/llm/client.py`.
 
 ## Usage
 
