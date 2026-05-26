@@ -12,7 +12,29 @@ from pathlib import Path
 from typing import Iterator
 
 from generator.llm.trace_buffer import drain as _drain_llm_calls
-from generator.schema import EditorAction, StageTrace, Trace, TraceApproval
+from generator.schema import (
+    EditorAction,
+    LLMCall,
+    StageTokens,
+    StageTrace,
+    Trace,
+    TraceApproval,
+)
+
+
+def _rollup(calls: list[LLMCall]) -> tuple[float | None, StageTokens | None, str | None]:
+    """Aggregate per-call cost/tokens/model into stage-level fields."""
+    if not calls:
+        return None, None, None
+    cost = round(sum(c.cost_usd for c in calls), 6)
+    tokens = StageTokens(
+        input=sum(c.input_tokens for c in calls),
+        output=sum(c.output_tokens for c in calls),
+    )
+    # Stages may route to one model; report it when unambiguous.
+    models = {c.model for c in calls}
+    model = next(iter(models)) if len(models) == 1 else None
+    return cost, tokens, model
 
 
 class TraceRecorder:
@@ -31,31 +53,42 @@ class TraceRecorder:
         try:
             yield
         except Exception as exc:  # surface error in trace and re-raise
+            calls = _drain_llm_calls()
+            cost, tokens, rolled_model = _rollup(calls)
             self.stages.append(
                 StageTrace(
                     stage=name,
                     started_at=started_iso,
                     duration_ms=int((time.perf_counter() - start) * 1000),
-                    model=model,
+                    model=model or rolled_model,
+                    tokens=tokens,
+                    cost_usd=cost,
                     outcome="error",
                     error=str(exc),
-                    llm_calls=_drain_llm_calls(),
+                    llm_calls=calls,
                 )
             )
             raise
+        calls = _drain_llm_calls()
+        cost, tokens, rolled_model = _rollup(calls)
         self.stages.append(
             StageTrace(
                 stage=name,
                 started_at=started_iso,
                 duration_ms=int((time.perf_counter() - start) * 1000),
-                model=model,
+                model=model or rolled_model,
+                tokens=tokens,
+                cost_usd=cost,
                 outcome="success",
-                llm_calls=_drain_llm_calls(),
+                llm_calls=calls,
             )
         )
 
     def record_editor_action(self, action: EditorAction) -> None:
         self._editor_actions.append(action)
+
+    def _total_cost(self) -> float:
+        return round(sum(s.cost_usd or 0.0 for s in self.stages), 6)
 
     def _snapshot(self, *, final_outcome: str = "in_progress") -> Trace:
         """Build a Trace from current state without ending the run."""
@@ -67,7 +100,7 @@ class TraceRecorder:
             started_at=self.started_at.isoformat(),
             ended_at=now.isoformat(),
             total_duration_ms=int((now - self.started_at).total_seconds() * 1000),
-            total_cost_usd=0.0,
+            total_cost_usd=self._total_cost(),
             pipeline_trace=list(self.stages),
             editor_actions=list(self._editor_actions),
             final_outcome=final_outcome,  # type: ignore[arg-type]
@@ -118,7 +151,7 @@ class TraceRecorder:
             started_at=self.started_at.isoformat(),
             ended_at=ended_at.isoformat(),
             total_duration_ms=int((ended_at - self.started_at).total_seconds() * 1000),
-            total_cost_usd=0.0,
+            total_cost_usd=self._total_cost(),
             pipeline_trace=self.stages,
             editor_actions=list(self._editor_actions),
             final_outcome=final_outcome,

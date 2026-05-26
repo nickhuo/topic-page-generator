@@ -52,8 +52,8 @@ def _preview_for_block(rs: RenderedSection) -> str:
             cards = getattr(data, "cards", None) or []
             return f"{len(cards)} cards"
         if kind == "gallery":
-            images = getattr(data, "images", None) or []
-            return f"{len(images)} images"
+            items = getattr(data, "items", None) or []
+            return f"{len(items)} images"
         if kind == "timeline":
             entries = getattr(data, "entries", None) or []
             return f"{len(entries)} entries"
@@ -62,8 +62,8 @@ def _preview_for_block(rs: RenderedSection) -> str:
             names = ", ".join(getattr(c, "name", "?") for c in cards[:3])
             return f"{len(cards)} people: {names}"
         if kind == "reactions":
-            quotes = getattr(data, "quotes", None) or []
-            return f"{len(quotes)} reactions"
+            cards = getattr(data, "cards", None) or []
+            return f"{len(cards)} reactions"
         if kind == "chart":
             return getattr(data, "title", "") or "chart"
     except Exception:
