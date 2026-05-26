@@ -7,6 +7,7 @@ import tempfile
 import time
 import uuid
 from contextlib import contextmanager
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterator
@@ -15,6 +16,9 @@ from generator.llm.trace_buffer import drain as _drain_llm_calls
 from generator.schema import (
     EditorAction,
     LLMCall,
+    SectionPlan,
+    SectionResearchLog,
+    StagePlanning,
     StageTokens,
     StageTrace,
     Trace,
@@ -22,7 +26,27 @@ from generator.schema import (
 )
 
 
-def _rollup(calls: list[LLMCall]) -> tuple[float | None, StageTokens | None, str | None]:
+@dataclass
+class _StageHandle:
+    """Mutable handle yielded by ``TraceRecorder.stage`` so callers can attach
+    LLM-generated planning artifacts that are read back at context exit."""
+
+    section_plans: list[SectionPlan] = field(default_factory=list)
+    research_log: list[SectionResearchLog] = field(default_factory=list)
+
+
+def _build_planning(handle: _StageHandle) -> StagePlanning | None:
+    if handle.section_plans or handle.research_log:
+        return StagePlanning(
+            section_plans=handle.section_plans,
+            research_log=handle.research_log,
+        )
+    return None
+
+
+def _rollup(
+    calls: list[LLMCall],
+) -> tuple[float | None, StageTokens | None, str | None]:
     """Aggregate per-call cost/tokens/model into stage-level fields."""
     if not calls:
         return None, None, None
@@ -47,11 +71,12 @@ class TraceRecorder:
         self._editor_actions: list[EditorAction] = []
 
     @contextmanager
-    def stage(self, name: str, model: str | None = None) -> Iterator[None]:
+    def stage(self, name: str, model: str | None = None) -> Iterator[_StageHandle]:
+        handle = _StageHandle()
         start = time.perf_counter()
         started_iso = datetime.now(timezone.utc).isoformat()
         try:
-            yield
+            yield handle
         except Exception as exc:  # surface error in trace and re-raise
             calls = _drain_llm_calls()
             cost, tokens, rolled_model = _rollup(calls)
@@ -65,6 +90,7 @@ class TraceRecorder:
                     cost_usd=cost,
                     outcome="error",
                     error=str(exc),
+                    planning=_build_planning(handle),
                     llm_calls=calls,
                 )
             )
@@ -80,6 +106,7 @@ class TraceRecorder:
                 tokens=tokens,
                 cost_usd=cost,
                 outcome="success",
+                planning=_build_planning(handle),
                 llm_calls=calls,
             )
         )

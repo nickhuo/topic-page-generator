@@ -49,8 +49,6 @@ def test_long_snippet_is_truncated_with_ellipsis():
 
 def test_grounding_rule_is_present_in_system_prompt():
     msgs = build_ground_messages("x", [])
-    system_text = "\n".join(
-        m["content"] for m in msgs if m["role"] == "system"
-    )
+    system_text = "\n".join(m["content"] for m in msgs if m["role"] == "system")
     assert "Grounding rule" in system_text
     assert "prior knowledge" in system_text

@@ -144,7 +144,7 @@ def generate(
             ground_out.facts,
             canonical_title=ground_out.canonical_title or ground_out.facts.what[:80],
         )
-        with recorder.stage("curation"):
+        with recorder.stage("curation") as cur_stage:
             curation_out = await run_curation_stage(
                 facts=ground_out.facts,
                 canonical_title=ground_out.canonical_title
@@ -152,6 +152,9 @@ def generate(
                 backbone=backbone,
                 reporter=reporter,
             )
+            # Record the full editorial plan (backbone + LLM-curated) that
+            # drives research, including every section's acceptance criteria.
+            cur_stage.section_plans = list(backbone) + list(curation_out.sections)
         _flush_trace()
 
         # HITL: plan_review — multi-select edit + per-section comments + add.
@@ -178,9 +181,9 @@ def generate(
         _wp_card = await fetch_wikipedia_card(ground_out.canonical_title)
         seed_sources = [wd_source] if wd_source else []
 
-        with recorder.stage("research"):
+        with recorder.stage("research") as res_stage:
             with reporter.live_section_table([s.section_id for s in combined.sections]):
-                pools = await run_research_stage(
+                pools, research_log = await run_research_stage(
                     sections=combined.sections,
                     canonical_title=ground_out.canonical_title,
                     facts=ground_out.facts,
@@ -188,6 +191,7 @@ def generate(
                     reporter=reporter,
                     notes=editor_notes,
                 )
+            res_stage.research_log = research_log
         _flush_trace()
 
         # Stage 4: block-driven extraction.

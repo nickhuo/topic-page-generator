@@ -376,6 +376,22 @@ class ResearchEvalResult(_Frozen):
         return self
 
 
+class SectionResearchStep(_Frozen):
+    """One iteration of the per-section research loop."""
+
+    iteration: int
+    query: str
+    pool_size: int  # pool size after this iteration's fetch+merge
+    eval: ResearchEvalResult
+
+
+class SectionResearchLog(_Frozen):
+    """The full per-iteration research trace for one section."""
+
+    section_id: str
+    steps: list[SectionResearchStep] = Field(default_factory=list)
+
+
 class RenderedSection(_Frozen):
     """A fully extracted section, ready for the renderer.
 
@@ -432,6 +448,19 @@ class LLMCall(_Frozen):
     duration_ms: int
 
 
+class StagePlanning(_Frozen):
+    """LLM-generated plans/criteria captured during a planning stage.
+
+    Curation populates `section_plans` (the full editorial plan that drove
+    research, incl. each section's acceptance criteria). Research populates
+    `research_log` (per-section query + eval iterations). Other stages leave
+    both empty.
+    """
+
+    section_plans: list[SectionPlan] = Field(default_factory=list)
+    research_log: list[SectionResearchLog] = Field(default_factory=list)
+
+
 class StageTrace(_Frozen):
     stage: str
     started_at: ISO8601
@@ -443,6 +472,7 @@ class StageTrace(_Frozen):
     retry_count: int = 0
     error: str | None = None
     output_ref: str | None = None
+    planning: StagePlanning | None = None
     llm_calls: list[LLMCall] = Field(default_factory=list)
 
 

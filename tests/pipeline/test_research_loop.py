@@ -47,7 +47,7 @@ def _fake_source(url: str, pub: str = "Reuters") -> Source:
 def test_default_budgets():
     assert DEFAULT_MAX_ITERATIONS_PER_SECTION == 3
     assert DEFAULT_MAX_FETCH_CALLS_PER_SECTION == 4
-    assert DEFAULT_MAX_TOTAL_TAVILY == 30
+    assert DEFAULT_MAX_TOTAL_TAVILY == 50
 
 
 async def test_loop_exits_when_eval_satisfied_first_iteration(monkeypatch):
@@ -72,7 +72,7 @@ async def test_loop_exits_when_eval_satisfied_first_iteration(monkeypatch):
     )
     monkeypatch.setattr("generator.pipeline.research._gen_query", fake_query)
 
-    result = await run_research_stage(
+    result, logs = await run_research_stage(
         sections=[_section()],
         canonical_title="t",
         facts=None,  # not used by fakes
@@ -83,6 +83,13 @@ async def test_loop_exits_when_eval_satisfied_first_iteration(monkeypatch):
     assert call_log["eval"] == 1
     assert "overview" in result
     assert result["overview"]
+    # The research log captures the single satisfied iteration.
+    assert [log.section_id for log in logs] == ["overview"]
+    steps = logs[0].steps
+    assert len(steps) == 1
+    assert steps[0].iteration == 1
+    assert steps[0].query
+    assert steps[0].eval.satisfied is True
 
 
 async def test_loop_iterates_when_eval_unsatisfied(monkeypatch):

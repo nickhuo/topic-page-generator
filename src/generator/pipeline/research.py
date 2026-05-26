@@ -2,7 +2,7 @@
 
 Public surface:
 - `run_research_stage(sections, canonical_title, facts, seed_sources, budget?)`
-  → dict[section_id, list[Source]]
+  → (dict[section_id, list[Source]], list[SectionResearchLog])
 - `ResearchBudget` dataclass (overridable via env vars or kwargs)
 
 The loop runs all sections in parallel under a shared `GlobalBudget` that
@@ -31,6 +31,8 @@ from generator.schema import (
     EditorNotes,
     EventFacts,
     SectionPlan,
+    SectionResearchLog,
+    SectionResearchStep,
     Source,
 )
 from generator.sources.tavily import fetch_tavily
@@ -126,11 +128,12 @@ async def _section_loop(
     primary_entity: str,
     reporter: PipelineReporter,
     editor_note: str | None = None,
-) -> list[Source]:
+) -> tuple[list[Source], SectionResearchLog]:
     pool: list[Source] = list(seed_sources)  # always start with seeds
     previous_gaps: list[str] | None = None
     previous_query: str | None = None
     fetch_calls_this_section = 0
+    steps: list[SectionResearchStep] = []
 
     for iter_idx in range(budget.max_iterations_per_section):
         if fetch_calls_this_section >= budget.max_fetch_calls_per_section:
@@ -187,14 +190,22 @@ async def _section_loop(
         eval_result = await run_research_eval_stage(
             section=section, sources=pool, canonical_title=canonical_title
         )
+        steps.append(
+            SectionResearchStep(
+                iteration=iter_idx + 1,
+                query=query,
+                pool_size=len(pool),
+                eval=eval_result,
+            )
+        )
         if eval_result.satisfied:
             reporter.section_event(section.section_id, "eval_satisfied")
-            return pool
+            return pool, SectionResearchLog(section_id=section.section_id, steps=steps)
         reporter.section_event(section.section_id, "eval_gaps", gaps=eval_result.gaps)
         previous_gaps = eval_result.gaps
         previous_query = query
 
-    return pool
+    return pool, SectionResearchLog(section_id=section.section_id, steps=steps)
 
 
 async def run_research_stage(
@@ -206,8 +217,12 @@ async def run_research_stage(
     budget: ResearchBudget | None = None,
     reporter: PipelineReporter | None = None,
     notes: EditorNotes | None = None,
-) -> dict[str, list[Source]]:
-    """Run the per-section research loop in parallel under a global budget."""
+) -> tuple[dict[str, list[Source]], list[SectionResearchLog]]:
+    """Run the per-section research loop in parallel under a global budget.
+
+    Returns the per-section evidence pools plus a per-section research log
+    (query + eval iterations) for the trace.
+    """
     b = budget or ResearchBudget.from_env()
     global_counter = _GlobalCounter(b.max_total_tavily)
     r = reporter or NullReporter()
@@ -228,8 +243,10 @@ async def run_research_stage(
         )
         for s in sections
     ]
-    pools = await asyncio.gather(*coros)
-    return {s.section_id: pool for s, pool in zip(sections, pools)}
+    results = await asyncio.gather(*coros)
+    pools = {s.section_id: pool for s, (pool, _log) in zip(sections, results)}
+    logs = [log for _pool, log in results]
+    return pools, logs
 
 
 __all__ = [

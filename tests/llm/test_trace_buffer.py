@@ -37,4 +37,3 @@ async def test_push_inside_gather_is_captured_by_parent():
     await asyncio.gather(*[_child() for _ in range(5)])
     out = drain()
     assert len(out) == 5
-

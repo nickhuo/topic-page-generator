@@ -564,9 +564,7 @@ class EditorPrompter:
                     continue
                 plan = plans_by_id.get(target)
                 if plan is None:
-                    self.console.print(
-                        f"[red]No plan found for '{target}'.[/red]"
-                    )
+                    self.console.print(f"[red]No plan found for '{target}'.[/red]")
                     continue
                 note = await questionary.text(
                     "Editor note for this regen (blank to skip):",
@@ -602,9 +600,7 @@ class EditorPrompter:
                     continue
                 plan = plans_by_id.get(target)
                 if plan is None:
-                    self.console.print(
-                        f"[red]No plan found for '{target}'.[/red]"
-                    )
+                    self.console.print(f"[red]No plan found for '{target}'.[/red]")
                     continue
                 edited_plan, note = await self._edit_plan_flow(plan)
                 if edited_plan is None:
@@ -677,9 +673,7 @@ class EditorPrompter:
             return f"{per}\n\nGeneral note: {global_comment}"
         return per or global_comment or None
 
-    async def _pick_section_id(
-        self, rendered: list[RenderedSection]
-    ) -> str | None:
+    async def _pick_section_id(self, rendered: list[RenderedSection]) -> str | None:
         if not rendered:
             self.console.print("[red]No sections to pick.[/red]")
             return None
@@ -697,9 +691,7 @@ class EditorPrompter:
     async def _edit_plan_flow(
         self, plan: SectionPlan
     ) -> tuple[SectionPlan | None, str | None]:
-        new_title = await questionary.text(
-            "Title:", default=plan.title
-        ).ask_async()
+        new_title = await questionary.text("Title:", default=plan.title).ask_async()
         if new_title is None:
             return None, None
         new_intent = await questionary.text(
@@ -756,14 +748,15 @@ class EditorPrompter:
         from generator.pipeline.research import run_research_stage
 
         try:
-            with self.rec.stage(f"research:{plan.section_id}"):
-                pools = await run_research_stage(
+            with self.rec.stage(f"research:{plan.section_id}") as res_stage:
+                pools, research_log = await run_research_stage(
                     sections=[plan],
                     canonical_title=canonical_title,
                     facts=facts,
                     seed_sources=seed_sources,
                     notes=notes,
                 )
+                res_stage.research_log = research_log
         except Exception as exc:
             self.console.print(f"[red]Research failed:[/red] {exc}")
             return None
