@@ -127,6 +127,58 @@ def _brave_query_for_section(section: SectionPlan, canonical_title: str) -> str:
     return raw[:80]
 
 
+def _match_source_by_url(raw_url: str, sources_by_len: list[Source]) -> Source | None:
+    """Find the pool source whose URL is the clean prefix of a card URL.
+
+    The block-extract LLM occasionally fails to terminate the copied `url`
+    string, leaving the clean article URL with trailing junk appended (`',`,
+    `/published_at`, or whole collapsed JSON fields). Since the real URL is
+    always a prefix, we match against the evidence pool. `sources_by_len` must
+    be sorted longest-URL-first so we never match a shorter prefix belonging to
+    a different article on the same host.
+    """
+    for s in sources_by_len:
+        su = str(s.url)
+        if raw_url == su or raw_url.startswith(su):
+            return s
+    return None
+
+
+def _canonicalize_news_cards(cards: list, sources: list[Source]) -> list:
+    """Rebuild each NewsCard's authoritative fields from the matched pool Source.
+
+    Repairs LLM-corrupted `url` values (and stale publisher/tier/date/thumbnail)
+    by keying off a longest-prefix URL match against the evidence pool. The
+    LLM-written `summary` is preserved; everything else comes from the Source.
+    Cards with no pool match pass through unchanged — they get dropped later by
+    citation-integrity / viability checks.
+    """
+    if not cards or not sources:
+        return cards
+    by_len = sorted(sources, key=lambda s: len(str(s.url)), reverse=True)
+    out: list = []
+    changed = False
+    for c in cards:
+        match = _match_source_by_url(str(c.url), by_len)
+        if match is None:
+            out.append(c)
+            continue
+        new_c = c.model_copy(
+            update={
+                "url": match.url,
+                "publisher": match.publisher.name,
+                "tier": match.publisher.tier,
+                "published_at": match.published_at,
+                # may be None -> refilled (latest_news) or dropped (newsfeed) downstream
+                "thumbnail_url": match.thumbnail_url,
+                "source_id": match.id,
+            }
+        )
+        out.append(new_c)
+        changed = changed or new_c != c
+    return out if changed else cards
+
+
 def _collect_cited_ids(obj) -> set[str]:
     """Recursive walker — find every source_id reference in a block_data tree."""
     cited: set[str] = set()
@@ -238,6 +290,15 @@ async def extract_one_section(
             error=str(exc)[:120],
         )
         return None
+
+    # Repair LLM-corrupted news card URLs against the evidence pool before any
+    # downstream filtering / thumbnail enrichment operates on them.
+    if section.block_kind in ("newsfeed", "latest_news") and getattr(
+        data, "cards", None
+    ):
+        canon = _canonicalize_news_cards(list(data.cards), sources)
+        if canon != list(data.cards):
+            data = data.model_copy(update={"cards": canon})
 
     # Spec-defined normalization (filter/sort/cap items) before integrity checks.
     data = spec.postprocess(data)

@@ -39,14 +39,6 @@ Skips every prompt. Editor actions are still recorded with `reason: "auto_mode"`
 uv run generate run --auto "The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026"
 ```
 
-### Regenerate a single section
-
-Re-run block extraction for one section against an existing data file. Useful for iterating on a specific section without re-paying for the full pipeline.
-
-```bash
-uv run generate regen-section <section_id> output/<slug>.data.json
-```
-
 ### Outputs
 
 Written to `output/<slug>.{html,data.json,trace.json}`:
