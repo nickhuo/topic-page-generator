@@ -16,8 +16,9 @@
         <time class="ref-timeline__date">{{ entry.time[:10] if entry.time|length > 10 else entry.time }}</time>
       {% endif %}
       <div class="ref-timeline__label">
-        {% if entry.source_id and source_index[entry.source_id] %}
-          <a href="#src-{{ source_index[entry.source_id] }}">{{ entry.title }}</a>
+        {% set cite = cite_cluster([entry.source_id]) if entry.source_id else none %}
+        {% if cite %}
+          <a href="{{ cite.cards[0].url }}" rel="noopener noreferrer" target="_blank">{{ entry.title }}</a>
         {% else %}
           {{ entry.title }}
         {% endif %}
