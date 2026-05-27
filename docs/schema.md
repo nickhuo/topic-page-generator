@@ -497,6 +497,27 @@ type ResearchEvalResult = {
 };
 ```
 
+### `SectionResearchStep` / `SectionResearchLog` — per-section research trace
+
+One `SectionResearchStep` per loop iteration: the LLM-generated Tavily `query`,
+the evidence pool size after that iteration's fetch+merge, and the iteration's
+`ResearchEvalResult`. A `SectionResearchLog` bundles all steps for one section.
+Persisted on the research `StageTrace` via `planning.research_log` (see below).
+
+```typescript
+type SectionResearchStep = {
+  iteration: number;                 // 1-based
+  query: string;                     // LLM-generated Tavily query
+  pool_size: number;                 // pool size after this iteration
+  eval: ResearchEvalResult;
+};
+
+type SectionResearchLog = {
+  section_id: string;
+  steps: SectionResearchStep[];
+};
+```
+
 ### `ConsistencyCheckOutput` — cross-section consistency
 
 ```typescript
@@ -528,6 +549,21 @@ type LLMCall = {
 };
 ```
 
+### `StagePlanning` — LLM-generated plans/criteria for a planning stage
+
+Captured only on planning stages. The **curation** stage populates
+`section_plans` with the full editorial plan that drove research (backbone +
+LLM-curated sections, each carrying its `acceptance` criteria). The **research**
+stage populates `research_log` with one `SectionResearchLog` per section. Other
+stages leave `planning` null.
+
+```typescript
+type StagePlanning = {
+  section_plans: SectionPlan[];      // curation: the plan + acceptance criteria
+  research_log: SectionResearchLog[];// research: per-section query/eval iterations
+};
+```
+
 ### `StageTrace` — one entry per pipeline stage
 
 ```typescript
@@ -542,6 +578,7 @@ type StageTrace = {
   retry_count: number;
   error?: string;
   output_ref?: string;               // hash or reference, not the full payload
+  planning?: StagePlanning;          // present only on curation/research stages
   llm_calls: LLMCall[];              // empty for deterministic stages
 };
 ```

@@ -1,44 +1,41 @@
 {
-  "trace_id": "trace_083dea6dc292",
-  "page_id": "page_909d164f",
-  "input_sentence": "The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026.",
-  "started_at": "2026-05-18T16:59:25.216659+00:00",
-  "ended_at": "2026-05-18T17:05:37.123954+00:00",
-  "total_duration_ms": 371907,
-  "total_cost_usd": 0.0,
+  "trace_id": "trace_77913a13c5d1",
+  "page_id": "page_25164122",
+  "input_sentence": "The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026",
+  "started_at": "2026-05-26T21:25:02.920222+00:00",
+  "ended_at": "2026-05-26T21:27:11.784322+00:00",
+  "total_duration_ms": 128864,
+  "total_cost_usd": 0.355663,
   "pipeline_trace": [
     {
       "stage": "ground",
-      "started_at": "2026-05-18T16:59:25.217123+00:00",
-      "duration_ms": 44375,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "started_at": "2026-05-26T21:25:02.920744+00:00",
+      "duration_ms": 21502,
+      "model": "anthropic/claude-sonnet-4-6",
+      "tokens": {
+        "input": 5143,
+        "output": 319
+      },
+      "cost_usd": 0.020214,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
+      "planning": null,
       "llm_calls": [
         {
           "model": "anthropic/claude-sonnet-4-6",
-          "input_tokens": 5141,
-          "output_tokens": 390,
-          "cost_usd": 0.021273,
-          "duration_ms": 8014
-        },
-        {
-          "model": "anthropic/claude-sonnet-4-6",
-          "input_tokens": 5297,
-          "output_tokens": 297,
-          "cost_usd": 0.020346,
-          "duration_ms": 6840
+          "input_tokens": 5143,
+          "output_tokens": 319,
+          "cost_usd": 0.020214,
+          "duration_ms": 7528
         }
       ]
     },
     {
       "stage": "hero_image",
-      "started_at": "2026-05-18T17:01:02.790354+00:00",
-      "duration_ms": 1761,
+      "started_at": "2026-05-26T21:25:24.428417+00:00",
+      "duration_ms": 630,
       "model": null,
       "tokens": null,
       "cost_usd": null,
@@ -46,59 +43,855 @@
       "retry_count": 0,
       "error": null,
       "output_ref": null,
+      "planning": null,
       "llm_calls": []
     },
     {
       "stage": "curation",
-      "started_at": "2026-05-18T17:01:04.570125+00:00",
-      "duration_ms": 11300,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "started_at": "2026-05-26T21:25:25.085639+00:00",
+      "duration_ms": 13699,
+      "model": "anthropic/claude-sonnet-4-6",
+      "tokens": {
+        "input": 2952,
+        "output": 618
+      },
+      "cost_usd": 0.018126,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
+      "planning": {
+        "section_plans": [
+          {
+            "section_id": "overview",
+            "kind": "backbone",
+            "title": "Overview",
+            "rank": 1,
+            "block_kind": "paragraph",
+            "intent": "Two short paragraphs introducing 2026 FIFA World Cup Opening at Estadio Azteca: what just happened, who is involved, when/where, and why a reader should care.",
+            "acceptance": {
+              "description": "At least one well-cited paragraph or three bullets.",
+              "min_sources": 2,
+              "min_publishers": 2,
+              "required_facets": [],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "timeline",
+            "kind": "backbone",
+            "title": "Timeline",
+            "rank": 2,
+            "block_kind": "timeline",
+            "intent": "Three to seven milestone entries spanning past, present, and future. Every entry must set `temporal_phase` to one of past / present / future. The set MUST cover all three phases when evidence supports it — at least one entry for events that already happened (past), the current/just-broken development (present), and any scheduled or expected next steps (future).",
+            "acceptance": {
+              "description": "At least 3 milestone entries with temporal_phase set; the set should cover past / present / future when sources allow.",
+              "min_sources": 2,
+              "min_publishers": 1,
+              "required_facets": [
+                "past",
+                "present",
+                "future"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "sidebar"
+          },
+          {
+            "section_id": "media_coverage",
+            "kind": "backbone",
+            "title": "Featured Coverage",
+            "rank": 3,
+            "block_kind": "newsfeed",
+            "intent": "Up to five TOP / FEATURED external articles about 2026 FIFA World Cup Opening at Estadio Azteca — the stories an editor would put above the fold: scoops, in-depth reporting, analysis from authoritative outlets. Bias toward T0/T1 publishers; prefer depth and context over raw recency (that's what latest_news handles). Every card MUST have a thumbnail_url — drop cards without images. Among the selected featured stories, sort newest first.",
+            "acceptance": {
+              "description": "Up to 5 image-bearing cards from distinct publishers, sorted newest first.",
+              "min_sources": 3,
+              "min_publishers": 3,
+              "required_facets": [
+                "thumbnail_url"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "latest_news",
+            "kind": "backbone",
+            "title": "Latest News",
+            "rank": 4,
+            "block_kind": "latest_news",
+            "intent": "Strictly chronological feed of the most recent reporting about 2026 FIFA World Cup Opening at Estadio Azteca. Sort by published_at DESCENDING; the order IS the editorial — do not re-rank for prominence, do not deduplicate by angle, do not prefer feature pieces. This is the opposite of media_coverage (which is editor-curated top/featured stories with large hero images). Every card MUST have published_at; drop cards without dates. Prefer breadth (more publishers, more recency) over depth.",
+            "acceptance": {
+              "description": "Vertical list of 4-8 recent news items from distinct publishers, newest first. Each card links directly to the source article.",
+              "min_sources": 4,
+              "min_publishers": 3,
+              "required_facets": [
+                "published_at"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "tournament_snapshot",
+            "kind": "curated",
+            "title": "Tournament at a Glance",
+            "rank": 5,
+            "block_kind": "chart",
+            "intent": "Highlight the key numbers that define the 2026 World Cup — 48 teams, 3 host nations, 16 venues, 104 matches — giving readers an instant quantitative sense of the tournament's historic scale.",
+            "acceptance": {
+              "description": "At least 4 distinct stat callouts (teams, host countries, venues, matches) sourced from credible football or news outlets.",
+              "min_sources": 1,
+              "min_publishers": 1,
+              "required_facets": [
+                "teams",
+                "host_nations",
+                "venues",
+                "matches"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "key_figures",
+            "kind": "curated",
+            "title": "Key Figures",
+            "rank": 6,
+            "block_kind": "people",
+            "intent": "Portrait cards for the principal decision-makers and headline names tied to this opening — FIFA president, host nation football federation heads, and marquee players expected to feature — so readers immediately know who is driving the event.",
+            "acceptance": {
+              "description": "2–6 portrait cards each with name, role, and a one-sentence explanation of why they matter to the 2026 World Cup opening, drawn from at least 2 publishers.",
+              "min_sources": 2,
+              "min_publishers": 2,
+              "required_facets": [
+                "name",
+                "role",
+                "relevance"
+              ],
+              "forbid_single_perspective": true
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "host_venues_overview",
+            "kind": "curated",
+            "title": "Host Cities & Venues",
+            "rank": 7,
+            "block_kind": "paragraph",
+            "intent": "Briefly profile the 16 stadiums across the USA, Mexico, and Canada — capacity, city, and any notable facts — helping readers understand the tri-nation footprint beyond the Azteca opening.",
+            "acceptance": {
+              "description": "Covers all three host countries with at least one venue detail per country, sourced from at least 2 publishers.",
+              "min_sources": 2,
+              "min_publishers": 2,
+              "required_facets": [
+                "USA_venues",
+                "Mexico_venues",
+                "Canada_venues"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "reactions",
+            "kind": "curated",
+            "title": "Reactions & Perspectives",
+            "rank": 8,
+            "block_kind": "reactions",
+            "intent": "2–4 quote cards capturing contrasting sentiments — excitement from football federations or players, skepticism from critics or fan groups — to reflect the range of opinion surrounding the historic 48-team, tri-nation format.",
+            "acceptance": {
+              "description": "At least 2 quote cards representing distinct sentiments (e.g. enthusiasm vs. concern) from at least 2 different publishers.",
+              "min_sources": 2,
+              "min_publishers": 2,
+              "required_facets": [
+                "positive_sentiment",
+                "critical_or_skeptical_sentiment"
+              ],
+              "forbid_single_perspective": true
+            },
+            "placement": "main"
+          }
+        ],
+        "research_log": []
+      },
       "llm_calls": [
         {
           "model": "anthropic/claude-sonnet-4-6",
           "input_tokens": 2952,
-          "output_tokens": 558,
-          "cost_usd": 0.017226,
-          "duration_ms": 11283
+          "output_tokens": 618,
+          "cost_usd": 0.018126,
+          "duration_ms": 13679
         }
       ]
     },
     {
       "stage": "research",
-      "started_at": "2026-05-18T17:02:15.436233+00:00",
-      "duration_ms": 94549,
+      "started_at": "2026-05-26T21:25:40.263251+00:00",
+      "duration_ms": 68197,
       "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "tokens": {
+        "input": 83167,
+        "output": 2819
+      },
+      "cost_usd": 0.247538,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
-      "llm_calls": []
+      "planning": {
+        "section_plans": [],
+        "research_log": [
+          {
+            "section_id": "overview",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup opening ceremony Estadio Azteca June 11",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No source specifically covers the 2026 FIFA World Cup opening ceremony at Estadio Azteca — details about the opening match, opening ceremony events, date, teams playing, and significance of Azteca as the venue are missing",
+                    "No publisher has provided details about what happened at the opening or who performed/participated in the opening ceremony at Azteca"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup opening ceremony Estadio Azteca Mexico City opening match details"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "2026 FIFA World Cup opening match Estadio Azteca teams schedule",
+                "pool_size": 13,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No source specifically covers the 2026 FIFA World Cup opening ceremony or opening match at Estadio Azteca — who plays, what ceremonies are planned, and why the Azteca venue is historically significant for this opener",
+                    "Evidence pool lacks any dedicated coverage of the opening match/ceremony details at Estadio Azteca (Mexico City)"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup opening ceremony Estadio Azteca opening match June 11 Mexico City"
+                }
+              },
+              {
+                "iteration": 3,
+                "query": "2026 FIFA World Cup opening ceremony Estadio Azteca significance",
+                "pool_size": 17,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No source specifically describes the 2026 FIFA World Cup opening match/ceremony at Estadio Azteca — who played, what happened at the opening, details about the opening ceremony at that specific venue",
+                    "Evidence covers general World Cup 2026 info, halftime show, and venues broadly, but none focuses on the Estadio Azteca opening match or ceremony specifically"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup opening match Estadio Azteca Mexico ceremony June 11"
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "timeline",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup opening ceremony Estadio Azteca June 11 schedule",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence specifically about the Estadio Azteca opening match/ceremony history or the decision to host the opening there (past milestone)",
+                    "No evidence about the current state of Estadio Azteca preparations or the opening match announcement (present milestone)",
+                    "No evidence about the specific scheduled opening match at Estadio Azteca on June 11, 2026 including teams, kickoff time, or ceremony details (future milestone)",
+                    "Evidence pool lacks specific Azteca-focused sources; all sources are general World Cup coverage"
+                  ],
+                  "next_query_hint": "Estadio Azteca 2026 FIFA World Cup opening match June 11 ceremony details teams"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "Estadio Azteca 2026 World Cup opening match teams kickoff time",
+                "pool_size": 11,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence specifically about the Estadio Azteca opening ceremony or opening match milestone (past award/selection of Azteca as opening venue, present preparations, future opening match date)",
+                    "No source explicitly covering the past milestone of Azteca being selected/confirmed as the opening venue for the 2026 World Cup",
+                    "No source covering present-phase preparations or ceremonies specifically at Estadio Azteca for the opening"
+                  ],
+                  "next_query_hint": "Estadio Azteca 2026 FIFA World Cup opening match ceremony history selection"
+                }
+              },
+              {
+                "iteration": 3,
+                "query": "Estadio Azteca selected 2026 FIFA World Cup opening venue announcement",
+                "pool_size": 15,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "media_coverage",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup opening ceremony Estadio Azteca coverage analysis",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence item has a thumbnail_url field — the acceptance criteria require every card to have a thumbnail_url, but none of the retrieved sources include image URLs",
+                    "No sources are specifically about the 2026 FIFA World Cup opening match/ceremony at Estadio Azteca — coverage is generic World Cup content",
+                    "All sources are T2/T3 publishers; no T0/T1 authoritative outlets (e.g. BBC, AP, Reuters, ESPN) are represented",
+                    "Minimum 3 distinct publishers with image-bearing articles about the Azteca opening is not met"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup opening ceremony Estadio Azteca Mexico vs South Africa June 11 site:bbc.com OR site:espn.com OR site:reuters.com OR site:apnews.com"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "2026 FIFA World Cup Estadio Azteca opening match June 11 analysis",
+                "pool_size": 16,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence item includes a thumbnail_url field — the required_facets demand every card has an image, but none of the retrieved sources carry image/thumbnail metadata",
+                    "No sources specifically cover the 2026 FIFA World Cup opening match/ceremony at Estadio Azteca in depth — most are general World Cup coverage",
+                    "Only one T1 publisher (Axios) is present, and that article is about the Bay Area, not the Azteca opening; need more authoritative/T0-T1 sources focused on the Azteca opening",
+                    "Multiple sources are from the same publisher (Foxsports x3, Thedrum x2, Telecomasia x2) reducing distinct-publisher diversity for featured cards"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup opening match Estadio Azteca Mexico ceremony June 11 site:espn.com OR site:bbc.com OR site:reuters.com OR site:apnews.com"
+                }
+              },
+              {
+                "iteration": 3,
+                "query": "2026 FIFA World Cup opening ceremony Estadio Azteca coverage",
+                "pool_size": 19,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence item has a confirmed thumbnail_url field — the section requires every card to have a thumbnail_url, and none of the evidence blocks include image URLs",
+                    "No evidence specifically covers the Estadio Azteca opening match/ceremony in depth — most articles are general World Cup coverage, not focused on the opening at Azteca",
+                    "No T0/T1 publisher articles specifically about the Estadio Azteca opening (only one T1 source, Axios, covers Bay Area prep, not Azteca)",
+                    "Missing in-depth reporting or analysis pieces specifically about the Estadio Azteca opening ceremony, its significance, or the Mexico vs South Africa match"
+                  ],
+                  "next_query_hint": "Estadio Azteca 2026 FIFA World Cup opening match ceremony Mexico South Africa June 11 site:espn.com OR site:bbc.com OR site:reuters.com OR site:apnews.com"
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "latest_news",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup opening Estadio Azteca June 11 latest news",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "tournament_snapshot",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup 48 teams 104 matches 16 venues statistics",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "key_figures",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup opening key figures FIFA president Mexico federation",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No portrait-level information about FIFA president Gianni Infantino's specific role in the 2026 World Cup opening at Estadio Azteca",
+                    "No information about host nation football federation heads (US Soccer, Canadian Soccer, FMF presidents) and their roles",
+                    "No marquee players confirmed to feature in the opening match at Estadio Azteca with sufficient detail for portrait cards",
+                    "Evidence does not specifically address the Estadio Azteca opening ceremony key figures",
+                    "Only surface mentions of Infantino and Kaká without role/relevance detail sufficient for portrait cards"
+                  ],
+                  "next_query_hint": "Key figures FIFA president Gianni Infantino Estadio Azteca 2026 World Cup opening ceremony players Mexico federation"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "Gianni Infantino 2026 World Cup opening ceremony Estadio Azteca role",
+                "pool_size": 14,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No specific information about the opening match at Estadio Azteca or who is playing in it",
+                    "No named marquee players expected to feature in the opening game at Azteca specifically",
+                    "No information about the host nation football federation heads (e.g., Mexican FA president)",
+                    "Evidence mentions Gianni Infantino (FIFA president) only in passing without a clear role description tied to the opening ceremony",
+                    "No dedicated profile/portrait information for key figures tied specifically to the Azteca opening"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup opening ceremony Estadio Azteca key figures players teams June 11 Mexico"
+                }
+              },
+              {
+                "iteration": 3,
+                "query": "2026 FIFA World Cup opening match Estadio Azteca teams players",
+                "pool_size": 19,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No specific information about the opening match at Estadio Azteca or who the key figures are for that specific opening ceremony",
+                    "No named host nation football federation heads (e.g., Mexican Football Federation president) with role and relevance to the opening",
+                    "No marquee players specifically tied to the Azteca opening match (Mexico vs. ?) identified with name, role, and relevance",
+                    "Gianni Infantino is mentioned in passing but no dedicated profile with role and relevance to the opening",
+                    "Sources do not cover the specific opening ceremony at Estadio Azteca or the teams/players featured there"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup opening ceremony Estadio Azteca Mexico key figures players teams June 2026"
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "host_venues_overview",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup stadiums venues USA Mexico Canada capacity",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No specific venue details (capacity, stadium name, notable facts) for Canadian host cities/stadiums",
+                    "No specific venue details for Mexican host venues beyond general mentions",
+                    "Evidence lacks dedicated per-country venue breakdowns with capacity figures; most sources only mention venues in passing",
+                    "Only 2 distinct publishers (Telecomasia and Fox Sports/Fox News) provide any venue-level detail, and neither covers all three countries with specifics"
+                  ],
+                  "next_query_hint": "2026 FIFA World Cup host stadiums Canada Toronto Vancouver capacity details"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "2026 FIFA World Cup host stadiums Canada Mexico USA details",
+                "pool_size": 11,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "reactions",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "2026 FIFA World Cup reactions perspectives 48-team format",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No direct quotes expressing positive sentiment (enthusiasm/excitement) from football federations, players, or fans about the 2026 World Cup opening or 48-team format",
+                    "No direct quotes expressing skepticism or concern — the SF Chronicle/AP News article appears critical but no actual quote text is provided in the evidence summaries",
+                    "Evidence summaries are too thin to extract quotable content for quote cards"
+                  ],
+                  "next_query_hint": "quotes reactions FIFA World Cup 2026 opening Azteca excitement enthusiasm federation player statements 48-team format"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "2026 World Cup opening ceremony Estadio Azteca player reactions quotes",
+                "pool_size": 17,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No direct quotes from football federations, players, or officials expressing positive/enthusiastic sentiment about the 48-team tri-nation format or the Azteca opening specifically",
+                    "The AP/SF Chronicle skeptical article (src_c5ed822b2b5f / src_8073084ac6eb) provides critical perspective but no actual quotable text is visible in the summary to use as a quote card",
+                    "No quotes from fan groups or critics specifically about the Estadio Azteca opening match or the expanded format",
+                    "Missing positive sentiment quote card from a named federation official or player about the historic opening"
+                  ],
+                  "next_query_hint": "quotes reactions FIFA officials players excitement 2026 World Cup opening Estadio Azteca 48-team format tri-nation"
+                }
+              },
+              {
+                "iteration": 3,
+                "query": "2026 FIFA World Cup tri-nation format federation officials enthusiasm reactions",
+                "pool_size": 24,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No direct quotes expressing positive sentiment about the 48-team tri-nation format or the Estadio Azteca opening from football federations, players, or officials",
+                    "No direct quotes expressing skepticism or criticism about the format or the opening — the AP/SF Chronicle article title suggests critical content but no actual quotes are surfaced in the summaries",
+                    "Evidence pool lacks quote-level content from any source; summaries do not contain attributable statements suitable for quote cards"
+                  ],
+                  "next_query_hint": "quotes reactions FIFA World Cup 2026 opening Azteca 48-team format excitement criticism players officials"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 954,
+          "output_tokens": 21,
+          "cost_usd": 0.001059,
+          "duration_ms": 1344
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1010,
+          "output_tokens": 27,
+          "cost_usd": 0.001145,
+          "duration_ms": 1513
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 940,
+          "output_tokens": 21,
+          "cost_usd": 0.001045,
+          "duration_ms": 1586
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 908,
+          "output_tokens": 25,
+          "cost_usd": 0.001033,
+          "duration_ms": 1773
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 990,
+          "output_tokens": 24,
+          "cost_usd": 0.00111,
+          "duration_ms": 1752
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 947,
+          "output_tokens": 21,
+          "cost_usd": 0.001052,
+          "duration_ms": 1746
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 949,
+          "output_tokens": 27,
+          "cost_usd": 0.001084,
+          "duration_ms": 1958
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 963,
+          "output_tokens": 27,
+          "cost_usd": 0.001098,
+          "duration_ms": 2254
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2555,
+          "output_tokens": 20,
+          "cost_usd": 0.007965,
+          "duration_ms": 2395
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2548,
+          "output_tokens": 112,
+          "cost_usd": 0.009324,
+          "duration_ms": 3710
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2694,
+          "output_tokens": 20,
+          "cost_usd": 0.008382,
+          "duration_ms": 1842
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1029,
+          "output_tokens": 24,
+          "cost_usd": 0.001149,
+          "duration_ms": 1301
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2566,
+          "output_tokens": 122,
+          "cost_usd": 0.009528,
+          "duration_ms": 5252
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2641,
+          "output_tokens": 152,
+          "cost_usd": 0.010203,
+          "duration_ms": 4522
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2602,
+          "output_tokens": 124,
+          "cost_usd": 0.009666,
+          "duration_ms": 4522
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1074,
+          "output_tokens": 21,
+          "cost_usd": 0.001179,
+          "duration_ms": 1146
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2672,
+          "output_tokens": 192,
+          "cost_usd": 0.010896,
+          "duration_ms": 5163
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2599,
+          "output_tokens": 168,
+          "cost_usd": 0.010317,
+          "duration_ms": 6386
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1122,
+          "output_tokens": 26,
+          "cost_usd": 0.001252,
+          "duration_ms": 1482
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1075,
+          "output_tokens": 24,
+          "cost_usd": 0.001195,
+          "duration_ms": 1600
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1130,
+          "output_tokens": 29,
+          "cost_usd": 0.001275,
+          "duration_ms": 1278
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1170,
+          "output_tokens": 27,
+          "cost_usd": 0.001305,
+          "duration_ms": 1737
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 3337,
+          "output_tokens": 113,
+          "cost_usd": 0.011706,
+          "duration_ms": 6505
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1025,
+          "output_tokens": 23,
+          "cost_usd": 0.00114,
+          "duration_ms": 1036
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2994,
+          "output_tokens": 125,
+          "cost_usd": 0.010857,
+          "duration_ms": 5129
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2900,
+          "output_tokens": 20,
+          "cost_usd": 0.009,
+          "duration_ms": 2044
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1097,
+          "output_tokens": 25,
+          "cost_usd": 0.001222,
+          "duration_ms": 2495
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 3464,
+          "output_tokens": 144,
+          "cost_usd": 0.012552,
+          "duration_ms": 5370
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 4068,
+          "output_tokens": 173,
+          "cost_usd": 0.014799,
+          "duration_ms": 6303
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 3946,
+          "output_tokens": 220,
+          "cost_usd": 0.015138,
+          "duration_ms": 6650
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1111,
+          "output_tokens": 24,
+          "cost_usd": 0.001231,
+          "duration_ms": 1866
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1122,
+          "output_tokens": 22,
+          "cost_usd": 0.001232,
+          "duration_ms": 1579
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1203,
+          "output_tokens": 23,
+          "cost_usd": 0.001318,
+          "duration_ms": 2641
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 3670,
+          "output_tokens": 20,
+          "cost_usd": 0.01131,
+          "duration_ms": 2419
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 4049,
+          "output_tokens": 117,
+          "cost_usd": 0.013902,
+          "duration_ms": 5183
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 5212,
+          "output_tokens": 137,
+          "cost_usd": 0.017691,
+          "duration_ms": 5378
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 4327,
+          "output_tokens": 169,
+          "cost_usd": 0.015516,
+          "duration_ms": 6714
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 4504,
+          "output_tokens": 210,
+          "cost_usd": 0.016662,
+          "duration_ms": 6429
+        }
+      ]
     },
     {
       "stage": "block_extract",
-      "started_at": "2026-05-18T17:03:49.991318+00:00",
-      "duration_ms": 20820,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "started_at": "2026-05-26T21:26:48.474480+00:00",
+      "duration_ms": 23224,
+      "model": "anthropic/claude-haiku-4-5",
+      "tokens": {
+        "input": 44145,
+        "output": 5128
+      },
+      "cost_usd": 0.069785,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
-      "llm_calls": []
+      "planning": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 3911,
+          "output_tokens": 162,
+          "cost_usd": 0.004721,
+          "duration_ms": 2603
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 5029,
+          "output_tokens": 487,
+          "cost_usd": 0.007464,
+          "duration_ms": 5724
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 6630,
+          "output_tokens": 487,
+          "cost_usd": 0.009065,
+          "duration_ms": 5742
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 3742,
+          "output_tokens": 937,
+          "cost_usd": 0.008427,
+          "duration_ms": 7815
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 5810,
+          "output_tokens": 710,
+          "cost_usd": 0.00936,
+          "duration_ms": 19432
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 4078,
+          "output_tokens": 568,
+          "cost_usd": 0.006918,
+          "duration_ms": 19607
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 7798,
+          "output_tokens": 531,
+          "cost_usd": 0.010453,
+          "duration_ms": 22229
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 7147,
+          "output_tokens": 1246,
+          "cost_usd": 0.013377,
+          "duration_ms": 13743
+        }
+      ]
     },
     {
       "stage": "render",
-      "started_at": "2026-05-18T17:05:09.157186+00:00",
-      "duration_ms": 46,
+      "started_at": "2026-05-26T21:27:11.702819+00:00",
+      "duration_ms": 77,
       "model": null,
       "tokens": null,
       "cost_usd": null,
@@ -106,12 +899,13 @@
       "retry_count": 0,
       "error": null,
       "output_ref": null,
+      "planning": null,
       "llm_calls": []
     }
   ],
   "editor_actions": [
     {
-      "action_at": "2026-05-18T17:01:02+00:00",
+      "action_at": "2026-05-26T21:25:24+00:00",
       "actor": "editor:cli",
       "action": "accept_section",
       "target": {
@@ -120,10 +914,10 @@
       },
       "before": null,
       "after": null,
-      "reason": "manual_accept"
+      "reason": "auto_mode"
     },
     {
-      "action_at": "2026-05-18T17:02:14+00:00",
+      "action_at": "2026-05-26T21:25:38+00:00",
       "actor": "editor:cli",
       "action": "accept_section",
       "target": {
@@ -132,10 +926,10 @@
       },
       "before": null,
       "after": null,
-      "reason": "manual_accept"
+      "reason": "auto_mode"
     },
     {
-      "action_at": "2026-05-18T17:05:09+00:00",
+      "action_at": "2026-05-26T21:27:11+00:00",
       "actor": "editor:cli",
       "action": "accept_section",
       "target": {
@@ -144,22 +938,22 @@
       },
       "before": null,
       "after": null,
-      "reason": "manual_accept"
+      "reason": "auto_mode"
     },
     {
-      "action_at": "2026-05-18T17:05:37+00:00",
+      "action_at": "2026-05-26T21:27:11+00:00",
       "actor": "editor:cli",
       "action": "approve_page",
       "target": null,
       "before": null,
       "after": null,
-      "reason": "manual_approve"
+      "reason": "auto_mode"
     }
   ],
-  "final_outcome": "approved_published",
+  "final_outcome": "auto_approved",
   "approval": {
     "actor": "cli_user@local",
-    "approved_at": "2026-05-18T17:05:37.123954+00:00",
-    "auto_mode": false
+    "approved_at": "2026-05-26T21:27:11.784322+00:00",
+    "auto_mode": true
   }
 }

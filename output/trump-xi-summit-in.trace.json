@@ -1,37 +1,41 @@
 {
-  "trace_id": "trace_44164b29253d",
-  "page_id": "page_990ebd8b",
-  "input_sentence": "Trump China summit",
-  "started_at": "2026-05-18T17:15:49.871936+00:00",
-  "ended_at": "2026-05-18T17:21:52.552533+00:00",
-  "total_duration_ms": 362680,
-  "total_cost_usd": 0.0,
+  "trace_id": "trace_0709e4dd14f5",
+  "page_id": "page_1256d9c0",
+  "input_sentence": " trump xi summit",
+  "started_at": "2026-05-26T20:54:06.116737+00:00",
+  "ended_at": "2026-05-26T20:57:34.416614+00:00",
+  "total_duration_ms": 208299,
+  "total_cost_usd": 0.231595,
   "pipeline_trace": [
     {
       "stage": "ground",
-      "started_at": "2026-05-18T17:15:49.872224+00:00",
-      "duration_ms": 23997,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "started_at": "2026-05-26T20:54:06.117508+00:00",
+      "duration_ms": 38110,
+      "model": "anthropic/claude-sonnet-4-6",
+      "tokens": {
+        "input": 4967,
+        "output": 373
+      },
+      "cost_usd": 0.020496,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
+      "planning": null,
       "llm_calls": [
         {
           "model": "anthropic/claude-sonnet-4-6",
-          "input_tokens": 4972,
-          "output_tokens": 362,
-          "cost_usd": 0.020346,
-          "duration_ms": 8158
+          "input_tokens": 4967,
+          "output_tokens": 373,
+          "cost_usd": 0.020496,
+          "duration_ms": 8987
         }
       ]
     },
     {
       "stage": "hero_image",
-      "started_at": "2026-05-18T17:16:36.722126+00:00",
-      "duration_ms": 666,
+      "started_at": "2026-05-26T20:54:48.535150+00:00",
+      "duration_ms": 1784,
       "model": null,
       "tokens": null,
       "cost_usd": null,
@@ -39,93 +43,633 @@
       "retry_count": 0,
       "error": null,
       "output_ref": null,
+      "planning": null,
       "llm_calls": []
     },
     {
       "stage": "curation",
-      "started_at": "2026-05-18T17:16:37.404744+00:00",
-      "duration_ms": 12309,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "started_at": "2026-05-26T20:54:50.375993+00:00",
+      "duration_ms": 11482,
+      "model": "anthropic/claude-sonnet-4-6",
+      "tokens": {
+        "input": 2965,
+        "output": 541
+      },
+      "cost_usd": 0.01701,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
+      "planning": {
+        "section_plans": [
+          {
+            "section_id": "overview",
+            "kind": "backbone",
+            "title": "Overview",
+            "rank": 1,
+            "block_kind": "paragraph",
+            "intent": "Two short paragraphs introducing Trump–Xi Summit in Beijing, May 2026: what just happened, who is involved, when/where, and why a reader should care.",
+            "acceptance": {
+              "description": "At least one well-cited paragraph or three bullets.",
+              "min_sources": 2,
+              "min_publishers": 2,
+              "required_facets": [],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "timeline",
+            "kind": "backbone",
+            "title": "Timeline",
+            "rank": 2,
+            "block_kind": "timeline",
+            "intent": "Three to seven milestone entries spanning past, present, and future. Every entry must set `temporal_phase` to one of past / present / future. The set MUST cover all three phases when evidence supports it — at least one entry for events that already happened (past), the current/just-broken development (present), and any scheduled or expected next steps (future).",
+            "acceptance": {
+              "description": "At least 3 milestone entries with temporal_phase set; the set should cover past / present / future when sources allow.",
+              "min_sources": 2,
+              "min_publishers": 1,
+              "required_facets": [
+                "past",
+                "present",
+                "future"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "sidebar"
+          },
+          {
+            "section_id": "media_coverage",
+            "kind": "backbone",
+            "title": "Featured Coverage",
+            "rank": 3,
+            "block_kind": "newsfeed",
+            "intent": "Up to five TOP / FEATURED external articles about Trump–Xi Summit in Beijing, May 2026 — the stories an editor would put above the fold: scoops, in-depth reporting, analysis from authoritative outlets. Bias toward T0/T1 publishers; prefer depth and context over raw recency (that's what latest_news handles). Every card MUST have a thumbnail_url — drop cards without images. Among the selected featured stories, sort newest first.",
+            "acceptance": {
+              "description": "Up to 5 image-bearing cards from distinct publishers, sorted newest first.",
+              "min_sources": 3,
+              "min_publishers": 3,
+              "required_facets": [
+                "thumbnail_url"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "latest_news",
+            "kind": "backbone",
+            "title": "Latest News",
+            "rank": 4,
+            "block_kind": "latest_news",
+            "intent": "Strictly chronological feed of the most recent reporting about Trump–Xi Summit in Beijing, May 2026. Sort by published_at DESCENDING; the order IS the editorial — do not re-rank for prominence, do not deduplicate by angle, do not prefer feature pieces. This is the opposite of media_coverage (which is editor-curated top/featured stories with large hero images). Every card MUST have published_at; drop cards without dates. Prefer breadth (more publishers, more recency) over depth.",
+            "acceptance": {
+              "description": "Vertical list of 4-8 recent news items from distinct publishers, newest first. Each card links directly to the source article.",
+              "min_sources": 4,
+              "min_publishers": 3,
+              "required_facets": [
+                "published_at"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "key_outcomes",
+            "kind": "curated",
+            "title": "Key Outcomes & Agreements",
+            "rank": 5,
+            "block_kind": "paragraph",
+            "intent": "Summarise the concrete agreements, joint statements, and unresolved sticking points that emerged from the two-day summit, giving readers a clear scorecard of what was achieved.",
+            "acceptance": {
+              "description": "At least three distinct outcomes or agenda items (trade, Taiwan, Iran, tech) are covered with sourced detail.",
+              "min_sources": 2,
+              "min_publishers": 2,
+              "required_facets": [
+                "trade",
+                "Taiwan",
+                "technology"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "key_figures",
+            "kind": "curated",
+            "title": "Who's at the Table",
+            "rank": 6,
+            "block_kind": "people",
+            "intent": "Portrait cards for the principal figures — Trump, Xi, and key advisers or delegates — explaining each person's role and why they matter to this specific summit.",
+            "acceptance": {
+              "description": "2–4 portrait cards covering at least Trump and Xi with role and summit-specific relevance.",
+              "min_sources": 1,
+              "min_publishers": 1,
+              "required_facets": [
+                "role",
+                "why_they_matter"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "global_reactions",
+            "kind": "curated",
+            "title": "Global Reactions",
+            "rank": 7,
+            "block_kind": "reactions",
+            "intent": "2–4 quote cards spanning distinct stakeholder perspectives — e.g. US officials, Chinese state media, allied governments, and market analysts — to show how the summit is being received worldwide.",
+            "acceptance": {
+              "description": "At least two contrasting sentiments or stakeholder tiers are represented, each linked to a distinct source.",
+              "min_sources": 2,
+              "min_publishers": 2,
+              "required_facets": [
+                "US perspective",
+                "Chinese perspective"
+              ],
+              "forbid_single_perspective": true
+            },
+            "placement": "main"
+          },
+          {
+            "section_id": "trade_war_scorecard",
+            "kind": "curated",
+            "title": "Trade War Scorecard",
+            "rank": 8,
+            "block_kind": "chart",
+            "intent": "Stat callouts or a compare table showing key trade metrics — tariff levels, bilateral trade volumes, tech-export restrictions — before and after the summit to quantify the stakes.",
+            "acceptance": {
+              "description": "At least three quantitative data points comparing US–China trade or tariff figures are sourced and displayed.",
+              "min_sources": 1,
+              "min_publishers": 1,
+              "required_facets": [
+                "tariffs",
+                "trade_volume"
+              ],
+              "forbid_single_perspective": false
+            },
+            "placement": "main"
+          }
+        ],
+        "research_log": []
+      },
       "llm_calls": [
         {
           "model": "anthropic/claude-sonnet-4-6",
-          "input_tokens": 2967,
-          "output_tokens": 613,
-          "cost_usd": 0.018096,
-          "duration_ms": 12294
-        }
-      ]
-    },
-    {
-      "stage": "section_proposer",
-      "started_at": "2026-05-18T17:17:52.195539+00:00",
-      "duration_ms": 4515,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
-      "outcome": "success",
-      "retry_count": 0,
-      "error": null,
-      "output_ref": null,
-      "llm_calls": [
-        {
-          "model": "anthropic/claude-sonnet-4-6",
-          "input_tokens": 1896,
-          "output_tokens": 145,
-          "cost_usd": 0.007863,
-          "duration_ms": 4488
+          "input_tokens": 2965,
+          "output_tokens": 541,
+          "cost_usd": 0.01701,
+          "duration_ms": 11461
         }
       ]
     },
     {
       "stage": "research",
-      "started_at": "2026-05-18T17:19:21.187756+00:00",
-      "duration_ms": 40459,
+      "started_at": "2026-05-26T20:55:09.147207+00:00",
+      "duration_ms": 63925,
       "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "tokens": {
+        "input": 47139,
+        "output": 1065
+      },
+      "cost_usd": 0.130792,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
-      "llm_calls": []
+      "planning": {
+        "section_plans": [],
+        "research_log": [
+          {
+            "section_id": "overview",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi summit Beijing May 2026 trade Taiwan",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "timeline",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi summit Beijing May 2026 timeline schedule",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "media_coverage",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi Summit Beijing May 2026 coverage analysis",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence item includes a confirmed thumbnail_url — the acceptance criteria require every card to have a thumbnail_url, but none of the evidence blocks contain image URL fields",
+                    "Only 3 distinct publishers with meaningful content (CNBC, Nypost, SCMP/DW/Org) are confirmed, and several are T3 tier; need at least 3 T0/T1 publishers with images for above-the-fold quality",
+                    "Missing in-depth analysis or long-form reporting from T0/T1 outlets such as NYT, Washington Post, Reuters, AP, BBC, or FT with accompanying images"
+                  ],
+                  "next_query_hint": "Trump Xi Beijing summit May 2026 analysis site:reuters.com OR site:nytimes.com OR site:bbc.com OR site:ft.com"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "Trump Xi Beijing summit May 2026 New York Times Washington Post analysis",
+                "pool_size": 14,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence item includes a confirmed thumbnail_url field — the acceptance criteria require every card to have a thumbnail_url, but none of the evidence blocks contain image URLs"
+                  ],
+                  "next_query_hint": "Trump Xi Beijing summit May 2026 site:cnbc.com OR site:nytimes.com OR site:apnews.com high-resolution image thumbnail"
+                }
+              },
+              {
+                "iteration": 3,
+                "query": "Trump Xi Beijing summit May 2026 coverage analysis major outlets",
+                "pool_size": 18,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No evidence items include a confirmed thumbnail_url field — the acceptance criteria require every card to have a thumbnail_url, but none of the evidence blocks contain image URLs"
+                  ],
+                  "next_query_hint": "Trump Xi Beijing summit May 2026 site:cnbc.com OR site:nytimes.com OR site:apnews.com OR site:washingtonpost.com high-resolution image thumbnail"
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "latest_news",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi Summit Beijing May 2026 latest news",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "key_outcomes",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi Beijing summit May 2026 agreements outcomes",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "key_figures",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi summit Beijing May 2026 delegates advisers",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "global_reactions",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi Beijing summit May 2026 global reactions analysis",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No direct quotes or explicit reactions from Chinese state media (e.g., Xinhua, People's Daily, Global Times) representing the official Chinese perspective",
+                    "No reactions from allied governments (e.g., European, Japanese, or other regional perspectives)",
+                    "No explicit market analyst quotes or commentary beyond a headline about Wall Street boost",
+                    "Sources are dominated by US-centric outlets (CNBC, Fox News, NY Post, Reuters) with limited distinct publisher diversity for contrasting perspectives"
+                  ],
+                  "next_query_hint": "Chinese state media Xinhua or Global Times reaction to Trump Xi Beijing summit May 2026"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "Trump Xi Beijing summit Chinese state media Xinhua reaction",
+                "pool_size": 17,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          },
+          {
+            "section_id": "trade_war_scorecard",
+            "steps": [
+              {
+                "iteration": 1,
+                "query": "Trump Xi Beijing summit May 2026 trade tariffs bilateral metrics",
+                "pool_size": 9,
+                "eval": {
+                  "satisfied": false,
+                  "gaps": [
+                    "No specific quantitative tariff figures (e.g., current US tariff rate on Chinese goods, current Chinese tariff rate on US goods) are present in the evidence summaries",
+                    "No specific bilateral trade volume figures (e.g., total US-China trade in dollars before/after summit) are cited in the evidence",
+                    "The $30 billion figure mentioned in src_a37c3a0fc5f2 is a potential tariff cut target but no before/after comparison data points are confirmed",
+                    "Evidence summaries are too brief/truncated to confirm three distinct quantitative data points covering both tariffs and trade volume"
+                  ],
+                  "next_query_hint": "US China tariff rates 2025 2026 bilateral trade volume statistics before after summit"
+                }
+              },
+              {
+                "iteration": 2,
+                "query": "US China tariff rates trade volume 2026 Trump Xi summit",
+                "pool_size": 14,
+                "eval": {
+                  "satisfied": true,
+                  "gaps": [],
+                  "next_query_hint": null
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 970,
+          "output_tokens": 19,
+          "cost_usd": 0.001065,
+          "duration_ms": 1920
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 939,
+          "output_tokens": 20,
+          "cost_usd": 0.001039,
+          "duration_ms": 1896
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 931,
+          "output_tokens": 19,
+          "cost_usd": 0.001026,
+          "duration_ms": 2042
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 914,
+          "output_tokens": 19,
+          "cost_usd": 0.001009,
+          "duration_ms": 2301
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 997,
+          "output_tokens": 19,
+          "cost_usd": 0.001092,
+          "duration_ms": 2368
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 942,
+          "output_tokens": 22,
+          "cost_usd": 0.001052,
+          "duration_ms": 2374
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1016,
+          "output_tokens": 19,
+          "cost_usd": 0.001111,
+          "duration_ms": 2481
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 932,
+          "output_tokens": 20,
+          "cost_usd": 0.001032,
+          "duration_ms": 2547
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2481,
+          "output_tokens": 20,
+          "cost_usd": 0.007743,
+          "duration_ms": 1587
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2495,
+          "output_tokens": 20,
+          "cost_usd": 0.007785,
+          "duration_ms": 1647
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2552,
+          "output_tokens": 20,
+          "cost_usd": 0.007956,
+          "duration_ms": 2862
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2599,
+          "output_tokens": 20,
+          "cost_usd": 0.008097,
+          "duration_ms": 2290
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2517,
+          "output_tokens": 169,
+          "cost_usd": 0.010086,
+          "duration_ms": 5385
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1119,
+          "output_tokens": 22,
+          "cost_usd": 0.001229,
+          "duration_ms": 1547
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2605,
+          "output_tokens": 190,
+          "cost_usd": 0.010665,
+          "duration_ms": 5430
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1176,
+          "output_tokens": 23,
+          "cost_usd": 0.001291,
+          "duration_ms": 1384
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2499,
+          "output_tokens": 20,
+          "cost_usd": 0.007797,
+          "duration_ms": 2997
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 3369,
+          "output_tokens": 20,
+          "cost_usd": 0.010407,
+          "duration_ms": 2258
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 2519,
+          "output_tokens": 137,
+          "cost_usd": 0.009612,
+          "duration_ms": 5509
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1081,
+          "output_tokens": 19,
+          "cost_usd": 0.001176,
+          "duration_ms": 1668
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 3449,
+          "output_tokens": 89,
+          "cost_usd": 0.011682,
+          "duration_ms": 3594
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 1073,
+          "output_tokens": 21,
+          "cost_usd": 0.001178,
+          "duration_ms": 1417
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 3865,
+          "output_tokens": 20,
+          "cost_usd": 0.011895,
+          "duration_ms": 1803
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6",
+          "input_tokens": 4099,
+          "output_tokens": 98,
+          "cost_usd": 0.013767,
+          "duration_ms": 4368
+        }
+      ]
     },
     {
       "stage": "block_extract",
-      "started_at": "2026-05-18T17:20:01.651056+00:00",
-      "duration_ms": 16614,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
+      "started_at": "2026-05-26T20:56:13.100358+00:00",
+      "duration_ms": 81313,
+      "model": "anthropic/claude-haiku-4-5",
+      "tokens": {
+        "input": 35797,
+        "output": 5500
+      },
+      "cost_usd": 0.063297,
       "outcome": "success",
       "retry_count": 0,
       "error": null,
       "output_ref": null,
-      "llm_calls": []
-    },
-    {
-      "stage": "render",
-      "started_at": "2026-05-18T17:21:06.880213+00:00",
-      "duration_ms": 56,
-      "model": null,
-      "tokens": null,
-      "cost_usd": null,
-      "outcome": "success",
-      "retry_count": 0,
-      "error": null,
-      "output_ref": null,
-      "llm_calls": []
+      "planning": null,
+      "llm_calls": [
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 3382,
+          "output_tokens": 405,
+          "cost_usd": 0.005407,
+          "duration_ms": 15140
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 5080,
+          "output_tokens": 179,
+          "cost_usd": 0.005975,
+          "duration_ms": 16523
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 3929,
+          "output_tokens": 473,
+          "cost_usd": 0.006294,
+          "duration_ms": 17817
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 3444,
+          "output_tokens": 681,
+          "cost_usd": 0.006849,
+          "duration_ms": 19649
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 3652,
+          "output_tokens": 888,
+          "cost_usd": 0.008092,
+          "duration_ms": 20156
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 3518,
+          "output_tokens": 755,
+          "cost_usd": 0.007293,
+          "duration_ms": 20227
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 6661,
+          "output_tokens": 1304,
+          "cost_usd": 0.013181,
+          "duration_ms": 58581
+        },
+        {
+          "model": "anthropic/claude-haiku-4-5",
+          "input_tokens": 6131,
+          "output_tokens": 815,
+          "cost_usd": 0.010206,
+          "duration_ms": 80885
+        }
+      ]
     }
   ],
   "editor_actions": [
     {
-      "action_at": "2026-05-18T17:16:36+00:00",
+      "action_at": "2026-05-26T20:54:48+00:00",
       "actor": "editor:cli",
       "action": "accept_section",
       "target": {
@@ -137,38 +681,7 @@
       "reason": "manual_accept"
     },
     {
-      "action_at": "2026-05-18T17:18:19+00:00",
-      "actor": "editor:cli",
-      "action": "add_section",
-      "target": {
-        "section_id": "summit_gallery",
-        "field_path": null
-      },
-      "before": null,
-      "after": {
-        "section_id": "summit_gallery",
-        "kind": "curated",
-        "title": "Summit in Photos",
-        "rank": 9,
-        "block_kind": "gallery",
-        "intent": "Showcase key visual moments from the Trump–Xi Beijing summit, giving readers an at-a-glance sense of the event's atmosphere, settings, and principal figures.",
-        "acceptance": {
-          "description": "Gallery contains at least 4 captioned images drawn from the summit covering distinct moments such as arrival, bilateral meetings, press appearances, and departures, sourced from at least 2 publishers.",
-          "min_sources": 4,
-          "min_publishers": 2,
-          "required_facets": [
-            "arrival",
-            "bilateral meeting",
-            "press appearance"
-          ],
-          "forbid_single_perspective": true
-        },
-        "placement": "main"
-      },
-      "reason": "manual_add_section"
-    },
-    {
-      "action_at": "2026-05-18T17:19:19+00:00",
+      "action_at": "2026-05-26T20:55:05+00:00",
       "actor": "editor:cli",
       "action": "accept_section",
       "target": {
@@ -178,33 +691,12 @@
       "before": null,
       "after": null,
       "reason": "manual_accept"
-    },
-    {
-      "action_at": "2026-05-18T17:21:06+00:00",
-      "actor": "editor:cli",
-      "action": "accept_section",
-      "target": {
-        "section_id": "sections",
-        "field_path": null
-      },
-      "before": null,
-      "after": null,
-      "reason": "manual_accept"
-    },
-    {
-      "action_at": "2026-05-18T17:21:52+00:00",
-      "actor": "editor:cli",
-      "action": "approve_page",
-      "target": null,
-      "before": null,
-      "after": null,
-      "reason": "manual_approve"
     }
   ],
-  "final_outcome": "approved_published",
+  "final_outcome": "draft_saved",
   "approval": {
     "actor": "cli_user@local",
-    "approved_at": "2026-05-18T17:21:52.552533+00:00",
+    "approved_at": null,
     "auto_mode": false
   }
 }

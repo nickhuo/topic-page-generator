@@ -278,11 +278,16 @@ Each LLM stage has its own `MODEL_*` env var (`MODEL_GROUND`, `MODEL_CURATION`, 
 
 The page is **two columns with a horizontal sticky chip nav.** Main column on the left holds the lead paragraph and the high-density blocks (newsfeed, charts, reactions). Sidebar on the right holds the timeline and reference cards. The sticky chip nav at the top lets the reader jump between sections. Hero-magazine, three-column dashboard, and single-column responsive were all considered and rejected — each loses either legibility across event types or the sidebar's value as a stable reference rail. The two-column-with-chip-nav is **boring-on-purpose**: in an editorial product, predictability is a feature. The reader's attention is on the facts, not the layout.
 
-### Inline citations
+### Citations: progressive disclosure
 
-Citations are rendered as inline `<span class="citation">` elements rather than footnotes or hover popovers. Two reasons. First, on a page whose value proposition is "every fact is sourced," the citation should be visible at the point of the claim, not relegated to a popover the reader might not discover. Second, inline citations make the page printable and screenshot-friendly — both common ways editors share drafts.
+Citations use **progressive disclosure**, implemented as the **cite-cluster** (`templates/chrome/cite_cluster.html` + `render.py::_build_cite_cluster`). Two layers:
 
-Citations are visually low-key (small, muted) so they don't disrupt reading rhythm, but they're persistent. The deal with the reader is: *we'll always show you where this came from, and we won't make you click for it.*
+1. **Always visible, no interaction.** At the point of every claim, an inline indicator shows stacked publisher favicons (capped at `_MAX_STACKED_LOGOS`) plus a source count ("3 sources" / "+2 more"). This is the trust *signal*: that a fact is sourced, and by whom, is on the page without the reader doing anything.
+2. **On demand.** Hover or focus expands a popover (`role="tooltip"`, via CSS `:hover` / `:focus-within`) with the full source cards — thumbnail, publisher, headline, summary, clickable link. This is the audit *detail*.
+
+Two extremes were rejected. Raw `[N]` footnotes force the reader to jump away from the claim. A bare hover-popover with no always-visible indicator hides the entire value proposition until the reader happens to hover. The split keeps the trust signal persistent while moving the heavy source detail out of the reading flow.
+
+Known tradeoff: the popover detail doesn't survive a screenshot, though the publisher logos and source count do — so a shared draft still shows *that* each claim is sourced and by whom. A print stylesheet that expands clusters into footnotes is a small, deferred follow-up.
 
 ### Empty states as product surface
 
