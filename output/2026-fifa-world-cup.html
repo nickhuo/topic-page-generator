@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2026 FIFA World Cup Opening at Estadio Azteca — Topic Page</title>
+  <title>2026 FIFA World Cup Opening: Mexico vs South Africa at Estadio Azteca — Topic Page</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
 
 /* ── Design tokens ── */
 :root {
@@ -55,6 +55,7 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   --content-max: 1200px;
   --content-pad: 56px;
   --sidebar-w:   320px;
+  --gutter:      var(--content-pad);   /* horizontal page gutter; tracks content-pad */
 }
 
 body {
@@ -187,16 +188,8 @@ body {
   margin: 0 auto;
   padding: var(--sp-7) var(--content-pad) var(--sp-9);
 }
-@media (max-width: 900px) {
-  .page-grid { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-5); }
-  .page-reference {
-    order: -1;
-    position: static;
-    max-height: none;
-    overflow: visible;
-  }
-  :root { --content-pad: 20px; }
-}
+/* Responsive overrides for .page-grid / .page-reference live near the end of this
+   file (TABLET), after the base .page-reference rule, so the static reset wins. */
 
 /* ── Main content ── */
 .page-main { min-width: 0; }
@@ -704,6 +697,7 @@ body {
 }
 .ln-card__media {
   margin: 0; aspect-ratio: 16/10;
+  align-self: start; min-width: 0;
   overflow: hidden; border-radius: 6px;
   background: var(--surface);
 }
@@ -726,11 +720,7 @@ body {
   font: 600 1.0625rem/1.35 var(--serif);
   color: var(--ink); margin: 2px 0 2px;
   letter-spacing: -0.005em;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-.ln-card__summary {
-  font: 400 .875rem/1.55 var(--sans);
-  color: var(--ink-2); margin: 0;
+  min-height: calc(1.35em * 2);
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
@@ -1062,6 +1052,24 @@ body {
 }
 
 /* =========================================================================
+   TABLET
+   ========================================================================= */
+/* Declared after the base .page-reference rule so the sidebar reset wins the
+   cascade (media queries add no specificity — source order decides ties). */
+@media (max-width: 900px) {
+  /* Single mobile gutter so hero, nav, main, sidebar, and footer share one edge. */
+  :root { --content-pad: 16px; --gutter: 16px; }
+  .page-grid { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--gutter); }
+  .page-reference {
+    /* DOM order is main → reference, so dropping `order` lets the reference
+       column (Timeline + background card) fall to the bottom, in-flow. */
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+/* =========================================================================
    MOBILE
    ========================================================================= */
 @media (max-width: 640px) {
@@ -1075,11 +1083,49 @@ body {
   .ln-card__link--no-media { grid-template-columns: 1fr; gap: 0; }
   .ln-card__media { aspect-ratio: 1/1; }
   .ln-card__title { font-size: 0.9375rem; }
-  .ln-card__summary { -webkit-line-clamp: 3; }
   .people__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Citation popover → bottom sheet ──
+     Desktop anchors the card at `left:0` beside the inline citation; on a
+     phone that juts ~398px past the viewport (it's visibility:hidden, not
+     display:none, so it stays in layout and expands scrollWidth). Switching to
+     position:fixed removes it from the document scroll width entirely and
+     centers it as a viewport-anchored sheet — no horizontal overflow, and it's
+     touch-revealable via the cluster's existing tabindex/:focus-within. */
+  .cite-popover {
+    position: fixed; left: 50%; right: auto; top: auto;
+    bottom: max(var(--gutter), env(safe-area-inset-bottom, 0px));
+    width: min(440px, calc(100vw - 2 * var(--gutter)));
+    max-width: none;
+    transform: translateX(-50%) translateY(8px) scale(.99);
+    transform-origin: bottom center;
+    max-height: min(70vh, 520px); overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ref-prose .cite-popover { width: min(440px, calc(100vw - 2 * var(--gutter))); }
+  .cite-cluster:hover .cite-popover,
+  .cite-cluster:focus-within .cite-popover,
+  .cite-cluster:focus-visible .cite-popover {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .cite-cluster::after { display: none; }   /* hover bridge is meaningless on touch */
+
+  /* Let a wide comparison table scroll inside its own box, not the page. */
+  .compare-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Keep newsfeed nav buttons inside the column edge (desktop pulls them ±8px out). */
+  .newsfeed-nav--prev { left: 0; }
+  .newsfeed-nav--next { right: 0; }
+}
+
+/* Reduced motion: the base block sets transform:none, which would drop the
+   sheet's translateX(-50%) and shove it off-center — keep the centering. */
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .cite-popover,
+  .cite-cluster:hover .cite-popover,
+  .cite-cluster:focus-within .cite-popover { transform: translateX(-50%); }
 }
 </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"2026 FIFA World Cup Opening at Estadio Azteca","description":"The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026","startDate":"2026-06-11","location":"Estadio Azteca, Mexico City, Mexico"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"2026 FIFA World Cup Opening: Mexico vs South Africa at Estadio Azteca","description":"The 2026 FIFA World Cup kicks off at Estadio Azteca on June 11, 2026","startDate":"2026-06-11","location":"Estadio Azteca, Mexico City, Mexico"}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -1089,8 +1135,8 @@ body {
       <section class="hero" aria-label="Page lede">
   
     <img class="hero__img"
-         src="https://library.sportingnews.com/styles/crop_style_16_9_desktop_webp/s3/2022-03/USMNT%20vs%20Mexico%202017%20Estadio%20Azteca%20Tim%20Ream%20032321.jpg.webp?itok=VquXd7GD"
-         alt="Where is the 2026 World Cup the opening match? FIFA schedule revealed as Estadio Azteca in Mexico City given honor image"
+         src="https://sportal365images.com/process/smp-images-production/ringier.africa/06062026/4a82115b-16bf-448b-9e31-f6044327cb0a.jpeg?operations=autocrop(700:467)"
+         alt="South Africa celebrate Tshabalala&#39;s opener against Mexcio at the 2010 FIFA World Cup. (Photo Credit: Imago)"
          loading="eager">
   
   <div class="hero__overlay"></div>
@@ -1100,15 +1146,15 @@ body {
         
           <span class="hero__badge">2026-06-11 · Estadio Azteca, Mexico City, Mexico</span>
         
-        <time class="hero__time" datetime="2026-05-26T21:27:11.702799+00:00">
-          Updated 2026-05-26
+        <time class="hero__time" datetime="2026-06-08T20:48:56.028326+00:00">
+          Updated 2026-06-08
         </time>
       </div>
 
-      <h1 class="hero__title">2026 FIFA World Cup Opening at Estadio Azteca</h1>
+      <h1 class="hero__title">2026 FIFA World Cup Opening: Mexico vs South Africa at Estadio Azteca</h1>
 
       
-        <p class="hero__subtitle">The 2026 FIFA World Cup opens at Estadio Azteca in Mexico City on June 11, running through July 19 across 16 venues in the USA, Mexico, and Canada, with a record 48 teams and 104 matches.</p>
+        <p class="hero__subtitle">Mexico faces South Africa in the opening match at Estadio Azteca on June 11, launching the biggest World Cup in history with 48 teams, 104 matches, and three co-host nations through July 19.</p>
       
     </div>
   </div>
@@ -1132,16 +1178,16 @@ body {
         <a href="#section-latest_news">Latest News</a>
       </div>
     
-      <div class="nav__item" data-section="key_figures">
-        <a href="#section-key_figures">Key Figures</a>
+      <div class="nav__item" data-section="key_players">
+        <a href="#section-key_players">Key Players</a>
       </div>
     
-      <div class="nav__item" data-section="host_venues_overview">
-        <a href="#section-host_venues_overview">Host Venues Overview</a>
+      <div class="nav__item" data-section="stadium_spotlight">
+        <a href="#section-stadium_spotlight">Stadium Spotlight</a>
       </div>
     
-      <div class="nav__item" data-section="reactions">
-        <a href="#section-reactions">Reactions</a>
+      <div class="nav__item" data-section="fan_and_expert_reactions">
+        <a href="#section-fan_and_expert_reactions">Fan And Expert Reactions</a>
       </div>
     
   </div>
@@ -1170,11 +1216,17 @@ body {
     
     
     <p>
-      The 2026 FIFA World Cup will kick off on June 11 in Mexico City, marking the first time the tournament is hosted across three nations—the United States, Mexico, and Canada. This historic edition will feature 48 teams competing in 104 matches across 16 stadiums, expanding the global showcase to unprecedented scale. The tournament runs through July 19, with the final scheduled for MetLife Stadium in New York.
+      Mexico will host the opening match of the 2026 FIFA World Cup on June 11 at the historic Estadio Azteca, facing South Africa in a rematch of their 2010 World Cup opener. This marks a significant return for South Africa, who are competing in the tournament for the first time since hosting it in 2010. The 2026 World Cup will be the largest in history, featuring 48 teams across 104 matches played in three countries.
       
         
 <span class="cite-cluster" tabindex="0" aria-label="3 sources">
   <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=bleacherreport.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
     
       <img class="cite-logo"
            src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64"
@@ -1183,13 +1235,7 @@ body {
            width="20" height="20">
     
       <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64"
-           alt=""
-           loading="lazy"
-           width="20" height="20">
-    
-      <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64"
+           src="https://www.google.com/s2/favicons?domain=www.forbes.com&amp;sz=64"
            alt=""
            loading="lazy"
            width="20" height="20">
@@ -1201,7 +1247,26 @@ body {
     <span class="cite-popover__title">Sources (3)</span>
     <span class="cite-popover__list">
       
-        <a class="cite-popover__card" href="https://www.telecomasia.net/in/blog/world-cup-2026-schedule/" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://bleacherreport.com/articles/25435273-world-cup-schedule-2026-fixtures-and-kick-times-every-match" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=bleacherreport.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=bleacherreport.com&amp;sz=64" alt="" width="14" height="14">
+              Bleacherreport
+            </span>
+            <span class="cite-popover__headline">World Cup Schedule 2026 Fixtures and Kick-Off Times for Every Match - Bleacher Report</span>
+            
+              <span class="cite-popover__summary">Mexico kicks off the event with a home match against South Africa at the Estadio Azteca on Thursday afternoon. Canada&#39;s opener takes place in Toronto on Friday afternoon, while the United States men&#39;s national team plays Friday night at Sof</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.telecomasia.net/blog/group-a-world-cup-2026-predictions-and-betting-tips-who-will-qualify/" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
@@ -1213,47 +1278,28 @@ body {
               <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64" alt="" width="14" height="14">
               Telecomasia
             </span>
-            <span class="cite-popover__headline">2026 World Cup schedule: match calendar, dates, kick-off times (UTC) and tables - Telecom Asia Sport</span>
+            <span class="cite-popover__headline">2026 FIFA World Cup Group A Predictions and Bets: Can Mexico Hold Off the Czech Republic and South Korea? - Telecom Asia Sport</span>
             
-              <span class="cite-popover__summary">The summer of 2026 will begin with a grand event in world football – the World Cup. From June 11 to July 19, the main sports tournament of the four-year anniversary will be held in the USA, Canada and Mexico. For the first time in history, </span>
-            
-          </span>
-        </a>
-      
-        <a class="cite-popover__card" href="https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams" rel="noopener noreferrer" target="_blank">
-          
-            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
-                  aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64" alt="" loading="lazy">
-            </span>
-          
-          <span class="cite-popover__body">
-            <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64" alt="" width="14" height="14">
-              Foxsports
-            </span>
-            <span class="cite-popover__headline">2026 FIFA World Cup: What To Know, USA&#39;s Schedule, How To Watch All 48 Teams - FOX Sports</span>
-            
-              <span class="cite-popover__summary">FIFA Men&#39;s World Cup. FIFA Men&#39;s World Cup. # 2026 FIFA World Cup: What To Know, USA&#39;s Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by t</span>
+              <span class="cite-popover__summary"># 2026 FIFA World Cup Group A Predictions and Bets: Can Mexico Hold Off the Czech Republic and South Korea? The 2026 FIFA World Cup kicks off on June 11 with the opening match between Mexico and South Africa at the Azteca Stadium in Mexico </span>
             
           </span>
         </a>
       
-        <a class="cite-popover__card" href="https://www.cnn.com/2026/05/14/sport/world-cup-final-halftime-show-headliners-hnk" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://www.forbes.com/sites/johnkoetsier/2026/06/04/this-will-be-the-first-world-cup-ever-with-ai-coaches-on-the-sidelines/" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64" alt="" loading="lazy">
+              <img src="https://www.google.com/s2/favicons?domain=www.forbes.com&amp;sz=64" alt="" loading="lazy">
             </span>
           
           <span class="cite-popover__body">
             <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64" alt="" width="14" height="14">
-              Cnn
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.forbes.com&amp;sz=64" alt="" width="14" height="14">
+              Forbes
             </span>
-            <span class="cite-popover__headline">Shakira, Madonna and BTS to headline 2026 World Cup Final halftime show - CNN</span>
+            <span class="cite-popover__headline">This Will Be The First World Cup Ever With AI Coaches On The Sidelines - Forbes</span>
             
-              <span class="cite-popover__summary"># Shakira, Madonna and BTS to headline 2026 World Cup Final halftime show. Shakira, Madonna and K-pop superstars BTS will headline the first-ever World Cup final halftime show, FIFA announced in an Instagram post on Thursday. World Cup 2026</span>
+              <span class="cite-popover__summary"># This Will Be The First World Cup Ever With AI Coaches On The Sidelines. When Mexico kicks off against South Africa at Estadio Azteca on June 11, the 2026 World Cup will be the biggest in the tournament’s history: 48 teams, 104 matches, th</span>
             
           </span>
         </a>
@@ -1267,26 +1313,26 @@ body {
     
     
     <p>
-      The opening ceremony promises star-studded entertainment, with performers including Katy Perry, Future, LISA, J Balvin, Alanis Morissette, and Tyla set to take the stage. The final&#39;s halftime show will be equally spectacular, featuring Madonna, Shakira, and BTS—the first-ever halftime performance at a World Cup final, curated by Coldplay&#39;s Chris Martin. This combination of elite soccer competition and world-class entertainment underscores why the 2026 World Cup represents a landmark moment in sports history.
+      The Estadio Azteca&#39;s elevation of over 7,300 feet above sea level will present a unique challenge for both teams and other competitors throughout the tournament. This opening match carries special significance as host nations traditionally receive the honor of kicking off the World Cup, and Mexico&#39;s selection underscores the tournament&#39;s expanded scope and the importance of the Mexican venues in this historic edition.
       
         
 <span class="cite-cluster" tabindex="0" aria-label="3 sources">
   <span class="cite-cluster__logos" aria-hidden="true">
     
       <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.billboard.com&amp;sz=64"
+           src="https://www.google.com/s2/favicons?domain=www.houstonchronicle.com&amp;sz=64"
            alt=""
            loading="lazy"
            width="20" height="20">
     
       <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64"
+           src="https://www.google.com/s2/favicons?domain=bleacherreport.com&amp;sz=64"
            alt=""
            loading="lazy"
            width="20" height="20">
     
       <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64"
+           src="https://www.google.com/s2/favicons?domain=www.usatoday.com&amp;sz=64"
            alt=""
            loading="lazy"
            width="20" height="20">
@@ -1298,59 +1344,59 @@ body {
     <span class="cite-popover__title">Sources (3)</span>
     <span class="cite-popover__list">
       
-        <a class="cite-popover__card" href="https://www.billboard.com/music/music-news/fifa-world-cup-performers-poll-most-excited-to-see-perform-1236248225/" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://www.houstonchronicle.com/sports/article/mexico-city-s-altitude-poses-a-key-challenge-22293933.php" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.billboard.com&amp;sz=64" alt="" loading="lazy">
+              <img src="https://www.google.com/s2/favicons?domain=www.houstonchronicle.com&amp;sz=64" alt="" loading="lazy">
             </span>
           
           <span class="cite-popover__body">
             <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.billboard.com&amp;sz=64" alt="" width="14" height="14">
-              Billboard
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.houstonchronicle.com&amp;sz=64" alt="" width="14" height="14">
+              Houstonchronicle
             </span>
-            <span class="cite-popover__headline">From BTS to Madonna &amp; More, Who Are You Most Excited to See Perform at the 2026 World Cup? Vote! - Billboard</span>
+            <span class="cite-popover__headline">Mexico City’s altitude poses a key challenge for teams at the 2026 World Cup - Houston Chronicle</span>
             
-              <span class="cite-popover__summary"># From BTS to Madonna &amp; More, Who Are You Most Excited to See Perform at the 2026 World Cup? The 2026 World Cup will be a coming together of soccer teams — and artists — from all around the globe, with BTS, Madonna and more set to perform a</span>
+              <span class="cite-popover__summary"># Mexico City’s altitude poses a key challenge for teams at the 2026 World Cup. By CARLOS RODRIGUEZ and JOHN DUERDEN, AP Sports Writers. MEXICO CITY (AP) — Heat won’t be the only environmental factor affecting players’ performance at the Wo</span>
             
           </span>
         </a>
       
-        <a class="cite-popover__card" href="https://www.cnn.com/2026/05/14/sport/world-cup-final-halftime-show-headliners-hnk" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://bleacherreport.com/articles/25435273-world-cup-schedule-2026-fixtures-and-kick-times-every-match" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64" alt="" loading="lazy">
+              <img src="https://www.google.com/s2/favicons?domain=bleacherreport.com&amp;sz=64" alt="" loading="lazy">
             </span>
           
           <span class="cite-popover__body">
             <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64" alt="" width="14" height="14">
-              Cnn
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=bleacherreport.com&amp;sz=64" alt="" width="14" height="14">
+              Bleacherreport
             </span>
-            <span class="cite-popover__headline">Shakira, Madonna and BTS to headline 2026 World Cup Final halftime show - CNN</span>
+            <span class="cite-popover__headline">World Cup Schedule 2026 Fixtures and Kick-Off Times for Every Match - Bleacher Report</span>
             
-              <span class="cite-popover__summary"># Shakira, Madonna and BTS to headline 2026 World Cup Final halftime show. Shakira, Madonna and K-pop superstars BTS will headline the first-ever World Cup final halftime show, FIFA announced in an Instagram post on Thursday. World Cup 2026</span>
+              <span class="cite-popover__summary">Mexico kicks off the event with a home match against South Africa at the Estadio Azteca on Thursday afternoon. Canada&#39;s opener takes place in Toronto on Friday afternoon, while the United States men&#39;s national team plays Friday night at Sof</span>
             
           </span>
         </a>
       
-        <a class="cite-popover__card" href="https://www.foxnews.com/outkick-sports/fifa-announces-first-ever-world-cup-final-halftime-show-featuring-madonna-bts-shakira" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://www.usatoday.com/story/sports/soccer/worldcup/2026/06/06/world-cup-group-a-2026-predictions-preview-schedule/90284336007/" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" loading="lazy">
+              <img src="https://www.google.com/s2/favicons?domain=www.usatoday.com&amp;sz=64" alt="" loading="lazy">
             </span>
           
           <span class="cite-popover__body">
             <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" width="14" height="14">
-              Foxnews
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.usatoday.com&amp;sz=64" alt="" width="14" height="14">
+              Usatoday
             </span>
-            <span class="cite-popover__headline">Shakira, Madonna and BTS co-headline first-ever World Cup Final halftime show - Fox News</span>
+            <span class="cite-popover__headline">2026 World Cup Group A: Preview, predictions, schedule - USA Today</span>
             
-              <span class="cite-popover__summary">* #### No need to wait for LeBron James to retire, the next &#39;great one&#39; is already here and his name is Wemby. ## The first-ever World Cup halftime show at MetLife Stadium will be curated by Coldplay&#39;s Chris Martin. Alex Lasry, CEO of the N</span>
+              <span class="cite-popover__summary"># 2026 World Cup Group A preview, predictions. The first day of the World Cup sees the tournament open with Mexico hosting South Africa at the historic, renovated Estadio Azteca in a rematch of the teams&#39; thrilling opening game in 2010. Lat</span>
             
           </span>
         </a>
@@ -1365,7 +1411,7 @@ body {
       
     
       <div class="block block--chart block--chart-stat">
-  <h3 class="chart__title">2026 FIFA World Cup at a Glance</h3>
+  <h3 class="chart__title">2026 World Cup: By the Numbers</h3>
 
   
     <div class="stat-row">
@@ -1377,21 +1423,21 @@ body {
         </div>
       
         <div class="stat">
-          <div class="stat__value">3</div>
-          <div class="stat__label">Host Nations</div>
+          <div class="stat__value">104</div>
+          <div class="stat__label">Matches</div>
           
         </div>
       
         <div class="stat">
           <div class="stat__value">16</div>
-          <div class="stat__label">Venues</div>
+          <div class="stat__label">Host Cities</div>
           
         </div>
       
         <div class="stat">
-          <div class="stat__value">104</div>
-          <div class="stat__label">Matches</div>
-          
+          <div class="stat__value">39</div>
+          <div class="stat__label">Tournament Duration</div>
+          <div class="stat__cmp">days</div>
         </div>
       
     </div>
@@ -1426,14 +1472,14 @@ body {
           <div class="news-card__fallback" aria-hidden="true">
             <span class="news-card__fallback-mark">F</span>
             <img class="news-card__fallback-logo"
-                 src="https://www.google.com/s2/favicons?domain=www.foxsports.com&sz=128"
+                 src="https://www.google.com/s2/favicons?domain=www.forbes.com&sz=128"
                  alt=""
                  loading="lazy">
-            <span class="news-card__fallback-name">Foxsports</span>
+            <span class="news-card__fallback-name">Forbes</span>
           </div>
           
             <img class="news-card__photo"
-                 src="https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/05/1408/814/fox-world-cup-2026.jpg?ve=1&amp;tl=1"
+                 src="https://imageio.forbes.com/specials-images/imageserve/6a21fe12d04723c43c0fb18b/0x0.jpg?format=jpg&amp;height=900&amp;width=1600&amp;fit=bounds"
                  alt=""
                  loading="lazy"
                  onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
@@ -1441,16 +1487,16 @@ body {
         </figure>
 
         <div class="news-card__body">
-          <p class="news-card__outlet">Foxsports</p>
+          <p class="news-card__outlet">Forbes</p>
           <h3 class="news-card__title">
-            <a href="https://www.foxsports.com/stories/presspass/fox-sports-presents-all-star-studio-team-anchoring-fifa-world-cup-2026" rel="noopener noreferrer">FOX Sports Presents All-Star Studio Team Anchoring FIFA World Cup 2026™</a>
+            <a href="https://www.forbes.com/sites/johnkoetsier/2026/06/04/this-will-be-the-first-world-cup-ever-with-ai-coaches-on-the-sidelines/" rel="noopener noreferrer">This Will Be The First World Cup Ever With AI Coaches On The Sidelines</a>
           </h3>
           
-            <p class="news-card__summary">With less than one month to go before the tournament begins, FOX Sports celebrates the fast-approaching start to the world&#39;s greatest sporting event this summer with a blockbuster unveiling of the star-studded studio team anchoring the network&#39;s anticipated presentation.</p>
+            <p class="news-card__summary">When Mexico kicks off against South Africa at Estadio Azteca on June 11, the 2026 World Cup will be the biggest in the tournament&#39;s history: 48 teams, 104 matches, three countries. It will also be the first World Cup where every single team walks in with the same AI analyst sitting on the bench.</p>
           
           <p class="news-card__meta">
             
-              <time class="news-card__date">Wed, 20 Ma</time>
+              <time class="news-card__date">Thu, 04 Ju</time>
             
           </p>
         </div>
@@ -1461,16 +1507,16 @@ body {
       <li class="news-card">
         <figure class="news-card__media">
           <div class="news-card__fallback" aria-hidden="true">
-            <span class="news-card__fallback-mark">F</span>
+            <span class="news-card__fallback-mark">S</span>
             <img class="news-card__fallback-logo"
-                 src="https://www.google.com/s2/favicons?domain=www.foxsports.com&sz=128"
+                 src="https://www.google.com/s2/favicons?domain=www.skysports.com&sz=128"
                  alt=""
                  loading="lazy">
-            <span class="news-card__fallback-name">Foxsports</span>
+            <span class="news-card__fallback-name">Skysports</span>
           </div>
           
             <img class="news-card__photo"
-                 src="https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/6135f138-825d-42dc-a1f6-28d679f9308d/720/1280/j6my5mmt9o02rte6.jpg?ve=1&amp;tl=1"
+                 src="https://e0.365dm.com/26/06/1600x900/skysports-world-cup-48-questions_7268096.jpg?20260608094447"
                  alt=""
                  loading="lazy"
                  onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
@@ -1478,90 +1524,16 @@ body {
         </figure>
 
         <div class="news-card__body">
-          <p class="news-card__outlet">Foxsports</p>
+          <p class="news-card__outlet">Skysports</p>
           <h3 class="news-card__title">
-            <a href="https://www.foxsports.com/watch-vertical/fmc-xolnul2fxogqlwis" rel="noopener noreferrer">Full United States 2026 FIFA World Cup™ 26-Man Roster Reveal ⚽️ FOX Soccer</a>
+            <a href="https://www.skysports.com/football/news/11095/13548788/world-cup-2026-every-key-question-answered-about-this-summers-tournament-in-usa-canada-and-mexico" rel="noopener noreferrer">World Cup 2026: Every key question answered about this summer&#39;s tournament in USA, Canada and Mexico</a>
           </h3>
           
-            <p class="news-card__summary">Check out the full United States 2026 FIFA World Cup™ 26-Man Roster Reveal ceremony! The U.S. opens up the FIFA World Cup™ on June 12th against Paraguay.</p>
+            <p class="news-card__summary">48 teams, 48 key questions answered to get you clued up for this summer&#39;s fiesta of football. The World Cup officially gets under way on Thursday, June 11 when Mexico face South Africa at 8pm BST, with an opening ceremony.</p>
           
           <p class="news-card__meta">
             
-              <time class="news-card__date">Tue, 26 Ma</time>
-            
-          </p>
-        </div>
-      </li>
-    
-      
-      
-      <li class="news-card">
-        <figure class="news-card__media">
-          <div class="news-card__fallback" aria-hidden="true">
-            <span class="news-card__fallback-mark">G</span>
-            <img class="news-card__fallback-logo"
-                 src="https://www.google.com/s2/favicons?domain=www.goal.com&sz=128"
-                 alt=""
-                 loading="lazy">
-            <span class="news-card__fallback-name">Goal</span>
-          </div>
-          
-            <img class="news-card__photo"
-                 src="https://assets.goal.com/images/v3/getty-2246737439/crop/MM5DINBQGA5DENBXGU5G433XMU5DGNJZHIYTINA=/GettyImages-2246737439.jpg"
-                 alt=""
-                 loading="lazy"
-                 onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
-          
-        </figure>
-
-        <div class="news-card__body">
-          <p class="news-card__outlet">Goal</p>
-          <h3 class="news-card__title">
-            <a href="https://www.goal.com/en/news/czech-republic-football-tv-schedule/bltf123c41b59e45753" rel="noopener noreferrer">Czech Republic FIFA World Cup 2026 TV Schedule: Live streams, channels, full fixture list, dates, kick-off times</a>
-          </h3>
-          
-            <p class="news-card__summary">Everything you need to know about how to watch Czech Republic in the World Cup.</p>
-          
-          <p class="news-card__meta">
-            
-              <time class="news-card__date">Tue, 26 Ma</time>
-            
-          </p>
-        </div>
-      </li>
-    
-      
-      
-      <li class="news-card">
-        <figure class="news-card__media">
-          <div class="news-card__fallback" aria-hidden="true">
-            <span class="news-card__fallback-mark">T</span>
-            <img class="news-card__fallback-logo"
-                 src="https://www.google.com/s2/favicons?domain=www.thedrum.com&sz=128"
-                 alt=""
-                 loading="lazy">
-            <span class="news-card__fallback-name">Thedrum</span>
-          </div>
-          
-            <img class="news-card__photo"
-                 src="https://thedrum-media.imgix.net/thedrum-user-assets-prod/s3/images/original/ksi.jpg?w=1280&amp;ar=default&amp;fit=crop&amp;crop=faces&amp;auto=format"
-                 alt=""
-                 loading="lazy"
-                 onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
-          
-        </figure>
-
-        <div class="news-card__body">
-          <p class="news-card__outlet">Thedrum</p>
-          <h3 class="news-card__title">
-            <a href="https://www.thedrum.com/news/ad-of-the-day-itv-kicks-off-world-cup-coverage-with-star-studded-sweepstake" rel="noopener noreferrer">Ad of The Day: ITV kicks off World Cup coverage with star-studded sweepstake</a>
-          </h3>
-          
-            <p class="news-card__summary">&#39;All in on ITV&#39; opens the curtain on &#39;the biggest World Cup in history.&#39; It&#39;s now a mere 16 days until co-hosts Mexico play South Africa in the first game of the 2026 Fifa World Cup. The tournament is being billed as &#39;the biggest World Cup in history&#39; – in more ways than one.</p>
-          
-          <p class="news-card__meta">
-            
-              <time class="news-card__date">Tue, 26 Ma</time>
+              <time class="news-card__date">Mon, 08 Ju</time>
             
           </p>
         </div>
@@ -1581,7 +1553,7 @@ body {
           </div>
           
             <img class="news-card__photo"
-                 src="https://gsp-image-cdn.wmsports.io/cms/prod/bleacher-report/getty_images/2026-05/2161853219_large_cropped.jpg?w=3800&amp;h=2000"
+                 src="https://gsp-image-cdn.wmsports.io/cms/prod/bleacher-report/2026-06/worldcup26_all-groups-orange.png?w=3800&amp;h=2000"
                  alt=""
                  loading="lazy"
                  onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
@@ -1591,14 +1563,51 @@ body {
         <div class="news-card__body">
           <p class="news-card__outlet">Bleacherreport</p>
           <h3 class="news-card__title">
-            <a href="https://bleacherreport.com/articles/25427703-shakira-bts-madonna-headline-2026-world-cup-final-halftime-show" rel="noopener noreferrer">Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show</a>
+            <a href="https://bleacherreport.com/articles/25435273-world-cup-schedule-2026-fixtures-and-kick-times-every-match" rel="noopener noreferrer">World Cup Schedule 2026 Fixtures and Kick-Off Times for Every Match - Bleacher Report</a>
           </h3>
           
-            <p class="news-card__summary">FIFA is combining eras and genres for its first-ever halftime show at a World Cup final. Coldplay lead vocalist Chris Martin, who helped curate the event, announced that Shakira, BTS and Madonna will take the stage.</p>
+            <p class="news-card__summary">Mexico kicks off the event with a home match against South Africa at the Estadio Azteca on Thursday afternoon. The matchup with South Africa is a repeat of the 2010 World Cup opener between the two sides. Host nations were given the honor starting with Mexico.</p>
           
           <p class="news-card__meta">
             
-              <time class="news-card__date">Thu, 14 Ma</time>
+              <time class="news-card__date">Mon, 08 Ju</time>
+            
+          </p>
+        </div>
+      </li>
+    
+      
+      
+      <li class="news-card">
+        <figure class="news-card__media">
+          <div class="news-card__fallback" aria-hidden="true">
+            <span class="news-card__fallback-mark">E</span>
+            <img class="news-card__fallback-logo"
+                 src="https://www.google.com/s2/favicons?domain=www.espn.com&sz=128"
+                 alt=""
+                 loading="lazy">
+            <span class="news-card__fallback-name">Espn</span>
+          </div>
+          
+            <img class="news-card__photo"
+                 src="https://a4.espncdn.com/combiner/i?img=%2Fphoto%2F2026%2F0526%2Fr1664059_1296x729_16%2D9.jpg"
+                 alt=""
+                 loading="lazy"
+                 onerror="this.closest('.news-card__media').classList.add('news-card__media--fallback'); this.remove();">
+          
+        </figure>
+
+        <div class="news-card__body">
+          <p class="news-card__outlet">Espn</p>
+          <h3 class="news-card__title">
+            <a href="https://www.espn.com/soccer/story/_/id/48972437/shakira-burna-boy-perform-2026-world-cup-opening-ceremony-mexico" rel="noopener noreferrer">Shakira, Burna Boy to perform at 2026 World Cup opening ceremony in Mexico</a>
+          </h3>
+          
+            <p class="news-card__summary">Shakira will headline the opening ceremony of the 2026 World Cup in Mexico City, FIFA announced on Thursday, with the Colombian superstar set to perform the tournament&#39;s official song ahead of the opening match.</p>
+          
+          <p class="news-card__meta">
+            
+              <time class="news-card__date">Fri, 05 Ju</time>
             
           </p>
         </div>
@@ -1632,14 +1641,178 @@ body {
 <div class="block block--latest-news"
      data-initial-visible="5"
      data-step="5"
-     data-total="6">
+     data-total="8">
   <ol class="latest-news__list">
     
       <li class="ln-card">
-        <a class="ln-card__link" href="https://www.foxsports.com/stories/soccer/usmnt-defender-chris-richards-injures-ankle-ligaments" target="_blank" rel="noopener noreferrer">
+        <a class="ln-card__link" href="https://www.sportingnews.com/uk/football/news/watch-world-cup-2026-tv-channel-live-stream-schedule-fifa/46268ff50d73cda78827ce9d" target="_blank" rel="noopener noreferrer">
           
             <figure class="ln-card__media">
-              <img src="https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/05/1408/814/f69eb515-richards-1.jpg?ve=1&amp;tl=1" alt="" loading="lazy">
+              <img src="https://library.sportingnews.com/styles/crop_style_16_9_desktop_webp/s3/2026-05/World%20Cup%20fans%20generic%201%20WC26%20FTR.jpg.webp?itok=IF0brSYz" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.sportingnews.com&sz=64"
+                   alt="">
+              <span>Sportingnews</span>
+              
+                <time datetime="Wed, 03 Jun 2026 14:21:37 GMT">Wed, 03 Ju</time>
+              
+            </header>
+            <h3 class="ln-card__title">How to watch World Cup 2026: TV channels, live streams and fixture schedule for FIFA tournament - sportingnews.com</h3>
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://www.aljazeera.com/sports/2026/6/4/world-cup-2026-what-are-the-key-dates-from-the-opening-match-to-the-final" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://www.aljazeera.com/wp-content/uploads/2026/05/SSS10772_1-1778687088.jpg?resize=1920%2C1440" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.aljazeera.com&sz=64"
+                   alt="">
+              <span>Aljazeera</span>
+              
+                <time datetime="Thu, 04 Jun 2026 08:51:13 GMT">Thu, 04 Ju</time>
+              
+            </header>
+            <h3 class="ln-card__title">World Cup 2026: What are the key dates from the opening match to the final? - Al Jazeera</h3>
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://sports.yahoo.com/articles/south-africa-2026-world-cup-053000007.html" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://s.yimg.com/ny/api/res/1.2/SVGpL5l059HdzyfM7CqaZQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03OTk7Y2Y9d2VicA--/https://media.zenfs.com/en/the_football_faithful_articles_458/b35ef9c64b51f7a6fbea60e7a33cef0b" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=sports.yahoo.com&sz=64"
+                   alt="">
+              <span>Yahoo</span>
+              
+                <time datetime="Thu, 04 Jun 2026 05:30:00 GMT">Thu, 04 Ju</time>
+              
+            </header>
+            <h3 class="ln-card__title">South Africa: 2026 World Cup Squad, Fixtures and Schedule - Yahoo Sports</h3>
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://www.skysports.com/football/news/12040/13481245/world-cup-2026-fixture-schedule-and-uk-kick-off-times-day-by-day-breakdown-of-all-104-matches-including-england-scotland" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://e0.365dm.com/25/12/1600x900/skysports-world-cup-trophy_7105535.jpg?20251209123529" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.skysports.com&sz=64"
+                   alt="">
+              <span>Skysports</span>
+              
+                <time datetime="Sat, 06 Jun 2026 21:04:56 GMT">Sat, 06 Ju</time>
+              
+            </header>
+            <h3 class="ln-card__title">Full 2026 World Cup schedule by day - Sky Sports</h3>
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card">
+        <a class="ln-card__link" href="https://sports.yahoo.com/articles/does-world-cup-start-date-141641170.html" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://s.yimg.com/os/en/the_sporting_news_articles_584/66602489a485bed9c44e6af472c3f374" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=sports.yahoo.com&sz=64"
+                   alt="">
+              <span>Yahoo</span>
+              
+                <time datetime="Sat, 06 Jun 2026 10:56:19 GMT">Sat, 06 Ju</time>
+              
+            </header>
+            <h3 class="ln-card__title">When does the World Cup start? Date, time, first match and opening ceremony for 2026 FIFA soccer finals - Yahoo Sports</h3>
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link" href="https://time.com/article/2026/05/29/world-cup-2026-opening-ceremonies-performers-usa-mexico-canada-fifa/" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt375235f953aefbe9/6a19e8845198ff0a37fbac5e/GettyImages-1244985404.jpg?branch=production&amp;width=3840&amp;quality=75&amp;auto=webp&amp;crop=16:9" alt="" loading="lazy">
+            </figure>
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=time.com&sz=64"
+                   alt="">
+              <span>Time</span>
+              
+                <time datetime="Fri, 29 May 2026 19:33:03 GMT">Fri, 29 Ma</time>
+              
+            </header>
+            <h3 class="ln-card__title">Here&#39;s What to Expect From the Three World Cup Opening Ceremonies - Time Magazine</h3>
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link ln-card__link--no-media" href="https://www.telecomasia.net/blog/group-a-world-cup-2026-predictions-and-betting-tips-who-will-qualify/" target="_blank" rel="noopener noreferrer">
+          
+          <div class="ln-card__body">
+            <header class="ln-card__pub">
+              
+              
+              <img class="ln-card__logo"
+                   src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&sz=64"
+                   alt="">
+              <span>Telecomasia</span>
+              
+                <time datetime="Fri, 05 Jun 2026 18:49:32 GMT">Fri, 05 Ju</time>
+              
+            </header>
+            <h3 class="ln-card__title">2026 FIFA World Cup Group A Predictions and Bets: Can Mexico Hold Off the Czech Republic and South Korea? - Telecom Asia Sport</h3>
+          </div>
+        </a>
+      </li>
+    
+      <li class="ln-card ln-card--collapsed">
+        <a class="ln-card__link" href="https://www.foxsports.com/stories/presspass/fox-sports-announces-group-stage-match-assignments-opening-week-fifa-world-cup-2026" target="_blank" rel="noopener noreferrer">
+          
+            <figure class="ln-card__media">
+              <img src="https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/06/1408/814/untitled-1.png?ve=1&amp;tl=1" alt="" loading="lazy">
             </figure>
           
           <div class="ln-card__body">
@@ -1651,136 +1824,10 @@ body {
                    alt="">
               <span>Foxsports</span>
               
-                <time datetime="Thu, 21 May 2026 21:47:35 GMT">Thu, 21 Ma</time>
+                <time datetime="Fri, 05 Jun 2026 17:53:03 GMT">Fri, 05 Ju</time>
               
             </header>
-            <h3 class="ln-card__title">Crystal Palace Coach Says USA Defender Chris Richards Tears Ankle Ligaments</h3>
-            
-              <p class="ln-card__summary">USA defender Chris Richards suffered two torn ligaments in his ankle, according to Crystal Palace manager Oliver Glasner.</p>
-            
-          </div>
-        </a>
-      </li>
-    
-      <li class="ln-card">
-        <a class="ln-card__link" href="https://bleacherreport.com/articles/25427703-shakira-bts-madonna-headline-2026-world-cup-final-halftime-show" target="_blank" rel="noopener noreferrer">
-          
-            <figure class="ln-card__media">
-              <img src="https://gsp-image-cdn.wmsports.io/cms/prod/bleacher-report/getty_images/2026-05/2161853219_large_cropped.jpg?w=3800&amp;h=2000" alt="" loading="lazy">
-            </figure>
-          
-          <div class="ln-card__body">
-            <header class="ln-card__pub">
-              
-              
-              <img class="ln-card__logo"
-                   src="https://www.google.com/s2/favicons?domain=bleacherreport.com&sz=64"
-                   alt="">
-              <span>Bleacherreport</span>
-              
-                <time datetime="Thu, 14 May 2026 11:46:40 GMT">Thu, 14 Ma</time>
-              
-            </header>
-            <h3 class="ln-card__title">Shakira, BTS, Madonna to Headline 2026 World Cup Final Halftime Show</h3>
-            
-              <p class="ln-card__summary">FIFA announced Shakira, BTS and Madonna will headline the first-ever halftime show at a World Cup final, curated by Coldplay&#39;s Chris Martin.</p>
-            
-          </div>
-        </a>
-      </li>
-    
-      <li class="ln-card">
-        <a class="ln-card__link ln-card__link--no-media" href="https://www.cnn.com/2026/05/14/sport/world-cup-final-halftime-show-headliners-hnk" target="_blank" rel="noopener noreferrer">
-          
-          <div class="ln-card__body">
-            <header class="ln-card__pub">
-              
-              
-              <img class="ln-card__logo"
-                   src="https://www.google.com/s2/favicons?domain=www.cnn.com&sz=64"
-                   alt="">
-              <span>Cnn</span>
-              
-                <time datetime="Thu, 14 May 2026 05:14:32 GMT">Thu, 14 Ma</time>
-              
-            </header>
-            <h3 class="ln-card__title">Shakira, Madonna and BTS to headline 2026 World Cup Final halftime show</h3>
-            
-              <p class="ln-card__summary">Shakira, Madonna and K-pop superstars BTS will headline the first-ever World Cup final halftime show, FIFA announced.</p>
-            
-          </div>
-        </a>
-      </li>
-    
-      <li class="ln-card">
-        <a class="ln-card__link" href="https://www.sfchronicle.com/sports/article/gutierrez-and-martinez-lead-mexico-to-victory-22273326.php" target="_blank" rel="noopener noreferrer">
-          
-            <figure class="ln-card__media">
-              <img src="https://s.hdnux.com/photos/01/66/27/16/31028101/3/rawImage.jpg" alt="" loading="lazy">
-            </figure>
-          
-          <div class="ln-card__body">
-            <header class="ln-card__pub">
-              
-              
-              <img class="ln-card__logo"
-                   src="https://www.google.com/s2/favicons?domain=www.sfchronicle.com&sz=64"
-                   alt="">
-              <span>Sfchronicle</span>
-              
-                <time datetime="Sat, 23 May 2026 04:37:51 GMT">Sat, 23 Ma</time>
-              
-            </header>
-            <h3 class="ln-card__title">Gutiérrez and Martinez lead Mexico to victory over Ghana in a World Cup warm-up</h3>
-            
-              <p class="ln-card__summary">Mexico defeated Ghana 2-0 in a World Cup warm-up match, with goals from Brian Gutiérrez and Guillermo Martinez.</p>
-            
-          </div>
-        </a>
-      </li>
-    
-      <li class="ln-card">
-        <a class="ln-card__link ln-card__link--no-media" href="https://www.telecomasia.net/blog/fifa-world-cup-2026-stadiums-all-16-venues/" target="_blank" rel="noopener noreferrer">
-          
-          <div class="ln-card__body">
-            <header class="ln-card__pub">
-              
-              
-              <img class="ln-card__logo"
-                   src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&sz=64"
-                   alt="">
-              <span>Telecomasia</span>
-              
-                <time datetime="Mon, 25 May 2026 10:14:26 GMT">Mon, 25 Ma</time>
-              
-            </header>
-            <h3 class="ln-card__title">FIFA World Cup 2026 stadiums: all 16 venues, host cities and where the final is played</h3>
-            
-              <p class="ln-card__summary">The 2026 FIFA World Cup will be held from June 11 to July 19 across 16 stadiums: 11 in the USA, three in Mexico and two in Canada.</p>
-            
-          </div>
-        </a>
-      </li>
-    
-      <li class="ln-card ln-card--collapsed">
-        <a class="ln-card__link ln-card__link--no-media" href="https://www.telecomasia.net/in/blog/world-cup-2026-schedule/" target="_blank" rel="noopener noreferrer">
-          
-          <div class="ln-card__body">
-            <header class="ln-card__pub">
-              
-              
-              <img class="ln-card__logo"
-                   src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&sz=64"
-                   alt="">
-              <span>Telecomasia</span>
-              
-                <time datetime="Fri, 22 May 2026 10:42:19 GMT">Fri, 22 Ma</time>
-              
-            </header>
-            <h3 class="ln-card__title">2026 World Cup schedule: match calendar, dates, kick-off times (UTC) and tables</h3>
-            
-              <p class="ln-card__summary">The 2026 FIFA World Cup will run from June 11 to July 19 with 48 teams competing in 104 matches across the USA, Canada and Mexico.</p>
-            
+            <h3 class="ln-card__title">FOX Sports Announces Group Stage Match Assignments for Opening Week of FIFA World Cup 2026 - FOX Sports</h3>
           </div>
         </a>
       </li>
@@ -1789,8 +1836,8 @@ body {
   
     <button type="button"
             class="latest-news__more"
-            data-remaining="1">
-      <span class="latest-news__more-label">Load 1 more</span>
+            data-remaining="3">
+      <span class="latest-news__more-label">Load 3 more</span>
       <span class="latest-news__more-chev" aria-hidden="true"></span>
     </button>
   
@@ -1801,13 +1848,13 @@ body {
 </section>
       
         
-        <section id="section-key_figures"
+        <section id="section-key_players"
          class="need-section"
-         data-need="key_figures"
-         data-screen-label="04 Key Figures">
+         data-need="key_players"
+         data-screen-label="04 Key Players">
   
 
-  <h2 class="need-section__title">Key Figures</h2>
+  <h2 class="need-section__title">Key Players</h2>
 
   
 
@@ -1820,17 +1867,17 @@ body {
       <li class="person-card">
         <div class="person-card__media">
           
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Gianni_Infantino_-_55062516828.jpg/330px-Gianni_Infantino_-_55062516828.jpg" alt="Gianni Infantino" loading="lazy">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Ra%C3%BAl_Jim%C3%A9nez_04032026_%281%29.jpg/330px-Ra%C3%BAl_Jim%C3%A9nez_04032026_%281%29.jpg" alt="Raul Jimenez" loading="lazy">
           
         </div>
         <div class="person-card__body">
           <h3 class="person-card__name">
             
-              <a href="https://en.wikipedia.org/wiki/Gianni_Infantino" target="_blank" rel="noopener noreferrer">Gianni Infantino</a>
+              <a href="https://en.wikipedia.org/wiki/Ra%C3%BAl_Jim%C3%A9nez" target="_blank" rel="noopener noreferrer">Raul Jimenez</a>
             
           </h3>
-          <p class="person-card__role">FIFA President</p>
-          <p class="person-card__bio">Leading FIFA&#39;s oversight of the 2026 World Cup, the first tournament hosted across three countries with 48 teams and a record 104 matches.</p>
+          <p class="person-card__role">Forward, Mexico National Team</p>
+          <p class="person-card__bio">Key striker for Mexico&#39;s opening World Cup match, part of the squad that won the 2025 CONCACAF Nations League and Gold Cup under coach Javier Aguirre.</p>
           
         </div>
       </li>
@@ -1838,17 +1885,17 @@ body {
       <li class="person-card">
         <div class="person-card__media">
           
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Claudia_Sheinbaum_in_2025_%283x4_cropped%29.jpg/330px-Claudia_Sheinbaum_in_2025_%283x4_cropped%29.jpg" alt="Claudia Sheinbaum" loading="lazy">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Edson_%C3%81lvarez.png/330px-Edson_%C3%81lvarez.png" alt="Edson Alvarez" loading="lazy">
           
         </div>
         <div class="person-card__body">
           <h3 class="person-card__name">
             
-              <a href="https://en.wikipedia.org/wiki/Claudia_Sheinbaum" target="_blank" rel="noopener noreferrer">Claudia Sheinbaum</a>
+              <a href="https://en.wikipedia.org/wiki/Edson_%C3%81lvarez" target="_blank" rel="noopener noreferrer">Edson Alvarez</a>
             
           </h3>
-          <p class="person-card__role">President of Mexico</p>
-          <p class="person-card__bio">Mexico&#39;s president overseeing her nation&#39;s role as co-host of the 2026 World Cup and managing diplomatic arrangements including hosting Iran&#39;s national team during the tournament.</p>
+          <p class="person-card__role">Midfielder, Mexico National Team</p>
+          <p class="person-card__bio">Central midfielder selected as a key player for Mexico&#39;s 2026 World Cup squad competing in the opening match at Estadio Azteca.</p>
           
         </div>
       </li>
@@ -1856,17 +1903,17 @@ body {
       <li class="person-card">
         <div class="person-card__media">
           
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/330px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg" alt="Shakira" loading="lazy">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mex-Kor_%281%29_%28cropped%29.jpg/330px-Mex-Kor_%281%29_%28cropped%29.jpg" alt="Guillermo Ochoa" loading="lazy">
           
         </div>
         <div class="person-card__body">
           <h3 class="person-card__name">
             
-              <a href="https://en.wikipedia.org/wiki/Shakira" target="_blank" rel="noopener noreferrer">Shakira</a>
+              <a href="https://en.wikipedia.org/wiki/Guillermo_Ochoa" target="_blank" rel="noopener noreferrer">Guillermo Ochoa</a>
             
           </h3>
-          <p class="person-card__role">Headline Performer, 2026 World Cup Final Halftime Show</p>
-          <p class="person-card__bio">Colombian artist headlining the first-ever World Cup final halftime show alongside Madonna and BTS, and collaborating on the official tournament album.</p>
+          <p class="person-card__role">Goalkeeper, Mexico National Team</p>
+          <p class="person-card__bio">Veteran goalkeeper making his historic sixth World Cup appearance at age 40, anchoring Mexico&#39;s defense in the opening match.</p>
           
         </div>
       </li>
@@ -1874,17 +1921,17 @@ body {
       <li class="person-card">
         <div class="person-card__media">
           
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg/330px-Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03_%28cropped%29.jpg" alt="Neymar" loading="lazy">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Santiago_Gim%C3%A9nez.png/330px-Santiago_Gim%C3%A9nez.png" alt="Santiago Gimenez" loading="lazy">
           
         </div>
         <div class="person-card__body">
           <h3 class="person-card__name">
             
-              <a href="https://en.wikipedia.org/wiki/Neymar" target="_blank" rel="noopener noreferrer">Neymar</a>
+              <a href="https://en.wikipedia.org/wiki/Santiago_Gim%C3%A9nez" target="_blank" rel="noopener noreferrer">Santiago Gimenez</a>
             
           </h3>
-          <p class="person-card__role">Brazil Forward, 2026 World Cup Squad</p>
-          <p class="person-card__bio">The 34-year-old Brazilian star selected by manager Carlo Ancelotti for one final World Cup campaign as part of Brazil&#39;s 26-man squad.</p>
+          <p class="person-card__role">Forward, Mexico National Team</p>
+          <p class="person-card__bio">Attacking midfielder selected as a key player for Mexico&#39;s opening World Cup fixture against South Africa.</p>
           
         </div>
       </li>
@@ -1897,13 +1944,13 @@ body {
 </section>
       
         
-        <section id="section-host_venues_overview"
+        <section id="section-stadium_spotlight"
          class="need-section"
-         data-need="host_venues_overview"
-         data-screen-label="05 Host Venues Overview">
+         data-need="stadium_spotlight"
+         data-screen-label="05 Stadium Spotlight">
   
 
-  <h2 class="need-section__title">Host Venues Overview</h2>
+  <h2 class="need-section__title">Stadium Spotlight</h2>
 
   
 
@@ -1915,117 +1962,20 @@ body {
     
     
     <p>
-      The 2026 FIFA World Cup will be hosted across 16 stadiums in three countries for the first time in tournament history. The United States will provide 11 venues, while Mexico and Canada will each contribute three and two stadiums respectively. This tri-nation format represents an unprecedented expansion, with 48 teams competing in 104 matches from June 11 to July 19, 2026.
+      Estadio Azteca in Mexico City stands as one of soccer&#39;s most storied venues, earning legendary status through its role in World Cup history. The stadium will host the opening match of the 2026 FIFA World Cup on June 11, when Mexico faces South Africa, continuing its tradition as a premier global stage. Situated at over 7,300 feet above sea level, the venue presents a unique environmental challenge that has shaped countless matches throughout its history.
       
         
 <span class="cite-cluster" tabindex="0" aria-label="3 sources">
   <span class="cite-cluster__logos" aria-hidden="true">
     
       <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64"
+           src="https://www.google.com/s2/favicons?domain=www.forbes.com&amp;sz=64"
            alt=""
            loading="lazy"
            width="20" height="20">
     
       <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64"
-           alt=""
-           loading="lazy"
-           width="20" height="20">
-    
-      <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64"
-           alt=""
-           loading="lazy"
-           width="20" height="20">
-    
-  </span>
-  <span class="cite-cluster__count">3 sources</span>
-
-  <span class="cite-popover" role="tooltip">
-    <span class="cite-popover__title">Sources (3)</span>
-    <span class="cite-popover__list">
-      
-        <a class="cite-popover__card" href="https://www.telecomasia.net/blog/fifa-world-cup-2026-stadiums-all-16-venues/" rel="noopener noreferrer" target="_blank">
-          
-            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
-                  aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64" alt="" loading="lazy">
-            </span>
-          
-          <span class="cite-popover__body">
-            <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64" alt="" width="14" height="14">
-              Telecomasia
-            </span>
-            <span class="cite-popover__headline">FIFA World Cup 2026 stadiums: all 16 venues, host cities and where the final is played - Telecom Asia Sport</span>
-            
-              <span class="cite-popover__summary"># FIFA World Cup 2026 stadiums: all 16 venues, host cities and where the final is played. The 2026 FIFA World Cup will be held from June 11 to July 19 in the USA, Mexico and Canada. Telecom Asia tells you which stadiums will host the 2026 W</span>
-            
-          </span>
-        </a>
-      
-        <a class="cite-popover__card" href="https://www.telecomasia.net/in/blog/world-cup-2026-schedule/" rel="noopener noreferrer" target="_blank">
-          
-            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
-                  aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64" alt="" loading="lazy">
-            </span>
-          
-          <span class="cite-popover__body">
-            <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&amp;sz=64" alt="" width="14" height="14">
-              Telecomasia
-            </span>
-            <span class="cite-popover__headline">2026 World Cup schedule: match calendar, dates, kick-off times (UTC) and tables - Telecom Asia Sport</span>
-            
-              <span class="cite-popover__summary">The summer of 2026 will begin with a grand event in world football – the World Cup. From June 11 to July 19, the main sports tournament of the four-year anniversary will be held in the USA, Canada and Mexico. For the first time in history, </span>
-            
-          </span>
-        </a>
-      
-        <a class="cite-popover__card" href="https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams" rel="noopener noreferrer" target="_blank">
-          
-            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
-                  aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64" alt="" loading="lazy">
-            </span>
-          
-          <span class="cite-popover__body">
-            <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64" alt="" width="14" height="14">
-              Foxsports
-            </span>
-            <span class="cite-popover__headline">2026 FIFA World Cup: What To Know, USA&#39;s Schedule, How To Watch All 48 Teams - FOX Sports</span>
-            
-              <span class="cite-popover__summary">FIFA Men&#39;s World Cup. FIFA Men&#39;s World Cup. # 2026 FIFA World Cup: What To Know, USA&#39;s Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by t</span>
-            
-          </span>
-        </a>
-      
-    </span>
-  </span>
-</span>
-      
-    </p>
-  
-    
-    
-    <p>
-      MetLife Stadium in New York will host the final on July 19, while the opening match takes place at Estadio Azteca in Mexico City. Across the host nations, stadiums will undergo neutral branding during the tournament as per FIFA policy, with all venues temporarily removing their commercial naming rights. The tournament spans 16 host cities strategically distributed to accommodate the record-breaking number of teams and matches.
-      
-        
-<span class="cite-cluster" tabindex="0" aria-label="3 sources">
-  <span class="cite-cluster__logos" aria-hidden="true">
-    
-      <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64"
-           alt=""
-           loading="lazy"
-           width="20" height="20">
-    
-      <img class="cite-logo"
-           src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64"
+           src="https://www.google.com/s2/favicons?domain=www.houstonchronicle.com&amp;sz=64"
            alt=""
            loading="lazy"
            width="20" height="20">
@@ -2043,45 +1993,45 @@ body {
     <span class="cite-popover__title">Sources (3)</span>
     <span class="cite-popover__list">
       
-        <a class="cite-popover__card" href="https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://www.forbes.com/sites/johnkoetsier/2026/06/04/this-will-be-the-first-world-cup-ever-with-ai-coaches-on-the-sidelines/" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64" alt="" loading="lazy">
+              <img src="https://www.google.com/s2/favicons?domain=www.forbes.com&amp;sz=64" alt="" loading="lazy">
             </span>
           
           <span class="cite-popover__body">
             <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxsports.com&amp;sz=64" alt="" width="14" height="14">
-              Foxsports
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.forbes.com&amp;sz=64" alt="" width="14" height="14">
+              Forbes
             </span>
-            <span class="cite-popover__headline">2026 FIFA World Cup: What To Know, USA&#39;s Schedule, How To Watch All 48 Teams - FOX Sports</span>
+            <span class="cite-popover__headline">This Will Be The First World Cup Ever With AI Coaches On The Sidelines - Forbes</span>
             
-              <span class="cite-popover__summary">FIFA Men&#39;s World Cup. FIFA Men&#39;s World Cup. # 2026 FIFA World Cup: What To Know, USA&#39;s Schedule, How To Watch All 48 Teams. As the biggest-ever edition of the global showcase, the 2026 FIFA World Cup will be the first tournament hosted by t</span>
+              <span class="cite-popover__summary"># This Will Be The First World Cup Ever With AI Coaches On The Sidelines. When Mexico kicks off against South Africa at Estadio Azteca on June 11, the 2026 World Cup will be the biggest in the tournament’s history: 48 teams, 104 matches, th</span>
             
           </span>
         </a>
       
-        <a class="cite-popover__card" href="https://www.foxnews.com/outkick-sports/fifa-announces-first-ever-world-cup-final-halftime-show-featuring-madonna-bts-shakira" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://www.houstonchronicle.com/sports/article/mexico-city-s-altitude-poses-a-key-challenge-22293933.php" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
-              <img src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" loading="lazy">
+              <img src="https://www.google.com/s2/favicons?domain=www.houstonchronicle.com&amp;sz=64" alt="" loading="lazy">
             </span>
           
           <span class="cite-popover__body">
             <span class="cite-popover__publisher">
-              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.foxnews.com&amp;sz=64" alt="" width="14" height="14">
-              Foxnews
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.houstonchronicle.com&amp;sz=64" alt="" width="14" height="14">
+              Houstonchronicle
             </span>
-            <span class="cite-popover__headline">Shakira, Madonna and BTS co-headline first-ever World Cup Final halftime show - Fox News</span>
+            <span class="cite-popover__headline">Mexico City’s altitude poses a key challenge for teams at the 2026 World Cup - Houston Chronicle</span>
             
-              <span class="cite-popover__summary">* #### No need to wait for LeBron James to retire, the next &#39;great one&#39; is already here and his name is Wemby. ## The first-ever World Cup halftime show at MetLife Stadium will be curated by Coldplay&#39;s Chris Martin. Alex Lasry, CEO of the N</span>
+              <span class="cite-popover__summary"># Mexico City’s altitude poses a key challenge for teams at the 2026 World Cup. By CARLOS RODRIGUEZ and JOHN DUERDEN, AP Sports Writers. MEXICO CITY (AP) — Heat won’t be the only environmental factor affecting players’ performance at the Wo</span>
             
           </span>
         </a>
       
-        <a class="cite-popover__card" href="https://sports.yahoo.com/soccer/article/21-days-to-the-world-cup-the-fifa-policy-requiring-every-stadium-except-1-to-scrub-its-branding-120000374.html" rel="noopener noreferrer" target="_blank">
+        <a class="cite-popover__card" href="https://sports.yahoo.com/articles/lebron-james-travis-scott-every-001128869.html" rel="noopener noreferrer" target="_blank">
           
             <span class="cite-popover__thumb cite-popover__thumb--placeholder"
                   aria-hidden="true">
@@ -2093,9 +2043,81 @@ body {
               <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=sports.yahoo.com&amp;sz=64" alt="" width="14" height="14">
               Yahoo
             </span>
-            <span class="cite-popover__headline">21 days to the World Cup: The FIFA policy requiring every stadium (except 1) to scrub its branding - Yahoo Sports</span>
+            <span class="cite-popover__headline">LeBron James, Travis Scott and Every Celebrity in Nike’s Huge World Cup Ad - Yahoo Sports</span>
             
-              <span class="cite-popover__summary">Starting next month, 16 NFL and soccer stadiums across the United States, Canada and Mexico will be hosting teams for the 2026 World Cup. But for local fans, things at those stadiums are going to look a little different than the rest of the</span>
+              <span class="cite-popover__summary"># LeBron James, Travis Scott and Every Celebrity in Nike’s Huge World Cup Ad. We are one week away from the World Cup kicking off, with Mexico hosting South Africa at the legendary Estadio Azteca, and the hype for the most-watched sports to</span>
+            
+          </span>
+        </a>
+      
+    </span>
+  </span>
+</span>
+      
+    </p>
+  
+    
+    
+    <p>
+      Mexico&#39;s selection of Estadio Azteca for the 2026 opening underscores the nation&#39;s deep connection to the World Cup. Mexico has now hosted the tournament three times—in 1970, 1986, and 2026—making it the first country to host three World Cups. This remarkable achievement reflects both the stadium&#39;s iconic status and Mexico&#39;s enduring significance in international soccer, cementing Estadio Azteca as a venue of unparalleled World Cup prestige and cultural importance.
+      
+        
+<span class="cite-cluster" tabindex="0" aria-label="2 sources">
+  <span class="cite-cluster__logos" aria-hidden="true">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.espn.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+      <img class="cite-logo"
+           src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64"
+           alt=""
+           loading="lazy"
+           width="20" height="20">
+    
+  </span>
+  <span class="cite-cluster__count">2 sources</span>
+
+  <span class="cite-popover" role="tooltip">
+    <span class="cite-popover__title">Sources (2)</span>
+    <span class="cite-popover__list">
+      
+        <a class="cite-popover__card" href="http://www.espn.com/football/story/_/id/48957098/group-2026-world-cup-teams-records-stats-know-mexico-south-korea-czechia-south-africa" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.espn.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.espn.com&amp;sz=64" alt="" width="14" height="14">
+              Espn
+            </span>
+            <span class="cite-popover__headline">Group A at the 2026 World Cup: Teams, records, stats to know - kwese.espn.com</span>
+            
+              <span class="cite-popover__summary">Group A at the 2026 World Cup: Teams, records, stats to know. The Knicks solved their minutes puzzle just in time for a Finals run. &#39;A dream&#39;: Korda wins coveted U.S. Women&#39;s Open. World Cup Rank: The 50 best players in the 2026 tournament.</span>
+            
+          </span>
+        </a>
+      
+        <a class="cite-popover__card" href="https://www.cnn.com/interactive/2026/06/04/sport/world-cup-quiz-vis/" rel="noopener noreferrer" target="_blank">
+          
+            <span class="cite-popover__thumb cite-popover__thumb--placeholder"
+                  aria-hidden="true">
+              <img src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64" alt="" loading="lazy">
+            </span>
+          
+          <span class="cite-popover__body">
+            <span class="cite-popover__publisher">
+              <img class="cite-popover__favicon" src="https://www.google.com/s2/favicons?domain=www.cnn.com&amp;sz=64" alt="" width="14" height="14">
+              Cnn
+            </span>
+            <span class="cite-popover__headline">CNN’s Ultimate World Cup Quiz - CNN</span>
+            
+              <span class="cite-popover__summary"># CNN’s Ultimate World Cup Quiz. Test your knowledge with CNN’s ultimate World Cup quiz. ### Which team has won the most World Cups? ### Which country has hosted the World Cup the most times? Mexico has solo hosted the World Cup in 1970 and</span>
             
           </span>
         </a>
@@ -2113,13 +2135,13 @@ body {
 </section>
       
         
-        <section id="section-reactions"
+        <section id="section-fan_and_expert_reactions"
          class="need-section"
-         data-need="reactions"
-         data-screen-label="06 Reactions">
+         data-need="fan_and_expert_reactions"
+         data-screen-label="06 Fan And Expert Reactions">
   
 
-  <h2 class="need-section__title">Reactions</h2>
+  <h2 class="need-section__title">Fan And Expert Reactions</h2>
 
   
 
@@ -2146,9 +2168,9 @@ body {
                 data-tier="positive" role="tab">Optimistic</button>
       
       
-        <button class="opinions__tab"
-                data-tier="negative" role="tab">Critical</button>
       
+        <button class="opinions__tab"
+                data-tier="neutral" role="tab">Analytical</button>
       
     </div>
 
@@ -2158,8 +2180,8 @@ body {
   
   
   <a class="opinion-card"
-     href="https://www.cnn.com/2026/05/14/sport/world-cup-final-halftime-show-headliners-hnk" target="_blank" rel="noopener noreferrer">
-    <blockquote class="opinion-card__quote">Shakira, Madonna and K-pop superstars BTS will headline the first-ever World Cup final halftime show</blockquote>
+     href="https://www.bozemandailychronicle.com/ap_news/sports/aguirre-s-early-mexico-camp-revives-a-1986-style-grind-for-a-home-world-cup/article_15cdd258-62ef-5180-8016-745917c653c3.html" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">Aguirre&#39;s early Mexico camp revives a 1986-style grind for a home World Cup push</blockquote>
     <footer class="opinion-card__attr">
       <span class="opinion-card__avatar">
         
@@ -2167,13 +2189,13 @@ body {
           
             
           
-          <span>FI</span>
+          <span>JA</span>
         
       </span>
       <span class="opinion-card__who">
-        <strong>FIFA</strong>
+        <strong>Javier Aguirre</strong>
         
-          <span class="opinion-card__role">Tournament Organizer</span>
+          <span class="opinion-card__role">Mexico Head Coach</span>
         
       </span>
     </footer>
@@ -2183,61 +2205,13 @@ body {
           
           
           <img class="opinion-card__pub-logo"
-               src="https://www.google.com/s2/favicons?domain=www.cnn.com&sz=64"
+               src="https://www.google.com/s2/favicons?domain=www.bozemandailychronicle.com&sz=64"
                alt="">
         
-        <span class="opinion-card__pub">CNN</span>
+        <span class="opinion-card__pub">Bozeman Daily Chronicle</span>
         <span class="opinion-card__article-divider">·</span>
         
-          <span class="opinion-card__article-title">Shakira, Madonna and BTS to headline 2026 World Cup Final halftime show - CNN</span>
-        
-        
-          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        
-      </div>
-    
-  </a>
-</li>
-      </ul>
-    
-    
-      <ul class="opinions__panel" data-tier="negative">
-        <li>
-  
-  
-  <a class="opinion-card"
-     href="https://apnews.com/article/world-cup-2026-format-2115b322a2ad9700e0d2f36e368f6d3a" target="_blank" rel="noopener noreferrer">
-    <blockquote class="opinion-card__quote">A supersized World Cup with more teams, more games and even more host nations than ever before leaves a big question hanging over the biggest sporting show on earth: How much is too much?</blockquote>
-    <footer class="opinion-card__attr">
-      <span class="opinion-card__avatar">
-        
-          
-          
-            
-          
-          <span>AN</span>
-        
-      </span>
-      <span class="opinion-card__who">
-        <strong>AP News</strong>
-        
-          <span class="opinion-card__role">Sports Correspondent</span>
-        
-      </span>
-    </footer>
-    
-      <div class="opinion-card__article">
-        
-          
-          
-          <img class="opinion-card__pub-logo"
-               src="https://www.google.com/s2/favicons?domain=apnews.com&sz=64"
-               alt="">
-        
-        <span class="opinion-card__pub">AP News</span>
-        <span class="opinion-card__article-divider">·</span>
-        
-          <span class="opinion-card__article-title">FIFA&#39;s big experiment may have made the World Cup too big for its own good - AP News</span>
+          <span class="opinion-card__article-title">Aguirre&#39;s early Mexico camp revives a 1986-style grind for a home World Cup push</span>
         
         
           <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2249,8 +2223,8 @@ body {
   
   
   <a class="opinion-card"
-     href="https://timesofindia.indiatimes.com/sports/football/news/what-a-downgrade-fifa-world-cup-2026-anthem-goals-starring-lisa-sparks-backlash-before-official-release/articleshow/131229114.cms" target="_blank" rel="noopener noreferrer">
-    <blockquote class="opinion-card__quote">What a downgrade</blockquote>
+     href="https://sports.yahoo.com/articles/south-africa-wins-mexico-over-072300455.html" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">South Africa wins Mexico over with this fan - all the players came over to sign the young man&#39;s sticker album</blockquote>
     <footer class="opinion-card__attr">
       <span class="opinion-card__avatar">
         
@@ -2258,13 +2232,13 @@ body {
           
             
           
-          <span>OC</span>
+          <span>ST</span>
         
       </span>
       <span class="opinion-card__who">
-        <strong>Online Critics</strong>
+        <strong>South Africa National Team</strong>
         
-          <span class="opinion-card__role">Social Media Users</span>
+          <span class="opinion-card__role">Players</span>
         
       </span>
     </footer>
@@ -2274,13 +2248,13 @@ body {
           
           
           <img class="opinion-card__pub-logo"
-               src="https://www.google.com/s2/favicons?domain=timesofindia.indiatimes.com&sz=64"
+               src="https://www.google.com/s2/favicons?domain=sports.yahoo.com&sz=64"
                alt="">
         
-        <span class="opinion-card__pub">The Times of India</span>
+        <span class="opinion-card__pub">Yahoo Sports</span>
         <span class="opinion-card__article-divider">·</span>
         
-          <span class="opinion-card__article-title">&#34;What a downgrade&#34;: FIFA World Cup 2026 anthem &#39;Goals&#39; starring Lisa sparks backlash before official release - The Times of India</span>
+          <span class="opinion-card__article-title">🎥 South Africa wins Mexico over with this fan 🇿🇦</span>
         
         
           <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2291,6 +2265,54 @@ body {
 </li>
       </ul>
     
+    
+    
+      <ul class="opinions__panel" data-tier="neutral">
+        <li>
+  
+  
+  <a class="opinion-card"
+     href="https://www.telecomasia.net/blog/group-a-world-cup-2026-predictions-and-betting-tips-who-will-qualify/publisher_logo_url" target="_blank" rel="noopener noreferrer">
+    <blockquote class="opinion-card__quote">Group A is one of the most unpredictable in the tournament</blockquote>
+    <footer class="opinion-card__attr">
+      <span class="opinion-card__avatar">
+        
+          
+          
+            
+          
+          <span>TA</span>
+        
+      </span>
+      <span class="opinion-card__who">
+        <strong>Tournament Analysts</strong>
+        
+          <span class="opinion-card__role">Betting &amp; Prediction Experts</span>
+        
+      </span>
+    </footer>
+    
+      <div class="opinion-card__article">
+        
+          
+          
+          <img class="opinion-card__pub-logo"
+               src="https://www.google.com/s2/favicons?domain=www.telecomasia.net&sz=64"
+               alt="">
+        
+        <span class="opinion-card__pub">Telecom Asia Sport</span>
+        <span class="opinion-card__article-divider">·</span>
+        
+          <span class="opinion-card__article-title">2026 FIFA World Cup Group A Predictions and Bets: Can Mexico Hold Off the Czech Republic and South Korea?</span>
+        
+        
+          <svg class="opinion-card__arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 L9 3 M9 3 H4.5 M9 3 V7.5" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        
+      </div>
+    
+  </a>
+</li>
+      </ul>
     
   </section>
 </div>
@@ -2315,15 +2337,6 @@ body {
 
   
   
-    
-    
-  
-
-  
-  
-
-  
-  
 
   
   
@@ -2335,18 +2348,14 @@ body {
 <ol class="ref-timeline">
   
     
-    <li class="ref-timeline__item ref-timeline__item--current">
-      
-        <time class="ref-timeline__date">2026-05-21</time>
+    <li class="ref-timeline__item ref-timeline__item--past">
       
       <div class="ref-timeline__label">
         
         
-          <a href="https://www.foxsports.com/stories/soccer/towering-statue-of-pele-unveiled-in-guadalajara-ahead-of-the-world-cup" rel="noopener noreferrer" target="_blank">Pelé statue unveiled in Guadalajara</a>
+          <a href="https://sports.yahoo.com/articles/south-africa-2026-world-cup-053000007.html" rel="noopener noreferrer" target="_blank">South Africa qualifies for World Cup, first appearance since 2010</a>
         
       </div>
-      
-        <div class="ref-timeline__loc">Guadalajara, Mexico</div>
       
     </li>
   
@@ -2358,27 +2367,11 @@ body {
       <div class="ref-timeline__label">
         
         
-          <a href="https://www.telecomasia.net/in/blog/world-cup-2026-schedule/" rel="noopener noreferrer" target="_blank">2026 FIFA World Cup opens at Estadio Azteca</a>
+          <a href="https://bleacherreport.com/articles/25435273-world-cup-schedule-2026-fixtures-and-kick-times-every-match" rel="noopener noreferrer" target="_blank">Mexico vs South Africa opens 2026 FIFA World Cup at Estadio Azteca</a>
         
       </div>
       
-        <div class="ref-timeline__loc">Mexico City, Mexico</div>
-      
-    </li>
-  
-    
-    <li class="ref-timeline__item ref-timeline__item--past">
-      
-        <time class="ref-timeline__date">2026-06-12</time>
-      
-      <div class="ref-timeline__label">
-        
-        
-          <a href="https://www.foxsports.com/watch-vertical/fmc-xolnul2fxogqlwis" rel="noopener noreferrer" target="_blank">USA opens World Cup against Paraguay</a>
-        
-      </div>
-      
-        <div class="ref-timeline__loc">USA</div>
+        <div class="ref-timeline__loc">Estadio Azteca, Mexico City</div>
       
     </li>
   
@@ -2390,25 +2383,11 @@ body {
       <div class="ref-timeline__label">
         
         
-          <a href="https://www.telecomasia.net/in/blog/world-cup-2026-schedule/" rel="noopener noreferrer" target="_blank">Group stage matches conclude</a>
+          <a href="https://www.aljazeera.com/sports/2026/6/4/world-cup-2026-what-are-the-key-dates-from-the-opening-match-to-the-final" rel="noopener noreferrer" target="_blank">2026 World Cup tournament spans 39 days across North America</a>
         
       </div>
       
-    </li>
-  
-    
-    <li class="ref-timeline__item ref-timeline__item--past ref-timeline__item--breaking">
-      
-        <time class="ref-timeline__date">2026-07-19</time>
-      
-      <div class="ref-timeline__label">
-        
-        
-          <a href="https://www.foxsports.com/stories/soccer/2026-fifa-world-cup-how-to-watch-usmnt-schedule-48-teams" rel="noopener noreferrer" target="_blank">World Cup final at MetLife Stadium</a>
-        
-      </div>
-      
-        <div class="ref-timeline__loc">New York, USA</div>
+        <div class="ref-timeline__loc">United States, Canada, Mexico</div>
       
     </li>
   
@@ -2424,7 +2403,7 @@ body {
 
   <footer class="page-footer">
     <div class="page-footer__inner">
-      <p class="page-footer__meta">Last updated 2026-05-26</p>
+      <p class="page-footer__meta">Last updated 2026-06-08</p>
     </div>
   </footer>
 

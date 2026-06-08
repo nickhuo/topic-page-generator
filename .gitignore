@@ -4,7 +4,7 @@ __pycache__/
 *.pyc
 *.py[codz]
 *$py.class
-
+docs/CASE_EXPLORATION_PREP.zh.md
 # C extensions
 *.so
 # Distribution / packaging
@@ -227,7 +227,7 @@ tempCodeRunnerFile.py
 
 # Ruff stuff:
 .ruff_cache/
-
+docs/CASE_EXPLORATION_PREP.md
 # PyPI configuration file
 .pypirc
 
@@ -240,3 +240,5 @@ __marimo__/
 .streamlit/secrets.toml
 
 .DS_Store
+docs/PRESENTATION_PREP.md
+.gstack/
